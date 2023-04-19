@@ -241,7 +241,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the organisation&apos;s name.
+        ///   Looks up a localized string similar to Enter an organisation name using letters, numbers or limited punctuation only.
         /// </summary>
         public static string OrgNameRequired {
             get {
@@ -277,7 +277,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please choose the type of organisation.
+        ///   Looks up a localized string similar to Choose an organisation type.
         /// </summary>
         public static string OrgTypeRequired {
             get {
@@ -349,7 +349,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the registration number.
+        ///   Looks up a localized string similar to Enter a registration number using letters and numbers only.
         /// </summary>
         public static string RegNumberRequired {
             get {

@@ -121,7 +121,7 @@
     <value>Address line 1</value>
   </data>
   <data name="Address1Required" xml:space="preserve">
-    <value>Please enter the first line of your address</value>
+    <value>Enter an address (line 1) using letters and numbers only</value>
   </data>
   <data name="Address2" xml:space="preserve">
     <value>Address line 2</value>
@@ -136,7 +136,7 @@
     <value>Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk</value>
   </data>
   <data name="CityRequired" xml:space="preserve">
-    <value>Please enter your town or city</value>
+    <value>Enter a town/city using letters and numbers only</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>
@@ -145,7 +145,7 @@
     <value>Select the country the organisation is operating from</value>
   </data>
   <data name="CountryRequired" xml:space="preserve">
-    <value>The Country field is required.</value>
+    <value>Enter a county using letters only</value>
   </data>
   <data name="CountrySelect" xml:space="preserve">
     <value>Please select a country</value>
@@ -160,6 +160,6 @@
     <value>For example: AB1 2CD</value>
   </data>
   <data name="PostcodeRequired" xml:space="preserve">
-    <value>Please enter the post code</value>
+    <value>Enter a postcode using letters and numbers only</value>
   </data>
 </root>

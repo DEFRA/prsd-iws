@@ -136,13 +136,13 @@
     <value>Organisation name</value>
   </data>
   <data name="OrgNameRequired" xml:space="preserve">
-    <value>Please enter the organisation's name</value>
+    <value>Enter an organisation name using letters, numbers or limited punctuation only</value>
   </data>
   <data name="OrgType" xml:space="preserve">
     <value>Organisation type</value>
   </data>
   <data name="OrgTypeRequired" xml:space="preserve">
-    <value>Please choose the type of organisation</value>
+    <value>Choose an organisation type</value>
   </data>
   <data name="OtherOrgType" xml:space="preserve">
     <value>Organisation type</value>
@@ -157,7 +157,7 @@
     <value>Registration number</value>
   </data>
   <data name="RegNumberRequired" xml:space="preserve">
-    <value>Please enter the registration number</value>
+    <value>Enter a registration number using letters and numbers only</value>
   </data>
   <data name="SoleTraderRegNoRequired" xml:space="preserve">
     <value>Sole Trader registration number is required</value>
