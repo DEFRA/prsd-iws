@@ -56,7 +56,7 @@
 
 @section scripts {
     <script type="text/javascript">
-        function hideImportFromCompHouseSection() {
+        function hideProducerFromCompanyHouseSection() {
             $("#dvBtnImportName").hide();
             $("#hintOrgName").show();
             $("#Business_Name").removeAttr('readonly');
@@ -64,7 +64,7 @@
             $("#dvOrgNameDetails").show();
         }
 
-        function showImportFromCompHouseSection() {
+        function showProducerFromCompanyHouseSection() {
             $("#dvBtnImportName").show();
             $("#hintOrgName").hide();
             $("#Business_Name").attr('readonly', 'readonly');
@@ -89,33 +89,31 @@
             $("#hintOrgName").show();
             $("#dvOrgNameDetails").show();
 
-            $('#yes').click(function () {
-                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
-                if (isLimitedCompany) {
-                    showImportFromCompHouseSection();
-                } else {
-                    hideImportFromCompHouseSection();
-                }
-            });
+            var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+            if (isLimitedCompany) {
+                showProducerFromCompanyHouseSection();
+            } else {
+                hideProducerFromCompanyHouseSection();
+            }
 
             $('#no').click(function () {
-                hideImportFromCompHouseSection();
+                hideProducerFromCompanyHouseSection();
             });
 
             $('#SoleTrader').click(function () {
-                hideImportFromCompHouseSection();
+                hideProducerFromCompanyHouseSection();
             });
 
             $('#Partnership').click(function () {
-                hideImportFromCompHouseSection();
+                hideProducerFromCompanyHouseSection();
             });
 
             $('#LimitedCompany').click(function () {
-                showImportFromCompHouseSection();
+                showProducerFromCompanyHouseSection();
             });
 
             $('#Other').click(function () {
-                hideImportFromCompHouseSection();
+                hideProducerFromCompanyHouseSection();
             });
 
             var regNumber = $('#Business_RegistrationNumber').val();

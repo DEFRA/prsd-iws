@@ -116,15 +116,13 @@
         data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
         data_addressbook_type = "Producer"
     })
+</div>
 
-    <br />
-    <br />
-    <div class="govuk-form-group">
-        @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
-        @Html.Gds().HintSpan(BusinessResources.OrgTradingNameHint)
-        <span>
-            <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
-            @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
-        </span>
-    </div>
+<div class="govuk-form-group">
+    @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
+    @Html.Gds().HintSpan(BusinessResources.OrgTradingNameHint)
+    <span>
+        <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+        @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
+    </span>
 </div>
