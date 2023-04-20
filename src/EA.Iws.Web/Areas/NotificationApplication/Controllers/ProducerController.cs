@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification.Audit;
+    using EA.Iws.Web.Areas.Common;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -22,12 +23,15 @@
         private readonly IMediator mediator;
         private readonly IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap;
         private readonly IAuditService auditService;
+        private readonly ITrimTextMethod trimTextMethod;
 
-        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap, IAuditService auditService)
+        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap, 
+                                  IAuditService auditService, ITrimTextMethod trimTextMethod)
         {
             this.mediator = mediator;
             this.producerAddressBookMap = producerAddressBookMap;
             this.auditService = auditService;
+            this.trimTextMethod = trimTextMethod;
         }
 
         [HttpGet]
@@ -64,6 +68,9 @@
                 {
                     model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
                 }
+
+                //Trim address post code
+                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 var request = model.ToRequest();
 
@@ -132,6 +139,9 @@
                 {
                     model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
                 }
+
+                //Trim address post code
+                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 var request = model.ToRequest();
 

@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using EA.Iws.Web.Areas.Common;
     using EA.Iws.Web.Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -17,10 +18,12 @@
     public class FacilityController : Controller
     {
         private readonly IMediator mediator;
+        private readonly ITrimTextMethod trimTextMethod;
 
-        public FacilityController(IMediator mediator)
+        public FacilityController(IMediator mediator, ITrimTextMethod trimTextMethod)
         {
             this.mediator = mediator;
+            this.trimTextMethod = trimTextMethod;
         }
 
         [HttpGet]
@@ -35,7 +38,7 @@
                 NotificationType = details.NotificationType,
                 Facilities = facilityCollection.Facilities
             };
-            
+
             return View(model);
         }
 
@@ -54,7 +57,7 @@
 
             return RedirectToAction("Index", "Shipment");
         }
-            
+
         [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
@@ -67,7 +70,7 @@
 
             var details = await mediator.SendAsync(new GetNotificationDetails(id));
             model.NotificationType = details.NotificationType;
-            
+
             return View(model);
         }
 
@@ -82,6 +85,9 @@
 
                 return View(model);
             }
+
+            //Trim address post code
+            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
 
@@ -125,7 +131,7 @@
         {
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
             var facilityToEdit = facilityCollection.Facilities.SingleOrDefault(f => f.Id == facilityId.GetValueOrDefault());
-            
+
             if (facilityToEdit == null)
             {
                 return RedirectToAction("index");
@@ -146,6 +152,9 @@
             {
                 return View(model);
             }
+
+            //Trim address post code
+            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
             var facilityToEdit = facilityCollection.Facilities.SingleOrDefault(f => f.Id == model.FacilityId);

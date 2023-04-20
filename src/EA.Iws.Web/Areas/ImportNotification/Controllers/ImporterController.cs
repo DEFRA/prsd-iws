@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using EA.Iws.Web.Areas.Common;
     using EA.Iws.Web.Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -16,10 +17,12 @@
     public class ImporterController : Controller
     {
         private readonly IMediator mediator;
+        private readonly ITrimTextMethod trimTextMethod;
 
-        public ImporterController(IMediator mediator)
+        public ImporterController(IMediator mediator, ITrimTextMethod trimTextMethod)
         {
             this.mediator = mediator;
+            this.trimTextMethod = trimTextMethod;
         }
 
         [HttpGet]
@@ -45,6 +48,9 @@
             {
                 return View(model);
             }
+
+            //Trim address post code
+            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
             var importer = new Importer(id)
             {

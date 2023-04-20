@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using EA.Iws.Web.Areas.Common;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
@@ -14,10 +15,12 @@
     public class ProducerController : Controller
     {
         private readonly IMediator mediator;
+        private readonly ITrimTextMethod trimTextMethod;
 
-        public ProducerController(IMediator mediator)
+        public ProducerController(IMediator mediator, ITrimTextMethod trimTextMethod)
         {
             this.mediator = mediator;
+            this.trimTextMethod = trimTextMethod;
         }
 
         [HttpGet]
@@ -43,6 +46,9 @@
                 return View(model);
             }
 
+            //Trim address post code
+            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+
             var producer = new Producer(id)
             {
                 Address = model.Address.AsAddress(),
@@ -57,6 +63,6 @@
             await mediator.SendAsync(new SetDraftData<Producer>(id, producer));
 
             return RedirectToAction("Index", "Facility");
-        } 
+        }
     }
 }

@@ -5,6 +5,7 @@
     using Core.AddressBook;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Web.Areas.Common;
     using FakeItEasy;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -22,13 +23,14 @@
         private readonly ImporterController importerController;
         private readonly IAuditService auditService;
         private readonly IMediator mediator;
+        private readonly ITrimTextMethod trimTextMethod;
 
         public ImporterControllerTests()
         {
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
-            importerController = new ImporterController(A.Fake<IMediator>(), 
-                A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>(), this.auditService);
+            this.trimTextMethod = A.Fake<ITrimTextMethod>();
+            importerController = new ImporterController(A.Fake<IMediator>(), A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>(), this.auditService, trimTextMethod);
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Importer));
         }
 
