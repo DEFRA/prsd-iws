@@ -2,6 +2,7 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
+    using EA.Iws.Web.Areas.Common;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -22,13 +23,15 @@
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
         private readonly IAuditService auditService;
+        private readonly ITrimTextMethod trimTextMethod;
 
         public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType,
-                                  AddAddressBookEntry> addressBookMapper, IAuditService auditService)
+                                  AddAddressBookEntry> addressBookMapper, IAuditService auditService, ITrimTextMethod trimTextMethod)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
             this.auditService = auditService;
+            this.trimTextMethod = trimTextMethod;
         }
 
         [HttpGet]
@@ -78,6 +81,9 @@
                 {
                     model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
                 }
+
+                //Trim address post code
+                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 await mediator.SendAsync(model.ToRequest());
 

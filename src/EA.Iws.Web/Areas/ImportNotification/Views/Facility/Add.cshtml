@@ -54,7 +54,7 @@
                     <span class="form-hint" id="RegNumHintUk">@BusinessResources.RegistrationNumberHintUK</span>
                     <span class="form-hint" id="RegNumHintNonUk" style="display:none;">@BusinessResources.RegistrationNumberHintNonUK</span>
                     @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
-                    @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+                    @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber, new { @style = "text-transform: uppercase;" })
                     <div>
                         <br />
                     </div>

@@ -119,7 +119,7 @@
             <span id="compHouseNonJSMessage" class="form-hint js-hidden">@nonJavascriptMessage</span>
         }
         @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
-        @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.RegistrationNumber, new { @style = "text-transform: uppercase;" })
 
         @if (Model.DisplayCompaniesHouseHint)
         {

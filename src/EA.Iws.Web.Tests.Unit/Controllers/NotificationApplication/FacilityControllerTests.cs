@@ -6,6 +6,7 @@
     using Core.Notification;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Web.Areas.Common;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
@@ -28,11 +29,13 @@
         private readonly Guid facilityId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly FacilityController facilityController;
         private readonly Guid facilityId2 = new Guid("D8991991-64A7-4101-A3A2-2F6B538A0A7A");
+        private readonly ITrimTextMethod trimTextMethod;
 
         public FacilityControllerTests()
         {
             mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
+            this.trimTextMethod = A.Fake<ITrimTextMethod>();
 
             A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
@@ -59,7 +62,7 @@
                     NotificationType = NotificationType.Recovery
                 });
 
-            facilityController = new FacilityController(mediator, new AddAddressBookEntryMap(), this.auditService);
+            facilityController = new FacilityController(mediator, new AddAddressBookEntryMap(), this.auditService, trimTextMethod);
 
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.RecoveryFacilities));
         }
