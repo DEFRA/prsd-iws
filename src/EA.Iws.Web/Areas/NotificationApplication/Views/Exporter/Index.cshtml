@@ -170,7 +170,10 @@
 
             var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
             if (isUkOrg === 'True') {
-                $("#dvBtnImportName").show();
+                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+                if (isLimitedCompany) {
+                    $("#dvBtnImportName").show();
+                }
                 $("#hintOrgName").hide();
             }
 
