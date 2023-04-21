@@ -225,7 +225,7 @@
                         type: 'POST',
                         dataType: 'json',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        data: { "registrationNumber": regNumber.toUpperCase(), __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
                             if (result.success) {
                                 $("#Business_Name").val(result.companyName);
