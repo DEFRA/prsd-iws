@@ -5,7 +5,6 @@
     using Core.Notification.Audit;
     using Core.Shared;
     using EA.Iws.Web.Areas.Common;
-    using EA.IWS.Api.Infrastructure.Infrastructure;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
@@ -22,14 +21,14 @@
         private readonly Guid notificationId = new Guid("81CBBCEE-34C0-4628-B054-E0D8135A7947");
         private readonly ExporterController exporterController;
         private readonly IAuditService auditService;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
         public ExporterControllerTests()
         {
             client = A.Fake<IMediator>();
             auditService = A.Fake<IAuditService>();
-            trimTextMethod = A.Fake<ITrimTextMethod>();
-            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService, trimTextMethod);
+            trimTextService = A.Fake<ITrimTextService>();
+            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService, trimTextService);
 
             A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Exporter));
         }

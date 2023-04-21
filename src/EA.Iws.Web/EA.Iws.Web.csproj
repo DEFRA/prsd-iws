@@ -803,8 +803,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArchiveNotificationResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Common\ITrimTextMethod.cs" />
-    <Compile Include="Areas\Common\TrimTextMethod.cs" />
+    <Compile Include="Areas\Common\ITrimTextService.cs" />
+    <Compile Include="Areas\Common\TrimTextService.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressTypeEnum.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\DefraCompaniesHouseApi.cs" />

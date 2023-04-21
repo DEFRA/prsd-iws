@@ -17,12 +17,12 @@
     public class ImporterController : Controller
     {
         private readonly IMediator mediator;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
-        public ImporterController(IMediator mediator, ITrimTextMethod trimTextMethod)
+        public ImporterController(IMediator mediator, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
-            this.trimTextMethod = trimTextMethod;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -50,7 +50,7 @@
             }
 
             //Trim address post code
-            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+            model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
             var importer = new Importer(id)
             {

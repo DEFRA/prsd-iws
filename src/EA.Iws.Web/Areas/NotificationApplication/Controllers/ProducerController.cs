@@ -23,15 +23,15 @@
         private readonly IMediator mediator;
         private readonly IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap;
         private readonly IAuditService auditService;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
         public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap, 
-                                  IAuditService auditService, ITrimTextMethod trimTextMethod)
+                                  IAuditService auditService, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
             this.producerAddressBookMap = producerAddressBookMap;
             this.auditService = auditService;
-            this.trimTextMethod = trimTextMethod;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -70,7 +70,7 @@
                 }
 
                 //Trim address post code
-                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 var request = model.ToRequest();
 
@@ -141,7 +141,7 @@
                 }
 
                 //Trim address post code
-                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 var request = model.ToRequest();
 

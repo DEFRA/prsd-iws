@@ -23,15 +23,15 @@
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
         private readonly IAuditService auditService;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
         public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType,
-                                  AddAddressBookEntry> addressBookMapper, IAuditService auditService, ITrimTextMethod trimTextMethod)
+                                  AddAddressBookEntry> addressBookMapper, IAuditService auditService, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
             this.auditService = auditService;
-            this.trimTextMethod = trimTextMethod;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -83,7 +83,7 @@
                 }
 
                 //Trim address post code
-                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 await mediator.SendAsync(model.ToRequest());
 

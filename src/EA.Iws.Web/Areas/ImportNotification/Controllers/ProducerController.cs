@@ -15,12 +15,12 @@
     public class ProducerController : Controller
     {
         private readonly IMediator mediator;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
-        public ProducerController(IMediator mediator, ITrimTextMethod trimTextMethod)
+        public ProducerController(IMediator mediator, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
-            this.trimTextMethod = trimTextMethod;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@
             }
 
             //Trim address post code
-            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+            model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
             var producer = new Producer(id)
             {

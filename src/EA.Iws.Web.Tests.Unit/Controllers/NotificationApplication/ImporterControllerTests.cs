@@ -23,14 +23,14 @@
         private readonly ImporterController importerController;
         private readonly IAuditService auditService;
         private readonly IMediator mediator;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
         public ImporterControllerTests()
         {
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
-            this.trimTextMethod = A.Fake<ITrimTextMethod>();
-            importerController = new ImporterController(A.Fake<IMediator>(), A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>(), this.auditService, trimTextMethod);
+            this.trimTextService = A.Fake<ITrimTextService>();
+            importerController = new ImporterController(A.Fake<IMediator>(), A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>(), this.auditService, trimTextService);
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Importer));
         }
 

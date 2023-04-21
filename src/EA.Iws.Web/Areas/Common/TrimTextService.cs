@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.Common
 {    
-    public class TrimTextMethod : ITrimTextMethod
+    public class TrimTextService : ITrimTextService
     {
         public string RemoveTextWhiteSpaces(string requestText) 
         {

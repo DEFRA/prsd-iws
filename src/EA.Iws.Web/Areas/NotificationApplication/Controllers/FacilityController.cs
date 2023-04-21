@@ -25,14 +25,14 @@
         private readonly IMediator mediator;
         private readonly IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap;
         private readonly IAuditService auditService;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
-        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap, IAuditService auditService, ITrimTextMethod trimTextMethod)
+        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap, IAuditService auditService, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
             this.addFacilityAddressBookMap = addFacilityAddressBookMap;
             this.auditService = auditService;
-            this.trimTextMethod = trimTextMethod;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -64,7 +64,7 @@
             try
             {
                 //Trim address post code
-                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 await mediator.SendAsync(model.ToRequest());
 
@@ -125,7 +125,7 @@
             try
             {
                 //Trim address post code
-                model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 var request = model.ToRequest();
 
