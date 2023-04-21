@@ -15,12 +15,12 @@
     public class ExporterController : Controller
     {
         private readonly IMediator mediator;
-        private readonly ITrimTextMethod trimTextMethod;
+        private readonly ITrimTextService trimTextService;
 
-        public ExporterController(IMediator mediator, ITrimTextMethod trimTextMethod)
+        public ExporterController(IMediator mediator, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
-            this.trimTextMethod = trimTextMethod;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -47,7 +47,7 @@
             }
 
             //Trim address post code
-            model.Address.PostalCode = trimTextMethod.RemoveTextWhiteSpaces(model.Address.PostalCode);
+            model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
             var exporter = new Exporter(id)
             {
