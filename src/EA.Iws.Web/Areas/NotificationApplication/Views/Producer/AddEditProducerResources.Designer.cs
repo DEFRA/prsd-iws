@@ -187,7 +187,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter registration number.
+        ///   Looks up a localized string similar to Enter a registration number using letters and numbers only.
         /// </summary>
         public static string RegistrationNumberRequired {
             get {
