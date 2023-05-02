@@ -160,7 +160,7 @@
     <value>Registration number</value>
   </data>
   <data name="RegistrationNumberRequired" xml:space="preserve">
-    <value>Please enter registration number</value>
+    <value>Enter a registration number using letters and numbers only</value>
   </data>
   <data name="TitleAdd" xml:space="preserve">
     <value>Add a waste generator-producer</value>
