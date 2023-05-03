@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AdditionalRegistrationNumberMaxLength" xml:space="preserve">
+    <value>The additional registration number cannot be greater than 100 characters</value>
+  </data>
+  <data name="AdditionalRegNumber" xml:space="preserve">
+    <value>Permit number or exemption</value>
+  </data>
   <data name="BusinessName" xml:space="preserve">
     <value>Organisation name</value>
   </data>

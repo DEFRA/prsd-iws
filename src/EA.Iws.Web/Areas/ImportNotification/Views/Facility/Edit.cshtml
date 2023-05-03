@@ -86,6 +86,12 @@
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
     </div>
 
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.AdditionalRegistrationNumber)" id="dvAdditionalRegNumber">
+        @Html.Gds().LabelFor(m => m.Business.AdditionalRegistrationNumber)
+        @Html.Gds().ValidationMessageFor(model => model.Business.AdditionalRegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.Business.AdditionalRegistrationNumber)
+    </div>
+
     <h2 class="heading-medium">@Resource.OrganisationNameTitle</h2>
     <hr />
     <div class="govuk-form-group" id="dvOrgNameDesction">
@@ -169,6 +175,10 @@
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
             $("#dvRegNumber").show();
+            $('#companies-house-number').hide();
+            $("#dvAdditionalRegNumber").hide();
+            $("#hintImpButtonMsg").hide();
+            $("#Business_Name").val("");
         }
 
         function showFacilityFromCompanyHouseSection() {
@@ -179,6 +189,9 @@
             $("#dvOrgNameDesction").show();
             $("#dvOrgNameDetails").hide();
             $("#dvRegNumber").hide();
+            $('#companies-house-number').show();
+            $("#dvAdditionalRegNumber").show();
+            $("#hintImpButtonMsg").show();
         }
 
         function disabledFacilityImportNameButton() {

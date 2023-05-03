@@ -58,7 +58,7 @@ else if (Model.AddressType == AddressType.Facility)
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
-    @Html.Gds().LabelFor(m => m.PostalCode, false)
+    @Html.Gds().LabelFor(m => m.PostalCode, new { @id = "lblPostCode" })
     @Html.Gds().ValidationMessageFor(m => m.PostalCode)
     @Html.Gds().TextBoxFor(m => m.PostalCode)
 </div>

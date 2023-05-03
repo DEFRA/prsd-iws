@@ -44,7 +44,7 @@
         {
             FacilityId = facility.Id;
             Address = new AddressViewModel(facility.Address, AddressTypeEnum.Facility);
-            Business = new BusinessViewModel(facility.BusinessName, facility.RegistrationNumber);
+            Business = new BusinessViewModel(facility.BusinessName, facility.RegistrationNumber, facility.AdditionalRegistrationNumber);
             Contact = new ContactViewModel(facility.Contact, AddressTypeEnum.Facility);
             BusinessType = facility.Type;
             IsActualSite = facility.IsActualSite;

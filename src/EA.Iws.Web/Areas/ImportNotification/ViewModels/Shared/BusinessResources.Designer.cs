@@ -61,6 +61,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The additional registration number cannot be greater than 100 characters.
+        /// </summary>
+        public static string AdditionalRegistrationNumberMaxLength {
+            get {
+                return ResourceManager.GetString("AdditionalRegistrationNumberMaxLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permit number or exemption.
+        /// </summary>
+        public static string AdditionalRegNumber {
+            get {
+                return ResourceManager.GetString("AdditionalRegNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Organisation name.
         /// </summary>
         public static string BusinessName {
