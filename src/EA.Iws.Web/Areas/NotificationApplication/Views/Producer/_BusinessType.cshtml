@@ -110,7 +110,7 @@
         </span>
     </div>
 
-    @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHint, "hintOrgName")
     @Html.Gds().TextBoxFor(m => m.Business.Name, new
     {
         data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),

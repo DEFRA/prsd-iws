@@ -232,7 +232,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
         /// </summary>
         public static string OrgNameHint {
             get {

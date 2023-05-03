@@ -34,6 +34,7 @@
 
             if (setDefaultAsUnitedKingdom)
             {
+                response.Insert(0, new CountryData { Id = Guid.Empty, Name = string.Empty });
                 controller.ViewBag.Countries = new SelectList(response, "Id", "Name", defaultId);
             }
             else

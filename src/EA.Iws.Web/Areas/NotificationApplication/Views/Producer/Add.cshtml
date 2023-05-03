@@ -62,6 +62,7 @@
             $("#Business_Name").removeAttr('readonly');
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
+            $("#Business_Name").val('');
         }
 
         function showProducerFromCompanyHouseSection() {
@@ -89,16 +90,14 @@
             $("#hintOrgName").show();
             $("#dvOrgNameDetails").show();
 
+            $("#lblPostCode").text("Post code");
+
             var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
             if (isLimitedCompany) {
                 showProducerFromCompanyHouseSection();
             } else {
                 hideProducerFromCompanyHouseSection();
-            }
-
-            $('#no').click(function () {
-                hideProducerFromCompanyHouseSection();
-            });
+            }            
 
             $('#SoleTrader').click(function () {
                 hideProducerFromCompanyHouseSection();

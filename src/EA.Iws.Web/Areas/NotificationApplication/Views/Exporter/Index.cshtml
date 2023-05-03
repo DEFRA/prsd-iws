@@ -136,6 +136,7 @@
             $("#dvBtnImportName").hide();
             $("#hintOrgName").show();
             $("#Business_Name").removeAttr('readonly');
+            $("#Business_Name").val('');
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
         }
@@ -173,8 +174,11 @@
                 var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
                 if (isLimitedCompany) {
                     $("#dvBtnImportName").show();
+                    $("#hintOrgName").hide();
+                } else {
+                    $("#hintOrgName").show();
                 }
-                $("#hintOrgName").hide();
+                $("#lblPostCode").text("Post code");
             }
 
             $('#yes').click(function () {
@@ -184,10 +188,16 @@
                 } else {
                     hideImportFromCompHouseSection();
                 }
+                $("#s2id_Address_CountryId").select2("val", "c9930d1c-3b06-417b-b51f-2f899c23c7b5");
+                $("#Address_PostalCode").val("");
+                $("#lblPostCode").text("Post code");
             });
 
             $('#no').click(function () {
                 hideImportFromCompHouseSection();
+                $("#s2id_Address_CountryId").select2("val", "00000000-0000-0000-0000-000000000000");
+                $("#Address_PostalCode").val("N/A");
+                $("#lblPostCode").text("Post code (optional for non-UK address)");
             });
 
             $('#SoleTrader').click(function () {
