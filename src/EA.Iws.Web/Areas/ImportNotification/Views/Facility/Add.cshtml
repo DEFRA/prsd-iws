@@ -16,7 +16,7 @@
 
 <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resource.Title, Model.NotificationType.ToString().ToLower()))</h1>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Add", "Facility", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
