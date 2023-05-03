@@ -86,6 +86,12 @@
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
     </div>
 
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.AdditionalRegistrationNumber)" id="dvAdditionalRegNumber">
+        @Html.Gds().LabelFor(m => m.Business.AdditionalRegistrationNumber)
+        @Html.Gds().ValidationMessageFor(model => model.Business.AdditionalRegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.Business.AdditionalRegistrationNumber)
+    </div>
+
     <h2 class="heading-medium">@Resource.OrganisationNameTitle</h2>
     <hr />
     <div class="govuk-form-group" id="dvOrgNameDesction">
@@ -112,11 +118,8 @@
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
         @Html.Gds().LabelFor(m => m.Business.Name, false)
         @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-
         <div id="dvBtnImportName">
-            <span class="form-hint">
-                @Resource.ImpNameButtonHintMsg
-            </span>
+            @Html.Gds().HintSpan(@Resource.ImpNameButtonHintMsg, id: "hintImpButtonMsg")
             <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">@Resource.ImportName</button>
             <span class="field-validation-error govuk-error-message" id="errorMessage">
             </span>
@@ -176,6 +179,9 @@
             $("#dvOrgNameDetails").show();
             $("#dvRegNumber").show();
             $('#companies-house-number').hide();
+            $("#dvAdditionalRegNumber").hide();
+            $("#hintImpButtonMsg").hide();
+            $("#Business_Name").val("");
         }
 
         function showImportFromCompHouseSection() {
@@ -186,6 +192,8 @@
             $("#dvOrgNameDetails").hide();
             $("#dvRegNumber").hide();
             $('#companies-house-number').show();
+            $("#dvAdditionalRegNumber").show();
+            $("#hintImpButtonMsg").show();
         }
 
         function disabledImportNameButton() {
@@ -204,6 +212,11 @@
             //On page load, controls show
             $("#hintOrgName").show();
             $("#dvOrgNameDetails").show();
+
+            $("#dvAdditionalRegNumber").hide();
+            $("#hintImpButtonMsg").hide();
+
+            $("#lblPostCode").text("Post code");
 
             $('#SoleTrader').click(function () {
                 hideImportFromCompHouseSection();

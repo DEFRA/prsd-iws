@@ -100,7 +100,8 @@
                 Type = model.BusinessType,
                 Id = Guid.NewGuid(),
                 IsActualSite = model.IsActualSite,
-                IsAddedToAddressBook = model.IsAddedToAddressBook
+                IsAddedToAddressBook = model.IsAddedToAddressBook,
+                AdditionalRegistrationNumber = model.Business.AdditionalRegistrationNumber
             };
 
             facilityCollection.Facilities.Add(newFacility);
@@ -172,7 +173,8 @@
                     Type = model.BusinessType,
                     Id = model.FacilityId,
                     IsActualSite = model.IsActualSite,
-                    IsAddedToAddressBook = model.IsAddedToAddressBook
+                    IsAddedToAddressBook = model.IsAddedToAddressBook,
+                    AdditionalRegistrationNumber = model.Business.AdditionalRegistrationNumber
                 };
 
                 facilityCollection.Facilities.Add(newFacility);

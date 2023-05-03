@@ -117,7 +117,7 @@
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
         @Html.Gds().LabelFor(m => m.Business.Name, false)
-        @Html.Gds().HintSpan(@Resource.OrgNameHintMsg)
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, "hintOrgName")
         @Html.Gds().ValidationMessageFor(m => m.Business.Name)
         @Html.Gds().TextBoxFor(m => m.Business.Name, new
         {
@@ -165,6 +165,7 @@
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
             $("#dvRegNumber").show();
+            $("#Business_Name").val("");
         }
 
         function showImportFromCompHouseSection() {

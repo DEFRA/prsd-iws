@@ -13,6 +13,10 @@
         [Display(Name = "OrgTradingName", ResourceType = typeof(BusinessResources))]
         public string OrgTradingName { get; set; }
 
+        [Display(Name = "AdditionalRegNumber", ResourceType = typeof(BusinessResources))]
+        [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "AdditionalRegistrationNumberMaxLength")]
+        public string AdditionalRegistrationNumber { get; set; }
+
         public BusinessViewModel()
         {
         }
@@ -21,7 +25,7 @@
             Name = businessName;
         }
 
-        public BusinessViewModel(string businessName, string registrationNumber)
+        public BusinessViewModel(string businessName, string registrationNumber, string additionalRegistrationNumber = "")
         {
             if (!string.IsNullOrEmpty(businessName))
             {
@@ -38,6 +42,7 @@
                 }
             }
             RegistrationNumber = registrationNumber;
+            AdditionalRegistrationNumber = additionalRegistrationNumber;
         }
     }
 }
