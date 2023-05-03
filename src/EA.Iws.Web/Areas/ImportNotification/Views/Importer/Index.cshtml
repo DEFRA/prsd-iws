@@ -11,7 +11,7 @@
 
 <h1 class="govuk-heading-l">@Resource.Title</h1>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Importer", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
