@@ -7,7 +7,7 @@
     ViewBag.UseDefaultValidationAndToolTips = false;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Producer", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()

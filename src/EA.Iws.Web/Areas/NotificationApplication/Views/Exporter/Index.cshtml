@@ -16,9 +16,9 @@
     ViewBag.UseDefaultValidationAndToolTips = false;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Exporter", FormMethod.Post, new { autocomplete = "off" }))
 {
-    @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
