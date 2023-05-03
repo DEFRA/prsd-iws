@@ -19,7 +19,7 @@
     ViewBag.UseUKAddressValidationAndTooltips = false;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Facility", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
