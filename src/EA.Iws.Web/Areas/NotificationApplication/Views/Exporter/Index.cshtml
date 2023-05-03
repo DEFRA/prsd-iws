@@ -188,14 +188,15 @@
                 } else {
                     hideImportFromCompHouseSection();
                 }
-                $("#s2id_Address_CountryId").select2("val", "c9930d1c-3b06-417b-b51f-2f899c23c7b5");
+                $("#s2id_Address_CountryId").select2("val", $("#Address_CountryId option:contains('United Kingdom')").val());
                 $("#Address_PostalCode").val("");
                 $("#lblPostCode").text("Post code");
             });
 
             $('#no').click(function () {
                 hideImportFromCompHouseSection();
-                $("#s2id_Address_CountryId").select2("val", "00000000-0000-0000-0000-000000000000");
+                
+                $("#s2id_Address_CountryId").select2("val", $("#Address_CountryId option:contains('')").val());
                 $("#Address_PostalCode").val("N/A");
                 $("#lblPostCode").text("Post code (optional for non-UK address)");
             });
