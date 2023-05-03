@@ -175,7 +175,7 @@
     <value>Select an organisation type and enter a registration number. If none of these options apply, select "Other" and add details.</value>
   </data>
   <data name="OrgNameHint" xml:space="preserve">
-    <value>For example 'A&amp;B Materials'</value>
+    <value>For example 'A&amp;B Materials CD'</value>
   </data>
   <data name="OrgHelpWithNamingContent1" xml:space="preserve">
     <value>When inputting your organisation name, the following naming conventions should be used to minimise errors:</value>

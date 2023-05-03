@@ -47,7 +47,8 @@
             {
                 model = new ExporterViewModel
                 {
-                    NotificationId = id
+                    NotificationId = id,
+                    IsUkBased = true
                 };
             }
 
