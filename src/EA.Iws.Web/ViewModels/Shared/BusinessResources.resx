@@ -174,7 +174,7 @@
   <data name="FormHint" xml:space="preserve">
     <value>Select an organisation type and enter a registration number. If none of these options apply, select "Other" and add details.</value>
   </data>
-  <data name="OrgNameHint" xml:space="preserve">
+  <data name="OrgNameHintNonUK" xml:space="preserve">
     <value>For example 'A&amp;B Materials CD'</value>
   </data>
   <data name="OrgHelpWithNamingContent1" xml:space="preserve">
@@ -221,5 +221,8 @@
   </data>
   <data name="OrgHelpWithNamingContent5NonUk" xml:space="preserve">
     <value>For example: Instead of 'A &amp; b Materials c.d.' the name should be 'A&amp;B Materials CD'</value>
+  </data>
+  <data name="OrgNameHintUK" xml:space="preserve">
+    <value>For example 'A&amp;B Materials'</value>
   </data>
 </root>

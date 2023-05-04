@@ -188,7 +188,8 @@
         </span>
     </div>
 
-    @Html.Gds().HintSpan(BusinessResources.OrgNameHint, id: "hintOrgName")
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHintUK, id: "hintOrgNameUK")
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHintNonUK, id: "hintOrgNameNonUK")
 
     @if (addressType.HasValue)
     {

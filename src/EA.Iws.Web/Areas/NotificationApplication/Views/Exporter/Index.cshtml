@@ -18,7 +18,7 @@
 
 @using (Html.BeginForm("Index", "Exporter", FormMethod.Post, new { autocomplete = "off" }))
 {
-                @Html.AntiForgeryToken()
+    @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
@@ -134,7 +134,6 @@
 
         function hideImportFromCompHouseSection() {
             $("#dvBtnImportName").hide();
-            $("#hintOrgName").show();
             $("#Business_Name").removeAttr('readonly');
             $("#Business_Name").val('');
             $("#dvOrgNameDesction").hide();
@@ -145,7 +144,6 @@
             var isUkBased = $("input[id='yes']:checked").val();
             if (isUkBased) {
                 $("#dvBtnImportName").show();
-                $("#hintOrgName").hide();
                 $("#Business_Name").attr('readonly', 'readonly');
                 $("#dvOrgNameDesction").show();
                 $("#dvOrgNameDetails").hide();
@@ -174,10 +172,10 @@
                 var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
                 if (isLimitedCompany) {
                     $("#dvBtnImportName").show();
-                    $("#hintOrgName").hide();
-                } else {
-                    $("#hintOrgName").show();
                 }
+
+                $("#hintOrgNameUK").show();
+                $("#hintOrgNameNonUK").hide();
                 $("#lblPostCode").text("Post code");
             }
 
@@ -191,14 +189,20 @@
                 $("#s2id_Address_CountryId").select2("val", $("#Address_CountryId option:contains('United Kingdom')").val());
                 $("#Address_PostalCode").val("");
                 $("#lblPostCode").text("Post code");
+
+                $("#hintOrgNameUK").show();
+                $("#hintOrgNameNonUK").hide();
             });
 
             $('#no').click(function () {
                 hideImportFromCompHouseSection();
-                
+
                 $("#s2id_Address_CountryId").select2("val", $("#Address_CountryId option:contains('')").val());
                 $("#Address_PostalCode").val("N/A");
                 $("#lblPostCode").text("Post code (optional for non-UK address)");
+
+                $("#hintOrgNameUK").hide();
+                $("#hintOrgNameNonUK").show();
             });
 
             $('#SoleTrader').click(function () {
@@ -211,6 +215,14 @@
 
             $('#LimitedCompany').click(function () {
                 showImportFromCompHouseSection();
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
             });
 
             $('#Other').click(function () {
