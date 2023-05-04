@@ -162,7 +162,7 @@
     <script type="text/javascript">
 
         function hideImportFromCompHouseSection() {
-            $("#btnImportName").hide();            
+            $("#btnImportName").hide();
             $("#Business_Name").removeAttr('readonly');
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
@@ -219,7 +219,7 @@
                 hideImportFromCompHouseSection();
             });
 
-            var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
+            var isLimitedCompanyChecked = $("input[id='LimitedCompany']:checked").val();
             if (isLimitedCompanyChecked) {
                 showImportFromCompHouseSection();
 
