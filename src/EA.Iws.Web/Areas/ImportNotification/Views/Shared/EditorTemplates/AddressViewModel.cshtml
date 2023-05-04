@@ -58,7 +58,16 @@ else if (Model.AddressType == AddressType.Facility)
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
-    @Html.Gds().LabelFor(m => m.PostalCode, new { @id = "lblPostCode" })
+    @if (Model.AddressType == AddressType.Importer || Model.AddressType == AddressType.Facility)
+    {
+        @Html.Gds().LabelFor(m => m.PostalCode, false)
+        @Html.Gds().HintSpan(@Resource.AddressPostCodeHint, "addressPostCodeHint", "")
+    }
+    else
+    {
+        @Html.Gds().LabelFor(m => m.PostalCode)
+        @Html.Gds().HintSpan(@Resource.AddressPostCodeHint, "addressPostCodeHint", "none")
+    }
     @Html.Gds().ValidationMessageFor(m => m.PostalCode)
     @Html.Gds().TextBoxFor(m => m.PostalCode)
 </div>

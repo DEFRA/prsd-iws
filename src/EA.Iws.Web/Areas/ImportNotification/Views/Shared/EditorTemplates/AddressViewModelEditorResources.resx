@@ -123,6 +123,9 @@
   <data name="AddressLine1HintMsgExp" xml:space="preserve">
     <value>For example: Example Street, 21</value>
   </data>
+  <data name="AddressPostCodeHint" xml:space="preserve">
+    <value>For example: AB1 2CD</value>
+  </data>
   <data name="CountryHintMsg" xml:space="preserve">
     <value>Select the country the organisation is operating from</value>
   </data>

@@ -80,6 +80,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For example: AB1 2CD.
+        /// </summary>
+        public static string AddressPostCodeHint {
+            get {
+                return ResourceManager.GetString("AddressPostCodeHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select the country the organisation is operating from.
         /// </summary>
         public static string CountryHintMsg {

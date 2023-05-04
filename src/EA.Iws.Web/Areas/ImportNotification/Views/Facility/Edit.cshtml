@@ -104,13 +104,13 @@
             </span>
         </summary>
         <div class="govuk-details__text">
-            When inputting your organisation name, the following naming conventions should be used to minimise errors:
+            @Resource.OrgHelpSummaryDetailsHeader
             <div id="dvImpNotificationOrgName">
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>Company name abbreviations should always be in uppercase with no full stops</li>
-                    <li>Company suffixes should always be uppercase with no full stops</li>
-                    <li>There should be no spaces either side of special characters, particularly at the end of the name</li>
-                    <li>For example: Instead of 'A & b Materials c.d.' the name should be 'A&B Materials CD'</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint1</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint2</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint3</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint4</li>
                 </ul>
             </div>
         </div>
@@ -170,7 +170,6 @@
 
         function hideFacilityFromCompanyHouseSection() {
             $("#dvBtnImportName").hide();
-            $("#hintOrgName").show();
             $("#Business_Name").removeAttr('readonly');
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
@@ -179,11 +178,11 @@
             $("#dvAdditionalRegNumber").hide();
             $("#hintImpButtonMsg").hide();
             $("#Business_Name").val("");
+            $("#hintOrgName").show();
         }
 
         function showFacilityFromCompanyHouseSection() {
             $("#dvBtnImportName").show();
-            $("#hintOrgName").show();
             $("#btnImportName").show();
             $("#Business_Name").attr('readonly', 'readonly');
             $("#dvOrgNameDesction").show();
@@ -192,6 +191,7 @@
             $('#companies-house-number').show();
             $("#dvAdditionalRegNumber").show();
             $("#hintImpButtonMsg").show();
+            $("#hintOrgName").hide();
         }
 
         function disabledFacilityImportNameButton() {
