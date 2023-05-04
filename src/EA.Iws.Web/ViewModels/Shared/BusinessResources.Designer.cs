@@ -234,9 +234,18 @@ namespace EA.Iws.Web.ViewModels.Shared {
         /// <summary>
         ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
         /// </summary>
-        public static string OrgNameHint {
+        public static string OrgNameHintNonUK {
             get {
-                return ResourceManager.GetString("OrgNameHint", resourceCulture);
+                return ResourceManager.GetString("OrgNameHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgNameHintUK {
+            get {
+                return ResourceManager.GetString("OrgNameHintUK", resourceCulture);
             }
         }
         
