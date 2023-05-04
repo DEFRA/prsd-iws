@@ -171,9 +171,18 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         /// <summary>
         ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
         /// </summary>
-        public static string OrgNameHintMsg {
+        public static string OrgNameHintMsgNonUK {
             get {
-                return ResourceManager.GetString("OrgNameHintMsg", resourceCulture);
+                return ResourceManager.GetString("OrgNameHintMsgNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgNameHintMsgUK {
+            get {
+                return ResourceManager.GetString("OrgNameHintMsgUK", resourceCulture);
             }
         }
         

@@ -97,6 +97,51 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsHeader {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company name abbreviations should always be in uppercase with no full stops.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint1 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be no spaces either side of special characters, particularly at the end of the name.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint2 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be no full stops present.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint3 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint4 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use the &apos;Import name&apos; button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually..
         /// </summary>
         public static string OrgHelpWithNamingDescription {
@@ -106,7 +151,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
         /// </summary>
         public static string OrgNameHintMsg {
             get {

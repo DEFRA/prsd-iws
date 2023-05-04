@@ -129,11 +129,26 @@
   <data name="OrganisationNameTitle" xml:space="preserve">
     <value>Organisation name</value>
   </data>
+  <data name="OrgHelpSummaryDetailsHeader" xml:space="preserve">
+    <value>When inputting your organisation name, the following naming conventions should be used to minimise errors:</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint1" xml:space="preserve">
+    <value>Company name abbreviations should always be in uppercase with no full stops</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint2" xml:space="preserve">
+    <value>There should be no spaces either side of special characters, particularly at the end of the name</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint3" xml:space="preserve">
+    <value>There should be no full stops present</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint4" xml:space="preserve">
+    <value>For example: Instead of 'a &amp; b materials', the name should be 'A&amp;B Materials'</value>
+  </data>
   <data name="OrgHelpWithNamingDescription" xml:space="preserve">
     <value>Use the 'Import name' button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually.</value>
   </data>
   <data name="OrgNameHintMsg" xml:space="preserve">
-    <value>For example 'A&amp;B Materials CD'</value>
+    <value>For example 'A&amp;B Materials'</value>
   </data>
   <data name="OrgTradingNameHint" xml:space="preserve">
     <value>The name your organisation trades under if different to your organisation name</value>

@@ -117,7 +117,10 @@
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
         @Html.Gds().LabelFor(m => m.Business.Name, false)
-        @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, "hintOrgName")
+
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsgNonUK, "hintOrgNameNonUK")
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsgUK, "hintOrgNameUK")
+
         @Html.Gds().ValidationMessageFor(m => m.Business.Name)
         @Html.Gds().TextBoxFor(m => m.Business.Name, new
         {
@@ -159,13 +162,15 @@
     <script type="text/javascript">
 
         function hideImportFromCompHouseSection() {
-            $("#btnImportName").hide();
-            $("#hintOrgName").show();
+            $("#btnImportName").hide();            
             $("#Business_Name").removeAttr('readonly');
             $("#dvOrgNameDesction").hide();
             $("#dvOrgNameDetails").show();
             $("#dvRegNumber").show();
             $("#Business_Name").val("");
+
+            $("#hintOrgNameNonUK").hide();
+            $("#hintOrgNameUK").show();
         }
 
         function showImportFromCompHouseSection() {
@@ -191,7 +196,8 @@
             $("#dvOrgNameDesction").hide();
 
             //On page load, controls show
-            $("#hintOrgName").show();
+            $("#hintOrgNameNonUK").hide();
+            $("#hintOrgNameUK").show();
             $("#dvOrgNameDetails").show();
 
             $('#SoleTrader').click(function () {
@@ -204,6 +210,9 @@
 
             $('#LimitedCompany').click(function () {
                 showImportFromCompHouseSection();
+
+                $("#hintOrgNameNonUK").hide();
+                $("#hintOrgNameUK").hide();
             });
 
             $('#Other').click(function () {
@@ -213,6 +222,9 @@
             var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
             if (isLimitedCompanyChecked) {
                 showImportFromCompHouseSection();
+
+                $("#hintOrgNameNonUK").hide();
+                $("#hintOrgNameUK").hide();
             }
 
             var regNumber = $('#Business_RegistrationNumber').val();
