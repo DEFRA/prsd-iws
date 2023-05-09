@@ -207,14 +207,33 @@
 
             $('#SoleTrader').click(function () {
                 hideImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").show();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
             });
 
             $('#Partnership').click(function () {
                 hideImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").show();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
             });
 
             $('#LimitedCompany').click(function () {
                 showImportFromCompHouseSection();
+
                 var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
                 if (isUkOrg === 'True') {
                     $("#hintOrgNameUK").hide();
@@ -227,6 +246,15 @@
 
             $('#Other').click(function () {
                 hideImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").show();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
             });
 
             var regNumber = $('#Business_RegistrationNumber').val();
