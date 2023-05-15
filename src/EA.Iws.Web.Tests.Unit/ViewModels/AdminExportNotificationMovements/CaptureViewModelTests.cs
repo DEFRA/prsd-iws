@@ -85,7 +85,7 @@
         [Fact]
         public void WasteReceivedDateCannotBeInThePast()
         {
-            var model = CreateViewModelForReceivedDate(30, 5, 2016, true);
+            var model = CreateViewModelForReceivedDate(30, 4, 2016, true);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -99,7 +99,7 @@
         [Fact]
         public void WasteReceivedDateCannotBeBeforeActualShipmentDate()
         {
-            var model = CreateViewModelForReceivedDate(31, 5, 2016, true);
+            var model = CreateViewModelForReceivedDate(30, 4, 2016, true);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
