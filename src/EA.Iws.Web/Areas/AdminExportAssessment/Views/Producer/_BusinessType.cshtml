@@ -3,18 +3,14 @@
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Producer.AddProducerViewModel
 
-<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
-    @Html.Gds().LabelFor(m => m.Business.Name)
-    @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-    @Html.Gds().HintSpan(BusinessResources.OrgNameHintUK)
-    @Html.Gds().TextBoxFor(m => m.Business.Name, new
-    {
-        data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-        data_addressbook_type = "Producer"
-    })
-</div>
-
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+    <fieldset class="govuk-fieldset">
+        <legend class="govuk-label">
+            @BusinessResources.BusinessTypeHeader
+        </legend>
+    </fieldset>
+    <span class="form-hint">@BusinessResources.FormHintProducer</span>
+
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
     <div class="govuk-radios__item" data-target="sole-trader-number">
@@ -39,22 +35,23 @@
     </div>
 
     <div class="panel @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
             @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
-            <span class="form-hint">The 8-character code as documented by Companies House.</span>
+            <span class="form-hint" id="RegNumHintUk">@BusinessResources.RegistrationNumberHintUK</span>
+            <span class="form-hint" id="RegNumHintNonUk" style="display:none;">@BusinessResources.RegistrationNumberHintNonUK</span>
             @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
-            @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
-
-            <details data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+            @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber, new { @style = "text-transform: uppercase;" })
+            <div>
+                <br />
+            </div>
+            <details id="CompaniesHouseSummary" data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
                         @BusinessResources.WhereToFindCompanyHouse
                     </span>
                 </summary>
                 <div class="govuk-details__text">
-                    <p>
-                        @Html.Raw(BusinessResources.CompanyHouseDescription)
-                    </p>
+                    @Html.Raw(BusinessResources.CompanyHouseDescription)
                 </div>
             </details>
         </div>
@@ -74,4 +71,59 @@
             @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
         </div>
     </div>
+</div>
+
+<h2 class="heading-medium">@BusinessResources.OrgNameHeader</h2>
+<hr />
+<div class="govuk-form-group" id="dvOrgNameDesction">
+    @BusinessResources.OrgHelpWithNamingDescription
+</div>
+
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+    <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @BusinessResources.OrgHelpWithNamingTitle
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @BusinessResources.OrgHelpWithNamingContent1
+            <div id="dvImpNotificationOrgName">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>@BusinessResources.OrgHelpWithNamingContent2</li>
+                    <li>@BusinessResources.OrgHelpWithNamingContent3</li>
+                    <li id="orgHelpWithNamingContent4Uk">@BusinessResources.OrgHelpWithNamingContent4Uk</li>
+                    <li id="orgHelpWithNamingContent5Uk">@BusinessResources.OrgHelpWithNamingContent5Uk</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    @Html.Gds().LabelFor(m => m.Business.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+
+    <div id="dvBtnImportName">
+        <span class="form-hint">
+            Please enter above registration number to enable 'Import name' button.
+        </span>
+        <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">Import name</button>
+        <span class="field-validation-error govuk-error-message" id="errorMessage">
+        </span>
+    </div>
+
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHintUK, "hintOrgNameUK")
+
+    @Html.Gds().TextBoxFor(m => m.Business.Name, new
+    {
+        data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+        data_addressbook_type = "Producer"
+    })
+</div>
+
+<div class="govuk-form-group">
+    @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
+    @Html.Gds().HintSpan(BusinessResources.OrgTradingNameHint)
+    <span>
+        <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+        @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
+    </span>
 </div>
