@@ -23,28 +23,28 @@ BEGIN
     SET @Counter = @Counter  + 1;
 	IF @Counter <= 9
 		BEGIN
-			SET @NotificationNumber = 'GB 0001 00800' + CONVERT(VARCHAR, @Counter);
+			SET @NotificationNumber = 'GB 0001 00100' + CONVERT(VARCHAR, @Counter);
 			SET @NotificationStatus = 8;
 		END
 	ELSE
 		BEGIN
-			SET @NotificationNumber = 'GB 0001 0080' + CONVERT(VARCHAR, @Counter);
+			SET @NotificationNumber = 'GB 0001 0010' + CONVERT(VARCHAR, @Counter);
 			SET @NotificationStatus = 9;
 		END
 
 INSERT [Notification].[Notification]
 	   ([Id],
-	    [userid],
-		[notificationtype],
-		[competentauthority],
-		[notificationnumber],
-		[createddate],
-		[reasonforexport],
-		[hasspecialhandlingrequirements],
-		[specialhandlingdetails],
-		[isrecoverypercentagedataprovidedbyimporter],
-		[wastegenerationprocess],
-		[iswastegenerationprocessattached])
+	    [UserId],
+		[NotificationType],
+		[CompetentAuthority],
+		[NotificationNumber],
+		[CreatedDate],
+		[ReasonForExport],
+		[HasSpecialHandlingRequirements],
+		[SpecialHandlingDetails],
+		[IsRecoveryPercentageDataProvidedByImporter],
+		[WasteGenerationProcess],
+		[IsWasteGenerationProcessAttached])
 VALUES (NEWID(),
 		@UserId,
 		1,
@@ -78,25 +78,25 @@ VALUES (@FacilityCollectionId,
 		@NotificationId,
 		1)
 
-INSERT [Notification].[facility]
-	   ([id],
-		[name],
-		[isactualsiteoftreatment],
-		[type],
-		[registrationnumber],
-		[additionalregistrationnumber],
-		[address1],
-		[address2],
-		[townorcity],
-		[postalcode],
-		[region],
-		[country],
-		[fullname],
-		[telephone],
-		[fax],
-		[email],
+INSERT [Notification].[Facility]
+	   ([Id],
+		[Name],
+		[IsActualSiteOfTreatment],
+		[Type],
+		[RegistrationNumber],
+		[AdditionalRegistrationNumber],
+		[Address1],
+		[Address2],
+		[TownOrCity],
+		[PostalCode],
+		[Region],
+		[Country],
+		[FullName],
+		[Telephone],
+		[Fax],
+		[Email],
 		[FacilityCollectionId],
-		[otherdescription])
+		[OtherDescription])
 VALUES (NEWID(),
 		N'Importer Facility',
 		1,
@@ -116,24 +116,24 @@ VALUES (NEWID(),
 		@FacilityCollectionId,
 		NULL)
 
-INSERT [Notification].[importer]
-	   ([id],
-		[name],
-		[type],
-		[registrationnumber],
-		[additionalregistrationnumber],
-		[address1],
-		[address2],
-		[townorcity],
-		[postalcode],
-		[region],
-		[country],
-		[fullname],
-		[telephone],
-		[fax],
-		[email],
-		[notificationid],
-		[otherdescription])
+INSERT [Notification].[Importer]
+	   ([Id],
+		[Name],
+		[Type],
+		[RegistrationNumber],
+		[AdditionalRegistrationNumber],
+		[Address1],
+		[Address2],
+		[TownOrCity],
+		[PostalCode],
+		[Region],
+		[Country],
+		[FullName],
+		[Telephone],
+		[Fax],
+		[Email],
+		[NotificationId],
+		[OtherDescription])
 VALUES (NEWID(),
 		N'Importer',
 		2,
@@ -161,24 +161,24 @@ VALUES (@ProducerCollectionId,
 
 SET @ProducerId = NEWID();
 INSERT [Notification].[Producer]
-	   ([id],
-		[name],
-		[issiteofexport],
-		[type],
-		[registrationnumber],
-		[additionalregistrationnumber],
-		[address1],
-		[address2],
-		[townorcity],
-		[postalcode],
-		[region],
-		[country],
-		[fullname],
-		[telephone],
-		[fax],
-		[email],
-		[producercollectionid],
-		[otherdescription])
+	   ([Id],
+		[Name],
+		[IsSiteOfExport],
+		[Type],
+		[RegistrationNumber],
+		[AdditionalRegistrationNumber],
+		[Address1],
+		[Address2],
+		[TownOrCity],
+		[PostalCode],
+		[Region],
+		[Country],
+		[FullName],
+		[Telephone],
+		[Fax],
+		[Email],
+		[ProducerCollectionId],
+		[OtherDescription])
 VALUES (@ProducerId,
 		N'New Producer',
 		0,
@@ -198,24 +198,24 @@ VALUES (@ProducerId,
 		@ProducerCollectionId,
 		NULL)
 
-INSERT [Notification].[exporter]
-	   ([id],
-		[name],
-		[type],
-		[registrationnumber],
-		[additionalregistrationnumber],
-		[address1],
-		[address2],
-		[townorcity],
-		[postalcode],
-		[region],
-		[country],
-		[fullname],
-		[telephone],
-		[fax],
-		[email],
-		[notificationid],
-		[otherdescription])
+INSERT [Notification].[Exporter]
+	   ([Id],
+		[Name],
+		[Type],
+		[RegistrationNumber],
+		[AdditionalRegistrationNumber],
+		[Address1],
+		[Address2],
+		[TownOrCity],
+		[PostalCode],
+		[Region],
+		[Country],
+		[FullName],
+		[Telephone],
+		[Fax],
+		[Email],
+		[NotificationId],
+		[OtherDescription])
 VALUES (NEWID(),
 		N'Exporter',
 		2,
@@ -234,14 +234,14 @@ VALUES (NEWID(),
 		@NotificationId,
 		NULL)
 
-INSERT [Notification].[shipmentinfo]
-	   ([id],
-		[notificationid],
-		[numberofshipments],
-		[quantity],
-		[units],
-		[firstdate],
-		[lastdate])
+INSERT [Notification].[ShipmentInfo]
+	   ([Id],
+		[NotificationId],
+		[NumberOfShipments],
+		[Quantity],
+		[Units],
+		[FirstDate],
+		[LastDate])
 VALUES (NEWID(),
 		@NotificationId,
 		520,
@@ -257,24 +257,24 @@ INSERT [Notification].[CarrierCollection]
 VALUES (@CarrierCollectionId,
 		@NotificationId)
 
-INSERT [Notification].[carrier]
-	   ([id],
-		[name],
-		[carriercollectionid],
-		[type],
-		[registrationnumber],
-		[additionalregistrationnumber],
-		[address1],
-		[address2],
-		[townorcity],
-		[postalcode],
-		[region],
-		[country],
-		[fullname],
-		[telephone],
-		[fax],
-		[email],
-		[otherdescription])
+INSERT [Notification].[Carrier]
+	   ([Id],
+		[Name],
+		[CarrierCollectionId],
+		[Type],
+		[RegistrationNumber],
+		[AdditionalRegistrationNumber],
+		[Address1],
+		[Address2],
+		[TownOrCity],
+		[PostalCode],
+		[Region],
+		[Country],
+		[FullName],
+		[Telephone],
+		[Fax],
+		[Email],
+		[OtherDescription])
 VALUES (NEWID(),
 		N'Carrier',
 		@CarrierCollectionId,
@@ -293,21 +293,21 @@ VALUES (NEWID(),
 		N'test@carrier.com',
 		NULL)
 
-INSERT [Notification].[packaginginfo]
-	   ([id],
-		[packagingtype],
-		[otherdescription],
-		[notificationid])
+INSERT [Notification].[PackagingInfo]
+	   ([Id],
+		[PackagingType],
+		[OtherDescription],
+		[NotificationId])
 VALUES (NEWID(),
 		4,
 		NULL,
 		@NotificationId)
 
-INSERT [Notification].[packaginginfo]
-	   ([id],
-		[packagingtype],
-		[otherdescription],
-		[notificationid])
+INSERT [Notification].[PackagingInfo]
+	   ([Id],
+		[PackagingType],
+		[OtherDescription],
+		[NotificationId])
 VALUES (NEWID(),
 		5,
 		NULL,
@@ -536,21 +536,21 @@ VALUES (NEWID(),
 		@NotificationId)
 
 INSERT [Notification].[PhysicalCharacteristicsInfo]
-	   ([id],
-		[physicalcharacteristictype],
-		[otherdescription],
-		[notificationid])
+	   ([Id],
+		[PhysicalCharacteristicType],
+		[OtherDescription],
+		[NotificationId])
 VALUES (NEWID(),
 		3,
 		NULL,
 		@NotificationId)
 
 INSERT [Notification].[TechnologyEmployed]
-	   ([id],
-		[annexprovided],
-		[details],
-		[notificationid],
-		[furtherdetails])
+	   ([Id],
+		[AnnexProvided],
+		[Details],
+		[NotificationId],
+		[FurtherDetails])
 VALUES (NEWID(),
 		0,
 		'Electrolysis',
@@ -629,12 +629,12 @@ VALUES (NEWID(),
 		5)
 
 INSERT [Notification].[WasteAdditionalInformation]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[wasteinformationtype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[WasteInformationType])
 VALUES (NEWID(),
 		N'Moisture content',
 		Cast(2.00 AS DECIMAL(5, 2)),
@@ -643,12 +643,12 @@ VALUES (NEWID(),
 		2)
 
 INSERT [Notification].[WasteAdditionalInformation]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[wasteinformationtype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[WasteInformationType])
 VALUES (NEWID(),
 		N'Ash content',
 		Cast(2.00 AS DECIMAL(5, 2)),
@@ -657,12 +657,12 @@ VALUES (NEWID(),
 		3)
 
 INSERT [Notification].[WasteAdditionalInformation]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[wasteinformationtype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[WasteInformationType])
 VALUES (NEWID(),
 		N'Net calorific value',
 		Cast(2.00 AS DECIMAL(5, 2)),
@@ -686,27 +686,40 @@ VALUES (NEWID(),
 
 DECLARE @NotificationAssessmentId UNIQUEIDENTIFIER = NEWID();
 
-INSERT [Notification].[notificationassessment]
-	   ([id],
-	    [notificationapplicationid],
-	    [status])
+INSERT [Notification].[NotificationAssessment]
+	   ([Id],
+	    [NotificationApplicationId],
+	    [Status])
 VALUES (@NotificationAssessmentId,
 		@NotificationId,
 		@NotificationStatus);
 
-INSERT [Notification].[NotificationDates]
-		([Id],
-		 [NotificationAssessmentId],
-		 [NotificationReceivedDate])
-VALUES ((SELECT Cast(Cast(Newid() AS BINARY(10)) + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-		@NotificationAssessmentId,
-		'2016-01-02')
+IF @Counter <= 9
+	BEGIN
+		INSERT [Notification].[NotificationDates]
+				([Id],
+				 [NotificationAssessmentId],
+				 [WithdrawnDate])
+		VALUES (NEWID(),
+				@NotificationAssessmentId,
+				@NotificationCreateDate)
+	END
+ELSE
+	BEGIN
+		INSERT [Notification].[NotificationDates]
+					([Id],
+					 [NotificationAssessmentId],
+					 [ObjectedDate])
+			VALUES (NEWID(),
+					@NotificationAssessmentId,
+					@NotificationCreateDate)
+	END
 
-INSERT INTO [Notification].[FinancialGuaranteeCollection]
-			([Id],
-			 [NotificationId])
-	   VALUES ((SELECT Cast(Cast(Newid() AS BINARY(10)) + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-				@NotificationId)
+INSERT [Notification].[FinancialGuaranteeCollection]
+		([Id],
+		 [NotificationId])
+VALUES (NEWID(),
+		@NotificationId)
 
 INSERT [Notification].[EntryExitCustomsSelection]
 		(Id,
