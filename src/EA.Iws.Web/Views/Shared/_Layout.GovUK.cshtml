@@ -23,9 +23,18 @@
 
     <meta property="og:image" content="@Url.Content("~/govuk-frontend/govuk/assets/images/govuk-opengraph-image.png")" />
     @RenderSection("head", required: false)
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GTM-NCT2XTD"></script>
 </head>
 
 <body class="govuk-template__body @Html.Raw(ViewBag.BodyClasses ?? string.Empty)">
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NCT2XTD" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
     <script type="text/javascript">
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
@@ -174,20 +183,55 @@
     function loadAnalytics() {
         var googleAnalyticsAccountId = String("@System.Web.Configuration.WebConfigurationManager.AppSettings["Iws.GoogleAnalyticsAccountId"].ToString()");
 
-        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date(); a = s.createElement(o),
-                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', googleAnalyticsAccountId, 'auto');
-        ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', { 'allowLinker': true });
-        ga('govuk_shared.require', 'linker');
-        ga('govuk_shared.linker.set', 'anonymizeIp', true);
-        ga('govuk_shared.linker.set', 'allowAdFeatures', false);
-        ga('govuk_shared.linker:autoLink', ['www.gov.uk', 'www.nationalarchives.gov.uk', 'www.daera-ni.gov.uk', 'www.data.gov.uk']);
-        ga('send', 'pageview');
-        ga('govuk_shared.send', 'pageview');
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({ 'gtm.start': new Date().getTime(), event: 'gtm.js' });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+                j.async = true;
+                j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+                f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-NCT2XTD');
+
+        // Old
+
+        //(function (i, s, o, g, r, a, m) {
+        //    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        //        (i[r].q = i[r].q || []).push(arguments)
+        //    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        //        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        //})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+        //ga('create', googleAnalyticsAccountId, 'auto');
+        //ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', { 'allowLinker': true });
+        //ga('govuk_shared.require', 'linker');
+        //ga('govuk_shared.linker.set', 'anonymizeIp', true);
+        //ga('govuk_shared.linker.set', 'allowAdFeatures', false);
+        //ga('govuk_shared.linker:autoLink', ['www.gov.uk', 'www.nationalarchives.gov.uk', 'www.daera-ni.gov.uk', 'www.data.gov.uk']);
+        //ga('send', 'pageview');
+        //ga('govuk_shared.send', 'pageview');
+
+        //End Old
+
+        // New GA4
+
+        //window.dataLayer = window.dataLayer || [];
+        //function gtag() {
+        //    dataLayer.push(arguments);
+        //}
+        //gtag('js', new Date());
+        //gtag('config', 'GTM-NCT2XTD');
+
+        //gtag('create', googleAnalyticsAccountId, 'auto');
+        //gtag('create', 'UA-145652997-1', 'auto', 'govuk_shared', { 'allowLinker': true });
+        //gtag('govuk_shared.require', 'linker');
+        //gtag('govuk_shared.linker.set', 'anonymizeIp', true);
+        //gtag('govuk_shared.linker.set', 'allowAdFeatures', false);
+        //gtag('govuk_shared.linker:autoLink', ['www.gov.uk', 'www.nationalarchives.gov.uk', 'www.daera-ni.gov.uk', 'www.data.gov.uk']);
+        //gtag('send', 'pageview');
+        //gtag('govuk_shared.send', 'pageview');
+
+        //End GA4
     }
 
     var element = document.getElementById('saveCookieChoice');
