@@ -14,7 +14,7 @@ DECLARE @NotificationStatus INT;
 
 SELECT @UserId = id
 FROM   [Identity].[aspnetusers]
-WHERE  [email] = 'IWS.Internal.User@civica.co.uk'
+WHERE  [email] = 'sunily@sfwltd.co.uk'
 
 SET @Counter = 0;
 WHILE ( @Counter < 30)
