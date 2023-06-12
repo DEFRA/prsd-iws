@@ -23,12 +23,12 @@ BEGIN
     SET @Counter = @Counter  + 1;
 	IF @Counter <= 9
 		BEGIN
-			SET @NotificationNumber = 'GB 0001 00600' + CONVERT(VARCHAR, @Counter);
+			SET @NotificationNumber = 'GB 0001 00800' + CONVERT(VARCHAR, @Counter);
 			SET @NotificationStatus = 8;
 		END
 	ELSE
 		BEGIN
-			SET @NotificationNumber = 'GB 0001 0060' + CONVERT(VARCHAR, @Counter);
+			SET @NotificationNumber = 'GB 0001 0080' + CONVERT(VARCHAR, @Counter);
 			SET @NotificationStatus = 9;
 		END
 
@@ -51,7 +51,7 @@ VALUES (NEWID(),
 		1,
 		@NotificationNumber,
 		@NotificationCreateDate,
-		N'Recycling at advanced facility',
+		N'Acrhive recycling at advanced facility',
 		0,
 		NULL,
 		1,
