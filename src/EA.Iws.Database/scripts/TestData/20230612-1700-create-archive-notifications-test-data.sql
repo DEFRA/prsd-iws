@@ -23,12 +23,12 @@ BEGIN
     SET @Counter = @Counter  + 1;
 	IF @Counter <= 9
 		BEGIN
-			SET @NotificationNumber = 'GB 0001 00100' + CONVERT(VARCHAR, @Counter);
+			SET @NotificationNumber = 'GB 0001 00700' + CONVERT(VARCHAR, @Counter);
 			SET @NotificationStatus = 8;
 		END
 	ELSE
 		BEGIN
-			SET @NotificationNumber = 'GB 0001 0010' + CONVERT(VARCHAR, @Counter);
+			SET @NotificationNumber = 'GB 0001 0070' + CONVERT(VARCHAR, @Counter);
 			SET @NotificationStatus = 9;
 		END
 
