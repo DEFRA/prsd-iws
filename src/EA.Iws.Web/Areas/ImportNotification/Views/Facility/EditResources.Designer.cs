@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department..
+        /// </summary>
+        public static string CompanyHouseDescription {
+            get {
+                return ResourceManager.GetString("CompanyHouseDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Limited Company.
         /// </summary>
         public static string LimitedCompanyLabel {
@@ -79,11 +88,110 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string OrganisationNameTitle {
+            get {
+                return ResourceManager.GetString("OrganisationNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsHeader {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company name abbreviations should always be in uppercase with no full stops.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint1 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be no spaces either side of special characters, particularly at the end of the name.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint2 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be no full stops present.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint3 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgHelpSummaryDetailsPoint4 {
+            get {
+                return ResourceManager.GetString("OrgHelpSummaryDetailsPoint4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the &apos;Import name&apos; button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually..
+        /// </summary>
+        public static string OrgHelpWithNamingDescription {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgNameHintMsg {
+            get {
+                return ResourceManager.GetString("OrgNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name your organisation trades under if different to your organisation name.
+        /// </summary>
+        public static string OrgTradingNameHint {
+            get {
+                return ResourceManager.GetString("OrgTradingNameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
         public static string OtherLabel {
             get {
                 return ResourceManager.GetString("OtherLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the registration number of the company in the country in which they are registered..
+        /// </summary>
+        public static string RegistrationNumberHintNonUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The 8-character code as documented by Companies House..
+        /// </summary>
+        public static string RegistrationNumberHintUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintUK", resourceCulture);
             }
         }
         
@@ -102,6 +210,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where can I find my Companies House number?.
+        /// </summary>
+        public static string WhereToFindCompanyHouse {
+            get {
+                return ResourceManager.GetString("WhereToFindCompanyHouse", resourceCulture);
             }
         }
     }

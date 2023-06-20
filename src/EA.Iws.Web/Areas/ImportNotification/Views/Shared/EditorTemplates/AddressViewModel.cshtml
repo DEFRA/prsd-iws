@@ -1,9 +1,28 @@
 ﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.AddressViewModelEditorResources
+@using AddressType = EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.AddressTypeEnum
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.AddressViewModel
+
 
 <h2 class="heading-medium">@Resource.Title</h2>
 
 <hr />
+
+@if (Model.AddressType == AddressType.Exporter)
+{
+    <p>@Resource.ExporterHeaderInfoMsg</p>
+}
+else if (Model.AddressType == AddressType.Producer)
+{
+    <p>@Resource.ProducerHeaderInfoMsg</p>
+}
+else if (Model.AddressType == AddressType.Importer)
+{
+    <p>@Resource.ImporterHeaderInfoMsg</p>
+}
+else if (Model.AddressType == AddressType.Facility)
+{
+    <p>@Resource.FacilityHeaderInfoMsg</p>
+}
 
 @for (int i = 0; i < Model.Countries.Count; i++)
 {
@@ -13,6 +32,11 @@
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.StreetOrSuburb)">
     @Html.Gds().LabelFor(m => m.StreetOrSuburb, false)
+    @if (Model.AddressType == AddressType.Exporter || Model.AddressType == AddressType.Producer)
+    {
+        @Html.Gds().HintSpan(@Resource.AddressLine1HintMsg)
+        @Html.Gds().HintSpan(@Resource.AddressLine1HintMsgExp)
+    }
     @Html.Gds().ValidationMessageFor(m => m.StreetOrSuburb)
     @Html.Gds().TextBoxFor(m => m.StreetOrSuburb)
 </div>
@@ -25,18 +49,32 @@
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
     @Html.Gds().LabelFor(m => m.TownOrCity, false)
+    @if (Model.AddressType == AddressType.Exporter || Model.AddressType == AddressType.Producer)
+    {
+        @Html.Gds().HintSpan(@Resource.TownOrCityHintMsg)
+    }
     @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
     @Html.Gds().TextBoxFor(m => m.TownOrCity)
 </div>
 
-<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
-    @Html.Gds().LabelFor(m => m.CountryId, false)
-    @Html.Gds().ValidationMessageFor(m => m.CountryId)
-    @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountrySelectList, string.Empty, new { data_select_box = "true" })
-</div>
-
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
-    @Html.Gds().LabelFor(m => m.PostalCode, false)
+    @if (Model.AddressType == AddressType.Importer || Model.AddressType == AddressType.Facility)
+    {
+        @Html.Gds().LabelFor(m => m.PostalCode, false)
+        @Html.Gds().HintSpan(@Resource.AddressPostCodeHint, "addressPostCodeHint", "")
+    }
+    else
+    {
+        @Html.Gds().LabelFor(m => m.PostalCode)
+        @Html.Gds().HintSpan(@Resource.AddressPostCodeHint, "addressPostCodeHint", "none")
+    }
     @Html.Gds().ValidationMessageFor(m => m.PostalCode)
     @Html.Gds().TextBoxFor(m => m.PostalCode)
+</div>
+
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+    @Html.Gds().LabelFor(m => m.CountryId, false)
+    @Html.Gds().HintSpan(@Resource.CountryHintMsg)
+    @Html.Gds().ValidationMessageFor(m => m.CountryId)
+    @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountrySelectList, string.Empty, new { data_select_box = "true" })
 </div>

@@ -2,6 +2,7 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
+    using EA.Iws.Web.Areas.Common;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -9,12 +10,11 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.AddressBook;
     using Requests.Exporters;
-    using Requests.Notification;
-    using ViewModels.Exporter;
     using System;
-    using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using ViewModels.Exporter;
 
     [Authorize]
     [NotificationReadOnlyFilter]
@@ -23,12 +23,15 @@
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
         private readonly IAuditService auditService;
+        private readonly ITrimTextService trimTextService;
 
-        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper, IAuditService auditService)
+        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType,
+                                  AddAddressBookEntry> addressBookMapper, IAuditService auditService, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
             this.auditService = auditService;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -44,8 +47,16 @@
             {
                 model = new ExporterViewModel
                 {
-                    NotificationId = id
+                    NotificationId = id,
+                    IsUkBased = true
                 };
+            }
+
+            if (model.Business?.Name?.Contains(" T/A ") == true)
+            {
+                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
+                model.Business.Name = businessNames[0];
+                model.Business.OrgTradingName = businessNames[1];
             }
 
             await this.BindCountryList(mediator);
@@ -66,6 +77,14 @@
             try
             {
                 var exporter = await mediator.SendAsync(new GetExporterByNotificationId(model.NotificationId));
+
+                if (!string.IsNullOrEmpty(model.Business?.OrgTradingName?.Trim()))
+                {
+                    model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
+                }
+
+                //Trim address post code
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
 
                 await mediator.SendAsync(model.ToRequest());
 
@@ -107,8 +126,43 @@
             }
 
             var addressRecord = addressBookMapper.Map(model, AddressRecordType.Producer);
-                
+
             await mediator.SendAsync(addressRecord);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetCompanyName(string registrationNumber)
+        {
+            if (!this.Request.IsAjaxRequest())
+            {
+                throw new InvalidOperationException();
+            }
+
+            try
+            {
+                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
+                return Json(new { success = true, companyName = orgName });
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
+                }
+                else if (ex.Status == WebExceptionStatus.ConnectFailure)
+                {
+                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
+                }
+                else
+                {
+                    return Json(new { success = false, errorMsg = ex.Message });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMsg = ex.Message });
+            }
         }
     }
 }

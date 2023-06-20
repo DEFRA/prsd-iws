@@ -35,17 +35,17 @@
         public FacilityViewModel()
         {
             FacilityId = Guid.NewGuid();
-            Address = new AddressViewModel();
-            Contact = new ContactViewModel();
+            Address = new AddressViewModel(AddressTypeEnum.Facility);
+            Contact = new ContactViewModel(AddressTypeEnum.Facility);
             Business = new BusinessViewModel();
         }
 
         public FacilityViewModel(Facility facility)
         {
             FacilityId = facility.Id;
-            Address = new AddressViewModel(facility.Address);
-            Business = new BusinessViewModel(facility.BusinessName, facility.RegistrationNumber);
-            Contact = new ContactViewModel(facility.Contact);
+            Address = new AddressViewModel(facility.Address, AddressTypeEnum.Facility);
+            Business = new BusinessViewModel(facility.BusinessName, facility.RegistrationNumber, facility.AdditionalRegistrationNumber);
+            Contact = new ContactViewModel(facility.Contact, AddressTypeEnum.Facility);
             BusinessType = facility.Type;
             IsActualSite = facility.IsActualSite;
             IsAddedToAddressBook = facility.IsAddedToAddressBook;

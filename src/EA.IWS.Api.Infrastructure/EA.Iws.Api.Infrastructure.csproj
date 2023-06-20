@@ -72,6 +72,7 @@
     <Compile Include="Infrastructure\ElmahLogSink.cs" />
     <Compile Include="Infrastructure\ElmahSqlLogger.cs" />
     <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
+    <Compile Include="Infrastructure\IElmahSqlLogger.cs" />
     <Compile Include="Infrastructure\LoggerConfigurationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DebugExceptionLogger.cs" />

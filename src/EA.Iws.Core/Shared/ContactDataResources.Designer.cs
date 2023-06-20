@@ -70,7 +70,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the email address.
+        ///   Looks up a localized string similar to Enter an e-mail address using letters, numbers and valid punctuation only e.g. example@mail.com.
         /// </summary>
         public static string EmailRequired {
             get {
@@ -124,7 +124,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the fax number.
+        ///   Looks up a localized string similar to Enter a fax number using numbers only e.g. 1234567890.
         /// </summary>
         public static string FaxRequired {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the full name.
+        ///   Looks up a localized string similar to Enter a contact person name using letters and numbers only.
         /// </summary>
         public static string FullNameRequired {
             get {
@@ -178,7 +178,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the telephone number.
+        ///   Looks up a localized string similar to Enter a telephone number using numbers only e.g. 1234567890.
         /// </summary>
         public static string TelephoneNumberRequired {
             get {
@@ -196,7 +196,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the telephone prefix.
+        ///   Looks up a localized string similar to Enter a telephone number prefix using only numbers up to a maximum of 3 characters.
         /// </summary>
         public static string TelephonePrefixRequired {
             get {

@@ -70,7 +70,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the first line of your address.
+        ///   Looks up a localized string similar to Enter an address (line 1) using letters and numbers only.
         /// </summary>
         public static string Address1Required {
             get {
@@ -88,7 +88,16 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Town or city.
+        ///   Looks up a localized string similar to Street Name followed by Unit Number. For example: Example Street, 21.
+        /// </summary>
+        public static string AddressLine1HintNonUK {
+            get {
+                return ResourceManager.GetString("AddressLine1HintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Town or City.
         /// </summary>
         public static string City {
             get {
@@ -97,7 +106,16 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter your town or city.
+        ///   Looks up a localized string similar to Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk.
+        /// </summary>
+        public static string CityHintNonUK {
+            get {
+                return ResourceManager.GetString("CityHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a town/city using letters and numbers only.
         /// </summary>
         public static string CityRequired {
             get {
@@ -115,7 +133,16 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Contry field is required..
+        ///   Looks up a localized string similar to Select the country the organisation is operating from.
+        /// </summary>
+        public static string CountryHint {
+            get {
+                return ResourceManager.GetString("CountryHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a county using letters only.
         /// </summary>
         public static string CountryRequired {
             get {
@@ -151,7 +178,16 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the post code.
+        ///   Looks up a localized string similar to For example: AB1 2CD.
+        /// </summary>
+        public static string PostCodeHint {
+            get {
+                return ResourceManager.GetString("PostCodeHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a postcode using letters and numbers only.
         /// </summary>
         public static string PostcodeRequired {
             get {

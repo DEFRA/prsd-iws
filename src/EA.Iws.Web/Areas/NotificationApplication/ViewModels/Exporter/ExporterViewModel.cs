@@ -1,14 +1,18 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.Exporter
 {
     using System;
+    using System.ComponentModel.DataAnnotations;
     using Core.Exporters;
     using Core.Shared;
+    using EA.Iws.Web.Areas.NotificationApplication.Views.Exporter;
     using Requests.Exporters;
     using Web.ViewModels.Shared;
 
     public class ExporterViewModel
     {
         public Guid NotificationId { get; set; }
+
+        public bool IsUkBased { get; set; }
 
         public AddressData Address { get; set; }
 
@@ -32,6 +36,7 @@
         public ExporterViewModel(ExporterData exporter)
         {
             NotificationId = exporter.NotificationId;
+            IsUkBased = exporter.IsUkBased;
             Address = exporter.Address;
             Contact = exporter.Contact;
             Business = new BusinessTypeViewModel(exporter.Business);
@@ -43,6 +48,7 @@
         {
             return new SetExporterForNotification
             {
+                IsUkBased = IsUkBased,
                 NotificationId = NotificationId,
                 Address = Address,
                 Business = Business.ToBusinessInfoData(),

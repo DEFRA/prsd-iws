@@ -38,6 +38,7 @@
                 Contact = contactMap.Map(source.Contact),
                 Id = source.Id,
                 NotificationId = source.NotificationId,
+                IsUkBased = source.IsUkBased,
                 HasExporter = true
             };
         }

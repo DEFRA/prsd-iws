@@ -97,7 +97,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department, or &lt;a href=&quot;https://beta.companieshouse.gov.uk/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;search the Companies House online services&lt;/a&gt;..
+        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department..
         /// </summary>
         public static string CompanyHouseDescription {
             get {
@@ -115,11 +115,101 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If none of these options apply, please select &quot;Other&quot; and add details.
+        ///   Looks up a localized string similar to Select an organisation type and enter a registration number. If none of these options apply, select &quot;Other&quot; and add details..
         /// </summary>
         public static string FormHint {
             get {
                 return ResourceManager.GetString("FormHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an organisation type and enter a registration number if required. If none of these options apply, select &quot;Other&quot; and add details..
+        /// </summary>
+        public static string FormHintProducer {
+            get {
+                return ResourceManager.GetString("FormHintProducer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
+        /// </summary>
+        public static string OrgHelpWithNamingContent1 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company name abbreviations should always be in uppercase with no full stops.
+        /// </summary>
+        public static string OrgHelpWithNamingContent2 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be no spaces either side of special characters, particularly at the end of the name.
+        /// </summary>
+        public static string OrgHelpWithNamingContent3 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company suffixes should always be uppercase with no full stops (excluding GmbH).
+        /// </summary>
+        public static string OrgHelpWithNamingContent4NonUk {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent4NonUk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There should be no full stops present.
+        /// </summary>
+        public static string OrgHelpWithNamingContent4Uk {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent4Uk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: Instead of &apos;A &amp; b Materials c.d.&apos; the name should be &apos;A&amp;B Materials CD&apos;.
+        /// </summary>
+        public static string OrgHelpWithNamingContent5NonUk {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent5NonUk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgHelpWithNamingContent5Uk {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent5Uk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the &apos;Import name&apos; button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually..
+        /// </summary>
+        public static string OrgHelpWithNamingDescription {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help with appropriate naming conventions.
+        /// </summary>
+        public static string OrgHelpWithNamingTitle {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingTitle", resourceCulture);
             }
         }
         
@@ -133,20 +223,56 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For example, ‘Organisation Name Limited’. For &quot;trading as&quot; names, record it as ‘Organisation Name Limited T/A Name of Organisation’.
+        ///   Looks up a localized string similar to Organisation name.
         /// </summary>
-        public static string OrgNameHint {
+        public static string OrgNameHeader {
             get {
-                return ResourceManager.GetString("OrgNameHint", resourceCulture);
+                return ResourceManager.GetString("OrgNameHeader", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the organisation&apos;s name.
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
+        /// </summary>
+        public static string OrgNameHintNonUK {
+            get {
+                return ResourceManager.GetString("OrgNameHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgNameHintUK {
+            get {
+                return ResourceManager.GetString("OrgNameHintUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter an organisation name using letters, numbers or limited punctuation only.
         /// </summary>
         public static string OrgNameRequired {
             get {
                 return ResourceManager.GetString("OrgNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Trading as&apos; name.
+        /// </summary>
+        public static string OrgTradingName {
+            get {
+                return ResourceManager.GetString("OrgTradingName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name your organisation trades under if different to your organisation name.
+        /// </summary>
+        public static string OrgTradingNameHint {
+            get {
+                return ResourceManager.GetString("OrgTradingNameHint", resourceCulture);
             }
         }
         
@@ -160,7 +286,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please choose the type of organisation.
+        ///   Looks up a localized string similar to Choose an organisation type.
         /// </summary>
         public static string OrgTypeRequired {
             get {
@@ -205,6 +331,24 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This should be the registration number of the company in the country in which they are registered..
+        /// </summary>
+        public static string RegistrationNumberHintNonUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The 8-character code as documented by Companies House..
+        /// </summary>
+        public static string RegistrationNumberHintUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The registration number cannot be greater than 100 characters.
         /// </summary>
         public static string RegistrationNumberMaxLength {
@@ -214,7 +358,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the registration number.
+        ///   Looks up a localized string similar to Enter a registration number using letters and numbers only.
         /// </summary>
         public static string RegNumberRequired {
             get {

@@ -32,12 +32,12 @@
 
             if (exporter == null)
             {
-                exporter = new Exporter(message.NotificationId, address, business, contact);
+                exporter = new Exporter(message.NotificationId, message.IsUkBased, address, business, contact);
                 exporterRepository.Add(exporter);
             }
             else
             {
-                exporter.Update(address, business, contact);
+                exporter.Update(message.IsUkBased, address, business, contact);
             }
 
             await context.SaveChangesAsync();

@@ -12,9 +12,11 @@
     ViewBag.CompanyRegistrationNumber = ExporterResources.CompanyRegistrationNumber;
     ViewBag.NonJavascriptMessage = ExporterResources.NonJavascriptMessage;
     ViewBag.AddressType = AddressRecordType.Producer;
+    ViewBag.UseUKAddressValidationAndTooltips = true;
+    ViewBag.UseDefaultValidationAndToolTips = false;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Exporter", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -23,6 +25,30 @@
     <header class="hgroup">
         <h1 class="govuk-heading-l">@ExporterResources.Header</h1>
     </header>
+    <fieldset class="govuk-fieldset">
+        <legend class="govuk-label">
+            @ExporterResources.IsUkBased
+        </legend>
+    </fieldset>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsUkBased)">
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsUkBased, true, new { id = "yes", @class = "govuk-radios__input", @onchange = "showHideTooltips()" })
+                    <label class="govuk-label govuk-radios__label" for="yes">
+                        @ExporterResources.Yes
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsUkBased, false, new { id = "no", @class = "govuk-radios__input", @onchange = "showHideTooltips()" })
+                    <label class="govuk-label govuk-radios__label" for="no">
+                        @ExporterResources.No
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
 
     <fieldset>
         @Html.EditorFor(m => m.Business)
@@ -30,7 +56,7 @@
 
     <h2 class="heading-medium">@ExporterResources.AddressHeader</h2>
     <hr />
-    <span class="form-hint">@ExporterResources.AddressDescription</span>
+    @Html.Gds().HintParagraph(@ExporterResources.AddressDescription)
 
     <fieldset>
         <legend class="visuallyhidden">@ExporterResources.AddressHeader</legend>
@@ -58,4 +84,220 @@
     </div>
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts {
+    <script>
+        document.addEventListener("DOMContentLoaded", showHideTooltips);
+
+        function showHideTooltips() {
+            var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+            if (isUkOrg === 'True') {
+                hideShowUkSpecificTooltips('block');
+                hideShowNonUkSpecificTooltips('none');
+            }
+            else {
+                hideShowUkSpecificTooltips('none');
+                hideShowNonUkSpecificTooltips('block');
+            }
+        }
+
+        function hideShowUkSpecificTooltips(displayValue) {
+            if (displayValue === 'block') {
+                document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
+                document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
+                document.getElementById('orgHelpWithNamingContent5Uk').style.display = '';
+            }
+            else {
+                document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
+                document.getElementById('orgHelpWithNamingContent5Uk').style.display = displayValue;
+            }
+
+            document.getElementById('compHouseDetailsBlock').style.display = displayValue;
+            document.getElementById('compHouseDetailsBlock').style.paddingTop = "20px";
+            document.getElementById('addressPostCodeHint').style.display = displayValue;
+        }
+
+        function hideShowNonUkSpecificTooltips(displayValue) {
+            if (displayValue === 'block') {
+                document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
+                document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
+                document.getElementById('orgHelpWithNamingContent5NonUk').style.display = '';
+            }
+            else {
+                document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
+                document.getElementById('orgHelpWithNamingContent5NonUk').style.display = displayValue;
+            }
+            document.getElementById('addressLine1HintNonUk').style.display = displayValue;
+            document.getElementById('addressCityHintNonUk').style.display = displayValue;
+        }
+
+        function hideImportFromCompHouseSection() {
+            $("#dvBtnImportName").hide();
+            $("#Business_Name").removeAttr('readonly');
+            $("#Business_Name").val('');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            var isUkBased = $("input[id='yes']:checked").val();
+            if (isUkBased) {
+                $("#dvBtnImportName").show();
+                $("#Business_Name").attr('readonly', 'readonly');
+                $("#dvOrgNameDesction").show();
+                $("#dvOrgNameDetails").hide();
+            }
+        }
+
+        function disabledImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
+        }
+
+        $(function () {
+            //On page load, controls hide
+            $("#dvBtnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+
+            var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+            if (isUkOrg === 'True') {
+                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+                if (isLimitedCompany) {
+                    $("#dvBtnImportName").show();
+                }
+
+                $("#hintOrgNameUK").show();
+                $("#hintOrgNameNonUK").hide();
+                $("#lblPostCode").text("Post code");
+            } else {
+                $("#hintOrgNameUK").hide();
+            }
+
+            $('#yes').click(function () {
+                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+                if (isLimitedCompany) {
+                    showImportFromCompHouseSection();
+                } else {
+                    hideImportFromCompHouseSection();
+                }
+                $("#s2id_Address_CountryId").select2("val", $("#Address_CountryId option:contains('United Kingdom')").val());
+                $("#Address_PostalCode").val("");
+                $("#lblPostCode").text("Post code");
+
+                $("#hintOrgNameUK").show();
+                $("#hintOrgNameNonUK").hide();
+            });
+
+            $('#no').click(function () {
+                hideImportFromCompHouseSection();
+
+                $("#s2id_Address_CountryId").select2("val", $("#Address_CountryId option:contains('')").val());
+                $("#Address_PostalCode").val("N/A");
+                $("#lblPostCode").text("Post code (optional for non-UK address)");
+
+                $("#hintOrgNameUK").hide();
+                $("#hintOrgNameNonUK").show();
+            });
+
+            $('#SoleTrader').click(function () {
+                hideImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").show();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
+            });
+
+            $('#Partnership').click(function () {
+                hideImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").show();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
+            });
+
+            $('#LimitedCompany').click(function () {
+                showImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
+            });
+
+            $('#Other').click(function () {
+                hideImportFromCompHouseSection();
+
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    $("#hintOrgNameUK").show();
+                    $("#hintOrgNameNonUK").hide();
+                } else {
+                    $("#hintOrgNameUK").hide();
+                    $("#hintOrgNameNonUK").show();
+                }
+            });
+
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").keyup(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledImportNameButton();
+                } else {
+                    enabledImportNameButton();
+                }
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber !== null) && (regNumber !== '')) {
+                    $.ajax({
+                        url: 'exporter/GetCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: { "registrationNumber": regNumber.toUpperCase(), __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
 }

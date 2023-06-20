@@ -15,9 +15,11 @@
     ViewBag.OtherRegistrationNumber = message;
     ViewBag.NonJavascriptMessage = message;
     ViewBag.AddressType = AddressRecordType.Facility;
+    ViewBag.UseDefaultValidationAndToolTips = false;
+    ViewBag.UseUKAddressValidationAndTooltips = false;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Facility", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -64,4 +66,25 @@
     </div>
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            //On page load, controls hide
+            $("#dvBtnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+            $("#orgHelpWithNamingContent4Uk").hide();
+            $("#orgHelpWithNamingContent5Uk").hide();
+
+            //On page load, controls show
+            $("#hintOrgNameUK").hide();
+            $("#hintOrgNameNonUK").show();
+            $("#dvOrgNameDetails").show();
+            $("#orgHelpWithNamingContent4NonUk").show();
+            $("#orgHelpWithNamingContent5NonUk").show();
+        });
+
+    </script>
 }
