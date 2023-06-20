@@ -2,9 +2,12 @@
 {
     using System;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using EA.Iws.Web.Areas.Common;
+    using EA.Iws.Web.Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
@@ -15,10 +18,12 @@
     public class FacilityController : Controller
     {
         private readonly IMediator mediator;
+        private readonly ITrimTextService trimTextService;
 
-        public FacilityController(IMediator mediator)
+        public FacilityController(IMediator mediator, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -33,7 +38,7 @@
                 NotificationType = details.NotificationType,
                 Facilities = facilityCollection.Facilities
             };
-            
+
             return View(model);
         }
 
@@ -52,7 +57,7 @@
 
             return RedirectToAction("Index", "Shipment");
         }
-            
+
         [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
@@ -65,7 +70,7 @@
 
             var details = await mediator.SendAsync(new GetNotificationDetails(id));
             model.NotificationType = details.NotificationType;
-            
+
             return View(model);
         }
 
@@ -81,18 +86,22 @@
                 return View(model);
             }
 
+            //Trim address post code
+            model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
+
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
 
             var newFacility = new Facility(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.Business.Name,
+                BusinessName = (string.IsNullOrEmpty(model.Business.OrgTradingName) ? model.Business.Name : (model.Business.Name + " T/A " + model.Business.OrgTradingName)),
                 Contact = model.Contact.AsContact(),
                 RegistrationNumber = model.Business.RegistrationNumber,
                 Type = model.BusinessType,
                 Id = Guid.NewGuid(),
                 IsActualSite = model.IsActualSite,
-                IsAddedToAddressBook = model.IsAddedToAddressBook
+                IsAddedToAddressBook = model.IsAddedToAddressBook,
+                AdditionalRegistrationNumber = model.Business.AdditionalRegistrationNumber
             };
 
             facilityCollection.Facilities.Add(newFacility);
@@ -123,7 +132,7 @@
         {
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
             var facilityToEdit = facilityCollection.Facilities.SingleOrDefault(f => f.Id == facilityId.GetValueOrDefault());
-            
+
             if (facilityToEdit == null)
             {
                 return RedirectToAction("index");
@@ -145,6 +154,9 @@
                 return View(model);
             }
 
+            //Trim address post code
+            model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
+
             var facilityCollection = await mediator.SendAsync(new GetDraftData<FacilityCollection>(id));
             var facilityToEdit = facilityCollection.Facilities.SingleOrDefault(f => f.Id == model.FacilityId);
 
@@ -161,7 +173,8 @@
                     Type = model.BusinessType,
                     Id = model.FacilityId,
                     IsActualSite = model.IsActualSite,
-                    IsAddedToAddressBook = model.IsAddedToAddressBook
+                    IsAddedToAddressBook = model.IsAddedToAddressBook,
+                    AdditionalRegistrationNumber = model.Business.AdditionalRegistrationNumber
                 };
 
                 facilityCollection.Facilities.Add(newFacility);
@@ -170,6 +183,41 @@
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetCompanyName(string registrationNumber)
+        {
+            if (!this.Request.IsAjaxRequest())
+            {
+                throw new InvalidOperationException();
+            }
+
+            try
+            {
+                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
+                return Json(new { success = true, companyName = orgName });
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
+                }
+                else if (ex.Status == WebExceptionStatus.ConnectFailure)
+                {
+                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
+                }
+                else
+                {
+                    return Json(new { success = false, errorMsg = ex.Message });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMsg = ex.Message });
+            }
         }
     }
 }

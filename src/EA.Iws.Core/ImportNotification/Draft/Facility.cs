@@ -15,6 +15,8 @@
 
         public string RegistrationNumber { get; set; }
 
+        public string AdditionalRegistrationNumber { get; set; }
+
         public Contact Contact { get; set; }
 
         public bool IsActualSite { get; set; }

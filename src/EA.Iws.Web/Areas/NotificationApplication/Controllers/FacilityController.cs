@@ -2,6 +2,7 @@
 {
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Web.Areas.Common;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -24,12 +25,14 @@
         private readonly IMediator mediator;
         private readonly IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap;
         private readonly IAuditService auditService;
+        private readonly ITrimTextService trimTextService;
 
-        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap, IAuditService auditService)
+        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap, IAuditService auditService, ITrimTextService trimTextService)
         {
             this.mediator = mediator;
             this.addFacilityAddressBookMap = addFacilityAddressBookMap;
             this.auditService = auditService;
+            this.trimTextService = trimTextService;
         }
 
         [HttpGet]
@@ -60,6 +63,9 @@
 
             try
             {
+                //Trim address post code
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
+
                 await mediator.SendAsync(model.ToRequest());
 
                 await this.auditService.AddAuditEntry(this.mediator,
@@ -118,6 +124,9 @@
 
             try
             {
+                //Trim address post code
+                model.Address.PostalCode = trimTextService.RemoveTextWhiteSpaces(model.Address.PostalCode);
+
                 var request = model.ToRequest();
 
                 await mediator.SendAsync(request);

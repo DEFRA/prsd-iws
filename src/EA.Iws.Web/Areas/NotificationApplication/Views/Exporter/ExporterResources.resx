@@ -118,13 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the correspondence address for the exporter - notifier</value>
+    <value>The correspondence address for the exporter – notifier. Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
   </data>
   <data name="AddressHeader" xml:space="preserve">
     <value>Address</value>
   </data>
   <data name="CompanyRegistrationNumber" xml:space="preserve">
-    <value>This should be your Companies House number</value>
+    <value>The 8-character code as documented by Companies House.</value>
+  </data>
+  <data name="CompanyRegistrationNumberNonUk" xml:space="preserve">
+    <value>This should be the registration number of the company in the country in which they are registered.</value>
   </data>
   <data name="ContactDescription" xml:space="preserve">
     <value>This should be the contact person for the exporter - notifier</value>
@@ -135,14 +138,23 @@
   <data name="Header" xml:space="preserve">
     <value>Who is the exporter - notifier?</value>
   </data>
+  <data name="IsUkBased" xml:space="preserve">
+    <value>Is the organisation based and registered in the UK and/or using a UK address?</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NonJavascriptMessage" xml:space="preserve">
-    <value>For Limited company, this should be your Companies House number.
+    <value>For Limited company, the 8-character code as documented by Companies House.
             For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number.</value>
   </data>
   <data name="RegistrationNumberGeneralMessage" xml:space="preserve">
-    <value>If you're acting on behalf of the waste generator - producer, this will be your waste broker licence number</value>
+    <value>If you're acting on behalf of the waste generator – producer, this is your waste broker licence number.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Who is the exporter-notifier?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

@@ -10,22 +10,12 @@
 
 <h1 class="govuk-heading-l">@Resource.Title</h1>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Exporter", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
     <h2 class="heading-medium">@Resource.OrganisationSubtitle</h2>
-
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
-        @Html.Gds().LabelFor(m => m.Business.Name, false)
-        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-        @Html.Gds().TextBoxFor(m => m.Business.Name, new
-    {
-        data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-        data_addressbook_type = "Producer"
-    })
-    </div>
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
         @Html.Gds().LabelFor(m => m.BusinessType, false)
@@ -67,6 +57,46 @@
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
     </div>
 
+    <h2 class="heading-medium">@Resource.OrganisationNameTitle</h2>
+    <hr />
+    <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                Help with appropriate naming conventions
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            When inputting your organisation name, the following naming conventions should be used to minimise errors:
+            <div id="dvImpNotificationOrgName">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Company name abbreviations should always be in uppercase with no full stops</li>
+                    <li>Company suffixes should always be uppercase with no full stops</li>
+                    <li>There should be no spaces either side of special characters, particularly at the end of the name</li>
+                    <li>For example: Instead of 'A & b Materials c.d.' the name should be 'A&B Materials CD'</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+        @Html.Gds().LabelFor(m => m.Business.Name, false)
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsg)
+        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+        @Html.Gds().TextBoxFor(m => m.Business.Name, new
+        {
+            data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+            data_addressbook_type = "Producer"
+        })
+    </div>
+
+    <div class="govuk-form-group">
+        @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
+        @Html.Gds().HintSpan(@Resource.OrgTradingNameHint)
+        <span>
+            <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+            @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
+        </span>
+    </div>
+
     @Html.EditorFor(m => m.Address)
 
     @Html.EditorFor(m => m.Contact)
@@ -80,9 +110,20 @@
                 </label>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div class="govuk-form-group">
         <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            $("#lblPostCode").text("Post code (optional)");
+            $("#Address_PostalCode").val("N/A");
+        });
+
+    </script>
 }

@@ -24,6 +24,8 @@
         [Display(Name = "CountryId", ResourceType = typeof(AddressViewModelResources))]
         public Guid? CountryId { get; set; }
 
+        public AddressTypeEnum AddressType { get; set; }
+
         public SelectList CountrySelectList
         {
             get
@@ -38,7 +40,12 @@
         {
         }
 
-        public AddressViewModel(Address address)
+        public AddressViewModel(AddressTypeEnum addressTypeEnum)
+        {
+            this.AddressType = addressTypeEnum;
+        }
+
+        public AddressViewModel(Address address, AddressTypeEnum addressTypeEnum)
         {
             if (address != null)
             {
@@ -48,6 +55,7 @@
                 PostalCode = address.PostalCode;
                 CountryId = address.CountryId;
             }
+            AddressType = addressTypeEnum;
         }
 
         public Address AsAddress()

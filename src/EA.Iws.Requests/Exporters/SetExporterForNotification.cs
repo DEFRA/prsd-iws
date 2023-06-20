@@ -11,6 +11,8 @@
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class SetExporterForNotification : IRequest<Guid>
     {
+        public bool IsUkBased { get; set; }
+
         public BusinessInfoData Business { get; set; }
 
         public AddressData Address { get; set; }

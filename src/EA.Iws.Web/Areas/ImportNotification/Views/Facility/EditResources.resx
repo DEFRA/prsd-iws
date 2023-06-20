@@ -117,19 +117,58 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CompanyHouseDescription" xml:space="preserve">
+    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department.</value>
+  </data>
   <data name="LimitedCompanyLabel" xml:space="preserve">
     <value>Limited Company</value>
   </data>
   <data name="OrganisationHeading" xml:space="preserve">
     <value>Organisation</value>
   </data>
+  <data name="OrganisationNameTitle" xml:space="preserve">
+    <value>Organisation name</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsHeader" xml:space="preserve">
+    <value>When inputting your organisation name, the following naming conventions should be used to minimise errors:</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint1" xml:space="preserve">
+    <value>Company name abbreviations should always be in uppercase with no full stops</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint2" xml:space="preserve">
+    <value>There should be no spaces either side of special characters, particularly at the end of the name</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint3" xml:space="preserve">
+    <value>There should be no full stops present</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint4" xml:space="preserve">
+    <value>For example: Instead of 'a &amp; b materials', the name should be 'A&amp;B Materials'</value>
+  </data>
+  <data name="OrgHelpWithNamingDescription" xml:space="preserve">
+    <value>Use the 'Import name' button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually.</value>
+  </data>
+  <data name="OrgNameHintMsg" xml:space="preserve">
+    <value>For example 'A&amp;B Materials'</value>
+  </data>
+  <data name="OrgTradingNameHint" xml:space="preserve">
+    <value>The name your organisation trades under if different to your organisation name</value>
+  </data>
   <data name="OtherLabel" xml:space="preserve">
     <value>Other</value>
+  </data>
+  <data name="RegistrationNumberHintNonUK" xml:space="preserve">
+    <value>This should be the registration number of the company in the country in which they are registered.</value>
+  </data>
+  <data name="RegistrationNumberHintUK" xml:space="preserve">
+    <value>The 8-character code as documented by Companies House.</value>
   </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Edit a facility</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Edit facility</value>
+  </data>
+  <data name="WhereToFindCompanyHouse" xml:space="preserve">
+    <value>Where can I find my Companies House number?</value>
   </data>
 </root>

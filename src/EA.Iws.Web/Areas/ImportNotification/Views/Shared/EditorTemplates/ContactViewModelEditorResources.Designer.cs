@@ -62,6 +62,51 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the exporter – notifier.
+        /// </summary>
+        public static string ExporterFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("ExporterFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the recovery facility.
+        /// </summary>
+        public static string FacilityFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("FacilityFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the importer – consignee.
+        /// </summary>
+        public static string ImporterFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("ImporterFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the generator – producer.
+        /// </summary>
+        public static string ProducerFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("ProducerFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the full telephone number including the international dialling code. For example +00 1234567890.
+        /// </summary>
+        public static string TelephoneHintMsg {
+            get {
+                return ResourceManager.GetString("TelephoneHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter only up to 3 digits in the telephone prefix field.
         /// </summary>
         public static string TelephonePrefixTitle {

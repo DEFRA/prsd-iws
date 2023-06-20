@@ -2,6 +2,7 @@
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @using EA.Iws.Web.Areas.AddressBook.Views
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Importer.IndexResources
+@using BusinessResources = EA.Iws.Web.ViewModels.Shared.BusinessResources
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer.ImporterViewModel
 
 @{
@@ -10,22 +11,12 @@
 
 <h1 class="govuk-heading-l">@Resource.Title</h1>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Index", "Importer", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
     <h2 class="heading-medium">@Resource.OrganisationSubtitle</h2>
-
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
-        @Html.Gds().LabelFor(m => m.Business.Name, false)
-        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-        @Html.Gds().TextBoxFor(m => m.Business.Name, new
-   {
-       data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-       data_addressbook_type = "Facility"
-   })
-    </div>
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
         @Html.Gds().LabelFor(m => m.BusinessType, false)
@@ -45,11 +36,34 @@
                 </label>
             </div>
 
-            <div class="govuk-radios__item">
-                @Html.RadioButtonFor(m => m.BusinessType, BusinessType.LimitedCompany, new { @class = "govuk-radios__input", id = "LimitedCompany" })
+            <div class="govuk-radios__item" data-target="companies-house-number">
+                @Html.RadioButtonFor(m => m.BusinessType, "LimitedCompany", new { @class = "govuk-radios__input", @id = "LimitedCompany" })
                 <label class="govuk-label govuk-radios__label" for="LimitedCompany">
                     @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
                 </label>
+            </div>
+
+            <div class="panel @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+                    @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
+                    <span class="form-hint" id="RegNumHintUk">@BusinessResources.RegistrationNumberHintUK</span>
+                    <span class="form-hint" id="RegNumHintNonUk" style="display:none;">@BusinessResources.RegistrationNumberHintNonUK</span>
+                    @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+                    @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber, new { @style = "text-transform: uppercase;" })
+                    <div>
+                        <br />
+                    </div>
+                    <details id="CompaniesHouseSummary" data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+                        <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                                @BusinessResources.WhereToFindCompanyHouse
+                            </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            @Html.Raw(BusinessResources.CompanyHouseDescription)
+                        </div>
+                    </details>
+                </div>
             </div>
 
             <div class="govuk-radios__item">
@@ -61,10 +75,67 @@
         </fieldset>
     </div>
 
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" id="dvRegNumber">
         @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
         @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+    </div>
+
+    <h2 class="heading-medium">@Resource.OrganisationNameTitle</h2>
+    <hr />
+    <div class="govuk-form-group" id="dvOrgNameDesction">
+        @Resource.OrgHelpWithNamingDescription
+    </div>
+
+    <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @Resource.OrgHelpSummary
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @Resource.OrgHelpSummaryDetailsHeader
+            <div id="dvImpNotificationOrgName">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>@Resource.OrgHelpSummaryDetailsPoint1</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint2</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint3</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint4</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    <div id="dvBtnImportName">
+        <span class="form-hint">
+            @Resource.ImpNameButtonHintMsg
+        </span>
+        <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">@Resource.ImportName</button>
+        <span class="field-validation-error govuk-error-message" id="errorMessage">
+        </span>
+    </div>
+
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+        @Html.Gds().LabelFor(m => m.Business.Name, false)
+
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsgNonUK, "hintOrgNameNonUK")
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsgUK, "hintOrgNameUK")
+
+        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+        @Html.Gds().TextBoxFor(m => m.Business.Name, new
+        {
+            data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+            data_addressbook_type = "Facility"
+        })
+    </div>
+
+    <div class="govuk-form-group">
+        @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
+        @Html.Gds().HintSpan(@Resource.OrgTradingNameHint)
+        <span>
+            <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+            @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
+        </span>
     </div>
 
     @Html.EditorFor(m => m.Address)
@@ -85,4 +156,116 @@
     <div class="govuk-form-group">
         <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+        function hideImportFromCompHouseSection() {
+            $("#btnImportName").hide();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+            $("#dvRegNumber").show();
+            $("#Business_Name").val("");
+
+            $("#hintOrgNameNonUK").hide();
+            $("#hintOrgNameUK").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            $("#btnImportName").show();
+            $("#hintOrgName").hide();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+            $("#dvRegNumber").hide();
+        }
+
+        function disabledImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
+        }
+
+        $(function () {
+            //On page load, controls hide
+            $("#btnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgNameNonUK").hide();
+            $("#hintOrgNameUK").show();
+            $("#dvOrgNameDetails").show();
+
+            $('#SoleTrader').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#Partnership').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#LimitedCompany').click(function () {
+                showImportFromCompHouseSection();
+
+                $("#hintOrgNameNonUK").hide();
+                $("#hintOrgNameUK").hide();
+            });
+
+            $('#Other').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            var isLimitedCompanyChecked = $("input[id='LimitedCompany']:checked").val();
+            if (isLimitedCompanyChecked) {
+                showImportFromCompHouseSection();
+
+                $("#hintOrgNameNonUK").hide();
+                $("#hintOrgNameUK").hide();
+            }
+
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").keyup(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledImportNameButton();
+                } else {
+                    enabledImportNameButton();
+                }
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber !== null) && (regNumber !== '')) {
+                    $.ajax({
+                        url: 'Importer/GetCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: { "registrationNumber": regNumber.toUpperCase(), __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
 }

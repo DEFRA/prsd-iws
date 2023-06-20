@@ -62,11 +62,92 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Street Name followed by Unit Name/Number..
+        /// </summary>
+        public static string AddressLine1HintMsg {
+            get {
+                return ResourceManager.GetString("AddressLine1HintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: Example Street, 21.
+        /// </summary>
+        public static string AddressLine1HintMsgExp {
+            get {
+                return ResourceManager.GetString("AddressLine1HintMsgExp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: AB1 2CD.
+        /// </summary>
+        public static string AddressPostCodeHint {
+            get {
+                return ResourceManager.GetString("AddressPostCodeHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the country the organisation is operating from.
+        /// </summary>
+        public static string CountryHintMsg {
+            get {
+                return ResourceManager.GetString("CountryHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The correspondence address for the exporter - notifier.  Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string ExporterHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("ExporterHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the site address for the recovery facility. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string FacilityHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("FacilityHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the site address for the importer – consignee. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string ImporterHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("ImporterHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The correspondence address for the generator – producer. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string ProducerHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("ProducerHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Their address.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk.
+        /// </summary>
+        public static string TownOrCityHintMsg {
+            get {
+                return ResourceManager.GetString("TownOrCityHintMsg", resourceCulture);
             }
         }
     }

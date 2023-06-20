@@ -1,7 +1,25 @@
-﻿@model EA.Iws.Core.Shared.AddressData
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Core.Shared.AddressData
 
+@{
+    bool useUKAddressValidationAndTooltips = false;
+    if (ViewBag.UseUKAddressValidationAndTooltips != null)
+    {
+        useUKAddressValidationAndTooltips = ViewBag.UseUKAddressValidationAndTooltips;
+    }
+
+    bool useDefaultValidationAndToolTips = true;
+    if (ViewBag.UseDefaultValidationAndToolTips != null)
+    {
+        useDefaultValidationAndToolTips = ViewBag.UseDefaultValidationAndToolTips;
+    }
+}
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.StreetOrSuburb)">
     @Html.Gds().LabelFor(m => m.StreetOrSuburb)
+    @if (useDefaultValidationAndToolTips == false)
+    {
+        @Html.Gds().HintSpan(AddressDataResources.AddressLine1HintNonUK, "addressLine1HintNonUk", useUKAddressValidationAndTooltips ? "none" : "")
+    }
     @Html.Gds().ValidationMessageFor(m => m.StreetOrSuburb)
     @Html.Gds().TextBoxFor(m => m.StreetOrSuburb)
 </div>
@@ -12,6 +30,10 @@
 </div>
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
     @Html.Gds().LabelFor(m => m.TownOrCity)
+    @if (useDefaultValidationAndToolTips == false)
+    {
+        @Html.Gds().HintSpan(AddressDataResources.CityHintNonUK, "addressCityHintNonUk", useUKAddressValidationAndTooltips ? "none" : "")
+    }
     @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
     @Html.Gds().TextBoxFor(m => m.TownOrCity)
 </div>
@@ -21,12 +43,21 @@
     @Html.Gds().TextBoxFor(m => m.Region)
 </div>
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
-    @Html.Gds().LabelFor(m => m.PostalCode, "(optional for non-UK address)")
+    @if (useUKAddressValidationAndTooltips)
+    {
+        @Html.Gds().LabelFor(m => m.PostalCode, new { @id = "lblPostCode" })
+    }
+    else
+    {
+        @Html.Gds().LabelFor(m => m.PostalCode, new { @id = "lblPostCode" }, "(optional for non-UK address)")
+    }
+    @Html.Gds().HintSpan(AddressDataResources.PostCodeHint, "addressPostCodeHint", useUKAddressValidationAndTooltips ? "" : "none")
     @Html.Gds().ValidationMessageFor(m => m.PostalCode)
     @Html.Gds().TextBoxFor(m => m.PostalCode)
 </div>
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId)
+    @Html.Gds().HintSpan(AddressDataResources.CountryHint)
     @Html.Gds().ValidationMessageFor(m => m.CountryId)
     @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, new { data_select_box = "true" })
     @Html.HiddenFor(m => m.DefaultCountryId)

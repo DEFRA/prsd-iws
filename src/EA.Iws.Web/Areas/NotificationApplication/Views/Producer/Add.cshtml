@@ -3,9 +3,11 @@
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.AddProducerViewModel
 @{
     ViewBag.Title = AddEditProducerResources.TitleAdd;
+    ViewBag.UseUKAddressValidationAndTooltips = true;
+    ViewBag.UseDefaultValidationAndToolTips = false;
 }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Add", "Producer", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -22,7 +24,7 @@
 
     <h2 class="heading-medium">@AddEditProducerResources.Address</h2>
     <hr />
-    <span class="form-hint">@AddEditProducerResources.AddressDescription</span>
+    @Html.Gds().HintParagraph(@AddEditProducerResources.AddressDescription)
 
     <fieldset>
         <legend class="visuallyhidden">@AddEditProducerResources.Address</legend>
@@ -30,7 +32,8 @@
     </fieldset>
 
     <h2 class="heading-medium">@AddEditProducerResources.Contact</h2>
-    <hr/>
+    <hr />
+    <span class="form-hint">@AddEditProducerResources.ContactDescription</span>
 
     <fieldset>
         <legend class="visuallyhidden">@AddEditProducerResources.Contact</legend>
@@ -49,4 +52,108 @@
     </div>
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        function hideProducerFromCompanyHouseSection() {
+            $("#dvBtnImportName").hide();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+            $("#Business_Name").val('');
+            $("#hintOrgNameUK").show();
+        }
+
+        function showProducerFromCompanyHouseSection() {
+            $("#dvBtnImportName").show();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+            $("#hintOrgNameUK").hide();
+        }
+
+        function disabledImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
+        }
+
+        $(function () {
+            //On page load, controls hide
+            $("#dvBtnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+            $("#lblPostCode").text("Post code");
+            $("#hintOrgNameUK").show();
+
+            var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+            if (isLimitedCompany) {
+                showProducerFromCompanyHouseSection();
+            } else {
+                hideProducerFromCompanyHouseSection();
+            }
+
+            $('#SoleTrader').click(function () {
+                hideProducerFromCompanyHouseSection();                
+            });
+
+            $('#Partnership').click(function () {
+                hideProducerFromCompanyHouseSection();
+            });
+
+            $('#LimitedCompany').click(function () {
+                showProducerFromCompanyHouseSection();
+            });
+
+            $('#Other').click(function () {
+                hideProducerFromCompanyHouseSection();
+            });
+
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").keyup(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledImportNameButton();
+                } else {
+                    enabledImportNameButton();
+                }
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber !== null) && (regNumber !== '')) {
+                    $.ajax({
+                        url: 'GetCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: { "registrationNumber": regNumber.toUpperCase(), __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
 }
