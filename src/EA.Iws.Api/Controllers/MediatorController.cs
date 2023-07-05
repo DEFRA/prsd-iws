@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Api.Controllers
 {
     using System;
+    using System.IdentityModel;
     using System.Net;
     using System.Security;
     using System.Security.Authentication;
@@ -39,31 +40,34 @@
             try
             {
                 var typeInformation = new RequestTypeInformation(apiRequest);
-
-                var result = JsonConvert.DeserializeObject(apiRequest.RequestJson, typeInformation.RequestType,
-                    new EnumerationConverter());
-
+                var result = JsonConvert.DeserializeObject(apiRequest.RequestJson, typeInformation.RequestType, new EnumerationConverter());
                 var response = await mediator.SendAsync(result, typeInformation.ResponseType);
+
                 return Ok(response);
+            }
+            catch (BadRequestException ex)
+            {
+                logger.Error(ex, "Bad Request Exception");
+                return this.StatusCode(HttpStatusCode.BadRequest, new HttpError(ex, includeErrorDetail: true));
             }
             catch (AuthenticationException ex)
             {
-                logger.Error(ex, "Authentication error");
+                logger.Error(ex, "Authentication Exception");
                 return this.StatusCode(HttpStatusCode.Unauthorized, new HttpError(ex, includeErrorDetail: true));
             }
             catch (SecurityException ex)
             {
-                logger.Error(ex, "Authorization error");
+                logger.Error(ex, "Security Exception");
                 return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));
             }
             catch (RequestAuthorizationException ex)
             {
-                logger.Error(ex, "Request authorization error");
+                logger.Error(ex, "Request Authorization Exception");
                 return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));
             }
             catch (Exception ex)
             {
-                logger.Error(ex, "Unhandled error");
+                logger.Error(ex, "Unhandled Exception");
                 throw;
             }
         }
