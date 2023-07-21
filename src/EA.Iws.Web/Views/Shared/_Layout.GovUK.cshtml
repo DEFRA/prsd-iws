@@ -195,6 +195,7 @@
         })(window, document, 'script', 'dataLayer', gaDataLayerId);
 
         gtag('js', new Date());
+        gtag('config', gaDataLayerId);
         gtag('create', googleAnalyticsAccountId, 'auto');
         gtag('create', 'UA-145652997-1', 'auto', 'govuk_shared', { 'allowLinker': true });
         gtag('govuk_shared.require', 'linker');
