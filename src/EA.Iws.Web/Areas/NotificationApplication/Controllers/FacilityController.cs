@@ -69,6 +69,11 @@
                 return View(model);
             }
 
+            if (!string.IsNullOrEmpty(model.Business?.OrgTradingName?.Trim()))
+            {
+                model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
+            }
+
             try
             {
                 //Trim address post code
