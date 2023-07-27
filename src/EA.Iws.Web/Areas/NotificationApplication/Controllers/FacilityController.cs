@@ -2,6 +2,7 @@
 {
     using Core.Notification.Audit;
     using Core.Shared;
+    using DocumentFormat.OpenXml.EMMA;
     using EA.Iws.Web.Areas.Common;
     using Infrastructure;
     using Prsd.Core.Mapper;
@@ -47,6 +48,13 @@
 
             await this.BindCountryList(mediator, false);
             facility.Address.DefaultCountryId = this.GetDefaultCountryId();
+
+            if (facility.Business?.Name?.Contains(" T/A ") == true)
+            {
+                string[] businessNames = facility.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
+                facility.Business.Name = businessNames[0];
+                facility.Business.OrgTradingName = businessNames[1];
+            }
 
             return View(facility);
         }
@@ -120,6 +128,11 @@
             {
                 await this.BindCountryList(mediator, false);
                 return View(model);
+            }
+
+            if (!string.IsNullOrEmpty(model.Business?.OrgTradingName?.Trim()))
+            {
+                model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
             }
 
             try
