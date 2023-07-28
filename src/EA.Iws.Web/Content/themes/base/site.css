@@ -232,7 +232,6 @@ li.clear-child {
 
 .username-format {
     font-weight: bold;
-    /*color: $black;*/
 }
 
 #homepage-link-container {
@@ -240,12 +239,12 @@ li.clear-child {
     margin-top: 10px;
 }
 
-.green-tick {    
+.green-tick {
     padding-left: 10px;
 }
 
 dl.object-summary {
-    padding: 9px;    
+    padding: 9px;
     margin-bottom: 16px;
     display: inline;
     margin: 0;
@@ -286,7 +285,7 @@ table.table-pad-bottom {
     margin-bottom: 1em;
 }
 
-#descriptionTextArea > div {    
+#descriptionTextArea > div {
     padding-top: 10px;
     min-height: 50px;
     padding-bottom: 10px;
@@ -312,13 +311,13 @@ table.table-pad-bottom {
     position: relative;
 }
 
-.stickem-row::after {
-    clear: both;
-    content: '.';
-    display: block;
-    height: 0;
-    visibility: hidden;
-}
+    .stickem-row::after {
+        clear: both;
+        content: '.';
+        display: block;
+        height: 0;
+        visibility: hidden;
+    }
 
 .stickem-container .stickem {
     width: 330px;
@@ -635,11 +634,6 @@ input[type="search"] {
     -webkit-box-sizing: content-box;
     box-sizing: content-box;
 }
-
-    /*input[type="search"]::-webkit-search-cancel-button {
-        -webkit-appearance: searchfield-cancel-button;
-        margin-right: 2px;
-    }*/
 
     input[type="search"]::-webkit-search-decoration {
         -webkit-appearance: none;
@@ -998,16 +992,16 @@ button:focus,
     width: auto;
 }
 
-.button:before, .cookieBannerButton:before {
-    content: "";
-    height: 110%;
-    width: 100%;
-    display: block;
-    background: transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+    .button:before, .cookieBannerButton:before {
+        content: "";
+        height: 110%;
+        width: 100%;
+        display: block;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 
 .grid-row:after, .notice:after, #content:after, fieldset:after, .form-section:after, .form-group:after, .form-group-error:after, .error:after, .panel:after, .panel-indent:after, .example:after {
     content: "";
@@ -1213,31 +1207,31 @@ hr {
     background: #f8f8f8;
 }
 
-.accordion-general li {
-    list-style-type: none;
-}
+    .accordion-general li {
+        list-style-type: none;
+    }
 
-.accordion-general .current {
-    background: #d53880;
-    color: #fff;
-}
+    .accordion-general .current {
+        background: #d53880;
+        color: #fff;
+    }
 
-.accordion-general h3 {
-    cursor: pointer;
-    color: #0b0c0c;
-    padding: 7px 0 5px 10px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 19px;
-}
+    .accordion-general h3 {
+        cursor: pointer;
+        color: #0b0c0c;
+        padding: 7px 0 5px 10px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 19px;
+    }
 
-.accordion-general ul ul li {
-    padding: 3px 0 3px 15px;
-    color: #005ea5;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 16px;
-}
+    .accordion-general ul ul li {
+        padding: 3px 0 3px 15px;
+        color: #005ea5;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 16px;
+    }
 
 ul, ol {
     list-style-type: none !important;
@@ -1378,14 +1372,14 @@ ul, ol {
     clear: none;
 }
 
-.form-date .govuk-form-group label {
-    display: block;
-    padding-bottom: 2px;
-}
+    .form-date .govuk-form-group label {
+        display: block;
+        padding-bottom: 2px;
+    }
 
-.form-date .govuk-form-group input {
-    width: 100%;
-}
+    .form-date .govuk-form-group input {
+        width: 100%;
+    }
 
 @media (min-width: 641px) {
     .heading-large .heading-secondary {
@@ -1617,22 +1611,22 @@ input[type=number] {
     padding-bottom: 15px !important;
 }
 
-.accordion-import ul ul {
-    display: none;
-}
+    .accordion-import ul ul {
+        display: none;
+    }
 
-.accordion-import ul ul {
-    padding: 10px 0 0 0;
-    background: #fff;
-}
+    .accordion-import ul ul {
+        padding: 10px 0 0 0;
+        background: #fff;
+    }
 
-.accordion-import li.active ul {
-    display: block;
-}
+    .accordion-import li.active ul {
+        display: block;
+    }
 
-.accordion-import ul li.active ul li:hover {
-    background-color: #dee0e2;
-}
+    .accordion-import ul li.active ul li:hover {
+        background-color: #dee0e2;
+    }
 
 .international-number .plus-label {
     display: inline-block;
@@ -1728,22 +1722,22 @@ Internal user export notification menu
     font-size: 19px;
 }
 
-.accordion-export h3 span {
-    content: '';
-    margin-right: 5px;
-    display: inline-block;
-    cursor: pointer;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 6px 12px 6px;
-    border-color: transparent transparent #0b0c0c transparent;
-    -webkit-transform: translateY(0%) rotate(90deg);
-    -moz-transform: translateY(0%) rotate(90deg);
-    -ms-transform: translateY(0%) rotate(90deg);
-    -o-transform: translateY(0%) rotate(90deg);
-    transform: translateY(0%) rotate(90deg);
-}
+    .accordion-export h3 span {
+        content: '';
+        margin-right: 5px;
+        display: inline-block;
+        cursor: pointer;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 6px 12px 6px;
+        border-color: transparent transparent #0b0c0c transparent;
+        -webkit-transform: translateY(0%) rotate(90deg);
+        -moz-transform: translateY(0%) rotate(90deg);
+        -ms-transform: translateY(0%) rotate(90deg);
+        -o-transform: translateY(0%) rotate(90deg);
+        transform: translateY(0%) rotate(90deg);
+    }
 
 .accordion-export .current span {
     content: '';
@@ -1777,30 +1771,30 @@ Internal user export notification menu
     background: #fff;
 }
 
-.accordion-export ul ul li {
-    padding: 3px 0 3px 15px;
-    color: #005ea5;
-    text-decoration: none;
-    cursor: pointer;
-    font-size: 16px;
-}
-
-    .accordion-export ul ul li a {
-        display: block;
+    .accordion-export ul ul li {
+        padding: 3px 0 3px 15px;
+        color: #005ea5;
         text-decoration: none;
-        color: #0b0c0c;
-        transition: all .15s;
+        cursor: pointer;
+        font-size: 16px;
     }
 
-.accordion-export ul ul:after {
-    content: '';
-    display: block;
-    border-bottom: 5px solid #2b8cc4;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    height: 0;
-    width: 100%;
-}
+        .accordion-export ul ul li a {
+            display: block;
+            text-decoration: none;
+            color: #0b0c0c;
+            transition: all .15s;
+        }
+
+    .accordion-export ul ul:after {
+        content: '';
+        display: block;
+        border-bottom: 5px solid #2b8cc4;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height: 0;
+        width: 100%;
+    }
 
 .accordion-export ul ul {
     display: none;
@@ -1877,50 +1871,48 @@ details {
     clear: both;
 }
 
-details summary {
-    display: inline-block;
-    color: #005ea5;
-    cursor: pointer;
-    position: relative;
-    margin-bottom: 0.26316em;
-    padding-left: 25px;
-}
+    details summary {
+        display: inline-block;
+        color: #005ea5;
+        cursor: pointer;
+        position: relative;
+        margin-bottom: 0.26316em;
+        padding-left: 25px;
+    }
 
-    details summary:before {
-        content: "";
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
+        details summary:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: transparent;
+            clip-path: polygon(0% 0%,100% 50%,0% 100%);
+            border-width: 7px 0 7px 12.124px;
+            border-left-color: inherit;
+        }
+
+    details[open] > summary:before {
         display: block;
         width: 0;
         height: 0;
         border-style: solid;
         border-color: transparent;
-        /* -webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);*/
-        clip-path: polygon(0% 0%,100% 50%,0% 100%);
-        border-width: 7px 0 7px 12.124px;
-        border-left-color: inherit;
+        clip-path: polygon(0% 0%,50% 100%,100% 0%);
+        border-width: 12.124px 7px 0 7px;
+        border-top-color: inherit;
     }
 
-details[open] > summary:before {
-    display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: transparent;
-    /*-webkit-clip-path: polygon(0% 0%,50% 100%,100% 0%);*/
-    clip-path: polygon(0% 0%,50% 100%,100% 0%);
-    border-width: 12.124px 7px 0 7px;
-    border-top-color: inherit;
-}
-
-details .summary {
-    text-decoration: underline;
-    font-size: inherit;
-    font-weight: normal;
-}
+    details .summary {
+        text-decoration: underline;
+        font-size: inherit;
+        font-weight: normal;
+    }
 
 summary > h2 {
     display: inline-block;
@@ -1961,7 +1953,16 @@ summary > h2 {
     }
 }
 
-.button:link, .button:link:focus, .button:hover, .button:focus, .button:visited, .cookieBannerButton:link, .cookieBannerButton:link:focus, .cookieBannerButton:hover, .cookieBannerButton:focus, .cookieBannerButton:visited {
+.button:link,
+.button:link:focus,
+.button:hover,
+.button:focus,
+.button:visited,
+.cookieBannerButton:link,
+.cookieBannerButton:link:focus,
+.cookieBannerButton:hover,
+.cookieBannerButton:focus,
+.cookieBannerButton:visited {
     color: #fff;
 }
 
@@ -2041,9 +2042,9 @@ summary > h2 {
     list-style-type: inherit !important;
 }
 
-#dvImpNotificationOrgName ul li {
-    padding-top: 5px;    
-}
+    #dvImpNotificationOrgName ul li {
+        padding-top: 5px;
+    }
 
 .orgTradingName {
     margin-left: -7px;
@@ -2095,7 +2096,6 @@ details summary:before {
     height: 0;
     border-style: solid;
     border-color: transparent;
-    /*-webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);*/
     clip-path: polygon(0% 0%,100% 50%,0% 100%);
     border-width: 7px 0 7px 12.124px;
     border-left-color: inherit;
@@ -2187,11 +2187,11 @@ textarea {
     width: 800px;
 }
 
-#tblArchive tr td .govuk-checkboxes__item {
-    min-height: 0px !important;
-    margin-top: -5px !important;
-    margin-bottom: 0px !important;
-}
+    #tblArchive tr td .govuk-checkboxes__item {
+        min-height: 0px !important;
+        margin-top: -5px !important;
+        margin-bottom: 0px !important;
+    }
 
 #dvCountHeader {
     background-color: #1d70b8;
@@ -2227,14 +2227,14 @@ textarea {
     transition: all ease-in 0.2s;
 }
 
-.tableRadio:checked {
-    background-color: black;
-}
+    .tableRadio:checked {
+        background-color: black;
+    }
 
-.tableRadio:focus {
-    border-width: 4px;
-    outline-offset: 1px;        
-}
+    .tableRadio:focus {
+        border-width: 4px;
+        outline-offset: 1px;
+    }
 
 .noteDiv {
     border-width: 0px;
@@ -2278,7 +2278,7 @@ textarea {
 
 #div_red {
     background-color: red;
-    border-color: red;    
+    border-color: red;
 }
 
 #div_blue {
