@@ -49,13 +49,6 @@
             await this.BindCountryList(mediator, false);
             facility.Address.DefaultCountryId = this.GetDefaultCountryId();
 
-            if (facility.Business?.Name?.Contains(" T/A ") == true)
-            {
-                string[] businessNames = facility.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
-                facility.Business.Name = businessNames[0];
-                facility.Business.OrgTradingName = businessNames[1];
-            }
-
             return View(facility);
         }
 
@@ -110,14 +103,17 @@
         [HttpGet]
         public async Task<ActionResult> Edit(Guid id, Guid entityId, bool? backToOverview = null)
         {
-            var facility =
-                await
-                    mediator.SendAsync(new GetFacilityForNotification(id, entityId));
-
-            var response =
-                await mediator.SendAsync(new GetNotificationBasicInfo(id));
-
+            var facility = await mediator.SendAsync(new GetFacilityForNotification(id, entityId));
+            var response = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+            
             var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
+
+            if (facility.Business?.Name?.Contains(" T/A ") == true)
+            {
+                string[] businessNames = facility.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
+                model.Business.Name = businessNames[0];
+                model.Business.OrgTradingName = businessNames[1];
+            }
 
             await this.BindCountryList(mediator, false);
             facility.Address.DefaultCountryId = this.GetDefaultCountryId();
