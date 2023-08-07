@@ -6,11 +6,12 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Domain.NotificationApplication;
+    using EA.Iws.TestHelpers.Base;
     using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
     using Xunit;
 
-    public class ReceiptRecoveryRecoveryDateFormatRuleTests
+    public class ReceiptRecoveryRecoveryDateFormatRuleTests : SimpleTestBase
     {
         private readonly ReceiptRecoveryRecoveryDateFormatRule rule;
         private readonly Guid notificationId;
