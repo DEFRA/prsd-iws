@@ -230,7 +230,7 @@
     }
 
     function rejectCookies() {
-        getGA4Cookie();
+        deleteGA4Cookies();
         GOVUK.cookie('iws-cookie-consent', 'no', { days: 28 });
         document.getElementById("global-cookie-message").style.display = "none";
         GOVUK.cookie('_ga', null);
@@ -239,7 +239,7 @@
         GOVUK.cookie('_gat_govuk_shared', null);
     }
 
-    function getGA4Cookie() {
+    function deleteGA4Cookies() {
         if (document.cookie && document.cookie != '') {
             var cookies = document.cookie.split(';');
             for (var i = 0; i < cookies.length; i++) {
