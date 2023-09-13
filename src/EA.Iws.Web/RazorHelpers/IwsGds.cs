@@ -35,11 +35,11 @@
 
             if (string.IsNullOrEmpty(eventLabel))
             {
-                result = string.Format("ga('send', 'event', '{0}', '{1}');", HttpUtility.JavaScriptStringEncode(eventCategory), HttpUtility.JavaScriptStringEncode(eventAction));
+                result = string.Format("gtag('send', 'event', '{0}', '{1}');", HttpUtility.JavaScriptStringEncode(eventCategory), HttpUtility.JavaScriptStringEncode(eventAction));
             }
             else
             {
-                result = string.Format("ga('send', 'event', '{0}', '{1}', '{2}');", HttpUtility.JavaScriptStringEncode(eventCategory), HttpUtility.JavaScriptStringEncode(eventAction), HttpUtility.JavaScriptStringEncode(eventLabel));
+                result = string.Format("gtag('send', 'event', '{0}', '{1}', '{2}');", HttpUtility.JavaScriptStringEncode(eventCategory), HttpUtility.JavaScriptStringEncode(eventAction), HttpUtility.JavaScriptStringEncode(eventLabel));
             }
 
             return result;
