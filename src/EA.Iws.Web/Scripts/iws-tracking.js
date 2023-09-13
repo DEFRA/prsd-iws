@@ -7,7 +7,7 @@
             var state = $(this).parent().next().attr('aria-hidden') === "false" ? true : false;
 
             if (state) {
-                ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
+                gtag("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
             }
         });
     });
@@ -17,14 +17,14 @@
     // or a link that goes to an external site
     $('[data-track="element"]').each(function() {
         $(this).click(function () {
-            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
+            gtag("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
         });
     });
 
     // Send ga event when a user clicks a link to another internal page
     $('[data-track="link"]').each(function () {
         $(this).click(function (event) {
-            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
+            gtag("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
         });
     });
 });
