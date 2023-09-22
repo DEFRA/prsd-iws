@@ -11,6 +11,8 @@
 
         public ChemicalComposition ChemicalCompositionType { get; set; }
 
+        //public List<WasteComponentData> WasteComponentinfo { get; set; }
+
         public WasteCategoryType? WasteCategoryType { get; set; }
 
         public string ChemicalCompositionName { get; set; }
