@@ -1,0 +1,49 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.WasteComponentViewModel
+@{
+    ViewBag.Title = WasteComponentResources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@WasteComponentResources.Header</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteComponentTypes)">
+        @Html.Gds().ValidationMessageFor(m => m.WasteComponentTypes)
+        <fieldset class="govuk-fieldset">
+            <legend class="visuallyhidden">@WasteComponentResources.HeaderDescription</legend>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                @for (int i = 0; i < Model.WasteComponentTypes.PossibleValues.Count; i++)
+                {
+                    MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.WasteComponentTypes.PossibleValues[i]);
+
+                    <div class="multiple-choice govuk-checkboxes__item">
+                        @Html.CheckBoxFor(m => m.WasteComponentTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox, @class = "govuk-checkboxes__input" })
+                        <label class="govuk-label govuk-checkboxes__label" for="@idForThisCheckBox">
+                            @if (Model.WasteComponentTypes.ShowEnumValue)
+                            {
+                                @Html.DisplayFor(m => m.WasteComponentTypes.PossibleValues[i].Value)
+                                @Html.Raw(" - ")
+                            }
+                            @Html.DisplayFor(m => m.WasteComponentTypes.PossibleValues[i].Text)
+                        </label>
+                    </div>
+
+                    @Html.HiddenFor(m => m.WasteComponentTypes.PossibleValues[i].Text)
+                    @Html.HiddenFor(m => m.WasteComponentTypes.PossibleValues[i].Value)
+                }                
+            </div>
+        </fieldset>
+
+    </div>
+
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

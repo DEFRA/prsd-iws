@@ -433,6 +433,8 @@
     <Compile Include="Users\GetUserIsInternal.cs" />
     <Compile Include="WasteCodes\EditHCodes.cs" />
     <Compile Include="WasteCodes\EditYCodes.cs" />
+    <Compile Include="WasteComponentType\GetWasteComponentInfoForNotification.cs" />
+    <Compile Include="WasteComponentType\SetWasteComponentInfoForNotification.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCost.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecovery.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValue.cs" />

@@ -291,6 +291,7 @@
     <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
     <Compile Include="NotificationApplication\MeansOfTransport.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.WasteComponentInfo.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\ICarrierRepository.cs" />
@@ -320,6 +321,7 @@
     <Compile Include="NotificationApplication\Shipment\NumberOfShipmentsHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
     <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
+    <Compile Include="NotificationApplication\WasteComponentInfo.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\ProviderChangedEvent.cs" />
     <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />

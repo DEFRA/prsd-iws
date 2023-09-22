@@ -83,6 +83,8 @@
 
         public virtual DbSet<WasteDisposal> WasteDisposals { get; set; }
 
+        public virtual DbSet<WasteComponentInfo> WasteComponentInfos { get; set; }
+
         public virtual DbSet<Consent> Consents { get; set; }
 
         public virtual DbSet<Exporter> Exporters { get; set; }
