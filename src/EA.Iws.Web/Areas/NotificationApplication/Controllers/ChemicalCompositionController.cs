@@ -69,25 +69,28 @@
             {
                 case "Solid recovered fuel (SRF)":
                     return RedirectToAction("Parameters", new { id = model.NotificationId, chemicalCompositionType = ChemicalComposition.SRF, backToOverview });
+
                 case "Refuse derived fuel (RDF)":
                     return RedirectToAction("Parameters", new { id = model.NotificationId, chemicalCompositionType = ChemicalComposition.RDF, backToOverview });
+
                 case "Wood":
                     return RedirectToAction("Parameters", new { id = model.NotificationId, chemicalCompositionType = ChemicalComposition.Wood, backToOverview });
+
                 default:
-                    return RedirectToAction("WasteCategory", new { id = model.NotificationId, chemicalCompositionType = ChemicalComposition.Other, backToOverview });
+                    return RedirectToAction("WasteCategory", "ChemicalComposition", new { notificationId = model.NotificationId });
             }
         }
 
         [HttpGet]
-        public async Task<ActionResult> WasteCategory(Guid id, bool? backToOverview = null)
+        public async Task<ActionResult> WasteCategory(Guid notificationId)
         {
             var model = new WasteCategoryViewModel
             {
-                NotificationId = id,
+                NotificationId = notificationId,
                 WasteCategoryType = RadioButtonStringCollectionViewModel.CreateFromEnum<WasteCategoryType>()
             };
 
-            var wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
+            var wasteTypeData = await mediator.SendAsync(new GetWasteType(notificationId));
             if (wasteTypeData != null)
             {
                 switch (EnumHelper.GetDisplayName(wasteTypeData.WasteCategoryType))
@@ -153,11 +156,11 @@
                    existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.ChemicalComposition);
 
-            return RedirectToAction("WasteComponent", new { id = model.NotificationId, backToOverview });
+            return RedirectToAction("WasteComponent", "ChemicalComposition", new { notificationId = model.NotificationId, backToOverview });
         }
 
         [HttpGet]
-        public async Task<ActionResult> WasteComponent(Guid id, bool? backToOverview = null)
+        public async Task<ActionResult> WasteComponent(Guid notificationId, bool? backToOverview = null)
         {
             var wasteComponentTypes = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>();
             wasteComponentTypes.ShowEnumValue = true;
@@ -165,11 +168,11 @@
 
             var model = new WasteComponentViewModel
             {
-                NotificationId = id,
+                NotificationId = notificationId,
                 WasteComponentTypes = wasteComponentTypes
             };
 
-            var wasteComponentData = await mediator.SendAsync(new GetWasteComponentInfoForNotification(id));
+            var wasteComponentData = await mediator.SendAsync(new GetWasteComponentInfoForNotification(notificationId));
             if (wasteComponentData != null)
             {
                 model.WasteComponentTypes.SetSelectedValues(wasteComponentData.WasteComponentTypes);
@@ -205,18 +208,18 @@
                 existingWasteComponentData.WasteComponentTypes.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                 NotificationAuditScreenType.ChemicalComposition);
 
-            return RedirectToAction("OtherWaste", new { id = model.NotificationId, backToOverview });
+            return RedirectToAction("OtherWaste", "ChemicalComposition", new { notificationId = model.NotificationId, backToOverview });
         }
 
         [HttpGet]
-        public async Task<ActionResult> OtherWaste(Guid id, bool? backToOverview = null)
+        public async Task<ActionResult> OtherWaste(Guid notificationId, bool? backToOverview = null)
         {
             var model = new OtherWasteViewModel
             {
-                NotificationId = id
+                NotificationId = notificationId
             };
 
-            var wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
+            var wasteTypeData = await mediator.SendAsync(new GetWasteType(notificationId));
 
             if (wasteTypeData != null && wasteTypeData.ChemicalCompositionName != null)
             {
@@ -254,7 +257,7 @@
                    NotificationAuditType.Updated,
                    NotificationAuditScreenType.ChemicalComposition);
 
-            return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId, backToOverview });
+            return RedirectToAction("OtherWasteAdditionalInformation", "ChemicalComposition", new { id = model.NotificationId, backToOverview });
         }
 
         [HttpGet]
