@@ -14,7 +14,7 @@
         {
         }
 
-        private WasteType(ChemicalComposition chemicalComposition, string chemicalCompositionName)
+        private WasteType(ChemicalComposition chemicalComposition, string chemicalCompositionName, WasteCategoryType wasteCategoryType)
         {
             ChemicalCompositionType = chemicalComposition;
 
@@ -22,11 +22,21 @@
             {
                 Guard.ArgumentNotNull(() => chemicalCompositionName, chemicalCompositionName);
                 ChemicalCompositionName = chemicalCompositionName;
+                WasteCategoryType = wasteCategoryType;
             }
         }
 
-        private WasteType(ChemicalComposition chemicalComposition,
-            IList<WasteAdditionalInformation> wasteCompositions, string chemicalCompositionDescription = "")
+        private WasteType(ChemicalComposition chemicalComposition, WasteCategoryType wasteCategoryType)
+        {
+            ChemicalCompositionType = chemicalComposition;
+
+            if (chemicalComposition == ChemicalComposition.Other)
+            {
+                WasteCategoryType = wasteCategoryType;
+            }
+        }
+
+        private WasteType(ChemicalComposition chemicalComposition, IList<WasteAdditionalInformation> wasteCompositions, string chemicalCompositionDescription = "")
         {
             ChemicalCompositionType = chemicalComposition;
 
@@ -46,6 +56,8 @@
         }
 
         public ChemicalComposition ChemicalCompositionType { get; internal set; }
+
+        public WasteCategoryType? WasteCategoryType { get; set; }
 
         protected string chemicalCompositionDescription;
 
@@ -222,9 +234,14 @@
             WasteAdditionalInformationCollection = wasteAdditionalInformation;
         }
 
-        public static WasteType CreateOtherWasteType(string chemicalCompositionName)
+        public static WasteType CreateOtherWasteType(string chemicalCompositionName, WasteCategoryType wasteCategoryType)
         {
-            return new WasteType(ChemicalComposition.Other, chemicalCompositionName);
+            return new WasteType(ChemicalComposition.Other, chemicalCompositionName, wasteCategoryType);
+        }
+
+        public static WasteType CreateOtherWasteTypeCategory(WasteCategoryType wasteCategoryType)
+        {
+            return new WasteType(ChemicalComposition.Other, wasteCategoryType);
         }
 
         public static WasteType CreateWoodWasteType(string chemicalCompositionDescription, IList<WasteAdditionalInformation> wasteCompositions)
