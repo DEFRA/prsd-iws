@@ -92,7 +92,7 @@
             {
                 if (ChemicalCompositionType == ChemicalComposition.Other)
                 {
-                    Guard.ArgumentNotNull(() => value, value);
+                    //Guard.ArgumentNotNull(() => value, value);
                     chemicalCompositionName = value;
                 }
                 else if (!string.IsNullOrWhiteSpace(value))
