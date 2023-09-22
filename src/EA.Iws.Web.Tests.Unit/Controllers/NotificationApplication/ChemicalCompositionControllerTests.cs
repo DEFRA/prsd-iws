@@ -28,7 +28,7 @@
         {
             mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
-            chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap(), this.auditService);
+            chemicalCompositionController = new ChemicalCompositionController(mediator, this.auditService);
 
             A.CallTo(
                 () =>
