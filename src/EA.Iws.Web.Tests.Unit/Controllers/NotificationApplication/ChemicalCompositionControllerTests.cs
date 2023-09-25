@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
@@ -95,9 +96,19 @@
         [Fact]
         public async Task WasteCategory_ReturnsView()
         {
+            var model = new WasteCategoryViewModel
+            {
+                NotificationId = notificationId,
+                WasteCategoryType = RadioButtonStringCollectionViewModel.CreateFromEnum<WasteCategoryType>()
+            };
+
             var result = await chemicalCompositionController.WasteCategory(notificationId) as ViewResult;
+            var resultModel = (WasteCategoryViewModel)(result.Model);
 
             Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal(model.NotificationId, resultModel.NotificationId);
+            Assert.Equal(model.WasteCategoryType.PossibleValues.Count(), resultModel.WasteCategoryType.PossibleValues.Count());
+            Assert.Equal(model.WasteCategoryType.SelectedValue, resultModel.WasteCategoryType.SelectedValue);
         }
 
         [Fact]
@@ -130,9 +141,18 @@
         [Fact]
         public async Task WasteComponent_ReturnsView()
         {
+            var model = new WasteComponentViewModel
+            {
+                NotificationId = notificationId,
+                WasteComponentTypes = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>()
+            };
+
             var result = await chemicalCompositionController.WasteComponent(notificationId) as ViewResult;
+            var resultModel = (WasteComponentViewModel)(result.Model);
 
             Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal(model.NotificationId, resultModel.NotificationId);
+            Assert.Equal(model.WasteComponentTypes.PossibleValues.Count(), resultModel.WasteComponentTypes.PossibleValues.Count());
         }
 
         [Fact]
@@ -153,9 +173,17 @@
         [Fact]
         public async Task OtherWaste_ReturnsView()
         {
+            var model = new OtherWasteViewModel()
+            {
+                NotificationId = notificationId,
+                Description = "Test Description"
+            };
+
             var result = await chemicalCompositionController.OtherWaste(notificationId) as ViewResult;
+            var resultModel = (OtherWasteViewModel)result.Model;
 
             Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal(model.NotificationId, resultModel.NotificationId);
         }
 
         [Fact]
