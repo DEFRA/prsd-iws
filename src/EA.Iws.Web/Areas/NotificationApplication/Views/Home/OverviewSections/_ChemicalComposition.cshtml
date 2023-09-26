@@ -4,12 +4,24 @@
 <div class="overview-block">
     @if (Model.IsChemicalCompositionCompleted)
     {
-        <div class="overview-block-element grid-row">
-            <div class="column-third">Type:</div>
-            <div class="column-two-thirds">
-                @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @Html.DisplayFor(m => m.ChemicalComposition.WasteCategoryType)
+        if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Other)
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Type:</div>
+                <div class="column-two-thirds">
+                    @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)
+                </div>
             </div>
-        </div>
+        }
+        else
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Type:</div>
+                <div class="column-two-thirds">
+                    @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @Html.DisplayFor(m => m.ChemicalComposition.WasteCategoryType)
+                </div>
+            </div>
+        }
 
         if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))
         {
