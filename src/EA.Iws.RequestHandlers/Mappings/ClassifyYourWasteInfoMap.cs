@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Core.Notification.Overview;
     using Core.WasteCodes;
     using Core.WasteType;
@@ -29,7 +30,18 @@
                 ChemicalComposition = GetWasteType(notification),
                 PhysicalCharacteristics = GetPhysicalCharacteristics(notification),
                 ProcessOfGeneration = GetWasteGenerationProcess(notification),
+                WasteComponentTypes = GetWasteComponentTypes(notification)
             };
+        }
+
+        private List<string> GetWasteComponentTypes(NotificationApplication notification)
+        {
+            var wasteComponentTypes = new List<string>();
+            foreach (var c in notification.WasteComponentInfos)
+            {
+                wasteComponentTypes.Add(EnumHelper.GetDisplayName(c.WasteComponentType));
+            }
+            return wasteComponentTypes;
         }
 
         private WasteTypeData GetWasteType(NotificationApplication notification)

@@ -19,14 +19,6 @@
             </div>
         }
 
-        @*if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.WasteComponentType))
-        {
-            <div class="overview-block-element grid-row">
-                <div class="column-third">Contains:</div>
-                <div class="column-two-thirds">@Html.DisplayFor(m => m.ChemicalComposition.WasteComponentType)</div>
-            </div>
-        }*@
-
         if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionDescription) && Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Wood)
         {
             <div class="overview-block-element grid-row">
@@ -88,6 +80,14 @@
                 </table>
             </div>
             <br />
+        }
+
+        if (!string.IsNullOrWhiteSpace(Model.WasteComponentTypesDescription))
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Contains:</div>
+                <div class="column-two-thirds">@Model.WasteComponentTypesDescription</div>
+            </div>
         }
 
         if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.OtherWasteTypeDescription))
