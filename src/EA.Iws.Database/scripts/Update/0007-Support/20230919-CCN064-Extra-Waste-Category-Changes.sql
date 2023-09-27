@@ -67,3 +67,5 @@ GO
 
 ALTER TABLE [Notification].[WasteComponentInfo] CHECK CONSTRAINT [FK_WasteComponentInfo_Notification]
 GO
+
+ALTER TABLE [Reports].[FreedomOfInformationCache] ADD [WasteComponentTypes] NVARCHAR(100) NULL;

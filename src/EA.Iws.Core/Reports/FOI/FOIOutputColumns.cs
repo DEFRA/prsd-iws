@@ -63,6 +63,9 @@
         [Display(Name = "Waste Type")]
         NameOfWaste,
 
+        [Display(Name = "Waste Contains")]
+        WasteComponentTypes,
+
         [Display(Name = "EWC Code")]
         Ewc,
 
