@@ -25,12 +25,13 @@ SELECT
         CASE WHEN WT.[ChemicalCompositionType] = 4
             THEN 'Other - ' + WC.[Name] + ' - ' + WT.[ChemicalCompositionName]
             ELSE CCT.[Description] END AS [NameOfWaste],
-        (SELECT STRING_AGG(WCT.Name, ', ') 
-			FROM  [Notification].[WasteComponentInfo] WCI 
-			INNER JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCI.WasteComponentType 
-			WHERE N.Id = WCI.NotificationId
-			GROUP BY WCI.NotificationId
-			) AS [WasteComponentTypes],
+        STUFF(( SELECT ', ' + WCT.Name AS [text()]
+            FROM [Notification].[WasteComponentInfo] WCOI
+            LEFT JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCOI.WasteComponentType 
+            WHERE N.Id = WCOI.NotificationId
+            ORDER BY WCOI.WasteComponentType
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [WasteComponentTypes],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
             FROM [Notification].[WasteCodeInfo] WCI
             LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
