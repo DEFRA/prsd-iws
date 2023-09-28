@@ -18,7 +18,7 @@
             <div class="overview-block-element grid-row">
                 <div class="column-third">Type:</div>
                 <div class="column-two-thirds">
-                    @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @Html.DisplayFor(m => m.ChemicalComposition.WasteCategoryType)
+                    @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ChemicalComposition.WasteCategoryType.Value)
                 </div>
             </div>
         }
