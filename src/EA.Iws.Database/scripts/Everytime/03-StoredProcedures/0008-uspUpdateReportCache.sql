@@ -87,6 +87,7 @@ BEGIN
           ,[ImportCountryName]
           ,[ChemicalCompositionTypeId]
           ,[NameOfWaste]
+          ,[WasteComponentTypes]
           ,[EWC]
           ,[YCode]
           ,[HCode]
