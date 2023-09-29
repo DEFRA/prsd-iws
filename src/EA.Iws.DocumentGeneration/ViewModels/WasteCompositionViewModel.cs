@@ -29,10 +29,12 @@
 
             ChemicalComposition = wasteType.ChemicalCompositionType;
             Compositions = formatter.GetWasteCompositionPercentages(wasteType);
-            AdditionalInfos =
-                formatter.GetAdditionalInformationChemicalCompositionPercentages(wasteType.WasteAdditionalInformation);
+            AdditionalInfos = formatter.GetAdditionalInformationChemicalCompositionPercentages(wasteType.WasteAdditionalInformation);
 
-            WasteCategoryType = EnumHelper.GetDisplayName(wasteType.WasteCategoryType.Value);
+            if (wasteType.WasteCategoryType.HasValue)
+            {
+                WasteCategoryType = EnumHelper.GetDisplayName(wasteType.WasteCategoryType.Value);
+            }
 
             SetMergeDescriptionText();
         }
