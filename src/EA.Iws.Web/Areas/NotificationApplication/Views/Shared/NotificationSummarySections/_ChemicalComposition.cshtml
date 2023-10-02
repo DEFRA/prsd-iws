@@ -1,11 +1,19 @@
 ﻿@using EA.Iws.Core.WasteType
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
-    
+
 @if (Model.IsChemicalCompositionCompleted)
 {
     <dl>
-        <dt>Type:</dt>
-        <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</dd>
+        @if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Other)
+        {
+            <dt>Type:</dt>
+            <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</dd>
+        }
+        else
+        {
+            <dt>Type:</dt>
+            <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ChemicalComposition.WasteCategoryType.Value)</dd>
+        }
 
         @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))
         {
@@ -72,7 +80,7 @@
         @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.OtherWasteTypeDescription))
         {
             <dt>Description:</dt>
-                <dd>@Model.ChemicalComposition.OtherWasteTypeDescription</dd>
+            <dd>@Model.ChemicalComposition.OtherWasteTypeDescription</dd>
         }
 
         @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.EnergyInformation))
@@ -90,7 +98,7 @@
         @if (Model.ChemicalComposition.HasAnnex)
         {
             <dt>Further details:</dt>
-                <dd>To be provided in a separate annex.</dd>
+            <dd>To be provided in a separate annex.</dd>
         }
     </dl>
 
