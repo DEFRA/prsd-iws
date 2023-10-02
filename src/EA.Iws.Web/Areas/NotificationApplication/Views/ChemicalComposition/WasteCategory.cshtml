@@ -1,0 +1,26 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.WasteCategoryViewModel
+@{
+    ViewBag.Title = WasteCategoryResources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@WasteCategoryResources.Header</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteCategoryType.SelectedValue)">
+        <div class="govuk-body govuk-error-message ">
+            @Html.Gds().ValidationMessageFor(m => m.WasteCategoryType.SelectedValue, "Please tell us what waste category type applies")
+        </div>
+        @Html.EditorFor(m => m.WasteCategoryType)
+    </div>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submitButton" value="Continue">@Constants.ContinueButtonText</button>
+    </div>
+}

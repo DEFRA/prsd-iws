@@ -18,6 +18,7 @@
         {
             wasteType.ChemicalCompositionType = ChemicalComposition.Other;
             wasteType.OtherWasteTypeDescription = "a short description";
+            wasteType.WasteCategoryType = WasteCategoryType.Batteries;
 
             var first = new WasteCompositionViewModel(wasteType, wasteCompositionFormatter);
             var result = new WasteCompositionViewModel(first, 7);
@@ -32,6 +33,7 @@
         {
             wasteType.ChemicalCompositionType = ChemicalComposition.Other;
             wasteType.OtherWasteTypeDescription = new string('a', 250);
+            wasteType.WasteCategoryType = WasteCategoryType.Oils;
 
             var first = new WasteCompositionViewModel(wasteType, wasteCompositionFormatter);
             var result = new WasteCompositionViewModel(first, 7);

@@ -133,6 +133,7 @@
     <Compile Include="Mappings\Exports\SharedUserHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\SharedUserMapping.cs" />
     <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteComponentInfoMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />

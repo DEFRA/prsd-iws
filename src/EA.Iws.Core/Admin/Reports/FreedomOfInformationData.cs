@@ -60,6 +60,9 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Waste Type")]
         public string NameOfWaste { get; set; }
 
+        [DisplayName("Waste Contains")]
+        public string WasteComponentTypes { get; set; }
+
         [DisplayName("EWC Code")]
         public string Ewc { get; set; }
         

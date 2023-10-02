@@ -21,5 +21,7 @@
         public List<WoodInformationData> WasteCompositions { get; set; }
 
         public string WasteCompositionName { get; set; }
+
+        public WasteCategoryType WasteCategoryType { get; set; }
     }
 }

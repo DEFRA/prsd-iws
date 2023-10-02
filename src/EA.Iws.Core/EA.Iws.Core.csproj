@@ -338,6 +338,8 @@
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointDataGroup.cs" />
     <Compile Include="TransportRoute\TransportRouteData.cs" />
+    <Compile Include="WasteComponentType\WasteComponentData.cs" />
+    <Compile Include="WasteComponentType\WasteComponentType.cs" />
     <Compile Include="WasteType\ChemicalCompositionCategory.cs" />
     <Compile Include="WasteType\ChemicalCompositionData.cs" />
     <Compile Include="WasteType\ChemicalComposition.cs" />
@@ -345,6 +347,7 @@
     <Compile Include="WasteType\PhysicalCharacteristicsData.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />
     <Compile Include="WasteCodes\WasteCodeData.cs" />
+    <Compile Include="WasteType\WasteCategoryType.cs" />
     <Compile Include="WasteType\WasteCompositionData.cs" />
     <Compile Include="WasteType\WasteGenerationProcessData.cs" />
     <Compile Include="WasteType\WasteInformationType.cs" />

@@ -459,6 +459,8 @@
     <Compile Include="Mappings\SharedUserMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
+    <Compile Include="Mappings\WasteComponentDataMap.cs" />
+    <Compile Include="Mappings\WasteComponentInfoMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
     <Compile Include="Movement\AuditMovementHandler.cs" />
@@ -702,6 +704,8 @@
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="WasteCodes\CanEditHCodesHandler.cs" />
     <Compile Include="WasteCodes\EditYCodesHandler.cs" />
+    <Compile Include="WasteComponentType\GetWasteComponentInfoForNotificationHandler.cs" />
+    <Compile Include="WasteComponentType\SetWasteComponentInfoForNotificationHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />

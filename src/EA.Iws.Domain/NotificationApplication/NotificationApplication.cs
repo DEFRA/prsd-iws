@@ -24,6 +24,7 @@
 
             OperationInfosCollection = new List<OperationInfo>();
             PackagingInfosCollection = new List<PackagingInfo>();
+            WasteComponentInfosCollection = new List<WasteComponentInfo>();
             PhysicalCharacteristicsCollection = new List<PhysicalCharacteristicsInfo>();
             WasteCodeInfoCollection = new List<WasteCodeInfo>();
 
@@ -33,6 +34,8 @@
         protected virtual ICollection<OperationInfo> OperationInfosCollection { get; set; }
 
         protected virtual ICollection<PackagingInfo> PackagingInfosCollection { get; set; }
+
+        protected virtual ICollection<WasteComponentInfo> WasteComponentInfosCollection { get; set; }
 
         protected virtual ICollection<PhysicalCharacteristicsInfo> PhysicalCharacteristicsCollection { get; set; }
 
@@ -82,6 +85,11 @@
         public IEnumerable<PackagingInfo> PackagingInfos
         {
             get { return PackagingInfosCollection.ToSafeIEnumerable(); }
+        }
+
+        public IEnumerable<WasteComponentInfo> WasteComponentInfos
+        {
+            get { return WasteComponentInfosCollection.ToSafeIEnumerable(); }
         }
 
         public IEnumerable<PhysicalCharacteristicsInfo> PhysicalCharacteristics
