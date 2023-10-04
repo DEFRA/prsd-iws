@@ -138,6 +138,9 @@
   <data name="OrgNameRequired" xml:space="preserve">
     <value>Please enter the organisation's name</value>
   </data>
+  <data name="PostalcodeRequired" xml:space="preserve">
+    <value>Please enter post code</value>
+  </data>
   <data name="TelephoneInvalid" xml:space="preserve">
     <value>Please enter the valid telephone number</value>
   </data>

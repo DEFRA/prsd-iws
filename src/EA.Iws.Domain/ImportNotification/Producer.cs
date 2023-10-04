@@ -40,5 +40,16 @@
         public BusinessType Type { get; set; }
 
         public string RegistrationNumber { get; set; }
+
+        public void UpdateProducerDetails(Contact contact, string businessName, Address address)
+        {
+            Guard.ArgumentNotNull(() => contact, contact);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
+
+            Contact = contact;
+            Name = businessName;
+            Address = address;
+        }
     }
 }
