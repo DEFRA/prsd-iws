@@ -125,6 +125,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter post code.
+        /// </summary>
+        public static string PostalcodeRequired {
+            get {
+                return ResourceManager.GetString("PostalcodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the valid telephone number.
         /// </summary>
         public static string TelephoneInvalid {
