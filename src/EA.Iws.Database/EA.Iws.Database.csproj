@@ -142,7 +142,7 @@
     <Content Include="scripts\Update\0007-Support\20230106-ExportNotification-Rejection-DataUpdate.sql" />
     <Content Include="scripts\Update\0007-Support\20230125-P37532-ProducerReportCacheIndex.sql" />
     <Content Include="scripts\Update\0007-Support\20230308-CCN059-TooltipChanges.sql" />
-    <Content Include="scripts\Update\0007-Support\20230919-CCN064-Extra-Waste-Category-Changes.sql" />
+    <Content Include="scripts\Update\0007-Support\20231005-CCN064-Extra-Waste-Category-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20230925-adding-new-basel-code-a1180.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
