@@ -3,7 +3,6 @@
     using Core.ImportNotification.Summary;
     using EA.Iws.Requests.ImportNotification.Facilities;
     using EA.Iws.Requests.ImportNotification.Producers;
-    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification.Exporters;
@@ -19,7 +18,7 @@
     {
         private readonly IMediator mediator;
 
-        public EditContactController(IMediator mediator, IAuditService auditService)
+        public EditContactController(IMediator mediator)
         {
             this.mediator = mediator;
         }
