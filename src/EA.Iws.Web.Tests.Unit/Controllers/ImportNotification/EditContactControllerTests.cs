@@ -133,25 +133,29 @@
 
         private dynamic CreateValidEditContact(string type)
         {
+            var address = new Address
+            {
+                AddressLine1 = "address1",
+                AddressLine2 = "address2",
+                Country = "United Kingdom",
+                PostalCode = "postcode",
+                TownOrCity = "town"
+            };
+
+            var contact = new Contact
+            {
+                Email = "email@address.com",
+                Name = "first last",
+                Telephone = "7448826833",
+                TelephonePrefix = "44"
+            };
+
             if (type != null && type == "Exporter")
             {
                 return new Exporter
                 {
-                    Address = new Address
-                    {
-                        AddressLine1 = "address1",
-                        AddressLine2 = "address2",                        
-                        Country = "United Kingdom",
-                        PostalCode = "postcode",
-                        TownOrCity = "town"
-                    },
-                    Contact = new Contact
-                    {
-                        Email = "email@address.com",
-                        Name = "first last",
-                        Telephone = "7448826833",
-                        TelephonePrefix = "44"
-                    },
+                    Address = address,
+                    Contact = contact,
                     BusinessType = BusinessType.SoleTrader,
                     Name = "Test Name",
                     RegistrationNumber = "4345435"
@@ -161,21 +165,8 @@
             {
                 return new Producer
                 {
-                    Address = new Address
-                    {
-                        AddressLine1 = "address1",
-                        AddressLine2 = "address2",
-                        Country = "United Kingdom",
-                        PostalCode = "postcode",
-                        TownOrCity = "town"
-                    },
-                    Contact = new Contact
-                    {
-                        Email = "email@address.com",
-                        Name = "first last",
-                        Telephone = "7448826833",
-                        TelephonePrefix = "44"
-                    },
+                    Address = address,
+                    Contact = contact,
                     BusinessType = BusinessType.SoleTrader,
                     Name = "Test Name",
                     RegistrationNumber = "4345435"
@@ -185,21 +176,8 @@
             {
                 return new Importer
                 {
-                    Address = new Address
-                    {
-                        AddressLine1 = "address1",
-                        AddressLine2 = "address2",
-                        Country = "United Kingdom",
-                        PostalCode = "postcode",
-                        TownOrCity = "town"
-                    },
-                    Contact = new Contact
-                    {
-                        Email = "email@address.com",
-                        Name = "first last",
-                        Telephone = "7448826833",
-                        TelephonePrefix = "44"
-                    },
+                    Address = address,
+                    Contact = contact,
                     BusinessType = BusinessType.SoleTrader,
                     Name = "Test Name",
                     RegistrationNumber = "4345435"
@@ -209,21 +187,8 @@
             {
                 return new Facility
                 {
-                    Address = new Address
-                    {
-                        AddressLine1 = "address1",
-                        AddressLine2 = "address2",
-                        Country = "United Kingdom",
-                        PostalCode = "postcode",
-                        TownOrCity = "town"
-                    },
-                    Contact = new Contact
-                    {
-                        Email = "email@address.com",
-                        Name = "first last",
-                        Telephone = "7448826833",
-                        TelephonePrefix = "44"
-                    },
+                    Address = address,
+                    Contact = contact,
                     BusinessType = BusinessType.SoleTrader,
                     Name = "Test Name",
                     RegistrationNumber = "4345435"
