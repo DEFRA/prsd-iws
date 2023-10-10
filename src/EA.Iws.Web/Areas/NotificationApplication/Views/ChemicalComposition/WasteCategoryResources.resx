@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorMessage" xml:space="preserve">
+    <value>Select the appropriate waste category</value>
+  </data>
   <data name="Header" xml:space="preserve">
     <value>Please select the predominant waste category from the list below, if applicable?</value>
+  </data>
+  <data name="HeaderDescription" xml:space="preserve">
+    <value>If the predominant waste category for your waste is not shown please select 'Not applicable'</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Waste Category</value>

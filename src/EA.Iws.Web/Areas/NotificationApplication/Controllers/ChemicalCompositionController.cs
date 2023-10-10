@@ -93,28 +93,7 @@
             var wasteTypeData = await mediator.SendAsync(new GetWasteType(notificationId));
             if (wasteTypeData != null)
             {
-                switch (EnumHelper.GetDisplayName(wasteTypeData.WasteCategoryType))
-                {
-                    case "Singleship":
-                        model.WasteCategoryType.SelectedValue = "Single ship";
-                        break;
-
-                    case "RugsAbsorbents":
-                        model.WasteCategoryType.SelectedValue = "Rugs/Absorbents";
-                        break;
-
-                    case "SolventsDyes":
-                        model.WasteCategoryType.SelectedValue = "Solvents/Dyes";
-                        break;
-
-                    case "PlatformRig":
-                        model.WasteCategoryType.SelectedValue = "Platform/Rig";
-                        break;
-
-                    default:
-                        model.WasteCategoryType.SelectedValue = EnumHelper.GetDisplayName(wasteTypeData.WasteCategoryType);
-                        break;
-                }
+                model.WasteCategoryType.SelectedValue = EnumHelper.GetDisplayName((WasteCategoryType)wasteTypeData.WasteCategoryType);
             }
 
             return View(model);
@@ -129,7 +108,7 @@
                 if (ModelState["WasteCategoryType.SelectedValue"] != null && ModelState["WasteCategoryType.SelectedValue"].Errors.Count == 1)
                 {
                     ModelState["WasteCategoryType.SelectedValue"].Errors.Clear();
-                    ModelState.AddModelError("WasteCategoryType.SelectedValue", "Please tell us what waste category type applies");
+                    ModelState.AddModelError("WasteCategoryType.SelectedValue", "Select the appropriate waste category");
                 }
                 return View(model);
             }
@@ -191,15 +170,7 @@
             }
 
             var selectedWasteComponentTypes = model.WasteComponentTypes.PossibleValues.Where(p => p.Selected).Select(p => (WasteComponentType)(Convert.ToInt32(p.Value))).ToList();
-
-            if (!selectedWasteComponentTypes.Any())
-            {
-                ModelState.AddModelError("WasteComponentTypes", WasteComponentResources.ChooseWasteComponentType);
-                return View(model);
-            }
-
             var existingWasteComponentData = await mediator.SendAsync(new GetWasteComponentInfoForNotification(model.NotificationId));
-
             await mediator.SendAsync(new SetWasteComponentInfoForNotification(selectedWasteComponentTypes, model.NotificationId));
 
             await auditService.AddAuditEntry(mediator,

@@ -4,19 +4,21 @@
     ViewBag.Title = WasteCategoryResources.Title;
 }
 
+@Html.Gds().ValidationSummary()
+
 <header class="hgroup">
     <h1 class="govuk-heading-l">@WasteCategoryResources.Header</h1>
+    <span class="form-hint">@WasteCategoryResources.HeaderDescription</span>
 </header>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteCategoryType.SelectedValue)">
         <div class="govuk-body govuk-error-message ">
-            @Html.Gds().ValidationMessageFor(m => m.WasteCategoryType.SelectedValue, "Please tell us what waste category type applies")
+            @Html.Gds().ValidationMessageFor(m => m.WasteCategoryType.SelectedValue, @WasteCategoryResources.ErrorMessage)
         </div>
         @Html.EditorFor(m => m.WasteCategoryType)
     </div>

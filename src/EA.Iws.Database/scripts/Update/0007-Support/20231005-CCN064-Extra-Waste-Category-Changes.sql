@@ -13,12 +13,12 @@ VALUES	(1, 'Metals'),
 		(5, 'Batteries'),
 		(6, 'Clinical'),
 		(7, 'Pharamaceuticals'),
-		(8, 'Rugs/Absorbents'),
+		(8, 'Rugs/absorbents'),
 		(9, 'Oils'),
-		(10, 'Solvents/Dyes'),
+		(10, 'Solvents/dyes'),
 		(11, 'Single ship'),
-		(12, 'Platform/Rig'),
-		(13, 'N/A');
+		(12, 'Platform/rig'),
+		(13, 'Not applicable');
 GO
 
 ALTER TABLE [Notification].[WasteType] ADD WasteCategoryType INT NULL;

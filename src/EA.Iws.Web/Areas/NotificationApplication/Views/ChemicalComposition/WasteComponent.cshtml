@@ -6,12 +6,12 @@
 
 <header class="hgroup">
     <h1 class="govuk-heading-l">@WasteComponentResources.Header</h1>
+    <span class="form-hint">@WasteComponentResources.HeaderDescription</span>
 </header>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteComponentTypes)">
@@ -37,7 +37,7 @@
 
                     @Html.HiddenFor(m => m.WasteComponentTypes.PossibleValues[i].Text)
                     @Html.HiddenFor(m => m.WasteComponentTypes.PossibleValues[i].Value)
-                }                
+                }
             </div>
         </fieldset>
 
