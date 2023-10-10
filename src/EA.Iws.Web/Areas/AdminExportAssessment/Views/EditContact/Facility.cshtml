@@ -1,0 +1,21 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact.EditContactViewModel
+@{
+    ViewBag.Title = "Amend facility details";
+}
+
+<h1 class="govuk-heading-l">Amend facility details</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.EditorForModel()
+
+    <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
+}
+
+@section menu
+{
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

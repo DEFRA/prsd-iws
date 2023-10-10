@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact
 {
     using System.ComponentModel.DataAnnotations;
-    using Core.Exporters;
-    using Core.Importer;
 
     public class EditContactViewModel
     {
@@ -10,16 +8,7 @@
         {
         }
 
-        public EditContactViewModel(ExporterData data)
-        {
-            Name = data.Business.Name;
-            FullName = data.Contact.FullName;
-            Email = data.Contact.Email;
-            TelephonePrefix = data.Contact.TelephonePrefix;
-            Telephone = data.Contact.Telephone;
-        }
-
-        public EditContactViewModel(ImporterData data)
+        public EditContactViewModel(dynamic data)
         {
             Name = data.Business.Name;
             FullName = data.Contact.FullName;

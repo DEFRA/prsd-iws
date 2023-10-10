@@ -856,6 +856,8 @@
     <Content Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteComponent.cshtml" />
     <Content Include="Areas\ImportNotification\Views\EditContact\Producer.cshtml" />
     <Content Include="Areas\ImportNotification\Views\EditContact\Facility.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\EditContact\Producer.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\EditContact\Facility.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

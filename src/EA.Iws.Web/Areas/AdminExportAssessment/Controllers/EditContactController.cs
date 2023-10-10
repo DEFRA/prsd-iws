@@ -1,12 +1,19 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Exporters;
     using Core.Importer;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Core.Facilities;
+    using EA.Iws.Core.Producers;
+    using EA.Iws.Domain.NotificationApplication;
+    using EA.Iws.Requests.Facilities;
+    using EA.Iws.Requests.ImportNotification.Facilities;
+    using EA.Iws.Requests.Producers;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -94,6 +101,71 @@
             return RedirectToAction("Index", "Overview");
         }
 
+        [HttpGet]
+        public async Task<ActionResult> Producer(Guid id)
+        {
+            var producerList = await mediator.SendAsync(new GetProducersByNotificationId(id));
+            var producer = producerList.FirstOrDefault();
+            var model = new EditContactViewModel(producer);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Producer(Guid id, EditContactViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var producerList = await mediator.SendAsync(new GetProducersByNotificationId(id));
+            var producer = producerList.FirstOrDefault();
+            var producerData = GetNewProducerData(model, producer);
+            await mediator.SendAsync(new SetProducerDetails(id, producerData));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.Producer);
+
+            return RedirectToAction("Index", "Overview");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Facility(Guid id)
+        {
+            var facility = await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
+            var model = new EditContactViewModel(facility.FirstOrDefault());
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Facility(Guid id, EditContactViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var facitiyList = await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
+            var facility = facitiyList.FirstOrDefault();
+            var facilityData = GetNewFacilityData(model, facility);
+            await mediator.SendAsync(new SetFacilityDetails(id, facilityData));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.DisposalFacilities);
+
+            return RedirectToAction("Index", "Overview");
+        }
+
         private static ContactData GetNewContactData(EditContactViewModel model, ContactData oldContactData)
         {
             var newContactData = new ContactData
@@ -139,6 +211,28 @@
                 Business = GetNewBusinessInfoData(model, oldImporterData.Business)
             };
             return newImporterData;
+        }
+
+        private static ProducerData GetNewProducerData(EditContactViewModel model, ProducerData oldProducerData)
+        {
+            var newProducerData = new ProducerData
+            {
+                Contact = GetNewContactData(model, oldProducerData.Contact),
+                Business = GetNewBusinessInfoData(model, oldProducerData.Business)
+            };
+
+            return newProducerData;
+        }
+
+        private static FacilityData GetNewFacilityData(EditContactViewModel model, FacilityData oldFacilityData)
+        {
+            var newFacilityData = new FacilityData
+            {
+                Contact = GetNewContactData(model, oldFacilityData.Contact),
+                Business = GetNewBusinessInfoData(model, oldFacilityData.Business)
+            };
+
+            return newFacilityData;
         }
     }
 }
