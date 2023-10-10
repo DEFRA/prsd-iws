@@ -91,7 +91,7 @@
             };
 
             var wasteTypeData = await mediator.SendAsync(new GetWasteType(notificationId));
-            if (wasteTypeData != null)
+            if (wasteTypeData != null && wasteTypeData.WasteCategoryType != null)
             {
                 model.WasteCategoryType.SelectedValue = EnumHelper.GetDisplayName((WasteCategoryType)wasteTypeData.WasteCategoryType);
             }
