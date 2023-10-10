@@ -10,9 +10,7 @@
     using Core.Shared;
     using EA.Iws.Core.Facilities;
     using EA.Iws.Core.Producers;
-    using EA.Iws.Domain.NotificationApplication;
     using EA.Iws.Requests.Facilities;
-    using EA.Iws.Requests.ImportNotification.Facilities;
     using EA.Iws.Requests.Producers;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -54,9 +52,7 @@
             }
 
             var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
-
             var exporterData = GetNewExporterData(model, exporter);
-
             await mediator.SendAsync(new SetExporterDetails(id, exporterData));
 
             await this.auditService.AddAuditEntry(this.mediator,
@@ -87,9 +83,7 @@
             }
 
             var importer = await mediator.SendAsync(new GetImporterByNotificationId(id));
-
             var importerData = GetNewImporterData(model, importer);
-
             await mediator.SendAsync(new SetImporterDetails(id, importerData));
 
             await this.auditService.AddAuditEntry(this.mediator,
