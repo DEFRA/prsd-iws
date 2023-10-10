@@ -266,6 +266,8 @@
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitData.cs" />
+    <Compile Include="NotificationAssessment\SetFacilityDetails.cs" />
+    <Compile Include="NotificationAssessment\SetProducerDetails.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExit.cs" />
     <Compile Include="NotificationAssessment\TransitStateWithEntryOrExitPointsData.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCode.cs" />
