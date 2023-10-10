@@ -25,22 +25,22 @@
         [Display(Name = "Pharamaceuticals")]
         Pharamaceuticals = 7,
 
-        [Display(Name = "Rugs/Absorbents")]
-        RugsAbsorbents = 8,
+        [Display(Name = "Rugs/absorbents")]
+        Rugsabsorbents = 8,
 
         [Display(Name = "Oils")]
         Oils = 9,
 
-        [Display(Name = "Solvents/Dyes")]
-        SolventsDyes = 10,
+        [Display(Name = "Solvents/dyes")]
+        Solventsdyes = 10,
 
         [Display(Name = "Single ship")]
         Singleship = 11,
 
-        [Display(Name = "Platform/Rig")]
-        PlatformRig = 12,
+        [Display(Name = "Platform/rig")]
+        Platformrig = 12,
 
-        [Display(Name = "N/A")]
-        NA = 13
+        [Display(Name = "Not applicable")]
+        Notapplicable = 13
     }
 }

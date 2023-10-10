@@ -62,11 +62,29 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the appropriate waste category.
+        /// </summary>
+        public static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the predominant waste category from the list below, if applicable?.
         /// </summary>
         public static string Header {
             get {
                 return ResourceManager.GetString("Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the predominant waste category for your waste is not shown please select &apos;Not applicable&apos;.
+        /// </summary>
+        public static string HeaderDescription {
+            get {
+                return ResourceManager.GetString("HeaderDescription", resourceCulture);
             }
         }
         
