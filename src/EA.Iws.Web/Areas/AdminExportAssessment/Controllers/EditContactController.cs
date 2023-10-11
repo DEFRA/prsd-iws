@@ -187,12 +187,27 @@
             return newBusinessInfoData;
         }
 
+        private static AddressData GetNewAddressData(EditContactViewModel model, AddressData oldAddressData)
+        {
+            var newAddressData = new AddressData
+            {
+                StreetOrSuburb = oldAddressData.StreetOrSuburb,
+                Address2 = oldAddressData.Address2,
+                CountryName = oldAddressData.CountryName,
+                TownOrCity = oldAddressData.TownOrCity,
+                Region = oldAddressData.Region,
+                PostalCode = model.PostalCode
+            };
+            return newAddressData;
+        }
+
         private static ExporterData GetNewExporterData(EditContactViewModel model, ExporterData oldExporterData)
         {
             var newExporterData = new ExporterData
             {
                 Contact = GetNewContactData(model, oldExporterData.Contact),
-                Business = GetNewBusinessInfoData(model, oldExporterData.Business)
+                Business = GetNewBusinessInfoData(model, oldExporterData.Business),
+                Address = GetNewAddressData(model, oldExporterData.Address)
             };
             return newExporterData;
         }
@@ -202,7 +217,8 @@
             var newImporterData = new ImporterData
             {
                 Contact = GetNewContactData(model, oldImporterData.Contact),
-                Business = GetNewBusinessInfoData(model, oldImporterData.Business)
+                Business = GetNewBusinessInfoData(model, oldImporterData.Business),
+                Address = GetNewAddressData(model, oldImporterData.Address)
             };
             return newImporterData;
         }
@@ -212,7 +228,8 @@
             var newProducerData = new ProducerData
             {
                 Contact = GetNewContactData(model, oldProducerData.Contact),
-                Business = GetNewBusinessInfoData(model, oldProducerData.Business)
+                Business = GetNewBusinessInfoData(model, oldProducerData.Business),
+                Address = GetNewAddressData(model, oldProducerData.Address)
             };
 
             return newProducerData;
@@ -223,7 +240,8 @@
             var newFacilityData = new FacilityData
             {
                 Contact = GetNewContactData(model, oldFacilityData.Contact),
-                Business = GetNewBusinessInfoData(model, oldFacilityData.Business)
+                Business = GetNewBusinessInfoData(model, oldFacilityData.Business),
+                Address = GetNewAddressData(model, oldFacilityData.Address)
             };
 
             return newFacilityData;

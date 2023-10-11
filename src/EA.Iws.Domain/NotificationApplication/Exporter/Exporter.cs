@@ -45,12 +45,15 @@
             Contact = contact;
         }
 
-        public void UpdateContactAndBusiness(Contact contact, Business business)
+        public void UpdateContactAndBusiness(Contact contact, Business business, Address address)
         {
             Guard.ArgumentNotNull(() => business, business);
             Guard.ArgumentNotNull(() => contact, contact);
+            Guard.ArgumentNotNull(() => address, address);
+
             Business = business;
             Contact = contact;
+            Address = address;
         }
     }
 }
