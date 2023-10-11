@@ -23,7 +23,8 @@
             var exporter = await repository.GetByNotificationId(message.NotificationId);
             var contact = ValueObjectInitializer.CreateContact(message.Exporter.Contact);
             var business = ValueObjectInitializer.CreateBusiness(message.Exporter.Business);
-            exporter.UpdateContactAndBusiness(contact, business);
+            var address = ValueObjectInitializer.CreateAddress(message.Exporter.Address, message.Exporter.Address.CountryName);
+            exporter.UpdateContactAndBusiness(contact, business, address);
 
             await context.SaveChangesAsync();
 
