@@ -121,7 +121,7 @@
     <value>Select the appropriate waste category</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Please select the predominant waste category from the list below, if applicable?</value>
+    <value>Please select the predominant waste category from the list below.</value>
   </data>
   <data name="HeaderDescription" xml:space="preserve">
     <value>If the predominant waste category for your waste is not shown please select 'Not applicable'</value>
