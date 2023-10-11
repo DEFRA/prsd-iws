@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select the predominant waste category from the list below, if applicable?.
+        ///   Looks up a localized string similar to Please select the predominant waste category from the list below..
         /// </summary>
         public static string Header {
             get {
