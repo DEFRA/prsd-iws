@@ -9,7 +9,6 @@
     using Core.WasteType;
     using EA.Iws.Core.WasteComponentType;
     using EA.Iws.Requests.WasteComponentType;
-    using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition;
     using EA.Prsd.Core.Helpers;
     using Infrastructure;
     using Prsd.Core.Mediator;
@@ -142,7 +141,7 @@
         public async Task<ActionResult> WasteComponent(Guid notificationId, bool? backToOverview = null)
         {
             var wasteComponentTypes = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>();
-            wasteComponentTypes.ShowEnumValue = true;
+            wasteComponentTypes.ShowEnumValue = false;
             wasteComponentTypes.PossibleValues = wasteComponentTypes.PossibleValues.ToList();
 
             var model = new WasteComponentViewModel
