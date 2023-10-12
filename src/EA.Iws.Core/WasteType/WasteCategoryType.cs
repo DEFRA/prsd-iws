@@ -22,11 +22,11 @@
         [Display(Name = "Clinical")]
         Clinical = 6,
 
-        [Display(Name = "Pharamaceuticals")]
-        Pharamaceuticals = 7,
+        [Display(Name = "Pharmaceuticals")]
+        Pharmaceuticals = 7,
 
-        [Display(Name = "Rugs/absorbents")]
-        Rugsabsorbents = 8,
+        [Display(Name = "Rags/absorbents")]
+        Ragsabsorbents = 8,
 
         [Display(Name = "Oils")]
         Oils = 9,
