@@ -25,8 +25,9 @@
             var facility = facilityCollection.Facilities.FirstOrDefault();
             var contact = ValueObjectInitializer.CreateContact(message.FacilityData.Contact);
             var business = ValueObjectInitializer.CreateBusiness(message.FacilityData.Business);
-           
-            facility.UpdateContactAndBusiness(contact, business);
+            var address = ValueObjectInitializer.CreateAddress(message.FacilityData.Address, message.FacilityData.Address.CountryName);
+
+            facility.UpdateContactAndBusiness(contact, business, address);
 
             await context.SaveChangesAsync();
 

@@ -23,7 +23,9 @@
             var importer = await repository.GetByNotificationId(message.NotificationId);
             var contact = ValueObjectInitializer.CreateContact(message.Importer.Contact);
             var business = ValueObjectInitializer.CreateBusiness(message.Importer.Business);
-            importer.UpdateContactAndBusiness(contact, business);
+            var address = ValueObjectInitializer.CreateAddress(message.Importer.Address, message.Importer.Address.CountryName);
+
+            importer.UpdateContactAndBusiness(contact, business, address);
 
             await context.SaveChangesAsync();
 
