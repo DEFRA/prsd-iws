@@ -26,8 +26,9 @@
             var contact = ValueObjectInitializer.CreateContact(message.Producer.Contact);
             var business = ValueObjectInitializer.CreateBusiness(message.Producer.Business);
             var producerBusiness = ProducerBusiness.CreateProducerBusiness(business.Name, business.Type, business.RegistrationNumber, business.OtherDescription);
+            var address = ValueObjectInitializer.CreateAddress(message.Producer.Address, message.Producer.Address.CountryName);
 
-            producer.UpdateContactAndBusiness(contact, producerBusiness);
+            producer.UpdateContactAndBusiness(contact, producerBusiness, address);
 
             await context.SaveChangesAsync();
 
