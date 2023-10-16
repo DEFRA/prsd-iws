@@ -284,6 +284,7 @@
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
+    <Compile Include="NotificationApplication\FacilityBusiness.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />

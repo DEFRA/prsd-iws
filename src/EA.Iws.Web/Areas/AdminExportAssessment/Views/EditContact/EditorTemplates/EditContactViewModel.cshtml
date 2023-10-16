@@ -39,3 +39,9 @@
     @Html.Gds().ValidationMessageFor(model => model.Email)
     @Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>
+
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
+    @Html.Gds().LabelFor(model => model.PostalCode)
+    @Html.Gds().ValidationMessageFor(model => model.PostalCode)
+    @Html.Gds().TextBoxFor(model => model.PostalCode)
+</div>

@@ -161,7 +161,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdminExportAssessment\EditContactControllerTests.cs" />
     <Compile Include="Controllers\Admin\ArchiveNotificationControllerTests.cs" />
+    <Compile Include="Controllers\ImportNotification\EditContactControllerTests.cs" />
     <Compile Include="ViewModels\Registration\AdminRegistrationViewModelTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AddressBook\EditControllerTests.cs" />
