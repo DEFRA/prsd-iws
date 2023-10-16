@@ -11,8 +11,16 @@
         }
         else
         {
-            <dt>Type:</dt>
-            <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ChemicalComposition.WasteCategoryType.Value)</dd>
+            if (Model.ChemicalComposition.WasteCategoryType.HasValue)
+            {
+                <dt>Type:</dt>
+                <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ChemicalComposition.WasteCategoryType.Value)</dd>
+            }
+            else
+            {
+                <dt>Type:</dt>
+                <dd>@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</dd>
+            }
         }
 
         @if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))

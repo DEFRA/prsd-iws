@@ -8,7 +8,7 @@
     public class Importer : Entity
     {
         protected Importer()
-        {    
+        {
         }
 
         public Importer(Guid importNotificationId, string businessName, BusinessType businessType,
@@ -41,12 +41,15 @@
 
         public Contact Contact { get; private set; }
 
-        public void UpdateContactAndName(Contact contact, string businessName)
+        public void UpdateImporterDetails(Contact contact, string businessName, Address address)
         {
             Guard.ArgumentNotNull(() => contact, contact);
+            Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
+
             Contact = contact;
             Name = businessName;
+            Address = address;
         }
     }
 }

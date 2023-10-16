@@ -206,6 +206,8 @@
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
     <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationId.cs" />
     <Compile Include="ImportNotification\Exporters\SetExporterDetailsForImportNotification.cs" />
+    <Compile Include="ImportNotification\Facilities\GetFacilityByImportNotificationId.cs" />
+    <Compile Include="ImportNotification\Facilities\SetFacilityDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberById.cs" />
@@ -218,6 +220,8 @@
     <Compile Include="ImportNotification\GetWasteOperationData.cs" />
     <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationId.cs" />
     <Compile Include="ImportNotification\Importers\SetImporterDetailsForImportNotification.cs" />
+    <Compile Include="ImportNotification\Producers\GetProducerByImportNotificationId.cs" />
+    <Compile Include="ImportNotification\Producers\SetProducerDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\SetNewNumberOfShipments.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
@@ -262,6 +266,8 @@
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitData.cs" />
+    <Compile Include="NotificationAssessment\SetFacilityDetails.cs" />
+    <Compile Include="NotificationAssessment\SetProducerDetails.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExit.cs" />
     <Compile Include="NotificationAssessment\TransitStateWithEntryOrExitPointsData.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCode.cs" />

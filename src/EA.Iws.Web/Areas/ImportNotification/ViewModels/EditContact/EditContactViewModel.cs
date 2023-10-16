@@ -1,29 +1,21 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact
 {
     using System.ComponentModel.DataAnnotations;
-    using Core.ImportNotification.Summary;
+
     public class EditContactViewModel
     {
         public EditContactViewModel()
         {
         }
 
-        public EditContactViewModel(Exporter data)
+        public EditContactViewModel(dynamic data)
         {
             Name = data.Name;
             FullName = data.Contact.Name;
             Email = data.Contact.Email;
             TelephonePrefix = data.Contact.TelephonePrefix;
             Telephone = data.Contact.Telephone;
-        }
-
-        public EditContactViewModel(Importer data)
-        {
-            Name = data.Name;
-            FullName = data.Contact.Name;
-            Email = data.Contact.Email;
-            TelephonePrefix = data.Contact.TelephonePrefix;
-            Telephone = data.Contact.Telephone;
+            PostalCode = data.Address.PostalCode;
         }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]
@@ -51,5 +43,9 @@
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string Telephone { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "PostalcodeRequired")]
+        [Display(Name = "Post Code")]
+        public string PostalCode { get; set; }
     }
 }

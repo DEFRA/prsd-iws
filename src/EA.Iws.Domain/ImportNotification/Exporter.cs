@@ -38,12 +38,14 @@
 
         public Contact Contact { get; private set; }
 
-        public void UpdateContactAndName(Contact contact, string businessName)
+        public void UpdateExporterDetails(Contact contact, string businessName, Address address)
         {
             Guard.ArgumentNotNull(() => contact, contact);
             Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
+            Guard.ArgumentNotNull(() => address, address);
             Contact = contact;
             Name = businessName;
+            Address = address;
         }
     }
 }

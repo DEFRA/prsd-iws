@@ -4,6 +4,11 @@
 <div class="overview-block">
     @if (Model.Details.Producer != null && !Model.Details.Producer.IsEmpty())
     {
+        if (Model.CanEditContactDetails)
+        {
+            <div class="change-answer">@Html.ActionLink("Amend producer details", "Producer", "EditContact", new { id = Model.Details.Id }, null)</div>
+        }
+
         <div class="overview-block-element">
             @if (!string.IsNullOrWhiteSpace(Model.Details.Producer.Name))
             {

@@ -20,6 +20,14 @@
             Contact = contact;
         }
 
+        public void UpdateContactAndBusiness(Contact contact, Business business)
+        {
+            Guard.ArgumentNotNull(() => business, business);
+            Guard.ArgumentNotNull(() => contact, contact);
+            Business = business;
+            Contact = contact;
+        }
+
         public Business Business
         {
             get { return business; }
