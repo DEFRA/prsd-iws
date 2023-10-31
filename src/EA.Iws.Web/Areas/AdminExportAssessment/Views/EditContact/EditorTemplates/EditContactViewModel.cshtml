@@ -1,11 +1,16 @@
 ﻿@using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact.EditContactViewModel
-    
+
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
-	@Html.Gds().LabelFor(m => m.Name)
-	@Html.Gds().ValidationMessageFor(m => m.Name)
-	@Html.Gds().HintSpan(EditContactViewModelResources.OrgNameHint)
-	@Html.Gds().TextBoxFor(m => m.Name)	
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
+    @Html.Gds().HintSpan(EditContactViewModelResources.OrgNameHint)
+    @Html.Gds().TextBoxFor(m => m.Name)
+</div>
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
+    @Html.Gds().LabelFor(model => model.PostalCode)
+    @Html.Gds().ValidationMessageFor(model => model.PostalCode)
+    @Html.Gds().TextBoxFor(model => model.PostalCode)
 </div>
 <hr />
 <h2 class="heading-medium">Contact details</h2>
@@ -40,8 +45,3 @@
     @Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>
 
-<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
-    @Html.Gds().LabelFor(model => model.PostalCode)
-    @Html.Gds().ValidationMessageFor(model => model.PostalCode)
-    @Html.Gds().TextBoxFor(model => model.PostalCode)
-</div>
