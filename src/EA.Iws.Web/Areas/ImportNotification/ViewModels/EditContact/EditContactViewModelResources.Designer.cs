@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact details.
+        /// </summary>
+        public static string ContactDetailsHeading {
+            get {
+                return ResourceManager.GetString("ContactDetailsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email address.
         /// </summary>
         public static string Email {
