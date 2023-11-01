@@ -45,7 +45,7 @@
         public string Telephone { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "PostalcodeRequired")]
-        [Display(Name = "Post Code")]
+        [Display(Name = "PostCode", ResourceType = typeof(EditContactViewModelResources))]
         public string PostalCode { get; set; }
     }
 }

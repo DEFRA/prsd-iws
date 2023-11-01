@@ -143,6 +143,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Post code.
+        /// </summary>
+        public static string PostCode {
+            get {
+                return ResourceManager.GetString("PostCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the valid telephone number.
         /// </summary>
         public static string TelephoneInvalid {

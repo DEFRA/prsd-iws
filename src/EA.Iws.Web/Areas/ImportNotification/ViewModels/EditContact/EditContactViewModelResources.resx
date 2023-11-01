@@ -144,6 +144,9 @@
   <data name="PostalcodeRequired" xml:space="preserve">
     <value>Please enter post code</value>
   </data>
+  <data name="PostCode" xml:space="preserve">
+    <value>Post code</value>
+  </data>
   <data name="TelephoneInvalid" xml:space="preserve">
     <value>Please enter the valid telephone number</value>
   </data>
