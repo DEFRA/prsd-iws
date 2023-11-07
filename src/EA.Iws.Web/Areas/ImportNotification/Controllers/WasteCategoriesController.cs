@@ -42,12 +42,12 @@
                 return View(model);
             }
 
-            var chemicalComposition = new Core.ImportNotification.Draft.WasteCategories(id)
+            var wasteCategory = new Core.ImportNotification.Draft.WasteCategories(id)
             {
                 WasteCategoryType = model.GetSelectedWasteCategoryType()
             };
 
-            await mediator.SendAsync(new SetDraftData<Core.ImportNotification.Draft.WasteCategories>(id, chemicalComposition));
+            await mediator.SendAsync(new SetDraftData<Core.ImportNotification.Draft.WasteCategories>(id, wasteCategory));
 
             return RedirectToAction("Index", "WasteCodes");
         }
