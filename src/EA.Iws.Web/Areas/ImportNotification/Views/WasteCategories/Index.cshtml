@@ -1,0 +1,27 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteCategories.WasteCategoriesViewModel
+@using Resources = EA.Iws.Web.Areas.ImportNotification.Views.WasteCategories.IndexResources
+@{
+    ViewBag.Title = Resources.Header;
+}
+
+@Html.Gds().ValidationSummary()
+
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@Resources.Header</h1>
+    <span class="form-hint">@Resources.HeaderDescription</span>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteCategories.SelectedValue)">
+        <div class="govuk-body govuk-error-message ">
+            @Html.Gds().ValidationMessageFor(m => m.WasteCategories.SelectedValue, @Resources.ErrorMessage)
+        </div>
+        @Html.EditorFor(m => m.WasteCategories)
+    </div>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submitButton" value="Continue">@Constants.ContinueButtonText</button>
+    </div>
+}

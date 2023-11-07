@@ -152,6 +152,7 @@
     <Compile Include="ImportNotification\Draft\StateOfImport.cs" />
     <Compile Include="ImportNotification\Draft\TransitState.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollection.cs" />
+    <Compile Include="ImportNotification\Draft\WasteCategories.cs" />
     <Compile Include="ImportNotification\Draft\WasteOperation.cs" />
     <Compile Include="ImportNotification\Draft\Shipment.cs" />
     <Compile Include="ImportNotification\Draft\WasteType.cs" />
