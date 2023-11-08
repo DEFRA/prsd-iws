@@ -49,7 +49,7 @@
 
             await mediator.SendAsync(new SetDraftData<Core.ImportNotification.Draft.WasteCategories>(id, wasteCategory));
 
-            return RedirectToAction("Index", "WasteCodes");
+            return RedirectToAction("Index", "WasteComponents");
         }
     }
 }
