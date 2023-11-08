@@ -22,9 +22,9 @@
         public bool ShowChangeEntryExitPointLink { get; set; }
 
         public bool ShowChangeWasteTypesLink { get; set; }
-        
+
         public bool ShowChangeWasteOperationLink { get; set; }
-        
+
         public bool CanEditContactDetails { get; set; }
 
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
@@ -38,7 +38,7 @@
                                            details.Status != ImportNotificationStatus.NotificationReceived &&
                                            details.Status != ImportNotificationStatus.FileClosed;
             ShowChangeWasteTypesLink = canChangeWasteTypes && EditableStatus(details.Status);
-            ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);                                       
+            ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);
             CanEditContactDetails = canEditContactDetails && EditableStatus(details.Status);
 
             if (details.WasteType != null)

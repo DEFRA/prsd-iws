@@ -824,16 +824,16 @@
     <Compile Include="Areas\Common\ITrimTextService.cs" />
     <Compile Include="Areas\Common\TrimTextService.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteCategoriesController.cs" />
-    <Compile Include="Areas\ImportNotification\Controllers\WasteComponentsController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\WasteComponentController.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressTypeEnum.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\WasteCategories\WasteCategoriesViewModel.cs" />
-    <Compile Include="Areas\ImportNotification\ViewModels\WasteComponents\WasteComponentsViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\WasteComponent\WasteComponentViewModel.cs" />
     <Compile Include="Areas\ImportNotification\Views\WasteCategories\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ImportNotification\Views\WasteComponents\IndexResources.Designer.cs">
+    <Compile Include="Areas\ImportNotification\Views\WasteComponent\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -873,7 +873,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\Producer.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\Facility.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteCategories\Index.cshtml" />
-    <Content Include="Areas\ImportNotification\Views\WasteComponents\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\WasteComponent\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4972,7 +4972,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ImportNotification\Views\WasteComponents\IndexResources.resx">
+    <EmbeddedResource Include="Areas\ImportNotification\Views\WasteComponent\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

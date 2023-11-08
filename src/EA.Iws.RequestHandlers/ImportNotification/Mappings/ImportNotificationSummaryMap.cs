@@ -40,7 +40,8 @@
                 HasNoTransitStates = source.TransportRoute != null ? !source.TransportRoute.TransitStates.Any() : true,
                 StateOfExport = source.TransportRoute != null ? mapper.Map<Core.StateOfExport>(source.TransportRoute.StateOfExport) : null,
                 StateOfImport = source.TransportRoute != null ? mapper.Map<Core.StateOfImport>(source.TransportRoute.StateOfImport) : null,
-                Composition = mapper.Map<Core.ChemicalComposition>(source.WasteType)
+                Composition = mapper.Map<Core.ChemicalComposition>(source.WasteType),
+                WasteCategories = mapper.Map<Core.WasteCategory>(source.WasteType)
             };
         }
     }

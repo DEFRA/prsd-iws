@@ -6,10 +6,11 @@
         @if (Model.Details.Composition != null && Model.Details.Composition.Composition.HasValue)
         {
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.WasteCategories.WasteCategoryType.Value)
 
             if (Model.Details.Composition.Composition.Value == ChemicalComposition.Other && Model.Details.WasteType != null)
             {
-                <br/>
+                <br />
                 @Model.Details.WasteType.Name
             }
         }

@@ -22,24 +22,18 @@
         {
             await authorization.EnsureAccessAsync(notificationId);
 
-            var notification =
-                await context.ImportNotifications.SingleOrDefaultAsync(x => x.Id == notificationId);
-            var assessments =
-                await
-                    context.ImportNotificationAssessments.SingleOrDefaultAsync(
-                        x => x.NotificationApplicationId == notificationId);
+            var notification = await context.ImportNotifications.SingleOrDefaultAsync(x => x.Id == notificationId);
+            var assessments = await context.ImportNotificationAssessments.SingleOrDefaultAsync(x => x.NotificationApplicationId == notificationId);
             var exporter = await context.Exporters.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
             var importer = await context.Importers.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
             var producer = await context.Producers.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
-            var facilities =
-                await context.Facilities.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
+            var facilities = await context.Facilities.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
             var shipment = await context.Shipments.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
-            var transportRoute =
-                await context.TransportRoutes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
-            var operationCode =
-                await context.OperationCodes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
-            var wasteType =
-                await context.WasteTypes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
+            var operationCode = await context.OperationCodes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
+            var wasteType = await context.WasteTypes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
+            //var wasteComponents = await context.WasteComponents.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
+            var wasteComponents = (WasteComponent)null;
 
             return ImportNotificationOverview.Load(notification,
                 assessments,
@@ -50,7 +44,8 @@
                 shipment,
                 transportRoute,
                 operationCode,
-                wasteType);
+                wasteType,
+                wasteComponents);
         }
 
         public Task<ImportNotificationOverview> GetFromDraft(Guid notificationId)
