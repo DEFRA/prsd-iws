@@ -24,6 +24,8 @@
 
         public WasteType WasteType { get; private set; }
 
+        public WasteComponent WasteComponents { get; private set; }
+
         public static ImportNotificationOverview Load(ImportNotification notification,
             ImportNotificationAssessment assessment,
             Exporter exporter,
@@ -33,7 +35,8 @@
             Shipment shipment,
             TransportRoute transportRoute,
             WasteOperation wasteOperation,
-            WasteType wasteType)
+            WasteType wasteType,
+            WasteComponent wasteComponents)
         {
             return new ImportNotificationOverview
             {
@@ -46,7 +49,8 @@
                 Shipment = shipment,
                 TransportRoute = transportRoute,
                 WasteOperation = wasteOperation,
-                WasteType = wasteType
+                WasteType = wasteType,
+                WasteComponents = wasteComponents
             };
         }
     }

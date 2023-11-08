@@ -1,4 +1,6 @@
-﻿namespace EA.Iws.Core.ImportNotification.Summary
+﻿using EA.Iws.Core.WasteType;
+
+namespace EA.Iws.Core.ImportNotification.Summary
 {
     public class WasteType
     {
@@ -13,5 +15,7 @@
         public WasteCodeSelection HCodes { get; set; }
 
         public WasteCodeSelection UnClasses { get; set; }
+
+        public WasteCategoryType WasteCategoryType { get; set; }
     }
 }

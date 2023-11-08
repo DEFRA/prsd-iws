@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteComponents
+﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteComponent
 {
     using EA.Iws.Core.ImportNotification;
     using EA.Iws.Core.ImportNotification.Draft;
@@ -9,13 +9,13 @@
     using System.Collections.Generic;
     using System.Linq;
 
-    public class WasteComponentsViewModel
+    public class WasteComponentViewModel
     {
-        public WasteComponentsViewModel()
+        public WasteComponentViewModel()
         {
         }
 
-        public WasteComponentsViewModel(NotificationDetails details, WasteComponents data)
+        public WasteComponentViewModel(NotificationDetails details, WasteComponent data)
         {
             ImportNotificationId = details.ImportNotificationId;
             var selectedCodes = data.WasteComponentTypes ?? new WasteComponentType[0];

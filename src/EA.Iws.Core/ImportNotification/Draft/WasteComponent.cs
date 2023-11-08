@@ -4,14 +4,14 @@
     using System.ComponentModel;
     using WasteComponentType;
 
-    [DisplayName("Waste components")]
-    public class WasteComponents : IDraftEntity
+    [DisplayName("Waste component")]
+    public class WasteComponent : IDraftEntity
     {
-        internal WasteComponents()
+        internal WasteComponent()
         {
         }
 
-        public WasteComponents(Guid importNotificationId)
+        public WasteComponent(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;
         }
