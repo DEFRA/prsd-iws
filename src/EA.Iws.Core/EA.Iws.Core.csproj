@@ -153,6 +153,7 @@
     <Compile Include="ImportNotification\Draft\TransitState.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollection.cs" />
     <Compile Include="ImportNotification\Draft\WasteCategories.cs" />
+    <Compile Include="ImportNotification\Draft\WasteComponents.cs" />
     <Compile Include="ImportNotification\Draft\WasteOperation.cs" />
     <Compile Include="ImportNotification\Draft\Shipment.cs" />
     <Compile Include="ImportNotification\Draft\WasteType.cs" />
@@ -340,6 +341,7 @@
     <Compile Include="TransportRoute\EntryOrExitPointDataGroup.cs" />
     <Compile Include="TransportRoute\TransportRouteData.cs" />
     <Compile Include="WasteComponentType\WasteComponentData.cs" />
+    <Compile Include="WasteComponentType\WasteComponentMetadata.cs" />
     <Compile Include="WasteComponentType\WasteComponentType.cs" />
     <Compile Include="WasteType\ChemicalCompositionCategory.cs" />
     <Compile Include="WasteType\ChemicalCompositionData.cs" />
