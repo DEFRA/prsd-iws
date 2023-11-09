@@ -163,6 +163,7 @@
     <Compile Include="Mappings\Imports\StateOfImportMapping.cs" />
     <Compile Include="Mappings\Imports\TransitStateMapping.cs" />
     <Compile Include="Mappings\Imports\TransportRouteMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteComponentMapping.cs" />
     <Compile Include="Mappings\Imports\WasteOperationCodeMapping.cs" />
     <Compile Include="Mappings\Imports\WasteOperationMapping.cs" />
     <Compile Include="Mappings\Imports\ProducerMapping.cs" />

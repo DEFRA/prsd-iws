@@ -1,10 +1,9 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
+    using EA.Iws.Core.WasteComponentType;
     using EA.Prsd.Core;
     using EA.Prsd.Core.Domain;
-    using EA.Prsd.Core.Extensions;
     using System;
-    using System.Collections.Generic;
 
     public class WasteComponent : Entity
     {
@@ -12,31 +11,16 @@
         {
         }
 
-        public WasteComponent(Guid importNotificationId, WasteComponentCodesList wasteComponentCodes)
+        public WasteComponent(Guid importNotificationId, WasteComponentType wasteComponentType)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
-            Guard.ArgumentNotNull(() => wasteComponentCodes, wasteComponentCodes);
 
             ImportNotificationId = importNotificationId;
-            ComponentCodesCollection = new List<WasteComponentCode>(wasteComponentCodes);
+            WasteComponentType = wasteComponentType;
         }
 
         public Guid ImportNotificationId { get; private set; }
 
-        protected virtual ICollection<WasteComponentCode> ComponentCodesCollection { get; set; }        
-
-        public IEnumerable<WasteComponentCode> Codes
-        {
-            get { return ComponentCodesCollection.ToSafeIEnumerable(); }
-        }
-
-        public void SetComponentCodes(List<WasteComponentCode> wasteComponentCodes)
-        {
-            Guard.ArgumentNotNull(() => wasteComponentCodes, wasteComponentCodes);
-
-            ComponentCodesCollection.Clear();
-
-            ComponentCodesCollection = wasteComponentCodes;
-        }
+        public WasteComponentType WasteComponentType { get; set; }
     }
 }

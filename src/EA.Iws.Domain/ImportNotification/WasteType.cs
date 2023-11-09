@@ -29,6 +29,8 @@
 
         public ChemicalComposition ChemicalCompositionType { get; private set; }
 
+        public WasteCategoryType? WasteCategoryType { get; private set; }
+
         public IEnumerable<WasteTypeWasteCode> WasteCodes
         {
             get { return WasteCodesCollection.ToSafeIEnumerable(); }
@@ -45,7 +47,8 @@
             YCode yCode,
             HCode hCode,
             UnClass unClass,
-            ChemicalComposition chemicalComposition)
+            ChemicalComposition chemicalComposition,
+            WasteCategoryType? wasteCategoryType)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNullOrEmpty(() => name, name);
@@ -91,6 +94,7 @@
             }
 
             WasteCodesCollection = wasteCodes;
+            WasteCategoryType = wasteCategoryType;
         }
 
         public void Update(string name,
@@ -98,7 +102,8 @@
             EwcCode ewcCode,
             YCode yCode,
             HCode hCode,
-            UnClass unClass)
+            UnClass unClass,
+            WasteCategoryType? wasteCategoryType)
         {
             Guard.ArgumentNotNullOrEmpty(() => name, name);
             Guard.ArgumentNotNull(() => baselOecdCode, baselOecdCode);
@@ -145,6 +150,7 @@
             }
 
             WasteCodesCollection = wasteCodes;
+            WasteCategoryType = wasteCategoryType;
         }
     }
 }

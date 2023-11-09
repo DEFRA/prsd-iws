@@ -32,8 +32,7 @@
             var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
             var operationCode = await context.OperationCodes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
             var wasteType = await context.WasteTypes.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
-            //var wasteComponents = await context.WasteComponents.SingleOrDefaultAsync(x => x.ImportNotificationId == notificationId);
-            var wasteComponents = (WasteComponent)null;
+            var wasteComponents = await context.WasteComponents.Where(x => x.ImportNotificationId == notificationId).ToListAsync();
 
             return ImportNotificationOverview.Load(notification,
                 assessments,
