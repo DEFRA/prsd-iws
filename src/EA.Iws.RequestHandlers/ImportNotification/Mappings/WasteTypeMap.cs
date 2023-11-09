@@ -11,7 +11,7 @@
     using Core = Core.ImportNotification.Summary;
     using Domain = Domain.ImportNotification;
 
-    internal class WasteTypeMap : IMap<Domain.WasteType, Core.WasteType>, 
+    internal class WasteTypeMap : IMap<Domain.WasteType, Core.WasteType>,
         IMapWithParameter<Domain.WasteType, List<WasteCodeData>, WasteTypes>
     {
         private readonly IWasteCodeRepository wasteCodeRepository;
@@ -89,6 +89,11 @@
             else
             {
                 wasteType.UnClasses = MapWasteCodes(CodeType.Un, wasteCodes);
+            }
+
+            if (source.WasteCategoryType.HasValue)
+            {
+                wasteType.WasteCategoryType = source.WasteCategoryType.Value;
             }
 
             return wasteType;

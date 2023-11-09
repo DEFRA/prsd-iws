@@ -1,7 +1,7 @@
-﻿using EA.Iws.Core.WasteType;
-
-namespace EA.Iws.Core.ImportNotification.Summary
+﻿namespace EA.Iws.Core.ImportNotification.Summary
 {
+    using EA.Iws.Core.WasteType;
+
     public class WasteType
     {
         public string Name { get; set; }
@@ -16,6 +16,6 @@ namespace EA.Iws.Core.ImportNotification.Summary
 
         public WasteCodeSelection UnClasses { get; set; }
 
-        public WasteCategoryType WasteCategoryType { get; set; }
+        public WasteCategoryType? WasteCategoryType { get; set; }
     }
 }

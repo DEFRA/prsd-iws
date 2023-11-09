@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
     using ImportNotificationAssessment;
+    using System.Collections.Generic;
 
     public class ImportNotificationOverview
     {
@@ -24,7 +25,7 @@
 
         public WasteType WasteType { get; private set; }
 
-        public WasteComponent WasteComponents { get; private set; }
+        public List<WasteComponent> WasteComponents { get; private set; }
 
         public static ImportNotificationOverview Load(ImportNotification notification,
             ImportNotificationAssessment assessment,
@@ -36,7 +37,7 @@
             TransportRoute transportRoute,
             WasteOperation wasteOperation,
             WasteType wasteType,
-            WasteComponent wasteComponents)
+            List<WasteComponent> wasteComponents)
         {
             return new ImportNotificationOverview
             {
