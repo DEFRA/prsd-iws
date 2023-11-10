@@ -34,6 +34,17 @@
                         </dd>
                     </dl>
                 }
+
+                if (Model.Details.WasteComponentTypes != null && Model.Details.WasteComponentTypes != null && Model.Details.WasteComponentTypes.Any())
+                {
+                    <dl>
+                        <dd>
+                            <div class="overview-block-element">
+                                @string.Join(", ", Model.Details.WasteComponentTypes)
+                            </div>
+                        </dd>
+                    </dl>
+                }
                 <dl>
                     <dd>
                         @Model.Details.WasteType.Name

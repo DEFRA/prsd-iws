@@ -32,6 +32,8 @@
             var wasteOperationValidator = new WasteOperationValidator();
             var wasteTypeValidator = new WasteTypeValidator();
             var chemicalCompositionValidator = new ChemicalCompositionValidator();
+            var wasteCategoriesValidator = new WasteCategoriesValidator();
+
             validator = new ImportNotificationValidator(exporterValidator,
                 facilitiesValidator,
                 importerValidator,
@@ -43,7 +45,8 @@
                 transitStatesValidator,
                 wasteOperationValidator,
                 wasteTypeValidator,
-                chemicalCompositionValidator);
+                chemicalCompositionValidator,
+                wasteCategoriesValidator);
         }
 
         [Fact]

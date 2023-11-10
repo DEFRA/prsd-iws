@@ -5,6 +5,6 @@
 
     public class WasteComponent
     {
-        public WasteComponentType[] WasteComponentTypes { get; set; }
+        public IList<WasteComponentType> WasteComponentTypes { get; set; }
     }
 }
