@@ -37,6 +37,7 @@
             result.Add(await validator.ValidateAsync(notificationDraft.StateOfExport));
             result.Add(await validator.ValidateAsync(notificationDraft.StateOfImport));
             result.Add(await validator.ValidateAsync(notificationDraft.TransitStates));
+            result.Add(await validator.ValidateAsync(notificationDraft.WasteCategories));
 
             return result;
         }

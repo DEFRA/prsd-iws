@@ -43,6 +43,8 @@
 
         public WasteComponent WasteComponents { get; set; }
 
+        public List<string> WasteComponentTypes { get; set; }
+
         public WasteCategory WasteCategories { get; set; }
     }
 }

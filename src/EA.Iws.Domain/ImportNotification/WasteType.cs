@@ -29,7 +29,7 @@
 
         public ChemicalComposition ChemicalCompositionType { get; private set; }
 
-        public WasteCategoryType? WasteCategoryType { get; private set; }
+        public WasteCategoryType? WasteCategoryType { get; set; }
 
         public IEnumerable<WasteTypeWasteCode> WasteCodes
         {

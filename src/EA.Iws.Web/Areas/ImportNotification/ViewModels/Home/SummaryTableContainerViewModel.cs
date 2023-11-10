@@ -62,6 +62,14 @@
                 Details.WasteType.YCodes.WasteCodes = ycodesOrdered;
                 Details.WasteType.HCodes.WasteCodes = hcodesOrdered;
                 Details.WasteType.UnClasses.WasteCodes = unclassesOrdered;
+
+                if (details.WasteType.WasteCategoryType == null)
+                {
+                    if (details.WasteCategories != null && details.WasteCategories.WasteCategoryType.HasValue)
+                    {
+                        Details.WasteType.WasteCategoryType = details.WasteCategories.WasteCategoryType;
+                    }
+                }
             }
         }
 

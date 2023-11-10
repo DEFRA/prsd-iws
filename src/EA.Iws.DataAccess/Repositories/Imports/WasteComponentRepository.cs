@@ -3,6 +3,7 @@
     using EA.Iws.Domain.ImportNotification;
     using EA.Iws.Domain.Security;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
 
@@ -23,9 +24,9 @@
             return await context.WasteComponents.SingleAsync(o => o.ImportNotificationId == notificationId);
         }
 
-        public void Add(WasteComponent wasteComponent)
+        public void Add(List<WasteComponent> wasteComponent)
         {
-            context.WasteComponents.Add(wasteComponent);
+            context.WasteComponents.AddRange(wasteComponent);
         }
     }
 }
