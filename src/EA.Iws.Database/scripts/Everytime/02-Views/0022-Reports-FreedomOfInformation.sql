@@ -146,7 +146,7 @@ SELECT
 	INNER JOIN [Lookup].[BusinessType] PT ON PT.Id = P.[Type] 
 	INNER JOIN [Lookup].[BusinessType] IT ON IT.Id = I.[Type] 
     INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
-    INNER JOIN [Lookup].[WasteCategoryType] WC ON WC.Id = WT.WasteCategoryType
+    LEFT JOIN [Lookup].[WasteCategoryType] WC ON WC.Id = WT.WasteCategoryType
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [Notification].[ShipmentInfo] S ON S.NotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
@@ -190,9 +190,15 @@ SELECT
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         COALESCE(WasteCodeInfo.[Code] + ' - ' + WasteCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         CASE WHEN WT.[ChemicalCompositionType] = 4
-            THEN 'Other - ' + WT.[Name]
-            ELSE CCT.[Description] END AS [NameOfWaste],
-        NULL AS [WasteComponentTypes],
+            THEN 'Other - ' + WC.[Name] + ' - ' + WT.[Name]
+            ELSE CCT.[Description] END AS [NameOfWaste],        
+		STUFF(( SELECT ', ' + WCT.Name AS [text()]
+            FROM [ImportNotification].[WasteComponent] WCOI
+            LEFT JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCOI.WasteComponentType 
+            WHERE N.Id = WCOI.ImportNotificationId
+            ORDER BY WCOI.WasteComponentType
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [WasteComponentTypes],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
             FROM [ImportNotification].[WasteType] WT
             INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
@@ -306,6 +312,7 @@ SELECT
         WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
     INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
     INNER JOIN [ImportNotification].[WasteType] WT ON WT.ImportNotificationId = N.Id
+	LEFT JOIN [Lookup].[WasteCategoryType] WC ON WC.Id = WT.WasteCategoryType
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [ImportNotification].[Shipment] S ON S.ImportNotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
