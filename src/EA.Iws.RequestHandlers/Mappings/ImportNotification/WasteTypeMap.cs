@@ -13,7 +13,7 @@
     using ChemicalComposition = Core.WasteType.ChemicalComposition;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Variables relate to waste codes")]
-    internal class WasteTypeMap : IMapWithParameter<WasteType, ChemicalComposition, Domain.ImportNotification.WasteType>, 
+    internal class WasteTypeMap : IMapWithParameter<WasteType, ChemicalComposition, Domain.ImportNotification.WasteType>,
         IMap<WasteTypes, UpdateWasteCodeData>
     {
         private readonly Domain.NotificationApplication.IWasteCodeRepository wasteCodeRepository;
@@ -38,7 +38,8 @@
                 yCode,
                 hCode,
                 unClass,
-                parameter);
+                parameter,
+                source.WasteCategoryType);
         }
 
         public UpdateWasteCodeData Map(WasteTypes source)
@@ -50,7 +51,8 @@
                 EwcCode = CreateEwcCode(source.SelectedEwcCodes),
                 YCode = CreateYCode(source.YCodeNotApplicable, source.SelectedYCodes),
                 HCode = CreateHCode(source.HCodeNotApplicable, source.SelectedHCodes),
-                UnClass = CreateUnClass(source.UnClassNotApplicable, source.SelectedUnClasses)
+                UnClass = CreateUnClass(source.UnClassNotApplicable, source.SelectedUnClasses),
+                WasteCategoryType = source.WasteCategoryType
             };
         }
 

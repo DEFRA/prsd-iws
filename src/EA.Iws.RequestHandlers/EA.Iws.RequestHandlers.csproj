@@ -402,6 +402,12 @@
       <DependentUpon>TransitStateValidatorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ImportNotification\Validate\ValidateImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\Validate\WasteCategoriesValidator.cs" />
+    <Compile Include="ImportNotification\Validate\WasteCategoriesValidatorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteCategoriesValidatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ImportNotification\Validate\WasteOperationValidator.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -968,6 +974,10 @@
     <EmbeddedResource Include="ImportNotification\Validate\TransitStateValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStateValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportNotification\Validate\WasteCategoriesValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteCategoriesValidatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\WasteOperationValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

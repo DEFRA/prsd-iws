@@ -28,7 +28,7 @@
             var codes = mapper.Map<UpdateWasteCodeData>(message.WasteTypes);
 
             currentWasteType.Update(codes.Name, codes.BaselOecdCode, codes.EwcCode, codes.YCode,
-                codes.HCode, codes.UnClass);
+                codes.HCode, codes.UnClass, codes.WasteCategoryType);
 
             await context.SaveChangesAsync();
 
