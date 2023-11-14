@@ -43,8 +43,8 @@
             };
 
             await mediator.SendAsync(new SetDraftData<Core.ImportNotification.Draft.ChemicalComposition>(id, chemicalComposition));
-
-            return RedirectToAction("Index", "WasteCodes");
+            
+            return RedirectToAction("Index", "WasteCategories");
         }
     }
 }

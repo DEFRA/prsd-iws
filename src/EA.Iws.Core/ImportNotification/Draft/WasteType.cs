@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
+    using EA.Iws.Core.WasteType;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -28,6 +29,8 @@
         public List<Guid> SelectedUnClasses { get; set; }
 
         public Guid ImportNotificationId { get; private set; }
+
+        public WasteCategoryType? WasteCategoryType { get; set; }
 
         public WasteType(Guid importNotificationId)
         {

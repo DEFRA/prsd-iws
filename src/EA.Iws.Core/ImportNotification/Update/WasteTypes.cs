@@ -31,6 +31,8 @@
 
         public IList<WasteCodeData> AllCodes { get; set; }
 
+        public WasteCategoryType? WasteCategoryType { get; set; }
+
         public WasteTypes(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;

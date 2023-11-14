@@ -5,12 +5,55 @@
     <div class="overview-block-element">
         @if (Model.Details.Composition != null && Model.Details.Composition.Composition.HasValue)
         {
-            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
-
             if (Model.Details.Composition.Composition.Value == ChemicalComposition.Other && Model.Details.WasteType != null)
             {
-                <br/>
-                @Model.Details.WasteType.Name
+                if (Model.Details.WasteType != null && Model.Details.WasteType.WasteCategoryType.HasValue)
+                {
+                    <dl>
+                        <dd>
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value) - @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.WasteType.WasteCategoryType.Value)
+                        </dd>
+                    </dl>
+                }
+                else
+                {
+                    <dl>
+                        <dd>
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
+                        </dd>
+                    </dl>
+                }
+
+                if (Model.Details.WasteComponents != null && Model.Details.WasteComponents.WasteComponentTypes != null && Model.Details.WasteComponents.WasteComponentTypes.Any())
+                {
+                    <dl>
+                        <dd>
+                            <div class="overview-block-element">
+                                @string.Join(", ", Model.Details.WasteComponents.WasteComponentTypes)
+                            </div>
+                        </dd>
+                    </dl>
+                }
+
+                if (Model.Details.WasteComponentTypes != null && Model.Details.WasteComponentTypes != null && Model.Details.WasteComponentTypes.Any())
+                {
+                    <dl>
+                        <dd>
+                            <div class="overview-block-element">
+                                @string.Join(", ", Model.Details.WasteComponentTypes)
+                            </div>
+                        </dd>
+                    </dl>
+                }
+                <dl>
+                    <dd>
+                        @Model.Details.WasteType.Name
+                    </dd>
+                </dl>
+            }
+            else
+            {
+                @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
             }
         }
         else
