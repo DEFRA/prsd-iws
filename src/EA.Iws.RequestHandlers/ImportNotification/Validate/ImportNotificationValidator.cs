@@ -31,7 +31,12 @@
             RuleFor(x => x.WasteOperation).SetValidator(wasteOperationValidator);
             RuleFor(x => x.WasteType).SetValidator(wasteTypeValidator);
             RuleFor(x => x.ChemicalComposition).SetValidator(chemicalCompositionValidator);
-            RuleFor(x => x.WasteCategories).SetValidator(wasteCategoryValidator);
+            RuleFor(x => x.WasteCategories).SetValidator(wasteCategoryValidator).When(BeNonEmptyWhenChemicalCompositionIsOther);
         }
+
+        private bool BeNonEmptyWhenChemicalCompositionIsOther(ImportNotification importNotification)
+        {
+            return importNotification != null && importNotification.ChemicalComposition.Composition.Value == Core.WasteType.ChemicalComposition.Other;
+        }        
     }
 }
