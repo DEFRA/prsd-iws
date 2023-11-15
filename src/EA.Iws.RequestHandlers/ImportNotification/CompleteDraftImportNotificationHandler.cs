@@ -100,9 +100,12 @@
                 var wasteType = mapper.Map<Domain.ImportNotification.WasteType>(draft.WasteType, draft.ChemicalComposition.Composition);
 
                 var wasteComponentList = new List<WasteComponent>();
-                for (var count = 0; draft.WasteComponent.WasteComponentTypes.Length > count; count++)
+                if (draft.ChemicalComposition.Composition == Core.WasteType.ChemicalComposition.Other && draft.WasteComponent.WasteComponentTypes != null)
                 {
-                    wasteComponentList.Add(new WasteComponent(draft.WasteComponent.ImportNotificationId, draft.WasteComponent.WasteComponentTypes[count]));
+                    for (var count = 0; draft.WasteComponent.WasteComponentTypes.Length > count; count++)
+                    {
+                        wasteComponentList.Add(new WasteComponent(draft.WasteComponent.ImportNotificationId, draft.WasteComponent.WasteComponentTypes[count]));
+                    }
                 }
 
                 exporterRepository.Add(exporter);
@@ -113,7 +116,11 @@
                 transportRouteRepository.Add(transportRoute);
                 wasteOperationRepository.Add(wasteOperation);
                 wasteTypeRepository.Add(wasteType);
-                wasteComponentRepository.Add(wasteComponentList);
+
+                if (wasteComponentList != null && wasteComponentList.Count > 0)
+                {
+                    wasteComponentRepository.Add(wasteComponentList);
+                }
 
                 assessment.Submit();
 
