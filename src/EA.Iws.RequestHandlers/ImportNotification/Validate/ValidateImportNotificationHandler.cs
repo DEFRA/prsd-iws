@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using DataAccess.Draft;
+    using EA.Iws.Core.WasteType;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification.Validate;
     using Validation;
@@ -37,7 +38,11 @@
             result.Add(await validator.ValidateAsync(notificationDraft.StateOfExport));
             result.Add(await validator.ValidateAsync(notificationDraft.StateOfImport));
             result.Add(await validator.ValidateAsync(notificationDraft.TransitStates));
-            result.Add(await validator.ValidateAsync(notificationDraft.WasteCategories));
+
+            if (notificationDraft.ChemicalComposition.Composition == ChemicalComposition.Other)
+            {
+                result.Add(await validator.ValidateAsync(notificationDraft.WasteCategories));
+            }
 
             return result;
         }
