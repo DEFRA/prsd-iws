@@ -31,7 +31,7 @@ SELECT
             WHERE N.Id = WCOI.NotificationId
             ORDER BY WCOI.WasteComponentType
             FOR XML PATH('')
-            ), 1, 1, '' ) AS [WasteComponentTypes],
+            ), 1, 2, '' ) AS [WasteComponentTypes],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
             FROM [Notification].[WasteCodeInfo] WCI
             LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
@@ -198,7 +198,7 @@ SELECT
             WHERE N.Id = WCOI.ImportNotificationId
             ORDER BY WCOI.WasteComponentType
             FOR XML PATH('')
-            ), 1, 1, '' ) AS [WasteComponentTypes],
+            ), 1, 2, '' ) AS [WasteComponentTypes],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
             FROM [ImportNotification].[WasteType] WT
             INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
