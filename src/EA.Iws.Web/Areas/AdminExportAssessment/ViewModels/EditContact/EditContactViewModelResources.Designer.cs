@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contact details.
+        /// </summary>
+        public static string ContactDetailsHeading {
+            get {
+                return ResourceManager.GetString("ContactDetailsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email address.
         /// </summary>
         public static string Email {
@@ -121,6 +130,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact {
         public static string OrgNameRequired {
             get {
                 return ResourceManager.GetString("OrgNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter post code.
+        /// </summary>
+        public static string PostalcodeRequired {
+            get {
+                return ResourceManager.GetString("PostalcodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Post code.
+        /// </summary>
+        public static string PostCode {
+            get {
+                return ResourceManager.GetString("PostCode", resourceCulture);
             }
         }
         

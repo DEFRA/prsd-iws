@@ -11,6 +11,8 @@
 
         public ChemicalComposition ChemicalCompositionType { get; set; }
 
+        public WasteCategoryType? WasteCategoryType { get; set; }
+
         public string ChemicalCompositionName { get; set; }
 
         public string ChemicalCompositionDescription { get; set; }
@@ -18,7 +20,7 @@
         public List<WasteCompositionData> WasteCompositionData { get; set; }
 
         public List<WoodInformationData> WasteAdditionalInformation { get; set; }
-        
+
         public string OtherWasteTypeDescription { get; set; }
 
         public string EnergyInformation { get; set; }

@@ -10,5 +10,6 @@
         public WasteTypeData ChemicalComposition { get; set; }
         public WasteGenerationProcessData ProcessOfGeneration { get; set; }
         public List<string> PhysicalCharacteristics { get; set; }
+        public List<string> WasteComponentTypes { get; set; }
     }
 }

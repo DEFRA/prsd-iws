@@ -1,6 +1,9 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Mappings
 {
+    using System.Collections.Generic;
+    using System.Data.Entity.Core.Metadata.Edm;
     using System.Linq;
+    using Aspose.Words.Lists;
     using Domain.ImportNotification;
     using Prsd.Core.Mapper;
     using Core = Core.ImportNotification.Summary;
@@ -21,8 +24,8 @@
             {
                 areFacilitiesPreconsented = source.Facilities.AllFacilitiesPreconsented;
             }
-            
-            return new Core.ImportNotificationSummary
+
+            var summaryData = new Core.ImportNotificationSummary
             {
                 Id = source.Notification.Id,
                 Type = source.Notification.NotificationType,
@@ -42,6 +45,15 @@
                 StateOfImport = source.TransportRoute != null ? mapper.Map<Core.StateOfImport>(source.TransportRoute.StateOfImport) : null,
                 Composition = mapper.Map<Core.ChemicalComposition>(source.WasteType)
             };
+
+            var strTypes = new List<string>();
+            foreach (var item in source.WasteComponents)
+            {
+                strTypes.Add(item.WasteComponentType.ToString());
+            }
+            summaryData.WasteComponentTypes = strTypes;
+
+            return summaryData;
         }
     }
 }

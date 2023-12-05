@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using Core.WasteType;
     using Domain.NotificationApplication;
+    using EA.Prsd.Core.Helpers;
     using Formatters;
 
     internal class WasteCompositionViewModel
@@ -28,14 +29,19 @@
 
             ChemicalComposition = wasteType.ChemicalCompositionType;
             Compositions = formatter.GetWasteCompositionPercentages(wasteType);
-            AdditionalInfos =
-                formatter.GetAdditionalInformationChemicalCompositionPercentages(wasteType.WasteAdditionalInformation);
+            AdditionalInfos = formatter.GetAdditionalInformationChemicalCompositionPercentages(wasteType.WasteAdditionalInformation);
+
+            if (wasteType.WasteCategoryType.HasValue)
+            {
+                WasteCategoryType = EnumHelper.GetDisplayName(wasteType.WasteCategoryType.Value);
+            }
 
             SetMergeDescriptionText();
         }
 
         public WasteCompositionViewModel(WasteCompositionViewModel model, int annexNumber)
         {
+            WasteCategoryType = model.WasteCategoryType;
             WasteName = model.WasteName;
             HasAnnex = model.HasAnnex;
             chemicalCompositionDescription = model.ChemicalCompositionDescription;
@@ -85,6 +91,8 @@
             get { return longDescription; }
             private set { longDescription = value; }
         }
+
+        public string WasteCategoryType { get; private set; }
 
         public string Energy { get; private set; }
 

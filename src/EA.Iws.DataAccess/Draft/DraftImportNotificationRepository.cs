@@ -70,7 +70,9 @@
                 TransitStates = GetDraftData<TransitStateCollection>(data, importNotificationId),
                 WasteOperation = GetDraftData<WasteOperation>(data, importNotificationId),
                 WasteType = GetDraftData<WasteType>(data, importNotificationId),
-                ChemicalComposition = GetDraftData<ChemicalComposition>(data, importNotificationId)
+                ChemicalComposition = GetDraftData<ChemicalComposition>(data, importNotificationId),
+                WasteComponent = GetDraftData<WasteComponent>(data, importNotificationId),
+                WasteCategories = GetDraftData<WasteCategories>(data, importNotificationId)
             };
         }
 

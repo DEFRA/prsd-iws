@@ -51,5 +51,16 @@
                 contact = value;
             }
         }
+
+        public void UpdateContactAndBusiness(Contact contact, ProducerBusiness business, Address addressData)
+        {
+            Guard.ArgumentNotNull(() => business, business);
+            Guard.ArgumentNotNull(() => contact, contact);
+            Guard.ArgumentNotNull(() => addressData, addressData);
+
+            Business = business;
+            Contact = contact;
+            Address = addressData;
+        }
     }
 }

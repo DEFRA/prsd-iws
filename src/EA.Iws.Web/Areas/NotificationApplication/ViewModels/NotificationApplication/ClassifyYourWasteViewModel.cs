@@ -15,6 +15,7 @@
         public WasteTypeData ChemicalComposition { get; set; }
         public string ProcessOfGeneration { get; set; }
         public List<string> PhysicalCharacteristics { get; set; }
+        public string WasteComponentTypesDescription { get; set; }
 
         public ClassifyYourWasteViewModel()
         {
@@ -27,9 +28,9 @@
             IsProcessOfGenerationCompleted = progress.HasWasteGenerationProcess;
             ArePhysicalCharacteristicsCompleted = progress.HasPhysicalCharacteristics;
             ChemicalComposition = classifyYourWasteInfo.ChemicalComposition;
-            ProcessOfGeneration = classifyYourWasteInfo.ProcessOfGeneration.IsDocumentAttached ? 
-                "The details will be provided in a separate document" : classifyYourWasteInfo.ProcessOfGeneration.Process;
+            ProcessOfGeneration = classifyYourWasteInfo.ProcessOfGeneration.IsDocumentAttached ? "The details will be provided in a separate document" : classifyYourWasteInfo.ProcessOfGeneration.Process;
             PhysicalCharacteristics = classifyYourWasteInfo.PhysicalCharacteristics;
+            WasteComponentTypesDescription = string.Join(", ", classifyYourWasteInfo.WasteComponentTypes);
         }
 
         public string ConstituentTitle(WoodInformationData woodInformationData)

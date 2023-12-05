@@ -1,41 +1,49 @@
 ﻿@using EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact
+@using Resource = EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModelResources
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModel
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
-	@Html.Gds().LabelFor(m => m.Name)
-	@Html.Gds().ValidationMessageFor(m => m.Name)
-	@Html.Gds().HintSpan(EditContactViewModelResources.OrgNameHint)
-	@Html.Gds().TextBoxFor(m => m.Name)
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
+    @Html.Gds().HintSpan(EditContactViewModelResources.OrgNameHint)
+    @Html.Gds().TextBoxFor(m => m.Name)
 </div>
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PostalCode)">
+    @Html.Gds().LabelFor(model => model.PostalCode)
+    @Html.Gds().ValidationMessageFor(model => model.PostalCode)
+    @Html.Gds().TextBoxFor(model => model.PostalCode)
+</div>
+
 <hr />
-<h2 class="heading-medium">Contact details</h2>
+
+<h2 class="heading-medium">@Resource.ContactDetailsHeading</h2>
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FullName)">
-	@Html.Gds().LabelFor(model => model.FullName)
-	@Html.Gds().ValidationMessageFor(model => model.FullName)
-	@Html.Gds().TextBoxFor(model => model.FullName)
+    @Html.Gds().LabelFor(model => model.FullName)
+    @Html.Gds().ValidationMessageFor(model => model.FullName)
+    @Html.Gds().TextBoxFor(model => model.FullName)
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
-	@Html.Gds().LabelFor(model => model.Telephone)
-	@Html.Gds().ValidationMessageFor(model => model.TelephonePrefix)
-	@Html.Gds().ValidationMessageFor(model => model.Telephone)
-	<fieldset>
-		<div class="international-number">
-			<div class="plus-label">
-				+
-			</div>
-			<div class="international-number-prefix">
-				@Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @type = "number" })
-			</div>
-			<div class="international-number-body">
-				@Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
-			</div>
-		</div>
-	</fieldset>
+    @Html.Gds().LabelFor(model => model.Telephone)
+    @Html.Gds().ValidationMessageFor(model => model.TelephonePrefix)
+    @Html.Gds().ValidationMessageFor(model => model.Telephone)
+    <fieldset>
+        <div class="international-number">
+            <div class="plus-label">
+                +
+            </div>
+            <div class="international-number-prefix">
+                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @type = "number" })
+            </div>
+            <div class="international-number-body">
+                @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
+            </div>
+        </div>
+    </fieldset>
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Email)">
-	@Html.Gds().LabelFor(model => model.Email)
-	@Html.Gds().ValidationMessageFor(model => model.Email)
-	@Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
+    @Html.Gds().LabelFor(model => model.Email)
+    @Html.Gds().ValidationMessageFor(model => model.Email)
+    @Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>
