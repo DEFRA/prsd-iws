@@ -37,7 +37,8 @@
                 WasteAdditionalInformation = compositionMapper.Map(source.WasteAdditionalInformation).ToList(),
                 EnergyInformation = source.EnergyInformation,
                 FurtherInformation = source.OptionalInformation,
-                WoodTypeDescription = source.WoodTypeDescription
+                WoodTypeDescription = source.WoodTypeDescription,
+                WasteCategoryType = source.WasteCategoryType
             };
         }
 
@@ -56,7 +57,14 @@
                     wasteType = WasteType.CreateWoodWasteType(source.ChemicalCompositionDescription, compositionContinuedMapper.Map(source.WasteCompositions));
                     break;
                 case ChemicalComposition.Other:
-                    wasteType = WasteType.CreateOtherWasteType(source.WasteCompositionName);
+                    if (source.WasteCompositionName != null)
+                    {
+                        wasteType = WasteType.CreateOtherWasteType(source.WasteCompositionName, source.WasteCategoryType);
+                    }
+                    else
+                    {
+                        wasteType = WasteType.CreateOtherWasteTypeCategory(source.WasteCategoryType);
+                    }
                     break;
                 default:
                     throw new InvalidOperationException(string.Format("Unknown Chemical Composition Type: {0}", source));

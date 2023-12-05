@@ -7,7 +7,7 @@
     using Core.ImportNotification.Summary;
     using Core.ImportNotificationAssessment;
     using DataAccess.Draft;
-    using Domain.ImportNotification;
+    using Domain.ImportNotification;    
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
@@ -18,6 +18,8 @@
     using Facility = Core.ImportNotification.Summary.Facility;
     using Importer = Core.ImportNotification.Summary.Importer;
     using Producer = Core.ImportNotification.Summary.Producer;
+    using WasteCategories = Core.ImportNotification.Summary.WasteCategory;
+    using WasteComponent = Core.ImportNotification.Summary.WasteComponent;
     using WasteOperation = Core.ImportNotification.Summary.WasteOperation;
 
     internal class GetSummaryHandler : IRequestHandler<GetSummary, ImportNotificationSummary>
@@ -83,7 +85,9 @@
                     WasteOperation = GetWasteOperation(data),
                     WasteType = await wasteTypeSummary.GetWasteType(message.Id),
                     AreFacilitiesPreconsented = GetFacilityPreconsent(data),
-                    Composition = GetChemicalComposition(data)
+                    Composition = GetChemicalComposition(data),
+                    WasteComponents = GetWasteComponent(data),
+                    WasteCategories = GetWasteCategory(data)
                 };
             }
 
@@ -167,6 +171,14 @@
             };
         }
 
+        private static WasteComponent GetWasteComponent(Draft.ImportNotification notification)
+        {
+            return new WasteComponent
+            {
+                WasteComponentTypes = notification.WasteComponent.WasteComponentTypes
+            };
+        }
+
         private Address ConvertAddress(Draft.Address address)
         {
             if (address == null)
@@ -209,6 +221,14 @@
             return new ChemicalComposition
             {
                 Composition = notification.ChemicalComposition.Composition
+            };
+        }
+
+        private static WasteCategories GetWasteCategory(Draft.ImportNotification notification)
+        {
+            return new WasteCategories
+            {
+                WasteCategoryType = notification.WasteCategories.WasteCategoryType
             };
         }
     }

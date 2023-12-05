@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact
 {
     using System.ComponentModel.DataAnnotations;
-    using Core.Exporters;
-    using Core.Importer;
 
     public class EditContactViewModel
     {
@@ -10,22 +8,14 @@
         {
         }
 
-        public EditContactViewModel(ExporterData data)
+        public EditContactViewModel(dynamic data)
         {
             Name = data.Business.Name;
             FullName = data.Contact.FullName;
             Email = data.Contact.Email;
             TelephonePrefix = data.Contact.TelephonePrefix;
             Telephone = data.Contact.Telephone;
-        }
-
-        public EditContactViewModel(ImporterData data)
-        {
-            Name = data.Business.Name;
-            FullName = data.Contact.FullName;
-            Email = data.Contact.Email;
-            TelephonePrefix = data.Contact.TelephonePrefix;
-            Telephone = data.Contact.Telephone;
+            PostalCode = data.Address.PostalCode;
         }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]
@@ -53,5 +43,9 @@
         [DataType(DataType.PhoneNumber)]
         [RegularExpression(@"[\d]+[\d\s]+[\d]+", ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string Telephone { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "PostalcodeRequired")]
+        [Display(Name = "PostCode", ResourceType = typeof(EditContactViewModelResources))]
+        public string PostalCode { get; set; }
     }
 }

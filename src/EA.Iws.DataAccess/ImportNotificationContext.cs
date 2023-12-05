@@ -39,13 +39,15 @@
 
         public virtual DbSet<Producer> Producers { get; set; }
 
+        public virtual DbSet<WasteComponent> WasteComponents { get; set; }
+
         public virtual DbSet<WasteOperation> OperationCodes { get; set; }
 
         public virtual DbSet<FacilityCollection> Facilities { get; set; }
-       
+
         public virtual DbSet<Shipment> Shipments { get; set; }
 
-        public virtual DbSet<TransportRoute> TransportRoutes { get; set; } 
+        public virtual DbSet<TransportRoute> TransportRoutes { get; set; }
 
         public virtual DbSet<WasteType> WasteTypes { get; set; }
 
