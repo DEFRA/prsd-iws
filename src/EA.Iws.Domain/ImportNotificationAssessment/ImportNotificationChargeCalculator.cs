@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Core.ComponentRegistration;
     using Core.Shared;
     using ImportNotification;
     using NotificationApplication;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     [AutoRegister]
     public class ImportNotificationChargeCalculator : IImportNotificationChargeCalculator
@@ -17,7 +17,7 @@
         private readonly IInterimStatusRepository interimStatusRepository;
         private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
 
-        public ImportNotificationChargeCalculator(IImportNotificationRepository notificationRepository, 
+        public ImportNotificationChargeCalculator(IImportNotificationRepository notificationRepository,
             IShipmentRepository shipmentRepository,
             IPricingStructureRepository pricingStructureRepository,
             IInterimStatusRepository interimStatusRepository,
@@ -69,18 +69,18 @@
 
         private async Task<decimal> GetPrice(ImportNotification notification, int numberOfShipments, bool isInterim)
         {
-             var pricingStructures = await pricingStructureRepository.Get();
+            var pricingStructures = await pricingStructureRepository.Get();
 
             var correspondingPricingStructure =
                 pricingStructures.Single(p => p.CompetentAuthority == notification.CompetentAuthority
-                                              && p.Activity.TradeDirection == TradeDirection.Import
-                                              && p.Activity.NotificationType == notification.NotificationType
-                                              && p.Activity.IsInterim == isInterim
-                                              && p.ShipmentQuantityRange.RangeFrom <= numberOfShipments
-                                              && (p.ShipmentQuantityRange.RangeTo == null
-                                                  || p.ShipmentQuantityRange.RangeTo >= numberOfShipments));
+                    //&& p.ValidFrom >= notification.
+                    && p.Activity.TradeDirection == TradeDirection.Import
+                    && p.Activity.NotificationType == notification.NotificationType
+                    && p.Activity.IsInterim == isInterim
+                    && p.ShipmentQuantityRange.RangeFrom <= numberOfShipments
+                    && (p.ShipmentQuantityRange.RangeTo == null || p.ShipmentQuantityRange.RangeTo >= numberOfShipments));
 
             return correspondingPricingStructure.Price;
-        } 
+        }
     }
 }
