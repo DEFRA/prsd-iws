@@ -7,6 +7,7 @@
     using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
+    using EA.Iws.Domain.NotificationAssessment;
     using FakeItEasy;
     using Finance;
     using TestHelpers.DomainFakes;
@@ -29,6 +30,7 @@
         private readonly TestableNotificationApplication notificationApplication;
         private readonly IFacilityRepository facilityRepository;
         private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
+        private readonly INotificationAssessmentRepository notificationAssessmentRepository;
 
         public NotificationChargeCalculatorTests()
         {
@@ -40,10 +42,12 @@
             pricingStructureRepository = A.Fake<IPricingStructureRepository>();
             facilityRepository = A.Fake<IFacilityRepository>();
             numberOfShipmentsHistotyRepository = A.Fake<INumberOfShipmentsHistotyRepository>();
+            notificationAssessmentRepository = A.Fake<INotificationAssessmentRepository>();
 
             notificationApplication = new TestableNotificationApplication();
 
-            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository, facilityRepository, numberOfShipmentsHistotyRepository);
+            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository, 
+                facilityRepository, numberOfShipmentsHistotyRepository, notificationAssessmentRepository);
         }
 
         [Fact]
@@ -64,7 +68,7 @@
             A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId)).Returns(shipmentInfo);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notificationApplication);
             A.CallTo(() => pricingStructureRepository.Get()).Returns(GetPricingStructures());
-            A.CallTo(() => pricingStructureRepository.GetExport(UKCompetentAuthority.England, NotificationType.Recovery, A<int>.Ignored, A<bool>.Ignored)).Returns(GetPricingStructure());
+            A.CallTo(() => pricingStructureRepository.GetExport(UKCompetentAuthority.England, NotificationType.Recovery, A<int>.Ignored, A<bool>.Ignored, A<DateTime>.Ignored)).Returns(GetPricingStructure());
             A.CallTo(() => facilityRepository.GetByNotificationId(notificationId)).Returns(GetFacilityCollection());
 
             var result = await chargeCalculator.GetValue(notificationId);
