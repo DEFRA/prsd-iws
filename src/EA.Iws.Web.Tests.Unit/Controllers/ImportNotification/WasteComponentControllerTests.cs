@@ -43,8 +43,9 @@
                 Codes = new List<KeyValuePairViewModel<WasteComponentType, bool>>
                 {
                     new KeyValuePairViewModel<WasteComponentType, bool>(WasteComponentType.NORM, true),
-                    new KeyValuePairViewModel<WasteComponentType, bool>(WasteComponentType.FGasODS, false),
-                    new KeyValuePairViewModel<WasteComponentType, bool>(WasteComponentType.Mercury, false)
+                    new KeyValuePairViewModel<WasteComponentType, bool>(WasteComponentType.FGas, false),
+                    new KeyValuePairViewModel<WasteComponentType, bool>(WasteComponentType.Mercury, false),
+                    new KeyValuePairViewModel<WasteComponentType, bool>(WasteComponentType.ODS, false)
                 },
                 ImportNotificationId = importNotificationId
             };
