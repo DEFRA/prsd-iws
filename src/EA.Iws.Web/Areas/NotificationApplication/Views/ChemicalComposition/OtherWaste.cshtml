@@ -12,6 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(M => M.WasteCategoryType)
     <div>@OtherWasteResources.DescriptionMessage</div>
     <div class="govuk-form-group">
         @Html.Gds().ValidationMessageFor(m => m.Description)

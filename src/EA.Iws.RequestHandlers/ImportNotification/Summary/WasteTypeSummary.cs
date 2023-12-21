@@ -15,7 +15,7 @@
         private readonly IDraftImportNotificationRepository draftRepository;
         private readonly Domain.NotificationApplication.IWasteCodeRepository wasteCodeRepository;
 
-        public WasteTypeSummary(IDraftImportNotificationRepository draftRepository, 
+        public WasteTypeSummary(IDraftImportNotificationRepository draftRepository,
             Domain.NotificationApplication.IWasteCodeRepository wasteCodeRepository)
         {
             this.draftRepository = draftRepository;
@@ -25,7 +25,6 @@
         public async Task<WasteType> GetWasteType(Guid notificationId)
         {
             var wasteType = await draftRepository.GetDraftData<Draft.WasteType>(notificationId);
-
             var lookups = await GetWasteCodesLookup(wasteType);
 
             return new WasteType
@@ -36,7 +35,7 @@
                 UnClasses =
                     GetWasteCodeSelection(wasteType.SelectedUnClasses, wasteType.UnClassNotApplicable, lookups),
                 YCodes = GetWasteCodeSelection(wasteType.SelectedYCodes, wasteType.YCodeNotApplicable, lookups),
-                BaselCode = GetWasteCodeSelection(wasteType.SelectedBaselCode.HasValue ? 
+                BaselCode = GetWasteCodeSelection(wasteType.SelectedBaselCode.HasValue ?
                     new List<Guid>
                     {
                         wasteType.SelectedBaselCode.Value

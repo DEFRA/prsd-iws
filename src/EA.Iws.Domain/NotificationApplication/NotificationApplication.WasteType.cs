@@ -34,7 +34,11 @@
         {
             if (wasteType.ChemicalCompositionType == ChemicalComposition.Other)
             {
-                WasteType.ChemicalCompositionName = wasteType.ChemicalCompositionName;
+                if (wasteType.ChemicalCompositionName != null)
+                {
+                    WasteType.ChemicalCompositionName = wasteType.ChemicalCompositionName;
+                }
+                WasteType.WasteCategoryType = wasteType.WasteCategoryType;
             }
 
             if (wasteType.ChemicalCompositionType == ChemicalComposition.RDF || wasteType.ChemicalCompositionType == ChemicalComposition.SRF)

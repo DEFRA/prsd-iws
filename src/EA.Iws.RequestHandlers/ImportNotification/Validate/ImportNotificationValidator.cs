@@ -16,7 +16,8 @@
             IValidator<TransitStateCollection> transitStatesValidator,
             IValidator<WasteOperation> wasteOperationValidator,
             IValidator<WasteType> wasteTypeValidator,
-            IValidator<ChemicalComposition> chemicalCompositionValidator)
+            IValidator<ChemicalComposition> chemicalCompositionValidator,
+            IValidator<WasteCategories> wasteCategoryValidator)
         {
             RuleFor(x => x.Exporter).SetValidator(exporterValidator);
             RuleFor(x => x.Facilities).SetValidator(facilitiesValidator);
@@ -30,6 +31,12 @@
             RuleFor(x => x.WasteOperation).SetValidator(wasteOperationValidator);
             RuleFor(x => x.WasteType).SetValidator(wasteTypeValidator);
             RuleFor(x => x.ChemicalComposition).SetValidator(chemicalCompositionValidator);
+            RuleFor(x => x.WasteCategories).SetValidator(wasteCategoryValidator).When(BeNonEmptyWhenChemicalCompositionIsOther);
         }
+
+        private bool BeNonEmptyWhenChemicalCompositionIsOther(ImportNotification importNotification)
+        {
+            return importNotification != null && importNotification.ChemicalComposition.Composition.Value == Core.WasteType.ChemicalComposition.Other;
+        }        
     }
 }

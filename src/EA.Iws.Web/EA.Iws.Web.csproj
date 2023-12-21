@@ -823,7 +823,33 @@
     </Compile>
     <Compile Include="Areas\Common\ITrimTextService.cs" />
     <Compile Include="Areas\Common\TrimTextService.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\WasteCategoriesController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\WasteComponentController.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressTypeEnum.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\WasteCategories\WasteCategoriesViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\WasteComponent\WasteComponentViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\Views\WasteCategories\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\WasteComponent\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteCategoryViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteComponentViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategoryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteCategoryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteComponentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteComponentResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\DefraCompaniesHouseApi.cs" />
     <Compile Include="Logging\ErrorUtils.cs" />
@@ -840,6 +866,14 @@
     <Content Include="Cert\Boomi-IWS-SND.pfx" />
     <Content Include="Cert\Boomi-IWS-TST.pfx" />
     <Content Include="Cert\Boomi-IWS-PRD.pfx" />
+    <Content Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategory.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteComponent.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\EditContact\Producer.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\EditContact\Facility.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\EditContact\Producer.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\EditContact\Facility.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\WasteCategories\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\WasteComponent\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4934,6 +4968,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\WasteCategories\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\WasteComponent\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
@@ -5038,6 +5080,14 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\ParametersResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ParametersResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategoryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteCategoryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteComponentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteComponentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

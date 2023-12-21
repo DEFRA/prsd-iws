@@ -9,7 +9,10 @@
                 MvcHtmlString idForThisRadioButton = Html.NameFor(m => m.PossibleValues[i]);
 
                 <div>@Html.HiddenFor(m => m.PossibleValues[i])</div>
-
+                if (Model.PossibleValues[i] == "Not applicable")
+                {
+                    <div class="govuk-radios__divider">or</div>
+                }
                 <div class="govuk-radios__item">
                     @Html.RadioButtonFor(m => m.SelectedValue, Model.PossibleValues[i], new { id = idForThisRadioButton, @class = "govuk-radios__input" })
                     <label class="govuk-label govuk-radios__label" for="@idForThisRadioButton">

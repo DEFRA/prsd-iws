@@ -40,7 +40,7 @@
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification1, Notification1Id);
             var importer1 = ImporterFactory.Create(Notification1Id, new Guid("DA0C2B9A-3370-4265-BA0D-2F7030241E7C"));
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification1);
+            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood", WasteCategoryType.Oils), notification1);
 
             var notification2 = NotificationApplicationFactory.Create(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 2);
@@ -55,7 +55,7 @@
                 UKCompetentAuthority.England, 1);
             EntityHelper.SetEntityId(notification3, Notification3Id);
             var importer3 = ImporterFactory.Create(Notification3Id, new Guid("AF7ADA0A-E81B-4A7F-9837-52591B219DD3"));
-            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood"), notification3);
+            ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, WasteType.CreateOtherWasteType("wood", WasteCategoryType.Oils), notification3);
 
             var destinationNotification = NotificationApplicationFactory.Create(UserWithNotificationsId, NotificationType.Recovery,
                 UKCompetentAuthority.England, 1);

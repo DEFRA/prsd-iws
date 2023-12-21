@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification
 {
     using Domain.ImportNotification.WasteCodes;
+    using EA.Iws.Core.WasteType;
 
     public class UpdateWasteCodeData
     {
@@ -15,5 +16,7 @@
         public HCode HCode { get; set; }
 
         public UnClass UnClass { get; set; }
+
+        public WasteCategoryType? WasteCategoryType { get; set; }
     }
 }

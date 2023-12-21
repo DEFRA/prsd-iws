@@ -26,7 +26,7 @@
                 YCode.CreateFor(new[] { AnyWasteCode(CodeType.Y) }),
                 HCode.CreateFor(new[] { AnyWasteCode(CodeType.H) }),
                 UnClass.CreateFor(new[] { AnyWasteCode(CodeType.Un) }),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.IsType<WasteType>(wasteType);
         }
@@ -41,7 +41,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.True(wasteType.BaselOecdCodeNotListed);
         }
@@ -56,7 +56,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.True(wasteType.YCodeNotApplicable);
         }
@@ -71,7 +71,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.True(wasteType.HCodeNotApplicable);
         }
@@ -86,7 +86,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.True(wasteType.UnClassNotApplicable);
         }
@@ -134,7 +134,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -150,7 +150,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -166,7 +166,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -182,7 +182,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -195,7 +195,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -211,7 +211,7 @@
                 null,
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -227,7 +227,7 @@
                 YCode.CreateNotApplicable(),
                 null,
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -243,7 +243,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 null,
-                ChemicalComposition.Other));
+                ChemicalComposition.Other, WasteCategoryType.Batteries));
         }
 
         [Fact]
@@ -260,7 +260,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == baselCodeId));
         }
@@ -279,7 +279,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == oecdCodeId));
         }
@@ -313,7 +313,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == ewcCodeId));
         }
@@ -348,7 +348,7 @@
                 YCode.CreateFor(new[] { yCode }),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == yCodeId));
         }
@@ -383,7 +383,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateFor(new[] { hCode }),
                 UnClass.CreateNotApplicable(),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == hCodeId));
         }
@@ -418,7 +418,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateFor(new[] { unCode }),
-                ChemicalComposition.Other);
+                ChemicalComposition.Other, WasteCategoryType.Batteries);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == unCodeId));
         }
@@ -452,7 +452,7 @@
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
                 UnClass.CreateNotApplicable(),
-                default(ChemicalComposition)));
+                default(ChemicalComposition), WasteCategoryType.Batteries));
         }
 
         private WasteCode AnyWasteCode(CodeType codeType)

@@ -61,6 +61,10 @@
                     "WasteCodeInfoCollection"))
                 .WithRequired()
                 .Map(m => m.MapKey("NotificationId"));
+
+            HasMany(ExpressionHelper.GetPrivatePropertyExpression<NotificationApplication, ICollection<WasteComponentInfo>>("WasteComponentInfosCollection"))
+                                    .WithRequired()
+                                    .Map(m => m.MapKey("NotificationId"));
         }
     }
 }

@@ -22,8 +22,12 @@
 
         public WasteOperation WasteOperation { get; set; }
 
+        public WasteComponent WasteComponent { get; set; }
+
         public WasteType WasteType { get; set; }
 
         public ChemicalComposition ChemicalComposition { get; set; }
+
+        public WasteCategories WasteCategories { get; set; }
     }
 }

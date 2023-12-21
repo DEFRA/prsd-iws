@@ -275,6 +275,8 @@
     <Compile Include="ImportNotification\Events\CreateImportNotificationAssessment.cs" />
     <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationIdHandler.cs" />
     <Compile Include="ImportNotification\Exporters\SetExporterDetailsForImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\Facilities\GetFacilityByImportNotificationIdHandler.cs" />
+    <Compile Include="ImportNotification\Facilities\SetFacilityDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
@@ -300,6 +302,8 @@
     <Compile Include="ImportNotification\Mappings\TransitStateMap.cs" />
     <Compile Include="ImportNotification\Mappings\WasteOperationMap.cs" />
     <Compile Include="ImportNotification\Mappings\WasteTypeMap.cs" />
+    <Compile Include="ImportNotification\Producers\GetProducerByImportNotificationIdHandler.cs" />
+    <Compile Include="ImportNotification\Producers\SetProducerDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\Summary\GetSummaryHandler.cs" />
     <Compile Include="ImportNotification\SetDraftDataHandler.cs" />
@@ -398,6 +402,12 @@
       <DependentUpon>TransitStateValidatorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ImportNotification\Validate\ValidateImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\Validate\WasteCategoriesValidator.cs" />
+    <Compile Include="ImportNotification\Validate\WasteCategoriesValidatorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteCategoriesValidatorResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ImportNotification\Validate\WasteOperationValidator.cs" />
     <Compile Include="ImportNotification\Validate\WasteOperationValidatorResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -459,6 +469,8 @@
     <Compile Include="Mappings\SharedUserMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
+    <Compile Include="Mappings\WasteComponentDataMap.cs" />
+    <Compile Include="Mappings\WasteComponentInfoMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
     <Compile Include="Movement\AuditMovementHandler.cs" />
@@ -508,10 +520,12 @@
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
+    <Compile Include="NotificationAssessment\SetFacilityDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationAssessment\SetProducerDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCodeHandler.cs" />
     <Compile Include="NotificationAssessment\SetOperationCodesHandler.cs" />
@@ -702,6 +716,8 @@
     <Compile Include="Validation\Validator.cs" />
     <Compile Include="WasteCodes\CanEditHCodesHandler.cs" />
     <Compile Include="WasteCodes\EditYCodesHandler.cs" />
+    <Compile Include="WasteComponentType\GetWasteComponentInfoForNotificationHandler.cs" />
+    <Compile Include="WasteComponentType\SetWasteComponentInfoForNotificationHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />
@@ -958,6 +974,10 @@
     <EmbeddedResource Include="ImportNotification\Validate\TransitStateValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStateValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportNotification\Validate\WasteCategoriesValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteCategoriesValidatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\WasteOperationValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

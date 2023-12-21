@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteComponent.WasteComponentViewModel
+@using Resources = EA.Iws.Web.Areas.ImportNotification.Views.WasteComponent.IndexResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@Resources.Header</h1>
+    <span class="form-hint">@Resources.HeaderDescription</span>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Codes)">
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                @for (int i = 0; i < Model.Codes.Count; i++)
+                {
+                    var id = Model.Codes[i].Key.ToString();
+                    @Html.HiddenFor(m => m.Codes[i].Key)
+
+                    <div class="multiple-choice govuk-checkboxes__item">
+                        @Html.CheckBoxFor(m => m.Codes[i].Value, new { id, @class = "govuk-checkboxes__input" })
+                        <label class="govuk-label govuk-checkboxes__label" for="@id">
+                            @Html.Raw(Model.CodeDisplay[i])
+                        </label>
+                    </div>
+                }
+            </div>
+        </fieldset>
+    </div>
+
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+}
