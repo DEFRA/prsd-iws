@@ -44,7 +44,14 @@
 
             await mediator.SendAsync(new SetDraftData<Core.ImportNotification.Draft.ChemicalComposition>(id, chemicalComposition));
 
-            return RedirectToAction("Index", "WasteCodes");
+            if (model.ChemicalCompositionType != null && model.ChemicalCompositionType.SelectedValue != null && model.ChemicalCompositionType.SelectedValue == "Other")
+            {
+                return RedirectToAction("Index", "WasteCategories");
+            }
+            else
+            {
+                return RedirectToAction("Index", "WasteCodes");
+            }
         }
     }
 }

@@ -2,8 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.AddressBook.Controllers;
@@ -172,8 +170,8 @@
                     FullName = "first last",
                     Telephone = "123"
                 },
-              Type = Core.AddressBook.AddressRecordType.Producer
+                Type = Core.AddressBook.AddressRecordType.Producer
             };
-        }       
+        }
     }
 }

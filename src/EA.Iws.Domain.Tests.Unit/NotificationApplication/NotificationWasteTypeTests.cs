@@ -134,7 +134,7 @@
         [Fact]
         public void CantAddWasteTypeForOtherWithoutOtherName()
         {
-            Action addOtherWasteTypeWithoutName = () => notification.SetWasteType(WasteType.CreateOtherWasteType(null));
+            Action addOtherWasteTypeWithoutName = () => notification.SetWasteType(WasteType.CreateOtherWasteType(null, WasteCategoryType.Oils));
             Assert.Throws<ArgumentNullException>(addOtherWasteTypeWithoutName);
         }
 

@@ -77,36 +77,36 @@ INSERT INTO [ImportNotification].[Facility]
            N'lkjlj@asfasf.faa',
            1)
 
-INSERT INTO [ImportNotification].[Facility]
-           ([Id]
-           ,[FacilityCollectionId]
-           ,[Name]
-           ,[Type]
-           ,[RegistrationNumber]
-           ,[Address1]
-           ,[Address2]
-           ,[TownOrCity]
-           ,[PostalCode]
-           ,[CountryId]
-           ,[ContactName]
-           ,[Telephone]
-           ,[Email]
-           ,[IsActualSiteOfTreatment])
-     VALUES
-           (NEWID(),
-           @FacilityCollectionId,
-           N'Scrap Waste Reclamation',
-           1,
-           N'45645684546',
-           N'5 Bib House',
-           N'The Road',
-           N'Brent',
-           N'HJ3 7JI',
-           @UKCountryId,
-           N'Bob',
-           N'09876 674534',
-           N'lkjlj@asfasf.faa',
-           0)
+--INSERT INTO [ImportNotification].[Facility]
+--           ([Id]
+--           ,[FacilityCollectionId]
+--           ,[Name]
+--           ,[Type]
+--           ,[RegistrationNumber]
+--           ,[Address1]
+--           ,[Address2]
+--           ,[TownOrCity]
+--           ,[PostalCode]
+--           ,[CountryId]
+--           ,[ContactName]
+--           ,[Telephone]
+--           ,[Email]
+--           ,[IsActualSiteOfTreatment])
+--     VALUES
+--           (NEWID(),
+--           @FacilityCollectionId,
+--           N'Scrap Waste Reclamation',
+--           1,
+--           N'45645684546',
+--           N'5 Bib House',
+--           N'The Road',
+--           N'Brent',
+--           N'HJ3 7JI',
+--           @UKCountryId,
+--           N'Bob',
+--           N'09876 674534',
+--           N'lkjlj@asfasf.faa',
+--           0)
 
 INSERT INTO [ImportNotification].[Importer]
            ([Id]

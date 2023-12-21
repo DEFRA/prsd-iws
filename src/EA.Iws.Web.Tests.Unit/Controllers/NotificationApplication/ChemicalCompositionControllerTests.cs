@@ -2,14 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.ChemicalComposition;
     using Core.Notification.Audit;
     using Core.WasteType;
+    using EA.Iws.Core.WasteComponentType;
     using FakeItEasy;
-    using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.WasteType;
@@ -28,7 +29,7 @@
         {
             mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
-            chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap(), this.auditService);
+            chemicalCompositionController = new ChemicalCompositionController(mediator, this.auditService);
 
             A.CallTo(
                 () =>
@@ -45,7 +46,7 @@
                 () => mediator.SendAsync(A<GetNotificationAuditTable>.That.Matches
                 (p => p.NotificationId == notificationId)))
                 .Returns(CreateTestAuditTable());
-            
+
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.ChemicalComposition));
         }
 
@@ -90,6 +91,99 @@
             Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
             Assert.Equal<bool?>(backToOverview.GetValueOrDefault(),
                 ((bool?)result.RouteValues[backToOverviewKey]).GetValueOrDefault());
+        }
+
+        [Fact]
+        public async Task WasteCategory_ReturnsView()
+        {
+            var model = new WasteCategoryViewModel
+            {
+                NotificationId = notificationId,
+                WasteCategoryType = RadioButtonStringCollectionViewModel.CreateFromEnum<WasteCategoryType>()
+            };
+
+            var result = await chemicalCompositionController.WasteCategory(notificationId) as ViewResult;
+            var resultModel = (WasteCategoryViewModel)(result.Model);
+
+            Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal(model.NotificationId, resultModel.NotificationId);
+            Assert.Equal(model.WasteCategoryType.PossibleValues.Count(), resultModel.WasteCategoryType.PossibleValues.Count());
+            Assert.Equal(model.WasteCategoryType.SelectedValue, resultModel.WasteCategoryType.SelectedValue);
+        }
+
+        [Fact]
+        public void OtherWaste_Post_RedirectedTo_BackToWasteCategory()
+        {
+            var chemicalCompositionType = RadioButtonStringCollectionViewModel.CreateFromEnum<ChemicalComposition>();
+            chemicalCompositionType.SelectedValue = ChemicalComposition.Other.ToString();
+            var model = new ChemicalCompositionTypeViewModel()
+            {
+                ChemicalCompositionType = chemicalCompositionType
+            };
+            var result = chemicalCompositionController.Index(model, true) as RedirectToRouteResult;
+            RouteAssert.RoutesTo(result.RouteValues, "WasteCategory", "ChemicalComposition");
+        }
+
+        [Fact]
+        public async Task OtherWaste_WasteCategory_RedirectedTo_WasteComponent()
+        {
+            var wasteCategoryType = RadioButtonStringCollectionViewModel.CreateFromEnum<WasteCategoryType>();
+            wasteCategoryType.SelectedValue = WasteCategoryType.Batteries.ToString();
+
+            var wasteCategoryViewModel = new WasteCategoryViewModel()
+            {
+                WasteCategoryType = wasteCategoryType
+            };
+            var result = await chemicalCompositionController.WasteCategory(wasteCategoryViewModel, true) as RedirectToRouteResult;
+            RouteAssert.RoutesTo(result.RouteValues, "WasteComponent", "ChemicalComposition");
+        }
+
+        [Fact]
+        public async Task WasteComponent_ReturnsView()
+        {
+            var model = new WasteComponentViewModel
+            {
+                NotificationId = notificationId,
+                WasteComponentTypes = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>()
+            };
+
+            var result = await chemicalCompositionController.WasteComponent(notificationId) as ViewResult;
+            var resultModel = (WasteComponentViewModel)(result.Model);
+
+            Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal(model.NotificationId, resultModel.NotificationId);
+            Assert.Equal(model.WasteComponentTypes.PossibleValues.Count(), resultModel.WasteComponentTypes.PossibleValues.Count());
+        }
+
+        [Fact]
+        public async Task OtherWaste_WasteComponent_RedirectedTo_OtherWaste()
+        {
+            var wasteComponentType = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>();
+            var selectedValues = new[] { 1, 2 };
+            wasteComponentType.SetSelectedValues(selectedValues);
+
+            var wasteComponentViewModel = new WasteComponentViewModel()
+            {
+                WasteComponentTypes = wasteComponentType
+            };
+            var result = await chemicalCompositionController.WasteComponent(wasteComponentViewModel, true) as RedirectToRouteResult;
+            RouteAssert.RoutesTo(result.RouteValues, "OtherWaste", "ChemicalComposition");
+        }
+
+        [Fact]
+        public async Task OtherWaste_ReturnsView()
+        {
+            var model = new OtherWasteViewModel()
+            {
+                NotificationId = notificationId,
+                Description = "Test Description"
+            };
+
+            var result = await chemicalCompositionController.OtherWaste(notificationId) as ViewResult;
+            var resultModel = (OtherWasteViewModel)result.Model;
+
+            Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal(model.NotificationId, resultModel.NotificationId);
         }
 
         [Fact]

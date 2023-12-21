@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification
 {
+    using System.Collections.Generic;
     using System.Linq;
+    using System.Threading;
     using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
     using DataAccess;
@@ -28,6 +30,7 @@
         private readonly ITransportRouteRepository transportRouteRepository;
         private readonly IWasteOperationRepository wasteOperationRepository;
         private readonly IWasteTypeRepository wasteTypeRepository;
+        private readonly IWasteComponentRepository wasteComponentRepository;
 
         public CompleteDraftImportNotificationHandler(IValidator<ImportNotification> importNotificationValidator,
             IDraftImportNotificationRepository draftImportNotificationRepository,
@@ -42,6 +45,7 @@
             ITransportRouteRepository transportRouteRepository,
             IWasteOperationRepository wasteOperationRepository,
             IWasteTypeRepository wasteTypeRepository,
+            IWasteComponentRepository wasteComponentRepository,
             ImportNotificationContext context)
         {
             this.importNotificationValidator = importNotificationValidator;
@@ -57,21 +61,20 @@
             this.transportRouteRepository = transportRouteRepository;
             this.wasteOperationRepository = wasteOperationRepository;
             this.wasteTypeRepository = wasteTypeRepository;
+            this.wasteComponentRepository = wasteComponentRepository;
             this.context = context;
         }
 
         public async Task<bool> HandleAsync(CompleteDraftImportNotification message)
         {
             var draft = await draftImportNotificationRepository.Get(message.ImportNotificationId);
-            var assessment =
-                await importNotificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
+            var assessment = await importNotificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
 
             var result = await importNotificationValidator.ValidateAsync(draft);
 
             if (result.IsValid && assessment.Status == ImportNotificationStatus.NotificationReceived)
             {
-                var notification =
-                    await importNotificationRepository.Get(message.ImportNotificationId);
+                var notification = await importNotificationRepository.Get(message.ImportNotificationId);
 
                 var exporter = mapper.Map<Exporter>(draft.Exporter);
                 var facilityCollection = mapper.Map<FacilityCollection>(draft.Facilities, draft.Preconsented);
@@ -85,12 +88,25 @@
 
                 if (!draft.TransitStates.HasNoTransitStates)
                 {
-                    transportRoute.SetTransitStates(
-                        new TransitStateList(draft.TransitStates.TransitStates.Select(t => mapper.Map<TransitState>(t))));
+                    transportRoute.SetTransitStates(new TransitStateList(draft.TransitStates.TransitStates.Select(t => mapper.Map<TransitState>(t))));
                 }
 
                 var wasteOperation = mapper.Map<WasteOperation>(draft.WasteOperation, notification);
+                if (draft.WasteCategories != null && draft.WasteCategories.WasteCategoryType.HasValue)
+                {
+                    draft.WasteType.WasteCategoryType = draft.WasteCategories.WasteCategoryType.Value;
+                }
+
                 var wasteType = mapper.Map<Domain.ImportNotification.WasteType>(draft.WasteType, draft.ChemicalComposition.Composition);
+
+                var wasteComponentList = new List<WasteComponent>();
+                if (draft.ChemicalComposition.Composition == Core.WasteType.ChemicalComposition.Other && draft.WasteComponent.WasteComponentTypes != null)
+                {
+                    for (var count = 0; draft.WasteComponent.WasteComponentTypes.Length > count; count++)
+                    {
+                        wasteComponentList.Add(new WasteComponent(draft.WasteComponent.ImportNotificationId, draft.WasteComponent.WasteComponentTypes[count]));
+                    }
+                }
 
                 exporterRepository.Add(exporter);
                 facilityRepository.Add(facilityCollection);
@@ -100,6 +116,11 @@
                 transportRouteRepository.Add(transportRoute);
                 wasteOperationRepository.Add(wasteOperation);
                 wasteTypeRepository.Add(wasteType);
+
+                if (wasteComponentList != null && wasteComponentList.Count > 0)
+                {
+                    wasteComponentRepository.Add(wasteComponentList);
+                }
 
                 assessment.Submit();
 

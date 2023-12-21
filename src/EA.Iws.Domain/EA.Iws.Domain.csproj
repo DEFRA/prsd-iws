@@ -144,6 +144,7 @@
     <Compile Include="ImportNotification\InterimStatus.cs" />
     <Compile Include="ImportNotification\INumberOfShipmentsHistotyRepository.cs" />
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
+    <Compile Include="ImportNotification\IWasteComponentRepository.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />
     <Compile Include="ImportNotification\NumberOfShipmentsHistory.cs" />
@@ -159,6 +160,9 @@
     <Compile Include="ImportNotification\WasteCodes\UnClass.cs" />
     <Compile Include="ImportNotification\WasteCodes\WasteTypeWasteCode.cs" />
     <Compile Include="ImportNotification\WasteCodes\YCode.cs" />
+    <Compile Include="ImportNotification\WasteComponentCode.cs" />
+    <Compile Include="ImportNotification\WasteComponentCodesList.cs" />
+    <Compile Include="ImportNotification\WasteComponent.cs" />
     <Compile Include="ImportNotification\WasteType.cs" />
     <Compile Include="ImportNotification\WasteOperation.cs" />
     <Compile Include="ImportNotification\OperationCodesList.cs" />
@@ -284,6 +288,7 @@
     <Compile Include="Movement\MovementStatusChangeEvent.cs" />
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
+    <Compile Include="NotificationApplication\FacilityBusiness.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
@@ -291,6 +296,7 @@
     <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
     <Compile Include="NotificationApplication\MeansOfTransport.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.WasteComponentInfo.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
     <Compile Include="NotificationApplication\ICarrierRepository.cs" />
@@ -320,6 +326,7 @@
     <Compile Include="NotificationApplication\Shipment\NumberOfShipmentsHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
     <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
+    <Compile Include="NotificationApplication\WasteComponentInfo.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\ProviderChangedEvent.cs" />
     <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />

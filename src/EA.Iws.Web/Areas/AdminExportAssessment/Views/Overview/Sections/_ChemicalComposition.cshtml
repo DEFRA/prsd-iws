@@ -4,10 +4,36 @@
 <div class="overview-block">
     @if (Model.IsChemicalCompositionCompleted)
     {
-        <div class="overview-block-element grid-row">
-            <div class="column-third">Type:</div>
-            <div class="column-two-thirds">@Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)</div>
-        </div>
+        if (Model.ChemicalComposition.ChemicalCompositionType != ChemicalComposition.Other)
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Type:</div>
+                <div class="column-two-thirds">
+                    @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)
+                </div>
+            </div>
+        }
+        else
+        {
+            if (Model.ChemicalComposition.WasteCategoryType.HasValue)
+            {
+                <div class="overview-block-element grid-row">
+                    <div class="column-third">Type:</div>
+                    <div class="column-two-thirds">
+                        @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType) - @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ChemicalComposition.WasteCategoryType.Value)
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="overview-block-element grid-row">
+                    <div class="column-third">Type:</div>
+                    <div class="column-two-thirds">
+                        @Html.DisplayFor(m => m.ChemicalComposition.ChemicalCompositionType)
+                    </div>
+                </div>
+            }
+        }
 
         if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.ChemicalCompositionName))
         {
@@ -78,6 +104,14 @@
                 </table>
             </div>
             <br />
+        }
+
+        if (!string.IsNullOrWhiteSpace(Model.WasteComponentTypesDescription))
+        {
+            <div class="overview-block-element grid-row">
+                <div class="column-third">Contains:</div>
+                <div class="column-two-thirds">@Model.WasteComponentTypesDescription</div>
+            </div>
         }
 
         if (!string.IsNullOrWhiteSpace(Model.ChemicalComposition.OtherWasteTypeDescription))

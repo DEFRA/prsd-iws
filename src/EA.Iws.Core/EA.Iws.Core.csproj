@@ -152,6 +152,8 @@
     <Compile Include="ImportNotification\Draft\StateOfImport.cs" />
     <Compile Include="ImportNotification\Draft\TransitState.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollection.cs" />
+    <Compile Include="ImportNotification\Draft\WasteCategories.cs" />
+    <Compile Include="ImportNotification\Draft\WasteComponent.cs" />
     <Compile Include="ImportNotification\Draft\WasteOperation.cs" />
     <Compile Include="ImportNotification\Draft\Shipment.cs" />
     <Compile Include="ImportNotification\Draft\WasteType.cs" />
@@ -168,8 +170,10 @@
     <Compile Include="ImportNotification\Summary\StateOfImport.cs" />
     <Compile Include="ImportNotification\Summary\StateOfExport.cs" />
     <Compile Include="ImportNotification\Summary\TransitState.cs" />
+    <Compile Include="ImportNotification\Summary\WasteCategory.cs" />
     <Compile Include="ImportNotification\Summary\WasteCode.cs" />
     <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
+    <Compile Include="ImportNotification\Summary\WasteComponent.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
     <Compile Include="ImportNotification\Update\WasteOperationData.cs" />
@@ -338,6 +342,9 @@
     <Compile Include="TransportRoute\EntryOrExitPointData.cs" />
     <Compile Include="TransportRoute\EntryOrExitPointDataGroup.cs" />
     <Compile Include="TransportRoute\TransportRouteData.cs" />
+    <Compile Include="WasteComponents\WasteComponentData.cs" />
+    <Compile Include="WasteComponents\WasteComponentMetadata.cs" />
+    <Compile Include="WasteComponents\WasteComponentType.cs" />
     <Compile Include="WasteType\ChemicalCompositionCategory.cs" />
     <Compile Include="WasteType\ChemicalCompositionData.cs" />
     <Compile Include="WasteType\ChemicalComposition.cs" />
@@ -345,6 +352,7 @@
     <Compile Include="WasteType\PhysicalCharacteristicsData.cs" />
     <Compile Include="WasteType\PhysicalCharacteristicType.cs" />
     <Compile Include="WasteCodes\WasteCodeData.cs" />
+    <Compile Include="WasteType\WasteCategoryType.cs" />
     <Compile Include="WasteType\WasteCompositionData.cs" />
     <Compile Include="WasteType\WasteGenerationProcessData.cs" />
     <Compile Include="WasteType\WasteInformationType.cs" />
