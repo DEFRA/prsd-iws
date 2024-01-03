@@ -84,7 +84,7 @@
             var price = result.Price;
 
             //Now from here there's some specifics for the new Charge Matrix from April 2024
-            if (notification.CompetentAuthority == Core.Notification.UKCompetentAuthority.England 
+            if (notification.CompetentAuthority == Core.Notification.UKCompetentAuthority.England
                 && submittedDate.Date >= new DateTime(2024, 04, 01))
             {
                 //Check if fixed fee for WasteCategoryType
@@ -98,13 +98,11 @@
                     }
                 }
 
-                if (notification.CompetentAuthority == Core.Notification.UKCompetentAuthority.England)
+                if (numberOfShipments > 1000)
                 {
-                    if (numberOfShipments > 1000)
-                    {
-                        price = IncreasePriceForOver1000Shipments(result.Price, numberOfShipments);
-                    }
+                    price = IncreasePriceForOver1000Shipments(result.Price, numberOfShipments);
                 }
+
                 if (notification.WasteComponentInfos.Count() > 0)
                 {
                     var wasteComponentFees = await pricingFixedFeeRepository.GetAllWasteComponentFees(submittedDate);
