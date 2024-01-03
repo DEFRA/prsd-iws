@@ -35,6 +35,10 @@
             {
                 WasteCategoryType = EnumHelper.GetDisplayName(wasteType.WasteCategoryType.Value);
             }
+            else
+            {
+                WasteCategoryType = string.Empty;
+            }
 
             SetMergeDescriptionText();
         }

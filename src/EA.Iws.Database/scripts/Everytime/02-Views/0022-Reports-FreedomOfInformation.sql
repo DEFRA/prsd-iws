@@ -23,8 +23,13 @@ SELECT
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         COALESCE(BaselCodeInfo.[Code] + ' - ' + BaselCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         CASE WHEN WT.[ChemicalCompositionType] = 4
-            THEN 'Other - ' + WC.[Name] + ' - ' + WT.[ChemicalCompositionName]
-            ELSE CCT.[Description] END AS [NameOfWaste],
+            THEN  
+              CASE WHEN (WC.[Name] IS NULL) 
+				    THEN 'Other - ' + WT.[ChemicalCompositionName] 
+				    ELSE 
+				    'Other - ' + WC.[Name] + ' - ' + WT.[ChemicalCompositionName]
+				    END
+		    ELSE CCT.[Description] END AS [NameOfWaste],
         STUFF(( SELECT ', ' + WCT.Name AS [text()]
             FROM [Notification].[WasteComponentInfo] WCOI
             LEFT JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCOI.WasteComponentType 
@@ -190,8 +195,13 @@ SELECT
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         COALESCE(WasteCodeInfo.[Code] + ' - ' + WasteCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         CASE WHEN WT.[ChemicalCompositionType] = 4
-            THEN 'Other - ' + WC.[Name] + ' - ' + WT.[Name]
-            ELSE CCT.[Description] END AS [NameOfWaste],        
+            THEN  
+			  CASE WHEN (WC.[Name] IS NULL) 
+					THEN 'Other - ' + WT.[Name] 
+					ELSE 
+					'Other - ' + WC.[Name] + ' - ' + WT.[Name]
+					END
+			ELSE CCT.[Description] END AS [NameOfWaste],
 		STUFF(( SELECT ', ' + WCT.Name AS [text()]
             FROM [ImportNotification].[WasteComponent] WCOI
             LEFT JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCOI.WasteComponentType 

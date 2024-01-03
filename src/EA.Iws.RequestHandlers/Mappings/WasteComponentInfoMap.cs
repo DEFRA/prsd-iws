@@ -19,8 +19,9 @@
                 switch (selectedComponentType)
                 {
                     case WasteComponentType.Mercury:
-                    case WasteComponentType.FGasODS:
+                    case WasteComponentType.FGas:
                     case WasteComponentType.NORM:
+                    case WasteComponentType.ODS:
                         wasteComponentInfos.Add(WasteComponentInfo.CreateWasteComponentInfo(selectedComponentType));
                         break;
                     default:
