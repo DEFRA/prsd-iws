@@ -14,6 +14,7 @@
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IPricingStructureRepository pricingStructureRepository;
+        private readonly IPricingFixedFeeRepository pricingFixedFeeRepository;
         private readonly IFacilityRepository facilityRepository;
         private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
         private readonly INotificationAssessmentRepository notificationAssessmentRepository;
@@ -21,6 +22,7 @@
         public NotificationChargeCalculator(IShipmentInfoRepository shipmentInfoRepository,
             INotificationApplicationRepository notificationApplicationRepository,
             IPricingStructureRepository pricingStructureRepository,
+            IPricingFixedFeeRepository pricingFixedFeeRepository,
             IFacilityRepository facilityRepository,
             INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository,
             INotificationAssessmentRepository notificationAssessmentRepository)
@@ -28,6 +30,7 @@
             this.shipmentInfoRepository = shipmentInfoRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.pricingStructureRepository = pricingStructureRepository;
+            this.pricingFixedFeeRepository = pricingFixedFeeRepository;
             this.facilityRepository = facilityRepository;
             this.numberOfShipmentsHistotyRepository = numberOfShipmentsHistotyRepository;
             this.notificationAssessmentRepository = notificationAssessmentRepository;
@@ -68,7 +71,7 @@
             var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);
             var notificationAssessment = await notificationAssessmentRepository.GetByNotificationId(notification.Id);
 
-            var submittedDate = new DateTimeOffset(new DateTime(2022, 05, 05)); //GetNotificationAssessmentSubmittedDate(notificationAssessment);
+            var submittedDate = GetNotificationAssessmentSubmittedDate(notificationAssessment);
 
             bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
 
@@ -81,14 +84,20 @@
             var price = result.Price;
 
             //Now from here there's some specifics for the new Charge Matrix from April 2024
-            if (submittedDate.Date >= new DateTime(2024, 04, 01))
+            if (notification.CompetentAuthority == Core.Notification.UKCompetentAuthority.England 
+                && submittedDate.Date >= new DateTime(2024, 04, 01))
             {
-                //Check if Ship/Rig
-                if (notification.WasteType.WasteCategoryType == Core.WasteType.WasteCategoryType.Singleship
-                    || notification.WasteType.WasteCategoryType == Core.WasteType.WasteCategoryType.Platformrig)
+                //Check if fixed fee for WasteCategoryType
+                if (notification.WasteType.WasteCategoryType != null)
                 {
-                    return 8188;
+                    var wasteCategoryfee =
+                        await pricingFixedFeeRepository.GetWasteCategoryFee(notification.WasteType.WasteCategoryType.Value, submittedDate);
+                    if (wasteCategoryfee != null && wasteCategoryfee.Price > 0)
+                    {
+                        return wasteCategoryfee.Price;
+                    }
                 }
+
                 if (notification.CompetentAuthority == Core.Notification.UKCompetentAuthority.England)
                 {
                     if (numberOfShipments > 1000)
@@ -98,7 +107,16 @@
                 }
                 if (notification.WasteComponentInfos.Count() > 0)
                 {
-                    price += 287;
+                    var wasteComponentFees = await pricingFixedFeeRepository.GetAllWasteComponentFees(submittedDate);
+                    if (wasteComponentFees.Count() > 0)
+                    {
+                        foreach (var wasteComponent in notification.WasteComponentInfos)
+                        {
+                            price += wasteComponentFees
+                                .OrderByDescending(ps => ps.ValidFrom)
+                                .FirstOrDefault(wcf => wcf.WasteComponentTypeId == wasteComponent.WasteComponentType).Price;
+                        }
+                    }
                 }
             }
 

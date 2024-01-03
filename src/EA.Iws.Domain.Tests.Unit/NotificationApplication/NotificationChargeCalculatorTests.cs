@@ -26,6 +26,7 @@
         private readonly INotificationChargeCalculator chargeCalculator;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IPricingStructureRepository pricingStructureRepository;
+        private readonly IPricingFixedFeeRepository pricingFixedFeeRepository;
         private readonly ShipmentInfo shipmentInfo;
         private readonly TestableNotificationApplication notificationApplication;
         private readonly IFacilityRepository facilityRepository;
@@ -40,14 +41,15 @@
             shipmentInfo = A.Fake<ShipmentInfo>();
             notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
             pricingStructureRepository = A.Fake<IPricingStructureRepository>();
+            pricingFixedFeeRepository = A.Fake<IPricingFixedFeeRepository>();
             facilityRepository = A.Fake<IFacilityRepository>();
             numberOfShipmentsHistotyRepository = A.Fake<INumberOfShipmentsHistotyRepository>();
             notificationAssessmentRepository = A.Fake<INotificationAssessmentRepository>();
 
             notificationApplication = new TestableNotificationApplication();
 
-            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository, 
-                facilityRepository, numberOfShipmentsHistotyRepository, notificationAssessmentRepository);
+            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository,
+                pricingFixedFeeRepository, facilityRepository, numberOfShipmentsHistotyRepository, notificationAssessmentRepository);
         }
 
         [Fact]
