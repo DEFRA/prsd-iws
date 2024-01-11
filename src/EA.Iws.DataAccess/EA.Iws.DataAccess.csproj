@@ -307,6 +307,7 @@
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\NotificationUserRepository.cs" />
     <Compile Include="Repositories\PricingFixedFeeRepository.cs" />
+    <Compile Include="Repositories\PriceRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
     <Compile Include="Repositories\ProducerRepository.cs" />
     <Compile Include="Repositories\Reports\ComplianceRepository.cs" />
