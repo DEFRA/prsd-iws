@@ -26,12 +26,11 @@
         private readonly INotificationChargeCalculator chargeCalculator;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IPricingStructureRepository pricingStructureRepository;
-        private readonly IPricingFixedFeeRepository pricingFixedFeeRepository;
+        private readonly IPriceRepository priceRepository;
         private readonly ShipmentInfo shipmentInfo;
         private readonly TestableNotificationApplication notificationApplication;
         private readonly IFacilityRepository facilityRepository;
         private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
-        private readonly INotificationAssessmentRepository notificationAssessmentRepository;
 
         public NotificationChargeCalculatorTests()
         {
@@ -41,15 +40,14 @@
             shipmentInfo = A.Fake<ShipmentInfo>();
             notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
             pricingStructureRepository = A.Fake<IPricingStructureRepository>();
-            pricingFixedFeeRepository = A.Fake<IPricingFixedFeeRepository>();
+            priceRepository = A.Fake<IPriceRepository>();
             facilityRepository = A.Fake<IFacilityRepository>();
             numberOfShipmentsHistotyRepository = A.Fake<INumberOfShipmentsHistotyRepository>();
-            notificationAssessmentRepository = A.Fake<INotificationAssessmentRepository>();
 
             notificationApplication = new TestableNotificationApplication();
 
-            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, pricingStructureRepository,
-                pricingFixedFeeRepository, facilityRepository, numberOfShipmentsHistotyRepository, notificationAssessmentRepository);
+            chargeCalculator = new NotificationChargeCalculator(shipmentInfoRepository, notificationApplicationRepository, 
+                priceRepository, numberOfShipmentsHistotyRepository);
         }
 
         [Fact]
@@ -70,7 +68,7 @@
             A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId)).Returns(shipmentInfo);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notificationApplication);
             A.CallTo(() => pricingStructureRepository.Get()).Returns(GetPricingStructures());
-            A.CallTo(() => pricingStructureRepository.GetExport(UKCompetentAuthority.England, NotificationType.Recovery, A<int>.Ignored, A<bool>.Ignored, A<DateTime>.Ignored)).Returns(GetPricingStructure());
+            A.CallTo(() => pricingStructureRepository.GetExport(UKCompetentAuthority.England, NotificationType.Recovery, A<int>.Ignored, A<bool>.Ignored, A<DateTimeOffset>.Ignored)).Returns(GetPricingStructure());
             A.CallTo(() => facilityRepository.GetByNotificationId(notificationId)).Returns(GetFacilityCollection());
 
             var result = await chargeCalculator.GetValue(notificationId);
