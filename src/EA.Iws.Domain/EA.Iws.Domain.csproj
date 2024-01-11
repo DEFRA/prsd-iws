@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Finance\PriceAndRefund.cs" />
     <Compile Include="Finance\PricingFixedFee.cs" />
     <Compile Include="IArchiveNotificationRepository.cs" />
     <Compile Include="IIntraCountryExportAllowedRepository.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
     <Compile Include="NotificationApplication\IPricingFixedFeeRepository.cs" />
+    <Compile Include="NotificationApplication\IPriceRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserHistoryRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
