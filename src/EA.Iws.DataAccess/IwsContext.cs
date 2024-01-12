@@ -57,6 +57,8 @@
 
         public virtual DbSet<PricingStructure> PricingStructures { get; set; }
 
+        public virtual DbSet<PricingFixedFee> PricingFixedFees { get; set; }
+
         public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; }
 
         public virtual DbSet<FinancialGuaranteeCollection> FinancialGuarantees { get; set; }

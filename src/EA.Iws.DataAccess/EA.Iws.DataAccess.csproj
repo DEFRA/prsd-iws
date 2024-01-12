@@ -103,6 +103,7 @@
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\Common\ActivityMapping.cs" />
     <Compile Include="Mappings\Common\DateTimeOffsetRangeMapping.cs" />
+    <Compile Include="Mappings\Common\PricingFixedFeeMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookRecordMapping.cs" />
     <Compile Include="Mappings\Common\DateRangeMapping.cs" />
@@ -305,6 +306,8 @@
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\NotificationUserRepository.cs" />
+    <Compile Include="Repositories\PricingFixedFeeRepository.cs" />
+    <Compile Include="Repositories\PriceRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
     <Compile Include="Repositories\ProducerRepository.cs" />
     <Compile Include="Repositories\Reports\ComplianceRepository.cs" />

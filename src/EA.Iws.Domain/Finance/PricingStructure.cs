@@ -22,5 +22,7 @@
         public Guid ActivityId { get; protected set; }
 
         public decimal Price { get; protected set; }
+
+        public DateTime ValidFrom { get; private set; }
     }
 }
