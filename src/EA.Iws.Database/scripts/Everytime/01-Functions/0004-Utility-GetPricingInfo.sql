@@ -131,7 +131,7 @@ BEGIN
 	ORDER BY ValidFrom desc;
 
 
-	IF @competentAuthority = 1 AND GETDATE() >= (SELECT MAX(ValidFrom) FROM [Lookup].[PricingStructure]) 
+	IF @competentAuthority = 1 AND GETDATE() >= (SELECT [Value] from [Utility].[SystemSettings] where id = 1) 
 	BEGIN
 		--Use the new fees and logic
 		DECLARE @fixedWasteCategoryFee MONEY;
