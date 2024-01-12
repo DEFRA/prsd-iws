@@ -130,8 +130,7 @@ BEGIN
 		AND (@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
 	ORDER BY ValidFrom desc;
 
-
-	IF @competentAuthority = 1 AND GETDATE() >= (SELECT [Value] from [Utility].[SystemSettings] where id = 1) 
+	IF @competentAuthority = 1 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
 	BEGIN
 		--Use the new fees and logic
 		DECLARE @fixedWasteCategoryFee MONEY;
