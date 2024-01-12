@@ -1,14 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
-    using Core.Notification;
-    using Core.Shared;
     using Domain.Finance;
     using Domain.NotificationApplication;
     using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
     using System.Data.SqlClient;
-    using System.Linq;
     using System.Threading.Tasks;
 
     public class PriceRepository : IPriceRepository
