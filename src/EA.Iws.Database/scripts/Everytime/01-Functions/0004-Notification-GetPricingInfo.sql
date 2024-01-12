@@ -1,12 +1,12 @@
-﻿IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'Utility')
-	EXEC('CREATE SCHEMA [Utility] AUTHORIZATION [dbo]');
+﻿IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'Notification')
+	EXEC('CREATE SCHEMA [Notification] AUTHORIZATION [dbo]');
 GO
 
-IF OBJECT_ID('[Utility].[GetPricingInfo]') IS NULL
-    EXEC('CREATE FUNCTION [Utility].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
+IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
+    EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
 GO
 
-ALTER FUNCTION [Utility].[GetPricingInfo](
+ALTER FUNCTION [Notification].[GetPricingInfo](
     @notificationId		UNIQUEIDENTIFIER)
 RETURNS @PricingInfo TABLE
 (
@@ -43,7 +43,7 @@ BEGIN
 		AND nsc.NewStatus = 2
 		) AS DATA;
 
-	SELECT @submittedDate = CASE WHEN @submittedDate IS NULL THEN GETDATE() END
+	SELECT @submittedDate = CASE WHEN @submittedDate IS NULL THEN GETDATE() ELSE @submittedDate END
 
     SELECT
         @numberOfShipments = NumberOfShipments,
