@@ -18,7 +18,7 @@
         public async Task<PriceAndRefund> GetPriceAndRefundByNotificationId(Guid notificationId)
         {
             return await context.Database.SqlQuery<PriceAndRefund>(@"
-                SELECT * FROM [Utility].[GetPricingInfo] (@NotificationId)",
+                SELECT * FROM [Notification].[GetPricingInfo] (@NotificationId)",
                 new SqlParameter("@NotificationId", notificationId)).FirstOrDefaultAsync();
         }
     }

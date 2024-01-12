@@ -151,7 +151,7 @@
     <Content Include="scripts\Update\0007-Support\20231214-Add-WasteComponentType-Change.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
-    <Content Include="scripts\Everytime\01-Functions\0004-Utility-GetPricingInfo.sql" />
+    <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0002-uspUpdateExportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\02-Views\0022-Reports-FreedomOfInformation.sql" />
