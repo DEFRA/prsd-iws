@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Shared;
@@ -475,16 +476,18 @@
         public async Task PricingStructureCorrectValue(UKCompetentAuthority ca, TradeDirection td, int nt, bool isInterim,
             int numberOfShipments, int expectedPrice)
         {
-            var result = (await context.PricingStructures.SingleAsync(
-                p => p.CompetentAuthority == ca &&
-                     p.Activity.TradeDirection == td &&
-                     (int)p.Activity.NotificationType == nt &&
-                     p.Activity.IsInterim == isInterim &&
-                     (p.ShipmentQuantityRange.RangeFrom <= numberOfShipments &&
-                      (p.ShipmentQuantityRange.RangeTo == null || p.ShipmentQuantityRange.RangeTo >= numberOfShipments))))
-                .Price;
+            var result = await context.PricingStructures
+                .OrderByDescending(ps => ps.ValidFrom)
+                .Where(p => p.CompetentAuthority == ca &&
+                    p.Activity.TradeDirection == td &&
+                    (int)p.Activity.NotificationType == nt &&
+                    p.Activity.IsInterim == isInterim &&
+                    p.ValidFrom <= new DateTime(2023, 1, 1) &&
+                    (p.ShipmentQuantityRange.RangeFrom <= numberOfShipments &&
+                    (p.ShipmentQuantityRange.RangeTo == null || p.ShipmentQuantityRange.RangeTo >= numberOfShipments)))
+                .FirstOrDefaultAsync();
 
-            Assert.Equal(expectedPrice, result);
+            Assert.Equal(expectedPrice, result.Price);
         }
     }
 }
