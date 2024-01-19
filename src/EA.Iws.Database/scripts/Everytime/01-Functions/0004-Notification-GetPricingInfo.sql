@@ -159,7 +159,7 @@ BEGIN
 			--Refund is the price minus the price for the lowest range
 			--So rather than calculate the refund based on something like the logic above just subtract the price for lowest range from calculated price above
 			SELECT TOP 1
-				@potentialRefund = CASE WHEN @numberOfShipments > 0 THEN 0 ELSE (@price - ps.Price) END
+				@potentialRefund = CASE WHEN @numberOfShipmentsMade > 0 THEN 0 ELSE (@price - ps.Price) END
 			FROM
 				[Lookup].[PricingStructure] ps
 				LEFT JOIN [Lookup].[ShipmentQuantityRange] sqr ON sqr.Id = ps.ShipmentQuantityRangeId
