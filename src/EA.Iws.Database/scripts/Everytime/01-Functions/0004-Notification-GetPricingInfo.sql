@@ -172,7 +172,7 @@ BEGIN
 		END
 
 		DECLARE @wasteComponentFees MONEY;
-		SELECT @fixedWasteCategoryFee = SUM(Price) FROM [Lookup].[PricingFixedFee] where WasteComponentTypeId in (
+		SELECT @wasteComponentFees = SUM(Price) FROM [Lookup].[PricingFixedFee] where WasteComponentTypeId in (
 			SELECT wc.WasteComponentType 
 			FROM [Notification].[Notification] n
 			LEFT JOIN [Notification].[WasteComponentInfo] wc on wc.NotificationId = n.Id
@@ -183,7 +183,7 @@ BEGIN
 			LEFT JOIN ImportNotification.WasteComponent iwc on iwc.ImportNotificationId = n.Id
 			WHERE n.id = @notificationId)
 
-		SELECT @price += @fixedWasteCategoryFee;
+		SELECT @price += ISNULL(@wasteComponentFees,0);
 	END;
 
 	INSERT @PricingInfo
