@@ -18,7 +18,7 @@
 
         public Importer.Importer Importer { get; private set; }
 
-        public int Charge { get; private set; }
+        public decimal Charge { get; private set; }
 
         public NotificationApplicationCompletionProgress Progress { get; private set; }
 
@@ -28,7 +28,7 @@
             WasteDisposal wasteDisposal,
             Exporter.Exporter exporter,
             Importer.Importer importer,
-            int charge,
+            decimal charge,
             NotificationApplicationCompletionProgress progress)
         {
             return new NotificationApplicationOverview

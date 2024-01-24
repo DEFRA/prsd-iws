@@ -17,7 +17,7 @@
 
         public string NotificationNumber { get; set; }
 
-        public int Charge { get; set; }
+        public decimal Charge { get; set; }
 
         public NotificationStatus Status { get; set; }
 
@@ -78,7 +78,7 @@
         {
         }
 
-        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge, NotificationApplicationCompletionProgress progress)
+        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, decimal notificationCharge, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = submitSummaryData.NotificationId;
             CompetentAuthorityName = EnumHelper.GetDisplayName(submitSummaryData.CompetentAuthority);
