@@ -54,8 +54,11 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
-    <Content Include="scripts\Update\0007-Support\20240103-CCN062-DataChangesPricingStructureMostly.sql" />
     <Content Include="scripts\Update\0007-Support\20240103-CCN062-AddingFixedFeeTable.sql" />
+    <Content Include="scripts\Update\0007-Support\20240103-CCN062-DataChangesPricingStructureMostly.sql" />
+    <Content Include="scripts\Update\0007-Support\20240123-CCN062-AlterShipmentTables.sql" />
+    <Content Include="scripts\Update\0007-Support\20240123-CCN062-SepaChargeMatrix.sql" />
+    <Content Include="scripts\Update\0007-Support\20240123-CCN062-AlteringFixedFeeTableForSepa.sql" />
     <Content Include="scripts\TestData\20230612-1700-create-archive-notifications-test-data.sql" />
     <Content Include="scripts\Update\0007-Support\20230517-R691482-Update-IWSO-Email-Address.sql" />
     <Content Include="Readme.txt" />

@@ -41,5 +41,7 @@
 
         [Display(Name = "EndDateDisplay", ResourceType = typeof(ShipmentViewModelResources))]
         public OptionalDateInputViewModel EndDate { get; set; }
+
+        public bool WillSelfEnterShipmentData { get; set; }
     }
 }

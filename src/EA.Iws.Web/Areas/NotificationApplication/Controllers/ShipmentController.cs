@@ -25,11 +25,13 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var shipmentData =
-                await
-                    mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
-
+            var shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
+                        
             var model = new ShipmentInfoViewModel(shipmentData);
+            model.ShowSelfEnterShipmentData = false;
+
+
+            // TODO - AAA Handle Self Entering Data Question show/hide database logic
 
             return View(model);
         }

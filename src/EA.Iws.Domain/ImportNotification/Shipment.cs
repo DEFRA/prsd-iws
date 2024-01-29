@@ -14,11 +14,13 @@
 
         public int NumberOfShipments { get; private set; }
 
+        public bool WillSelfEnterShipmentData { get; private set; }
+        
         protected Shipment()
         {
         }
 
-        public Shipment(Guid importNotificationId, ShipmentPeriod period, ShipmentQuantity quantity, int numberOfShipments)
+        public Shipment(Guid importNotificationId, ShipmentPeriod period, ShipmentQuantity quantity, int numberOfShipments, bool willSelfEnterShipmentData)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNull(() => period, period);
@@ -29,6 +31,7 @@
             Period = period;
             Quantity = quantity;
             NumberOfShipments = numberOfShipments;
+            WillSelfEnterShipmentData = willSelfEnterShipmentData;
         }
 
         public void UpdateNumberOfShipments(int numberOfShipments)

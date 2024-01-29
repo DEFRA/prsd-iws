@@ -39,6 +39,8 @@
                 quantity = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
             }
         }
+        
+        public bool WillSelfEnterShipmentData { get; private set; }
 
         public void UpdateQuantity(ShipmentQuantity shipmentQuantity)
         {
