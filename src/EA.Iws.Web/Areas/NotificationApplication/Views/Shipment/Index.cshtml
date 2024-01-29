@@ -8,7 +8,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    
+
     @Html.HiddenFor(m => m.Status)
     @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
 
@@ -24,8 +24,31 @@
         </div>
     </div>
 
+    if (Model.ShowSelfEnterShipmentData)
+    {
+        <hr>
+        <h2 class="govuk-heading-m">@ShipmentResources.WillSelfEnterShipmentData</h2>
+        @Html.Gds().HintSpan(ShipmentResources.WillSelfEnterShipmentDataHint)
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.WillSelfEnterShipmentData, true, new { id = "yes", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="yes">
+                        Yes
+                    </label>
+                </div>
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.WillSelfEnterShipmentData, false, new { id = "no", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="no">
+                        No
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    }
+
     <hr>
-    <h1 class="govuk-heading-l">@ShipmentResources.HeaderQty</h1>
+    <h1 class="govuk-heading-m">@ShipmentResources.HeaderQty</h1>
     @Html.Gds().HintSpan(ShipmentResources.NumberHint)
     <div class="grid-row">
         <div class="column-half">
@@ -45,7 +68,7 @@
     </div>
 
     <hr>
-    <h1 class="govuk-heading-l">@ShipmentResources.HeaderDates</h1>
+    <h1 class="govuk-heading-m">@ShipmentResources.HeaderDates</h1>
 
     <div class="grid-row">
         <div class="column-half">
@@ -61,24 +84,24 @@
                         @Html.Gds().ValidationMessageFor(m => m.StartYear)
                     </div>
                     <div class="govuk-date-input" id="dob">
-                        <div class="govuk-date-input__item">                            
-                            <div class="govuk-form-group">                                
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
                                 <label class="govuk-label govuk-date-input__label" for="StartDay">
                                     @Html.Gds().LabelFor(m => m.StartDay)
                                 </label>
                                 @Html.Gds().TextBoxFor(m => m.StartDay, new { type = "number", min = "1", max = "31", @class = "govuk-input govuk-date-input__input govuk-input--width-2" }, false)
                             </div>
                         </div>
-                        <div class="govuk-date-input__item">                            
-                            <div class="govuk-form-group">                                
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
                                 <label class="govuk-label govuk-date-input__label" for="StartMonth">
                                     @Html.Gds().LabelFor(m => m.StartMonth)
                                 </label>
                                 @Html.Gds().TextBoxFor(m => m.StartMonth, new { type = "number", min = "1", max = "12", @class = "govuk-input govuk-date-input__input govuk-input--width-2" }, false)
                             </div>
                         </div>
-                        <div class="govuk-date-input__item">                            
-                            <div class="govuk-form-group">                                
+                        <div class="govuk-date-input__item">
+                            <div class="govuk-form-group">
                                 <label class="govuk-label govuk-date-input__label" for="StartYear">
                                     @Html.Gds().LabelFor(m => m.StartYear)
                                 </label>
@@ -87,7 +110,7 @@
                         </div>
                     </div>
                 </fieldset>
-            </div>            
+            </div>
         </div>
 
         <div class="column-half">
@@ -129,7 +152,7 @@
                         </div>
                     </div>
                 </fieldset>
-            </div>            
+            </div>
         </div>
     </div>
 
