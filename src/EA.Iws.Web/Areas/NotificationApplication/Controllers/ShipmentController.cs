@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification.Audit;
+    using EA.Iws.Requests.ImportNotification;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.IntendedShipments;
@@ -26,10 +27,13 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
-                        
             var model = new ShipmentInfoViewModel(shipmentData);
-            model.ShowSelfEnterShipmentData = false;
 
+            var notificationInfo = await mediator.SendAsync(new GetNotificationDetails(id));
+            if (notificationInfo.CompetentAuthority == Core.Notification.UKCompetentAuthority.Scotland)
+            {
+                model.ShowSelfEnterShipmentData = false;
+            }
 
             // TODO - AAA Handle Self Entering Data Question show/hide database logic
 
