@@ -286,15 +286,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Shipment {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please note if you select ‘No’ you will be charged £25 per shipment for SEPA staff to upload the shipment data on your behalf..
-        /// </summary>
-        public static string WillSelfEnterShipmentDataHint {
-            get {
-                return ResourceManager.GetString("WillSelfEnterShipmentDataHint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please select whether you will be entering shipment data yourselves.
         /// </summary>
         public static string WillSelfEnterShipmentDataRequired {

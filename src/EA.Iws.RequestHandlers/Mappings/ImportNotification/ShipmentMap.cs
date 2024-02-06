@@ -11,7 +11,7 @@
             return new Domain.ImportNotification.Shipment(source.ImportNotificationId,
                 new ShipmentPeriod(source.StartDate.Value, source.EndDate.Value, parameter.AllFacilitiesPreconsented.GetValueOrDefault()),
                 new ShipmentQuantity(source.Quantity.Value, source.Unit.Value),
-                source.TotalShipments.Value, source.WillSelfEnterShipmentData);
+                source.TotalShipments.Value);
         }
     }
 }

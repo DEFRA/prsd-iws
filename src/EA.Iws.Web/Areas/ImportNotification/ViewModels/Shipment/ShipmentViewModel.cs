@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shipment
 {
-    using System.ComponentModel.DataAnnotations;
-    using System.Web.Mvc;
     using Core.ImportNotification.Draft;
     using Core.Shared;
     using Prsd.Core.Helpers;
+    using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using Web.ViewModels.Shared;
 
     public class ShipmentViewModel
@@ -41,7 +41,5 @@
 
         [Display(Name = "EndDateDisplay", ResourceType = typeof(ShipmentViewModelResources))]
         public OptionalDateInputViewModel EndDate { get; set; }
-
-        public bool WillSelfEnterShipmentData { get; set; }
     }
 }

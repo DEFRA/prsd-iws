@@ -14,7 +14,6 @@
             Property(x => x.Period.LastDate).HasColumnName("LastDate").IsRequired();
             Property(x => x.Quantity.Quantity).HasColumnName("Quantity").IsRequired().HasPrecision(18, 4);
             Property(x => x.Quantity.Units).HasColumnName("Units").IsRequired();
-            Property(x => x.WillSelfEnterShipmentData).IsRequired();
             Property(x => x.ImportNotificationId).IsRequired();
         }
     }
