@@ -192,9 +192,6 @@
   <data name="WillSelfEnterShipmentData" xml:space="preserve">
     <value>Will you be entering the shipment data yourselves into the digital service?</value>
   </data>
-  <data name="WillSelfEnterShipmentDataHint" xml:space="preserve">
-    <value>Please note if you select ‘No’ you will be charged £25 per shipment for SEPA staff to upload the shipment data on your behalf.</value>
-  </data>
   <data name="WillSelfEnterShipmentDataRequired" xml:space="preserve">
     <value>Please select whether you will be entering shipment data yourselves</value>
   </data>

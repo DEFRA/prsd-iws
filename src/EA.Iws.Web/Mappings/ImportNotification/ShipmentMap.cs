@@ -15,8 +15,7 @@
                 Quantity = source.TotalQuantity,
                 Unit = source.Units,
                 StartDate = source.StartDate.AsDateTime(),
-                EndDate = source.EndDate.AsDateTime(),
-                WillSelfEnterShipmentData = source.WillSelfEnterShipmentData
+                EndDate = source.EndDate.AsDateTime()
             };
 
             return shipment;
