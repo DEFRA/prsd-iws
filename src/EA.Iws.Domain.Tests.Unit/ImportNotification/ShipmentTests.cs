@@ -20,7 +20,7 @@
         [Fact]
         public void CanCreateShipment()
         {
-            var shipment = new Shipment(ImportNotificationId, period, quantity, 50, false);
+            var shipment = new Shipment(ImportNotificationId, period, quantity, 50);
 
             Assert.IsType<Shipment>(shipment);
         }
@@ -28,19 +28,19 @@
         [Fact]
         public void ImportNotificationIdCantBeEmpty()
         {
-            Assert.Throws<ArgumentException>(() => new Shipment(new Guid(), period, quantity, 50, false));
+            Assert.Throws<ArgumentException>(() => new Shipment(new Guid(), period, quantity, 50));
         }
 
         [Fact]
         public void ShipmentPeriodCantBeEmpty()
         {
-            Assert.Throws<ArgumentNullException>(() => new Shipment(ImportNotificationId, null, quantity, 50, false));
+            Assert.Throws<ArgumentNullException>(() => new Shipment(ImportNotificationId, null, quantity, 50));
         }
 
         [Fact]
         public void ShipmentQuantityCantBeEmpty()
         {
-            Assert.Throws<ArgumentNullException>(() => new Shipment(ImportNotificationId, period, null, 50, false));
+            Assert.Throws<ArgumentNullException>(() => new Shipment(ImportNotificationId, period, null, 50));
         }
 
         [Theory]
@@ -48,7 +48,7 @@
         [InlineData(-1)]
         public void NumberOfShipmentsCantBeZeroOrNegative(int numberOfShipments)
         {
-            Assert.Throws<ArgumentOutOfRangeException>(() => new Shipment(ImportNotificationId, period, quantity, numberOfShipments, false));
+            Assert.Throws<ArgumentOutOfRangeException>(() => new Shipment(ImportNotificationId, period, quantity, numberOfShipments));
         }
 
         [Fact]
