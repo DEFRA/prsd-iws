@@ -12,6 +12,7 @@
     @Html.HiddenFor(m => m.Status)
     @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
     @Html.HiddenFor(m => m.ShowSelfEnterShipmentData)
+    @Html.HiddenFor(m => m.WillSelfEnterShipmentDataHintWithPrice)
 
     <h1 class="govuk-heading-l">@ShipmentResources.HeaderNumber</h1>
     @Html.Gds().HintSpan(ShipmentResources.NumberHint)
