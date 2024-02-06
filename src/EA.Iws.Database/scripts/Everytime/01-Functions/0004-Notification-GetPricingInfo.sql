@@ -212,8 +212,8 @@ BEGIN
 			RETURN;
 		END;
 
-		DECLARE @applySelfEnterDataFee bit;
-		SELECT @applySelfEnterDataFee = WillSelfEnterShipmentData FROM (
+		DECLARE @selfEnteringData bit;
+		SELECT @selfEnteringData = WillSelfEnterShipmentData FROM (
 			SELECT WillSelfEnterShipmentData 
 			From [Notification].[ShipmentInfo]
 			where NotificationId = @notificationId
@@ -222,7 +222,7 @@ BEGIN
 			From [ImportNotification].[Shipment]
 			where ImportNotificationId = @notificationId
 		) AS shipmentInfo
-		IF @applySelfEnterDataFee = 0
+		IF @selfEnteringData = 0
 		BEGIN
 			SET @price += (@numberOfShipments * (select [Value] from [Lookup].[SystemSettings] where Id = 3))
 		END

@@ -29,7 +29,7 @@
             UnitsSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
             IsPreconsentedRecoveryFacility = intendedShipmentData.IsPreconsentedRecoveryFacility;
             Status = intendedShipmentData.Status;
-
+            WillSelfEnterShipmentData = intendedShipmentData.WillSelfEnterShipmentData;
             if (intendedShipmentData.HasShipmentData)
             {
                 EndDay = intendedShipmentData.LastDate.Day;
@@ -50,6 +50,8 @@
         [Display(Name = "NumberOfShipments", ResourceType = typeof(ShipmentResources))]
         public string NumberOfShipments { get; set; }
         
+        public string WillSelfEnterShipmentDataHintWithPrice { get; set; }
+
         public bool ShowSelfEnterShipmentData { get; set; }
 
         [RequiredIf("ShowSelfEnterShipmentData", true, ErrorMessageResourceName = "WillSelfEnterShipmentDataRequired", ErrorMessageResourceType = typeof(ShipmentResources))]
@@ -201,7 +203,8 @@
                 Convert.ToDecimal(Quantity),
                 Units.GetValueOrDefault(),
                 startDate,
-                endDate);
+                endDate,
+                WillSelfEnterShipmentData ?? true);
         }
     }
 }

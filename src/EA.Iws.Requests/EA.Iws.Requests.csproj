@@ -430,6 +430,7 @@
     <Compile Include="SharedUsers\DeleteSharedUserForNotification.cs" />
     <Compile Include="SharedUsers\GetSharedUserById.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationId.cs" />
+    <Compile Include="SystemSettings\GetSystemSettingById.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthorities.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryId.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPoints.cs" />

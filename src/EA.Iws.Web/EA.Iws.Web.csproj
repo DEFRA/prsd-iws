@@ -874,6 +874,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\Facility.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteCategories\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteComponent\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedSelfEnterShipmentData.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -5221,6 +5222,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Shipment\ShipmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShipmentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\SpecialHandling\SpecialHandlingResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5332,6 +5334,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PaymentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
