@@ -65,7 +65,7 @@
         }
         private ShipmentInfo GetRepoData(bool correctUnit)
         {
-            return new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now, false), 10, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms));
+            return new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now, false), 10, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), true);
         }
     }
 }
