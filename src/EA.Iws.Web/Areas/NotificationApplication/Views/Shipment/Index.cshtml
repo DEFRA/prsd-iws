@@ -11,6 +11,7 @@
 
     @Html.HiddenFor(m => m.Status)
     @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
+    @Html.HiddenFor(m => m.ShowSelfEnterShipmentData)
 
     <h1 class="govuk-heading-l">@ShipmentResources.HeaderNumber</h1>
     @Html.Gds().HintSpan(ShipmentResources.NumberHint)
@@ -28,20 +29,23 @@
     {
         <hr>
         <h2 class="govuk-heading-m">@ShipmentResources.WillSelfEnterShipmentData</h2>
-        @Html.Gds().HintSpan(ShipmentResources.WillSelfEnterShipmentDataHint)
+        @Html.Gds().HintSpan(Model.WillSelfEnterShipmentDataHintWithPrice)
+        @Html.Gds().ValidationMessageFor(m => m.WillSelfEnterShipmentData)
         <fieldset class="govuk-fieldset">
-            <div class="govuk-radios" data-module="govuk-radios">
-                <div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.WillSelfEnterShipmentData, true, new { id = "yes", @class = "govuk-radios__input" })
-                    <label class="govuk-label govuk-radios__label" for="yes">
-                        Yes
-                    </label>
-                </div>
-                <div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.WillSelfEnterShipmentData, false, new { id = "no", @class = "govuk-radios__input" })
-                    <label class="govuk-label govuk-radios__label" for="no">
-                        No
-                    </label>
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WillSelfEnterShipmentData)">
+                <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                        @Html.RadioButtonFor(m => m.WillSelfEnterShipmentData, true, new { id = "yes", @class = "govuk-radios__input" })
+                        <label class="govuk-label govuk-radios__label" for="yes">
+                            Yes
+                        </label>
+                    </div>
+                    <div class="govuk-radios__item">
+                        @Html.RadioButtonFor(m => m.WillSelfEnterShipmentData, false, new { id = "no", @class = "govuk-radios__input" })
+                        <label class="govuk-label govuk-radios__label" for="no">
+                            No
+                        </label>
+                    </div>
                 </div>
             </div>
         </fieldset>

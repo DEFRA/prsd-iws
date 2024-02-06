@@ -175,6 +175,7 @@
     <Compile Include="INotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="ISystemSettingRepository.cs" />
     <Compile Include="IUnitedKingdomCompetentAuthorityRepository.cs" />
     <Compile Include="Movement\BulkUpload\DraftBulkUpload.cs" />
     <Compile Include="Movement\BulkUpload\DraftPackagingInfo.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationUtilities.cs" />
     <Compile Include="NotificationApplication\IPricingFixedFeeRepository.cs" />
     <Compile Include="NotificationApplication\IPriceRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserHistoryRepository.cs" />
@@ -319,6 +321,7 @@
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
     <Compile Include="NotificationApplication\Audit.cs" />
+    <Compile Include="NotificationApplication\NotificationUtilities.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
     <Compile Include="IntraCountryExportAllowed.cs" />
@@ -437,6 +440,7 @@
     <Compile Include="NotificationApplication\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotificationApplication\Shipment\ShipmentInfo.cs" />
+    <Compile Include="SystemSetting.cs" />
     <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />
