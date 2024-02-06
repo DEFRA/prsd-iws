@@ -126,7 +126,7 @@
         {
             context.ShipmentInfos.Add(new ShipmentInfo(id,
                 new ShipmentPeriod(new DateTime(2015, 3, 3), new DateTime(2015, 5, 5), false), 25,
-                new ShipmentQuantity(25, ShipmentQuantityUnits.CubicMetres)));
+                new ShipmentQuantity(25, ShipmentQuantityUnits.CubicMetres), true));
         }
 
         private void AddTransportRoute(Guid id)
