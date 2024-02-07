@@ -104,6 +104,7 @@
     <Compile Include="Mappings\Common\ActivityMapping.cs" />
     <Compile Include="Mappings\Common\DateTimeOffsetRangeMapping.cs" />
     <Compile Include="Mappings\Common\PricingFixedFeeMapping.cs" />
+    <Compile Include="Mappings\Common\SystemSettingsMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookRecordMapping.cs" />
     <Compile Include="Mappings\Common\DateRangeMapping.cs" />
@@ -324,6 +325,7 @@
     <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\SharedUserHistoryRepository.cs" />
     <Compile Include="Repositories\SharedUserRepository.cs" />
+    <Compile Include="Repositories\SystemSettingRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UnitedKingdomCompetentAuthorityRepository.cs" />

@@ -22,6 +22,7 @@ BEGIN
     DECLARE @tradeDirection INT;
     DECLARE @isInterim BIT;
 	DECLARE @submittedDate DATETIMEOFFSET;
+	DECLARE @fixedWasteCategoryFee MONEY;
 	
 	SELECT @submittedDate = ChangeDate
 	 FROM (
@@ -133,9 +134,9 @@ BEGIN
 	IF @competentAuthority = 1 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
 	BEGIN
 		--Use the new fees and logic
-		DECLARE @fixedWasteCategoryFee MONEY;
-
-		select @fixedWasteCategoryFee = Price from Lookup.PricingFixedFee where WasteCategoryTypeId in (
+		SELECT @fixedWasteCategoryFee = Price 
+		FROM [Lookup].[PricingFixedFee]
+		WHERE WasteCategoryTypeId in (
 			SELECT nwt.WasteCategoryType FROM Notification.Notification n
 			LEFT JOIN Notification.WasteType nwt on nwt.NotificationId = n.Id
 			WHERE n.id = @notificationId
@@ -143,6 +144,8 @@ BEGIN
 			SELECT inwt.WasteCategoryType FROM ImportNotification.Notification n
 			LEFT JOIN ImportNotification.WasteType inwt on inwt.ImportNotificationId = n.Id
 			WHERE n.id = @notificationId)
+		AND CompetentAuthority = @competentAuthority
+
 		IF @fixedWasteCategoryFee > 0 
 		BEGIN
 			INSERT @PricingInfo
@@ -184,6 +187,45 @@ BEGIN
 			WHERE n.id = @notificationId)
 
 		SELECT @price += ISNULL(@wasteComponentFees,0);
+	END;
+
+	IF @competentAuthority = 2 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 2) 
+	BEGIN
+		SELECT @fixedWasteCategoryFee = Price 
+		FROM [Lookup].[PricingFixedFee]
+		WHERE WasteCategoryTypeId in (
+			SELECT nwt.WasteCategoryType 
+			FROM [Notification].[Notification] n
+			LEFT JOIN [Notification].[WasteType] nwt on nwt.NotificationId = n.Id
+			WHERE n.id = @notificationId
+			UNION 
+			SELECT inwt.WasteCategoryType 
+			FROM [ImportNotification].[Notification] n
+			LEFT JOIN ImportNotification.WasteType inwt on inwt.ImportNotificationId = n.Id
+			WHERE n.id = @notificationId)
+		AND CompetentAuthority = @competentAuthority
+
+		IF @fixedWasteCategoryFee > 0 
+		BEGIN
+			INSERT @PricingInfo
+			SELECT @fixedWasteCategoryFee, 0;
+			RETURN;
+		END;
+
+		DECLARE @selfEnteringData bit;
+		SELECT @selfEnteringData = WillSelfEnterShipmentData FROM (
+			SELECT WillSelfEnterShipmentData 
+			From [Notification].[ShipmentInfo]
+			where NotificationId = @notificationId
+			UNION
+			SELECT WillSelfEnterShipmentData 
+			From [ImportNotification].[Shipment]
+			where ImportNotificationId = @notificationId
+		) AS shipmentInfo
+		IF @selfEnteringData = 0
+		BEGIN
+			SET @price += (@numberOfShipments * (select [Value] from [Lookup].[SystemSettings] where Id = 3))
+		END
 	END;
 
 	INSERT @PricingInfo

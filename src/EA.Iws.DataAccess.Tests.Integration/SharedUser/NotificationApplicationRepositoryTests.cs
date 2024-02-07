@@ -263,7 +263,7 @@
             var notificationId = notification.Id;
 
             var shipmentsHistory = new NumberOfShipmentsHistory(notificationId, 10, DateTime.Now);
-            var shipmentsInfo = new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now.AddDays(10), true), 10, new ShipmentQuantity(1.0m, ShipmentQuantityUnits.Tonnes));
+            var shipmentsInfo = new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now.AddDays(10), true), 10, new ShipmentQuantity(1.0m, ShipmentQuantityUnits.Tonnes), true);
 
             context.NumberOfShipmentsHistories.Add(shipmentsHistory);
             context.ShipmentInfos.Add(shipmentsInfo);
@@ -313,7 +313,7 @@
             await repository.GetByNotificationId(notificationId);
 
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
-        
+
             context.DeleteOnCommit(producerCollection);
             await context.SaveChangesAsync();
 
@@ -332,7 +332,7 @@
 
             var notificationId = notification.Id;
 
-            var shipmentsInfo = new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now.AddDays(10), true), 10, new ShipmentQuantity(1.0m, ShipmentQuantityUnits.Tonnes));
+            var shipmentsInfo = new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now.AddDays(10), true), 10, new ShipmentQuantity(1.0m, ShipmentQuantityUnits.Tonnes), true);
             var assessment = new NotificationAssessment(notificationId);
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.NotificationReceived, assessment);
             var facilityCollection = new FacilityCollection(notificationId);
@@ -345,7 +345,7 @@
             context.SaveChanges();
 
             var repository = new ShipmentInfoRepository(context,
-                notificationApplicationAuthorization);
+                notificationApplicationAuthorization, A.Fake<INotificationUtilities>());
 
             await repository.GetByNotificationId(notificationId);
 

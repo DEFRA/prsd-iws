@@ -2,6 +2,7 @@
 {
     using Domain.Finance;
     using Domain.NotificationApplication;
+    using EA.Iws.Core.Notification;
     using EA.Iws.Core.WasteComponentType;
     using EA.Iws.Core.WasteType;
     using System;
@@ -33,7 +34,7 @@
                 .ToArrayAsync();
         }
 
-        public async Task<PricingFixedFee> GetWasteCategoryFee(WasteCategoryType wasteCategory, DateTimeOffset notificationSubmittedDate)
+        public async Task<PricingFixedFee> GetWasteCategoryFee(UKCompetentAuthority competentAuthority, WasteCategoryType wasteCategory, DateTimeOffset notificationSubmittedDate)
         {
             return await context.PricingFixedFees
                 .OrderByDescending(ps => ps.ValidFrom)
@@ -42,7 +43,8 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<PricingFixedFee> GetWasteComponentFee(WasteComponentType wasteComponent, DateTimeOffset notificationSubmittedDate)
+        public async Task<PricingFixedFee> GetWasteComponentFee(UKCompetentAuthority competentAuthority, WasteComponentType wasteComponent, 
+            DateTimeOffset notificationSubmittedDate)
         {
             return await context.PricingFixedFees
                 .OrderByDescending(ps => ps.ValidFrom)

@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification.Audit;
+    using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.SystemSettings;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.IntendedShipments;
@@ -25,11 +27,20 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var shipmentData =
-                await
-                    mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
-
+            var shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
             var model = new ShipmentInfoViewModel(shipmentData);
+
+            model.ShowSelfEnterShipmentData = false;
+            
+            if (shipmentData.ShouldDisplayShipmentSelfEnterDataQuestion)
+            {
+                model.ShowSelfEnterShipmentData = true;
+
+                var sepaFeeForNotSelfEnteringData = await mediator.SendAsync(new GetSystemSettingById(3));
+                model.WillSelfEnterShipmentDataHintWithPrice =
+                    "Please note if you select ‘No’ you will be charged £" + sepaFeeForNotSelfEnteringData.Value + 
+                        " per shipment for SEPA staff to upload the shipment data on your behalf.";
+            }
 
             return View(model);
         }
