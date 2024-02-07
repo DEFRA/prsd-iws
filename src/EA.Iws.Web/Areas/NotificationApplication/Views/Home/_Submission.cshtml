@@ -54,8 +54,8 @@
             @if (Model.Charge > 0)
             {
                 <div class="noti-charge govuk-body">
-                    <span>Notification<br />charge</span>
-                    <span class="price">&pound;@Model.Charge</span>
+                    <span>Notification Charge:</span>
+                    <span class="price">@Model.Charge.ToString("C")</span>
                     <div class="vat-message govuk-text">
                         All charges for environmental<br /> permits and licences are outside<br /> the scope of VAT
                     </div>

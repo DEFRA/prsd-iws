@@ -89,7 +89,7 @@
         {
             var anyShipmentPeriod = new ShipmentPeriod(new DateTime(2015, 3, 1), new DateTime(2016, 1, 1), true);
             var anyQuantity = new ShipmentQuantity(5m, Core.Shared.ShipmentQuantityUnits.Tonnes);
-            return new ShipmentInfo(NotificationId, anyShipmentPeriod, maxNumberOfMovements, anyQuantity);
+            return new ShipmentInfo(NotificationId, anyShipmentPeriod, maxNumberOfMovements, anyQuantity, true);
         }
 
         private Movement GetMovement(int number, Guid notificationId)

@@ -13,7 +13,7 @@
         public ShipmentQuantity Quantity { get; private set; }
 
         public int NumberOfShipments { get; private set; }
-
+        
         protected Shipment()
         {
         }

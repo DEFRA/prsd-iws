@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
+    using Domain.ImportNotification;
+    using Domain.Security;
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
-    using Domain.ImportNotification;
-    using Domain.Security;
 
     internal class ShipmentRepository : IShipmentRepository
     {

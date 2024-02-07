@@ -23,5 +23,9 @@
         public decimal Quantity { get; set; }
 
         public NotificationStatus Status { get; set; }
+
+        public bool? WillSelfEnterShipmentData { get; set; }
+
+        public bool ShouldDisplayShipmentSelfEnterDataQuestion { get; set; }
     }
 }

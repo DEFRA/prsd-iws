@@ -79,7 +79,7 @@
                 data.WasteDisposal,
                 data.Exporter,
                 data.Importer,
-                decimal.ToInt32(await chargeCalculator.GetValue(notificationId)), 
+                await chargeCalculator.GetValue(notificationId), 
                 progressService.GetNotificationProgressInfo(notificationId));
         }
     }

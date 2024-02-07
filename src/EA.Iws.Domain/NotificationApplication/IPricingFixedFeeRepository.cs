@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
+    using EA.Iws.Core.Notification;
     using EA.Iws.Core.WasteComponentType;
     using EA.Iws.Core.WasteType;
     using Finance;
@@ -11,9 +12,9 @@
     {
         Task<IEnumerable<PricingFixedFee>> Get();
 
-        Task<PricingFixedFee> GetWasteCategoryFee(WasteCategoryType wasteCategory, DateTimeOffset notificationSubmittedDate);
+        Task<PricingFixedFee> GetWasteCategoryFee(UKCompetentAuthority competentAuthority, WasteCategoryType wasteCategory, DateTimeOffset notificationSubmittedDate);
 
-        Task<PricingFixedFee> GetWasteComponentFee(WasteComponentType wasteComponent, DateTimeOffset notificationSubmittedDate);
+        Task<PricingFixedFee> GetWasteComponentFee(UKCompetentAuthority competentAuthority, WasteComponentType wasteComponent, DateTimeOffset notificationSubmittedDate);
 
         Task<IEnumerable<PricingFixedFee>> GetAllWasteComponentFees(DateTimeOffset notificationSubmittedDate);
     }
