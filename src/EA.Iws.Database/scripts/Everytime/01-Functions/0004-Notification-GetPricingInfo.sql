@@ -217,10 +217,6 @@ BEGIN
 			SELECT WillSelfEnterShipmentData 
 			From [Notification].[ShipmentInfo]
 			where NotificationId = @notificationId
-			UNION
-			SELECT WillSelfEnterShipmentData 
-			From [ImportNotification].[Shipment]
-			where ImportNotificationId = @notificationId
 		) AS shipmentInfo
 		IF @selfEnteringData = 0
 		BEGIN
