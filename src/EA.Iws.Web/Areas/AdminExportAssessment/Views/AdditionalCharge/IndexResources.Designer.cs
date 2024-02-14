@@ -79,6 +79,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AdditionalCharge {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No records available.
+        /// </summary>
+        public static string RecordsNotAvailable {
+            get {
+                return ResourceManager.GetString("RecordsNotAvailable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount charged.
         /// </summary>
         public static string TableHeaderAmount {
