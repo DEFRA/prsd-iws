@@ -364,6 +364,7 @@
     <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetArchivedNotificationById.cs" />
     <Compile Include="Notification\GetArchiveNotificationsByUser.cs" />
+    <Compile Include="Notification\GetNotificationAdditionalCharges.cs" />
     <Compile Include="Notification\GetNotificationAuditScreens.cs" />
     <Compile Include="Notification\GetNotificationAuditTable.cs" />
     <Compile Include="Notification\GetNotificationCompetentAuthority.cs" />

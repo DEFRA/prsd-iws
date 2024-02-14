@@ -812,6 +812,13 @@
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AdditionalChargeController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\AdditionalCharge\AdditionalChargeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\AdditionalCharge\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\ArchiveNotificationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
@@ -875,6 +882,7 @@
     <Content Include="Areas\ImportNotification\Views\WasteCategories\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteComponent\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedSelfEnterShipmentData.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\AdditionalCharge\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4217,6 +4225,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RefundDetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\AdditionalCharge\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Annex\AnnexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnnexResources.Designer.cs</LastGenOutput>
@@ -4741,6 +4753,7 @@
     <EmbeddedResource Include="Areas\Admin\Views\Menu\ExportNavigationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExportNavigationResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Menu\ImportNavigationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
