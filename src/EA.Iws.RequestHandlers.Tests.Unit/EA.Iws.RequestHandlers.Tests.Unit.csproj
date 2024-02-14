@@ -211,6 +211,7 @@
     <Compile Include="NotificationMovements\Create\CreateMovementCarriersHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandlerTests.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandlerTests.cs" />
+    <Compile Include="Notification\AdditionalChargesGetHandlerTests.cs" />
     <Compile Include="Notification\AddNotificationCommentsHandlerTests.cs" />
     <Compile Include="Notification\DeleteNotificationCommentHandlerTests.cs" />
     <Compile Include="Notification\GetNotificationCommentsHandlerTests.cs" />
