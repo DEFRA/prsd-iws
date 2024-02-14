@@ -123,6 +123,9 @@
   <data name="MainHeading" xml:space="preserve">
     <value>Additional charges</value>
   </data>
+  <data name="RecordsNotAvailable" xml:space="preserve">
+    <value>No records available</value>
+  </data>
   <data name="TableHeaderAmount" xml:space="preserve">
     <value>Amount charged</value>
   </data>
