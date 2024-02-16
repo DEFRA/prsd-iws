@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalCharge\CreateAdditionalCharge.cs" />
     <Compile Include="AddressBook\AddAddressBookEntry.cs" />
     <Compile Include="AddressBook\AddImportAddressBookEntry.cs" />
     <Compile Include="AddressBook\AddNewAddressBookEntry.cs" />
