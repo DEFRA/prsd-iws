@@ -9,9 +9,12 @@
     using Core.Notification.Audit;
     using Core.Shared;
     using EA.Iws.Core.Facilities;
+    using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Producers;
+    using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Facilities;
     using EA.Iws.Requests.Producers;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -26,11 +29,13 @@
     {
         private readonly IMediator mediator;
         private readonly IAuditService auditService;
+        private readonly IAdditionalChargeService additionalChargeService;
 
-        public EditContactController(IMediator mediator, IAuditService auditService)
+        public EditContactController(IMediator mediator, IAuditService auditService, IAdditionalChargeService additionalChargeService)
         {
             this.mediator = mediator;
             this.auditService = auditService;
+            this.additionalChargeService = additionalChargeService;
         }
 
         [HttpGet]
@@ -60,6 +65,16 @@
                     User.GetUserId(),
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Exporter);
+
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = AdditionalChargeType.Export,
+                ChargeAmount = model.AdditionalCharge.Amount.Value,
+                Comments = model.AdditionalCharge.Comments,
+                NotificationId = id
+            };
+
+            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
 
             return RedirectToAction("Index", "Overview");
         }
@@ -91,6 +106,16 @@
                     User.GetUserId(),
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Importer);
+
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = AdditionalChargeType.Importer,
+                ChargeAmount = model.AdditionalCharge.Amount.Value,
+                Comments = model.AdditionalCharge.Comments,
+                NotificationId = id
+            };
+
+            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
 
             return RedirectToAction("Index", "Overview");
         }
@@ -125,6 +150,16 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Producer);
 
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = AdditionalChargeType.Producer,
+                ChargeAmount = model.AdditionalCharge.Amount.Value,
+                Comments = model.AdditionalCharge.Comments,
+                NotificationId = id
+            };
+
+            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
+
             return RedirectToAction("Index", "Overview");
         }
 
@@ -156,6 +191,16 @@
                     User.GetUserId(),
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.DisposalFacilities);
+
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = AdditionalChargeType.Consignee,
+                ChargeAmount = model.AdditionalCharge.Amount.Value,
+                Comments = model.AdditionalCharge.Comments,
+                NotificationId = id
+            };
+
+            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
 
             return RedirectToAction("Index", "Overview");
         }

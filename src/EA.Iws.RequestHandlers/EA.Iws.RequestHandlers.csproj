@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalCharge\CreateAdditionalChargeHandler.cs" />
     <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\AddImportAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\AddNewAddressBookEntryHandler.cs" />

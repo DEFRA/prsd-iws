@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact
 {
+    using EA.Iws.Core.Shared;
     using System.ComponentModel.DataAnnotations;
 
     public class EditContactViewModel
@@ -47,5 +48,7 @@
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "PostalcodeRequired")]
         [Display(Name = "PostCode", ResourceType = typeof(EditContactViewModelResources))]
         public string PostalCode { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
     }
 }

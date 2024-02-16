@@ -27,5 +27,14 @@
                                                        .OrderByDescending(x => x.ChargeDate)
                                                        .ToListAsync();
         }
+
+        public async Task AddAdditionalCharge(AdditionalCharge additionalCharge)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(additionalCharge.NotificationId);
+
+            context.AdditionalCharges.Add(additionalCharge);
+
+            await context.SaveChangesAsync();
+        }
     }
 }

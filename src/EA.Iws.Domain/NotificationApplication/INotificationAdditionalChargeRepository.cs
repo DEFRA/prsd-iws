@@ -7,5 +7,7 @@
     public interface INotificationAdditionalChargeRepository
     {
         Task<IEnumerable<AdditionalCharge>> GetPagedNotificationAdditionalChargesById(Guid notificationId);
+
+        Task AddAdditionalCharge(AdditionalCharge additionalCharge);
     }
 }

@@ -858,6 +858,8 @@
       <DependentUpon>WasteComponentResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions\GdsExtensions.cs" />
+    <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
+    <Compile Include="Infrastructure\AdditionalCharge\IAdditionalChargeService.cs" />
     <Compile Include="Infrastructure\DefraCompaniesHouseApi.cs" />
     <Compile Include="Logging\ErrorUtils.cs" />
     <Compile Include="RazorHelpers\AttributesHelper.cs" />
@@ -1516,6 +1518,7 @@
     <Content Include="Views\NewUser\Accessibility.cshtml" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Shared\EditorTemplates\AdditionalChargeData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
