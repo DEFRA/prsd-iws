@@ -6,14 +6,19 @@
     using System.Web.Mvc;
     using Core.StateOfImport;
     using Core.TransportRoute;
+    using EA.Iws.Core.Shared;
 
     public class EntryPointViewModel
     {
-        public EntryPointViewModel(StateOfImportData stateOfImport, IList<EntryOrExitPointData> entryPoints)
+        public EntryPointViewModel(StateOfImportData stateOfImport, IList<EntryOrExitPointData> entryPoints, Guid notificationId)
         {
             CompetentAuthority = stateOfImport.CompetentAuthority.Name;
             EntryPoint = stateOfImport.EntryPoint.Name;
             EntryPoints = new SelectList(entryPoints, "Id", "Name");
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = notificationId
+            };
         }
 
         public EntryPointViewModel()
@@ -29,5 +34,7 @@
         [Display(ResourceType = typeof(UpdateJourneyResources), Name = "EntryPoint")]
         [Required(ErrorMessageResourceType = typeof(UpdateJourneyResources), ErrorMessageResourceName = "EntryPointRequired")]
         public Guid? SelectedEntryPoint { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
     }
 }

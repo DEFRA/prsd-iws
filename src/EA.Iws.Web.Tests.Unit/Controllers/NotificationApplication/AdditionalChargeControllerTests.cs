@@ -27,7 +27,7 @@
             {
                     new NotificationAdditionalChargeForDisplay()
                     {
-                        ChangeDetailType = AdditionalChargeType.Export,
+                        ChangeDetailType = AdditionalChargeType.EditExportDetails,
                         ChargeAmount = 100,
                         ChargeDate = DateTime.Now,
                         Comments = "Test"

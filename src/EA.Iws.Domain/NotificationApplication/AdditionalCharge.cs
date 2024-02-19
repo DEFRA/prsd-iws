@@ -11,15 +11,13 @@
         }
 
         public AdditionalCharge(Guid notificationId, DateTime chargeDate, decimal chargeAmount, int type, string comments)
-        {            
+        {
             NotificationId = notificationId;
             ChargeDate = chargeDate;
             ChargeAmount = chargeAmount;
             ChangeDetailType = (AdditionalChargeType)type;
             Comments = comments;
         }
-
-        //public Guid Id { get; set; }
 
         public Guid NotificationId { get; set; }
 

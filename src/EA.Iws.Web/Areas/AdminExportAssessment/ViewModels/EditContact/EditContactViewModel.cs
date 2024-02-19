@@ -17,6 +17,10 @@
             TelephonePrefix = data.Contact.TelephonePrefix;
             Telephone = data.Contact.Telephone;
             PostalCode = data.Address.PostalCode;
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = data.NotificationId
+            };
         }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]

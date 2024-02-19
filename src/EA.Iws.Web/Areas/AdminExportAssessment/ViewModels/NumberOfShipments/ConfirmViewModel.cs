@@ -2,6 +2,7 @@
 {
     using System;
     using Core.NotificationAssessment;
+    using EA.Iws.Core.Shared;
 
     public class ConfirmViewModel
     {
@@ -15,6 +16,8 @@
 
         public decimal NewCharge { get; set; }
 
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
         public ConfirmViewModel()
         {
         }
@@ -25,6 +28,10 @@
             CurrentCharge = data.CurrentCharge;
             OldNumberOfShipments = data.CurrentNumberOfShipments;
             NewCharge = data.NewCharge;
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = NotificationId
+            };
         }
 
         public bool IsIncrease
