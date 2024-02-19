@@ -3,6 +3,7 @@
     using EA.Iws.Core.Exporters;
     using EA.Iws.Core.Facilities;
     using EA.Iws.Core.Importer;
+    using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Producers;
     using EA.Iws.Core.Shared;
     using EA.Iws.Requests.Exporters;
@@ -224,12 +225,22 @@
 
         private EditContactViewModel ConvertToEditContactViewModel(dynamic data)
         {
+            var additionalChargeData = new AdditionalChargeData()
+            {
+                IsAdditionalChargesRequired = true,
+                Amount = 82,
+                Comments = "test",
+                NotificationId = notificationId,
+                AdditionalChargeType = AdditionalChargeType.EditExportDetails
+            };
+
             return new EditContactViewModel()
             {
                 FullName = data.Contact.FullName,
                 Email = data.Contact.Email,
                 TelephonePrefix = data.Contact.TelephonePrefix,
-                Telephone = data.Contact.Telephone
+                Telephone = data.Contact.Telephone,
+                AdditionalCharge = additionalChargeData
             };
         }
     }
