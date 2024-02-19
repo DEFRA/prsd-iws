@@ -9,8 +9,6 @@
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
     public class CreateAdditionalCharge : IRequest<bool>
     {
-        //public Guid Id { get; set; }
-
         public Guid NotificationId { get; set; }
 
         public DateTime ChargeDate { get; set; }

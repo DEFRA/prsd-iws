@@ -17,6 +17,8 @@
 
         public bool IsAddedToAddressBook { get; set; }
 
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
         public AddCarrierViewModel()
         {
             Address = new AddressData();

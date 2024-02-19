@@ -6,14 +6,19 @@
     using System.Web.Mvc;
     using Core.StateOfExport;
     using Core.TransportRoute;
+    using EA.Iws.Core.Shared;
 
     public class ExitPointViewModel
     {
-        public ExitPointViewModel(StateOfExportData stateOfExport, IList<EntryOrExitPointData> entryPoints)
+        public ExitPointViewModel(StateOfExportData stateOfExport, IList<EntryOrExitPointData> entryPoints, Guid notificationId)
         {
             CompetentAuthority = stateOfExport.CompetentAuthority.Name;
             ExitPoint = stateOfExport.ExitPoint.Name;
             ExitPoints = new SelectList(entryPoints, "Id", "Name");
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = notificationId
+            };
         }
 
         public ExitPointViewModel()
@@ -29,5 +34,7 @@
         [Display(ResourceType = typeof(UpdateJourneyResources), Name = "ExitPoint")]
         [Required(ErrorMessageResourceType = typeof(UpdateJourneyResources), ErrorMessageResourceName = "ExitPointRequired")]
         public Guid? SelectedExitPoint { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
     }
 }

@@ -26,7 +26,7 @@
             mapper = A.Fake<IMapper>();
 
             var charges = new List<AdditionalCharge>();
-            var chargeItem = new AdditionalCharge(notificationId, DateTime.UtcNow, 100, (int)AdditionalChargeType.Export, "Test");
+            var chargeItem = new AdditionalCharge(notificationId, DateTime.UtcNow, 100, (int)AdditionalChargeType.EditExportDetails, "Test");
 
             charges.Add(chargeItem);
 

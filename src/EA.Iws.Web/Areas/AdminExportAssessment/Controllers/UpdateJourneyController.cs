@@ -1,17 +1,24 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.Notification.Audit;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Notification.AdditionalCharge;
+    using EA.Iws.Core.Shared;
+    using EA.Iws.Requests.AdditionalCharge;
+    using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.SystemSettings;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using Requests.TransitState;
     using Requests.TransportRoute;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.UpdateJourney;
     using Web.ViewModels.Shared;
 
@@ -24,11 +31,13 @@
     {
         private readonly IMediator mediator;
         private readonly IAuditService auditService;
+        private readonly IAdditionalChargeService additionalChargeService;
 
-        public UpdateJourneyController(IMediator mediator, IAuditService auditService)
+        public UpdateJourneyController(IMediator mediator, IAuditService auditService, IAdditionalChargeService additionalChargeService)
         {
             this.mediator = mediator;
             this.auditService = auditService;
+            this.additionalChargeService = additionalChargeService;
         }
 
         [HttpGet]
@@ -37,7 +46,7 @@
             var stateOfImport = await mediator.SendAsync(new GetStateOfImportData(id));
             var entryPoints = await mediator.SendAsync(new GetEntryOrExitPointsByCountry(stateOfImport.Country.Id));
 
-            var model = new EntryPointViewModel(stateOfImport, entryPoints);
+            var model = new EntryPointViewModel(stateOfImport, entryPoints, id);
 
             return View(model);
         }
@@ -59,6 +68,13 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.ImportRoute);
 
+            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            {
+                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateEntryPoint);
+
+                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+            }
+
             return RedirectToAction("EntryPointChanged");
         }
 
@@ -78,7 +94,7 @@
             var stateOfExport = await mediator.SendAsync(new GetStateOfExportData(id));
             var entryPoints = await mediator.SendAsync(new GetEntryOrExitPointsByCountry(stateOfExport.Country.Id));
 
-            var model = new ExitPointViewModel(stateOfExport, entryPoints);
+            var model = new ExitPointViewModel(stateOfExport, entryPoints, id);
 
             return View(model);
         }
@@ -99,6 +115,13 @@
                     User.GetUserId(),
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.ExportRoute);
+
+            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            {
+                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateExitPoint);
+
+                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+            }
 
             return RedirectToAction("ExitPointChanged");
         }
@@ -284,6 +307,37 @@
             ViewBag.TransitExitPoint = transitStateData.TransitState.ExitPoint.Name;
 
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        {
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
+            var response = new Core.SystemSetting.SystemSettingData();
+            if (competentAuthority == UKCompetentAuthority.England)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(4)); //EA
+            }
+            else if (competentAuthority == UKCompetentAuthority.Scotland)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(5)); //SEPA
+            }
+
+            return Json(response.Value);
+        }
+
+        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
+        {
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = additionalChargeType,
+                ChargeAmount = model.Amount,
+                Comments = model.Comments,
+                NotificationId = notificationId
+            };
+
+            return createAddtionalCharge;
         }
     }
 }

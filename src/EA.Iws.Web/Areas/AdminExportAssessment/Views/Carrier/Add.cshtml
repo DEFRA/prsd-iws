@@ -26,9 +26,39 @@
 
     @Html.EditorFor(m => m.Contact)
 
+    <hr />
+    <fieldset>
+        @Html.EditorFor(m => m.AdditionalCharge)
+    </fieldset>
+
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { notificationId: '@Model.AdditionalCharge.NotificationId', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+        });
+    </script>
 }

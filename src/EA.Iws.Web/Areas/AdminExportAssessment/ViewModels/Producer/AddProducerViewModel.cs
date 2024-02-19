@@ -24,5 +24,7 @@
         public ProducerBusinessTypeViewModel Business { get; set; }
 
         public bool IsAddedToAddressBook { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
     }
 }

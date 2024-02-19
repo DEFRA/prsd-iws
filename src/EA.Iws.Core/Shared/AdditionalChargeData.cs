@@ -12,8 +12,9 @@
         [Display(Name = "IsAdditionalChargesRequired", ResourceType = typeof(AdditionalChargeDataResources))]
         public bool? IsAdditionalChargesRequired { get; set; }
 
+        [Range(0, 1000)]
         [Display(Name = "AdditionalAmount", ResourceType = typeof(AdditionalChargeDataResources))]
-        public decimal? Amount { get; set; }
+        public decimal Amount { get; set; }
 
         [Display(Name = "Comments", ResourceType = typeof(AdditionalChargeDataResources))]
         public string Comments { get; set; }

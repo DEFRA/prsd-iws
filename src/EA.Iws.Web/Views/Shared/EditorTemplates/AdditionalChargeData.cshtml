@@ -5,6 +5,8 @@
     ViewBag.Title = "AdditionalChargeData";
 }
 
+@Html.HiddenFor(m => m.NotificationId)
+
 <h2 class="govuk-heading-m">
     @AdditionalChargeDataResources.AdditionalChargeHeader
 </h2>
@@ -18,14 +20,14 @@
         @Html.Gds().LabelFor(m => m.IsAdditionalChargesRequired)
         <div class="govuk-radios" data-module="govuk-radios">
             <div class="govuk-radios__item">
-                @Html.RadioButtonFor(m => m.IsAdditionalChargesRequired, true, new { id = "yes", @class = "govuk-radios__input" })
-                <label class="govuk-label govuk-radios__label" for="yes">
+                @Html.RadioButtonFor(m => m.IsAdditionalChargesRequired, true, new { id = "additionalChargeYes", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="additionalChargeYes">
                     @AdditionalChargeDataResources.YesRadioButtonLable
                 </label>
             </div>
             <div class="govuk-radios__item">
-                @Html.RadioButtonFor(m => m.IsAdditionalChargesRequired, false, new { id = "no", @class = "govuk-radios__input" })
-                <label class="govuk-label govuk-radios__label" for="no">
+                @Html.RadioButtonFor(m => m.IsAdditionalChargesRequired, false, new { id = "additionalChargeNo", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="additionalChargeNo">
                     @AdditionalChargeDataResources.NoRadioButtonLable
                 </label>
             </div>

@@ -9,11 +9,14 @@
     using Core.Notification.Audit;
     using Core.Shared;
     using EA.Iws.Core.Facilities;
+    using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Producers;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Facilities;
+    using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.Producers;
+    using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -66,15 +69,12 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Exporter);
 
-            var createAddtionalCharge = new CreateAdditionalCharge()
+            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
             {
-                ChangeDetailType = AdditionalChargeType.Export,
-                ChargeAmount = model.AdditionalCharge.Amount.Value,
-                Comments = model.AdditionalCharge.Comments,
-                NotificationId = id
-            };
+                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
 
-            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
+                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+            }
 
             return RedirectToAction("Index", "Overview");
         }
@@ -107,15 +107,12 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Importer);
 
-            var createAddtionalCharge = new CreateAdditionalCharge()
+            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
             {
-                ChangeDetailType = AdditionalChargeType.Importer,
-                ChargeAmount = model.AdditionalCharge.Amount.Value,
-                Comments = model.AdditionalCharge.Comments,
-                NotificationId = id
-            };
+                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
 
-            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
+                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+            }
 
             return RedirectToAction("Index", "Overview");
         }
@@ -150,15 +147,12 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Producer);
 
-            var createAddtionalCharge = new CreateAdditionalCharge()
+            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
             {
-                ChangeDetailType = AdditionalChargeType.Producer,
-                ChargeAmount = model.AdditionalCharge.Amount.Value,
-                Comments = model.AdditionalCharge.Comments,
-                NotificationId = id
-            };
+                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
 
-            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
+                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+            }
 
             return RedirectToAction("Index", "Overview");
         }
@@ -192,17 +186,45 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.DisposalFacilities);
 
-            var createAddtionalCharge = new CreateAdditionalCharge()
+            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
             {
-                ChangeDetailType = AdditionalChargeType.Consignee,
-                ChargeAmount = model.AdditionalCharge.Amount.Value,
-                Comments = model.AdditionalCharge.Comments,
-                NotificationId = id
-            };
+                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditConsigneeDetails);
 
-            await this.additionalChargeService.AddAdditionalCharge(mediator, createAddtionalCharge);
+                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+            }
 
             return RedirectToAction("Index", "Overview");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        {
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
+            var response = new Core.SystemSetting.SystemSettingData();
+            if (competentAuthority == UKCompetentAuthority.England)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(4)); //EA
+            }
+            else if (competentAuthority == UKCompetentAuthority.Scotland)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(5)); //SEPA
+            }
+
+            return Json(response.Value);
+        }
+
+        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
+        {
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = additionalChargeType,
+                ChargeAmount = model.Amount,
+                Comments = model.Comments,
+                NotificationId = notificationId
+            };
+
+            return createAddtionalCharge;
         }
 
         private static ContactData GetNewContactData(EditContactViewModel model, ContactData oldContactData)
