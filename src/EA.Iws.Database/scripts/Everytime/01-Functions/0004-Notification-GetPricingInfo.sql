@@ -131,7 +131,7 @@ BEGIN
 		AND (@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
 	ORDER BY ValidFrom desc;
 
-	IF @competentAuthority = 1 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
+	IF @competentAuthority = 1 AND @submittedDate >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
 	BEGIN
 		--Use the new fees and logic
 		SELECT @fixedWasteCategoryFee = Price 
@@ -207,7 +207,7 @@ BEGIN
 		SELECT @price += ISNULL(@wasteComponentFees,0);
 	END;
 
-	IF @competentAuthority = 2 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 2) 
+	IF @competentAuthority = 2 AND @submittedDate >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 2) 
 	BEGIN
 		SELECT @fixedWasteCategoryFee = Price 
 		FROM [Lookup].[PricingFixedFee]
