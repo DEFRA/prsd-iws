@@ -30,5 +30,8 @@
 
         [Display(Name = "Updated shipment total", Description = "Updated shipment total")]
         UpdateShipmentTotal = 9,
+
+        [Display(Name = "Accept notification", Description = "Accept notification")]
+        AcceptNotification = 10,
     }
 }
