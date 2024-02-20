@@ -9,6 +9,7 @@
     using Areas.AdminExportAssessment.Controllers;
     using Areas.AdminExportAssessment.ViewModels;
     using Core.NotificationAssessment;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Mediator;
@@ -31,11 +32,13 @@
         private readonly DateTime acknowledgedDate = new DateTime(2015, 8, 22);
         private readonly DateTime decisionRequiredDate = new DateTime(2015, 8, 22);
         private readonly AuthorizationService authorizationService;
+        private readonly IAdditionalChargeService additionalChargeService;
 
         public KeyDatesControllerTests()
         {
             mediator = A.Fake<IMediator>();
             authorizationService = A.Fake<AuthorizationService>();
+            additionalChargeService = A.Fake<IAdditionalChargeService>();
 
             A.CallTo(
                 () => mediator.SendAsync(A<GetKeyDatesSummaryInformation>.That.Matches(p => p.NotificationId == notificationId)))
@@ -51,7 +54,7 @@
                     }
                 });
 
-            controller = new KeyDatesController(mediator, authorizationService);
+            controller = new KeyDatesController(mediator, authorizationService, additionalChargeService);
         }
 
         [Fact]
@@ -787,7 +790,7 @@
 
         private KeyDatesController GetMockAssessmentController(object viewModel)
         {
-            var assessmentController = new KeyDatesController(mediator, authorizationService);
+            var assessmentController = new KeyDatesController(mediator, authorizationService, additionalChargeService);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

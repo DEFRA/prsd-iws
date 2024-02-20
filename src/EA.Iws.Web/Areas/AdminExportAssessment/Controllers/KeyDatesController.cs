@@ -5,8 +5,8 @@
     using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Shared;
     using EA.Iws.Requests.AdditionalCharge;
-    using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.SystemSettings;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
@@ -21,11 +21,13 @@
     {
         private readonly IMediator mediator;
         private readonly AuthorizationService authorizationService;
+        private readonly IAdditionalChargeService additionalChargeService;
 
-        public KeyDatesController(IMediator mediator, AuthorizationService authorizationService)
+        public KeyDatesController(IMediator mediator, AuthorizationService authorizationService, IAdditionalChargeService additionalChargeService)
         {
             this.mediator = mediator;
             this.authorizationService = authorizationService;
+            this.additionalChargeService = additionalChargeService;
         }
 
         [HttpGet]
@@ -42,7 +44,9 @@
                 AdditionalCharge = new AdditionalChargeData()
                 {
                     NotificationId = id
-                }
+                },
+                CurrentStatus = data.Dates.CurrentStatus,
+                ShowAdditionalCharge = (data.CompetentAuthority == UKCompetentAuthority.England || data.CompetentAuthority == UKCompetentAuthority.Scotland) ? true : false
             };
 
             if (command != null)
@@ -51,10 +55,12 @@
                 AddRelevantDateToNewDate(model);
             }
 
-            model.ShowAssessmentDecisionLink =
-                await
-                    authorizationService.AuthorizeActivity(
-                        ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+            model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+
+            if (data.Dates.CurrentStatus == Core.NotificationAssessment.NotificationStatus.Reassessment)
+            {
+                return RedirectToAction("AcceptChanges", id);
+            }
 
             return View(model);
         }
@@ -65,10 +71,7 @@
         {
             if (!ModelState.IsValid)
             {
-                model.ShowAssessmentDecisionLink =
-                    await
-                        authorizationService.AuthorizeActivity(
-                            ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+                model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
 
                 return View(model);
             }
@@ -118,11 +121,52 @@
             return RedirectToAction("Index");
         }
 
+        [HttpGet]
+        public async Task<ActionResult> AcceptChanges(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetKeyDatesSummaryInformation(id));
+
+            var model = new DateInputViewModel(data.Dates)
+            {
+                IsAreaAssigned = data.IsLocalAreaSet,
+                CompetentAuthority = data.CompetentAuthority,
+                AssessmentDecisions = data.DecisionHistory,
+                IsInterim = data.IsInterim,
+                AdditionalCharge = new AdditionalChargeData()
+                {
+                    NotificationId = id
+                },
+                CurrentStatus = data.Dates.CurrentStatus,
+                ShowAdditionalCharge = (data.CompetentAuthority == UKCompetentAuthority.England || data.CompetentAuthority == UKCompetentAuthority.Scotland) ? true : false
+            };
+
+            model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+
+            return View(model);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AcceptChanges(Guid id, DateInputViewModel model)
+        public async Task<ActionResult> AcceptChanges(DateInputViewModel model)
         {
-            await mediator.SendAsync(new AcceptChanges(id));
+            if (!ModelState.IsValid)
+            {
+                model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+
+                return View(model);
+            }
+
+            await mediator.SendAsync(new AcceptChanges(model.NotificationId));
+
+            if (model.AdditionalCharge != null)
+            {
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.AcceptNotification);
+
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
+            }
 
             return RedirectToAction("Index");
         }
@@ -138,9 +182,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
         {
-            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {

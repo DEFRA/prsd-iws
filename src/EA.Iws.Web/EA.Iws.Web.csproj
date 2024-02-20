@@ -885,6 +885,7 @@
     <Content Include="Areas\ImportNotification\Views\WasteComponent\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedSelfEnterShipmentData.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\AdditionalCharge\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\KeyDates\AcceptChanges.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

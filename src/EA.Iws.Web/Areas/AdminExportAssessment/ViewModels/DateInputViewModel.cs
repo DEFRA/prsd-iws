@@ -23,6 +23,7 @@
             NewDate = new OptionalDateInputViewModel(true);
             AssessmentDecisions = new List<NotificationAssessmentDecision>();
             NotificationFileClosedDate = new OptionalDateInputViewModel(true);
+            AdditionalCharge = new AdditionalChargeData();
         }
 
         public DateInputViewModel(NotificationDatesData dates)
@@ -110,11 +111,17 @@
 
         public AdditionalChargeData AdditionalCharge { get; set; }
 
+        public bool ShowAdditionalCharge { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (Command != KeyDatesStatusEnum.ArchiveReference && !NewDate.IsCompleted)
+            var dateInputViewModel = (DateInputViewModel)validationContext.ObjectInstance;
+            if (dateInputViewModel != null && !dateInputViewModel.ShowAdditionalCharge)
             {
-                yield return new ValidationResult("Please enter a valid date", new[] { "NewDate" });
+                if (Command != KeyDatesStatusEnum.ArchiveReference && !NewDate.IsCompleted)
+                {
+                    yield return new ValidationResult("Please enter a valid date", new[] { "NewDate" });
+                }
             }
 
             if (Command == KeyDatesStatusEnum.NotificationReceived)
