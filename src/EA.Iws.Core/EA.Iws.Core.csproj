@@ -334,6 +334,7 @@
     <Compile Include="Documents\FileData.cs" />
     <Compile Include="Documents\FileType.cs" />
     <Compile Include="SystemSettings\SystemSettingData.cs" />
+    <Compile Include="SystemSettings\SystemSettingType.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="IntendedShipments\IntendedShipmentData.cs" />
     <Compile Include="Shared\ShipmentQuantityUnits.cs" />

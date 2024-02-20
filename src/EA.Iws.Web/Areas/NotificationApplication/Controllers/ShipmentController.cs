@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification.Audit;
+    using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.SystemSettings;
     using Infrastructure;
@@ -36,7 +37,8 @@
             {
                 model.ShowSelfEnterShipmentData = true;
 
-                var sepaFeeForNotSelfEnteringData = await mediator.SendAsync(new GetSystemSettingById(3));
+                var sepaFeeForNotSelfEnteringData = 
+                    await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaFeeForNotSelfEnteringData));
                 model.WillSelfEnterShipmentDataHintWithPrice =
                     "Please note if you select ‘No’ you will be charged £" + sepaFeeForNotSelfEnteringData.Value + 
                         " per shipment for SEPA staff to upload the shipment data on your behalf.";

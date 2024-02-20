@@ -2,6 +2,7 @@
 {
     using Core.ComponentRegistration;
     using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Core.SystemSettings;
     using EA.Iws.Domain.NotificationAssessment;
     using EA.Prsd.Core.Mediator;
     using Shipment;
@@ -28,7 +29,7 @@
 
         public async Task<bool> ShouldDisplayShipmentSelfEnterDataQuestion(Guid notificationId)
         {
-            var sepaNewMatrixStartDate = await systemSettingRepository.GetById(2);
+            var sepaNewMatrixStartDate = await systemSettingRepository.GetById(SystemSettingType.SepaChargeMatrixValidFrom);
             var notificationApplication = await notificationApplicationRepository.GetById(notificationId);
             var notificationAssessment = await notificationAssessmentRepository.GetByNotificationId(notificationId);
 
