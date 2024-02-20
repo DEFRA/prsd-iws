@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Importer
 {
     using System;
+    using EA.Iws.Core.Notification;
     using Shared;
 
     public class ImporterData
@@ -16,6 +17,8 @@
         public ContactData Contact { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public ImporterData()
         {

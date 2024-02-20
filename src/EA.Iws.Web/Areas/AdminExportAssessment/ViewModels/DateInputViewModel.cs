@@ -1,13 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels
 {
+    using Core.Notification;
+    using Core.NotificationAssessment;
+    using EA.Iws.Core.Shared;
+    using Prsd.Core;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Data;
     using System.Linq;
-    using Core.Notification;
-    using Core.NotificationAssessment;
-    using Prsd.Core;
     using Web.ViewModels.Shared;
 
     public class DateInputViewModel : IValidatableObject
@@ -108,11 +108,13 @@
             }
         }
 
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Command != KeyDatesStatusEnum.ArchiveReference && !NewDate.IsCompleted)
             {
-                yield return new ValidationResult("Please enter a valid date", new[] {"NewDate"});
+                yield return new ValidationResult("Please enter a valid date", new[] { "NewDate" });
             }
 
             if (Command == KeyDatesStatusEnum.NotificationReceived)

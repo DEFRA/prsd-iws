@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Shared;
+    using EA.Iws.Core.Notification;
     using NotificationApplication.ViewModels.Producer;
 
     public class AddProducerViewModel
@@ -26,5 +27,9 @@
         public bool IsAddedToAddressBook { get; set; }
 
         public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public bool ShowAdditionalCharge { get; set; }
     }
 }

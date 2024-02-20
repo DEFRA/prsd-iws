@@ -45,8 +45,9 @@
         {
             var stateOfImport = await mediator.SendAsync(new GetStateOfImportData(id));
             var entryPoints = await mediator.SendAsync(new GetEntryOrExitPointsByCountry(stateOfImport.Country.Id));
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
 
-            var model = new EntryPointViewModel(stateOfImport, entryPoints, id);
+            var model = new EntryPointViewModel(stateOfImport, entryPoints, id, competentAuthority);
 
             return View(model);
         }
@@ -68,11 +69,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.ImportRoute);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateEntryPoint);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateEntryPoint);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("EntryPointChanged");
@@ -93,8 +97,9 @@
         {
             var stateOfExport = await mediator.SendAsync(new GetStateOfExportData(id));
             var entryPoints = await mediator.SendAsync(new GetEntryOrExitPointsByCountry(stateOfExport.Country.Id));
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
 
-            var model = new ExitPointViewModel(stateOfExport, entryPoints, id);
+            var model = new ExitPointViewModel(stateOfExport, entryPoints, id, competentAuthority);
 
             return View(model);
         }
@@ -116,11 +121,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.ExportRoute);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateExitPoint);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateExitPoint);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("ExitPointChanged");
@@ -311,9 +319,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
         {
-            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {

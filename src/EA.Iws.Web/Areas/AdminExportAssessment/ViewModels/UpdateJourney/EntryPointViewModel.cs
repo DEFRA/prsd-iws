@@ -6,11 +6,12 @@
     using System.Web.Mvc;
     using Core.StateOfImport;
     using Core.TransportRoute;
+    using EA.Iws.Core.Notification;
     using EA.Iws.Core.Shared;
 
     public class EntryPointViewModel
     {
-        public EntryPointViewModel(StateOfImportData stateOfImport, IList<EntryOrExitPointData> entryPoints, Guid notificationId)
+        public EntryPointViewModel(StateOfImportData stateOfImport, IList<EntryOrExitPointData> entryPoints, Guid notificationId, UKCompetentAuthority authority)
         {
             CompetentAuthority = stateOfImport.CompetentAuthority.Name;
             EntryPoint = stateOfImport.EntryPoint.Name;
@@ -19,6 +20,8 @@
             {
                 NotificationId = notificationId
             };
+            NotificationCompetentAuthority = authority;
+            ShowAdditionalCharge = (authority == UKCompetentAuthority.England || authority == UKCompetentAuthority.Scotland) ? true : false;
         }
 
         public EntryPointViewModel()
@@ -36,5 +39,9 @@
         public Guid? SelectedEntryPoint { get; set; }
 
         public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
+
+        public bool ShowAdditionalCharge { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Producers
 {
     using System;
+    using EA.Iws.Core.Notification;
     using Shared;
 
     public class ProducerData
@@ -16,5 +17,7 @@
         public ContactData Contact { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
     }
 }

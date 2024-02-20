@@ -22,6 +22,8 @@
             @Html.HiddenFor(x => x.NewNumberOfShipments)
             @Html.HiddenFor(x => x.OldNumberOfShipments)
             @Html.HiddenFor(x => x.AdditionalCharge.NotificationId)
+            @Html.HiddenFor(x => x.CompetentAuthority)
+            @Html.HiddenFor(x => x.ShowAdditionalCharge)
 
             <div class="govuk-form-group">
 
@@ -58,12 +60,13 @@
                 @Html.ActionLink(Resource.CancelButtonText, "Index", "Overview")
             </div>
 
-
-            <hr />
-            <fieldset>
-                @Html.EditorFor(m => m.AdditionalCharge)
-            </fieldset>
-
+            if (Model.ShowAdditionalCharge)
+            {
+                <hr />
+                <fieldset>
+                    @Html.EditorFor(m => m.AdditionalCharge)
+                </fieldset>
+            }
 
             <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
         }
@@ -85,7 +88,7 @@
                 $.ajax({
                         url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
                         type: 'POST',
-                        data: { notificationId: '@Model.AdditionalCharge.NotificationId', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
                             $('#AdditionalCharge_Amount').val(result);
                             $("#AdditionalCharge_Amount").removeAttr("readonly");
