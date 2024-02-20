@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Shared;
+    using EA.Iws.Core.Notification;
     using Requests.NotificationAssessment;
     using Web.ViewModels.Shared;
 
@@ -18,6 +19,10 @@
         public bool IsAddedToAddressBook { get; set; }
 
         public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public bool ShowAdditionalCharge { get; set; }
 
         public AddCarrierViewModel()
         {

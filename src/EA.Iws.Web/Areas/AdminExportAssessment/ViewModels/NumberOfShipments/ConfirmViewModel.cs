@@ -2,6 +2,7 @@
 {
     using System;
     using Core.NotificationAssessment;
+    using EA.Iws.Core.Notification;
     using EA.Iws.Core.Shared;
 
     public class ConfirmViewModel
@@ -17,6 +18,10 @@
         public decimal NewCharge { get; set; }
 
         public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public bool ShowAdditionalCharge { get; set; }
 
         public ConfirmViewModel()
         {

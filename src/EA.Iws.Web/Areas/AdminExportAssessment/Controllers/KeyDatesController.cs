@@ -1,13 +1,19 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.Authorization.Permissions;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Notification.AdditionalCharge;
+    using EA.Iws.Core.Shared;
+    using EA.Iws.Requests.AdditionalCharge;
+    using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.SystemSettings;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using Requests.NotificationAssessment;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels;
 
     [AuthorizeActivity(typeof(GetKeyDatesSummaryInformation))]
@@ -32,7 +38,11 @@
                 IsAreaAssigned = data.IsLocalAreaSet,
                 CompetentAuthority = data.CompetentAuthority,
                 AssessmentDecisions = data.DecisionHistory,
-                IsInterim = data.IsInterim
+                IsInterim = data.IsInterim,
+                AdditionalCharge = new AdditionalChargeData()
+                {
+                    NotificationId = id
+                }
             };
 
             if (command != null)
@@ -110,7 +120,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AcceptChanges(Guid id)
+        public async Task<ActionResult> AcceptChanges(Guid id, DateInputViewModel model)
         {
             await mediator.SendAsync(new AcceptChanges(id));
 
@@ -124,6 +134,37 @@
             await mediator.SendAsync(new RejectChanges(id));
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        {
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
+            var response = new Core.SystemSetting.SystemSettingData();
+            if (competentAuthority == UKCompetentAuthority.England)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(4)); //EA
+            }
+            else if (competentAuthority == UKCompetentAuthority.Scotland)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(5)); //SEPA
+            }
+
+            return Json(response.Value);
+        }
+
+        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
+        {
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = additionalChargeType,
+                ChargeAmount = model.Amount,
+                Comments = model.Comments,
+                NotificationId = notificationId
+            };
+
+            return createAddtionalCharge;
         }
 
         private async Task SetNotificationTransmitted(DateInputViewModel model)
@@ -168,7 +209,7 @@
 
         private async Task FileClosed(DateInputViewModel model)
         {
-            var fileClosed = new SetNotifcationFileClosedDate(model.NotificationId, 
+            var fileClosed = new SetNotifcationFileClosedDate(model.NotificationId,
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
             await mediator.SendAsync(fileClosed);

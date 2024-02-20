@@ -14,6 +14,8 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(x => x.NotificationCompetentAuthority)
+    @Html.HiddenFor(x => x.ShowAdditionalCharge)
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedEntryPoint)">
         @Html.Gds().LabelFor(m => m.SelectedEntryPoint, new { @class = "form-label-bold" })
@@ -21,10 +23,13 @@
         @Html.Gds().DropDownListFor(m => m.SelectedEntryPoint, Model.EntryPoints, string.Empty, new { title = Resources.EntryPoint, data_select_box = "true" })
     </div>
 
-    <hr />
-    <fieldset>
-        @Html.EditorFor(m => m.AdditionalCharge)
-    </fieldset>
+    if (Model.ShowAdditionalCharge)
+    {
+        <hr />
+        <fieldset>
+            @Html.EditorFor(m => m.AdditionalCharge)
+        </fieldset>
+    }
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
@@ -42,7 +47,7 @@
                 $.ajax({
                         url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
                         type: 'POST',
-                        data: { notificationId: '@Model.AdditionalCharge.NotificationId', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        data: { competentAuthority: '@Model.NotificationCompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
                             $('#AdditionalCharge_Amount').val(result);
                             $("#AdditionalCharge_Amount").removeAttr("readonly");

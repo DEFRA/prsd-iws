@@ -4,6 +4,7 @@
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Shared;
+    using EA.Iws.Core.SystemSetting;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.SystemSettings;
@@ -36,13 +37,17 @@
         [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+
             var model = new AddCarrierViewModel
             { 
                 NotificationId = id,
                 AdditionalCharge = new AdditionalChargeData()
                 {
                     NotificationId = id
-                }
+                },
+                CompetentAuthority = competentAuthority,
+                ShowAdditionalCharge = (competentAuthority == UKCompetentAuthority.England || competentAuthority == UKCompetentAuthority.Scotland) ? true : false,
             };
             await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
@@ -92,10 +97,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
-        {
-            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
-            var response = new Core.SystemSetting.SystemSettingData();
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
+        {            
+            var response = new SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {
                 response = await mediator.SendAsync(new GetSystemSettingById(4)); //Id = 4 = EA

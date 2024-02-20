@@ -54,8 +54,11 @@
         public async Task<ActionResult> Confirm(Guid id, IndexViewModel model)
         {
             var data = await mediator.SendAsync(new GetChangeNumberOfShipmentConfrimationData(id, model.Number.GetValueOrDefault()));
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
             var confirmModel = new ConfirmViewModel(data);
             confirmModel.NewNumberOfShipments = model.Number.GetValueOrDefault();
+            confirmModel.CompetentAuthority = competentAuthority;
+            confirmModel.ShowAdditionalCharge = (competentAuthority == UKCompetentAuthority.England || competentAuthority == UKCompetentAuthority.Scotland) ? true : false;
 
             return View(confirmModel);
         }
@@ -77,11 +80,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.AmountsAndDates);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.UpdateShipmentTotal);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.UpdateShipmentTotal);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("Index", "Overview");
@@ -89,9 +95,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
         {
-            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {

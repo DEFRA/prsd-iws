@@ -143,7 +143,7 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationTransmittedDate.IsCompleted 
+                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationTransmittedDate.IsCompleted
                     && !Model.NotificationFileClosedDate.IsCompleted && Model.CurrentStatus != NotificationStatus.Objected)
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
@@ -166,7 +166,7 @@
             </td>
             <td>
                 @if (Model.NotificationTransmittedDate.IsCompleted && Model.CurrentStatus != NotificationStatus.Unlocked && Model.CurrentStatus != NotificationStatus.Reassessment && !Model.NotificationAcknowledgedDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
-				{
+                {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
                 }
             </td>
@@ -294,7 +294,8 @@
 
         @Html.AntiForgeryToken()
 
-        <br /><br />
+        <br />
+        <br />
 
         if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
         {
@@ -334,7 +335,7 @@
         }
 
 
-        <br/>
+        <br />
 
         <div class="govuk-form-group">
             @if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
@@ -345,7 +346,7 @@
             {
                 <input type="submit" class="govuk-button" value="@IndexResources.ButtonText" />
             }
-            
+
         </div>
     }
 
@@ -364,6 +365,9 @@
 }
 else
 {
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.AdditionalCharge)
+
     @section scripts{
         <script>
             $(function () {
@@ -372,6 +376,23 @@ else
                 if (link) {
                     link.focus();
                 }
+
+                $('#additionalChargeYes').click(function () {
+                    $.ajax({
+                            url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                            type: 'POST',
+                            data: { notificationId: '@Model.AdditionalCharge.NotificationId', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                            success: function (result) {
+                                $('#AdditionalCharge_Amount').val(result);
+                                $("#AdditionalCharge_Amount").removeAttr("readonly");
+                            }
+                        });
+                });
+
+                $('#additionalChargeNo').click(function () {
+                    $('#AdditionalCharge_Amount').val(0);
+                    $('#AdditionalCharge_Amount').attr('readonly', 'true');
+                });
             })
         </script>
     }
@@ -406,11 +427,18 @@ else
 
 @if (Model.CurrentStatus == NotificationStatus.Reassessment)
 {
+    <hr />
+    <fieldset>
+        @Html.EditorFor(m => m.AdditionalCharge)
+    </fieldset>
+
     <br />
     <div class="govuk-form-group">
-        @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
+        @*@using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))*@
+        @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post))
         {
             @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.AdditionalCharge)
             @Html.AntiForgeryToken()
 
             <input type="submit" class="govuk-button" value="Accept changes" data-track="element" data-category="Export notification assessment" data-action="Accept changes" />

@@ -2,6 +2,9 @@
 @using Resource = EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModelResources
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact.EditContactViewModel
 
+@Html.HiddenFor(m => m.CompetentAuthority)
+@Html.HiddenFor(m => m.ShowAdditionalCharge)
+
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
@@ -48,8 +51,10 @@
     @Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>
 
-<hr />
-<fieldset>
-    @Html.EditorFor(m => m.AdditionalCharge)
-</fieldset>
-
+@if (Model.ShowAdditionalCharge)
+{
+    <hr />
+    <fieldset>
+        @Html.EditorFor(m => m.AdditionalCharge)
+    </fieldset>
+}

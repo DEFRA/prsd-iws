@@ -45,6 +45,8 @@
         public async Task<ActionResult> Exporter(Guid id)
         {
             var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            exporter.CompetentAuthority = competentAuthority;
             var model = new EditContactViewModel(exporter);
 
             return View(model);
@@ -69,11 +71,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Exporter);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("Index", "Overview");
@@ -83,6 +88,8 @@
         public async Task<ActionResult> Importer(Guid id)
         {
             var importer = await mediator.SendAsync(new GetImporterByNotificationId(id));
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            importer.CompetentAuthority = competentAuthority;
             var model = new EditContactViewModel(importer);
 
             return View(model);
@@ -107,11 +114,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Importer);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("Index", "Overview");
@@ -122,6 +132,8 @@
         {
             var producerList = await mediator.SendAsync(new GetProducersByNotificationId(id));
             var producer = producerList.FirstOrDefault();
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            producer.CompetentAuthority = competentAuthority;
             var model = new EditContactViewModel(producer);
 
             return View(model);
@@ -147,11 +159,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.Producer);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("Index", "Overview");
@@ -160,8 +175,12 @@
         [HttpGet]
         public async Task<ActionResult> Facility(Guid id)
         {
-            var facility = await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
-            var model = new EditContactViewModel(facility.FirstOrDefault());
+            var facilityList = await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
+            var facility = facilityList.FirstOrDefault();
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            facility.CompetentAuthority = competentAuthority;
+
+            var model = new EditContactViewModel(facility);
 
             return View(model);
         }
@@ -186,11 +205,14 @@
                     NotificationAuditType.Updated,
                     NotificationAuditScreenType.DisposalFacilities);
 
-            if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+            if (model.AdditionalCharge != null)
             {
-                var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditConsigneeDetails);
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditConsigneeDetails);
 
-                await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
             }
 
             return RedirectToAction("Index", "Overview");
@@ -198,9 +220,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(Guid notificationId)
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
         {
-            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).CompetentAuthority;
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {

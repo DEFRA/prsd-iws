@@ -6,11 +6,12 @@
     using System.Web.Mvc;
     using Core.StateOfExport;
     using Core.TransportRoute;
+    using EA.Iws.Core.Notification;
     using EA.Iws.Core.Shared;
 
     public class ExitPointViewModel
     {
-        public ExitPointViewModel(StateOfExportData stateOfExport, IList<EntryOrExitPointData> entryPoints, Guid notificationId)
+        public ExitPointViewModel(StateOfExportData stateOfExport, IList<EntryOrExitPointData> entryPoints, Guid notificationId, UKCompetentAuthority authority)
         {
             CompetentAuthority = stateOfExport.CompetentAuthority.Name;
             ExitPoint = stateOfExport.ExitPoint.Name;
@@ -19,6 +20,8 @@
             {
                 NotificationId = notificationId
             };
+            NotificationCompetentAuthority = authority;
+            ShowAdditionalCharge = (authority == UKCompetentAuthority.England || authority == UKCompetentAuthority.Scotland) ? true : false;
         }
 
         public ExitPointViewModel()
@@ -36,5 +39,9 @@
         public Guid? SelectedExitPoint { get; set; }
 
         public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
+
+        public bool ShowAdditionalCharge { get; set; }
     }
 }

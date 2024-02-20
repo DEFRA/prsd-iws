@@ -28,7 +28,7 @@
                 $.ajax({
                         url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
                         type: 'POST',
-                        data: { notificationId: '@Model.AdditionalCharge.NotificationId', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
                             $('#AdditionalCharge_Amount').val(result);
                             $("#AdditionalCharge_Amount").removeAttr("readonly");
