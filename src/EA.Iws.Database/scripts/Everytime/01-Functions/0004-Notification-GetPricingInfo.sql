@@ -131,7 +131,7 @@ BEGIN
 		AND (@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
 	ORDER BY ValidFrom desc;
 
-	IF @competentAuthority = 1 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
+	IF @competentAuthority = 1 AND @submittedDate >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
 	BEGIN
 		--Use the new fees and logic
 		SELECT @fixedWasteCategoryFee = Price 
@@ -157,7 +157,25 @@ BEGIN
 		BEGIN
 			DECLARE @hundreds INT
 			SET @hundreds = (@numberOfShipments - 901) / 100
-			SET @price += (@price * 0.10 * @hundreds)
+
+			/*
+				For just the following we need to apply a different set of refund logic :)
+					Import Recovery IsInterim 0, ActivityId = F0407E39-C9BA-4519-B659-A4C9010901C7
+					Import Recovery IsInterim 1, ActivityId = DAF51836-41E0-4324-93AE-A4C9010901C7
+					Import Disposal IsInterim 0, ActivityId = E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7
+					Import Disposal IsInterim 1, ActivityId = BE00F07B-41E1-4C03-9BB9-A4C9010901C7
+			*/
+			IF @activityId IN (
+				'F0407E39-C9BA-4519-B659-A4C9010901C7', 'DAF51836-41E0-4324-93AE-A4C9010901C7', 
+				'E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7')
+			BEGIN
+				SET @price += (SELECT [VALUE] * @hundreds FROM [Lookup].[SystemSettings] where Id = 4)
+			END
+
+			ELSE
+			BEGIN
+				SET @price += (@price * 0.10 * @hundreds)
+			END
 
 			--Refund is the price minus the price for the lowest range
 			--So rather than calculate the refund based on something like the logic above just subtract the price for lowest range from calculated price above
@@ -189,7 +207,7 @@ BEGIN
 		SELECT @price += ISNULL(@wasteComponentFees,0);
 	END;
 
-	IF @competentAuthority = 2 AND GETDATE() >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 2) 
+	IF @competentAuthority = 2 AND @submittedDate >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 2) 
 	BEGIN
 		SELECT @fixedWasteCategoryFee = Price 
 		FROM [Lookup].[PricingFixedFee]
