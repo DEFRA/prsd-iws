@@ -15,6 +15,14 @@ PRINT N'Add new SystemSetting as per emails';
 INSERT INTO [Lookup].[SystemSettings] (Id, [Value], [Description])
 	VALUES (4, '1207', 'EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge')
 
+PRINT N'Add new SystemSetting for EA fixed additional charge for each data change';
+INSERT INTO [Lookup].[SystemSettings] (Id, [Value], [Description])
+	VALUES (5, '82', 'EA fixed additional charge for each data change')
+
+PRINT N'Add new SystemSetting for Sepa fixed additional charge for each data change';
+INSERT INTO [Lookup].[SystemSettings] (Id, [Value], [Description])
+	VALUES (6, '175', 'Sepa fixed additional charge for each data change')
+
 PRINT N'Updating EA Charge structure as per emails';
 -- Import Disposal IsInterim 0 Range 1-5
 UPDATE [Lookup].[PricingStructure] SET Price = '3330.00', PotentialRefund = '00.00' WHERE ID = '6CF3966E-1FF0-49CB-A73D-D890DCDA6ABB'
