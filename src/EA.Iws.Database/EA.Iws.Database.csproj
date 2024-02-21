@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20240219-CCN062-DataChanges.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Update\0007-Support\20240103-CCN062-AddingFixedFeeTable.sql" />
     <Content Include="scripts\Update\0007-Support\20240103-CCN062-DataChangesPricingStructureMostly.sql" />

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using EA.Iws.Core.SystemSettings;
     using EA.Iws.Domain;
     using System;
     using System.Data.Entity;
@@ -14,11 +15,11 @@
             this.context = context;
         }
 
-        public async Task<SystemSetting> GetById(int id)
+        public async Task<SystemSetting> GetById(SystemSettingType id)
         {
             try
             {
-                return await context.SystemSettings.SingleAsync(ss => ss.Id == id);
+                return await context.SystemSettings.SingleAsync(ss => ss.Id == (int)id);
             }
             catch (Exception ex)
             {
