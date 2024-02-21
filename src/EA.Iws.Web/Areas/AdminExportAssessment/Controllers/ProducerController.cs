@@ -5,6 +5,7 @@
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Shared;
+    using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.SystemSettings;
@@ -161,11 +162,11 @@
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {
-                response = await mediator.SendAsync(new GetSystemSettingById(4)); //Id = 4 = EA
+                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.EaAdditionalChargeFixedFee)); //Id = 4 = EA
             }
             else if (competentAuthority == UKCompetentAuthority.Scotland)
             {
-                response = await mediator.SendAsync(new GetSystemSettingById(5)); //Id = 5 = SEPA
+                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaAdditionalChargeFixedFee)); //Id = 5 = SEPA
             }
 
             return Json(response.Value);
