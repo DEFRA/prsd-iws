@@ -84,7 +84,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.UpdateShipmentTotal);
+                    var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.UpdateNumberOfShipment);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }

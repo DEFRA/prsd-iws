@@ -3,6 +3,7 @@
     using System;
     using Core.Notification;
     using Core.NotificationAssessment;
+    using EA.Iws.Core.Shared;
     using EA.Prsd.Core.Helpers;
 
     public class SubmitSideBarViewModel
@@ -28,6 +29,16 @@
         public bool IsSharedUser { get; set; }
 
         public bool IsInternalUser { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public bool ShowAdditionalCharge
+        {
+            get
+            {
+                return ((CompetentAuthority == UKCompetentAuthority.England || CompetentAuthority == UKCompetentAuthority.Scotland) && IsInternalUser) ? true : false;
+            }
+        }
 
         public string AccessLevelText
         {
@@ -88,6 +99,10 @@
             Status = submitSummaryData.Status;
             IsNotificationComplete = progress.IsAllComplete;
             CompetentAuthority = submitSummaryData.CompetentAuthority;
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = NotificationId
+            };
         }
     }
 }

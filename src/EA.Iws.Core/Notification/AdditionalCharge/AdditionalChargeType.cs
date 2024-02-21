@@ -28,10 +28,13 @@
         [Display(Name = "Update exit point details", Description = "Update exit point details")]
         UpdateExitPoint = 8,
 
-        [Display(Name = "Updated shipment total", Description = "Updated shipment total")]
-        UpdateShipmentTotal = 9,
+        [Display(Name = "Update number of shipment", Description = "Update number of shipment")]
+        UpdateNumberOfShipment = 9,
 
         [Display(Name = "Accept notification", Description = "Accept notification")]
         AcceptNotification = 10,
+
+        [Display(Name = "Resubmit notification", Description = "Resubmit notification")]
+        ResubmitNotification = 11,
     }
 }
