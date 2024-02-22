@@ -3,8 +3,9 @@
     using Core.Authorization.Permissions;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
+    using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.Shared;
-    using EA.Iws.Core.SystemSettings;
+    using EA.Iws.Core.SystemSettings;    
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
@@ -47,7 +48,12 @@
                     NotificationId = id
                 },
                 CurrentStatus = data.Dates.CurrentStatus,
-                ShowAdditionalCharge = (data.CompetentAuthority == UKCompetentAuthority.England || data.CompetentAuthority == UKCompetentAuthority.Scotland) ? true : false
+                ShowAdditionalCharge = ((data.CompetentAuthority == UKCompetentAuthority.England || data.CompetentAuthority == UKCompetentAuthority.Scotland) &&
+                                        ((data.Dates.CurrentStatus == NotificationStatus.Consented) ||
+                                         (data.Dates.CurrentStatus == NotificationStatus.ConsentedUnlock) ||
+                                         (data.Dates.CurrentStatus == NotificationStatus.Transmitted) ||
+                                         (data.Dates.CurrentStatus == NotificationStatus.DecisionRequiredBy) ||
+                                         (data.Dates.CurrentStatus == NotificationStatus.Reassessment))) ? true : false
             };
 
             if (command != null)
@@ -58,7 +64,7 @@
 
             model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
 
-            if (data.Dates.CurrentStatus == Core.NotificationAssessment.NotificationStatus.Reassessment)
+            if (data.Dates.CurrentStatus == NotificationStatus.Reassessment)
             {
                 return RedirectToAction("AcceptChanges", id);
             }
