@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
-    using System;
     using Core.Notification;
     using Core.NotificationAssessment;
     using EA.Iws.Core.Shared;
     using EA.Prsd.Core.Helpers;
+    using System;
 
     public class SubmitSideBarViewModel
     {
@@ -36,7 +36,12 @@
         {
             get
             {
-                return ((CompetentAuthority == UKCompetentAuthority.England || CompetentAuthority == UKCompetentAuthority.Scotland) && IsInternalUser) ? true : false;
+                return ((CompetentAuthority == UKCompetentAuthority.England || CompetentAuthority == UKCompetentAuthority.Scotland) &&
+                        ((Status == NotificationStatus.Consented) ||
+                        (Status == NotificationStatus.ConsentedUnlock) ||
+                        (Status == NotificationStatus.Transmitted) ||
+                        (Status == NotificationStatus.DecisionRequiredBy) ||
+                        (Status == NotificationStatus.Reassessment))) ? true : false;
             }
         }
 
