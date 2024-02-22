@@ -36,5 +36,8 @@
 
         [Display(Name = "Resubmit notification", Description = "Resubmit notification")]
         ResubmitNotification = 11,
+
+        [Display(Name = "Financial guarantee assessment changes", Description = "Financial guarantee assessment changes")]
+        FinancialGuaranteeAssessment = 12,
     }
 }
