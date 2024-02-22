@@ -84,7 +84,10 @@
             </h3>
             <ul>
                 <li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
-                <li>@Html.ActionLink(Resources.AdditionalChargesLinkText, "Index", "AdditionalCharge", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+                @if (Model.Data.CompetentAuthority == UKCompetentAuthority.England || Model.Data.CompetentAuthority == UKCompetentAuthority.Scotland)
+                {
+                    <li>@Html.ActionLink(Resources.AdditionalChargesLinkText, "Index", "AdditionalCharge", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+                }
             </ul>
         </li>
 
