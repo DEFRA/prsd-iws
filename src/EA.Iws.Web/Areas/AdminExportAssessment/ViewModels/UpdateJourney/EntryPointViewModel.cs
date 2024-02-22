@@ -1,17 +1,19 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney
 {
+    using Core.StateOfImport;
+    using Core.TransportRoute;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Core.Shared;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Core.StateOfImport;
-    using Core.TransportRoute;
-    using EA.Iws.Core.Notification;
-    using EA.Iws.Core.Shared;
 
     public class EntryPointViewModel
     {
-        public EntryPointViewModel(StateOfImportData stateOfImport, IList<EntryOrExitPointData> entryPoints, Guid notificationId, UKCompetentAuthority authority)
+        public EntryPointViewModel(StateOfImportData stateOfImport, IList<EntryOrExitPointData> entryPoints,
+                                   Guid notificationId, UKCompetentAuthority authority, NotificationStatus notificationStatus)
         {
             CompetentAuthority = stateOfImport.CompetentAuthority.Name;
             EntryPoint = stateOfImport.EntryPoint.Name;
@@ -21,7 +23,14 @@
                 NotificationId = notificationId
             };
             NotificationCompetentAuthority = authority;
-            ShowAdditionalCharge = (authority == UKCompetentAuthority.England || authority == UKCompetentAuthority.Scotland) ? true : false;
+            NotificationStatus = notificationStatus;
+            ShowAdditionalCharge = ((authority == UKCompetentAuthority.England ||
+                                    authority == UKCompetentAuthority.Scotland) &&
+                                    ((notificationStatus == NotificationStatus.Consented) ||
+                                    (notificationStatus == NotificationStatus.ConsentedUnlock) ||
+                                    (notificationStatus == NotificationStatus.Transmitted) ||
+                                    (notificationStatus == NotificationStatus.DecisionRequiredBy) ||
+                                    (notificationStatus == NotificationStatus.Reassessment))) ? true : false;
         }
 
         public EntryPointViewModel()
@@ -43,5 +52,7 @@
         public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
 
         public bool ShowAdditionalCharge { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
     }
 }

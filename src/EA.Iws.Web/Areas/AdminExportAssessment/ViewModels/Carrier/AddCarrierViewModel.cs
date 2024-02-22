@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Carrier
 {
-    using System;
     using Core.Shared;
     using EA.Iws.Core.Notification;
+    using EA.Iws.Core.NotificationAssessment;
     using Requests.NotificationAssessment;
+    using System;
     using Web.ViewModels.Shared;
 
     public class AddCarrierViewModel
@@ -24,12 +25,33 @@
 
         public bool ShowAdditionalCharge { get; set; }
 
+        public NotificationStatus NotificationStatus { get; set; }
+
         public AddCarrierViewModel()
         {
             Address = new AddressData();
 
             Contact = new ContactData();
 
+            Business = new BusinessTypeViewModel();
+        }
+
+        public AddCarrierViewModel(Guid notificationId, UKCompetentAuthority competentAuthority, NotificationStatus notificationStatus)
+        {
+            NotificationId = notificationId;
+            AdditionalCharge = new AdditionalChargeData() { NotificationId = notificationId };
+            CompetentAuthority = competentAuthority;
+            NotificationStatus = notificationStatus;
+            ShowAdditionalCharge = ((competentAuthority == UKCompetentAuthority.England ||
+                                competentAuthority == UKCompetentAuthority.Scotland) &&
+                                ((notificationStatus == NotificationStatus.Consented) ||
+                                (notificationStatus == NotificationStatus.ConsentedUnlock) ||
+                                (notificationStatus == NotificationStatus.Transmitted) ||
+                                (notificationStatus == NotificationStatus.DecisionRequiredBy) ||
+                                (notificationStatus == NotificationStatus.Reassessment))) ? true : false;
+
+            Address = new AddressData();
+            Contact = new ContactData();
             Business = new BusinessTypeViewModel();
         }
 

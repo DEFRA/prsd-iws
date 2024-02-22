@@ -47,7 +47,9 @@
         {
             var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
             exporter.CompetentAuthority = competentAuthority;
+            exporter.NotificationStatus = notificationStatus;
             var model = new EditContactViewModel(exporter);
 
             return View(model);
@@ -90,7 +92,9 @@
         {
             var importer = await mediator.SendAsync(new GetImporterByNotificationId(id));
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));            
             importer.CompetentAuthority = competentAuthority;
+            importer.NotificationStatus = notificationStatus;
             var model = new EditContactViewModel(importer);
 
             return View(model);
@@ -134,7 +138,9 @@
             var producerList = await mediator.SendAsync(new GetProducersByNotificationId(id));
             var producer = producerList.FirstOrDefault();
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
             producer.CompetentAuthority = competentAuthority;
+            producer.NotificationStatus = notificationStatus;
             var model = new EditContactViewModel(producer);
 
             return View(model);
@@ -179,7 +185,9 @@
             var facilityList = await mediator.SendAsync(new GetFacilitiesByNotificationId(id));
             var facility = facilityList.FirstOrDefault();
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
             facility.CompetentAuthority = competentAuthority;
+            facility.NotificationStatus = notificationStatus;
 
             var model = new EditContactViewModel(facility);
 

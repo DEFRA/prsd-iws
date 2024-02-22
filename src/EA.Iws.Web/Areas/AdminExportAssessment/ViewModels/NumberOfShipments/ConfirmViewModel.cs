@@ -23,11 +23,13 @@
 
         public bool ShowAdditionalCharge { get; set; }
 
+        public NotificationStatus NotificationStatus { get; set; }
+
         public ConfirmViewModel()
         {
         }
 
-        public ConfirmViewModel(ConfirmNumberOfShipmentsChangeData data)
+        public ConfirmViewModel(ConfirmNumberOfShipmentsChangeData data, UKCompetentAuthority competentAuthority, NotificationStatus notificationStatus)
         {
             NotificationId = data.NotificationId;
             CurrentCharge = data.CurrentCharge;
@@ -37,6 +39,15 @@
             {
                 NotificationId = NotificationId
             };
+            CompetentAuthority = competentAuthority;
+            NotificationStatus = notificationStatus;
+            ShowAdditionalCharge = ((competentAuthority == UKCompetentAuthority.England ||
+                                competentAuthority == UKCompetentAuthority.Scotland) &&
+                                ((notificationStatus == NotificationStatus.Consented) ||
+                                (notificationStatus == NotificationStatus.ConsentedUnlock) ||
+                                (notificationStatus == NotificationStatus.Transmitted) ||
+                                (notificationStatus == NotificationStatus.DecisionRequiredBy) ||
+                                (notificationStatus == NotificationStatus.Reassessment))) ? true : false;
         }
 
         public bool IsIncrease

@@ -56,10 +56,9 @@
         {
             var data = await mediator.SendAsync(new GetChangeNumberOfShipmentConfrimationData(id, model.Number.GetValueOrDefault()));
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
-            var confirmModel = new ConfirmViewModel(data);
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
+            var confirmModel = new ConfirmViewModel(data, competentAuthority, notificationStatus);
             confirmModel.NewNumberOfShipments = model.Number.GetValueOrDefault();
-            confirmModel.CompetentAuthority = competentAuthority;
-            confirmModel.ShowAdditionalCharge = (competentAuthority == UKCompetentAuthority.England || competentAuthority == UKCompetentAuthority.Scotland) ? true : false;
 
             return View(confirmModel);
         }

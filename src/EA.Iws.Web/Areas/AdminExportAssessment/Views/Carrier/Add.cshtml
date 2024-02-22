@@ -7,12 +7,15 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.CompetentAuthority)
+    @Html.HiddenFor(m => m.NotificationStatus)
 
     <header class="hgroup">
         <h1 class="govuk-heading-l">@AddCarrierResources.Header</h1>
     </header>
+
+    @Html.Gds().ValidationSummary()
 
     @Html.Partial("CarrierBusinessTypeViewModel", Model)
 

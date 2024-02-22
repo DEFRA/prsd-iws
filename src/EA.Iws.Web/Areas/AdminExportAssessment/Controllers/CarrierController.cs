@@ -1,5 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
-{    
+{
     using Core.Notification.Audit;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
@@ -39,19 +39,12 @@
         public async Task<ActionResult> Add(Guid id)
         {
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
+            var model = new AddCarrierViewModel(id, competentAuthority, notificationStatus);
 
-            var model = new AddCarrierViewModel
-            { 
-                NotificationId = id,
-                AdditionalCharge = new AdditionalChargeData()
-                {
-                    NotificationId = id
-                },
-                CompetentAuthority = competentAuthority,
-                ShowAdditionalCharge = (competentAuthority == UKCompetentAuthority.England || competentAuthority == UKCompetentAuthority.Scotland) ? true : false,
-            };
             await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
+
             return View(model);
         }
 
@@ -74,11 +67,14 @@
                     NotificationAuditType.Added,
                     NotificationAuditScreenType.IntendedCarrier);
 
-                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                if (model.AdditionalCharge != null)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.AddCarrier);
+                    if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                    {
+                        var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.AddCarrier);
 
-                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                        await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    }
                 }
 
                 return RedirectToAction("Index", "Overview");
@@ -99,7 +95,7 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
-        {            
+        {
             var response = new SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {

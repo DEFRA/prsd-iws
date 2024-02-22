@@ -4,8 +4,10 @@
     using Core.Notification.Audit;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
+    using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.Shared;
     using EA.Iws.Core.SystemSettings;
+    using EA.Iws.Domain;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.SystemSettings;
@@ -39,16 +41,8 @@
         public async Task<ActionResult> Add(Guid id)
         {
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
-            var model = new AddProducerViewModel
-            {
-                NotificationId = id,
-                AdditionalCharge = new AdditionalChargeData()
-                {
-                    NotificationId = id
-                },
-                CompetentAuthority = competentAuthority,
-                ShowAdditionalCharge = (competentAuthority == UKCompetentAuthority.England || competentAuthority == UKCompetentAuthority.Scotland) ? true : false,
-            };
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
+            var model = new AddProducerViewModel(id, competentAuthority, notificationStatus);
 
             if (model.Business?.Name?.Contains(" T/A ") == true)
             {
