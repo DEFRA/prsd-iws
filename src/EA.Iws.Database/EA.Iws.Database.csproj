@@ -153,6 +153,7 @@
     <Content Include="scripts\Update\0007-Support\20230925-adding-new-basel-code-a1180.sql" />
     <Content Include="scripts\Update\0007-Support\20231107-ImportNotification-Extra-Waste-Category-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20231214-Add-WasteComponentType-Change.sql" />
+    <Content Include="scripts\Update\0007-Support\20240220-R789923-UpdateCompAuthEmail.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
