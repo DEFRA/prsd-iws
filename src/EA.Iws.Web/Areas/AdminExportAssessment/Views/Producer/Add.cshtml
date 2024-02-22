@@ -8,15 +8,18 @@
 @using (Html.BeginForm("Add", "Producer", FormMethod.Post, new { autocomplete = "off" }))
 {
     @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
+
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.AdditionalCharge.NotificationId)
     @Html.HiddenFor(m => m.CompetentAuthority)
+    @Html.HiddenFor(m => m.NotificationStatus)
     @Html.HiddenFor(m => m.ShowAdditionalCharge)
 
     <header class="hgroup">
         <h1 class="govuk-heading-l">@ProducerResources.Header</h1>
     </header>
+
+    @Html.Gds().ValidationSummary()
 
     <fieldset>
         <legend class="visuallyhidden">@ProducerResources.ProducerDetails</legend>

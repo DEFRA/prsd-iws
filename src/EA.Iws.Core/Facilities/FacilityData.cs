@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Facilities
 {
     using EA.Iws.Core.Notification;
+    using EA.Iws.Core.NotificationAssessment;
     using Shared;
     using System;
     using System.ComponentModel.DataAnnotations;
@@ -18,6 +19,8 @@
         public Guid NotificationId { get; set; }
 
         public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
 
         [Display(Name = "Actual site of disposal/recovery")]
         public bool IsActualSiteOfTreatment { get; set; }

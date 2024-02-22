@@ -16,6 +16,7 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(x => x.NotificationCompetentAuthority)
     @Html.HiddenFor(x => x.ShowAdditionalCharge)
+    @Html.HiddenFor(x => x.NotificationStatus)
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedEntryPoint)">
         @Html.Gds().LabelFor(m => m.SelectedEntryPoint, new { @class = "form-label-bold" })

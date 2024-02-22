@@ -47,8 +47,9 @@
             var stateOfImport = await mediator.SendAsync(new GetStateOfImportData(id));
             var entryPoints = await mediator.SendAsync(new GetEntryOrExitPointsByCountry(stateOfImport.Country.Id));
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
 
-            var model = new EntryPointViewModel(stateOfImport, entryPoints, id, competentAuthority);
+            var model = new EntryPointViewModel(stateOfImport, entryPoints, id, competentAuthority, notificationStatus);
 
             return View(model);
         }
@@ -99,8 +100,9 @@
             var stateOfExport = await mediator.SendAsync(new GetStateOfExportData(id));
             var entryPoints = await mediator.SendAsync(new GetEntryOrExitPointsByCountry(stateOfExport.Country.Id));
             var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
 
-            var model = new ExitPointViewModel(stateOfExport, entryPoints, id, competentAuthority);
+            var model = new ExitPointViewModel(stateOfExport, entryPoints, id, competentAuthority, notificationStatus);
 
             return View(model);
         }

@@ -17,6 +17,7 @@
 
     @Html.HiddenFor(x => x.NotificationCompetentAuthority)
     @Html.HiddenFor(x => x.ShowAdditionalCharge)
+    @Html.HiddenFor(x => x.NotificationStatus)
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedExitPoint)">
         @Html.Gds().LabelFor(m => m.SelectedExitPoint, new { @class = "form-label-bold" })

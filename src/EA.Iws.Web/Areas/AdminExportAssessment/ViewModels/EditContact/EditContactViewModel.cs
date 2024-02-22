@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact
 {
     using EA.Iws.Core.Notification;
+    using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.Shared;
     using System.ComponentModel.DataAnnotations;
 
@@ -23,7 +24,14 @@
                 NotificationId = data.NotificationId
             };
             CompetentAuthority = data.CompetentAuthority;
-            ShowAdditionalCharge = (data.CompetentAuthority == UKCompetentAuthority.England || data.CompetentAuthority == UKCompetentAuthority.Scotland) ? true : false;
+            NotificationStatus = data.NotificationStatus;
+            ShowAdditionalCharge = ((data.CompetentAuthority == UKCompetentAuthority.England ||
+                                    data.CompetentAuthority == UKCompetentAuthority.Scotland) &&
+                                    ((data.NotificationStatus == NotificationStatus.Consented) ||
+                                    (data.NotificationStatus == NotificationStatus.ConsentedUnlock) ||
+                                    (data.NotificationStatus == NotificationStatus.Transmitted) ||
+                                    (data.NotificationStatus == NotificationStatus.DecisionRequiredBy) ||
+                                    (data.NotificationStatus == NotificationStatus.Reassessment))) ? true : false;
         }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]
@@ -61,5 +69,7 @@
         public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public bool ShowAdditionalCharge { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
     }
 }
