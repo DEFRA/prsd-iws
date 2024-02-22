@@ -2,6 +2,8 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Web.ViewModels.Shared;
 
@@ -10,6 +12,12 @@
         [Required]
         [Display(ResourceType = typeof(FinancialGuaranteeAssessmentResources), Name = "ReceivedDate")]
         public OptionalDateInputViewModel ReceivedDate { get; set; }
+
+        public bool HasAlreadyFinancialGuarantee { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public NewFinancialGuaranteeViewModel()
         {
