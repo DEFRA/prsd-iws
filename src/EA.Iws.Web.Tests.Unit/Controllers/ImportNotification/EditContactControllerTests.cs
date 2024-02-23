@@ -10,7 +10,7 @@
     using EA.Iws.Requests.ImportNotification.Facilities;
     using EA.Iws.Requests.ImportNotification.Importers;
     using EA.Iws.Requests.ImportNotification.Producers;
-    using EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact;
+    using EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact;    
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Xunit;
@@ -19,11 +19,11 @@
     {
         private EditContactController editContactController;
         private readonly IMediator mediator;
-        private readonly Guid importNotificationId = new Guid("A6386BA3-4070-4D83-99D1-54E9614A87EB");
+        private readonly Guid importNotificationId = new Guid("A6386BA3-4070-4D83-99D1-54E9614A87EB");        
 
         public EditContactControllerTests()
         {
-            mediator = A.Fake<IMediator>();
+            mediator = A.Fake<IMediator>();            
             editContactController = new EditContactController(mediator);
         }
 

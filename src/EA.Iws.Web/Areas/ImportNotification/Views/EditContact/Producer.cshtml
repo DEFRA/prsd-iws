@@ -11,7 +11,37 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
+    @Html.HiddenFor(m => m.NotificationStatus)
+    @Html.HiddenFor(m => m.CompetentAuthority)
+    @Html.HiddenFor(m => m.ShowAdditionalCharge)
+
     @Html.EditorForModel()
 
     <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
+}
+
+@section scripts {
+    <script>
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+
+        });
+    </script>
 }
