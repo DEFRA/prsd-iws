@@ -1,9 +1,7 @@
-﻿USE [EA.IwsSandpit_12012024]
-GO
-/****** Object:  UserDefinedFunction [Notification].[GetPricingInfo]    Script Date: 22/02/2024 10:17:39 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
+﻿GO
+ 
+IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
+    EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
 GO
 
 ALTER FUNCTION [Notification].[GetPricingInfo](
