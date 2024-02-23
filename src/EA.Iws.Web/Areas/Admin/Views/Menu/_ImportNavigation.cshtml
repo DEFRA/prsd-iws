@@ -114,7 +114,7 @@
             <li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
             @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England || Model.Details.CompetentAuthority == UKCompetentAuthority.Scotland)
             {
-                <li>@Html.ActionLink(Resources.AdditionalChargesLinkText, "Index", "AssignArea", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink(Resources.AdditionalChargesLinkText, "Index", "AdditionalCharge", new { area = "AdminImportAssessment", id }, null)</li>
             }
         </ul>
 	</li>
