@@ -136,6 +136,7 @@
     <Compile Include="ImportNotificationMovements\MovementsSummary.cs" />
     <Compile Include="ImportNotificationMovements\MovementTableData.cs" />
     <Compile Include="ImportNotificationMovements\Summary.cs" />
+    <Compile Include="ImportNotification\AdditionalCharge\AdditionalChargeType.cs" />
     <Compile Include="ImportNotification\ConfirmNumberOfShipmentsChangeData.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
     <Compile Include="ImportNotification\Draft\ChemicalComposition.cs" />

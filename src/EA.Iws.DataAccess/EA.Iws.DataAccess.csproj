@@ -140,6 +140,7 @@
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
+    <Compile Include="Mappings\Imports\AdditionalChargeMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ConsultationMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeApprovalMapping.cs" />
