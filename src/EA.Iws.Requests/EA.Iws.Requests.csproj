@@ -211,6 +211,7 @@
     <Compile Include="ImportNotification\Facilities\SetFacilityDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationAdditionalCharges.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberById.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />

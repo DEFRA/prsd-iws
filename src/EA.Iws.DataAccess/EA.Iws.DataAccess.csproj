@@ -243,6 +243,7 @@
     <Compile Include="Repositories\ArchiveNotificationRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementPartailRejectionRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationAdditionalChargeRepository.cs" />
     <Compile Include="Repositories\Imports\WasteComponentRepository.cs" />
     <Compile Include="Repositories\IntraCountryExportAllowedRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />

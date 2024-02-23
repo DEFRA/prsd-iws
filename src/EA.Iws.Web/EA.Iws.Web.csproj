@@ -819,6 +819,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Controllers\AdditionalChargeController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\AdditionalCharge\AdditionalChargeViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Views\AdditionalCharge\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\ArchiveNotificationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
@@ -887,6 +894,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\AdditionalCharge\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\KeyDates\AcceptChanges.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Resubmit.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\AdditionalCharge\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4451,6 +4459,10 @@
       <LastGenOutput>RefundDetailsViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AccountManagement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AdditionalCharge\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

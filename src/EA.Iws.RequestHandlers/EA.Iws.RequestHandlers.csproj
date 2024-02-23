@@ -280,6 +280,7 @@
     <Compile Include="ImportNotification\Facilities\SetFacilityDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationAdditionalChargesHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberByIdHandler.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />

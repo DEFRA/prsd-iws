@@ -1,0 +1,49 @@
+﻿@using EA.Iws.Core.ImportNotification.AdditionalCharge
+@using EA.Iws.Web.Areas.AdminImportAssessment.Views.AdditionalCharge
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.AdditionalCharge.AdditionalChargeViewModel
+
+@{
+    ViewBag.Title = @IndexResources.MainHeading;
+}
+
+<h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
+
+<div class="govuk-form-group">
+    <table class="govuk-table" title="@IndexResources.Heading">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderDate</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderAmount</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderChangeDetails</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderComments</th>
+            </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+            @{
+                if (Model.AdditionalChargeData != null && Model.AdditionalChargeData.Count() > 0)
+                {
+                    for (var i = 0; i < Model.AdditionalChargeData.Count(); i++)
+                    {
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">@Model.AdditionalChargeData[i].ChargeDate.ToString("dd/MM/yyyy")</td>
+                            <td class="govuk-table__cell">@Model.AdditionalChargeData[i].ChargeAmount.ToString("C")</td>
+                            <td class="govuk-table__cell">@EnumHelper.GetDescription((AdditionalChargeType)Model.AdditionalChargeData[i].ChangeDetailType)</td>
+                            <td class="govuk-table__cell">@Model.AdditionalChargeData[i].Comments</td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell" colspan="4">@IndexResources.RecordsNotAvailable</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
+}
