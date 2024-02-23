@@ -6,7 +6,7 @@
 }
 
 <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="column">
         <h1 class="govuk-heading-l">
             @(Model.IsIncrease ? Resource.Increase : Resource.Decrease)
             @Resource.Heading
@@ -21,6 +21,10 @@
             @Html.HiddenFor(x => x.NewCharge)
             @Html.HiddenFor(x => x.NewNumberOfShipments)
             @Html.HiddenFor(x => x.OldNumberOfShipments)
+            @Html.HiddenFor(x => x.AdditionalCharge.NotificationId)
+            @Html.HiddenFor(x => x.CompetentAuthority)
+            @Html.HiddenFor(x => x.ShowAdditionalCharge)
+            @Html.HiddenFor(x => x.NotificationStatus)
 
             <div class="govuk-form-group">
 
@@ -29,7 +33,7 @@
                     @Model.OldNumberOfShipments to @Model.NewNumberOfShipments
                 </div>
 
-                
+
                 @if (Model.IncreaseInCharge > 0)
                 {
                     <div class="govuk-form-group">
@@ -39,7 +43,7 @@
                         </div>
                     </div>
                 }
-                
+
                 <div class="govuk-form-group">
                     @if (Model.IsIncrease)
                     {
@@ -57,6 +61,14 @@
                 @Html.ActionLink(Resource.CancelButtonText, "Index", "Overview")
             </div>
 
+            if (Model.ShowAdditionalCharge)
+            {
+                <hr />
+                <fieldset>
+                    @Html.EditorFor(m => m.AdditionalCharge)
+                </fieldset>
+            }
+
             <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
         }
 
@@ -64,8 +76,32 @@
     </div>
 </div>
 
-
-
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Shipments })
+}
+
+@section scripts {
+    <script>
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+
+        });
+    </script>
 }

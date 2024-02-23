@@ -1,0 +1,47 @@
+﻿@model EA.Iws.Core.Shared.AdditionalChargeData
+@using EA.Iws.Core.Shared
+
+@{
+    ViewBag.Title = "AdditionalChargeData";
+}
+
+@Html.HiddenFor(m => m.NotificationId)
+
+<h2 class="govuk-heading-m">
+    @AdditionalChargeDataResources.AdditionalChargeHeader
+</h2>
+<p>
+    @AdditionalChargeDataResources.AdditionalChargeText
+</p>
+
+<fieldset class="govuk-fieldset">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsAdditionalChargesRequired)">
+        @Html.Gds().ValidationMessageFor(m => m.IsAdditionalChargesRequired)
+        @Html.Gds().LabelFor(m => m.IsAdditionalChargesRequired)
+        <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.IsAdditionalChargesRequired, true, new { id = "additionalChargeYes", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="additionalChargeYes">
+                    @AdditionalChargeDataResources.YesRadioButtonLable
+                </label>
+            </div>
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.IsAdditionalChargesRequired, false, new { id = "additionalChargeNo", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="additionalChargeNo">
+                    @AdditionalChargeDataResources.NoRadioButtonLable
+                </label>
+            </div>
+        </div>
+    </div>
+</fieldset>
+
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+    @Html.Gds().LabelFor(m => m.Amount)
+    @Html.Gds().TextBoxFor(m => m.Amount)
+</div>
+
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Comments)">
+    @Html.Gds().LabelFor(m => m.Comments)
+    @Html.TextAreaFor(m => m.Comments, new { @class = "govuk-textarea", rows = 5 })
+</div>
+

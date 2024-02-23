@@ -19,3 +19,29 @@
 {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }
+
+@section scripts {
+    <script>
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+
+        });
+    </script>
+}

@@ -33,7 +33,9 @@
         public decimal NotificationCharge { get; set; }
 
         public bool CanEditNotification { get; set; }
-        
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
         public NotificationOverviewViewModel()
         {
         }
@@ -54,6 +56,7 @@
             WasteCodeOverviewViewModel = new WasteCodeOverviewViewModel(overviewData.WasteCodesOverview, overviewData.Progress);
             NotificationCharge = overviewData.NotificationCharge;
             CanEditNotification = overviewData.CanEditNotification;
+            AdditionalCharge = new AdditionalChargeData() { NotificationId = overviewData.NotificationId };
         }
     }
 }

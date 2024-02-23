@@ -8,6 +8,7 @@ namespace EA.Iws.Web
     using Autofac;
     using Autofac.Integration.Mvc;
     using EA.Iws.Web.Areas.Common;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using IdentityModel;
     using Infrastructure;
     using Owin;
@@ -27,6 +28,7 @@ namespace EA.Iws.Web
             var configuration = new ConfigurationService();
             var auditService = new AuditService();
             var trimTextService = new TrimTextService();
+            var additionalChargeService = new AdditionalChargeService();
 
             var builder = new ContainerBuilder();
             builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
@@ -34,6 +36,7 @@ namespace EA.Iws.Web
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => auditService).As<IAuditService>().SingleInstance();
             builder.Register(c => trimTextService).As<ITrimTextService>().SingleInstance();
+            builder.Register(c => additionalChargeService).As<IAdditionalChargeService>().SingleInstance();
 
             var container = AutofacBootstrapper.Initialize(builder);
 
