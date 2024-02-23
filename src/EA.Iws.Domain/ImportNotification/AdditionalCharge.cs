@@ -1,6 +1,6 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
-    using EA.Iws.Core.ImportNotification.AdditionalCharge;
+    using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Prsd.Core.Domain;
     using System;
     

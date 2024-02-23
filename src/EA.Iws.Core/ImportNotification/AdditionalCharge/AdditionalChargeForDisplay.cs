@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Core.ImportNotification.AdditionalCharge
 {
+    using EA.Iws.Core.Notification.AdditionalCharge;
     using System;
 
     public class AdditionalChargeForDisplay
