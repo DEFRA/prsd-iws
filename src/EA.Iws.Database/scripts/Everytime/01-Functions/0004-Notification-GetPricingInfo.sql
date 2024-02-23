@@ -1,7 +1,5 @@
-﻿IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = N'Notification')
-	EXEC('CREATE SCHEMA [Notification] AUTHORIZATION [dbo]');
-GO
-
+﻿GO
+ 
 IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
     EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
 GO
@@ -23,6 +21,7 @@ BEGIN
     DECLARE @isInterim BIT;
 	DECLARE @submittedDate DATETIMEOFFSET;
 	DECLARE @fixedWasteCategoryFee MONEY;
+	DECLARE @additionalChargeTotal MONEY;
 	
 	SELECT @submittedDate = ChangeDate
 	 FROM (
@@ -131,6 +130,9 @@ BEGIN
 		AND (@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
 	ORDER BY ValidFrom desc;
 
+	--Getting Notification Additional charge totals
+	SET @additionalChargeTotal = (SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId);	
+
 	IF @competentAuthority = 1 AND @submittedDate >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
 	BEGIN
 		--Use the new fees and logic
@@ -148,6 +150,7 @@ BEGIN
 
 		IF @fixedWasteCategoryFee > 0 
 		BEGIN
+			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
 			INSERT @PricingInfo
 			SELECT @fixedWasteCategoryFee, 0;
 			RETURN;
@@ -225,6 +228,7 @@ BEGIN
 
 		IF @fixedWasteCategoryFee > 0 
 		BEGIN
+			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
 			INSERT @PricingInfo
 			SELECT @fixedWasteCategoryFee, 0;
 			RETURN;
@@ -240,11 +244,11 @@ BEGIN
 		BEGIN
 			SET @price += (@numberOfShipments * (select [Value] from [Lookup].[SystemSettings] where Id = 3))
 		END
-	END;
+	END;	
 
+	SELECT @price += ISNULL(@additionalChargeTotal, 0);
 	INSERT @PricingInfo
 	SELECT @price, @potentialRefund;
 	
 	RETURN;
 END;
-GO

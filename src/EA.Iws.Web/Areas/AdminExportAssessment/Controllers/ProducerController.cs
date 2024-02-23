@@ -1,16 +1,26 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
-    using System;
-    using System.Net;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.AddressBook;
     using Core.Notification.Audit;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Notification.AdditionalCharge;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Core.Shared;
+    using EA.Iws.Core.SystemSettings;
+    using EA.Iws.Domain;
+    using EA.Iws.Requests.AdditionalCharge;
+    using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.SystemSettings;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
     using Requests.NotificationAssessment;
+    using System;
+    using System.Net;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Producer;
 
     [AuthorizeActivity(typeof(AddProducer))]
@@ -18,20 +28,21 @@
     {
         private readonly IMediator mediator;
         private readonly IAuditService auditService;
+        private readonly IAdditionalChargeService additionalChargeService;
 
-        public ProducerController(IMediator mediator, IAuditService auditService)
+        public ProducerController(IMediator mediator, IAuditService auditService, IAdditionalChargeService additionalChargeService)
         {
             this.mediator = mediator;
             this.auditService = auditService;
+            this.additionalChargeService = additionalChargeService;
         }
 
         [HttpGet]
         public async Task<ActionResult> Add(Guid id)
         {
-            var model = new AddProducerViewModel
-            {
-                NotificationId = id
-            };
+            var competentAuthority = (await mediator.SendAsync(new GetNotificationBasicInfo(id))).CompetentAuthority;
+            var notificationStatus = await mediator.SendAsync(new GetNotificationStatus(id));
+            var model = new AddProducerViewModel(id, competentAuthority, notificationStatus);
 
             if (model.Business?.Name?.Contains(" T/A ") == true)
             {
@@ -90,6 +101,16 @@
                 });
             }
 
+            if (model.AdditionalCharge != null)
+            {
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.AddProducer);
+
+                    await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                }
+            }
+
             return RedirectToAction("Index", "Overview");
         }
 
@@ -126,6 +147,36 @@
             {
                 return Json(new { success = false, errorMsg = ex.Message });
             }
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
+        {
+            var response = new Core.SystemSetting.SystemSettingData();
+            if (competentAuthority == UKCompetentAuthority.England)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.EaAdditionalChargeFixedFee)); //Id = 4 = EA
+            }
+            else if (competentAuthority == UKCompetentAuthority.Scotland)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaAdditionalChargeFixedFee)); //Id = 5 = SEPA
+            }
+
+            return Json(response.Value);
+        }
+
+        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
+        {
+            var createAddtionalCharge = new CreateAdditionalCharge()
+            {
+                ChangeDetailType = additionalChargeType,
+                ChargeAmount = model.Amount,
+                Comments = model.Comments,
+                NotificationId = notificationId
+            };
+
+            return createAddtionalCharge;
         }
     }
 }

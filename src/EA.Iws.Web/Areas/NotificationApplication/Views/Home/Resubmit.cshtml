@@ -1,0 +1,66 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@{
+    ViewBag.SectionIncompleteText = "Section incomplete";
+    ViewBag.CanEditNotification = Model.CanEditNotification;
+    ViewBag.Title = "Submit notification";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@Html.Partial("_Submission", Model.SubmitSideBarViewModel)
+
+@Html.Partial("_OrganisationsInvolved", Model.OrganisationsInvolvedViewModel)
+
+@Html.Partial("_RecoveryOperation", Model.RecoveryOperationViewModel)
+
+@Html.Partial("_Transportation", Model.TransportationViewModel)
+
+@Html.Partial("_Journey", Model.JourneyViewModel)
+
+@Html.Partial("_AmountsAndDates", Model.AmountsAndDatesViewModel)
+
+@Html.Partial("_ClassifyYourWaste", Model.ClassifyYourWasteViewModel)
+
+@Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
+
+@if (Model.NotificationType == NotificationType.Recovery)
+{
+    @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)
+}
+
+<br />
+<br />
+
+@if (!Model.SubmitSideBarViewModel.IsInternalUser)
+{
+    <div>
+        @Html.ActionLink("Go to notification options", "Index", "Options")
+    </div>
+}
+
+
+@section scripts {
+    <script>
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { competentAuthority: '@Model.SubmitSideBarViewModel.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+
+        });
+    </script>
+}

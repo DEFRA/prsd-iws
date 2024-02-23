@@ -1,32 +1,29 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using Areas.NotificationApplication.Controllers;
-    using Areas.NotificationApplication.ViewModels.ShareNotification;
     using Core.Documents;
-    using Core.Notification;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Notification;
-    using Requests.SharedUsers;
-    using Requests.Users;
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using TestHelpers;
     using Xunit;
+
     public class HomeControllerTests
     {
         private readonly IMediator mediator;
         private readonly HomeController homeController;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly FileData fileData = new FileData("test.pdf", FileType.Pdf, new byte[0]);
+        private readonly IAdditionalChargeService additionalChargeService;
 
         public HomeControllerTests()
         {
             mediator = A.Fake<IMediator>();
-            homeController = new HomeController(mediator);
+            additionalChargeService = A.Fake<IAdditionalChargeService>();
+            homeController = new HomeController(mediator, additionalChargeService);
         }
 
         [Fact]

@@ -198,6 +198,7 @@
     <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
     <Compile Include="Movement\PartialRejectionMovement.cs" />
+    <Compile Include="NotificationApplication\AdditionalCharge.cs" />
     <Compile Include="NotificationApplication\AddNotificationSharedUser.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
@@ -293,6 +294,7 @@
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\FacilityBusiness.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationAdditionalChargeRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
     <Compile Include="NotificationApplication\INotificationUtilities.cs" />

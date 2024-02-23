@@ -3,6 +3,7 @@
     using EA.Iws.Core.Exporters;
     using EA.Iws.Core.Facilities;
     using EA.Iws.Core.Importer;
+    using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.Producers;
     using EA.Iws.Core.Shared;
     using EA.Iws.Requests.Exporters;
@@ -12,6 +13,7 @@
     using EA.Iws.Web.Areas.AdminExportAssessment.Controllers;
     using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact;
     using EA.Iws.Web.Infrastructure;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using EA.Prsd.Core.Mediator;
     using FakeItEasy;
     using System;
@@ -26,20 +28,22 @@
         private EditContactController editContactController;
         private readonly IMediator mediator;
         private readonly IAuditService auditService;
+        private readonly IAdditionalChargeService additionalChargeService;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
 
         public EditContactControllerTests()
         {
             mediator = A.Fake<IMediator>();
             auditService = A.Fake<IAuditService>();
-            editContactController = new EditContactController(mediator, auditService);
+            additionalChargeService = A.Fake<IAdditionalChargeService>();
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
         }
 
         [Fact]
         public async Task Export_ReturnsView()
         {
             A.CallTo(() => mediator.SendAsync(A<GetExporterByNotificationId>._)).Returns((ExporterData)CreateValidEditContact("Exporter"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var model = ConvertToEditContactViewModel(CreateValidEditContact("Exporter"));
             var result = await editContactController.Exporter(notificationId) as ViewResult;
@@ -51,7 +55,7 @@
         public async Task Exporter_ValidModel_RedirectsTo_NotificationOverview_Screen()
         {
             A.CallTo(() => mediator.SendAsync(A<GetExporterByNotificationId>._)).Returns((ExporterData)CreateValidEditContact("Exporter"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var model = CreateValidEditContact("Exporter");
             var editContactModel = ConvertToEditContactViewModel(model);
@@ -65,7 +69,7 @@
         public async Task Importer_ReturnsView()
         {
             A.CallTo(() => mediator.SendAsync(A<GetImporterByNotificationId>._)).Returns((ImporterData)CreateValidEditContact("Importer"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var model = ConvertToEditContactViewModel(CreateValidEditContact("Importer"));
             var result = await editContactController.Importer(notificationId) as ViewResult;
@@ -77,7 +81,7 @@
         public async Task Importer_ValidModel_RedirectsTo_NotificationOverview_Screen()
         {
             A.CallTo(() => mediator.SendAsync(A<GetImporterByNotificationId>._)).Returns((ImporterData)CreateValidEditContact("Importer"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var model = CreateValidEditContact("Importer");
             var editContactModel = ConvertToEditContactViewModel(model);
@@ -91,7 +95,7 @@
         public async Task Producer_ReturnsView()
         {
             A.CallTo(() => mediator.SendAsync(A<GetProducersByNotificationId>._)).Returns((List<ProducerData>)CreateValidEditContact("Producer"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var producerData = (List<ProducerData>)CreateValidEditContact("Producer");
             var model = ConvertToEditContactViewModel(producerData.FirstOrDefault());
@@ -104,7 +108,7 @@
         public async Task Producer_ValidModel_RedirectsTo_NotificationOverview_Screen()
         {
             A.CallTo(() => mediator.SendAsync(A<GetProducersByNotificationId>._)).Returns((List<ProducerData>)CreateValidEditContact("Producer"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var producerData = (List<ProducerData>)CreateValidEditContact("Producer");
             var model = ConvertToEditContactViewModel(producerData.FirstOrDefault());
@@ -118,7 +122,7 @@
         public async Task Facility_ReturnsView()
         {
             A.CallTo(() => mediator.SendAsync(A<GetFacilitiesByNotificationId>._)).Returns((List<FacilityData>)CreateValidEditContact("Facility"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var facilityData = (List<FacilityData>)CreateValidEditContact("Facility");
             var model = ConvertToEditContactViewModel(facilityData.FirstOrDefault());
@@ -131,7 +135,7 @@
         public async Task Facility_ValidModel_RedirectsTo_NotificationOverview_Screen()
         {
             A.CallTo(() => mediator.SendAsync(A<GetFacilitiesByNotificationId>._)).Returns((List<FacilityData>)CreateValidEditContact("Facility"));
-            editContactController = new EditContactController(mediator, auditService);
+            editContactController = new EditContactController(mediator, auditService, additionalChargeService);
 
             var facilityData = (List<FacilityData>)CreateValidEditContact("Facility");
             var model = ConvertToEditContactViewModel(facilityData.FirstOrDefault());
@@ -221,12 +225,22 @@
 
         private EditContactViewModel ConvertToEditContactViewModel(dynamic data)
         {
+            var additionalChargeData = new AdditionalChargeData()
+            {
+                IsAdditionalChargesRequired = true,
+                Amount = 82,
+                Comments = "test",
+                NotificationId = notificationId,
+                AdditionalChargeType = AdditionalChargeType.EditExportDetails
+            };
+
             return new EditContactViewModel()
             {
                 FullName = data.Contact.FullName,
                 Email = data.Contact.Email,
                 TelephonePrefix = data.Contact.TelephonePrefix,
-                Telephone = data.Contact.Telephone
+                Telephone = data.Contact.Telephone,
+                AdditionalCharge = additionalChargeData
             };
         }
     }
