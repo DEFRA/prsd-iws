@@ -154,6 +154,7 @@
     <Content Include="scripts\Update\0007-Support\20231107-ImportNotification-Extra-Waste-Category-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20231214-Add-WasteComponentType-Change.sql" />
     <Content Include="scripts\Update\0007-Support\20240213-CCN062-Additional-Charge-Changes.sql" />
+    <Content Include="scripts\Update\0007-Support\20240222-ImportNotification-Additional-Charge-DataChanges.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
