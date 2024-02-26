@@ -53,7 +53,7 @@
                     else
                     {
                         <td>
-                            @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" }, useHalfWidth: false)
+                            @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide", id="fileInputPoG" }, useHalfWidth: false)
                         </td>
                     }
                 </tr>
@@ -73,7 +73,7 @@
                     else
                     {
                         <td>
-                            @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" }, useHalfWidth: false)
+                            @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide", id = "fileInputTE" }, useHalfWidth: false)
                         </td>
                     }
                 </tr>
@@ -93,7 +93,7 @@
                     else
                     {
                         <td>
-                            @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" }, useHalfWidth: false)
+                            @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide", id = "fileInputComp" }, useHalfWidth: false)
                         </td>
                     }
                 </tr>
@@ -127,18 +127,26 @@
     });
 
     function disableButton() {
-        var button = document.getElementById("uploadButton");
-        var label = document.getElementById("uploadStatusLabel");
+        // Get reference to the file input
+        var fileInputPoG = document.getElementById("fileInputPoG");
+        var fileInputTE = document.getElementById("fileInputTE");
+        var fileInputComp = document.getElementById("fileInputComp");
 
-        // Disable the button
-        button.disabled = true;
+        // Check if there is a selected file
+        if ((fileInputPoG && fileInputPoG.files.length > 0)
+            || (fileInputTE && fileInputTE.files.length > 0) 
+            || (fileInputComp && fileInputComp.files.length > 0)) {
+            var button = document.getElementById("uploadButton");
+            var label = document.getElementById("uploadStatusLabel");
 
-        // Show the label with the specified text
-        label.innerText = "File upload in progress. Please wait";
+            // Disable the button
+            button.disabled = true;
 
+            // Show the label with the specified text
+            label.innerText = "File upload in progress. Please wait";
+        }
         // Get the form element by its ID
         var form = document.getElementById("uploadForm");
-
         // Use the submit() method to submit the form
         form.submit();
     }
