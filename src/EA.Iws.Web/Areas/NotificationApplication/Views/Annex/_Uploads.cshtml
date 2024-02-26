@@ -9,7 +9,7 @@
     <li>
         @Resource.FirstListItemA
         @Html.ActionLink(@Resource.PackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" },
-                new { data_track = "link", data_category = "Export notification", data_action = "Download" }) 
+                new { data_track = "link", data_category = "Export notification", data_action = "Download" })
         @Resource.FirstListItemB
     </li>
     <li>
@@ -17,7 +17,7 @@
     </li>
 </ol>
 
-@using (Html.BeginForm("Index", "Annex", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Index", "Annex", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -99,7 +99,6 @@
                 </tr>
             }
         </tbody>
-
     </table>
 
     <div class="form-group">
@@ -108,13 +107,39 @@
         @Resource.OptionsLinkPainTextB
     </div>
 
-
     <div class="form-group">
-        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
-    
+        <button id="uploadButton" class="govuk-button" type="submit" onclick="disableButton()">@Constants.ContinueButtonText</button>
+
+        <label class="" id="uploadStatusLabel"></label>
         <p>@Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)</p>
 
         @Html.ActionLink(@Resource.DownloadPackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" },
                 new { data_track = "link", data_category = "Export notification", data_action = "Download" })
     </div>
 }
+<script>
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            // Page was loaded from back/forward cache
+            // So force a reload
+            window.location.reload();
+        }
+    });
+
+    function disableButton() {
+        var button = document.getElementById("uploadButton");
+        var label = document.getElementById("uploadStatusLabel");
+
+        // Disable the button
+        button.disabled = true;
+
+        // Show the label with the specified text
+        label.innerText = "File upload in progress. Please wait";
+
+        // Get the form element by its ID
+        var form = document.getElementById("uploadForm");
+
+        // Use the submit() method to submit the form
+        form.submit();
+    }
+</script>
