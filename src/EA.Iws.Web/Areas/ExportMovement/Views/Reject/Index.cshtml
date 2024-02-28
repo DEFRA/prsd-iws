@@ -7,7 +7,7 @@
 
 <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
-@using (Html.BeginForm("Index", "Reject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("Index", "Reject", FormMethod.Post, new { enctype = "multipart/form-data", id = "uploadForm" }))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -30,11 +30,13 @@
         @Html.LabelFor(m => m.File, new { @class = "heading-small" })
         <br />
         @Html.Gds().ValidationMessageFor(m => m.File)
-        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file", id="fileInput" })
     </div>
 
     <div class="govuk-form-group">
-        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+        <button class="govuk-button" id="uploadButton" onclick="disableButton()" type="submit">@Constants.ContinueButtonText</button>
+
+        <label class="" id="uploadStatusLabel"></label>
     </div>
 }
 
@@ -43,3 +45,37 @@
         new { id = Model.NotificationId, area = "NotificationApplication" },
         null)
 </div>
+
+<script>
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            // Page was loaded from back/forward cache
+            // So force a reload
+            window.location.reload();
+        }
+    });
+
+
+    function disableButton() {
+        // Get reference to the file input
+        var fileInput = document.getElementById("fileInput");
+
+        // Check if there is a selected file
+        if (fileInput && fileInput.files.length > 0)
+        {
+            var button = document.getElementById("uploadButton");
+            var label = document.getElementById("uploadStatusLabel");
+
+            // Disable the button
+            button.disabled = true;
+
+            // Show the label with the specified text
+            label.innerText = "File upload in progress. Please wait";
+        }
+
+        // Get the form element by its ID
+        var form = document.getElementById("uploadForm");
+        // Use the submit() method to submit the form
+        form.submit();
+    }
+</script>
