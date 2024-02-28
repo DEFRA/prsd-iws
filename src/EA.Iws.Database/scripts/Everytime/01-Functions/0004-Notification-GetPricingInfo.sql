@@ -161,18 +161,29 @@ BEGIN
 			DECLARE @hundreds INT
 			SET @hundreds = (@numberOfShipments - 901) / 100
 
-			/*
-				For just the following we need to apply a different set of refund logic :)
-					Import Recovery IsInterim 0, ActivityId = F0407E39-C9BA-4519-B659-A4C9010901C7
-					Import Recovery IsInterim 1, ActivityId = DAF51836-41E0-4324-93AE-A4C9010901C7
-					Import Disposal IsInterim 0, ActivityId = E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7
-					Import Disposal IsInterim 1, ActivityId = BE00F07B-41E1-4C03-9BB9-A4C9010901C7
-			*/
+			--Import Recovery IsInterim 0, ActivityId = F0407E39-C9BA-4519-B659-A4C9010901C7
+			--Import Recovery IsInterim 1, ActivityId = DAF51836-41E0-4324-93AE-A4C9010901C7
+			--Import Disposal IsInterim 0, ActivityId = E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7
+			--Import Disposal IsInterim 1, ActivityId = BE00F07B-41E1-4C03-9BB9-A4C9010901C7
 			IF @activityId IN (
 				'F0407E39-C9BA-4519-B659-A4C9010901C7', 'DAF51836-41E0-4324-93AE-A4C9010901C7', 
 				'E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7')
 			BEGIN
 				SET @price += (SELECT [VALUE] * @hundreds FROM [Lookup].[SystemSettings] where Id = 4)
+			END
+			
+			--Export Recovery IsInterim 0, ActivityId = 75496653-C767-44D2-AA27-A4C9010901C7
+			--Export Recovery IsInterim 1, ActivityId = 71CC7688-63D3-4312-BAD2-A4C9010901C7
+			IF @activityId IN ('75496653-C767-44D2-AA27-A4C9010901C7', '71CC7688-63D3-4312-BAD2-A4C9010901C7')
+			BEGIN
+				SET @price += (SELECT [VALUE] * @hundreds FROM [Lookup].[SystemSettings] where Id = 7)
+			END
+
+			--Export Disposal IsInterim 0, ActivityId = 12AF7EA4-1E60-4D35-B965-A4C9010901C7
+			--Export Disposal IsInterim 1, ActivityId = 8385CAD7-E5F0-4765-A46B-A4C9010901C7
+			IF @activityId IN ('12AF7EA4-1E60-4D35-B965-A4C9010901C7', '8385CAD7-E5F0-4765-A46B-A4C9010901C7')
+			BEGIN
+				SET @price += (SELECT [VALUE] * @hundreds FROM [Lookup].[SystemSettings] where Id = 8)
 			END
 
 			ELSE
