@@ -12,8 +12,7 @@
     var fileText = Model.Certificate == CertificateType.Receipt ? "receipt" : (Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal");
 }
 
-
-@using (Html.BeginForm(null,null,FormMethod.Post,HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+@using (Html.BeginForm(null, null, FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data", id = "uploadForm" })))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -27,15 +26,15 @@
     @Html.HiddenFor(m => m.MovementId)
     if (Model.Certificate == CertificateType.ReceiptRecovery)
     {
-            <h1 class="heading-large">@Html.Raw(string.Format(@Resource.UploadCombinedTitle, operation, Model.ShipmentNumber))</h1>
+        <h1 class="heading-large">@Html.Raw(string.Format(@Resource.UploadCombinedTitle, operation, Model.ShipmentNumber))</h1>
     }
     else
     {
-         <h1 class="heading-large">@Html.Raw(titleText)</h1>
+        <h1 class="heading-large">@Html.Raw(titleText)</h1>
     }
     if (Model.Certificate == CertificateType.ReceiptRecovery)
     {
-    <p>@string.Format(Resource.UploadInstructionReceiptRecovery, fileText)</p>
+        <p>@string.Format(Resource.UploadInstructionReceiptRecovery, fileText)</p>
     }
     else
     {
@@ -44,12 +43,13 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
         <label for="@Html.NameFor(m => m.File)">@Html.Raw(Model.Certificate != CertificateType.ReceiptRecovery ? string.Format(Resource.UploadFileTitle, fileText) : string.Format(Resource.UploadFileCombinedTitle, operation))</label>
         @Html.Gds().ValidationMessageFor(m => m.File)
-        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file", id = "fileInput" })
     </div>
 
-
     <div class="form-group-compound">
-        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+        <button class="govuk-button" id="uploadButton" onclick="disableButton()" type="submit">@Constants.ContinueButtonText</button>
+
+        <label class="" id="uploadStatusLabel"></label>
     </div>
 
 }
@@ -59,3 +59,36 @@
     "Options",
     new { area = "NotificationApplication", id = Model.NotificationId },
     null)
+
+<script>
+    window.addEventListener('pageshow', function (event) {
+        if (event.persisted) {
+            // Page was loaded from back/forward cache
+            // So force a reload
+            window.location.reload();
+        }
+    });
+
+    function disableButton() {
+        // Get reference to the file input
+        var fileInput = document.getElementById("fileInput");
+
+        // Check if there is a selected file
+        if (fileInput && fileInput.files.length > 0)
+        {
+            var button = document.getElementById("uploadButton");
+            var label = document.getElementById("uploadStatusLabel");
+
+            // Disable the button
+            button.disabled = true;
+
+            // Show the label with the specified text
+            label.innerText = "File upload in progress. Please wait";
+        }
+
+        // Get the form element by its ID
+        var form = document.getElementById("uploadForm");
+        // Use the submit() method to submit the form
+        form.submit();
+    }
+</script>
