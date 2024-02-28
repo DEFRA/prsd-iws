@@ -12,7 +12,7 @@
 
         public string SiteRoot { get; set; }
 
-        [DefaultValue(1000)]
+        [DefaultValue(30000)]
         public int FileSafeTimerMilliseconds { get; set; }
 
         [DefaultValue("~/App_Data/uploads")]
