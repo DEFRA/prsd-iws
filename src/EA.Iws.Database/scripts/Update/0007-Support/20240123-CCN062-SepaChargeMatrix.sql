@@ -3,7 +3,7 @@
 INSERT INTO [Lookup].[SystemSettings] (Id, [Value], [Description])
 VALUES (3, '25', 'SEPA Additional Charge per shipment for self entering data')
 
---Add New EA charge matrix
+--Add New SEPA charge matrix
 DECLARE @validFrom nvarchar(100);
 SET @validFrom = (SELECT [Value] from [Lookup].[SystemSettings] where Id = 2);
 
