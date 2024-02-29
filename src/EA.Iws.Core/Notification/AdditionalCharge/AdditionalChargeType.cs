@@ -39,5 +39,8 @@
 
         [Display(Name = "Financial guarantee assessment changes", Description = "Financial guarantee assessment changes")]
         FinancialGuaranteeAssessment = 12,
+
+        [Display(Name = "Edit facility details", Description = "Edit facility details")]
+        EditFacilityDetails = 13,
     }
 }
