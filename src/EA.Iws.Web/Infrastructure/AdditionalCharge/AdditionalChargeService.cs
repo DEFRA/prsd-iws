@@ -10,5 +10,10 @@
         {
             await mediator.SendAsync(additionalChargeData);
         }
+
+        public async Task AddImportAdditionalCharge(IMediator mediator, CreateImportNotificationAdditionalCharge importAdditionalChargeData)
+        {
+            await mediator.SendAsync(importAdditionalChargeData);
+        }
     }
 }

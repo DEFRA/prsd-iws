@@ -78,7 +78,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
+                    var addtionalCharge = new CreateAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -123,7 +123,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
+                    var addtionalCharge = new CreateAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -170,7 +170,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
+                    var addtionalCharge = new CreateAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -218,7 +218,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditFacilityDetails);
+                    var addtionalCharge = new CreateAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditFacilityDetails);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -242,19 +242,6 @@
             }
 
             return Json(response.Value);
-        }
-
-        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
-        {
-            var createAddtionalCharge = new CreateAdditionalCharge()
-            {
-                ChangeDetailType = additionalChargeType,
-                ChargeAmount = model.Amount,
-                Comments = model.Comments,
-                NotificationId = notificationId
-            };
-
-            return createAddtionalCharge;
         }
 
         private static ContactData GetNewContactData(EditContactViewModel model, ContactData oldContactData)

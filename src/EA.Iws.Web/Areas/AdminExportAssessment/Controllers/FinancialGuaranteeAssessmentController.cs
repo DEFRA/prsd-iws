@@ -80,7 +80,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(model.AdditionalCharge.NotificationId, model.AdditionalCharge, AdditionalChargeType.FinancialGuaranteeAssessment);
+                    var addtionalCharge = new CreateAdditionalCharge(model.AdditionalCharge.NotificationId, model.AdditionalCharge, AdditionalChargeType.FinancialGuaranteeAssessment);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -139,19 +139,6 @@
             }
 
             return Json(response.Value);
-        }
-
-        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
-        {
-            var createAddtionalCharge = new CreateAdditionalCharge()
-            {
-                ChangeDetailType = additionalChargeType,
-                ChargeAmount = model.Amount,
-                Comments = model.Comments,
-                NotificationId = notificationId
-            };
-
-            return createAddtionalCharge;
         }
     }
 }
