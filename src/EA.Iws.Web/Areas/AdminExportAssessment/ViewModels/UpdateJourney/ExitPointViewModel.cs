@@ -1,5 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney
-{    
+{
     using Core.StateOfExport;
     using Core.TransportRoute;
     using EA.Iws.Core.Notification;
@@ -12,7 +12,7 @@
 
     public class ExitPointViewModel
     {
-        public ExitPointViewModel(StateOfExportData stateOfExport, IList<EntryOrExitPointData> entryPoints, 
+        public ExitPointViewModel(StateOfExportData stateOfExport, IList<EntryOrExitPointData> entryPoints,
                                   Guid notificationId, UKCompetentAuthority authority, NotificationStatus notificationStatus)
         {
             CompetentAuthority = stateOfExport.CompetentAuthority.Name;

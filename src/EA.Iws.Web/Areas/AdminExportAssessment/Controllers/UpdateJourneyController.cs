@@ -3,7 +3,6 @@
     using Core.Notification.Audit;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
-    using EA.Iws.Core.Shared;
     using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
@@ -75,7 +74,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateEntryPoint);
+                    var addtionalCharge = new CreateAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.UpdateEntryPoint);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -128,7 +127,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.UpdateExitPoint);
+                    var addtionalCharge = new CreateAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.UpdateExitPoint);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -335,19 +334,6 @@
             }
 
             return Json(response.Value);
-        }
-
-        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
-        {
-            var createAddtionalCharge = new CreateAdditionalCharge()
-            {
-                ChangeDetailType = additionalChargeType,
-                ChargeAmount = model.Amount,
-                Comments = model.Comments,
-                NotificationId = notificationId
-            };
-
-            return createAddtionalCharge;
         }
     }
 }

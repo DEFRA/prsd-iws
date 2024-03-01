@@ -21,7 +21,6 @@
             @Html.HiddenFor(x => x.NewCharge)
             @Html.HiddenFor(x => x.NewNumberOfShipments)
             @Html.HiddenFor(x => x.OldNumberOfShipments)
-            @Html.HiddenFor(x => x.AdditionalCharge.NotificationId)
             @Html.HiddenFor(x => x.CompetentAuthority)
             @Html.HiddenFor(x => x.ShowAdditionalCharge)
             @Html.HiddenFor(x => x.NotificationStatus)
@@ -63,6 +62,7 @@
 
             if (Model.ShowAdditionalCharge)
             {
+                @Html.HiddenFor(x => x.AdditionalCharge.NotificationId)
                 <hr />
                 <fieldset>
                     @Html.EditorFor(m => m.AdditionalCharge)

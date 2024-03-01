@@ -6,7 +6,7 @@
 }
 
 <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="column">
         <h1 class="govuk-heading-l">
             @(Model.IsIncrease ? Resource.Increase : Resource.Decrease)
             @Resource.Heading
@@ -21,6 +21,9 @@
             @Html.HiddenFor(x => x.NewCharge)
             @Html.HiddenFor(x => x.NewNumberOfShipments)
             @Html.HiddenFor(x => x.OldNumberOfShipments)
+            @Html.HiddenFor(x => x.CompetentAuthority)
+            @Html.HiddenFor(x => x.ShowAdditionalCharge)
+            @Html.HiddenFor(x => x.NotificationStatus)
 
             <div class="govuk-form-group">
 
@@ -28,7 +31,6 @@
                     @(Model.IsIncrease ? Resource.IncreaseTo : Resource.DecreaseTo)
                     @Model.OldNumberOfShipments to @Model.NewNumberOfShipments
                 </div>
-
 
                 @if (Model.IncreaseInCharge > 0)
                 {
@@ -50,16 +52,46 @@
                         @Html.Raw(string.Format(Resource.GuidanceDecrease, Model.NewNumberOfShipments))
                     }
                 </div>
-
             </div>
 
             <div class="govuk-form-group">
                 @Html.ActionLink(Resource.CancelButtonText, "Index", "Home")
             </div>
 
+            if (Model.ShowAdditionalCharge)
+            {
+                @Html.HiddenFor(x => x.AdditionalCharge.NotificationId)
+                <hr />
+                <fieldset>
+                    @Html.EditorFor(m => m.AdditionalCharge)
+                </fieldset>
+            }
             <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
         }
-
-
     </div>
 </div>
+@section scripts {
+    <script>
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+
+        });
+    </script>
+}

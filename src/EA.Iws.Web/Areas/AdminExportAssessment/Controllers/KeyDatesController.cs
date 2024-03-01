@@ -169,7 +169,7 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.AcceptNotification);
+                    var addtionalCharge = new CreateAdditionalCharge(model.NotificationId, model.AdditionalCharge, AdditionalChargeType.AcceptNotification);
 
                     await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
                 }
@@ -202,19 +202,6 @@
             }
 
             return Json(response.Value);
-        }
-
-        private static CreateAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
-        {
-            var createAddtionalCharge = new CreateAdditionalCharge()
-            {
-                ChangeDetailType = additionalChargeType,
-                ChargeAmount = model.Amount,
-                Comments = model.Comments,
-                NotificationId = notificationId
-            };
-
-            return createAddtionalCharge;
         }
 
         private async Task SetNotificationTransmitted(DateInputViewModel model)

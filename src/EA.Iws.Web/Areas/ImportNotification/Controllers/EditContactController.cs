@@ -3,13 +3,13 @@
     using Core.ImportNotification.Summary;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
-    using EA.Iws.Core.Shared;
     using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.ImportNotification;
     using EA.Iws.Requests.ImportNotification.Facilities;
     using EA.Iws.Requests.ImportNotification.Producers;
     using EA.Iws.Requests.SystemSettings;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification.Exporters;
@@ -24,10 +24,12 @@
     public class EditContactController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAdditionalChargeService additionalChargeService;
 
-        public EditContactController(IMediator mediator)
+        public EditContactController(IMediator mediator, IAdditionalChargeService additionalChargeService)
         {
             this.mediator = mediator;
+            this.additionalChargeService = additionalChargeService;
         }
 
         [HttpGet]
@@ -69,9 +71,9 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
+                    var additionalCharge = new CreateImportNotificationAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditExportDetails);
 
-                    //await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddImportAdditionalCharge(mediator, additionalCharge);
                 }
             }
 
@@ -118,9 +120,9 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
+                    var additionalCharge = new CreateImportNotificationAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditImporterDetails);
 
-                    //await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddImportAdditionalCharge(mediator, additionalCharge);
                 }
             }
 
@@ -167,9 +169,9 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
+                    var additionalCharge = new CreateImportNotificationAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditProducerDetails);
 
-                    //await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddImportAdditionalCharge(mediator, additionalCharge);
                 }
             }
 
@@ -215,9 +217,9 @@
             {
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
-                    var addtionalCharge = CreateAdditionalChargeData(id, model.AdditionalCharge, AdditionalChargeType.EditConsigneeDetails);
+                    var additionalCharge = new CreateImportNotificationAdditionalCharge(id, model.AdditionalCharge, AdditionalChargeType.EditFacilityDetails);
 
-                    //await additionalChargeService.AddAdditionalCharge(mediator, addtionalCharge);
+                    await additionalChargeService.AddImportAdditionalCharge(mediator, additionalCharge);
                 }
             }
 
@@ -239,19 +241,6 @@
             }
 
             return Json(response.Value);
-        }
-
-        private static CreateImportNotificationAdditionalCharge CreateAdditionalChargeData(Guid notificationId, AdditionalChargeData model, AdditionalChargeType additionalChargeType)
-        {
-            var createAddtionalCharge = new CreateImportNotificationAdditionalCharge()
-            {
-                ChangeDetailType = additionalChargeType,
-                ChargeAmount = model.Amount,
-                Comments = model.Comments,
-                NotificationId = notificationId
-            };
-
-            return createAddtionalCharge;
         }
 
         private static Contact GetNewContactData(EditContactViewModel model)
