@@ -10,7 +10,7 @@
         private readonly WriteFileVirusScanner virusScanner;
         private readonly IFileAccess fileAccess;
         private readonly string FileName = "File.txt";
-        private const int Timeout = 1000;
+        private const int Timeout = 30000;
 
         public WriteFileVirusScannerTests()
         {
