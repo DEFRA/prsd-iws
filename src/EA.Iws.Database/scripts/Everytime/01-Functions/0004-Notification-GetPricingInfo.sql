@@ -131,7 +131,8 @@ BEGIN
 	ORDER BY ValidFrom desc;
 
 	--Getting Notification Additional charge totals
-	SET @additionalChargeTotal = (SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId);	
+	SET @additionalChargeTotal = ISNULL((SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
+	SET @additionalChargeTotal += ISNULL((SELECT SUM(ChargeAmount) FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
 
 	IF @competentAuthority = 1 AND @submittedDate >= (SELECT [Value] from [Lookup].[SystemSettings] where Id = 1) 
 	BEGIN
