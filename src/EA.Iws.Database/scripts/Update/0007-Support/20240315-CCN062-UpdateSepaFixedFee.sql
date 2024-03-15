@@ -1,0 +1,2 @@
+﻿UPDATE [Lookup].[PricingFixedFee] Set [Price]=9884 where Id='D39271D5-381C-43C0-A137-A190DB98F1AF' and CompetentAuthority=2 and WasteCategoryTypeId=11;
+UPDATE [Lookup].[PricingFixedFee] Set [Price]=9884 where Id='AA5D920C-2E15-4EA1-A68A-401DDD50D3CF' and CompetentAuthority=2 and WasteCategoryTypeId=12;
