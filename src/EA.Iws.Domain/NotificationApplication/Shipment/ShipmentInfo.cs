@@ -14,12 +14,13 @@
         {
         }
 
-        public ShipmentInfo(Guid notificationId, ShipmentPeriod shipmentPeriod, int numberOfShipments, ShipmentQuantity shipmentQuantity)
+        public ShipmentInfo(Guid notificationId, ShipmentPeriod shipmentPeriod, int numberOfShipments, ShipmentQuantity shipmentQuantity, bool willSelfEnterShipmentData)
         {
             NotificationId = notificationId;
             UpdateQuantity(shipmentQuantity);
             UpdateShipmentPeriod(shipmentPeriod, NotificationStatus.NotSubmitted);
             UpdateNumberOfShipments(numberOfShipments);
+            WillSelfEnterShipmentData = willSelfEnterShipmentData;
         }
 
         public Guid NotificationId { get; private set; }
@@ -39,6 +40,8 @@
                 quantity = decimal.Round(value, 4, MidpointRounding.AwayFromZero);
             }
         }
+        
+        public bool WillSelfEnterShipmentData { get; private set; }
 
         public void UpdateQuantity(ShipmentQuantity shipmentQuantity)
         {
@@ -62,6 +65,11 @@
             Guard.ArgumentNotZeroOrNegative(() => numberOfShipments, numberOfShipments);
 
             NumberOfShipments = numberOfShipments;
+        }
+
+        public void UpdateWillSelfEnterShipmentData(bool willSelfEnterShipmentData)
+        {
+            WillSelfEnterShipmentData = willSelfEnterShipmentData;
         }
     }
 }

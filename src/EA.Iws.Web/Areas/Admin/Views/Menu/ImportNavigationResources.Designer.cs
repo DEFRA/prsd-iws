@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional charges.
+        /// </summary>
+        public static string AdditionalChargesLinkText {
+            get {
+                return ResourceManager.GetString("AdditionalChargesLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assign an area.
         /// </summary>
         public static string AreaLinkText {

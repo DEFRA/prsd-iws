@@ -72,7 +72,7 @@
 
         public bool CanEditNotification
         {
-            get
+            get 
             {
                 return stateMachine.IsInState(NotificationStatus.NotSubmitted)
                        || stateMachine.IsInState(NotificationStatus.Submitted)

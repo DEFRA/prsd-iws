@@ -4,6 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Notification.AdditionalCharge;
+    using EA.Iws.Core.SystemSettings;
+    using EA.Iws.Requests.AdditionalCharge;
+    using EA.Iws.Requests.SystemSettings;
+    using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
@@ -13,14 +19,16 @@
     public class NumberOfShipmentsController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAdditionalChargeService additionalChargeService;
 
-        public NumberOfShipmentsController(IMediator mediator)
+        public NumberOfShipmentsController(IMediator mediator, IAdditionalChargeService additionalChargeService)
         {
             this.mediator = mediator;
+            this.additionalChargeService = additionalChargeService;
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(Guid id)
         {
             return View();
         }
@@ -41,7 +49,11 @@
         public async Task<ActionResult> Confirm(Guid id, IndexViewModel model)
         {
             var data = await mediator.SendAsync(new GetChangeNumberOfShipmentConfrimationData(id, model.Number.GetValueOrDefault()));
-            var confirmModel = new ConfirmViewModel(data);
+
+            var importNotificationDetails = await mediator.SendAsync(new GetNotificationDetails(id));
+            
+            var confirmModel = new ConfirmViewModel(data, importNotificationDetails.CompetentAuthority, importNotificationDetails.Status);
+
             confirmModel.NewNumberOfShipments = model.Number.GetValueOrDefault();
 
             return View(confirmModel);
@@ -49,11 +61,46 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm(ConfirmViewModel model)
+        public async Task<ActionResult> Confirm(ConfirmViewModel model)
         {
-            mediator.SendAsync(new SetNewNumberOfShipments(model.NotificationId, model.OldNumberOfShipments, model.NewNumberOfShipments));
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await mediator.SendAsync(new SetNewNumberOfShipments(model.NotificationId, model.OldNumberOfShipments, model.NewNumberOfShipments));
+
+            if (model.AdditionalCharge != null)
+            {
+                if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
+                {
+                    var addtionalCharge = new CreateImportNotificationAdditionalCharge(
+                        model.NotificationId, 
+                        model.AdditionalCharge, 
+                        AdditionalChargeType.UpdateNumberOfShipment);
+
+                    await additionalChargeService.AddImportAdditionalCharge(mediator, addtionalCharge);
+                }
+            }
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<JsonResult> GetDefaultAdditionalChargeAmount(UKCompetentAuthority competentAuthority)
+        {
+            var response = new Core.SystemSetting.SystemSettingData();
+            if (competentAuthority == UKCompetentAuthority.England)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.EaAdditionalChargeFixedFee)); //EA
+            }
+            else if (competentAuthority == UKCompetentAuthority.Scotland)
+            {
+                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaAdditionalChargeFixedFee)); //SEPA
+            }
+
+            return Json(response.Value);
         }
     }
 }

@@ -136,6 +136,7 @@
     <Compile Include="ImportNotificationMovements\MovementsSummary.cs" />
     <Compile Include="ImportNotificationMovements\MovementTableData.cs" />
     <Compile Include="ImportNotificationMovements\Summary.cs" />
+    <Compile Include="ImportNotification\AdditionalCharge\AdditionalChargeForDisplay.cs" />
     <Compile Include="ImportNotification\ConfirmNumberOfShipmentsChangeData.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
     <Compile Include="ImportNotification\Draft\ChemicalComposition.cs" />
@@ -239,6 +240,8 @@
     <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
     <Compile Include="NotificationAssessment\NotificationCommentsUsersData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
+    <Compile Include="Notification\AdditionalCharge\AdditionalChargeType.cs" />
+    <Compile Include="Notification\AdditionalCharge\NotificationAdditionalChargeForDisplay.cs" />
     <Compile Include="Notification\Audit\NotificationAudit.cs" />
     <Compile Include="Notification\Audit\NotificationAuditForDisplay.cs" />
     <Compile Include="Notification\Audit\NotificationAuditScreen.cs" />
@@ -266,6 +269,12 @@
     <Compile Include="Reports\TextFilterHelper.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
+    <Compile Include="Shared\AdditionalChargeData.cs" />
+    <Compile Include="Shared\AdditionalChargeDataResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdditionalChargeDataResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Shared\CertificateType.cs" />
     <Compile Include="Shared\IntraCountryExportAllowedData.cs" />
     <Compile Include="Shared\ShipmentAuditData.cs" />
@@ -333,6 +342,8 @@
     <Compile Include="StateOfImport\StateOfImportWithTransportRouteData.cs" />
     <Compile Include="Documents\FileData.cs" />
     <Compile Include="Documents\FileType.cs" />
+    <Compile Include="SystemSettings\SystemSettingData.cs" />
+    <Compile Include="SystemSettings\SystemSettingType.cs" />
     <Compile Include="TechnologyEmployed\TechnologyEmployedData.cs" />
     <Compile Include="IntendedShipments\IntendedShipmentData.cs" />
     <Compile Include="Shared\ShipmentQuantityUnits.cs" />
@@ -363,6 +374,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Shared\AdditionalChargeDataResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AdditionalChargeDataResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Shared\AddressDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressDataResources.Designer.cs</LastGenOutput>
@@ -378,6 +393,7 @@
       <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

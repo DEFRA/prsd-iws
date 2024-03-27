@@ -5,6 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
 
     internal class WasteComponentRepository : IWasteComponentRepository
@@ -18,10 +19,10 @@
             this.authorization = authorization;
         }
 
-        public async Task<WasteComponent> GetByNotificationId(Guid notificationId)
+        public async Task<IEnumerable<WasteComponent>> GetByNotificationId(Guid notificationId)
         {
             await authorization.EnsureAccessAsync(notificationId);
-            return await context.WasteComponents.SingleAsync(o => o.ImportNotificationId == notificationId);
+            return await context.WasteComponents.Where(o => o.ImportNotificationId == notificationId).ToArrayAsync();
         }
 
         public void Add(List<WasteComponent> wasteComponent)

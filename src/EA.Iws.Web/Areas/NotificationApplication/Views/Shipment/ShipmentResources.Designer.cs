@@ -277,6 +277,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Shipment {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Will you be entering the shipment data yourselves into the digital service?.
+        /// </summary>
+        public static string WillSelfEnterShipmentData {
+            get {
+                return ResourceManager.GetString("WillSelfEnterShipmentData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select whether you will be entering shipment data yourselves.
+        /// </summary>
+        public static string WillSelfEnterShipmentDataRequired {
+            get {
+                return ResourceManager.GetString("WillSelfEnterShipmentDataRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Year.
         /// </summary>
         public static string Year {

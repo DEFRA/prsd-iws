@@ -166,6 +166,7 @@
     <Compile Include="Controllers\ImportNotification\EditContactControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\WasteCategoriesControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\WasteComponentControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\AdditionalChargeControllerTests.cs" />
     <Compile Include="ViewModels\Registration\AdminRegistrationViewModelTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AddressBook\EditControllerTests.cs" />

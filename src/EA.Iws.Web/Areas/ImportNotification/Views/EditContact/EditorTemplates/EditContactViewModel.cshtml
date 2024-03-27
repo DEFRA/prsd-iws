@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact
 @using Resource = EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModelResources
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModel
 
@@ -47,3 +48,11 @@
     @Html.Gds().ValidationMessageFor(model => model.Email)
     @Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>
+
+@if (Model.CompetentAuthority == UKCompetentAuthority.England || Model.CompetentAuthority == UKCompetentAuthority.Scotland)
+{
+    <hr />
+    <fieldset>
+        @Html.EditorFor(m => m.AdditionalCharge)
+    </fieldset>
+}

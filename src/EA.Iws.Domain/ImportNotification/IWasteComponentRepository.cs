@@ -6,7 +6,7 @@
 
     public interface IWasteComponentRepository
     {
-        Task<WasteComponent> GetByNotificationId(Guid notificationId);
+        Task<IEnumerable<WasteComponent>> GetByNotificationId(Guid notificationId);
 
         void Add(List<WasteComponent> wasteComponents);
     }

@@ -38,6 +38,18 @@
                     using (Html.BeginForm("Resubmit", "Home", FormMethod.Post, new { id = Model.NotificationId }))
                     {
                         @Html.AntiForgeryToken()
+                        @Html.Gds().ValidationSummary()
+                        @Html.HiddenFor(x => x.NotificationId)
+
+                        if (Model.ShowAdditionalCharge)
+                        {
+                            @Html.HiddenFor(x => x.AdditionalCharge.NotificationId)
+
+                            <hr />
+                            <fieldset>
+                                @Html.EditorFor(m => m.AdditionalCharge)
+                            </fieldset>
+                        }
 
                         <input type="submit" class="govuk-button" value="Resubmit notification" />
                     }
@@ -54,8 +66,8 @@
             @if (Model.Charge > 0)
             {
                 <div class="noti-charge govuk-body">
-                    <span>Notification<br />charge</span>
-                    <span class="price">&pound;@Model.Charge</span>
+                    <span>Notification Charge:</span>
+                    <span class="price">@Model.Charge.ToString("C")</span>
                     <div class="vat-message govuk-text">
                         All charges for environmental<br /> permits and licences are outside<br /> the scope of VAT
                     </div>
@@ -93,7 +105,7 @@
             </div>
 
             @if (Model.Status == NotificationStatus.NotSubmitted)
-            {               
+            {
                 <div class="govuk-grid-column-full" style="padding: 0px !important">
                     <div id="submit-side-bar" class="submitsidebar">
                         <h3 style="text-align:center;">Notification access level:</h3>

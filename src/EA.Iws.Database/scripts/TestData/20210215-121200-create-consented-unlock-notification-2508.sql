@@ -290,14 +290,16 @@ INSERT [Notification].[shipmentinfo]
         [quantity],
         [units],
         [firstdate],
-        [lastdate])
+        [lastdate],
+        [WillSelfEnterShipmentData])
 VALUES (NEWID(),
         @NotificationId,
         520,
         Cast(35000.0000 AS DECIMAL(18, 4)),
         3,
         Cast(N'2016-09-01' AS DATE),
-        Cast(N'2017-08-27' AS DATE))
+        Cast(N'2017-08-27' AS DATE),
+        1)
 
 INSERT [Notification].[CarrierCollection]
 	   ([Id],

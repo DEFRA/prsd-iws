@@ -1,32 +1,29 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
-    using System;
-    using System.Threading.Tasks;
     using Core.ComponentRegistration;
     using Shipment;
+    using System;
+    using System.Threading.Tasks;
 
     [AutoRegister]
     public class NotificationChargeCalculator : INotificationChargeCalculator
     {
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
-        private readonly IPricingStructureRepository pricingStructureRepository;
-        private readonly IFacilityRepository facilityRepository;
+        private readonly IPriceRepository priceRepository;
         private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
 
-        public NotificationChargeCalculator(IShipmentInfoRepository shipmentInfoRepository, 
+        public NotificationChargeCalculator(IShipmentInfoRepository shipmentInfoRepository,
             INotificationApplicationRepository notificationApplicationRepository,
-            IPricingStructureRepository pricingStructureRepository,
-            IFacilityRepository facilityRepository,
+            IPriceRepository priceRepository,
             INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository)
         {
             this.shipmentInfoRepository = shipmentInfoRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
-            this.pricingStructureRepository = pricingStructureRepository;
-            this.facilityRepository = facilityRepository;
+            this.priceRepository = priceRepository;
             this.numberOfShipmentsHistotyRepository = numberOfShipmentsHistotyRepository;
         }
-        
+
         public async Task<decimal> GetValue(Guid notificationId)
         {
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
@@ -59,15 +56,13 @@
 
         private async Task<decimal> GetPrice(int numberOfShipments, NotificationApplication notification)
         {
-            var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);
-            bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
+            var res = await priceRepository.GetPriceAndRefundByNotificationId(notification.Id);
+            if (res == null)
+            {
+                throw new Exception("GetPriceAndRefundByNotificationId(" + notification.Id + ") failed, please investigate");
+            }
 
-            var result = await pricingStructureRepository.GetExport(notification.CompetentAuthority, 
-                notification.NotificationType,
-                numberOfShipments, 
-                isInterim);
-
-            return result.Price;
+            return res.Price;
         }
     }
 }
