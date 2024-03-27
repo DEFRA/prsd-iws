@@ -1,0 +1,350 @@
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.KeyDates.IndexResources
+
+@model DateInputViewModel
+
+<h1 class="govuk-heading-l">Enter the key dates for this notification</h1>
+
+@{
+    ViewBag.Title = Resources.Title;
+    var nullMarker = "- -";
+    var byText = " by ";
+}
+
+<div>
+    These are the dates so far:
+
+    <table title="Assessment dates currently recorded">
+        <tr>
+            <th>Activity</th>
+            <th>Date / detail</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
+            <td>
+                @if (Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (!Model.NotificationReceivedDate.IsCompleted && Model.CanSetDates)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Payment received</td>
+            <td>
+                @if (Model.PaymentReceivedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+
+                    var text = string.Empty;
+
+                    if (!Model.PaymentIsComplete)
+                    {
+                        text = " (partial payment)";
+                        @text
+                    }
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationReceivedDate.IsCompleted && !Model.PaymentIsComplete)
+                {
+                    @Html.ActionLink("Go to payment details", "Index", "AccountManagement")
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Assessment started</td>
+            <td>
+                @if (Model.CommencementDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.CommencementDate.AsDateTime().GetValueOrDefault())
+                    @byText
+                    @Html.DisplayFor(m => m.NameOfOfficer)
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.PaymentIsComplete && !Model.CommencementDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted && Model.CanSetDates)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
+                }
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Notification complete</td>
+            <td>
+                @if (Model.NotificationCompleteDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.CommencementDate.IsCompleted && !Model.NotificationCompleteDate.IsCompleted)
+                {
+                    if (!Model.IsAreaAssigned && Model.CompetentAuthority == UKCompetentAuthority.England)
+                    {
+                        @Html.ActionLink("Go to Assign an area", "Index", "AssignArea")
+                    }
+                    else if (!Model.IsInterim.HasValue)
+                    {
+                        @Html.ActionLink("Mark notification as interim or non-interim", "Index", "MarkAsInterim")
+                    }
+                    else if (!Model.PaymentIsComplete)
+                    {
+                        @Html.ActionLink("Go to payment details", "Index", "AccountManagement")
+                    }
+                    else if (!Model.NotificationFileClosedDate.IsCompleted)
+                    {
+                        @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
+                    }
+                }
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Transmitted on</td>
+            <td>
+                @if (Model.NotificationTransmittedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationTransmittedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationTransmittedDate.IsCompleted
+                    && !Model.NotificationFileClosedDate.IsCompleted && Model.CurrentStatus != NotificationStatus.Objected)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
+                }
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Acknowledged on</td>
+            <td>
+                @if (Model.NotificationAcknowledgedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationTransmittedDate.IsCompleted && Model.CurrentStatus != NotificationStatus.Unlocked && Model.CurrentStatus != NotificationStatus.Reassessment && !Model.NotificationAcknowledgedDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
+                }
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Decision required by</td>
+            <td>
+                @if (Model.DecisionDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.ShowAssessmentDecisionLink && Model.NotificationAcknowledgedDate.IsCompleted && !Model.AssessmentDecisions.Any() && !Model.NotificationFileClosedDate.IsCompleted)
+                {
+                    @Html.ActionLink("Go to assessment decision", "Index", "Decision");
+                }
+            </td>
+        </tr>
+
+        @for (int i = 0; i < Model.AssessmentDecisions.Count; i++)
+        {
+            <tr>
+                <td>
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.AssessmentDecisions[i].Status)
+                </td>
+                <td>
+                    @Html.Gds().DisplayDateFor(m => m.AssessmentDecisions[i].Date)
+                </td>
+                <td>
+                    @if (Model.AssessmentDecisions[i].Status == NotificationStatus.Consented)
+                    {
+                        @Html.Gds().DisplayShortDateRangeFor(
+                            m => m.AssessmentDecisions[i].ConsentedFrom.GetValueOrDefault(),
+                            m => m.AssessmentDecisions[i].ConsentedTo.GetValueOrDefault())
+                    }
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td>File closed on</td>
+            <td>
+                @if (Model.NotificationFileClosedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationFileClosedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.CurrentStatus != NotificationStatus.ConsentedUnlock)
+                {
+                    if (!Model.NotificationFileClosedDate.IsCompleted && Model.AssessmentDecisions.Any())
+                    {
+                        @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.FileClosed }, null)
+                    }
+                    else if (Model.NotificationFileClosedDate.IsCompleted && string.IsNullOrWhiteSpace(Model.ArchiveReference))
+                    {
+                        @Html.ActionLink("Add archive reference", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                    }
+                    else if (!string.IsNullOrWhiteSpace(Model.ArchiveReference))
+                    {
+                        @Model.ArchiveReference
+                        @:&nbsp;
+                        @Html.ActionLink("Update", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                    }
+                }
+            </td>
+
+        </tr>
+
+    </table>
+</div>
+
+@if (Model.CurrentStatus == NotificationStatus.Reassessment)
+{
+    <div class="govuk-form-group">
+        @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.Command)
+            @Html.HiddenFor(m => m.PaymentReceivedDate)
+            @Html.HiddenFor(m => m.PaymentIsComplete)
+            @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
+            @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
+            @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
+            @Html.HiddenFor(m => m.CommencementDate.Day)
+            @Html.HiddenFor(m => m.CommencementDate.Month)
+            @Html.HiddenFor(m => m.CommencementDate.Year)
+            @Html.HiddenFor(m => m.IsAreaAssigned)
+            @Html.HiddenFor(m => m.IsInterim)
+            @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
+            @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
+            @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
+            @Html.HiddenFor(m => m.NotificationTransmittedDate.Day)
+            @Html.HiddenFor(m => m.NotificationTransmittedDate.Month)
+            @Html.HiddenFor(m => m.NotificationTransmittedDate.Year)
+            @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
+            @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
+            @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
+            @Html.HiddenFor(m => m.DecisionDate.Day)
+            @Html.HiddenFor(m => m.DecisionDate.Month)
+            @Html.HiddenFor(m => m.DecisionDate.Year)
+            @Html.HiddenFor(m => m.NotificationFileClosedDate.Day)
+            @Html.HiddenFor(m => m.NotificationFileClosedDate.Month)
+            @Html.HiddenFor(m => m.NotificationFileClosedDate.Year)
+
+            for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
+            {
+                @Html.HiddenFor(m => m.AssessmentDecisions[i].NotificationId)
+                @Html.HiddenFor(m => m.AssessmentDecisions[i].Date)
+                @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedFrom)
+                @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedTo)
+                @Html.HiddenFor(m => m.AssessmentDecisions[i].Status)
+            }
+
+            @Html.HiddenFor(m => m.CompetentAuthority)
+            @Html.HiddenFor(m => m.CurrentStatus)
+            @Html.HiddenFor(m => m.ShowAdditionalCharge)
+
+            if (Model.ShowAdditionalCharge)
+            {
+                <br />
+                <fieldset>
+                    @Html.EditorFor(m => m.AdditionalCharge)
+                </fieldset>
+            }
+
+            <input type="submit" class="govuk-button" value="Accept changes" data-track="element" data-category="Export notification assessment" data-action="Accept changes" />
+        }
+
+        @using (Html.BeginForm("RejectChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
+        {
+            @Html.HiddenFor(m => m.NotificationId)
+
+            @Html.AntiForgeryToken()
+
+            <input type="submit" class="govuk-button" value="Reject changes" data-track="element" data-category="Export notification assessment" data-action="Reject changes" />
+        }
+    </div>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
+
+@section scripts {
+    <script>
+
+        $(function () {
+
+            $('#additionalChargeYes').click(function () {
+                $.ajax({
+                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                        type: 'POST',
+                        data: { competentAuthority: '@Model.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    success: function (result) {
+                            $('#AdditionalCharge_Amount').val(result);
+                            $("#AdditionalCharge_Amount").removeAttr("readonly");
+                        }
+                    });
+            });
+
+            $('#additionalChargeNo').click(function () {
+                $('#AdditionalCharge_Amount').val(0);
+                $('#AdditionalCharge_Amount').attr('readonly', 'true');
+            });
+
+        });
+    </script>
+}

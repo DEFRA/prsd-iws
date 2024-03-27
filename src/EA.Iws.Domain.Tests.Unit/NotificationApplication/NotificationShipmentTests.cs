@@ -31,7 +31,7 @@
             var shipmentQuantity = new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Action createShipmentInfo = () =>
-                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 1, shipmentQuantity);
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 1, shipmentQuantity, true);
 
             Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
@@ -44,7 +44,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes), true);
 
             Assert.NotNull(shipmentInfo);
         }
@@ -58,7 +58,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
             var shipmentQuantity = new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms);
 
-            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 0, shipmentQuantity);
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 0, shipmentQuantity, true);
 
             Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
@@ -72,7 +72,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 1,
-                new ShipmentQuantity(0, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(0, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
@@ -86,7 +86,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
             var shipmentQuantity = new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms);
 
-            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, -5, shipmentQuantity);
+            Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, -5, shipmentQuantity, true);
 
             Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
@@ -100,7 +100,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             Action createShipmentInfo = () => new ShipmentInfo(AnyGuid, shipmentPeriod, 1,
-                new ShipmentQuantity(-5, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(-5, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Throws<ArgumentOutOfRangeException>(createShipmentInfo);
         }
@@ -114,7 +114,7 @@
             var shipmentQuantity = new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Action createShipmentInfo = () =>
-                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, false), 1, shipmentQuantity);
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, false), 1, shipmentQuantity, true);
 
             Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
@@ -127,7 +127,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.NotNull(shipmentInfo);
         }
@@ -141,7 +141,7 @@
             var shipmentQuantity = new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes);
 
             Action createShipmentInfo = () =>
-                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 1, shipmentQuantity);
+                new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 1, shipmentQuantity, true);
 
             Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
@@ -154,7 +154,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(1, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.NotNull(shipmentInfo);
         }
@@ -168,7 +168,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(1.23446m, ShipmentQuantityUnits.Tonnes));
+                new ShipmentQuantity(1.23446m, ShipmentQuantityUnits.Tonnes), true);
 
             Assert.Equal(1.2345m, shipmentInfo.Quantity);
         }
@@ -182,7 +182,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(1.23012m, ShipmentQuantityUnits.Tonnes));
+                new ShipmentQuantity(1.23012m, ShipmentQuantityUnits.Tonnes), true);
 
             Assert.Equal(1.2301m, shipmentInfo.Quantity);
         }
@@ -196,7 +196,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(1.26m, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(1.26m, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Equal(1.3m, shipmentInfo.Quantity);
         }
@@ -210,7 +210,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(1.23m, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(1.23m, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Equal(1.2m, shipmentInfo.Quantity);
         }
@@ -223,7 +223,7 @@
 
             Action createShipmentInfo = () =>
                 new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 10,
-                new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Throws<ArgumentException>("firstDate", createShipmentInfo);
         }
@@ -236,7 +236,7 @@
 
             Action createShipmentInfo = () =>
                 new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 10,
-                new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(10M, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Throws<ArgumentException>("lastDate", createShipmentInfo);
         }
@@ -249,7 +249,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes), true);
 
             var newFirstDate = new DateTime(2015, 06, 01);
             var newLastDate = new DateTime(2016, 05, 31);
@@ -269,7 +269,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes), true);
 
             shipmentInfo.UpdateQuantity(new ShipmentQuantity(2.0M, ShipmentQuantityUnits.Kilograms));
 
@@ -285,7 +285,7 @@
             var shipmentPeriod = new ShipmentPeriod(firstDate, lastDate, true);
 
             var shipmentInfo = new ShipmentInfo(AnyGuid, shipmentPeriod, 10,
-                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+                new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes), true);
 
             shipmentInfo.UpdateNumberOfShipments(50);
 
@@ -304,7 +304,7 @@
             Action createShipmentInfo =
                 () =>
                      new ShipmentInfo(AnyGuid, new ShipmentPeriod(firstDate, lastDate, true), 10,
-                        new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes));
+                        new ShipmentQuantity(0.0001M, ShipmentQuantityUnits.Tonnes), true);
 
             Assert.Throws<InvalidOperationException>(createShipmentInfo);
 
@@ -321,7 +321,7 @@
 
             Action createShipmentInfo = () => new ShipmentInfo(AnyGuid,
                 new ShipmentPeriod(firstDate, lastDate, preconsentedRecoveryFacility), 1,
-                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }
@@ -336,7 +336,7 @@
 
             Action createShipmentInfo = () => new ShipmentInfo(AnyGuid,
                 new ShipmentPeriod(firstDate, lastDate, preconsentedRecoveryFacility), 1,
-                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms));
+                new ShipmentQuantity(7, ShipmentQuantityUnits.Kilograms), true);
 
             Assert.Throws<InvalidOperationException>(createShipmentInfo);
         }

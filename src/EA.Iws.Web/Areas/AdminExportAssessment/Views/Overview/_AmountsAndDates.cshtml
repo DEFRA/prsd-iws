@@ -21,6 +21,17 @@
                 @Html.Partial(viewLocation + "_IntendedShipments.cshtml")
             </td>
         </tr>
+        @if(Model.IntendedShipmentData.ShouldDisplayShipmentSelfEnterDataQuestion)
+        { 
+            <tr>
+                <td>
+                    External&nbsp;shipment&nbsp;data&nbsp;entry?
+                </td>
+                <td>
+                    @Html.Partial(viewLocation + "_IntendedSelfEnterShipmentData.cshtml")
+                </td>
+            </tr>
+        }
         <tr>
             <td>
                 Intended&nbsp;total&nbsp;quantity

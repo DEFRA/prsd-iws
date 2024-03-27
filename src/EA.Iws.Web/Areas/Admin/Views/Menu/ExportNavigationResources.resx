@@ -201,4 +201,7 @@
   <data name="ShipmentAuditTrailLinkText" xml:space="preserve">
     <value>Review shipment audit trail</value>
   </data>
+  <data name="AdditionalChargesLinkText" xml:space="preserve">
+    <value>Additional charges</value>
+  </data>
 </root>

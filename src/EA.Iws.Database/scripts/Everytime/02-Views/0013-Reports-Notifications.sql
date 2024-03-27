@@ -30,7 +30,7 @@ AS
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Export' AS [ImportOrExport],
-        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge],
+        (SELECT Price FROM [Notification].[GetPricingInfo](N.Id)) AS [Charge],
         FC.[IsInterim]
 
     FROM		[Notification].[Notification] AS N
@@ -93,7 +93,7 @@ AS
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Import' AS [ImportOrExport],
-        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge],
+        (SELECT Price FROM [Notification].[GetPricingInfo](N.Id)) AS [Charge],
         InS.[IsInterim]
 
     FROM [ImportNotification].[Notification] AS N
