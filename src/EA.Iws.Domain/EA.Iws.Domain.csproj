@@ -46,6 +46,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Finance\PriceAndRefund.cs" />
+    <Compile Include="Finance\PricingFixedFee.cs" />
     <Compile Include="IArchiveNotificationRepository.cs" />
     <Compile Include="IIntraCountryExportAllowedRepository.cs" />
     <Compile Include="DateTimeOffsetRange.cs" />
@@ -123,6 +125,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransaction.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportRefundTransaction.cs" />
+    <Compile Include="ImportNotification\AdditionalCharge.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />
@@ -133,6 +136,7 @@
     <Compile Include="ImportNotification\IFacilityRepository.cs" />
     <Compile Include="ImportNotification\IImporterRepository.cs" />
     <Compile Include="ImportNotification\Facility.cs" />
+    <Compile Include="ImportNotification\IImportNotificationAdditionalChargeRepository.cs" />
     <Compile Include="ImportNotification\IImportNotificationAssessmentRepository.cs" />
     <Compile Include="ImportNotification\IImportNotificationSearchRepository.cs" />
     <Compile Include="ImportNotification\IImportNotificationOverviewRepository.cs" />
@@ -173,6 +177,7 @@
     <Compile Include="INotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="ISystemSettingRepository.cs" />
     <Compile Include="IUnitedKingdomCompetentAuthorityRepository.cs" />
     <Compile Include="Movement\BulkUpload\DraftBulkUpload.cs" />
     <Compile Include="Movement\BulkUpload\DraftPackagingInfo.cs" />
@@ -195,6 +200,7 @@
     <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
     <Compile Include="Movement\PartialRejectionMovement.cs" />
+    <Compile Include="NotificationApplication\AdditionalCharge.cs" />
     <Compile Include="NotificationApplication\AddNotificationSharedUser.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
@@ -290,8 +296,12 @@
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\FacilityBusiness.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationAdditionalChargeRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
     <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationUtilities.cs" />
+    <Compile Include="NotificationApplication\IPricingFixedFeeRepository.cs" />
+    <Compile Include="NotificationApplication\IPriceRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserHistoryRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
@@ -315,6 +325,7 @@
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
     <Compile Include="NotificationApplication\Audit.cs" />
+    <Compile Include="NotificationApplication\NotificationUtilities.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
     <Compile Include="IntraCountryExportAllowed.cs" />
@@ -433,6 +444,7 @@
     <Compile Include="NotificationApplication\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotificationApplication\Shipment\ShipmentInfo.cs" />
+    <Compile Include="SystemSetting.cs" />
     <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />

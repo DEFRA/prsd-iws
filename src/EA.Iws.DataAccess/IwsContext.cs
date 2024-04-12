@@ -57,6 +57,8 @@
 
         public virtual DbSet<PricingStructure> PricingStructures { get; set; }
 
+        public virtual DbSet<PricingFixedFee> PricingFixedFees { get; set; }
+
         public virtual DbSet<NotificationAssessment> NotificationAssessments { get; set; }
 
         public virtual DbSet<FinancialGuaranteeCollection> FinancialGuarantees { get; set; }
@@ -77,8 +79,8 @@
 
         public virtual DbSet<ShipmentInfo> ShipmentInfos { get; set; }
 
-        public virtual DbSet<TransportRoute> TransportRoutes { get; set; } 
-        
+        public virtual DbSet<TransportRoute> TransportRoutes { get; set; }
+
         public virtual DbSet<WasteRecovery> WasteRecoveries { get; set; }
 
         public virtual DbSet<WasteDisposal> WasteDisposals { get; set; }
@@ -89,7 +91,7 @@
 
         public virtual DbSet<Exporter> Exporters { get; set; }
 
-        public virtual DbSet<NotificationTransaction> NotificationTransactions { get; set; } 
+        public virtual DbSet<NotificationTransaction> NotificationTransactions { get; set; }
 
         public virtual DbSet<MovementDetails> MovementDetails { get; set; }
 
@@ -102,6 +104,8 @@
         public virtual DbSet<MovementCarrier> MovementCarrier { get; set; }
 
         public virtual DbSet<MovementAudit> MovementAudits { get; set; }
+
+        public virtual DbSet<AdditionalCharge> AdditionalCharges { get; set; }
 
         public virtual DbSet<AnnexCollection> AnnexCollections { get; set; }
 
@@ -138,6 +142,8 @@
         public virtual DbSet<DraftPackagingInfo> DraftPackagingInfos { get; set; }
 
         public virtual DbSet<NotificationComment> NotificationComments { get; set; }
+
+        public virtual DbSet<SystemSetting> SystemSettings { get; set; }
 
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {

@@ -49,7 +49,8 @@
                 shipmentInfo = new ShipmentInfo(command.NotificationId,
                     shipmentPeriod,
                     command.NumberOfShipments,
-                    shipmentQuantity);
+                    shipmentQuantity,
+                    command.WillSelfEnterShipmentData);
 
                 context.ShipmentInfos.Add(shipmentInfo);
             }
@@ -58,6 +59,7 @@
                 shipmentInfo.UpdateNumberOfShipments(command.NumberOfShipments);
                 shipmentInfo.UpdateShipmentPeriod(shipmentPeriod, status);
                 shipmentInfo.UpdateQuantity(shipmentQuantity);
+                shipmentInfo.UpdateWillSelfEnterShipmentData(command.WillSelfEnterShipmentData);
             }
 
             await context.SaveChangesAsync();

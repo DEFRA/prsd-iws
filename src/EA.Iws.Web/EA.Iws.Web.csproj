@@ -811,6 +811,20 @@
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AdditionalChargeController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\AdditionalCharge\AdditionalChargeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\AdditionalCharge\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Controllers\AdditionalChargeController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\AdditionalCharge\AdditionalChargeViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Views\AdditionalCharge\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\ArchiveNotificationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
@@ -850,6 +864,8 @@
       <DependentUpon>WasteComponentResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions\GdsExtensions.cs" />
+    <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
+    <Compile Include="Infrastructure\AdditionalCharge\IAdditionalChargeService.cs" />
     <Compile Include="Infrastructure\DefraCompaniesHouseApi.cs" />
     <Compile Include="Logging\ErrorUtils.cs" />
     <Compile Include="RazorHelpers\AttributesHelper.cs" />
@@ -873,6 +889,11 @@
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\Facility.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteCategories\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteComponent\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_IntendedSelfEnterShipmentData.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\AdditionalCharge\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\KeyDates\AcceptChanges.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\Resubmit.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\AdditionalCharge\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -1506,6 +1527,7 @@
     <Content Include="Views\NewUser\Accessibility.cshtml" />
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Views\Shared\EditorTemplates\AdditionalChargeData.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -4215,6 +4237,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RefundDetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\AdditionalCharge\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Annex\AnnexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnnexResources.Designer.cs</LastGenOutput>
@@ -4432,6 +4458,10 @@
       <LastGenOutput>RefundDetailsViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AccountManagement\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AdditionalCharge\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -4739,6 +4769,7 @@
     <EmbeddedResource Include="Areas\Admin\Views\Menu\ExportNavigationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExportNavigationResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Menu\ImportNavigationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5220,6 +5251,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Shipment\ShipmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShipmentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\SpecialHandling\SpecialHandlingResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5331,6 +5363,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PaymentResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

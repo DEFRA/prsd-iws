@@ -36,7 +36,7 @@
 
         public SubmitSummaryData SubmitSummaryData { get; set; }
 
-        public int NotificationCharge { get; set; }
+        public decimal NotificationCharge { get; set; }
 
         public bool CanEditNotification { get; set; }
     }

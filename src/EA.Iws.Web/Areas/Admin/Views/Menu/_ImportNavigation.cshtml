@@ -110,9 +110,13 @@
 			<span></span>
 			@Resources.FinanceHeading
 		</h3>
-		<ul>
-			<li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
-		</ul>
+        <ul>
+            <li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
+            @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England || Model.Details.CompetentAuthority == UKCompetentAuthority.Scotland)
+            {
+                <li>@Html.ActionLink(Resources.AdditionalChargesLinkText, "Index", "AdditionalCharge", new { area = "AdminImportAssessment", id }, null)</li>
+            }
+        </ul>
 	</li>
 
 	<li class="@GetClassForSection(ImportNavigationSection.Comments, "active")">

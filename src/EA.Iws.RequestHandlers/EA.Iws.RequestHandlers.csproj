@@ -90,6 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalCharge\CreateAdditionalChargeHandler.cs" />
+    <Compile Include="AdditionalCharge\CreateImportNotificationAdditionalChargeHandler.cs" />
     <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\AddImportAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\AddNewAddressBookEntryHandler.cs" />
@@ -279,6 +281,7 @@
     <Compile Include="ImportNotification\Facilities\SetFacilityDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationAdditionalChargesHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberByIdHandler.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />
@@ -467,6 +470,7 @@
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
     <Compile Include="Mappings\NumberOfShipmentsHistoryMap.cs" />
     <Compile Include="Mappings\SharedUserMap.cs" />
+    <Compile Include="Mappings\SystemSettingMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Mappings\WasteComponentDataMap.cs" />
@@ -682,6 +686,7 @@
     <Compile Include="Admin\GetNotificationInfoHandler.cs" />
     <Compile Include="Notification\GetArchivedNotificationByIdHandler.cs" />
     <Compile Include="Notification\GetArchiveNotificationsByUserHandler.cs" />
+    <Compile Include="Notification\GetNotificationAdditionalChargesHandler.cs" />
     <Compile Include="Notification\GetNotificationAuditScreensHandler.cs" />
     <Compile Include="Notification\GetNotificationAuditTableHandler.cs" />
     <Compile Include="Notification\GetNotificationCompetentAuthorityHandler.cs" />
@@ -704,6 +709,7 @@
     <Compile Include="SharedUsers\DeleteSharedUserForNotificationHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
+    <Compile Include="SystemSettings\GetSystemSettingByIdHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryIdHandler.cs" />

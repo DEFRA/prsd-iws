@@ -103,6 +103,9 @@
     <Compile Include="IwsContext.cs" />
     <Compile Include="Mappings\Common\ActivityMapping.cs" />
     <Compile Include="Mappings\Common\DateTimeOffsetRangeMapping.cs" />
+    <Compile Include="Mappings\Common\PricingFixedFeeMapping.cs" />
+    <Compile Include="Mappings\Common\SystemSettingsMapping.cs" />
+    <Compile Include="Mappings\Exports\AdditionalChargeMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookRecordMapping.cs" />
     <Compile Include="Mappings\Common\DateRangeMapping.cs" />
@@ -137,6 +140,7 @@
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
+    <Compile Include="Mappings\Imports\AdditionalChargeMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
     <Compile Include="Mappings\Imports\ConsultationMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeApprovalMapping.cs" />
@@ -239,6 +243,7 @@
     <Compile Include="Repositories\ArchiveNotificationRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementPartailRejectionRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationAdditionalChargeRepository.cs" />
     <Compile Include="Repositories\Imports\WasteComponentRepository.cs" />
     <Compile Include="Repositories\IntraCountryExportAllowedRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
@@ -294,6 +299,7 @@
     <Compile Include="Repositories\MovementPartialRejectionRepository.cs" />
     <Compile Include="Repositories\MovementRejectionRepository.cs" />
     <Compile Include="Repositories\MovementRepository.cs" />
+    <Compile Include="Repositories\NotificationAdditionalChargeRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentDatesSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentDecisionRepository.cs" />
     <Compile Include="Repositories\NotificationAttentionSummaryRepository.cs" />
@@ -305,6 +311,8 @@
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationTransactionRepository.cs" />
     <Compile Include="Repositories\NotificationUserRepository.cs" />
+    <Compile Include="Repositories\PricingFixedFeeRepository.cs" />
+    <Compile Include="Repositories\PriceRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
     <Compile Include="Repositories\ProducerRepository.cs" />
     <Compile Include="Repositories\Reports\ComplianceRepository.cs" />
@@ -321,6 +329,7 @@
     <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\SharedUserHistoryRepository.cs" />
     <Compile Include="Repositories\SharedUserRepository.cs" />
+    <Compile Include="Repositories\SystemSettingRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UnitedKingdomCompetentAuthorityRepository.cs" />
