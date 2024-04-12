@@ -118,7 +118,7 @@
             var dateInputViewModel = (DateInputViewModel)validationContext.ObjectInstance;
             if (dateInputViewModel != null && !dateInputViewModel.ShowAdditionalCharge)
             {
-                if (Command != KeyDatesStatusEnum.ArchiveReference && !NewDate.IsCompleted)
+                if (Command != KeyDatesStatusEnum.ArchiveReference && CurrentStatus != NotificationStatus.Reassessment && !NewDate.IsCompleted)
                 {
                     yield return new ValidationResult("Please enter a valid date", new[] { "NewDate" });
                 }
