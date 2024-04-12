@@ -77,6 +77,8 @@
 
         public virtual DbSet<ImportNotificationComment> ImportNotificationComments { get; set; }
 
+        public virtual DbSet<AdditionalCharge> AdditionalCharges { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

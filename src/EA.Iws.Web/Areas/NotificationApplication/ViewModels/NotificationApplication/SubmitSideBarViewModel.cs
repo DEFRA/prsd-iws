@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
-    using System;
     using Core.Notification;
     using Core.NotificationAssessment;
+    using EA.Iws.Core.Shared;
     using EA.Prsd.Core.Helpers;
+    using System;
 
     public class SubmitSideBarViewModel
     {
@@ -17,7 +18,7 @@
 
         public string NotificationNumber { get; set; }
 
-        public int Charge { get; set; }
+        public decimal Charge { get; set; }
 
         public NotificationStatus Status { get; set; }
 
@@ -28,6 +29,21 @@
         public bool IsSharedUser { get; set; }
 
         public bool IsInternalUser { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public bool ShowAdditionalCharge
+        {
+            get
+            {
+                return ((CompetentAuthority == UKCompetentAuthority.England || CompetentAuthority == UKCompetentAuthority.Scotland) &&
+                        ((Status == NotificationStatus.Consented) ||
+                        (Status == NotificationStatus.ConsentedUnlock) ||
+                        (Status == NotificationStatus.Transmitted) ||
+                        (Status == NotificationStatus.DecisionRequiredBy) ||
+                        (Status == NotificationStatus.Reassessment))) ? true : false;
+            }
+        }
 
         public string AccessLevelText
         {
@@ -78,7 +94,7 @@
         {
         }
 
-        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge, NotificationApplicationCompletionProgress progress)
+        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, decimal notificationCharge, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = submitSummaryData.NotificationId;
             CompetentAuthorityName = EnumHelper.GetDisplayName(submitSummaryData.CompetentAuthority);
@@ -88,6 +104,10 @@
             Status = submitSummaryData.Status;
             IsNotificationComplete = progress.IsAllComplete;
             CompetentAuthority = submitSummaryData.CompetentAuthority;
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = NotificationId
+            };
         }
     }
 }

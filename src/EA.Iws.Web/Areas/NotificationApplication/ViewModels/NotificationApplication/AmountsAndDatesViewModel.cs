@@ -19,6 +19,8 @@
 
         public bool CanChangeNumberOfShipments { get; set; }
 
+        public bool ShowSelfEnterShipmentDataQuestion { get; set; }
+
         public AmountsAndDatesViewModel()
         {
         }

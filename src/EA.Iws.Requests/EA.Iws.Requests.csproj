@@ -43,6 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalCharge\CreateAdditionalCharge.cs" />
+    <Compile Include="AdditionalCharge\CreateImportNotificationAdditionalCharge.cs" />
     <Compile Include="AddressBook\AddAddressBookEntry.cs" />
     <Compile Include="AddressBook\AddImportAddressBookEntry.cs" />
     <Compile Include="AddressBook\AddNewAddressBookEntry.cs" />
@@ -210,6 +212,7 @@
     <Compile Include="ImportNotification\Facilities\SetFacilityDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationAdditionalCharges.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberById.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />
@@ -364,6 +367,7 @@
     <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetArchivedNotificationById.cs" />
     <Compile Include="Notification\GetArchiveNotificationsByUser.cs" />
+    <Compile Include="Notification\GetNotificationAdditionalCharges.cs" />
     <Compile Include="Notification\GetNotificationAuditScreens.cs" />
     <Compile Include="Notification\GetNotificationAuditTable.cs" />
     <Compile Include="Notification\GetNotificationCompetentAuthority.cs" />
@@ -430,6 +434,7 @@
     <Compile Include="SharedUsers\DeleteSharedUserForNotification.cs" />
     <Compile Include="SharedUsers\GetSharedUserById.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationId.cs" />
+    <Compile Include="SystemSettings\GetSystemSettingById.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthorities.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryId.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPoints.cs" />

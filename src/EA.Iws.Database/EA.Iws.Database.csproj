@@ -53,6 +53,16 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20240228-CCN062-UpdateToEAChargeMatrix.sql" />
+    <Content Include="scripts\Update\0007-Support\20240228-CCN062-UpdateToSepaLogic.sql" />
+    <Content Include="scripts\Update\0007-Support\20240228-CCN062-UpdateToSepaChargeMatrix.sql" />
+    <Content Include="scripts\Update\0007-Support\20240219-CCN062-DataChanges.sql" />
+    <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
+    <Content Include="scripts\Update\0007-Support\20240103-CCN062-AddingFixedFeeTable.sql" />
+    <Content Include="scripts\Update\0007-Support\20240103-CCN062-DataChangesPricingStructureMostly.sql" />
+    <Content Include="scripts\Update\0007-Support\20240123-CCN062-AlterShipmentTables.sql" />
+    <Content Include="scripts\Update\0007-Support\20240123-CCN062-SepaChargeMatrix.sql" />
+    <Content Include="scripts\Update\0007-Support\20240123-CCN062-AlteringFixedFeeTableForSepa.sql" />
     <Content Include="scripts\TestData\20230612-1700-create-archive-notifications-test-data.sql" />
     <Content Include="scripts\Update\0007-Support\20230517-R691482-Update-IWSO-Email-Address.sql" />
     <Content Include="Readme.txt" />
@@ -146,10 +156,13 @@
     <Content Include="scripts\Update\0007-Support\20230925-adding-new-basel-code-a1180.sql" />
     <Content Include="scripts\Update\0007-Support\20231107-ImportNotification-Extra-Waste-Category-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20231214-Add-WasteComponentType-Change.sql" />
+    <Content Include="scripts\Update\0007-Support\20240213-CCN062-Additional-Charge-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20240220-R789923-UpdateCompAuthEmail.sql" />
+    <Content Include="scripts\Update\0007-Support\20240222-ImportNotification-Additional-Charge-DataChanges.sql" />
+    <Content Include="scripts\Update\0007-Support\20240315-CCN062-UpdateSepaFixedFee.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
-    <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
+    <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0002-uspUpdateExportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\02-Views\0022-Reports-FreedomOfInformation.sql" />

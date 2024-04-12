@@ -113,7 +113,7 @@
         {
             var shipmentPeriod = new ShipmentPeriod(DateTime.Now, DateTime.Now.AddMonths(12), true); 
             var shipmentQuantity = new ShipmentQuantity(1.0m, unit);
-            return new ShipmentInfo(notificationId, shipmentPeriod, 100, shipmentQuantity);
+            return new ShipmentInfo(notificationId, shipmentPeriod, 100, shipmentQuantity, true);
         }
 
         private static List<PrenotificationMovement> GetTestData(ShipmentQuantityUnits unit)

@@ -305,14 +305,16 @@ BEGIN
 				[quantity],
 				[units],
 				[firstdate],
-				[lastdate])
+				[lastdate],
+				[WillSelfEnterShipmentData])
 		VALUES (NEWID(),
 				@NotificationId,
 				520,
 				Cast(25000.0000 AS DECIMAL(18, 4)),
 				3,
 				Cast(N'2016-09-01' AS DATE),
-				Cast(N'2017-08-27' AS DATE))
+				Cast(N'2017-08-27' AS DATE),
+				1)
 
 		DECLARE @carrierCollectionId uniqueidentifier
 		SET @carrierCollectionId = NEWID()

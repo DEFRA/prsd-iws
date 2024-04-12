@@ -16,7 +16,8 @@
             decimal quantity,
             ShipmentQuantityUnits units,
             DateTime startDate,
-            DateTime endDate)
+            DateTime endDate,
+            bool willSelfEnterShipmentData)
         {
             NotificationId = notificationId;
             NumberOfShipments = numberOfShipments;
@@ -24,6 +25,7 @@
             Units = units;
             StartDate = startDate;
             EndDate = endDate;
+            WillSelfEnterShipmentData = willSelfEnterShipmentData;
         }
 
         public Guid NotificationId { get; private set; }
@@ -37,5 +39,7 @@
         public DateTime StartDate { get; private set; }
 
         public DateTime EndDate { get; private set; }
+
+        public bool WillSelfEnterShipmentData { get; private set; }
     }
 }

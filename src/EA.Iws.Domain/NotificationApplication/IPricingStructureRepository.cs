@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.Notification;
@@ -10,6 +11,6 @@
     {
         Task<IEnumerable<PricingStructure>> Get();
 
-        Task<PricingStructure> GetExport(UKCompetentAuthority competentAuthority, NotificationType notificationType, int numberOfShipments, bool isInterim);
+        Task<PricingStructure> GetExport(UKCompetentAuthority competentAuthority, NotificationType notificationType, int numberOfShipments, bool isInterim, DateTimeOffset notificationSubmittedDate);
     }
 }

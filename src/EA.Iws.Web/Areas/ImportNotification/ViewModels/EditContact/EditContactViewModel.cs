@@ -1,5 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact
 {
+    using EA.Iws.Core.ImportNotificationAssessment;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Shared;
     using System.ComponentModel.DataAnnotations;
 
     public class EditContactViewModel
@@ -16,6 +19,15 @@
             TelephonePrefix = data.Contact.TelephonePrefix;
             Telephone = data.Contact.Telephone;
             PostalCode = data.Address.PostalCode;
+            AdditionalCharge = new AdditionalChargeData()
+            {
+                NotificationId = data.NotificationId
+            };
+            CompetentAuthority = data.CompetentAuthority;
+            NotificationStatus = data.NotificationStatus;
+            ShowAdditionalCharge = ((data.CompetentAuthority == UKCompetentAuthority.England || data.CompetentAuthority == UKCompetentAuthority.Scotland) &&
+                                    ((data.NotificationStatus == ImportNotificationStatus.Consented) ||
+                                    (data.NotificationStatus == ImportNotificationStatus.DecisionRequiredBy))) ? true : false;
         }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]
@@ -47,5 +59,13 @@
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "PostalcodeRequired")]
         [Display(Name = "PostCode", ResourceType = typeof(EditContactViewModelResources))]
         public string PostalCode { get; set; }
+
+        public AdditionalChargeData AdditionalCharge { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public bool ShowAdditionalCharge { get; set; }
+
+        public ImportNotificationStatus NotificationStatus { get; set; }
     }
 }
