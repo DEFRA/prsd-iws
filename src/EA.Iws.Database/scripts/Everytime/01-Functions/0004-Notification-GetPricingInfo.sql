@@ -187,10 +187,10 @@ BEGIN
 				SET @price += (SELECT [VALUE] * @hundreds FROM [Lookup].[SystemSettings] where Id = 8)
 			END
 
-			ELSE
-			BEGIN
-				SET @price += (@price * 0.10 * @hundreds)
-			END
+			--ELSE
+			--BEGIN
+			--	SET @price += (@price * 0.10 * @hundreds)
+			--END
 
 			--Refund is the price minus the price for the lowest range
 			--So rather than calculate the refund based on something like the logic above just subtract the price for lowest range from calculated price above
