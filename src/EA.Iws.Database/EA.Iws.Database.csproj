@@ -53,6 +53,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20200918-328081-CR0044-add_ascension_island.sql" />
+    <Content Include="scripts\Update\0007-Support\20201028-CR0047-new_waste_codes.sql" />
+    <Content Include="scripts\Update\0007-Support\20201103-1452-add-bank-holidays-2021.sql" />
+    <Content Include="scripts\Update\0007-Support\20210111-CR0047-Add-Active-WasteCode-Column.sql" />
+    <Content Include="scripts\Update\0007-Support\20210112-CR0047-Remove-Basel-codes.sql" />
+    <Content Include="scripts\Update\0007-Support\20220124-1630-add-bank-holidays-2022.sql" />
     <Content Include="scripts\Update\0007-Support\20240228-CCN062-UpdateToEAChargeMatrix.sql" />
     <Content Include="scripts\Update\0007-Support\20240228-CCN062-UpdateToSepaLogic.sql" />
     <Content Include="scripts\Update\0007-Support\20240228-CCN062-UpdateToSepaChargeMatrix.sql" />
