@@ -119,6 +119,7 @@
                 DELETE FROM [ImportNotification].[Objection] WHERE NotificationId = @Id
                 DELETE FROM [ImportNotification].[Producer] WHERE ImportNotificationId = @Id
                 DELETE FROM [ImportNotification].[Shipment] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @Id
                 DELETE FROM [ImportNotification].[Transaction] WHERE NotificationId = @Id
                 DELETE FROM [ImportNotification].[StateOfExport] WHERE TransportRouteId IN (SELECT [Id] FROM [ImportNotification].[TransportRoute] WHERE ImportNotificationId = @Id)
                 DELETE FROM [ImportNotification].[StateOfImport] WHERE TransportRouteId IN (SELECT [Id] FROM [ImportNotification].[TransportRoute] WHERE ImportNotificationId = @Id)
