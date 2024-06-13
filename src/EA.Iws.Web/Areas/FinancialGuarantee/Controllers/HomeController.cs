@@ -25,7 +25,6 @@
             try
             {
                 var response = await mediator.SendAsync(new GenerateBankGuaranteeDocument());
-
                 var downloadName = "IwsBankGuarantee" + SystemTime.UtcNow + ".doc";
 
                 return File(response, "application/msword", downloadName);
@@ -47,7 +46,6 @@
             try
             {
                 var response = await mediator.SendAsync(new GenerateParentCompanyDocument());
-
                 var downloadName = "IwsParentCompanyGuarantee" + SystemTime.UtcNow + ".doc";
 
                 return File(response, "application/msword", downloadName);
