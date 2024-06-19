@@ -136,6 +136,7 @@
                 DELETE FROM [Notification].[RecoveryInfo] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[ShipmentInfo] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[TechnologyEmployed] WHERE NotificationId = @Id
+                DELETE FROM [Notification].[AdditionalCharges] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[Transaction] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[EntryCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[ExitCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
