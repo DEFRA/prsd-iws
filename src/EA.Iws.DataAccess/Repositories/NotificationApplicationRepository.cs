@@ -147,6 +147,7 @@
                 DELETE FROM [Notification].[TransportRoute] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[UserHistory] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[WasteCodeInfo] WHERE NotificationId = @Id
+                DELETE FROM [Notification].[WasteComponentInfo] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[WasteAdditionalInformation] WHERE WasteTypeId IN (SELECT [Id] FROM [Notification].[WasteType] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[WasteComposition] WHERE WasteTypeId IN (SELECT [Id] FROM [Notification].[WasteType] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[WasteType] WHERE NotificationId = @Id
