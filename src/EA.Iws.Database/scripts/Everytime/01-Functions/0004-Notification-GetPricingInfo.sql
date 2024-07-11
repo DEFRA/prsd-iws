@@ -25,13 +25,13 @@ BEGIN
 	
 	SELECT @submittedDate = ChangeDate
 	 FROM (
-        SELECT nsc.ChangeDate as ChangeDate
+        SELECT TOP 1 nsc.ChangeDate as ChangeDate
         FROM 
             [Notification].[Notification] N
 			LEFT JOIN [Notification].[NotificationAssessment] na on na.NotificationApplicationId = N.Id
 			LEFT JOIN [Notification].[NotificationStatusChange] nsc on nsc.NotificationAssessmentId = na.Id
-        WHERE N.Id = @notificationId
-		AND nsc.[Status] = 2
+        WHERE N.Id = @notificationId AND nsc.[Status] IN (2, 16)
+		ORDER BY nsc.ChangeDate DESC
 		UNION
 		SELECT
 			nsc.ChangeDate
