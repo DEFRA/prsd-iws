@@ -165,6 +165,7 @@
     <Content Include="scripts\Update\0007-Support\20240213-CCN062-Additional-Charge-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20240220-R789923-UpdateCompAuthEmail.sql" />
     <Content Include="scripts\Update\0007-Support\20240222-ImportNotification-Additional-Charge-DataChanges.sql" />
+    <Content Include="scripts\Update\0007-Support\20240711-Financial-Guarantee-Table-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20240315-CCN062-UpdateSepaFixedFee.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />

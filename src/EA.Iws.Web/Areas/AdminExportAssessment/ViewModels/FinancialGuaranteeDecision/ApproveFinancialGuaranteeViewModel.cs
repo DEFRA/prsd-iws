@@ -100,10 +100,11 @@
                 }
             }
 
-            if (CoverAmount.HasValue && CoverAmount.Value > (decimal)9999999.99)
-            {
-                yield return new ValidationResult(FinancialGuaranteeDecisionResources.CoverAmountTooMuch, new[] { "CoverAmount" });
-            }
+            //As discussed with Maria on 11/07/2023 removed this validation
+            //if (CoverAmount.HasValue && CoverAmount.Value > (decimal)9999999.99)
+            //{
+            //    yield return new ValidationResult(FinancialGuaranteeDecisionResources.CoverAmountTooMuch, new[] { "CoverAmount" });
+            //}
 
             if (!CalculationContinued.HasValue)
             {
@@ -119,10 +120,11 @@
                 }
             }
 
-            if (CalculationContinued.HasValue && CalculationContinued.Value > (decimal)9999999.99)
-            {
-                yield return new ValidationResult(FinancialGuaranteeDecisionResources.CalculationContinuedTooMuch, new[] { "CalculationContinued" });
-            }
+            //As discussed with Maria on 11/07/2023 removed this validation
+            //if (CalculationContinued.HasValue && CalculationContinued.Value > (decimal)9999999.99)
+            //{
+            //    yield return new ValidationResult(FinancialGuaranteeDecisionResources.CalculationContinuedTooMuch, new[] { "CalculationContinued" });
+            //}
         }
     }
 }
