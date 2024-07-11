@@ -1,0 +1,1 @@
+﻿INSERT INTO[Lookup].[NotificationStatus] ([Id], [Description]) VALUES(16, 'Resubmitted');
