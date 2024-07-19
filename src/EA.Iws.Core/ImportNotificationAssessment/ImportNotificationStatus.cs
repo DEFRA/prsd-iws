@@ -27,6 +27,8 @@
         [Display(Name = "Withdrawn")]
         Withdrawn = 12,
         [Display(Name = "File closed")]
-        FileClosed = 13
+        FileClosed = 13,
+        [Display(Name = "Resubmitted")]
+        Resubmitted = 14,
     }
 }
