@@ -34,13 +34,13 @@ BEGIN
 		ORDER BY nsc.ChangeDate DESC
 		UNION
 		SELECT
-			nsc.ChangeDate
+			TOP 1 nsc.ChangeDate
         FROM 
             [ImportNotification].[Notification] N
 			LEFT JOIN [ImportNotification].[NotificationAssessment] na on na.NotificationApplicationId = N.Id
 			LEFT JOIN [ImportNotification].[NotificationStatusChange] nsc on nsc.NotificationAssessmentId = na.Id
-        WHERE N.Id = @notificationId
-		AND nsc.NewStatus = 2
+        WHERE N.Id = @notificationId AND nsc.NewStatus IN (2, 14)
+		ORDER BY nsc.ChangeDate DESC
 		) AS DATA;
 
 	SELECT @submittedDate = CASE WHEN @submittedDate IS NULL THEN GETDATE() ELSE @submittedDate END
