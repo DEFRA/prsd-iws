@@ -34,6 +34,8 @@
         FileClosed = 14,
         [Display(Name = "Consented Unlock")]
         ConsentedUnlock = 15,
+        [Display(Name = "Resubmitted")]
+        Resubmitted = 16,
         [Display(Name = "In Determination")]
         InDetermination = 100
     }

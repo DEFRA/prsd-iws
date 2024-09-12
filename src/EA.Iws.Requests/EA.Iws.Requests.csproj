@@ -265,6 +265,7 @@
     <Compile Include="NotificationAssessment\AddCarrier.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />
+    <Compile Include="NotificationAssessment\CreateNotificationStatusChange.cs" />
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
