@@ -1,8 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification.Audit;
+    using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.SystemSettings;
-    using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.SystemSettings;
     using Infrastructure;
     using Prsd.Core.Mediator;
@@ -10,6 +11,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using System.Web.Services.Description;
     using ViewModels.Shipment;
 
     [Authorize]
@@ -32,15 +34,15 @@
             var model = new ShipmentInfoViewModel(shipmentData);
 
             model.ShowSelfEnterShipmentData = false;
-            
+
             if (shipmentData.ShouldDisplayShipmentSelfEnterDataQuestion)
             {
                 model.ShowSelfEnterShipmentData = true;
 
-                var sepaFeeForNotSelfEnteringData = 
+                var sepaFeeForNotSelfEnteringData =
                     await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaFeeForNotSelfEnteringData));
                 model.WillSelfEnterShipmentDataHintWithPrice =
-                    "Please note if you select ‘No’ you will be charged £" + sepaFeeForNotSelfEnteringData.Value + 
+                    "Please note if you select ‘No’ you will be charged £" + sepaFeeForNotSelfEnteringData.Value +
                         " per shipment for SEPA staff to upload the shipment data on your behalf.";
             }
 
@@ -59,6 +61,14 @@
             var existingShipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
 
             await mediator.SendAsync(model.ToRequest(id));
+
+            if (existingShipmentData.HasShipmentData && (existingShipmentData.Status == NotificationStatus.Transmitted ||
+                                                         existingShipmentData.Status == NotificationStatus.Unlocked ||
+                                                         existingShipmentData.Status == NotificationStatus.Consented ||
+                                                         existingShipmentData.Status == NotificationStatus.ConsentedUnlock))
+            {
+                await mediator.SendAsync(new CreateNotificationStatusChange(id));
+            }
 
             await this.auditService.AddAuditEntry(this.mediator,
                    id,

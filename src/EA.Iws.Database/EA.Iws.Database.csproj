@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20240711-CCN067-Notification-Resubmitted-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20200918-328081-CR0044-add_ascension_island.sql" />
     <Content Include="scripts\Update\0007-Support\20201028-CR0047-new_waste_codes.sql" />
     <Content Include="scripts\Update\0007-Support\20201103-1452-add-bank-holidays-2021.sql" />
@@ -165,6 +166,7 @@
     <Content Include="scripts\Update\0007-Support\20240213-CCN062-Additional-Charge-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20240220-R789923-UpdateCompAuthEmail.sql" />
     <Content Include="scripts\Update\0007-Support\20240222-ImportNotification-Additional-Charge-DataChanges.sql" />
+    <Content Include="scripts\Update\0007-Support\20240711-Financial-Guarantee-Table-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20240315-CCN062-UpdateSepaFixedFee.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />

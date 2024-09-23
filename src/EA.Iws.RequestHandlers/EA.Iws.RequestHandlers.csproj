@@ -119,6 +119,7 @@
     <Compile Include="Admin\KeyDates\SetImportKeyDatesOverrideHandler.cs" />
     <Compile Include="Admin\KeyDates\SetExportKeyDatesOverrideHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\AcceptChangesHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\CreateNotificationStatusChangeHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDecisionHistoryHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetExportNotificationConsultationHandler.cs" />
