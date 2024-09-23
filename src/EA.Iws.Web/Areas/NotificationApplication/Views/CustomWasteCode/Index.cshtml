@@ -61,7 +61,7 @@
             @Html.Gds().LabelFor(m => m.OtherCode, false)
             @Html.Gds().HintParagraph(CustomWasteCodeResources.OtherCodeHint)
             @Html.Gds().ValidationMessageFor(m => m.OtherCode)
-            @Html.Gds().TextBoxFor(m => m.OtherCode)
+            @Html.TextAreaFor(m => m.OtherCode, new { @id = "other-label", @class = "govuk-textarea full-width", @rows = 10 })
         </div>
         <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherCodeNotApplicable)">
             @Html.Gds().ValidationMessageFor(m => m.OtherCodeNotApplicable)
