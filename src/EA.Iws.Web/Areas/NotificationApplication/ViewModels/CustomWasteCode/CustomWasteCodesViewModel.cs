@@ -33,6 +33,7 @@
 
         [Display(Name = "OtherCode", ResourceType = typeof(CustomWasteCodeResources))]
         [RequiredIf("OtherCodeNotApplicable", false, ErrorMessageResourceName = "OtherCodeRequired", ErrorMessageResourceType = typeof(CustomWasteCodeResources))]
+        [StringLength(1000, ErrorMessage = "Please limit your comment to 1000 characters or less.")]
         public string OtherCode { get; set; }
 
         [Display(Name = "NotApplicable", ResourceType = typeof(CustomWasteCodeResources))]
