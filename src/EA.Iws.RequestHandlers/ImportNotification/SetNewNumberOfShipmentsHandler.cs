@@ -39,9 +39,13 @@
             shipmentHistotyRepository.Add(new NumberOfShipmentsHistory(message.NotificationId, message.OldNumberOfShipments, DateTime.UtcNow));
 
             var notificationAssesmentInfo = await importNotificationAssessmentRepository.GetByNotification(message.NotificationId);
-            notificationAssesmentInfo.AddStatusChangeRecord(new ImportNotificationStatusChange(notificationAssesmentInfo.Status,
-                                                                                               ImportNotificationStatus.Resubmitted,
-                                                                                               userContext.UserId));
+
+            if (message.OldNumberOfShipments != message.NewNumberOfShipments)
+            {
+                notificationAssesmentInfo.AddStatusChangeRecord(new ImportNotificationStatusChange(notificationAssesmentInfo.Status,
+                                                                                                   ImportNotificationStatus.Resubmitted,
+                                                                                                   userContext.UserId));
+            }
             await context.SaveChangesAsync();
 
             return true;
