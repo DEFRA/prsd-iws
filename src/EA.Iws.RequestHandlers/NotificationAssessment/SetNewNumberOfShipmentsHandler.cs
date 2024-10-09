@@ -40,7 +40,11 @@
 
             var notificationAssesmentInfo = await notificationAssessmentRepository.GetByNotificationId(message.NotificationId);
             var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
-            notificationAssesmentInfo.AddStatusChangeRecord(new NotificationStatusChange(Core.NotificationAssessment.NotificationStatus.Resubmitted, user));
+
+            if (message.OldNumberOfShipments != message.NewNumberOfShipments)
+            {
+                notificationAssesmentInfo.AddStatusChangeRecord(new NotificationStatusChange(Core.NotificationAssessment.NotificationStatus.Resubmitted, user));
+            }
 
             await context.SaveChangesAsync();
             
