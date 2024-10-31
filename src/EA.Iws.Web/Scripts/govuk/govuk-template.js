@@ -7,11 +7,13 @@
 
 	function getDomain() {
 		var host = window.location.hostname;
-		if (host.split('.').length > 1 && host !== "international-waste-shipments.service.gov.uk") {
-			return host.replace(host.split('.')[0], '');
-		}
-		else
+		if (host !== null && host.length > 1) {
 			return host;
+		}
+		else {
+			console.log("Host name return as null!");
+			return null;
+		}
 	}
 
 	GOVUK.cookie = function (name, value, options) {
@@ -27,6 +29,7 @@
 			return GOVUK.getCookie(name);
 		}
 	};
+
 	GOVUK.setCookie = function (name, value, options) {
 		if (typeof options === 'undefined') {
 			options = {};
