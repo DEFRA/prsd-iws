@@ -878,9 +878,6 @@
     <Content Include="Areas\Admin\Views\ArchiveNotification\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ArchiveNotification\Review.cshtml" />
     <Content Include="Areas\Admin\Views\ArchiveNotification\Archived.cshtml" />
-    <Content Include="Cert\Boomi-IWS-SND.pfx" />
-    <Content Include="Cert\Boomi-IWS-TST.pfx" />
-    <Content Include="Cert\Boomi-IWS-PRD.pfx" />
     <Content Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategory.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteComponent.cshtml" />
     <Content Include="Areas\ImportNotification\Views\EditContact\Producer.cshtml" />
