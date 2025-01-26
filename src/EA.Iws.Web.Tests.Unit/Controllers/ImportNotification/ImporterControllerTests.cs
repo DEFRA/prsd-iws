@@ -53,7 +53,7 @@
         {
             // Act
             string companyNumber = "12345678";
-            string companyName = "Test Company";
+            string companyName = "Test Importer Company";
             var apiModel = new DefraCompaniesHouseApiModel
             {
                 Organisation = new Organisation
