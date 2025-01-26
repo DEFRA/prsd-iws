@@ -12,6 +12,7 @@ namespace EA.Iws.Web
     using IdentityModel;
     using Infrastructure;
     using Owin;
+    using Serilog;
     using Services;
     using System.Net;
     using System.Reflection;
@@ -32,11 +33,12 @@ namespace EA.Iws.Web
 
             var builder = new ContainerBuilder();
             builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
-            builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+            builder.Register(c => configuration.CurrentConfiguration).As<IAppConfiguration>().SingleInstance();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => auditService).As<IAuditService>().SingleInstance();
             builder.Register(c => trimTextService).As<ITrimTextService>().SingleInstance();
             builder.Register(c => additionalChargeService).As<IAdditionalChargeService>().SingleInstance();
+            builder.Register(c => Log.Logger).As<ILogger>().SingleInstance();
 
             var container = AutofacBootstrapper.Initialize(builder);
 
