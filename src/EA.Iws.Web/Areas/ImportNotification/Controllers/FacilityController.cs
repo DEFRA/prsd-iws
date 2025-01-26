@@ -1,17 +1,19 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
+    using Core.ImportNotification.Draft;
+    using EA.Iws.Api.Client.CompaniesHouseAPI;
+    using EA.Iws.Api.Client.Models;
+    using EA.Iws.Web.Areas.Common;
+    using EA.Iws.Web.Services;
+    using Infrastructure.Authorization;
+    using Prsd.Core.Mediator;
+    using Requests.ImportNotification;
+    using Requests.Shared;
     using System;
     using System.Linq;
     using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.ImportNotification.Draft;
-    using EA.Iws.Web.Areas.Common;
-    using EA.Iws.Web.Infrastructure;
-    using Infrastructure.Authorization;
-    using Prsd.Core.Mediator;
-    using Requests.ImportNotification;
-    using Requests.Shared;
     using ViewModels.Facility;
 
     [AuthorizeActivity(typeof(SetDraftData<>))]
@@ -19,11 +21,17 @@
     {
         private readonly IMediator mediator;
         private readonly ITrimTextService trimTextService;
+        private readonly Func<ICompaniesHouseClient> companiesHouseClient;
+        private readonly ConfigurationService configurationService;
 
-        public FacilityController(IMediator mediator, ITrimTextService trimTextService)
+        public FacilityController(IMediator mediator, ITrimTextService trimTextService,
+                                  Func<ICompaniesHouseClient> companiesHouseClient,
+                                  ConfigurationService configurationService)
         {
             this.mediator = mediator;
             this.trimTextService = trimTextService;
+            this.companiesHouseClient = companiesHouseClient;
+            this.configurationService = configurationService;
         }
 
         [HttpGet]
@@ -185,38 +193,19 @@
             return RedirectToAction("Index");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult GetCompanyName(string registrationNumber)
+        [HttpGet]
+        public async Task<ActionResult> GetCompanyName(string registrationNumber)
         {
-            if (!this.Request.IsAjaxRequest())
-            {
-                throw new InvalidOperationException();
-            }
+            var result = await GetDefraCompanyDetails(registrationNumber);
 
-            try
+            return Json(new { success = true, companyName = result.Organisation?.Name }, JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task<DefraCompaniesHouseApiModel> GetDefraCompanyDetails(string companyRegistrationNumber)
+        {
+            using (var client = companiesHouseClient())
             {
-                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
-                return Json(new { success = true, companyName = orgName });
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
-                }
-                else if (ex.Status == WebExceptionStatus.ConnectFailure)
-                {
-                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
-                }
-                else
-                {
-                    return Json(new { success = false, errorMsg = ex.Message });
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, errorMsg = ex.Message });
+                return await client.GetCompanyDetailsAsync(configurationService.CurrentConfiguration.CompaniesHouseReferencePath, companyRegistrationNumber);
             }
         }
     }

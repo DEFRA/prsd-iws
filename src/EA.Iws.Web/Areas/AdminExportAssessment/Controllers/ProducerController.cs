@@ -2,21 +2,22 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
+    using EA.Iws.Api.Client.CompaniesHouseAPI;
+    using EA.Iws.Api.Client.Models;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
-    using EA.Iws.Core.Shared;
     using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
+    using EA.Iws.Web.Services;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
     using Requests.NotificationAssessment;
     using System;
-    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Producer;
@@ -27,12 +28,18 @@
         private readonly IMediator mediator;
         private readonly IAuditService auditService;
         private readonly IAdditionalChargeService additionalChargeService;
+        private readonly Func<ICompaniesHouseClient> companiesHouseClient;
+        private readonly ConfigurationService configurationService;
 
-        public ProducerController(IMediator mediator, IAuditService auditService, IAdditionalChargeService additionalChargeService)
+        public ProducerController(IMediator mediator, IAuditService auditService, IAdditionalChargeService additionalChargeService,
+                                  Func<ICompaniesHouseClient> companiesHouseClient,
+                                  ConfigurationService configurationService)
         {
             this.mediator = mediator;
             this.auditService = auditService;
             this.additionalChargeService = additionalChargeService;
+            this.companiesHouseClient = companiesHouseClient;
+            this.configurationService = configurationService;
         }
 
         [HttpGet]
@@ -112,38 +119,19 @@
             return RedirectToAction("Index", "Overview");
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult GetCompanyName(string registrationNumber)
+        [HttpGet]
+        public async Task<ActionResult> GetCompanyName(string registrationNumber)
         {
-            if (!this.Request.IsAjaxRequest())
-            {
-                throw new InvalidOperationException();
-            }
+            var result = await GetDefraCompanyDetails(registrationNumber);
 
-            try
+            return Json(new { success = true, companyName = result.Organisation?.Name }, JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task<DefraCompaniesHouseApiModel> GetDefraCompanyDetails(string companyRegistrationNumber)
+        {
+            using (var client = companiesHouseClient())
             {
-                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
-                return Json(new { success = true, companyName = orgName });
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
-                }
-                else if (ex.Status == WebExceptionStatus.ConnectFailure)
-                {
-                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
-                }
-                else
-                {
-                    return Json(new { success = false, errorMsg = ex.Message });
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, errorMsg = ex.Message });
+                return await client.GetCompanyDetailsAsync(configurationService.CurrentConfiguration.CompaniesHouseReferencePath, companyRegistrationNumber);
             }
         }
 
