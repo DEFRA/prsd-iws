@@ -171,7 +171,7 @@
             $("#dvRegNumber").show();
             $('#companies-house-number').hide();
             $("#dvAdditionalRegNumber").hide();
-            $("#hintImpButtonMsg").hide();            
+            $("#hintImpButtonMsg").hide();
             $("#hintOrgName").show();
         }
 
@@ -251,10 +251,10 @@
                 if ((regNumber !== null) && (regNumber !== '')) {
                     $.ajax({
                         url: '@Url.Action("GetCompanyName")',
-                        type: 'GET',
+                        type: 'Get',
                         dataType: 'json',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        data: { "registrationNumber": regNumber.toUpperCase(), __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        data: { "registrationNumber": regNumber.toUpperCase() },
                         success: function (result) {
                             if (result.success) {
                                 $("#Business_Name").val(result.companyName);
@@ -263,9 +263,6 @@
                                 $("#errorMessage").text(result.errorMsg);
                                 $("#Business_Name").val("");
                             }
-                        },
-                        error: function (xhr, textStatus, errorThrown) {
-                            console.log("Error: " + errorThrown);
                         }
                     });
                 }

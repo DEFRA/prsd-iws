@@ -78,7 +78,8 @@
 
                 return new DefraCompaniesHouseApiModel()
                 {
-                    Error = true
+                    Error = true,
+                    ErrorMessage = ex.Message
                 };
             }
         }

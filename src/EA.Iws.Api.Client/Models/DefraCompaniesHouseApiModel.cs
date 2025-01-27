@@ -14,5 +14,8 @@
 
         [JsonIgnore]
         public bool HasError => InvalidReference || Error;
+
+        [JsonIgnore]
+        public string ErrorMessage { get; set; }
     }
 }
