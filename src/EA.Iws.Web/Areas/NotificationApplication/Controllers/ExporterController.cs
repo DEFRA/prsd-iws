@@ -145,6 +145,11 @@
         {
             var result = await GetDefraCompanyDetails(registrationNumber);
 
+            if (result.Error)
+            {
+                return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." }, JsonRequestBehavior.AllowGet);
+            }
+
             return Json(new { success = true, companyName = result.Organisation?.Name }, JsonRequestBehavior.AllowGet);
         }
 
