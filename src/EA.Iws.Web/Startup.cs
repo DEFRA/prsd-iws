@@ -33,7 +33,7 @@ namespace EA.Iws.Web
 
             var builder = new ContainerBuilder();
             builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
-            builder.Register(c => configuration.CurrentConfiguration).As<IAppConfiguration>().SingleInstance();
+            builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => auditService).As<IAuditService>().SingleInstance();
             builder.Register(c => trimTextService).As<ITrimTextService>().SingleInstance();
