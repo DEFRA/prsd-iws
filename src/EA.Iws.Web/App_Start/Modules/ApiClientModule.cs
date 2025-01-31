@@ -22,7 +22,7 @@
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
-                var config = cc.Resolve<IAppConfiguration>();
+                var config = cc.Resolve<AppConfiguration>();
                 TimeSpan timeout = TimeSpan.FromSeconds(config.ApiTimeoutInSeconds);
                 return new IwsClient(config.ApiUrl, timeout);
             }).As<IIwsClient>().InstancePerRequest();
@@ -30,21 +30,21 @@
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
-                var config = cc.Resolve<IAppConfiguration>();
+                var config = cc.Resolve<AppConfiguration>();
                 return new OAuthClient(config.ApiUrl, config.ApiClientId, config.ApiSecret);
             }).As<IOAuthClient>().SingleInstance();
 
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
-                var config = cc.Resolve<IAppConfiguration>();
+                var config = cc.Resolve<AppConfiguration>();
                 return new OAuthClientCredentialClient(config.ApiUrl, config.ApiClientCredentialId, config.ApiClientCredentialSecret);
             }).As<IOAuthClientCredentialClient>().SingleInstance();
 
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
-                var config = cc.Resolve<IAppConfiguration>();
+                var config = cc.Resolve<AppConfiguration>();
                 return new UserInfoClient(config.ApiUrl);
             }).As<IUserInfoClient>().InstancePerRequest();
 
@@ -53,7 +53,7 @@
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
-                var config = cc.Resolve<IAppConfiguration>();
+                var config = cc.Resolve<AppConfiguration>();
                 var httpClient = cc.Resolve<IHttpClientWrapperFactory>();
                 var retryPolicy = cc.Resolve<IRetryPolicyWrapper>();
                 var jsonSerializer = cc.Resolve<IJsonSerializer>();
