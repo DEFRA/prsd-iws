@@ -45,11 +45,11 @@
 
         public async Task<DefraCompaniesHouseApiModel> GetCompanyDetailsAsync(string endpoint, string companyReference)
         {
-            Condition.Requires(endpoint).IsNotNullOrWhiteSpace("Endpoint cannot be null or whitespace.");
+            Condition.Requires(endpoint).IsNotNullOrWhiteSpace(CompaniesHouseResources.EndpointNullExceptionMessage);
 
             if (!IsValidCompanyReference(companyReference))
             {
-                logger.Warning("Not calling companies house API invalid reference");
+                logger.Warning(CompaniesHouseResources.CompaniesHouseAPIInvalidWarning);
 
                 return new DefraCompaniesHouseApiModel()
                 {
@@ -74,7 +74,7 @@
             }
             catch (Exception ex)
             {
-                logger.Error($"Error attempting to access companies house API for {companyReference}", ex);
+                logger.Error(string.Format(CompaniesHouseResources.CompaniesHouseAPIAccessError, companyReference), ex);
 
                 return new DefraCompaniesHouseApiModel()
                 {
