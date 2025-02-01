@@ -124,12 +124,7 @@
         {
             var result = await GetDefraCompanyDetails(registrationNumber);
 
-            if (result.Error)
-            {
-                return Json(new { success = false, errorMsg = "Company details could not be found." }, JsonRequestBehavior.AllowGet);
-            }
-
-            return Json(new { success = true, companyName = result.Organisation?.Name }, JsonRequestBehavior.AllowGet);
+            return Json(new { success = !result.Error, companyName = result.Organisation?.Name }, JsonRequestBehavior.AllowGet);
         }
 
         private async Task<DefraCompaniesHouseApiModel> GetDefraCompanyDetails(string companyRegistrationNumber)

@@ -162,6 +162,7 @@
             //On page load, controls hide
             $("#dvBtnImportName").hide();
             $("#dvOrgNameDesction").hide();
+            $("#errorMessage").hide();
 
             //On page load, controls show
             $("#hintOrgName").show();
@@ -285,9 +286,9 @@
                         success: function (result) {
                             if (result.success) {
                                 $("#Business_Name").val(result.companyName);
-                                $("#errorMessage").text("");
+                                $("#errorMessage").hide();
                             } else {
-                                $("#errorMessage").text(result.errorMsg);
+                                $("#errorMessage").show();
                                 $("#Business_Name").val("");
                             }
                         }

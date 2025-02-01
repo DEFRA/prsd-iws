@@ -133,6 +133,33 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import name.
+        /// </summary>
+        public static string ImportNameButtonText {
+            get {
+                return ResourceManager.GetString("ImportNameButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company details could not be found..
+        /// </summary>
+        public static string ImportNameErrorMessage {
+            get {
+                return ResourceManager.GetString("ImportNameErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter above registration number to enable &apos;Import name&apos; button..
+        /// </summary>
+        public static string ImportNameHintMessage {
+            get {
+                return ResourceManager.GetString("ImportNameHintMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
         /// </summary>
         public static string OrgHelpWithNamingContent1 {
