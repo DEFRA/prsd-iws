@@ -5,6 +5,7 @@
     using Core.Notification.Audit;
     using Core.Shared;
     using EA.Iws.Api.Client.CompaniesHouseAPI;
+    using EA.Iws.Api.Client.Models;
     using EA.Iws.Web.Areas.Common;
     using EA.Iws.Web.Services;
     using FakeItEasy;
@@ -116,6 +117,34 @@
 
             // Assert
             result.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void GetCompanyDetailsAsync_Should_Thow_EndPoint_ArgumentNull_Exeception()
+        {
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync(string.Empty, "12345"))
+                                               .Throws<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void GetCompanyDetailsAsync_Should_Return_InvalidReference_True()
+        {
+            var result = new DefraCompaniesHouseApiModel
+            {
+                InvalidReference = true
+            };
+
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync("https://test.com", string.Empty)).Returns(result);
+
+            result.Should().NotBeNull();
+            result.InvalidReference.Should().BeTrue();
+        }
+
+        [Fact]
+        public void GetCompanyDetailsAsync_Should_Thow_UnauthorizedAccessException()
+        {
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync("https://test.com", "12345"))
+                                               .Throws<UnauthorizedAccessException>();
         }
     }
 }
