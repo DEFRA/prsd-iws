@@ -4,8 +4,12 @@
     using Areas.NotificationApplication.ViewModels.Exporter;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Api.Client.CompaniesHouseAPI;
+    using EA.Iws.Api.Client.Models;
     using EA.Iws.Web.Areas.Common;
+    using EA.Iws.Web.Services;
     using FakeItEasy;
+    using FluentAssertions;
     using Mappings;
     using Prsd.Core.Mediator;
     using System;
@@ -22,13 +26,17 @@
         private readonly ExporterController exporterController;
         private readonly IAuditService auditService;
         private readonly ITrimTextService trimTextService;
+        private readonly ICompaniesHouseClient companiesHouseClient;
+        private readonly ConfigurationService configurationService;
 
         public ExporterControllerTests()
         {
             client = A.Fake<IMediator>();
             auditService = A.Fake<IAuditService>();
             trimTextService = A.Fake<ITrimTextService>();
-            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService, trimTextService);
+            companiesHouseClient = A.Fake<ICompaniesHouseClient>();
+            configurationService = A.Fake<ConfigurationService>();
+            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService, trimTextService, () => companiesHouseClient, configurationService);
 
             A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Exporter));
         }
@@ -91,6 +99,52 @@
             var result = await exporterController.Index(model, null) as RedirectToRouteResult;
 
             RouteAssert.RoutesTo(result.RouteValues, "List", "Producer");
+        }
+
+        [Fact]
+        public async Task GetCompany_Should_NotBeNull()
+        {
+            // Act
+            var companyRegistrationNumber = "22446688";
+
+            var result = await exporterController.GetCompanyName(companyRegistrationNumber) as JsonResult;
+
+            result.Should().BeOfType<JsonResult>();
+            result.JsonRequestBehavior.Should().Be(JsonRequestBehavior.AllowGet);
+
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync(configurationService.CurrentConfiguration.CompaniesHouseReferencePath, companyRegistrationNumber))
+                .MustHaveHappenedOnceExactly();
+
+            // Assert
+            result.Should().NotBeNull();
+        }
+
+        [Fact]
+        public void GetCompanyDetailsAsync_Should_Thow_EndPoint_ArgumentNull_Exeception()
+        {
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync(string.Empty, "12345"))
+                                               .Throws<ArgumentNullException>();
+        }
+
+        [Fact]
+        public void GetCompanyDetailsAsync_Should_Return_InvalidReference_True()
+        {
+            var result = new DefraCompaniesHouseApiModel
+            {
+                InvalidReference = true
+            };
+
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync("https://test.com", string.Empty)).Returns(result);
+
+            result.Should().NotBeNull();
+            result.InvalidReference.Should().BeTrue();
+        }
+
+        [Fact]
+        public void GetCompanyDetailsAsync_Should_Thow_UnauthorizedAccessException()
+        {
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync("https://test.com", "12345"))
+                                               .Throws<UnauthorizedAccessException>();
         }
     }
 }
