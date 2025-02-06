@@ -29,6 +29,8 @@
             //Register mapper module
             builder.RegisterModule(new MappingModule());
 
+            builder.RegisterModule(new Api.Client.ApiClientModule());
+
             // Allow property injection in views
             builder.RegisterSource(new ViewRegistrationSource());
 

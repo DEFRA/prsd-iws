@@ -37,5 +37,27 @@
         string ScanUrl { get; set; }
 
         string AvCertPath { get; set; }
+
+        bool ProxyEnabled { get; set; }
+
+        bool ByPassProxyOnLocal { get; set; }
+
+        string ProxyWebAddress { get; set; }
+
+        bool ProxyUseDefaultCredentials { get; set; }
+
+        string CompaniesHouseReferencePath { get; set; }
+
+        string CompaniesHouseBaseUrl { get; set; }
+
+        string OAuthTokenEndpoint { get; set; }
+
+        string OAuthTokenClientId { get; set; }
+
+        string OAuthTokenClientSecret { get; set; }
+
+        string CompaniesHouseScope { get; set; }
+
+        double ApiTimeoutInSeconds { get; set; }
     }
 }
