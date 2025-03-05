@@ -225,4 +225,13 @@
   <data name="OrgNameHintUK" xml:space="preserve">
     <value>For example 'A&amp;B Materials'</value>
   </data>
+  <data name="ImportNameButtonText" xml:space="preserve">
+    <value>Import name</value>
+  </data>
+  <data name="ImportNameErrorMessage" xml:space="preserve">
+    <value>Company details could not be found.</value>
+  </data>
+  <data name="ImportNameHintMessage" xml:space="preserve">
+    <value>Please enter above registration number to enable 'Import name' button.</value>
+  </data>
 </root>

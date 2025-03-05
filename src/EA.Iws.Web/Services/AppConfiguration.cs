@@ -53,5 +53,25 @@
 
         [DefaultValue("")]
         public string AvCertPath { get; set; }
+
+        public bool ProxyEnabled { get; set; }
+
+        public bool ByPassProxyOnLocal { get; set; }
+
+        public string ProxyWebAddress { get; set; }
+
+        public bool ProxyUseDefaultCredentials { get; set; }
+
+        public string CompaniesHouseReferencePath { get; set; }
+
+        public string CompaniesHouseBaseUrl { get; set; }
+
+        public string OAuthTokenEndpoint { get; set; }
+
+        public string OAuthTokenClientId { get; set; }
+
+        public string OAuthTokenClientSecret { get; set; }
+
+        public string CompaniesHouseScope { get; set; }
     }
 }

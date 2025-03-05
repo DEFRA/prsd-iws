@@ -1,7 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification.Audit;
+    using EA.Iws.Api.Client.CompaniesHouseAPI;
+    using EA.Iws.Api.Client.Models;
     using EA.Iws.Web.Areas.Common;
+    using EA.Iws.Web.Services;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -24,14 +27,20 @@
         private readonly IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap;
         private readonly IAuditService auditService;
         private readonly ITrimTextService trimTextService;
+        private readonly Func<ICompaniesHouseClient> companiesHouseClient;
+        private readonly ConfigurationService configurationService;
 
-        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap, 
-                                  IAuditService auditService, ITrimTextService trimTextService)
+        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap,
+                                  IAuditService auditService, ITrimTextService trimTextService,
+                                  Func<ICompaniesHouseClient> companiesHouseClient,
+                                  ConfigurationService configurationService)
         {
             this.mediator = mediator;
             this.producerAddressBookMap = producerAddressBookMap;
             this.auditService = auditService;
             this.trimTextService = trimTextService;
+            this.companiesHouseClient = companiesHouseClient;
+            this.configurationService = configurationService;
         }
 
         [HttpGet]
@@ -321,38 +330,19 @@
             return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult GetCompanyName(string registrationNumber)
+        [HttpGet]
+        public async Task<ActionResult> GetCompanyName(string registrationNumber)
         {
-            if (!this.Request.IsAjaxRequest())
-            {
-                throw new InvalidOperationException();
-            }
+            var result = await GetDefraCompanyDetails(registrationNumber);
 
-            try
+            return Json(new { success = !result.Error, companyName = result.Organisation?.Name }, JsonRequestBehavior.AllowGet);
+        }
+
+        private async Task<DefraCompaniesHouseApiModel> GetDefraCompanyDetails(string companyRegistrationNumber)
+        {
+            using (var client = companiesHouseClient())
             {
-                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
-                return Json(new { success = true, companyName = orgName });
-            }
-            catch (WebException ex)
-            {
-                if (ex.Status == WebExceptionStatus.ProtocolError)
-                {
-                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
-                }
-                else if (ex.Status == WebExceptionStatus.ConnectFailure)
-                {
-                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
-                }
-                else
-                {
-                    return Json(new { success = false, errorMsg = ex.Message });
-                }
-            }
-            catch (Exception ex)
-            {
-                return Json(new { success = false, errorMsg = ex.Message });
+                return await client.GetCompanyDetailsAsync(configurationService.CurrentConfiguration.CompaniesHouseReferencePath, companyRegistrationNumber);
             }
         }
     }

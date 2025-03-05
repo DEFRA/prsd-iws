@@ -1,13 +1,15 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Producer;
     using Core.Notification.Audit;
     using Core.Producers;
     using Core.Shared;
+    using EA.Iws.Api.Client.CompaniesHouseAPI;
     using EA.Iws.Web.Areas.Common;
+    using EA.Iws.Web.Services;
     using FakeItEasy;
+    using FluentAssertions;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Producers;
@@ -29,12 +31,16 @@
         private readonly ProducerController producerController;
         private readonly Guid producerId2 = new Guid("D8991991-64A7-4101-A3A2-2F6B538A0A7A");
         private readonly ITrimTextService trimTextService;
+        private readonly ICompaniesHouseClient companiesHouseClient;
+        private readonly ConfigurationService configurationService;
 
         public ProducerControllerTests()
         {
             mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             this.trimTextService = A.Fake<ITrimTextService>();
+            companiesHouseClient = A.Fake<ICompaniesHouseClient>();
+            configurationService = A.Fake<ConfigurationService>();
 
             A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
@@ -51,7 +57,7 @@
             });
 
             A.CallTo(() => mediator.SendAsync(A<GetProducerForNotification>._)).Returns(CreateProducer(producerId));
-            producerController = new ProducerController(mediator, new AddAddressBookEntryMap(), this.auditService, trimTextService);
+            producerController = new ProducerController(mediator, new AddAddressBookEntryMap(), this.auditService, trimTextService, () => companiesHouseClient, configurationService);
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Producer));
         }
 
@@ -501,6 +507,24 @@
             var result = await producerController.SiteOfExport(model, false, null) as RedirectToRouteResult;
 
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Importer");
+        }
+
+        [Fact]
+        public async Task GetCompany_Should_NotBeNull()
+        {
+            // Act
+            var companyRegistrationNumber = "87654321";
+
+            var result = await producerController.GetCompanyName(companyRegistrationNumber) as JsonResult;
+
+            result.Should().BeOfType<JsonResult>();
+            result.JsonRequestBehavior.Should().Be(JsonRequestBehavior.AllowGet);
+
+            A.CallTo(() => companiesHouseClient.GetCompanyDetailsAsync(configurationService.CurrentConfiguration.CompaniesHouseReferencePath, companyRegistrationNumber))
+                                               .MustHaveHappenedOnceExactly();
+
+            // Assert
+            result.Should().NotBeNull();
         }
 
         private AddProducerViewModel CreateValidAddProducer()
