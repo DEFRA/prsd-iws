@@ -9,7 +9,7 @@ AS
         N.[NotificationType],
         N.[CompetentAuthority] AS [CompetentAuthorityId],
         CASE
-            WHEN FC.[AllFacilitiesPreconsented] IS NULL THEN 0
+            WHEN FC.[AllFacilitiesPreconsented] IS NULL THEN 'false'
             ELSE FC.[AllFacilitiesPreconsented]
         END AS [Preconsented],
         NA.[Status],
