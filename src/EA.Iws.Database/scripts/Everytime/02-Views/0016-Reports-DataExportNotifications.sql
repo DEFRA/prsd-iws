@@ -8,12 +8,15 @@ AS
         REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
         N.[NotificationType],
         N.[CompetentAuthority] AS [CompetentAuthorityId],
-        FC.[AllFacilitiesPreconsented] AS [Preconsented],
+        CASE
+            WHEN FC.[AllFacilitiesPreconsented] IS NULL THEN 'false'
+            ELSE FC.[AllFacilitiesPreconsented]
+        END AS [Preconsented],
         NA.[Status],
         D.[NotificationReceivedDate] AS [NotificationReceived],
         D.[PaymentReceivedDate] AS [PaymentReceived],
         D.[CommencementDate] AS [AssessmentStarted],
-        D.[CompleteDate] AS [ApplicationCompleted],		
+        D.[CompleteDate] AS [ApplicationCompleted],
         D.[TransmittedDate] AS [Transmitted],
         D.[AcknowledgedDate] AS [Acknowledged],
         C.[From] AS [Consented],
