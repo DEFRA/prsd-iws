@@ -104,7 +104,7 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change govuk-link">
-                    <a href="@Url.Action("List", "Facility", new { id, backToOverview = true })">
+                    <a href="@Url.Action("MarkAsInterim", "Facility", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">@facilityLabel</span>
                     </a>
