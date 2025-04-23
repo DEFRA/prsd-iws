@@ -169,6 +169,7 @@
     <Content Include="scripts\Update\0007-Support\20240711-Financial-Guarantee-Table-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20240315-CCN062-UpdateSepaFixedFee.sql" />
     <Content Include="scripts\Update\0007-Support\20240923-adding-basel-and-y-codes.sql" />
+    <Content Include="scripts\Update\0007-Support\20250415-1237-NRWChargeMatrix.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
