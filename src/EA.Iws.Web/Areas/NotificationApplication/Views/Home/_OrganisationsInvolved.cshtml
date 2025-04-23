@@ -35,7 +35,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change govuk-link">                    
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "Exporter", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Exporter</span>
@@ -104,7 +104,7 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change govuk-link">
-                    <a href="@Url.Action("MarkAsInterim", "Facility", new { id, backToOverview = true })">
+                    <a href="@Url.Action("MarkInterimStatus", "Facility", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">@facilityLabel</span>
                     </a>

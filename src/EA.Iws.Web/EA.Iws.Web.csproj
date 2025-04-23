@@ -859,7 +859,7 @@
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteCategoryViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteComponentViewModel.cs" />
-    <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MarkAsInterimViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MarkInterimStatusViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategoryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -870,10 +870,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WasteComponentResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationApplication\Views\Facility\MarkAsInterimResources.Designer.cs">
+    <Compile Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatusResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>MarkAsInterimResources.resx</DependentUpon>
+      <DependentUpon>MarkInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
@@ -902,7 +902,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\KeyDates\AcceptChanges.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Resubmit.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AdditionalCharge\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Facility\MarkAsInterim.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatus.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -5164,9 +5164,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListFacilityResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\MarkAsInterimResources.resx">
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatusResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>MarkAsInterimResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>MarkInterimStatusResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\RecoveryPreconsentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

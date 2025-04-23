@@ -9,9 +9,9 @@
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
 
-    public class MarkAsInterimToNotification : IRequest<bool>
+    public class MarkInterimStatusToNotification : IRequest<bool>
     {
-        public MarkAsInterimToNotification(Guid notificationId, bool isInterim)
+        public MarkInterimStatusToNotification(Guid notificationId, bool isInterim)
         {
             NotificationId = notificationId;
             IsInterim = isInterim;

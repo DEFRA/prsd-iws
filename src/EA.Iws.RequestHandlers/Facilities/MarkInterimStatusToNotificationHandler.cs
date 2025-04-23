@@ -6,18 +6,18 @@
     using EA.Prsd.Core.Mediator;
     using System.Threading.Tasks;
 
-    internal class MarkAsInterimToNotificationHandler : IRequestHandler<MarkAsInterimToNotification, bool>
+    internal class MarkInterimStatusToNotificationHandler : IRequestHandler<MarkInterimStatusToNotification, bool>
     {
         private readonly NotificationInterim notificationInterim;
         private readonly IwsContext context;
 
-        public MarkAsInterimToNotificationHandler(NotificationInterim notificationInterim, IwsContext context)
+        public MarkInterimStatusToNotificationHandler(NotificationInterim notificationInterim, IwsContext context)
         {
             this.notificationInterim = notificationInterim;
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(MarkAsInterimToNotification message)
+        public async Task<bool> HandleAsync(MarkInterimStatusToNotification message)
         {
             await notificationInterim.SetValue(message.NotificationId, message.IsInterim);
 
