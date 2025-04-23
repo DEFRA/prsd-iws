@@ -388,7 +388,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> MarkAsInterim(Guid id, bool? backToOverview = null)
+        public async Task<ActionResult> MarkInterimStatus(Guid id, bool? backToOverview = null)
         {
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
@@ -401,7 +401,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MarkAsInterim(MarkInterimStatusViewModel model, bool? backToOverview = null)
+        public async Task<ActionResult> MarkInterimStatus(MarkInterimStatusViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
