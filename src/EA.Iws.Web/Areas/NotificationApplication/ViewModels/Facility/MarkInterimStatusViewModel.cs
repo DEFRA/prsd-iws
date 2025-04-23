@@ -6,16 +6,17 @@
     using System;
     using System.ComponentModel.DataAnnotations;
 
-    public class MarkAsInterimViewModel
+    public class MarkInterimStatusViewModel
     {
-        public MarkAsInterimViewModel()
+        public MarkInterimStatusViewModel()
         {
         }
 
-        public MarkAsInterimViewModel(InterimStatus interimStatus)
+        public MarkInterimStatusViewModel(InterimStatus interimStatus, NotificationType notificationType)
         {
             NotificationId = interimStatus.NotificationId;
             IsInterim = interimStatus.IsInterim;
+            NotificationType = notificationType;
         }
 
         public Guid NotificationId { get; set; }
@@ -25,9 +26,9 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public MarkAsInterimToNotification ToRequest()
+        public MarkInterimStatusToNotification ToRequest()
         {
-            return new MarkAsInterimToNotification(NotificationId, IsInterim.Value);
+            return new MarkInterimStatusToNotification(NotificationId, IsInterim.Value);
         }
     }
 }

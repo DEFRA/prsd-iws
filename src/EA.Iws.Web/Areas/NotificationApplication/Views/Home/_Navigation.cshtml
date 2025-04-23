@@ -15,7 +15,7 @@
 @Html.Navigation().Link("Waste generator - producer", Model.HasProducer, "List", "Producer", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromExporter", "Remove" })
 @Html.Navigation().Link("Site of export", Model.HasSiteOfExport, "SiteOfExport", "Producer", "NotificationApplication")
 @Html.Navigation().Link("Importer - consignee", Model.HasImporter, "Index", "Importer", "NotificationApplication")
-@Html.Navigation().Link(Model.NotificationType + " facility", Model.HasFacility, "MarkAsInterim", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromImporter", "Remove" })
+@Html.Navigation().Link(Model.NotificationType + " facility", Model.HasFacility, "MarkInterimStatus", "Facility", "NotificationApplication", additionalActiveActionNames: new[] { "Add", "Edit", "CopyFromImporter", "Remove" })
 @Html.Navigation().Link("Actual site of " + Model.NotificationType.ToString().ToLowerInvariant(), Model.HasActualSiteOfTreatment, "SiteOfTreatment", "Facility", "NotificationApplication")
 
 <span>@Model.NotificationType operation</span>

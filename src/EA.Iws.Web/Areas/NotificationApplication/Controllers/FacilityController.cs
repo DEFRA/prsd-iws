@@ -393,17 +393,15 @@
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
             var interimStatus = await mediator.SendAsync(new GetInterimStatus(id));
-            var model = new MarkAsInterimViewModel(interimStatus);
-
-            var notificationInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
-            model.NotificationType = notificationInfo.NotificationType;
+            var notificationType = await mediator.SendAsync(new GetNotificationType(id));
+            var model = new MarkInterimStatusViewModel(interimStatus, notificationType);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> MarkAsInterim(MarkAsInterimViewModel model, bool? backToOverview = null)
+        public async Task<ActionResult> MarkAsInterim(MarkInterimStatusViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
