@@ -6,6 +6,7 @@
     using Core.Notification;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Web.Areas.Common;
     using FakeItEasy;
     using Mappings;
@@ -536,7 +537,7 @@
 
             RouteAssert.RoutesTo(result.RouteValues, "OperationCodes", "WasteOperations");
         }
-        
+
         [Fact]
         public async Task RecoveryPreconsent_Post_BackToOverviewNull_RedirectToOperationCodes()
         {
@@ -546,7 +547,7 @@
 
             RouteAssert.RoutesTo(result.RouteValues, "OperationCodes", "WasteOperations");
         }
-        
+
         [Fact]
         public async Task Remove_MultipleFacilitiesRemoveSiteOfTreatment_ReturnsViewWithError()
         {
@@ -672,6 +673,76 @@
             var backToOverviewKey = "backToOverview";
             Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
             Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_WithDefaultReturnView()
+        {
+            var result = await facilityController.MarkInterimStatus(notificationId, null) as ViewResult;
+
+            Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_GetsNotificationTypeByNotificationId_MustHaveHappenedOnceExactly()
+        {
+            await facilityController.MarkInterimStatus(notificationId);
+
+            A.CallTo(() => mediator.SendAsync(A<GetNotificationType>.That.Matches(p => p.NotificationId == notificationId))).MustHaveHappenedOnceExactly();
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_GetsInterimStatus_ByNotificationId_MustHaveHappenedOnceExactly()
+        {
+            await facilityController.MarkInterimStatus(notificationId);
+
+            A.CallTo(() => mediator.SendAsync(A<GetInterimStatus>.That.Matches(p => p.NotificationId == notificationId))).MustHaveHappenedOnceExactly();
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_InvalidModel_ReturnsView()
+        {
+            var model = new MarkInterimStatusViewModel();
+
+            facilityController.ModelState.AddModelError("IsInterim", "The IsInterim is required!");
+
+            var result = await facilityController.MarkInterimStatus(model) as ViewResult;
+
+            Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_ValidModel_Call_MustHaveHappenedOnceExactly()
+        {
+            var model = new MarkInterimStatusViewModel()
+            {
+                NotificationId = Guid.NewGuid(),
+                IsInterim = true,
+                NotificationType = NotificationType.Disposal
+            };
+
+            await facilityController.MarkInterimStatus(model);
+
+            A.CallTo(() => mediator.SendAsync(A<MarkInterimStatusToNotification>._)).MustHaveHappenedOnceExactly();
+        }
+
+        [Theory]
+        [InlineData(NotificationType.Disposal, false)]
+        [InlineData(NotificationType.Disposal, true)]
+        [InlineData(NotificationType.Recovery, false)]
+        [InlineData(NotificationType.Recovery, true)]
+        public async Task MarkInterimStatus_ValidModel_RedirectsToList(NotificationType notificationType, bool isInterim)
+        {
+            var model = new MarkInterimStatusViewModel()
+            {
+                NotificationId = Guid.NewGuid(),
+                IsInterim = isInterim,
+                NotificationType = notificationType
+            };
+
+            var result = await facilityController.MarkInterimStatus(model) as RedirectToRouteResult;
+
+            Assert.Equal("List", result.RouteValues["action"]);
         }
     }
 }
