@@ -142,6 +142,16 @@
             };
         }
 
+        private MarkInterimStatusViewModel CreateValidMarkInterimStatus(NotificationType notificationType, bool isInterim)
+        {
+            return new MarkInterimStatusViewModel
+            {
+                NotificationId = Guid.NewGuid(),
+                IsInterim = isInterim,
+                NotificationType = notificationType
+            };
+        }
+
         [Fact]
         public async Task Add_ReturnsView()
         {
@@ -711,15 +721,14 @@
             Assert.Equal(string.Empty, result.ViewName);
         }
 
-        [Fact]
-        public async Task MarkInterimStatus_ValidModel_Call_MustHaveHappenedOnceExactly()
+        [Theory]
+        [InlineData(NotificationType.Disposal, false)]
+        [InlineData(NotificationType.Disposal, true)]
+        [InlineData(NotificationType.Recovery, false)]
+        [InlineData(NotificationType.Recovery, true)]
+        public async Task MarkInterimStatus_ValidModel_Call_MustHaveHappenedOnceExactly(NotificationType notificationType, bool isInterim)
         {
-            var model = new MarkInterimStatusViewModel()
-            {
-                NotificationId = Guid.NewGuid(),
-                IsInterim = true,
-                NotificationType = NotificationType.Disposal
-            };
+            var model = CreateValidMarkInterimStatus(notificationType, isInterim);
 
             await facilityController.MarkInterimStatus(model);
 
@@ -733,16 +742,47 @@
         [InlineData(NotificationType.Recovery, true)]
         public async Task MarkInterimStatus_ValidModel_RedirectsToList(NotificationType notificationType, bool isInterim)
         {
-            var model = new MarkInterimStatusViewModel()
-            {
-                NotificationId = Guid.NewGuid(),
-                IsInterim = isInterim,
-                NotificationType = notificationType
-            };
+            var model = CreateValidMarkInterimStatus(notificationType, isInterim);
 
             var result = await facilityController.MarkInterimStatus(model) as RedirectToRouteResult;
 
             Assert.Equal("List", result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_ValidModel_WithBackToOverviewTrue_MaintainsRouteValue()
+        {
+            var model = CreateValidMarkInterimStatus(NotificationType.Disposal, true);
+
+            var result = await facilityController.MarkInterimStatus(model, true) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.True(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_ValidModel_WithBackToOverviewFalse_MaintainsRouteValue()
+        {
+            var model = CreateValidMarkInterimStatus(NotificationType.Disposal, true);
+
+            var result = await facilityController.MarkInterimStatus(model, false) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
+        }
+
+        [Fact]
+        public async Task MarkInterimStatus_ValidModel_WithBackToOverviewNull_DefaultsRouteValueToFalse()
+        {
+            var model = CreateValidMarkInterimStatus(NotificationType.Disposal, true);
+
+            var result = await facilityController.MarkInterimStatus(model, null) as RedirectToRouteResult;
+
+            var backToOverviewKey = "backToOverview";
+            Assert.True(result.RouteValues.ContainsKey(backToOverviewKey));
+            Assert.False(Convert.ToBoolean(result.RouteValues[backToOverviewKey]));
         }
     }
 }
