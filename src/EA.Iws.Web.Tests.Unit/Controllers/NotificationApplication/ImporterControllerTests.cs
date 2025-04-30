@@ -81,7 +81,7 @@
 
             var result = await importerController.Index(model, false) as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(result.RouteValues, "List", "Facility");
+            RouteAssert.RoutesTo(result.RouteValues, "MarkInterimStatus", "Facility");
         }
 
         [Fact]
@@ -91,7 +91,7 @@
 
             var result = await importerController.Index(model, null) as RedirectToRouteResult;
 
-            RouteAssert.RoutesTo(result.RouteValues, "List", "Facility");
+            RouteAssert.RoutesTo(result.RouteValues, "MarkInterimStatus", "Facility");
         }
     }
 }
