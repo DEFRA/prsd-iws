@@ -59,5 +59,9 @@
         string CompaniesHouseScope { get; set; }
 
         double ApiTimeoutInSeconds { get; set; }
+
+        int SessionTimeoutInMinutes { get; set; }
+
+        int SessionTimeoutWarningInMinutes { get; set; }
     }
 }

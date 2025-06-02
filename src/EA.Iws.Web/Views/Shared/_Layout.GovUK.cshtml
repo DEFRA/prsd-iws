@@ -39,6 +39,8 @@
         document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');
     </script>
 
+    @Html.Partial("_SessionTimeout")
+
     @RenderSection("body_start", required: false)
 
     <div id="skiplink-container">
@@ -147,6 +149,12 @@
     @RenderSection("body_end", required: false)
 </body>
 </html>
+
+
+@{
+    var sessionTimeoutInMinutes = System.Configuration.ConfigurationManager.AppSettings["Iws.SessionTimeoutInMinutes"];
+    var sessionTimeoutWarningInMinutes = System.Configuration.ConfigurationManager.AppSettings["Iws.SessionTimeoutWarningInMinutes"];
+}
 
 <script>
     var cookieConsent = GOVUK.getCookie("iws-cookie-consent");
@@ -274,4 +282,6 @@
         document.getElementById("global-cookie-accept-message").style.display = "none";
         document.getElementById("global-cookie-reject-message").style.display = "none";
     }
+
+    GOVUK.sessionTimeout.start(@sessionTimeoutInMinutes, @sessionTimeoutWarningInMinutes, "@Context.User.Identity.IsAuthenticated");
 </script>

@@ -73,5 +73,11 @@
         public string OAuthTokenClientSecret { get; set; }
 
         public string CompaniesHouseScope { get; set; }
+
+        [DefaultValue(15)]
+        public int SessionTimeoutInMinutes { get; set; }
+
+        [DefaultValue(5)]
+        public int SessionTimeoutWarningInMinutes { get; set; }
     }
 }
