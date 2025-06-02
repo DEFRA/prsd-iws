@@ -896,6 +896,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\KeyDates\AcceptChanges.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Resubmit.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AdditionalCharge\Index.cshtml" />
+    <Content Include="Content\iws\_session-timeout.scss" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -975,6 +976,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
+    <Content Include="Scripts\session-timeout.js" />
     <Content Include="Scripts\show-hide-content.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
@@ -1530,6 +1532,8 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Shared\EditorTemplates\AdditionalChargeData.cshtml" />
+    <Content Include="Views\Shared\_SessionTimeout.cshtml" />
+    <Content Include="Views\Account\SessionSignedOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

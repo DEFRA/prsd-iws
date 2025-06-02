@@ -56,7 +56,8 @@
                 "~/Scripts/application.js",
                 "~/Scripts/business-type-radio-buttons.js",
                 "~/Scripts/customs-office-required-radio-buttons.js",
-                "~/Scripts/report-input-parameters.js"));
+                "~/Scripts/report-input-parameters.js",
+                "~/Scripts/session-timeout.js"));
 
             bundles.Add(new StyleBundle("~/Content/iws-page-ie6").Include(
                 "~/Content/iws-page-ie6.css"));
