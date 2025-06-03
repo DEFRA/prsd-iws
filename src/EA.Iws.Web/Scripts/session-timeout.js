@@ -59,7 +59,6 @@
     }
 
     async function logout() {
-        debugger;
         await post('/Account/SignOut')
 
         document.location.href = "/Account/SessionSignedOut"

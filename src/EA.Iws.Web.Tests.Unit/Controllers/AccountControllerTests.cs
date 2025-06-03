@@ -128,5 +128,17 @@
 
             RouteAssert.RoutesTo(result.RouteValues, "PasswordUpdated", "Account");
         }
+
+        [Fact]
+        public void SessionSignedOut_SetsTimeout()
+        {
+            appConfiguration.SessionTimeoutInMinutes = 5;
+
+            var result = controller.SessionSignedOut() as ActionResult;
+
+            Assert.Equal(controller.ViewBag.SessionTimeoutInMinutes, appConfiguration.SessionTimeoutInMinutes);
+
+            Assert.IsAssignableFrom<ActionResult>(result);
+        }
     }
 }
