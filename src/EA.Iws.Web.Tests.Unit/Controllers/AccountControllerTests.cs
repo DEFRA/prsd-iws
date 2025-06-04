@@ -140,5 +140,11 @@
 
             Assert.IsAssignableFrom<ActionResult>(result);
         }
+
+        [Fact]
+        public void ExtendSession_Exists()
+        {
+            controller.ExtendSession();
+        }
     }
 }
