@@ -104,6 +104,12 @@
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void ExtendSession()
+        {
+        }
+
         private ActionResult RedirectToLocal(string returnUrl, bool isInternal)
         {
             if (Url.IsLocalUrl(returnUrl))

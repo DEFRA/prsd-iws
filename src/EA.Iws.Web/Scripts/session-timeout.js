@@ -8,7 +8,7 @@
     let sessionWarningTimer;
     let sessionLogoutTimer;
 
-    const $sessionDialog = $("#hmrc-timeout-dialog, .hmrc-timeout-overlay");
+    const $sessionDialog = $("#govuk-timeout-dialog, .govuk-timeout-overlay");
 
     function startSessionTimeout() {
         clearTimeout(sessionWarningTimer);
@@ -26,7 +26,7 @@
     }
 
     function setTimeValue(val) {
-        let setVal = () => $("#hmrc-timeout-countdown").html(formatTime(val));
+        let setVal = () => $("#govuk-timeout-countdown").html(formatTime(val));
 
         setVal();
 
@@ -51,15 +51,16 @@
         let formData = new URLSearchParams();
         formData.append(tokenName, token)
 
-        await $.post({
+        await $.ajax({
             url: url,
+            type: "POST",
             data: formData.toString(),
             contentType: 'application/x-www-form-urlencoded;charset=UTF-8'
         });
     }
 
     async function logout() {
-        await post('/Account/SignOut')
+        await post('/Account/LogOff')
 
         document.location.href = "/Account/SessionSignedOut"
     }
@@ -88,7 +89,7 @@
             setTimeWith(timeoutInMinutes, warningBeforeInMinutes);
             startSessionTimeout();
 
-            $("#hmrc-timeout-keep-signin-btn").click(async () => {
+            $("#govuk-timeout-keep-signin-btn").click(async () => {
                 await post('/Account/ExtendSession');
 
                 setTimeWith(timeoutInMinutes, warningBeforeInMinutes);
