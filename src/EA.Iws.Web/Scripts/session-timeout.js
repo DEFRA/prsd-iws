@@ -62,7 +62,9 @@
     async function logout() {
         await post('/Account/LogOff')
 
-        document.location.href = "/Account/SessionSignedOut"
+        let signOutUrl = `${location.protocol}//${location.host}/Account/SessionSignedOut`
+
+        document.location.href = signOutUrl;
     }
 
     function setTimeWith(ltTimeoutInMinutes, lWarningTimeInMinutes) {
