@@ -7,6 +7,7 @@
     using System.Web.Routing;
     using Api.Client;
     using Api.Client.Entities;
+    using EA.Iws.Web.Services;
     using FakeItEasy;
     using IdentityModel.Client;
     using Microsoft.Owin.Security;
@@ -21,14 +22,16 @@
         private readonly IIwsClient client;
         private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
         private readonly AccountController controller;
+        private readonly AppConfiguration appConfiguration;
 
         public AccountControllerTests()
         {
             client = A.Fake<IIwsClient>();
             oauthClientCredentialClient = A.Fake<IOAuthClientCredentialClient>();
+            appConfiguration = A.Fake<AppConfiguration>();
 
             controller = new AccountController(A.Fake<IOAuthClient>(), A.Fake<IAuthenticationManager>(), client,
-                A.Fake<IUserInfoClient>(), oauthClientCredentialClient);
+                A.Fake<IUserInfoClient>(), oauthClientCredentialClient, appConfiguration);
 
             var request = A.Fake<HttpRequestBase>();
             var context = A.Fake<HttpContextBase>();
@@ -124,6 +127,24 @@
                 new ResetPasswordViewModel()) as RedirectToRouteResult;
 
             RouteAssert.RoutesTo(result.RouteValues, "PasswordUpdated", "Account");
+        }
+
+        [Fact]
+        public void SessionSignedOut_SetsTimeout()
+        {
+            appConfiguration.SessionTimeoutInMinutes = 5;
+
+            var result = controller.SessionSignedOut() as ActionResult;
+
+            Assert.Equal(controller.ViewBag.SessionTimeoutInMinutes, appConfiguration.SessionTimeoutInMinutes);
+
+            Assert.IsAssignableFrom<ActionResult>(result);
+        }
+
+        [Fact]
+        public void ExtendSession_Exists()
+        {
+            controller.ExtendSession();
         }
     }
 }

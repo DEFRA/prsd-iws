@@ -8,6 +8,7 @@
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
+    using EA.Iws.Web.Services;
     using Infrastructure;
     using Microsoft.Owin.Security;
     using Prsd.Core.Web.ApiClient;
@@ -23,6 +24,7 @@
         private readonly IAuthenticationManager authenticationManager;
         private readonly IOAuthClient oauthClient;
         private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
+        private readonly AppConfiguration appConfiguration;
         private readonly IIwsClient client;
         private readonly IUserInfoClient userInfoClient;
 
@@ -30,13 +32,15 @@
             IAuthenticationManager authenticationManager,
             IIwsClient client,
             IUserInfoClient userInfoClient, 
-            IOAuthClientCredentialClient oauthClientCredentialClient)
+            IOAuthClientCredentialClient oauthClientCredentialClient,
+            AppConfiguration appConfiguration)
         {
             this.oauthClient = oauthClient;
             this.client = client;
             this.authenticationManager = authenticationManager;
             this.userInfoClient = userInfoClient;
             this.oauthClientCredentialClient = oauthClientCredentialClient;
+            this.appConfiguration = appConfiguration;
         }
 
         [HttpGet]
@@ -90,6 +94,20 @@
         {
             authenticationManager.SignOut(Constants.IwsAuthType);
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult SessionSignedOut()
+        {
+            ViewBag.SessionTimeoutInMinutes = appConfiguration.SessionTimeoutInMinutes;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public void ExtendSession()
+        {
         }
 
         private ActionResult RedirectToLocal(string returnUrl, bool isInternal)
