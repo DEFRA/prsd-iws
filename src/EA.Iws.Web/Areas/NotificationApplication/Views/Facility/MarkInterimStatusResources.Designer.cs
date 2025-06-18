@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
+namespace EA.Iws.Web.Areas.NotificationApplication.Views.Facility {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class MarkInterimStatusResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal MarkInterimStatusResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Facility.MarkInterimStatusResource" +
+                            "s", typeof(MarkInterimStatusResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +62,47 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Only admin users can change the interim status of notifications.
+        ///   Looks up a localized string similar to Yes.
         /// </summary>
-        public static string AuthorisedOnly {
+        public static string Interim {
             get {
-                return ResourceManager.GetString("AuthorisedOnly", resourceCulture);
+                return ResourceManager.GetString("Interim", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Confirm interim status.
+        ///   Looks up a localized string similar to The notification is marked as interim.
         /// </summary>
-        public static string Heading {
+        public static string MarkedAsInterim {
             get {
-                return ResourceManager.GetString("Heading", resourceCulture);
+                return ResourceManager.GetString("MarkedAsInterim", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is this an iterim or non-interim notification?.
+        ///   Looks up a localized string similar to The notification is marked as non-interim.
         /// </summary>
-        public static string IsThisQuestionHeading {
+        public static string MarkedAsNonInterim {
             get {
-                return ResourceManager.GetString("IsThisQuestionHeading", resourceCulture);
+                return ResourceManager.GetString("MarkedAsNonInterim", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Non-interim.
+        ///   Looks up a localized string similar to No.
         /// </summary>
-        public static string No {
+        public static string NonInterim {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("NonInterim", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is only possible to change the interim status of notifications that have the status:.
+        ///   Looks up a localized string similar to Is there an interim facility or interim process?.
         /// </summary>
-        public static string StatusErrorMessage {
+        public static string QuestionTitle {
             get {
-                return ResourceManager.GetString("StatusErrorMessage", resourceCulture);
+                return ResourceManager.GetString("QuestionTitle", resourceCulture);
             }
         }
         
@@ -115,20 +116,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change interim status.
+        ///   Looks up a localized string similar to {0} facilities.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Interim.
-        /// </summary>
-        public static string Yes {
-            get {
-                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

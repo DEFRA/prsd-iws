@@ -1,0 +1,44 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.Facility.MarkInterimStatusResources
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.MarkInterimStatusViewModel
+
+@{
+    ViewBag.Title = Model.NotificationType;
+
+    <header class="hgroup">
+        <h1 class="govuk-heading-l">@string.Format(Resources.Title, Model.NotificationType)</h1>
+    </header>
+}
+
+<h2 class="heading-medium">@Resources.QuestionTitle</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.NotificationType)
+
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+        @Html.Gds().ValidationMessageFor(m => m.IsInterim)
+
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="yes">
+                        @Resources.Interim
+                    </label>
+                </div>
+
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="no">
+                        @Resources.NonInterim
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
+}

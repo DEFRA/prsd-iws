@@ -277,7 +277,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mark notification as interim or non-interim.
+        ///   Looks up a localized string similar to Confirm notification status as interim or non-interim.
         /// </summary>
         public static string MarkAsInterimLinkText {
             get {
