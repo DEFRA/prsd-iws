@@ -216,6 +216,7 @@
     <Compile Include="Notification\DeleteNotificationCommentHandlerTests.cs" />
     <Compile Include="Notification\GetNotificationCommentsHandlerTests.cs" />
     <Compile Include="Notification\GetNotificationCommentsUsersHandlerTests.cs" />
+    <Compile Include="Notification\MarkInterimStatusToNotificationHandlerTests.cs" />
     <Compile Include="Notification\NotifcationAuditGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditScreenGetHandlerTests.cs" />

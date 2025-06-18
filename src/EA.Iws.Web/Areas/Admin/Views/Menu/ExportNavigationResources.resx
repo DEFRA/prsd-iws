@@ -157,7 +157,7 @@
     <value>Key dates</value>
   </data>
   <data name="MarkInterimLinkText" xml:space="preserve">
-    <value>Mark notification as interim or non-interim</value>
+    <value>Confirm notification status as interim or non-interim</value>
   </data>
   <data name="nonInterim" xml:space="preserve">
     <value>Non-Interim</value>
