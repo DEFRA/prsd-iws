@@ -1,0 +1,87 @@
+﻿/****** Object:  Table [Lookup].[PricingTypeSettings]    Script Date: 20/06/2025 16:29:56 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Lookup].[PricingTypeSettings]') AND type in (N'U'))
+DROP TABLE [Lookup].[PricingTypeSettings]
+GO
+
+/****** Object:  Table [Lookup].[PricingTypeSettings]    Script Date: 20/06/2025 16:29:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Lookup].[PricingTypeSettings](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Description] [nvarchar](max) NOT NULL,
+ CONSTRAINT [PK_PricingTypeSettings] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+
+
+INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA fixed additional charge for each data change');
+INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge');
+INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA Export Recovery custom per 100 (or part of) shipments over 1000 additional charge');
+INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA Export Disposal custom per 100 (or part of) shipments over 1000 additional charge');
+INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('SEPA fixed additional charge for each data change');
+INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('SEPA Additional Charge per shipment for not self entering data');
+
+GO
+
+/****** Object:  Table [Lookup].[SystemSettings]    Script Date: 20/06/2025 16:42:19 ******/
+IF  EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[Lookup].[SystemSettings]') AND type in (N'U'))
+DROP TABLE [Lookup].[SystemSettings]
+GO
+
+/****** Object:  Table [Lookup].[SystemSettings]    Script Date: 20/06/2025 16:42:19 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE TABLE [Lookup].[SystemSettings](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[CompetentAuthority] [int] NOT NULL,
+	[ValidFrom] [date] NOT NULL,
+	[Price] [decimal](10, 2) NOT NULL,
+	[PricingType] [int] NOT NULL,
+ CONSTRAINT [PK_SystemSettings] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+ALTER TABLE [Lookup].[SystemSettings]  WITH CHECK ADD  CONSTRAINT [FK_SystemSettings_PricingTypeSettings] FOREIGN KEY([PricingType])
+REFERENCES [Lookup].[PricingTypeSettings] ([Id])
+GO
+
+ALTER TABLE [Lookup].[SystemSettings] CHECK CONSTRAINT [FK_SystemSettings_PricingTypeSettings]
+GO
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (1, 1, '01/04/2024', 82);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (1, 2, '01/04/2024', 1207);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (1, 3, '01/04/2024', 1196);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (1, 4, '01/04/2024', 1338);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (2, 5, '01/04/2024', 27);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (2, 6, '01/04/2024', 190);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (2, 5, '01/04/2025', 28);
+
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+VALUES (2, 6, '01/04/2025', 196);
