@@ -63,25 +63,25 @@ ALTER TABLE [Lookup].[SystemSettings] CHECK CONSTRAINT [FK_SystemSettings_Pricin
 GO
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (1, 1, '01/04/2024', 82);
+VALUES (1, 1, '2024-04-01', 82);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (1, 2, '01/04/2024', 1207);
+VALUES (1, 2, '2024-04-01', 1207);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (1, 3, '01/04/2024', 1196);
+VALUES (1, 3, '2024-04-01', 1196);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (1, 4, '01/04/2024', 1338);
+VALUES (1, 4, '2024-04-01', 1338);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 5, '01/04/2024', 27);
+VALUES (2, 5, '2024-04-01', 27);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 6, '01/04/2024', 190);
+VALUES (2, 6, '2024-04-01', 190);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 5, '01/04/2025', 28);
+VALUES (2, 5, '2025-04-01', 28);
 
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 6, '01/04/2025', 196);
+VALUES (2, 6, '2025-04-01', 196);

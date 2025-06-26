@@ -108,3 +108,7 @@ INSERT INTO [Lookup].[PricingStructure] (Id, CompetentAuthority, ShipmentQuantit
 	 ('7BD0628D-1775-4BE1-B799-E0D82F82ABEC', @CompetentAuthority, '5FBA5475-EC27-4645-AAC5-A4C90107D231', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7', '15540.00', '11962.00', @validFrom),
 	-- Import Disposal IsInterim 1 Range 501-
 	 ('CD3A26D5-FC60-4364-BC02-6D81A745CC3F', @CompetentAuthority, 'AEF5F83D-E5FB-41B2-84D7-A4C90107D231', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7', '27950.00', '24372.00', @validFrom);
+
+--12 = Platform/Rig
+INSERT INTO [Lookup].[PricingFixedFee] ([Id], [CompetentAuthority], [WasteComponentTypeId], [WasteCategoryTypeId], [Price], [ValidFrom])
+	VALUES ('D8549D4B-CB89-46DF-8744-E029C7E58107', @CompetentAuthority, null, 12, 10151, @validFrom);
