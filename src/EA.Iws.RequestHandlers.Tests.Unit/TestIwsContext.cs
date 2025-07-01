@@ -57,6 +57,7 @@
             this.WasteRecoveries = new TestDbSet<Domain.NotificationApplication.WasteRecovery.WasteRecovery>();
             this.Importers = new TestDbSet<Importer>();
             this.NotificationAudit = new TestDbSet<Audit>();
+            this.Facilities = new TestDbSet<FacilityCollection>();
         }
 
         public int SaveChangesCount { get; private set; }

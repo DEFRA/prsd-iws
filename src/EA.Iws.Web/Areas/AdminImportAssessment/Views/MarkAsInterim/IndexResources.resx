@@ -121,7 +121,7 @@
     <value>Only admin users can change the interim status of notifications</value>
   </data>
   <data name="Heading" xml:space="preserve">
-    <value>Change interim status</value>
+    <value>Confirm interim status</value>
   </data>
   <data name="IsThisQuestionHeading" xml:space="preserve">
     <value>Is this an iterim or non-interim notification?</value>

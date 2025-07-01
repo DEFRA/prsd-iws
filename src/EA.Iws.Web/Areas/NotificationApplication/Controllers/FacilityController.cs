@@ -2,7 +2,7 @@
 {
     using Core.Notification.Audit;
     using Core.Shared;
-    using DocumentFormat.OpenXml.EMMA;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Web.Areas.Common;
     using Infrastructure;
     using Prsd.Core.Mapper;
@@ -105,7 +105,7 @@
         {
             var facility = await mediator.SendAsync(new GetFacilityForNotification(id, entityId));
             var response = await mediator.SendAsync(new GetNotificationBasicInfo(id));
-            
+
             var model = new EditFacilityViewModel(facility) { NotificationType = response.NotificationType };
 
             if (facility.Business?.Name?.Contains(" T/A ") == true)
@@ -385,6 +385,32 @@
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> MarkInterimStatus(Guid id, bool? backToOverview = null)
+        {
+            ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
+
+            var interimStatus = await mediator.SendAsync(new GetInterimStatus(id));
+            var notificationType = await mediator.SendAsync(new GetNotificationType(id));
+            var model = new MarkInterimStatusViewModel(interimStatus, notificationType);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> MarkInterimStatus(MarkInterimStatusViewModel model, bool? backToOverview = null)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await mediator.SendAsync(model.ToRequest());
+
+            return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
         }
     }
 }
