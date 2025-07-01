@@ -97,7 +97,7 @@
                 }
                 else
                 {
-                    return RedirectToAction("List", "Facility", new { id = model.NotificationId });
+                    return RedirectToAction("MarkInterimStatus", "Facility", new { id = model.NotificationId });
                 }
             }
             catch (ApiBadRequestException ex)
