@@ -15,8 +15,7 @@
             return new SystemSettingData
             {
                 Id = source.Id,
-                Value = source.Value,
-                Description = source.Description
+                Value = source.Price
             };
         }
     }

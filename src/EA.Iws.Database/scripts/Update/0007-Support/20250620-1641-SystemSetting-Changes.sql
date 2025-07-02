@@ -10,10 +10,10 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE TABLE [Lookup].[PricingTypeSettings](
+CREATE TABLE [Lookup].[PriceType](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[Description] [nvarchar](max) NOT NULL,
- CONSTRAINT [PK_PricingTypeSettings] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_PriceType] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
@@ -21,12 +21,12 @@ CREATE TABLE [Lookup].[PricingTypeSettings](
 GO
 
 
-INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA fixed additional charge for each data change');
-INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge');
-INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA Export Recovery custom per 100 (or part of) shipments over 1000 additional charge');
-INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('EA Export Disposal custom per 100 (or part of) shipments over 1000 additional charge');
-INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('SEPA fixed additional charge for each data change');
-INSERT INTO [Lookup].[PricingTypeSettings] ([Description]) VALUES ('SEPA Additional Charge per shipment for not self entering data');
+INSERT INTO [Lookup].[PriceType] ([Description]) VALUES ('EA Fixed Additional Charge for each data change');
+INSERT INTO [Lookup].[PriceType] ([Description]) VALUES ('EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge');
+INSERT INTO [Lookup].[PriceType] ([Description]) VALUES ('EA Export Recovery custom per 100 (or part of) shipments over 1000 additional charge');
+INSERT INTO [Lookup].[PriceType] ([Description]) VALUES ('EA Export Disposal custom per 100 (or part of) shipments over 1000 additional charge');
+INSERT INTO [Lookup].[PriceType] ([Description]) VALUES ('SEPA Fixed Additional Charge for each data change');
+INSERT INTO [Lookup].[PriceType] ([Description]) VALUES ('SEPA Additional Charge per shipment for not self entering data');
 
 GO
 
@@ -45,9 +45,9 @@ GO
 CREATE TABLE [Lookup].[SystemSettings](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[CompetentAuthority] [int] NOT NULL,
+	[PriceType] [int] NOT NULL,
 	[ValidFrom] [date] NOT NULL,
 	[Price] [decimal](10, 2) NOT NULL,
-	[PricingType] [int] NOT NULL,
  CONSTRAINT [PK_SystemSettings] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -55,33 +55,33 @@ CREATE TABLE [Lookup].[SystemSettings](
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [Lookup].[SystemSettings]  WITH CHECK ADD  CONSTRAINT [FK_SystemSettings_PricingTypeSettings] FOREIGN KEY([PricingType])
-REFERENCES [Lookup].[PricingTypeSettings] ([Id])
+ALTER TABLE [Lookup].[SystemSettings]  WITH CHECK ADD  CONSTRAINT [FK_SystemSettings_PriceType] FOREIGN KEY([PriceType])
+REFERENCES [Lookup].[PriceType] ([Id])
 GO
 
-ALTER TABLE [Lookup].[SystemSettings] CHECK CONSTRAINT [FK_SystemSettings_PricingTypeSettings]
+ALTER TABLE [Lookup].[SystemSettings] CHECK CONSTRAINT [FK_SystemSettings_PriceType]
 GO
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
 VALUES (1, 1, '2024-04-01', 82);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
 VALUES (1, 2, '2024-04-01', 1207);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
 VALUES (1, 3, '2024-04-01', 1196);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
 VALUES (1, 4, '2024-04-01', 1338);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 5, '2024-04-01', 27);
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
+VALUES (2, 5, '2024-04-01', 190);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 6, '2024-04-01', 190);
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
+VALUES (2, 6, '2024-04-01', 27);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 5, '2025-04-01', 28);
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
+VALUES (2, 5, '2025-04-01', 196);
 
-INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PricingType], [ValidFrom] ,[Price])
-VALUES (2, 6, '2025-04-01', 196);
+INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
+VALUES (2, 6, '2025-04-01', 28);
