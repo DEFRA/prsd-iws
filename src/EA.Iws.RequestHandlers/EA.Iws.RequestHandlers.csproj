@@ -712,6 +712,7 @@
     <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
     <Compile Include="SystemSettings\GetSystemSettingByIdHandler.cs" />
+    <Compile Include="SystemSettings\GetSystemSettingsHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryIdHandler.cs" />
