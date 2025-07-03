@@ -21,7 +21,7 @@
     // increase the bottom margin to include it (s2).
     $button-shadow-size: $govuk-border-width-form-element;
 
-    .govuk-button {
+    .govuk-button, .govuk-button_automation-ignored {
         @include govuk-font($size: 19, $line-height: 19px);
         box-sizing: border-box;
         display: inline-block;
