@@ -1268,7 +1268,7 @@ ul, ol {
     }
 }
 
-#link-sign-out {
+#link-sign-out, #session-link-sign-out {
     font-family: "nta-extended",Arial,sans-serif;
     font-weight: 400;
     text-transform: none;
@@ -1278,7 +1278,7 @@ ul, ol {
 }
 
 @media (min-width: 641px) {
-    #link-sign-out {
+    #link-sign-out, #session-link-sign-out {
         font-size: 16px;
         line-height: 1.25;
     }
