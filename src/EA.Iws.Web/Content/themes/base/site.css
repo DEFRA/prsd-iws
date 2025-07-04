@@ -1277,8 +1277,12 @@ ul, ol {
     text-align: right;
 }
 
-@media (min-width: 641px) {
-    #link-sign-out, #session-link-sign-out {
+#session-link-sign-out{
+    margin-left: 30px;
+}
+
+    @media (min-width: 641px) {
+        #link-sign-out, #session-link-sign-out {
         font-size: 16px;
         line-height: 1.25;
     }
