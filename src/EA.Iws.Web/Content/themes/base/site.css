@@ -148,7 +148,7 @@ li.clear-child {
     padding-top: 0;
 }
 
-.link-submit {
+.link-submit, .session-link-submit {
     background: none;
     border: none;
     padding: 0;
@@ -1288,7 +1288,7 @@ ul, ol {
     }
 }
 
-.link-submit, .link-submit-xsmall {
+.link-submit, .link-submit-xsmall, .session-link-submit {
     background: none;
     border: none;
     padding: 0;
