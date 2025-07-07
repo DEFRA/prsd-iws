@@ -1,4 +1,5 @@
-(() => {
+(function () {
+    "use strict"
     let defaultTimeOutInMinutes;
     let warningTimeInMinutes;
 
@@ -106,4 +107,4 @@
     window.GOVUK = window.GOVUK || {};
     window.GOVUK.sessionTimeout = window.GOVUK.sessionTimeout || {};
     window.GOVUK.sessionTimeout.start = start;
-})();
+}).call(this);
