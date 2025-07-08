@@ -62,9 +62,18 @@
     }
 
     async function logout() {
-        await post('/Account/LogOff');
-        let signOutUrl = location.protocol + '//' + location.host + '/Account/SessionSignedOut';
+        let signOutUrl = null;
+        let logOffUrl = null;
+        if (location.host.includes('uat')) {
+            logOffUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/LogOff';
+            signOutUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/SessionSignedOut';
+        }
+        else {
+            logOffUrl = '/Account/LogOff';
+            signOutUrl = location.protocol + '//' + location.host + '/Account/SessionSignedOut';
+        }
 
+        await post(logOffUrl);
         document.location.href = signOutUrl;
     }
 
