@@ -63,7 +63,13 @@
 
     async function logout() {
         await post('/Account/LogOff');
-        let signOutUrl = location.protocol + '//' + location.host + '/Account/SessionSignedOut';
+        let signOutUrl = null;
+        if (location.host.includes('uat')) {
+            signOutUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/SessionSignedOut';
+        }
+        else {
+            signOutUrl = location.protocol + '//' + location.host + '/Account/SessionSignedOut';
+        }
 
         document.location.href = signOutUrl;
     }
