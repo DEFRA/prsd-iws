@@ -1,5 +1,6 @@
 (function () {
-    "use strict"
+    "use strict";
+
     let defaultTimeOutInMinutes;
     let warningTimeInMinutes;
 
@@ -8,49 +9,49 @@
 
     let sessionWarningTimer;
     let sessionLogoutTimer;
+    let countdownTimer;
 
-    const $sessionDialog = $("#govuk-timeout-dialog, .govuk-timeout-overlay");
+    let eventBound = false;
+
+    const $sessionDialog = $("#govuk-timeout-dialog, #govuk-timeout-overlay");
 
     function startSessionTimeout() {
         clearTimeout(sessionWarningTimer);
         clearTimeout(sessionLogoutTimer);
 
         sessionWarningTimer = setTimeout(() => showSessionWarning(), (sessionTimeoutInSeconds - warningTimeInSeconds) * 1000);
-
         sessionLogoutTimer = setTimeout(() => logout(), sessionTimeoutInSeconds * 1000);
     }
 
     function showSessionWarning() {
+        clearTimeout(countdownTimer); // Stop any previous countdown
         setTimeValue(warningTimeInSeconds - 1);
-
         $sessionDialog.show();
     }
 
     function setTimeValue(val) {
         let setVal = () => $("#govuk-timeout-countdown").html(formatTime(val));
-
         setVal();
 
         if (val < 1) return;
 
-        setTimeout(() => {
+        countdownTimer = setTimeout(() => {
             setTimeValue(--val);
-
             setVal();
         }, 1000);
     }
 
     function closeSessionWarning() {
+        clearTimeout(countdownTimer); // Stop countdown when modal is closed
         $sessionDialog.hide();
     }
 
     async function post(url) {
         let tokenName = "__RequestVerificationToken";
-
-        let token = $(`input[name='${tokenName}']`).val()
+        let token = $(`input[name='${tokenName}']`).val();
 
         let formData = new URLSearchParams();
-        formData.append(tokenName, token)
+        formData.append(tokenName, token);
 
         await $.ajax({
             url: url,
@@ -61,10 +62,8 @@
     }
 
     async function logout() {
-        await post('/Account/LogOff')
-
-        let signOutUrl = `${location.protocol}//${location.host}/Account/SessionSignedOut`
-
+        await post('/Account/LogOff');
+        let signOutUrl = `${location.protocol}//${location.host}/Account/SessionSignedOut`;
         document.location.href = signOutUrl;
     }
 
@@ -79,29 +78,34 @@
     function formatTime(seconds) {
         let mins = Math.floor(seconds / 60);
         let secs = seconds % 60;
-
         let minutesResult = mins > 0 ? `${mins} minute(s) and ` : "";
-
         return `${minutesResult}${secs} seconds`;
     }
 
     function start(timeoutInMinutes, warningBeforeInMinutes, authenticated) {
-        if (authenticated == "False") return;
+        if (authenticated === "False")
+            return;
 
-        $(document).ready(() => {
-            setTimeWith(timeoutInMinutes, warningBeforeInMinutes);
-            startSessionTimeout();
+        setTimeWith(timeoutInMinutes, warningBeforeInMinutes);
+        startSessionTimeout();
 
-            $("#govuk-timeout-keep-signin-btn").click(async () => {
-                await post('/Account/ExtendSession');
+        if (!eventBound) {
+            $("#govuk-timeout-keep-signin-btn").on("click", async () => {
+                let extendSessionUrl = `${location.protocol}//${location.host}/Account/ExtendSession`;
+                await post(extendSessionUrl);
+                //await post('/Account/ExtendSession');
+
+                clearTimeout(sessionWarningTimer);
+                clearTimeout(sessionLogoutTimer);
+                clearTimeout(countdownTimer);
 
                 setTimeWith(timeoutInMinutes, warningBeforeInMinutes);
-
                 startSessionTimeout();
-
                 closeSessionWarning();
             });
-        });
+
+            eventBound = true;
+        }
     }
 
     window.GOVUK = window.GOVUK || {};
