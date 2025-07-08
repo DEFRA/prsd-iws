@@ -65,7 +65,7 @@
         let signOutUrl = null;
         let logOffUrl = null;
         if (location.host.includes('uat')) {
-            logOffUrl = location.pathname.split('/')[1] + '/Account/LogOff';
+            logOffUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/LogOff';
             signOutUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/SessionSignedOut';
         }
         else {
