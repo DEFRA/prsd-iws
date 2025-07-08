@@ -2,13 +2,14 @@
 {
     public enum SystemSettingType
     {
-        EaChargeMatrixValidFrom = 1, //New EA charge matrix ValidFrom date
-        SepaChargeMatrixValidFrom = 2, //New SEPA charge matrix ValidFrom date
-        SepaFeeForNotSelfEnteringData = 3, //SEPA Additional Charge per shipment for not self entering data
-        EaCustomImportAdditionalCharge = 4, //EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge
-        EaAdditionalChargeFixedFee = 5, // EA fixed additional charge for each data change
-        SepaAdditionalChargeFixedFee = 6, //Sepa fixed additional charge for each data change
-        EaCustomExportRecoveryAdditionalCharge = 7, //EA Export Recovery custom per 100 (or part of) shipments over 1000 additional charge
-        EaCustomExportDisposalAdditionalCharge = 8 //EA Export Disposal custom per 100 (or part of) shipments over 1000 additional charge
+        //EA
+        EaAdditionalChargeFixedFee = 1, // EA Fixed Additional charge for each data change
+        EaCustomImportAdditionalCharge = 2, //EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge
+        EaCustomExportRecoveryAdditionalCharge = 3, //EA Export Recovery custom per 100 (or part of) shipments over 1000 additional charge
+        EaCustomExportDisposalAdditionalCharge = 4, //EA Export Disposal custom per 100 (or part of) shipments over 1000 additional charge
+
+        //SEPA
+        SepaAdditionalChargeFixedFee = 5, //Sepa fixed additional charge for each data change
+        SepaFeeForNotSelfEnteringData = 6 //SEPA Additional Charge per shipment for not self entering data
     }
 }

@@ -51,7 +51,7 @@
             var data = await mediator.SendAsync(new GetChangeNumberOfShipmentConfrimationData(id, model.Number.GetValueOrDefault()));
 
             var importNotificationDetails = await mediator.SendAsync(new GetNotificationDetails(id));
-            
+
             var confirmModel = new ConfirmViewModel(data, importNotificationDetails.CompetentAuthority, importNotificationDetails.Status);
 
             confirmModel.NewNumberOfShipments = model.Number.GetValueOrDefault();
@@ -75,8 +75,8 @@
                 if (model.AdditionalCharge.IsAdditionalChargesRequired.HasValue && model.AdditionalCharge.IsAdditionalChargesRequired.Value)
                 {
                     var addtionalCharge = new CreateImportNotificationAdditionalCharge(
-                        model.NotificationId, 
-                        model.AdditionalCharge, 
+                        model.NotificationId,
+                        model.AdditionalCharge,
                         AdditionalChargeType.UpdateNumberOfShipment);
 
                     await additionalChargeService.AddImportAdditionalCharge(mediator, addtionalCharge);
@@ -93,11 +93,11 @@
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {
-                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.EaAdditionalChargeFixedFee)); //EA
+                response = await mediator.SendAsync(new GetSystemSettings(competentAuthority, SystemSettingType.EaAdditionalChargeFixedFee));
             }
             else if (competentAuthority == UKCompetentAuthority.Scotland)
             {
-                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaAdditionalChargeFixedFee)); //SEPA
+                response = await mediator.SendAsync(new GetSystemSettings(competentAuthority, SystemSettingType.SepaAdditionalChargeFixedFee));
             }
 
             return Json(response.Value);

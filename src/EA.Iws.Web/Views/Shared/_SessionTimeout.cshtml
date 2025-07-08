@@ -1,0 +1,26 @@
+﻿
+<div id="govuk-timeout-overlay" class="govuk-timeout-overlay" style="display:none"></div>
+<div id="govuk-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="govuk-timeout-dialog" aria-labelledby="govuk-timeout-heading govuk-timeout-message" style="display:none">
+    <div>
+        <h2 id="govuk-timeout-heading" class="govuk-heading-m push--top">
+            You will be signed out soon
+        </h2>
+        <p class="govuk-body govuk-timeout-dialog__message" aria-hidden="true">
+            For your security, you will be signed out in
+            <span id="govuk-timeout-countdown" class="prsd-timeout-dialog__countdown">
+            </span>. Any unsaved data will be lost.
+        </p>
+        <div class="govuk-button-group">
+            <button id="govuk-timeout-keep-signin-btn" class="govuk-button">
+                Continue
+            </button>
+
+            @using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post, htmlAttributes: new { id = "logoutForm" }))
+            {
+                @Html.AntiForgeryToken()
+
+                <button class="link-submit govuk-link" id="link-sign-out" type="submit">Sign out</button>
+            }
+        </div>
+    </div>
+</div>
