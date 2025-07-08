@@ -8,18 +8,20 @@
         <p class="govuk-body govuk-timeout-dialog__message" aria-hidden="true">
             For your security, you will be signed out in
             <span id="govuk-timeout-countdown" class="prsd-timeout-dialog__countdown">
-            </span>. Any unsaved data will be lost.
+            </span>.
+            <br />
+            Any unsaved data will be lost.
         </p>
         <div class="govuk-button-group">
-            <button id="govuk-timeout-keep-signin-btn" class="govuk-button">
-                Continue
+            <button id="govuk-timeout-keep-signin-btn" class="govuk-button_automation-ignored">
+                Stay signed in
             </button>
 
             @using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post, htmlAttributes: new { id = "logoutForm" }))
             {
                 @Html.AntiForgeryToken()
 
-                <button class="link-submit govuk-link" id="link-sign-out" type="submit">Sign out</button>
+                <button class="session-link-submit govuk-link" id="session-link-sign-out" type="submit">Sign out</button>
             }
         </div>
     </div>
