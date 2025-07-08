@@ -63,7 +63,7 @@
 
     async function logout() {
         await post('/Account/LogOff');
-        let signOutUrl = location.protocol + '/' + location.host + '/Account/SessionSignedOut';
+        let signOutUrl = location.protocol + '//' + location.host + '/Account/SessionSignedOut';
 
         document.location.href = signOutUrl;
     }
@@ -93,12 +93,12 @@
 
         if (!eventBound) {
             $("#govuk-timeout-keep-signin-btn").on("click", async () => {
-                let extendSessionUrl;
-                if (location.host.match('uat')) {
-                    extendSessionUrl = location.protocol + '/' + location.host + '/' + location.pathname.split('/')[1] + '/Account/ExtendSession';
+                let extendSessionUrl = null;
+                if (location.host.includes('uat')) {
+                    extendSessionUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/ExtendSession';
                 }
                 else {
-                    extendSessionUrl = location.protocol + '/' + location.host + '/Account/ExtendSession';
+                    extendSessionUrl = location.protocol + '//' + location.host + '/Account/ExtendSession';
                 }
                 await post(extendSessionUrl);
 
