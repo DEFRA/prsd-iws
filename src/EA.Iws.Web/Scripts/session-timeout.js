@@ -48,14 +48,14 @@
 
     async function post(url) {
         let tokenName = "__RequestVerificationToken";
-        let token = $(`input[name='${tokenName}']`).val();
+        let token = $('input[name=' + tokenName + ']').val();
 
         let formData = new URLSearchParams();
         formData.append(tokenName, token);
 
         await $.ajax({
             url: url,
-            type: "POST",
+            type: "post",
             data: formData.toString(),
             contentType: 'application/x-www-form-urlencoded;charset=UTF-8'
         });
@@ -63,7 +63,8 @@
 
     async function logout() {
         await post('/Account/LogOff');
-        let signOutUrl = `${location.protocol}//${location.host}/Account/SessionSignedOut`;
+        let signOutUrl = location.protocol + '/' + location.host + '/Account/SessionSignedOut';
+
         document.location.href = signOutUrl;
     }
 
@@ -78,8 +79,9 @@
     function formatTime(seconds) {
         let mins = Math.floor(seconds / 60);
         let secs = seconds % 60;
-        let minutesResult = mins > 0 ? `${mins} minute(s) and ` : "";
-        return `${minutesResult}${secs} seconds`;
+        let minutesResult = mins > 0 ? mins + ' minute(s) and ' + secs + ' seconds' : + secs + ' seconds';
+
+        return minutesResult;
     }
 
     function start(timeoutInMinutes, warningBeforeInMinutes, authenticated) {
@@ -91,9 +93,14 @@
 
         if (!eventBound) {
             $("#govuk-timeout-keep-signin-btn").on("click", async () => {
-                let extendSessionUrl = `${location.protocol}//${location.host}/Account/ExtendSession`;
+                let extendSessionUrl;
+                if (location.host.match('uat')) {
+                    extendSessionUrl = location.protocol + '/' + location.host + '/' + location.pathname.split('/')[1] + '/Account/ExtendSession';
+                }
+                else {
+                    extendSessionUrl = location.protocol + '/' + location.host + '/Account/ExtendSession';
+                }
                 await post(extendSessionUrl);
-                //await post('/Account/ExtendSession');
 
                 clearTimeout(sessionWarningTimer);
                 clearTimeout(sessionLogoutTimer);
