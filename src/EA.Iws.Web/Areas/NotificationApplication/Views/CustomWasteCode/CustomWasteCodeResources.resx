@@ -150,9 +150,6 @@
   <data name="OtherCode" xml:space="preserve">
     <value>Other code(s)</value>
   </data>
-  <data name="OtherCodeHint" xml:space="preserve">
-    <value>If useful or required by the relevant competent authority, add any other code to help identify the waste</value>
-  </data>
   <data name="OtherCodeRequired" xml:space="preserve">
     <value>Please enter other code(s) or select "Not applicable"</value>
   </data>
