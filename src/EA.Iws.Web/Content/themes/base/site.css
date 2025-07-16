@@ -148,7 +148,7 @@ li.clear-child {
     padding-top: 0;
 }
 
-.link-submit {
+.link-submit, .session-link-submit {
     background: none;
     border: none;
     padding: 0;
@@ -1268,7 +1268,7 @@ ul, ol {
     }
 }
 
-#link-sign-out {
+#link-sign-out, #session-link-sign-out {
     font-family: "nta-extended",Arial,sans-serif;
     font-weight: 400;
     text-transform: none;
@@ -1277,14 +1277,18 @@ ul, ol {
     text-align: right;
 }
 
-@media (min-width: 641px) {
-    #link-sign-out {
+#session-link-sign-out{
+    margin-left: 30px;
+}
+
+    @media (min-width: 641px) {
+        #link-sign-out, #session-link-sign-out {
         font-size: 16px;
         line-height: 1.25;
     }
 }
 
-.link-submit, .link-submit-xsmall {
+.link-submit, .link-submit-xsmall, .session-link-submit {
     background: none;
     border: none;
     padding: 0;

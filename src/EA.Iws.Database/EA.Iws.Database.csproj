@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20250610-1202-Alter-Notification-WasteCodeInfo-Table.sql" />
     <Content Include="scripts\Update\0007-Support\20240711-CCN067-Notification-Resubmitted-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20200918-328081-CR0044-add_ascension_island.sql" />
     <Content Include="scripts\Update\0007-Support\20201028-CR0047-new_waste_codes.sql" />

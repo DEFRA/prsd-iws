@@ -161,15 +161,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If useful or required by the relevant competent authority, add any other code to help identify the waste.
-        /// </summary>
-        public static string OtherCodeHint {
-            get {
-                return ResourceManager.GetString("OtherCodeHint", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please enter other code(s) or select &quot;Not applicable&quot;.
         /// </summary>
         public static string OtherCodeRequired {
