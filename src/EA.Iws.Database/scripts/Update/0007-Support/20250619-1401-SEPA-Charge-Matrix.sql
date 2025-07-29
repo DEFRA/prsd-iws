@@ -1,6 +1,6 @@
 ﻿DECLARE @ValidFrom DATE;
 DECLARE @CompetentAuthority INT;
-SET @ValidFrom = '2025-06-01';
+SET @ValidFrom = '2025-04-01';
 SET @CompetentAuthority = 2; --SEPA(Scotland)
 
 INSERT INTO [Lookup].[PricingStructure] (Id, CompetentAuthority, ShipmentQuantityRangeId, ActivityId, Price, PotentialRefund, ValidFrom) 
