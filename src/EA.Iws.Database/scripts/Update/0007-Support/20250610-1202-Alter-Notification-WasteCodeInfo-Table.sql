@@ -1,0 +1,1 @@
+﻿ALTER TABLE [Notification].[WasteCodeInfo] ALTER COLUMN CustomCode NVARCHAR(200);

@@ -23,7 +23,7 @@
                 CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.IwsAuthType,
                 LoginPath = new PathString("/Account/Login"),
                 SlidingExpiration = true,
-                ExpireTimeSpan = TimeSpan.FromMinutes(60),
+                ExpireTimeSpan = TimeSpan.FromMinutes(config.SessionTimeoutInMinutes),
                 Provider = new CookieAuthenticationProvider
                 {
                     OnValidateIdentity = context => OnValidateIdentity(context),

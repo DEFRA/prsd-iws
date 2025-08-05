@@ -59,9 +59,8 @@
     <div class="wastecode-block">
         <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.OtherCode)">
             @Html.Gds().LabelFor(m => m.OtherCode, false)
-            @Html.Gds().HintParagraph(CustomWasteCodeResources.OtherCodeHint)
             @Html.Gds().ValidationMessageFor(m => m.OtherCode)
-            @Html.TextAreaFor(m => m.OtherCode, new { @id = "OtherCode", @class = "govuk-textarea full-width", @rows = 10 })
+            @Html.Gds().TextBoxFor(m => m.OtherCode)
         </div>
         <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherCodeNotApplicable)">
             @Html.Gds().ValidationMessageFor(m => m.OtherCodeNotApplicable)

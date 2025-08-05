@@ -859,6 +859,7 @@
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteCategoryViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteComponentViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MarkInterimStatusViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategoryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -868,6 +869,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WasteComponentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatusResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MarkInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
@@ -896,6 +902,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\KeyDates\AcceptChanges.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\Resubmit.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AdditionalCharge\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatus.cshtml" />
+    <Content Include="Content\iws\_session-timeout.scss" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -975,6 +983,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
+    <Content Include="Scripts\session-timeout.js" />
     <Content Include="Scripts\show-hide-content.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
@@ -1530,6 +1539,8 @@
     <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
     <Content Include="Scripts\jquery-3.6.0.min.map" />
     <Content Include="Views\Shared\EditorTemplates\AdditionalChargeData.cshtml" />
+    <Content Include="Views\Shared\_SessionTimeout.cshtml" />
+    <Content Include="Views\Account\SessionSignedOut.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -5156,6 +5167,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\ListFacilityResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListFacilityResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatusResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>MarkInterimStatusResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Facility\RecoveryPreconsentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
