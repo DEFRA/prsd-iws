@@ -231,15 +231,26 @@ BEGIN
 			WHERE n.id = @notificationId)
 		AND CompetentAuthority = @competentAuthority
 
+		DECLARE @selfEnteringData BIT;
 		IF @fixedWasteCategoryFee > 0
 		BEGIN
+			SELECT @selfEnteringData = WillSelfEnterShipmentData FROM (
+					SELECT WillSelfEnterShipmentData
+					FROM [Notification].[ShipmentInfo]
+					WHERE NotificationId = @notificationId
+				) AS shipmentInfo
+
+				IF @selfEnteringData = 0
+				BEGIN
+					SET @fixedWasteCategoryFee += (@numberOfShipments * (SELECT TOP 1 [Price] FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 2 AND PriceType = 6 ORDER BY ValidFrom DESC))
+				END
+
 			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
 			INSERT @PricingInfo
 			SELECT @fixedWasteCategoryFee, 0;
 			RETURN;
 		END;
 
-		DECLARE @selfEnteringData BIT;
 		SELECT @selfEnteringData = WillSelfEnterShipmentData FROM (
 			SELECT WillSelfEnterShipmentData
 			FROM [Notification].[ShipmentInfo]
