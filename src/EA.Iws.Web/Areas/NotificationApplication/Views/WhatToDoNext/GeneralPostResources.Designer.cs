@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Write your company name and notification number on the reverse of your cheque or postal order, and send it with your notification package to the Producer compliance and Waste Shipments Unit. Cheques and postal orders should be made payable to the Scottish Environmental Protection Agency..
+        ///   Looks up a localized string similar to Write your company name and notification number on the reverse of your cheque or postal order, and send it with your notification package to the Producer compliance and Waste Shipments Unit. Cheques and postal orders should be made payable to the Scottish Environment Protection Agency..
         /// </summary>
         public static string Sepa {
             get {
