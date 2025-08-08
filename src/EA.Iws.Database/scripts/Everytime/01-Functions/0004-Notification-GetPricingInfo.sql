@@ -217,7 +217,7 @@ BEGIN
 
 	IF @competentAuthority = 2 AND @submittedDate >= '2024-04-01'
 	BEGIN
-		SELECT @fixedWasteCategoryFee = Price
+		SET @fixedWasteCategoryFee = (SELECT TOP 1 Price
 		FROM [Lookup].[PricingFixedFee]
 		WHERE WasteCategoryTypeId IN (
 			SELECT nwt.WasteCategoryType 
@@ -229,7 +229,7 @@ BEGIN
 			FROM [ImportNotification].[Notification] n
 			LEFT JOIN ImportNotification.WasteType inwt ON inwt.ImportNotificationId = n.Id
 			WHERE n.id = @notificationId)
-		AND CompetentAuthority = @competentAuthority
+		AND CompetentAuthority = @competentAuthority)
 
 		DECLARE @selfEnteringData BIT;
 		IF @fixedWasteCategoryFee > 0
