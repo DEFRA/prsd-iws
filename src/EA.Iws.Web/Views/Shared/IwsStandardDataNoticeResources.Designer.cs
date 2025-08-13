@@ -411,12 +411,13 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Information Governance Unit&lt;/br&gt;
-        ///Scottish Environment Protection Agency&lt;/br&gt;
-        ///Strathallan House&lt;/br&gt;
-        ///Castle Business Park&lt;/br&gt;
-        ///Stirling&lt;/br&gt;
-        ///FK9 4TZ&lt;/br&gt;.
+        ///   Looks up a localized string similar to Scottish Environment Protection Agency&lt;br /&gt;
+        ///Producer Compliance and Waste Shipment Unit&lt;br /&gt;
+        ///Angus Smith Building&lt;br /&gt;
+        ///6 Parklands Avenue&lt;br /&gt;
+        ///Eurocentral&lt;br /&gt;
+        ///North Lanarkshire&lt;br /&gt;
+        ///ML1 4WQ&lt;br /&gt;.
         /// </summary>
         public static string SEPAAddress {
             get {

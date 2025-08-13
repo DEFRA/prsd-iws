@@ -131,11 +131,11 @@
             var response = new Core.SystemSetting.SystemSettingData();
             if (competentAuthority == UKCompetentAuthority.England)
             {
-                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.EaAdditionalChargeFixedFee)); //EA
+                response = await mediator.SendAsync(new GetSystemSettings(competentAuthority, SystemSettingType.EaAdditionalChargeFixedFee));
             }
             else if (competentAuthority == UKCompetentAuthority.Scotland)
             {
-                response = await mediator.SendAsync(new GetSystemSettingById(SystemSettingType.SepaAdditionalChargeFixedFee)); //SEPA
+                response = await mediator.SendAsync(new GetSystemSettings(competentAuthority, SystemSettingType.SepaAdditionalChargeFixedFee));
             }
 
             return Json(response.Value);
