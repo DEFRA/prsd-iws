@@ -2,6 +2,12 @@
 @using EA.Iws.Core.Notification;
 @using EA.Iws.Core.NotificationAssessment
 
+<style>
+    .js-hidden {
+        display: none !important;
+    }
+</style>
+
 <section class="grid-row">
     <div class="noti-overview">
         <div class="govuk-grid-column-two-thirds">
@@ -14,9 +20,9 @@
                 <div class="column" style="width:65%">
                     <div id="submit-side-bar" style="background-color:#f8f8f8">
                         <h3 style="text-align:center;">Notification access level:</h3>
-                        <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                            <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                        </div>
                     </div>
-                </div>
             }
             <div>
                 <br />
@@ -24,7 +30,7 @@
             <div>
                 @if (Model.ShowSubmitButton)
                 {
-                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { id = "btnSubmitNotification", @class = "govuk-button" })
+                    <button id="btnSubmitNotification" class="govuk-button">Submit notification</button>
                 }
 
                 else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
@@ -109,12 +115,11 @@
                 <div class="govuk-grid-column-full" style="padding: 0px !important">
                     <div id="submit-side-bar" class="submitsidebar">
                         <h3 style="text-align:center;">Notification access level:</h3>
-                        <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                            <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                        </div>
                     </div>
-                </div>
             }
         </div>
-
     </div>
 
     @if (!Model.IsNotificationComplete)
@@ -123,5 +128,26 @@
             <em>ALERT:</em> You need to address the highlighted section(s)
         </div>
     }
-
 </section>
+
+<div id="submit-confirmation-overlay" class="govuk-timeout-overlay js-hidden"></div>
+<div id="submit-confirmation-dialog" tabindex="-1" role="dialog" aria-modal="true" class="govuk-timeout-dialog js-hidden" aria-labelledby="submit-heading submit-message">
+    <div>
+        <h2 id="submit-heading" class="govuk-heading-m push--top">
+            Information
+        </h2>
+        <p class="govuk-body govuk-timeout-dialog__message" aria-hidden="true">
+            The Notification Charge displayed is indicative based on the information you have provided. The final charge amount
+            will be confirmed once the Competent Authority has reviewed and accepted the notification.
+            <br />
+        </p>
+        <div class="govuk-button-group">
+            <button id="submit-confirm-btn" class="govuk-button">
+                Continue
+            </button>
+            <button id="submit-cancel-btn" class="govuk-button govuk-button--secondary">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>

@@ -40,26 +40,48 @@
 
 @section scripts {
     <script>
-
         $(function () {
+            // Submit dialog functionality
+            var submitDialog = $("#submit-confirmation-dialog");
+            var submitOverlay = $("#submit-confirmation-overlay");
 
+            $("#btnSubmitNotification").on('click', function (e) {
+                e.preventDefault();
+                submitDialog.removeClass('js-hidden');
+                submitOverlay.removeClass('js-hidden');
+            });
+
+            $("#submit-cancel-btn").on('click', function () {
+                submitDialog.addClass('js-hidden');
+                submitOverlay.addClass('js-hidden');
+            });
+
+            $("#submit-confirm-btn").on('click', function () {
+                window.location.href = "@Url.Action("Disclaimer", "Submit")";
+            });
+
+            submitOverlay.on('click', function () {
+                submitDialog.addClass('js-hidden');
+                submitOverlay.addClass('js-hidden');
+            });
+
+            // Additional charge functionality
             $('#additionalChargeYes').click(function () {
                 $.ajax({
-                        url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
-                        type: 'POST',
-                        data: { competentAuthority: '@Model.SubmitSideBarViewModel.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
-                        success: function (result) {
-                            $('#AdditionalCharge_Amount').val(result);
-                            $("#AdditionalCharge_Amount").removeAttr("readonly");
-                        }
-                    });
+                    url: '@Url.Action("GetDefaultAdditionalChargeAmount")',
+                    type: 'POST',
+                    data: { competentAuthority: '@Model.SubmitSideBarViewModel.CompetentAuthority', __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    success: function (result) {
+                        $('#AdditionalCharge_Amount').val(result);
+                        $("#AdditionalCharge_Amount").removeAttr("readonly");
+                    }
+                });
             });
 
             $('#additionalChargeNo').click(function () {
                 $('#AdditionalCharge_Amount').val(0);
                 $('#AdditionalCharge_Amount').attr('readonly', 'true');
             });
-
         });
     </script>
 }
