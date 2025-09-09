@@ -449,29 +449,26 @@ VALUES (NEWID(),
 		@ExitId,
 		1)
 
-INSERT [Notification].[OperationCodes]
-	   ([Id],
-		[NotificationId],
-		[OperationCode])
-VALUES (NEWID(),
-		@NotificationId,
-		14)
-
-INSERT [Notification].[OperationCodes]
-	   ([Id],
-		[NotificationId],
-		[OperationCode])
-VALUES (NEWID(),
-		@NotificationId,
-		15)
-
-INSERT [Notification].[OperationCodes]
-	   ([Id],
-		[NotificationId],
-		[OperationCode])
-VALUES (NEWID(),
-		@NotificationId,
-		16)
+IF @NotificationType = 1
+	BEGIN
+		INSERT [Notification].[OperationCodes]
+			   ([Id],
+				[NotificationId],
+				[OperationCode])
+		VALUES (NEWID(),
+				@NotificationId,
+				1);
+	END
+ELSE
+	BEGIN
+		INSERT [Notification].[OperationCodes]
+			   ([Id],
+				[NotificationId],
+				[OperationCode])
+		VALUES (NEWID(),
+				@NotificationId,
+				14);
+	END
 
 DECLARE @WasteTypeId UNIQUEIDENTIFIER = NEWID();
 		
