@@ -339,14 +339,28 @@ INSERT INTO [ImportNotification].[WasteOperation]
            @ImportNotificationId,
            N'Mulching');
 
-INSERT INTO [ImportNotification].[OperationCodes]
-           ([Id]
-           ,[WasteOperationId]
-           ,[OperationCode])
-     VALUES
-           (NEWID(),
-           @WasteOperationId,
-           10);
+IF @NotificationType = 1
+    BEGIN
+        INSERT INTO [ImportNotification].[OperationCodes]
+                   ([Id]
+                   ,[WasteOperationId]
+                   ,[OperationCode])
+             VALUES
+                   (NEWID(),
+                   @WasteOperationId,
+                   1);
+    END
+ELSE
+    BEGIN
+        INSERT INTO [ImportNotification].[OperationCodes]
+                   ([Id]
+                   ,[WasteOperationId]
+                   ,[OperationCode])
+             VALUES
+                   (NEWID(),
+                   @WasteOperationId,
+                   14);
+    END
 
 DECLARE @WasteTypeId UNIQUEIDENTIFIER = NEWID();
 INSERT INTO [ImportNotification].[WasteType]
