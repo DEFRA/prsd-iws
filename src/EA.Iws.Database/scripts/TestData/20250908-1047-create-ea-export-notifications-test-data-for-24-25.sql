@@ -364,83 +364,83 @@ INSERT INTO [Notification].[TransportRoute]
 
 DECLARE @CountryId UNIQUEIDENTIFIER;
 
-SELECT @CountryId = id
+SELECT @CountryId = Id
 FROM   [Lookup].[Country]
-WHERE  [name] = 'United Kingdom';
+WHERE  [Name] = 'United Kingdom';
 
 DECLARE @CAId UNIQUEIDENTIFIER;
 
-SELECT @CAId = id
+SELECT @CAId = Id
 FROM   [Lookup].[CompetentAuthority]
-WHERE  [code] = 'GB01';
+WHERE  [Code] = 'GB01';
 
 DECLARE @EntryId UNIQUEIDENTIFIER;
 DECLARE @ExitId UNIQUEIDENTIFIER;
 
-SELECT @EntryId = id
+SELECT @EntryId = Id
 FROM   [Notification].[EntryOrExitPoint]
-WHERE  [name] = 'Dover';
+WHERE  [Name] = 'Dover';
 
 INSERT [Notification].[StateOfExport]
-	   ([id],
+	   ([Id],
 		[TransportRouteId],
-		[countryid],
-		[competentauthorityid],
-		[exitpointid])
+		[CountryId],
+		[CompetentAuthorityId],
+		[ExitPointId])
 VALUES (NEWID(),
 		@TransportRouteId,
 		@CountryId,
 		@CAId,
 		@EntryId)
 
-SELECT @CountryId = id
-FROM   [Lookup].[country]
-WHERE  [name] = 'France';
+SELECT @CountryId = Id
+FROM   [Lookup].[Country]
+WHERE  [Name] = 'France';
 
-SELECT @CAId = id
+SELECT @CAId = Id
 FROM   [Lookup].[CompetentAuthority]
-WHERE  [code] = 'F';
+WHERE  [Code] = 'F';
 
-SELECT @ExitId = id
+SELECT @ExitId = Id
 FROM   [Notification].[EntryOrExitPoint]
-WHERE  [name] = 'Bayonne';
+WHERE  [Name] = 'Bayonne';
 
 INSERT [Notification].[StateOfImport]
-	   ([id],
+	   ([Id],
 		[TransportRouteId],
-		[countryid],
-		[competentauthorityid],
-		[entrypointid])
+		[CountryId],
+		[CompetentAuthorityId],
+		[EntryPointId])
 VALUES (NEWID(),
 		@TransportRouteId,
 		@CountryId,
 		@CAId,
 		@ExitId)
 
-SELECT @CountryId = id
+SELECT @CountryId = Id
 FROM   [Lookup].[country]
-WHERE  [name] = 'France';
+WHERE  [Name] = 'France';
 
-SELECT @CAId = id
+SELECT @CAId = Id
 FROM   [Lookup].[CompetentAuthority]
-WHERE  [code] = 'F';
+WHERE  [Code] = 'F';
 
-SELECT @EntryId = id
+SELECT @EntryId = Id
 FROM   [Notification].[EntryOrExitPoint]
-WHERE  [name] = 'Calais';
+WHERE  [Name] = 'Calais';
 
-SELECT @ExitId = id
+SELECT @ExitId = Id
 FROM   [Notification].[EntryOrExitPoint]
-WHERE  [name] = 'Lille';
+WHERE  [Name] = 'Lille';
 
 INSERT [Notification].[TransitState]
-	   ([id],
+	   ([Id],
 		[TransportRouteId],
-		[countryid],
-		[competentauthorityid],
-		[entrypointid],
-		[exitpointid],
-		[ordinalposition])
+		[CountryId],
+		[CompetentAuthorityId],
+		[EntryPointId],
+		[ExitPointId],
+		[OrdinalPosition])
 VALUES (NEWID(),
 		@TransportRouteId,
 		@CountryId,
@@ -450,42 +450,42 @@ VALUES (NEWID(),
 		1)
 
 INSERT [Notification].[OperationCodes]
-	   ([id],
-		[notificationid],
-		[operationcode])
+	   ([Id],
+		[NotificationId],
+		[OperationCode])
 VALUES (NEWID(),
 		@NotificationId,
-		2)
+		14)
 
 INSERT [Notification].[OperationCodes]
-	   ([id],
-		[notificationid],
-		[operationcode])
+	   ([Id],
+		[NotificationId],
+		[OperationCode])
 VALUES (NEWID(),
 		@NotificationId,
-		3)
+		15)
 
 INSERT [Notification].[OperationCodes]
-	   ([id],
-		[notificationid],
-		[operationcode])
+	   ([Id],
+		[NotificationId],
+		[OperationCode])
 VALUES (NEWID(),
 		@NotificationId,
-		1)
+		16)
 
 DECLARE @WasteTypeId UNIQUEIDENTIFIER = NEWID();
 		
 INSERT [Notification].[WasteType]
-	   ([id],
-		[chemicalcompositiontype],
-		[chemicalcompositionname],
-		[chemicalcompositiondescription],
-		[notificationid],
-		[hasannex],
-		[otherwastetypedescription],
-		[energyinformation],
-		[woodtypedescription],
-		[optionalinformation])
+	   ([Id],
+		[ChemicalCompositionType],
+		[ChemicalCompositionName],
+		[ChemicalCompositionDescription],
+		[NotificationId],
+		[HasAnnex],
+		[OtherWasteTypeDescription],
+		[EnergyInformation],
+		[WoodTypeDescription],
+		[OptionalInformation])
 VALUES (@WasteTypeId,
 		3,
 		NULL,
@@ -498,12 +498,12 @@ VALUES (@WasteTypeId,
 		NULL)
 
 INSERT [Notification].[WasteComposition]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[chemicalcompositiontype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[ChemicalCompositionType])
 VALUES (NEWID(),
 		N'Paper',
 		Cast(1.00 AS DECIMAL(5, 2)),
@@ -512,12 +512,12 @@ VALUES (NEWID(),
 		1)
 
 INSERT [Notification].[WasteComposition]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[chemicalcompositiontype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[ChemicalCompositionType])
 VALUES (NEWID(),
 		N'Plastics',
 		Cast(1.00 AS DECIMAL(5, 2)),
@@ -526,12 +526,12 @@ VALUES (NEWID(),
 		2)
 
 INSERT [Notification].[WasteComposition]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[chemicalcompositiontype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[ChemicalCompositionType])
 VALUES (NEWID(),
 		N'Wood',
 		Cast(1.00 AS DECIMAL(5, 2)),
@@ -540,12 +540,12 @@ VALUES (NEWID(),
 		4)
 
 INSERT [Notification].[WasteComposition]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[chemicalcompositiontype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[ChemicalCompositionType])
 VALUES (NEWID(),
 		N'Textiles',
 		Cast(1.00 AS DECIMAL(5, 2)),
@@ -554,12 +554,12 @@ VALUES (NEWID(),
 		5)
 
 INSERT [Notification].[WasteComposition]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[chemicalcompositiontype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[ChemicalCompositionType])
 VALUES (NEWID(),
 		N'Metals',
 		Cast(1.00 AS DECIMAL(5, 2)),
@@ -568,10 +568,10 @@ VALUES (NEWID(),
 		6)
 
 INSERT [Notification].[PhysicalCharacteristicsInfo]
-	   ([id],
-		[physicalcharacteristictype],
-		[otherdescription],
-		[notificationid])
+	   ([Id],
+		[PhysicalCharacteristicType],
+		[OtherDescription],
+		[NotificationId])
 VALUES (NEWID(),
 		4,
 		NULL,
@@ -600,18 +600,18 @@ VALUES (NEWID(),
 		'A cathode and anode are used to separate recoverable materials from an ionic solution of waste.')
 
 INSERT [Notification].[WasteCodeInfo]
-	   ([id],
-		[wastecodeid],
-		[customcode],
-		[notificationid],
-		[codetype])
+	   ([Id],
+		[WasteCodeId],
+		[CustomCode],
+		[NotificationId],
+		[CodeType])
 VALUES (NEWID(),
-		(SELECT TOP 1 id FROM [Lookup].[WasteCode] WHERE [code] = 'A1030'),
+		(SELECT TOP 1 Id FROM [Lookup].[WasteCode] WHERE [code] = 'A1030'),
 		NULL,
 		@NotificationId,
 		(SELECT TOP 1 CodeType FROM [Lookup].[WasteCode] WHERE [code] = 'A1030')),
 		(NEWID(),
-		(SELECT TOP 1 id FROM [Lookup].[WasteCode] WHERE [code] = '01 05 04'),
+		(SELECT TOP 1 Id FROM [Lookup].[WasteCode] WHERE [code] = '01 05 04'),
 		NULL,
 		@NotificationId,
 		(SELECT TOP 1 CodeType FROM [Lookup].[WasteCode] WHERE [code] = '01 05 04')),
@@ -636,17 +636,17 @@ VALUES (NEWID(),
 		@NotificationId,
 		10),
 		(NEWID(),
-		(SELECT TOP 1 id FROM [Lookup].[WasteCode] WHERE [Description] = 'Explosives'),
+		(SELECT TOP 1 Id FROM [Lookup].[WasteCode] WHERE [Description] = 'Explosives'),
 		NULL,
 		@NotificationId,
 		(SELECT TOP 1 CodeType FROM [Lookup].[WasteCode] WHERE [Description] = 'Explosives')),
 		(NEWID(),
-		(SELECT TOP 1 id FROM [Lookup].[WasteCode] WHERE [code] = 'Y1'),
+		(SELECT TOP 1 Id FROM [Lookup].[WasteCode] WHERE [code] = 'Y1'),
 		NULL,
 		@NotificationId,
 		(SELECT TOP 1 CodeType FROM [Lookup].[WasteCode] WHERE [code] = 'Y1')),
 		(NEWID(),
-		(SELECT TOP 1 id FROM [Lookup].[WasteCode] WHERE [code] = 'H1'),
+		(SELECT TOP 1 Id FROM [Lookup].[WasteCode] WHERE [code] = 'H1'),
 		NULL,
 		@NotificationId,
 		(SELECT TOP 1 CodeType FROM [Lookup].[WasteCode] WHERE [code] = 'H1')),
@@ -657,12 +657,12 @@ VALUES (NEWID(),
 		(SELECT TOP 1 CodeType FROM [Lookup].[WasteCode] WHERE [code] = 'UN 0004'));
 
 INSERT [Notification].[WasteAdditionalInformation]
-	   ([id],
-		[constituent],
-		[minconcentration],
-		[maxconcentration],
-		[wastetypeid],
-		[wasteinformationtype])
+	   ([Id],
+		[Constituent],
+		[MinConcentration],
+		[MaxConcentration],
+		[WasteTypeId],
+		[WasteInformationType])
 VALUES (NEWID(),
 		N'Chlorine',
 		Cast(2.00 AS DECIMAL(5, 2)),
@@ -695,8 +695,8 @@ INSERT INTO [Notification].[NotificationStatusChange]
 
 INSERT [Notification].[NotificationDates]
 		([Id],
-			[NotificationAssessmentId],
-			[NotificationReceivedDate])
+		[NotificationAssessmentId],
+		[NotificationReceivedDate])
 VALUES (NEWID(),
 		@NotificationAssessmentId,
 		@NotificationCreateDate);
@@ -716,5 +716,4 @@ VALUES (NEWID(),
 		0,
 		0,
 		@TransportRouteId);
-
 END
