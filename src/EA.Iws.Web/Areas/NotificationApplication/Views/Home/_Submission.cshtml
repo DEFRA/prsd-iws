@@ -24,15 +24,20 @@
             <div>
                 @if (Model.ShowSubmitButton)
                 {
-                    <button id="btnSubmitNotification" class="govuk-button">Submit notification</button>
+                    if (Model.CompetentAuthority == UKCompetentAuthority.England)
+                    {
+                        <button id="btnSubmitNotificationEA" class="govuk-button" data-module="govuk-button">Submit notification</button>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { id = "btnSubmitNotification", @class = "govuk-button" })
+                    }
                 }
-
                 else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
                 {
                     <a href="#" class="govuk-button" disabled="disabled">Submit notification</a>
                     <p>You can submit this notification once you've completed all sections</p>
                 }
-
                 else if (Model.ShowResubmitButton)
                 {
                     using (Html.BeginForm("Resubmit", "Home", FormMethod.Post, new { id = Model.NotificationId }))
