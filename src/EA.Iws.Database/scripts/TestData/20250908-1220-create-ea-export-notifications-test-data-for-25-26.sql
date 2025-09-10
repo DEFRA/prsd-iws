@@ -20,11 +20,11 @@ SELECT @UserId = Id
 	WHERE	[UserName] = 'sunily@sfwltd.co.uk';
 
 SET @Counter = 0;
-SET @NotificationNumberCounter = 14;
+SET @NotificationNumberCounter = 28;
 
 WHILE ( @Counter < 14)
 BEGIN
-	SET @NotificationCreateDate = CONVERT(DATETIME2, '2024-04-01');
+	SET @NotificationCreateDate = CONVERT(DATETIME2, '2025-04-01');
 	SET @Counter = @Counter + 1;
 	SET @NotificationNumberCounter = @NotificationNumberCounter + 1;
 	SET @NotificationStatus = 2;

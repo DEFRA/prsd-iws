@@ -4,7 +4,6 @@ DECLARE @NotificationId UNIQUEIDENTIFIER;
 DECLARE @NotificationNumber NVARCHAR(50);
 DECLARE @NotificationCreateDate DATETIME;
 DECLARE @Counter INT;
-DECLARE @NotificationNumberCounter INT;
 DECLARE @MeansOfTransportId UNIQUEIDENTIFIER;
 DECLARE @FacilityCollectionId UNIQUEIDENTIFIER;
 DECLARE @ProducerCollectionId UNIQUEIDENTIFIER;
@@ -20,15 +19,20 @@ SELECT @UserId = Id
 	WHERE	[UserName] = 'sunily@sfwltd.co.uk';
 
 SET @Counter = 0;
-SET @NotificationNumberCounter = 14;
-
 WHILE ( @Counter < 14)
 BEGIN
-	SET @NotificationCreateDate = CONVERT(DATETIME2, '2024-04-01');
+	SET @NotificationCreateDate = CONVERT(DATETIME2, '2023-04-01');
 	SET @Counter = @Counter + 1;
-	SET @NotificationNumberCounter = @NotificationNumberCounter + 1;
 	SET @NotificationStatus = 2;
-	SET @NotificationNumber = 'GB 0001 0090' + CONVERT(VARCHAR, @NotificationNumberCounter);
+
+IF @Counter <= 9
+	BEGIN
+		SET @NotificationNumber = 'GB 0001 00900' + CONVERT(VARCHAR, @Counter);
+	END
+ELSE
+	BEGIN
+		SET @NotificationNumber = 'GB 0001 0090' + CONVERT(VARCHAR, @Counter);
+	END
 
 IF @Counter <= 7
 	BEGIN
