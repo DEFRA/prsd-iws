@@ -17,11 +17,11 @@ SELECT @UserId = Id
 	WHERE  [Email] = 'superuser@environment-agency.gov.uk';
 
 SET @Counter = 0;
-SET @NotificationNumberCounter = 14;
+SET @NotificationNumberCounter = 28;
 
 WHILE ( @Counter < 14)
 BEGIN
-	SET @NotificationCreateDate = CONVERT(DATETIME2, '2024-04-01');
+	SET @NotificationCreateDate = CONVERT(DATETIME2, '2025-04-01');
 	SET @Counter = @Counter + 1;
     SET @NotificationNumberCounter = @NotificationNumberCounter + 1;
 	SET @NotificationStatus = 2;
@@ -231,8 +231,8 @@ INSERT INTO [ImportNotification].[Shipment]
            @NumberOfShipments,
 		   Cast(25000.0000 AS DECIMAL(18, 4)),
            3,
-           Cast(N'2024-04-01' AS DATE),
-           Cast(N'2025-03-30' AS DATE),
+           Cast(N'2025-04-01' AS DATE),
+           Cast(N'2026-03-30' AS DATE),
            @ImportNotificationId);
 
 
@@ -425,13 +425,13 @@ INSERT INTO [ImportNotification].[NotificationDates]
      VALUES
            (NEWID(),
            @NotificationAssessmentId,
-           Cast(N'2024-04-01' AS DATE),
-           Cast(N'2024-04-02' AS DATE),
-           Cast(N'2024-04-03' AS DATE),
+           Cast(N'2025-04-01' AS DATE),
+           Cast(N'2025-04-02' AS DATE),
+           Cast(N'2025-04-03' AS DATE),
            N'Santa',
-           Cast(N'2024-04-04' AS DATE),
-           Cast(N'2024-04-05' AS DATE),
-           Cast(N'2024-04-06' AS DATE));
+           Cast(N'2025-04-04' AS DATE),
+           Cast(N'2025-04-05' AS DATE),
+           Cast(N'2025-04-06' AS DATE));
 
 INSERT INTO [ImportNotification].[Consent]
            ([Id]
@@ -442,9 +442,10 @@ INSERT INTO [ImportNotification].[Consent]
            ,[NotificationId])
      VALUES
            (NEWID(),
-           Cast(N'2024-04-01' AS DATE),
-           Cast(N'2025-03-30' AS DATE),
+           Cast(N'2025-04-01' AS DATE),
+           Cast(N'2026-03-30' AS DATE),
            N'Be nice',
            @UserId,
            @ImportNotificationId);
 END
+

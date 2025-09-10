@@ -4,7 +4,6 @@ DECLARE @ImportNotificationId UNIQUEIDENTIFIER;
 DECLARE @NotificationNumber NVARCHAR(50);
 DECLARE @NotificationCreateDate DATETIME;
 DECLARE @Counter INT;
-DECLARE @NotificationNumberCounter INT;
 DECLARE @FacilityCollectionId UNIQUEIDENTIFIER;
 DECLARE @ProducerId UNIQUEIDENTIFIER;
 DECLARE @UserId UNIQUEIDENTIFIER;
@@ -17,15 +16,20 @@ SELECT @UserId = Id
 	WHERE  [Email] = 'superuser@environment-agency.gov.uk';
 
 SET @Counter = 0;
-SET @NotificationNumberCounter = 14;
-
 WHILE ( @Counter < 14)
 BEGIN
-	SET @NotificationCreateDate = CONVERT(DATETIME2, '2024-04-01');
+	SET @NotificationCreateDate = CONVERT(DATETIME2, '2023-04-01');
 	SET @Counter = @Counter + 1;
-    SET @NotificationNumberCounter = @NotificationNumberCounter + 1;
 	SET @NotificationStatus = 2;
-	SET @NotificationNumber = 'GB 0001 0080' + CONVERT(VARCHAR, @NotificationNumberCounter);
+
+IF @Counter <= 9
+	BEGIN
+		SET @NotificationNumber = 'GB 0001 00800' + CONVERT(VARCHAR, @Counter);
+	END
+ELSE
+	BEGIN
+		SET @NotificationNumber = 'GB 0001 0080' + CONVERT(VARCHAR, @Counter);
+	END
 
 IF @Counter <= 7
 	BEGIN
@@ -231,8 +235,8 @@ INSERT INTO [ImportNotification].[Shipment]
            @NumberOfShipments,
 		   Cast(25000.0000 AS DECIMAL(18, 4)),
            3,
-           Cast(N'2024-04-01' AS DATE),
-           Cast(N'2025-03-30' AS DATE),
+           Cast(N'2023-04-01' AS DATE),
+           Cast(N'2024-03-30' AS DATE),
            @ImportNotificationId);
 
 
@@ -425,13 +429,13 @@ INSERT INTO [ImportNotification].[NotificationDates]
      VALUES
            (NEWID(),
            @NotificationAssessmentId,
-           Cast(N'2024-04-01' AS DATE),
-           Cast(N'2024-04-02' AS DATE),
-           Cast(N'2024-04-03' AS DATE),
+           Cast(N'2023-04-01' AS DATE),
+           Cast(N'2023-04-02' AS DATE),
+           Cast(N'2023-04-03' AS DATE),
            N'Santa',
-           Cast(N'2024-04-04' AS DATE),
-           Cast(N'2024-04-05' AS DATE),
-           Cast(N'2024-04-06' AS DATE));
+           Cast(N'2023-04-04' AS DATE),
+           Cast(N'2023-04-05' AS DATE),
+           Cast(N'2023-04-06' AS DATE));
 
 INSERT INTO [ImportNotification].[Consent]
            ([Id]
@@ -442,8 +446,8 @@ INSERT INTO [ImportNotification].[Consent]
            ,[NotificationId])
      VALUES
            (NEWID(),
-           Cast(N'2024-04-01' AS DATE),
-           Cast(N'2025-03-30' AS DATE),
+           Cast(N'2023-04-01' AS DATE),
+           Cast(N'2023-03-30' AS DATE),
            N'Be nice',
            @UserId,
            @ImportNotificationId);
