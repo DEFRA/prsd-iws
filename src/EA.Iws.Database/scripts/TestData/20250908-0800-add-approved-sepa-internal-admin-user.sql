@@ -1,5 +1,11 @@
 ﻿-- Inserting SEPA admin account
 
+DECLARE @UserId UNIQUEIDENTIFIER;
+DECLARE @CompetentAuthority INT;
+
+SET @UserId = NEWID();
+SET @CompetentAuthority = 2; --2 = SEPA
+
 INSERT INTO [Identity].[AspNetUsers]
 (
        Id,
@@ -17,10 +23,10 @@ INSERT INTO [Identity].[AspNetUsers]
 )
 VALUES
 (
-       'E7D9AB70-84FC-45C3-99A7-B437D1336402',
-       'sepaadmin@environment-agency.gov.uk', 
-       1, 
-       'ANubTHWcySaAyFA68WgviJdTq0KOF4/iv5MTPvVPwRgmo0+CuzLTEszU0BcUYtOOTA==', 
+       @UserId,
+       'sepaadmin@environment-agency.gov.uk',
+       1,
+       'ANubTHWcySaAyFA68WgviJdTq0KOF4/iv5MTPvVPwRgmo0+CuzLTEszU0BcUYtOOTA==',
        '9a241d0d-26d7-4783-a4a5-4ed3f4446a6b',
        0,
        0,
@@ -30,8 +36,6 @@ VALUES
        'Sepa',
        'Admin'
 );
-
-GO
 
 INSERT INTO [Person].[InternalUser]
 (
@@ -45,9 +49,9 @@ INSERT INTO [Person].[InternalUser]
 VALUES
 (
     NEWID(),
-    'E7D9AB70-84FC-45C3-99A7-B437D1336402',
+    @UserId,
     'Sepa Administrator',
-    2,
-    (SELECT TOP 1 [Id] FROM [Lookup].[LocalArea] WHERE Name = 'Head Office'),
+    @CompetentAuthority,
+    (SELECT [Id] FROM [Lookup].[LocalArea] WHERE Name = 'Head Office'),
     1
 );
