@@ -53,6 +53,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\TestData\20250908-0800-add-approved-sepa-internal-admin-user.sql" />
     <Content Include="scripts\TestData\20250908-1047-create-ea-export-notifications-test-data-for-24-25.sql" />
     <Content Include="scripts\TestData\20250908-1220-create-ea-export-notifications-test-data-for-25-26.sql" />
     <Content Include="scripts\TestData\20250908-1315-create-ea-import-notifications-test-data-for-23-24.sql" />
