@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The notification charge displayed is indicative based on the information you have provided. The final charge amount will be as displayed unless you are contacted by the competent authority after the notification has been reviewed..
+        /// </summary>
+        public static string EANotifiedWasteChargeIncrease {
+            get {
+                return ResourceManager.GetString("EANotifiedWasteChargeIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You can pay us by bank transfer, post, or credit or debit card. All payments must be made in sterling..
         /// </summary>
         public static string ListAvailablePaymentMethods {
