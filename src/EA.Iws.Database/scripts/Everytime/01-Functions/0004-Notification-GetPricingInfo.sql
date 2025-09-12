@@ -168,21 +168,21 @@ BEGIN
 				'F0407E39-C9BA-4519-B659-A4C9010901C7', 'DAF51836-41E0-4324-93AE-A4C9010901C7', 
 				'E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7')
 			BEGIN
-				SET @price += (SELECT [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 2)
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 2 AND ValidFrom <= @submittedDate ORDER BY ValidFrom DESC)
 			END
 			
 			--Export Recovery IsInterim 0, ActivityId = 75496653-C767-44D2-AA27-A4C9010901C7
 			--Export Recovery IsInterim 1, ActivityId = 71CC7688-63D3-4312-BAD2-A4C9010901C7
 			IF @activityId IN ('75496653-C767-44D2-AA27-A4C9010901C7', '71CC7688-63D3-4312-BAD2-A4C9010901C7')
 			BEGIN
-				SET @price += (SELECT [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 3)
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 3 AND ValidFrom <= @submittedDate ORDER BY ValidFrom DESC)
 			END
 
 			--Export Disposal IsInterim 0, ActivityId = 12AF7EA4-1E60-4D35-B965-A4C9010901C7
 			--Export Disposal IsInterim 1, ActivityId = 8385CAD7-E5F0-4765-A46B-A4C9010901C7
 			IF @activityId IN ('12AF7EA4-1E60-4D35-B965-A4C9010901C7', '8385CAD7-E5F0-4765-A46B-A4C9010901C7')
 			BEGIN
-				SET @price += (SELECT [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 4)
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 4 AND ValidFrom <= @submittedDate ORDER BY ValidFrom DESC)
 			END
 
 			--Refund is the price minus the price for the lowest range
@@ -211,6 +211,9 @@ BEGIN
 			FROM [ImportNotification].[Notification] n
 			LEFT JOIN ImportNotification.WasteComponent iwc ON iwc.ImportNotificationId = n.Id
 			WHERE n.id = @notificationId)
+			AND ValidFrom <= @submittedDate
+			GROUP BY Price, ValidFrom 
+			ORDER BY Price, ValidFrom DESC
 
 		SELECT @price += ISNULL(@wasteComponentFees,0);
 	END;
