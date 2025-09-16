@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is this an iterim or non-interim notification?.
+        ///   Looks up a localized string similar to Is this an interim or non-interim notification?.
         /// </summary>
         public static string IsThisQuestionHeading {
             get {
