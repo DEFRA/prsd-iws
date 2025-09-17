@@ -1,8 +1,9 @@
-﻿/****** Object:  UserDefinedFunction [Notification].[GetPricingInfo]    Script Date: 17/09/2025 17:21:40 ******/
-SET ANSI_NULLS ON
+﻿GO
+ 
+IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
+	EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
 GO
-SET QUOTED_IDENTIFIER ON
-GO
+
 ALTER FUNCTION [Notification].[GetPricingInfo](
 	@notificationId		UNIQUEIDENTIFIER)
 RETURNS @PricingInfo TABLE
