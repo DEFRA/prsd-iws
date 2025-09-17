@@ -1,9 +1,8 @@
-﻿GO
- 
-IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
-    EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
+﻿/****** Object:  UserDefinedFunction [Notification].[GetPricingInfo]    Script Date: 17/09/2025 17:21:40 ******/
+SET ANSI_NULLS ON
 GO
-
+SET QUOTED_IDENTIFIER ON
+GO
 ALTER FUNCTION [Notification].[GetPricingInfo](
 	@notificationId		UNIQUEIDENTIFIER)
 RETURNS @PricingInfo TABLE
@@ -22,6 +21,7 @@ BEGIN
 	DECLARE @submittedDate DATETIMEOFFSET;
 	DECLARE @fixedWasteCategoryFee MONEY;
 	DECLARE @additionalChargeTotal MONEY;
+	DECLARE @wasteComponentFees MONEY;
 	
 	SELECT @submittedDate = ChangeDate
 	 FROM (
@@ -149,6 +149,21 @@ BEGIN
 
 		IF @fixedWasteCategoryFee > 0
 		BEGIN
+			SET @wasteComponentFees = (SELECT TOP 1 SUM(Price) FROM [Lookup].[PricingFixedFee] WHERE WasteComponentTypeId IN (
+										SELECT wc.WasteComponentType
+										FROM [Notification].[Notification] n
+										LEFT JOIN [Notification].[WasteComponentInfo] wc ON wc.NotificationId = n.Id
+										WHERE n.id = @notificationId
+										UNION
+										SELECT iwc.WasteComponentType
+										FROM [ImportNotification].[Notification] n
+										LEFT JOIN ImportNotification.WasteComponent iwc ON iwc.ImportNotificationId = n.Id
+										WHERE n.id = @notificationId)
+										AND ValidFrom <= @submittedDate
+										GROUP BY Price, ValidFrom
+										ORDER BY ValidFrom DESC);
+
+			SELECT @fixedWasteCategoryFee += ISNULL(@wasteComponentFees, 0);
 			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
 			INSERT @PricingInfo
 			SELECT @fixedWasteCategoryFee, 0;
@@ -199,9 +214,8 @@ BEGIN
 				AND (1 >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR 1 <= sqr.RangeTo))
 			ORDER BY ValidFrom DESC;
 		END
-
-		DECLARE @wasteComponentFees MONEY;
-		SELECT @wasteComponentFees = SUM(Price) FROM [Lookup].[PricingFixedFee] WHERE WasteComponentTypeId IN (
+		
+		SET @wasteComponentFees = (SELECT TOP 1 SUM(Price) FROM [Lookup].[PricingFixedFee] WHERE WasteComponentTypeId IN (
 			SELECT wc.WasteComponentType
 			FROM [Notification].[Notification] n
 			LEFT JOIN [Notification].[WasteComponentInfo] wc ON wc.NotificationId = n.Id
@@ -213,9 +227,9 @@ BEGIN
 			WHERE n.id = @notificationId)
 			AND ValidFrom <= @submittedDate
 			GROUP BY Price, ValidFrom 
-			ORDER BY Price, ValidFrom DESC
+			ORDER BY ValidFrom DESC);
 
-		SELECT @price += ISNULL(@wasteComponentFees,0);
+		SELECT @price += ISNULL(@wasteComponentFees, 0);
 	END;
 
 	IF @competentAuthority = 2 AND @submittedDate >= '2024-04-01'
