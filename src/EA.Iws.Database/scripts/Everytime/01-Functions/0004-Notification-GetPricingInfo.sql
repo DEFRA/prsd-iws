@@ -150,21 +150,6 @@ BEGIN
 
 		IF @fixedWasteCategoryFee > 0
 		BEGIN
-			SET @wasteComponentFees = (SELECT TOP 1 SUM(Price) FROM [Lookup].[PricingFixedFee] WHERE WasteComponentTypeId IN (
-										SELECT wc.WasteComponentType
-										FROM [Notification].[Notification] n
-										LEFT JOIN [Notification].[WasteComponentInfo] wc ON wc.NotificationId = n.Id
-										WHERE n.id = @notificationId
-										UNION
-										SELECT iwc.WasteComponentType
-										FROM [ImportNotification].[Notification] n
-										LEFT JOIN ImportNotification.WasteComponent iwc ON iwc.ImportNotificationId = n.Id
-										WHERE n.id = @notificationId)
-										AND ValidFrom <= @submittedDate
-										GROUP BY Price, ValidFrom
-										ORDER BY ValidFrom DESC);
-
-			SELECT @fixedWasteCategoryFee += ISNULL(@wasteComponentFees, 0);
 			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
 			INSERT @PricingInfo
 			SELECT @fixedWasteCategoryFee, 0;
