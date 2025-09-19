@@ -40,7 +40,7 @@ BEGIN
 			[ImportNotification].[Notification] N
 			LEFT JOIN [ImportNotification].[NotificationAssessment] na ON na.NotificationApplicationId = N.Id
 			LEFT JOIN [ImportNotification].[NotificationStatusChange] nsc ON nsc.NotificationAssessmentId = na.Id
-		WHERE N.Id = @notificationId AND nsc.NewStatus IN (2, 16)
+		WHERE N.Id = @notificationId AND nsc.NewStatus IN (2, 14)
 		ORDER BY nsc.ChangeDate DESC
 		) AS DATA;
 
