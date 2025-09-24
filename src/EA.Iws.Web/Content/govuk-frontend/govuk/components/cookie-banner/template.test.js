@@ -1,56 +1,53 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('cookie-banner')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 describe('Cookie Banner', () => {
+  let examples
+
+  beforeAll(async () => {
+    examples = await getExamples('cookie-banner')
+  })
+
   describe('question banner', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('cookie-banner', examples.default)
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
     it('renders a heading', () => {
       const $ = render('cookie-banner', examples.default)
 
       const $heading = $('.govuk-cookie-banner__heading')
-      expect($heading.text()).toEqual('Cookies on this government service')
+      expect($heading.text().trim()).toBe('Cookies on this government service')
     })
 
     it('renders heading as escaped html when passed as text', () => {
       const $ = render('cookie-banner', examples['heading html as text'])
 
       const $heading = $('.govuk-cookie-banner__heading')
-      expect($heading.html().trim()).toEqual('Cookies on &lt;span&gt;my service&lt;/span&gt;')
+      expect($heading.html().trim()).toBe(
+        'Cookies on &lt;span&gt;my service&lt;/span&gt;'
+      )
     })
 
     it('renders heading html', () => {
       const $ = render('cookie-banner', examples['heading html'])
 
       const $heading = $('.govuk-cookie-banner__heading')
-      expect($heading.html().trim()).toEqual('Cookies on <span>my service</span>')
+      expect($heading.html().trim()).toBe('Cookies on <span>my service</span>')
     })
 
     it('renders main content text', () => {
       const $ = render('cookie-banner', examples.default)
 
       const $content = $('.govuk-cookie-banner__content')
-      expect($content.text()).toEqual('We use analytics cookies to help understand how users use our service.')
+      expect($content.text().trim()).toBe(
+        'We use analytics cookies to help understand how users use our service.'
+      )
     })
 
     it('renders main content html', () => {
       const $ = render('cookie-banner', examples.html)
 
       const $content = $('.govuk-cookie-banner__content')
-      expect($content.html().trim()).toEqual('<p class="govuk-body">We use cookies in <span>our service</span>.</p>')
+      expect($content.html().trim()).toBe(
+        '<p class="govuk-body">We use cookies in <span>our service</span>.</p>'
+      )
     })
 
     it('renders classes', () => {
@@ -66,7 +63,7 @@ describe('Cookie Banner', () => {
 
       const $banner = $('.govuk-cookie-banner .govuk-cookie-banner__message')
 
-      expect($banner.attr('data-attribute')).toEqual('my-value')
+      expect($banner.attr('data-attribute')).toBe('my-value')
     })
   })
 
@@ -75,32 +72,25 @@ describe('Cookie Banner', () => {
       const $ = render('cookie-banner', examples.default)
 
       const $component = $('.govuk-cookie-banner')
-      expect($component.attr('role')).toEqual('region')
+      expect($component.attr('role')).toBe('region')
     })
 
     it('has a default aria-label', () => {
       const $ = render('cookie-banner', examples.default)
 
       const $component = $('.govuk-cookie-banner')
-      expect($component.attr('aria-label')).toEqual('Cookie banner')
+      expect($component.attr('aria-label')).toBe('Cookie banner')
     })
 
     it('renders a custom aria label', () => {
       const $ = render('cookie-banner', examples['custom aria label'])
 
       const $component = $('.govuk-cookie-banner')
-      expect($component.attr('aria-label')).toEqual('Cookies on GOV.UK')
+      expect($component.attr('aria-label')).toBe('Cookies on GOV.UK')
     })
   })
 
   describe('confirmation banner', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('cookie-banner', examples['accepted confirmation banner'])
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
     it('role alert not set by default', () => {
       const $ = render('cookie-banner', examples.default)
 
@@ -110,11 +100,14 @@ describe('Cookie Banner', () => {
     })
 
     it('sets role attribute when role provided', () => {
-      const $ = render('cookie-banner', examples['accepted confirmation banner'])
+      const $ = render(
+        'cookie-banner',
+        examples['accepted confirmation banner']
+      )
 
       const $component = $('.govuk-cookie-banner')
       const $banner = $component.find('.govuk-cookie-banner__message')
-      expect($banner.attr('role')).toEqual('alert')
+      expect($banner.attr('role')).toBe('alert')
     })
 
     it('hides banner if hidden option set to true', () => {
@@ -137,23 +130,26 @@ describe('Cookie Banner', () => {
       const $ = render('cookie-banner', examples['default action'])
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.get(0).tagName).toEqual('button')
+      expect($actions.get(0).tagName).toBe('button')
     })
 
     it('renders as a link if href provided', () => {
       const $ = render('cookie-banner', examples.link)
 
       const $actions = $('.govuk-cookie-banner .govuk-link')
-      expect($actions.get(0).tagName).toEqual('a')
+      expect($actions.get(0).tagName).toBe('a')
     })
 
     it('ignores other button options if href provided', () => {
-      const $ = render('cookie-banner', examples['link with false button options'])
+      const $ = render(
+        'cookie-banner',
+        examples['link with false button options']
+      )
 
       const $actions = $('.govuk-cookie-banner .govuk-link')
-      expect($actions.get(0).tagName).toEqual('a')
-      expect($actions.text()).toEqual('This is a link')
-      expect($actions.attr('href')).toEqual('/link')
+      expect($actions.get(0).tagName).toBe('a')
+      expect($actions.text()).toBe('This is a link')
+      expect($actions.attr('href')).toBe('/link')
 
       expect($actions.attr('value')).toBeUndefined()
       expect($actions.attr('name')).toBeUndefined()
@@ -163,74 +159,78 @@ describe('Cookie Banner', () => {
       const $ = render('cookie-banner', examples['link as a button'])
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.get(0).tagName).toEqual('a')
-      expect($actions.text().trim()).toEqual('This is a link')
-      expect($actions.attr('href')).toEqual('/link')
-      expect($actions.attr('role')).toEqual('button')
+      expect($actions.get(0).tagName).toBe('a')
+      expect($actions.text().trim()).toBe('This is a link')
+      expect($actions.attr('href')).toBe('/link')
+      expect($actions.attr('role')).toBe('button')
     })
 
     it('renders button text', () => {
       const $ = render('cookie-banner', examples['default action'])
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.text().trim()).toEqual('This is a button')
+      expect($actions.text().trim()).toBe('This is a button')
     })
 
     it('renders button with custom type', () => {
       const $ = render('cookie-banner', examples.type)
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.attr('type')).toEqual('button')
+      expect($actions.attr('type')).toBe('button')
     })
 
     it('renders button with name', () => {
       const $ = render('cookie-banner', examples.default)
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.attr('name')).toEqual('cookies')
+      expect($actions.attr('name')).toBe('cookies')
     })
 
     it('renders button with value', () => {
       const $ = render('cookie-banner', examples.default)
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.attr('value')).toEqual('accept')
+      expect($actions.attr('value')).toBe('accept')
     })
 
     it('renders button with additional classes', () => {
       const $ = render('cookie-banner', examples['button classes'])
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.attr('class')).toEqual('govuk-button my-button-class app-button-class')
+      expect($actions.attr('class')).toBe(
+        'govuk-button my-button-class app-button-class'
+      )
     })
 
     it('renders button with custom attributes', () => {
       const $ = render('cookie-banner', examples['button attributes'])
 
       const $actions = $('.govuk-cookie-banner .govuk-button')
-      expect($actions.attr('data-button-attribute')).toEqual('my-value')
+      expect($actions.attr('data-button-attribute')).toBe('my-value')
     })
 
     it('renders link text and href', () => {
       const $ = render('cookie-banner', examples.link)
 
       const $actions = $('.govuk-cookie-banner .govuk-link')
-      expect($actions.text()).toEqual('This is a link')
-      expect($actions.attr('href')).toEqual('/link')
+      expect($actions.text()).toBe('This is a link')
+      expect($actions.attr('href')).toBe('/link')
     })
 
     it('renders link with additional classes', () => {
       const $ = render('cookie-banner', examples['link classes'])
 
       const $actions = $('.govuk-cookie-banner .govuk-link')
-      expect($actions.attr('class')).toEqual('govuk-link my-link-class app-link-class')
+      expect($actions.attr('class')).toBe(
+        'govuk-link my-link-class app-link-class'
+      )
     })
 
     it('renders link with custom attributes', () => {
       const $ = render('cookie-banner', examples['link attributes'])
 
       const $actions = $('.govuk-cookie-banner .govuk-link')
-      expect($actions.attr('data-link-attribute')).toEqual('my-value')
+      expect($actions.attr('data-link-attribute')).toBe('my-value')
     })
   })
 
@@ -239,21 +239,21 @@ describe('Cookie Banner', () => {
       const $ = render('cookie-banner', examples['client-side implementation'])
 
       const $actions = $('.govuk-cookie-banner__message')
-      expect($actions.length).toEqual(3)
+      expect($actions).toHaveLength(3)
     })
 
     it('2 banners are hidden', () => {
       const $ = render('cookie-banner', examples['client-side implementation'])
 
       const $actions = $('.govuk-cookie-banner__message[hidden]')
-      expect($actions.length).toEqual(2)
+      expect($actions).toHaveLength(2)
     })
 
     it('has a data-nosnippet attribute to hide it from search result snippets', () => {
       const $ = render('cookie-banner', examples['client-side implementation'])
 
       const $parentContainer = $('.govuk-cookie-banner')
-      expect($parentContainer.attr('data-nosnippet')).toEqual('')
+      expect($parentContainer.attr('data-nosnippet')).toBe('')
     })
   })
 
@@ -262,14 +262,14 @@ describe('Cookie Banner', () => {
       const $ = render('cookie-banner', examples['full banner hidden'])
 
       const $messages = $('.govuk-cookie-banner__message')
-      expect($messages.length).toEqual(3)
+      expect($messages).toHaveLength(3)
     })
 
     it('parent banner is hidden', () => {
       const $ = render('cookie-banner', examples['full banner hidden'])
 
       const $cookieBanner = $('.govuk-cookie-banner[hidden]')
-      expect($cookieBanner.length).toEqual(1)
+      expect($cookieBanner).toHaveLength(1)
     })
 
     it('adds classes to parent container when provided', () => {
@@ -283,7 +283,7 @@ describe('Cookie Banner', () => {
       const $ = render('cookie-banner', examples['full banner hidden'])
 
       const $cookieBanner = $('.govuk-cookie-banner')
-      expect($cookieBanner.attr('data-hide-cookie-banner')).toEqual('true')
+      expect($cookieBanner.attr('data-hide-cookie-banner')).toBe('true')
     })
   })
 })

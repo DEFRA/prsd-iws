@@ -1,4 +1,4 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Jest Snapshot v1, https://jestjs.io/docs/snapshot-testing
 
 exports[`Checkboxes nested dependant components passes through fieldset params without breaking 1`] = `
 <fieldset class="govuk-fieldset app-fieldset--custom-modifier"
@@ -36,7 +36,7 @@ exports[`Checkboxes nested dependant components passes through label params with
 </label>
 `;
 
-exports[`Checkboxes when they include a hint renders the hint 1`] = `
+exports[`Checkboxes when the fieldset includes a hint renders the hint 1`] = `
 <div id="example-multiple-hints-hint"
      class="govuk-hint"
 >

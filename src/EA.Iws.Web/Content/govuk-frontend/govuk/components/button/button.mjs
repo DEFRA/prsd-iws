@@ -1,64 +1,126 @@
-import '../../vendor/polyfills/Event.mjs' // addEventListener and event.target normaliziation
-import '../../vendor/polyfills/Function/prototype/bind.mjs'
+import { ConfigurableComponent } from '../../common/configuration.mjs'
 
-var KEY_SPACE = 32
-var DEBOUNCE_TIMEOUT_IN_SECONDS = 1
+const DEBOUNCE_TIMEOUT_IN_SECONDS = 1
 
-function Button ($module) {
-  this.$module = $module
-  this.debounceFormSubmitTimer = null
+/**
+ * JavaScript enhancements for the Button component
+ *
+ * @preserve
+ * @augments ConfigurableComponent<ButtonConfig>
+ */
+export class Button extends ConfigurableComponent {
+  /**
+   * @private
+   * @type {number | null}
+   */
+  debounceFormSubmitTimer = null
+
+  /**
+   * @param {Element | null} $root - HTML element to use for button
+   * @param {ButtonConfig} [config] - Button config
+   */
+  constructor($root, config = {}) {
+    super($root, config)
+
+    this.$root.addEventListener('keydown', (event) => this.handleKeyDown(event))
+    this.$root.addEventListener('click', (event) => this.debounce(event))
+  }
+
+  /**
+   * Trigger a click event when the space key is pressed
+   *
+   * Some screen readers tell users they can use the space bar to activate
+   * things with the 'button' role, so we need to match the functionality of
+   * native HTML buttons.
+   *
+   * See https://github.com/alphagov/govuk_elements/pull/272#issuecomment-233028270
+   *
+   * @private
+   * @param {KeyboardEvent} event - Keydown event
+   */
+  handleKeyDown(event) {
+    const $target = event.target
+
+    // Handle space bar only
+    if (event.key !== ' ') {
+      return
+    }
+
+    // Handle elements with [role="button"] only
+    if (
+      $target instanceof HTMLElement &&
+      $target.getAttribute('role') === 'button'
+    ) {
+      event.preventDefault() // prevent the page from scrolling
+      $target.click()
+    }
+  }
+
+  /**
+   * Debounce double-clicks
+   *
+   * If the click quickly succeeds a previous click then nothing will happen.
+   * This stops people accidentally causing multiple form submissions by double
+   * clicking buttons.
+   *
+   * @private
+   * @param {MouseEvent} event - Mouse click event
+   * @returns {undefined | false} Returns undefined, or false when debounced
+   */
+  debounce(event) {
+    // Check the button that was clicked has preventDoubleClick enabled
+    if (!this.config.preventDoubleClick) {
+      return
+    }
+
+    // If the timer is still running, prevent the click from submitting the form
+    if (this.debounceFormSubmitTimer) {
+      event.preventDefault()
+      return false
+    }
+
+    this.debounceFormSubmitTimer = window.setTimeout(() => {
+      this.debounceFormSubmitTimer = null
+    }, DEBOUNCE_TIMEOUT_IN_SECONDS * 1000)
+  }
+
+  /**
+   * Name for the component used when initialising using data-module attributes.
+   */
+  static moduleName = 'govuk-button'
+
+  /**
+   * Button default config
+   *
+   * @see {@link ButtonConfig}
+   * @constant
+   * @type {ButtonConfig}
+   */
+  static defaults = Object.freeze({
+    preventDoubleClick: false
+  })
+
+  /**
+   * Button config schema
+   *
+   * @constant
+   * @satisfies {Schema<ButtonConfig>}
+   */
+  static schema = Object.freeze({
+    properties: {
+      preventDoubleClick: { type: 'boolean' }
+    }
+  })
 }
 
 /**
-* JavaScript 'shim' to trigger the click event of element(s) when the space key is pressed.
-*
-* Created since some Assistive Technologies (for example some Screenreaders)
-* will tell a user to press space on a 'button', so this functionality needs to be shimmed
-* See https://github.com/alphagov/govuk_elements/pull/272#issuecomment-233028270
-*
-* @param {object} event event
-*/
-Button.prototype.handleKeyDown = function (event) {
-  // get the target element
-  var target = event.target
-  // if the element has a role='button' and the pressed key is a space, we'll simulate a click
-  if (target.getAttribute('role') === 'button' && event.keyCode === KEY_SPACE) {
-    event.preventDefault()
-    // trigger the target's click event
-    target.click()
-  }
-}
+ * Button config
+ *
+ * @typedef {object} ButtonConfig
+ * @property {boolean} [preventDoubleClick=false] - Prevent accidental double
+ *   clicks on submit buttons from submitting forms multiple times.
+ */
 
 /**
-* If the click quickly succeeds a previous click then nothing will happen.
-* This stops people accidentally causing multiple form submissions by
-* double clicking buttons.
-*/
-Button.prototype.debounce = function (event) {
-  var target = event.target
-  // Check the button that is clicked on has the preventDoubleClick feature enabled
-  if (target.getAttribute('data-prevent-double-click') !== 'true') {
-    return
-  }
-
-  // If the timer is still running then we want to prevent the click from submitting the form
-  if (this.debounceFormSubmitTimer) {
-    event.preventDefault()
-    return false
-  }
-
-  this.debounceFormSubmitTimer = setTimeout(function () {
-    this.debounceFormSubmitTimer = null
-  }.bind(this), DEBOUNCE_TIMEOUT_IN_SECONDS * 1000)
-}
-
-/**
-* Initialise an event listener for keydown at document level
-* this will help listening for later inserted elements with a role="button"
-*/
-Button.prototype.init = function () {
-  this.$module.addEventListener('keydown', this.handleKeyDown)
-  this.$module.addEventListener('click', this.debounce)
-}
-
-export default Button
+ * @import { Schema } from '../../common/configuration.mjs'
+ */

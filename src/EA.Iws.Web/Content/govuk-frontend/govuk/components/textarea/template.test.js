@@ -1,45 +1,37 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples, htmlWithClassName } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('textarea')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { htmlWithClassName } = require('@govuk-frontend/helpers/tests')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 const WORD_BOUNDARY = '\\b'
 const WHITESPACE = '\\s'
 
 describe('Textarea', () => {
+  let examples
+
+  beforeAll(async () => {
+    examples = await getExamples('textarea')
+  })
+
   describe('default example', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('textarea', examples.default)
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
-    it('renders with id', () => {
+    it('autopopulates default id from name', () => {
       const $ = render('textarea', examples.default)
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('id')).toEqual('more-detail')
+      expect($component.attr('id')).toBe($component.attr('name'))
     })
 
     it('renders with name', () => {
       const $ = render('textarea', examples.default)
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('name')).toEqual('more-detail')
+      expect($component.attr('name')).toBe('more-detail')
     })
 
     it('renders with default number of rows', () => {
       const $ = render('textarea', examples.default)
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('rows')).toEqual('5')
+      expect($component.attr('rows')).toBe('5')
     })
 
     it('renders with a form group wrapper', () => {
@@ -51,6 +43,14 @@ describe('Textarea', () => {
   })
 
   describe('custom options', () => {
+    it('renders with id', () => {
+      const $ = render('textarea', examples.id)
+
+      const $component = $('.govuk-textarea')
+      expect($component.attr('id')).not.toBe($component.attr('name'))
+      expect($component.attr('id')).toBe('textarea-id')
+    })
+
     it('renders with classes', () => {
       const $ = render('textarea', examples.classes)
 
@@ -62,28 +62,28 @@ describe('Textarea', () => {
       const $ = render('textarea', examples['with default value'])
 
       const $component = $('.govuk-textarea')
-      expect($component.text()).toEqual('221B Baker Street\nLondon\nNW1 6XE\n')
+      expect($component.text()).toBe('221B Baker Street\nLondon\nNW1 6XE\n')
     })
 
     it('renders with attributes', () => {
       const $ = render('textarea', examples.attributes)
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('data-attribute')).toEqual('my data value')
+      expect($component.attr('data-attribute')).toBe('my data value')
     })
 
     it('renders with aria-describedby', () => {
       const $ = render('textarea', examples['with describedBy'])
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('aria-describedby')).toMatch('some-id')
+      expect($component.attr('aria-describedby')).toMatch('test-target-element')
     })
 
     it('renders with rows', () => {
       const $ = render('textarea', examples['with custom rows'])
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('rows')).toEqual('8')
+      expect($component.attr('rows')).toBe('8')
     })
 
     it('renders with a form group wrapper that has extra classes', () => {
@@ -99,14 +99,14 @@ describe('Textarea', () => {
       const $ = render('textarea', examples['with spellcheck enabled'])
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('spellcheck')).toEqual('true')
+      expect($component.attr('spellcheck')).toBe('true')
     })
 
     it('renders with spellcheck attribute set to false', () => {
       const $ = render('textarea', examples['with spellcheck disabled'])
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('spellcheck')).toEqual('false')
+      expect($component.attr('spellcheck')).toBe('false')
     })
 
     it('renders without spellcheck attribute by default', () => {
@@ -128,28 +128,26 @@ describe('Textarea', () => {
       const $ = render('textarea', examples['with hint'])
 
       const $textarea = $('.govuk-textarea')
-      const $hint = $('.govuk-hint')
+      const hintId = $('.govuk-hint').attr('id')
 
-      const hintId = new RegExp(
-        WORD_BOUNDARY + $hint.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WORD_BOUNDARY}`
       )
 
-      expect($textarea.attr('aria-describedby'))
-        .toMatch(hintId)
+      expect($textarea.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the textarea as "described by" the hint and parent fieldset', () => {
       const $ = render('textarea', examples['with hint and described by'])
 
       const $textarea = $('.govuk-textarea')
-      const $hint = $('.govuk-hint')
+      const hintId = $('.govuk-hint').attr('id')
 
-      const hintId = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + $hint.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${hintId}${WORD_BOUNDARY}`
       )
 
-      expect($textarea.attr('aria-describedby'))
-        .toMatch(hintId)
+      expect($textarea.attr('aria-describedby')).toMatch(describedBy)
     })
   })
 
@@ -164,28 +162,29 @@ describe('Textarea', () => {
       const $ = render('textarea', examples['with error message'])
 
       const $component = $('.govuk-textarea')
-      const $errorMessage = $('.govuk-error-message')
+      const errorMessageId = $('.govuk-error-message').attr('id')
 
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + $errorMessage.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      expect($component.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the textarea as "described by" the error message and parent fieldset', () => {
-      const $ = render('textarea', examples['with error message and described by'])
-
-      const $component = $('.govuk-textarea')
-      const $errorMessage = $('.govuk-error-message')
-
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + $errorMessage.attr('id') + WORD_BOUNDARY
+      const $ = render(
+        'textarea',
+        examples['with error message and described by']
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      const $component = $('.govuk-textarea')
+      const errorMessageId = $('.govuk-error-message').attr('id')
+
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
+      )
+
+      expect($component.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('adds the error class to the textarea', () => {
@@ -211,27 +210,28 @@ describe('Textarea', () => {
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($component.attr('aria-describedby')).toMatch(describedByCombined)
     })
 
     it('associates the textarea as described by the hint, error message and parent fieldset', () => {
-      const $ = render('textarea', examples['with hint, error message and described by'])
+      const $ = render(
+        'textarea',
+        examples['with hint, error message and described by']
+      )
 
       const $component = $('.govuk-textarea')
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($component.attr('aria-describedby')).toMatch(describedByCombined)
     })
   })
 
@@ -253,7 +253,7 @@ describe('Textarea', () => {
       const $ = render('textarea', examples.default)
 
       const $label = $('.govuk-label')
-      expect($label.attr('for')).toEqual('more-detail')
+      expect($label.attr('for')).toBe('more-detail')
     })
 
     it('renders label as page heading', () => {
@@ -261,7 +261,7 @@ describe('Textarea', () => {
 
       const $label = $('.govuk-label')
       expect($('.govuk-label-wrapper')).toBeTruthy()
-      expect($label.attr('for')).toEqual('textarea-with-page-heading')
+      expect($label.attr('for')).toBe('textarea-with-page-heading')
     })
   })
 
@@ -270,7 +270,7 @@ describe('Textarea', () => {
       const $ = render('textarea', examples['with autocomplete attribute'])
 
       const $component = $('.govuk-textarea')
-      expect($component.attr('autocomplete')).toEqual('street-address')
+      expect($component.attr('autocomplete')).toBe('street-address')
     })
   })
 })

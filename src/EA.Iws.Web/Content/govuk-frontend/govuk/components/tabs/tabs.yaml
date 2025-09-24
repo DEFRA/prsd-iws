@@ -1,62 +1,66 @@
 params:
-- name: id
-  type: string
-  required: false
-  description: This is used for the main component and to compose the ID attribute for each item.
-- name: idPrefix
-  type: string
-  required: false
-  description: String to prefix id for each tab item if no id is specified on each item.
-- name: title
-  type: string
-  required: false
-  description: Title for the tabs table of contents.
-- name: items
-  type: array
-  required: true
-  description: Array of tab items.
-  params:
   - name: id
     type: string
-    required: true
-    description: Specific ID attribute for the tab item. If omitted, then `idPrefix` string is required instead.
-  - name: label
-    type: string
-    required: true
-    description: The text label of a tab item.
-  - name: attributes
-    type: object
     required: false
-    description: HTML attributes (for example data attributes) to add to the tab.
-  - name: panel
-    description: Content for the panel
-    type: object
+    description: This is used for the main component and to compose the ID attribute for each item.
+  - name: idPrefix
+    type: string
+    required: false
+    description: Optional prefix. This is used to prefix the `id` attribute for each tab item and panel, separated by `-`.
+  - name: title
+    type: string
+    required: false
+    description: Title for the tabs table of contents.
+  - name: items
+    type: array
     required: true
+    description: The individual tabs within the tabs component.
     params:
-      - name: text
+      - name: id
         type: string
         required: true
-        description: If `html` is set, this is not required. Text to use within each tab panel. If `html` is provided, the `text` option will be ignored.
-      - name: html
+        description: Specific ID attribute for the tab item. If omitted, then `idPrefix` string is required instead.
+      - name: label
         type: string
         required: true
-        description: If `text` is set, this is not required. HTML to use within the each tab panel. If `html` is provided, the `text` option will be ignored.
+        description: The text label of a tab item.
       - name: attributes
         type: object
         required: false
-        description: HTML attributes (for example data attributes) to add to the tab panel.
-- name: classes
-  type: string
-  required: false
-  description: Classes to add to the tabs component.
-- name: attributes
-  type: object
-  required: false
-  description: HTML attributes (for example data attributes) to add to the tabs component.
+        description: HTML attributes (for example data attributes) to add to the tab.
+      - name: panel
+        description: The contents of each tab within the tabs component. This is referenced as a panel.
+        type: object
+        required: true
+        params:
+          - name: text
+            type: string
+            required: true
+            description: If `html` is set, this is not required. Text to use within each tab panel. If `html` is provided, the `text` option will be ignored.
+          - name: html
+            type: string
+            required: true
+            description: If `text` is set, this is not required. HTML to use within each tab panel. If `html` is provided, the `text` option will be ignored.
+          - name: attributes
+            type: object
+            required: false
+            description: HTML attributes (for example data attributes) to add to the tab panel.
+  - name: classes
+    type: string
+    required: false
+    description: Classes to add to the tabs component.
+  - name: attributes
+    type: object
+    required: false
+    description: HTML attributes (for example data attributes) to add to the tabs component.
 
 examples:
   - name: default
-    data:
+    screenshot:
+      variants:
+        - default
+        - no-js
+    options:
       items:
         - label: Past day
           id: past-day
@@ -156,28 +160,10 @@ examples:
           panel:
             text: There is no data for this year yet, check back later
 
-  - name: tabs-with-anchor-in-panel
-    description: Ensure that anchors that are in tab panels work correctly
-    data:
-      items:
-        - label: Tab 1
-          id: tab-1
-          panel:
-            html: |
-              <h2 class="govuk-heading-l">Tab 1</h2>
-              <p class="govuk-body">Testing that when you click the anchor it moves to the anchor point successfully</p>
-              <p class="govuk-body"><a class="govuk-link" href="#anchor">Anchor</a></p>
-              <p class="govuk-body"><a id="anchor" tabIndex="0">Anchor Point</a></p>
-        - label: Tab 2
-          id: tab-2
-          panel:
-            html: |
-              <h2 class="govuk-heading-l">Tab 2</h2>
-
-# Hidden examples are not shown in the review app, but are used for tests and HTML fixtures
+  # Hidden examples are not shown in the review app, but are used for tests and HTML fixtures
   - name: classes
     hidden: true
-    data:
+    options:
       classes: app-tabs--custom-modifier
       items:
         - label: Tab 1
@@ -186,7 +172,7 @@ examples:
             text: Information about tabs
   - name: id
     hidden: true
-    data:
+    options:
       id: my-tabs
       items:
         - label: Tab 1
@@ -195,7 +181,7 @@ examples:
             text: Information about tabs
   - name: title
     hidden: true
-    data:
+    options:
       title: Custom title for Contents
       items:
         - label: Tab 1
@@ -204,7 +190,7 @@ examples:
             text: Information about tabs
   - name: attributes
     hidden: true
-    data:
+    options:
       attributes:
         data-attribute: my data value
       items:
@@ -214,7 +200,7 @@ examples:
             text: Information about tabs
   - name: item with attributes
     hidden: true
-    data:
+    options:
       items:
         - id: tab-1
           label: Tab 1
@@ -225,7 +211,7 @@ examples:
             data-attribute-2: my-attribute-2
   - name: panel with attributes
     hidden: true
-    data:
+    options:
       items:
         - id: tab-1
           label: Tab 1
@@ -236,16 +222,16 @@ examples:
               data-attribute-2: my-attribute-2
   - name: no item list
     hidden: true
-    data:
+    options:
       id: my-tabs
       classes: app-tabs--custom-modifier
   - name: empty item list
     hidden: true
-    data:
+    options:
       items: []
-  - name: with falsey values
+  - name: with falsy values
     hidden: true
-    data:
+    options:
       items:
         - label: Tab 1
           id: tab-1
@@ -253,14 +239,14 @@ examples:
             text: Panel 1 content
         - null
         - false
-        - ""
+        - ''
         - label: Tab 2
           id: tab-2
           panel:
             text: Panel 2 content
   - name: idPrefix
     hidden: true
-    data:
+    options:
       idPrefix: custom
       items:
         - label: Tab 1
@@ -271,7 +257,7 @@ examples:
             text: Panel 2 content
   - name: html as text
     hidden: true
-    data:
+    options:
       items:
         - label: Tab 1
           id: tab-1
@@ -283,7 +269,7 @@ examples:
             text: <p>Panel 2 content</p>
   - name: html
     hidden: true
-    data:
+    options:
       items:
         - label: Tab 1
           id: tab-1
@@ -293,3 +279,20 @@ examples:
           id: tab-2
           panel:
             html: <p>Panel 2 content</p>
+  - name: tabs-with-anchor-in-panel
+    description: Ensure that anchors that are in tab panels work correctly
+    options:
+      items:
+        - label: Tab 1
+          id: tab-1
+          panel:
+            html: |
+              <h2 class="govuk-heading-l">Tab 1</h2>
+              <p class="govuk-body">Testing that when you click the anchor it moves to the anchor point successfully</p>
+              <p class="govuk-body"><a class="govuk-link" href="#anchor">Anchor</a></p>
+              <p class="govuk-body"><a id="anchor" tabindex="0">Anchor Point</a></p>
+        - label: Tab 2
+          id: tab-2
+          panel:
+            html: |
+              <h2 class="govuk-heading-l">Tab 2</h2>

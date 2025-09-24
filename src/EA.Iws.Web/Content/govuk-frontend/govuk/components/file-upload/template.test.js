@@ -1,38 +1,30 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples, htmlWithClassName } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('file-upload')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { htmlWithClassName } = require('@govuk-frontend/helpers/tests')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 const WORD_BOUNDARY = '\\b'
 const WHITESPACE = '\\s'
 
 describe('File upload', () => {
+  let examples
+
+  beforeAll(async () => {
+    examples = await getExamples('file-upload')
+  })
+
   describe('default example', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('file-upload', examples.default)
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
-    it('renders with id', () => {
+    it('autopopulates default id from name', () => {
       const $ = render('file-upload', examples.default)
 
       const $component = $('.govuk-file-upload')
-      expect($component.attr('id')).toEqual('file-upload-1')
+      expect($component.attr('id')).toBe($component.attr('name'))
     })
 
     it('renders with name', () => {
       const $ = render('file-upload', examples.default)
 
       const $component = $('.govuk-file-upload')
-      expect($component.attr('name')).toEqual('file-upload-1')
+      expect($component.attr('name')).toBe('file-upload-1')
     })
 
     it('renders with a form group wrapper', () => {
@@ -44,36 +36,63 @@ describe('File upload', () => {
   })
 
   describe('custom options', () => {
+    it('renders with id', () => {
+      const $ = render('file-upload', examples.id)
+
+      const $component = $('.govuk-file-upload')
+      expect($component.attr('id')).not.toBe($component.attr('name'))
+      expect($component.attr('id')).toBe('file-upload-id')
+    })
+
     it('renders with classes', () => {
       const $ = render('file-upload', examples.classes)
 
       const $component = $('.govuk-file-upload')
-      expect($component.hasClass('app-file-upload--custom-modifier')).toBeTruthy()
+      expect(
+        $component.hasClass('app-file-upload--custom-modifier')
+      ).toBeTruthy()
     })
 
     it('renders with value', () => {
       const $ = render('file-upload', examples['with value'])
 
       const $component = $('.govuk-file-upload')
-      expect($component.val()).toEqual('C:\\fakepath\\myphoto.jpg')
+      expect($component.val()).toBe('C:\\fakepath\\myphoto.jpg')
     })
 
     it('renders with aria-describedby', () => {
       const $ = render('file-upload', examples['with describedBy'])
 
       const $component = $('.govuk-file-upload')
-      expect($component.attr('aria-describedby')).toMatch('some-id')
+      expect($component.attr('aria-describedby')).toMatch('test-target-element')
+    })
+
+    it('renders with multiple', () => {
+      const $ = render('file-upload', examples['allows multiple files'])
+
+      const $component = $('.govuk-file-upload')
+      expect($component.attr('multiple')).toBeTruthy()
+    })
+
+    it('renders with disabled', () => {
+      const $ = render('file-upload', examples.disabled)
+
+      const $component = $('.govuk-file-upload')
+      expect($component.attr('disabled')).toBeTruthy()
     })
 
     it('renders with attributes', () => {
       const $ = render('file-upload', examples.attributes)
 
       const $component = $('.govuk-file-upload')
-      expect($component.attr('accept')).toEqual('.jpg, .jpeg, .png')
+      expect($component.attr('accept')).toBe('.jpg, .jpeg, .png')
     })
 
     it('renders with a form group wrapper that has extra classes', () => {
-      const $ = render('file-upload', examples['with optional form-group classes'])
+      const $ = render(
+        'file-upload',
+        examples['with optional form-group classes']
+      )
 
       const $formGroup = $('.govuk-form-group')
       expect($formGroup.hasClass('extra-class')).toBeTruthy()
@@ -91,28 +110,26 @@ describe('File upload', () => {
       const $ = render('file-upload', examples['with hint text'])
 
       const $component = $('.govuk-file-upload')
-      const $hint = $('.govuk-hint')
+      const hintId = $('.govuk-hint').attr('id')
 
-      const hintId = new RegExp(
-        WORD_BOUNDARY + $hint.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(hintId)
+      expect($component.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the input as "described by" the hint and parent fieldset', () => {
       const $ = render('file-upload', examples['with hint and describedBy'])
 
       const $component = $('.govuk-file-upload')
-      const $hint = $('.govuk-hint')
+      const hintId = $('.govuk-hint').attr('id')
 
-      const hintId = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + $hint.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${hintId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(hintId)
+      expect($component.attr('aria-describedby')).toMatch(describedBy)
     })
   })
 
@@ -127,28 +144,26 @@ describe('File upload', () => {
       const $ = render('file-upload', examples.error)
 
       const $component = $('.govuk-file-upload')
-      const $errorMessage = $('.govuk-error-message')
+      const errorMessageId = $('.govuk-error-message').attr('id')
 
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + $errorMessage.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      expect($component.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the input as "described by" the error message and parent fieldset', () => {
       const $ = render('file-upload', examples['with error and describedBy'])
 
       const $component = $('.govuk-file-upload')
-      const $errorMessage = $('.govuk-error-message')
+      const errorMessageId = $('.govuk-error-message').attr('id')
 
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + $errorMessage.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      expect($component.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('includes the error class on the component', () => {
@@ -174,29 +189,97 @@ describe('File upload', () => {
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($component.attr('aria-describedby')).toMatch(describedByCombined)
     })
 
     it('associates the input as described by the hint, error message and parent fieldset', () => {
-      const describedById = 'some-id'
+      const describedById = 'test-target-element'
 
-      const $ = render('file-upload', examples['with error, describedBy and hint'])
+      const $ = render(
+        'file-upload',
+        examples['with error, describedBy and hint']
+      )
 
       const $component = $('.govuk-file-upload')
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + describedById + WHITESPACE + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}${describedById}${WHITESPACE}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($component.attr('aria-describedby')).toMatch(describedByCombined)
+    })
+  })
+
+  describe('`javascript` option', () => {
+    it('is falsy by default', () => {
+      const $ = render('file-upload', examples.javascript)
+
+      const $input = $('.govuk-form-group > .govuk-file-upload input')
+      expect($input.attr('data-module')).toBeUndefined()
+    })
+
+    it('adds the data-module attribute to the wrapper when `true`', () => {
+      const $ = render('file-upload', examples.enhanced)
+
+      const $wrapper = $('.govuk-form-group > .govuk-drop-zone')
+
+      expect($wrapper.attr('data-module')).toBe('govuk-file-upload')
+    })
+
+    it('adds the data-module attribute when receiving an object', () => {
+      const $ = render('file-upload', examples.translated)
+
+      const $wrapper = $('.govuk-form-group > .govuk-drop-zone')
+
+      expect($wrapper.attr('data-module')).toBe('govuk-file-upload')
+    })
+
+    it('enables the rendering of translation messages when true', () => {
+      const $ = render('file-upload', examples.translated)
+
+      const $wrapper = $('.govuk-form-group > .govuk-drop-zone')
+
+      expect($wrapper.attr('data-i18n.choose-files-button')).toBe(
+        'Dewiswch ffeil'
+      )
+      expect($wrapper.attr('data-i18n.drop-instruction')).toBe(
+        'neu ollwng ffeil'
+      )
+      expect($wrapper.attr('data-i18n.no-file-chosen')).toBe(
+        "Dim ffeil wedi'i dewis"
+      )
+      expect($wrapper.attr('data-i18n.multiple-files-chosen.one')).toBe(
+        "%{count} ffeil wedi'i dewis"
+      )
+      expect($wrapper.attr('data-i18n.multiple-files-chosen.other')).toBe(
+        "%{count} ffeil wedi'u dewis"
+      )
+      expect($wrapper.attr('data-i18n.entered-drop-zone')).toBe(
+        "Wedi mynd i mewn i'r parth gollwng"
+      )
+      expect($wrapper.attr('data-i18n.left-drop-zone')).toBe(
+        "Parth gollwng i'r chwith"
+      )
+    })
+
+    it('prevents the rendering of translation messages when false', () => {
+      const $ = render(
+        'file-upload',
+        examples['translated, no javascript enhancement']
+      )
+
+      const $input = $('.govuk-form-group > .govuk-file-upload')
+
+      expect($input.attr('data-i18n.select-files-button')).toBeUndefined()
+      expect($input.attr('data-i18n.files-selected-default')).toBeUndefined()
+      expect($input.attr('data-i18n.files-selected.one')).toBeUndefined()
+      expect($input.attr('data-i18n.files-selected.other')).toBeUndefined()
     })
   })
 
@@ -218,7 +301,7 @@ describe('File upload', () => {
       const $ = render('file-upload', examples.default)
 
       const $label = $('.govuk-label')
-      expect($label.attr('for')).toEqual('file-upload-1')
+      expect($label.attr('for')).toBe('file-upload-1')
     })
   })
 })

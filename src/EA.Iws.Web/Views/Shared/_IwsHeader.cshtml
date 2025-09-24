@@ -1,12 +1,12 @@
-﻿<div class="govuk-header__content govuk-!-padding-top-2">
-    <a href="~/" class="govuk-header__link govuk-header__link--service-name">
+﻿<div class="govuk-header__content">
+    <a href="~/" class="govuk-header__link govuk-header__service-name">
         International Waste Shipments (IWS)
     </a>
     @if (Request.IsAuthenticated)
     {
         if (User.IsInternalUser())
         {
-            <div style="margin-bottom:10px;">
+            <div>
                 @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "govuk-header__link govuk-link" })
             </div>
         }

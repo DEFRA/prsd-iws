@@ -1,20 +1,11 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('fieldset')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 describe('fieldset', () => {
-  it('passes accessibility tests', async () => {
-    const $ = render('fieldset', examples.default)
+  let examples
 
-    const results = await axe($.html())
-    expect(results).toHaveNoViolations()
+  beforeAll(async () => {
+    examples = await getExamples('fieldset')
   })
 
   it('creates a fieldset', () => {
@@ -28,28 +19,28 @@ describe('fieldset', () => {
     const $ = render('fieldset', examples.default)
 
     const $legend = $('.govuk-fieldset__legend')
-    expect($legend.get(0).tagName).toEqual('legend')
+    expect($legend.get(0).tagName).toBe('legend')
   })
 
   it('nests the legend within the fieldset', () => {
     const $ = render('fieldset', examples.default)
 
     const $legend = $('.govuk-fieldset__legend')
-    expect($legend.parent().get(0).tagName).toEqual('fieldset')
+    expect($legend.parent().get(0).tagName).toBe('fieldset')
   })
 
   it('allows you to set the legend text', () => {
     const $ = render('fieldset', examples.default)
 
     const $legend = $('.govuk-fieldset__legend')
-    expect($legend.text().trim()).toEqual('What is your address?')
+    expect($legend.text().trim()).toBe('What is your address?')
   })
 
   it('allows you to set the aria-describedby attribute', () => {
     const $ = render('fieldset', examples['with describedBy'])
 
     const $component = $('.govuk-fieldset')
-    expect($component.attr('aria-describedby')).toEqual('some-id')
+    expect($component.attr('aria-describedby')).toBe('test-target-element')
   })
 
   it('escapes HTML in the text argument', () => {
@@ -76,11 +67,15 @@ describe('fieldset', () => {
   it('renders html when passed as fieldset content', () => {
     const $ = render('fieldset', examples['html fieldset content'])
 
-    expect($('.govuk-fieldset .my-content').text().trim()).toEqual('This is some content to put inside the fieldset')
+    expect($('.govuk-fieldset .my-content').text().trim()).toBe(
+      'This is some content to put inside the fieldset'
+    )
   })
 
   it('renders nested components using `call`', () => {
-    const $ = render('fieldset', {}, '<div class="app-nested-component"></div>')
+    const $ = render('fieldset', {
+      callBlock: '<div class="app-nested-component"></div>'
+    })
 
     expect($('.govuk-fieldset .app-nested-component').length).toBeTruthy()
   })
@@ -103,13 +98,13 @@ describe('fieldset', () => {
     const $ = render('fieldset', examples.role)
 
     const $component = $('.govuk-fieldset')
-    expect($component.attr('role')).toEqual('group')
+    expect($component.attr('role')).toBe('group')
   })
 
   it('can have additional attributes', () => {
     const $ = render('fieldset', examples.attributes)
 
     const $component = $('.govuk-fieldset')
-    expect($component.attr('data-attribute')).toEqual('value')
+    expect($component.attr('data-attribute')).toBe('value')
   })
 })

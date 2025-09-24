@@ -29,8 +29,30 @@ $govuk-text-colour: govuk-colour("black") !default;
 ///
 /// @type Colour
 /// @access public
+/// @deprecated "$govuk-canvas-background-colour has been deprecated and will be removed in the next major
+/// version. Use `$govuk-template-background-colour` if you want to change the background of
+/// the `<html>` element and background colour of elements that need to match for visual
+/// continuity.
+$govuk-canvas-background-colour: govuk-colour("light-grey") !default;
 
-$govuk-canvas-background-colour: govuk-colour("light-grey", $legacy: "grey-3") !default;
+// Output a deprecation warning if $govuk-canvas-background-colour is being overridden
+// Remove in next major version.
+@if $govuk-canvas-background-colour != govuk-colour("light-grey") {
+  @include _warning(
+    "$govuk-canvas-background-colour",
+    "$govuk-canvas-background-colour has been deprecated and will be removed in the next major version."
+  );
+}
+
+/// Template background colour
+///
+/// Used by components that want to give the illusion of extending
+/// the template background (such as the footer and cookie banner).
+///
+/// @type Colour
+/// @access public
+
+$govuk-template-background-colour: govuk-colour("light-grey") !default;
 
 /// Body background colour
 ///
@@ -55,7 +77,7 @@ $govuk-print-text-colour: #000000 !default;
 /// @type Colour
 /// @access public
 
-$govuk-secondary-text-colour: govuk-colour("dark-grey", $legacy: "grey-1") !default;
+$govuk-secondary-text-colour: govuk-colour("dark-grey") !default;
 
 /// Focus colour
 ///
@@ -102,7 +124,7 @@ $govuk-success-colour: govuk-colour("green") !default;
 /// @type Colour
 /// @access public
 
-$govuk-border-colour: govuk-colour("mid-grey", $legacy: "grey-2");
+$govuk-border-colour: govuk-colour("mid-grey") !default;
 
 /// Input border colour
 ///
@@ -120,7 +142,7 @@ $govuk-input-border-colour: govuk-colour("black") !default;
 /// @type Colour
 /// @access public
 
-$govuk-hover-colour: govuk-colour("mid-grey", $legacy: "grey-3");
+$govuk-hover-colour: govuk-colour("mid-grey") !default;
 
 // =============================================================================
 // Links
@@ -138,18 +160,34 @@ $govuk-link-colour: govuk-colour("blue") !default;
 /// @type Colour
 /// @access public
 
-$govuk-link-visited-colour: govuk-colour("purple", $legacy: #4c2c92) !default;
+$govuk-link-visited-colour: govuk-colour("purple") !default;
 
 /// Link hover colour
 ///
 /// @type Colour
 /// @access public
 
-$govuk-link-hover-colour: govuk-colour("dark-blue", $legacy: "light-blue") !default;
+$govuk-link-hover-colour: govuk-colour("dark-blue") !default;
 
 /// Active link colour
 ///
 /// @type Colour
 /// @access public
 
-$govuk-link-active-colour: govuk-colour("black", $legacy: "light-blue") !default;
+$govuk-link-active-colour: govuk-colour("black") !default;
+
+// =============================================================================
+// Brand refresh
+// =============================================================================
+
+/// Updated template background colour
+///
+/// @type Colour
+/// @access private
+$_govuk-rebrand-template-background-colour: govuk-tint($govuk-brand-colour, 95%);
+
+/// Border colour for areas on a light-blue background
+///
+/// @type Colour
+/// @access private
+$_govuk-rebrand-border-colour-on-blue-tint-95: govuk-tint($govuk-brand-colour, 50%);

@@ -1,5 +1,4 @@
 @include govuk-exports("govuk/core/typography") {
-
   // Headings
 
   %govuk-heading-xl {
@@ -129,14 +128,16 @@
     @extend %govuk-body-s;
   }
 
+  // @deprecated
   %govuk-body-xs {
     @include govuk-text-colour;
-    @include govuk-font($size: 14);
+    @include govuk-font($size: _14);
 
     margin-top: 0;
     @include govuk-responsive-margin(4, "bottom");
   }
 
+  // @deprecated
   .govuk-body-xs {
     @extend %govuk-body-xs;
   }
@@ -157,7 +158,7 @@
   // Contextual adjustments
   // Add top padding to headings that appear directly after paragraphs.
 
-  %govuk-body-l  + %govuk-heading-l {
+  %govuk-body-l + %govuk-heading-l {
     padding-top: govuk-spacing(1);
 
     @include govuk-media-query($from: tablet) {
@@ -165,8 +166,8 @@
     }
   }
 
-  %govuk-body-m  + %govuk-heading-l,
-  %govuk-body-s  + %govuk-heading-l,
+  %govuk-body-m + %govuk-heading-l,
+  %govuk-body-s + %govuk-heading-l,
   %govuk-list + %govuk-heading-l {
     @include govuk-responsive-padding(4, "top");
   }

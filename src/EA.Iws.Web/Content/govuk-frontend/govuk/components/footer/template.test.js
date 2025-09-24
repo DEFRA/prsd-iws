@@ -1,35 +1,19 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('footer')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { nunjucksEnv, getExamples } = require('@govuk-frontend/lib/components')
 
 describe('footer', () => {
-  it('default example passes accessibility tests', async () => {
-    const $ = render('footer', examples.default)
+  let examples
 
-    const results = await axe($.html())
-    expect(results).toHaveNoViolations()
-  })
-
-  it('entire component must have a role of `contentinfo`', () => {
-    const $ = render('footer', examples.default)
-
-    const $component = $('.govuk-footer')
-    expect($component.attr('role')).toEqual('contentinfo')
+  beforeAll(async () => {
+    examples = await getExamples('footer')
   })
 
   it('renders attributes correctly', () => {
     const $ = render('footer', examples.attributes)
 
     const $component = $('.govuk-footer')
-    expect($component.attr('data-test-attribute')).toEqual('value')
-    expect($component.attr('data-test-attribute-2')).toEqual('value-2')
+    expect($component.attr('data-test-attribute')).toBe('value')
+    expect($component.attr('data-test-attribute-2')).toBe('value-2')
   })
 
   it('renders classes', () => {
@@ -49,19 +33,12 @@ describe('footer', () => {
   })
 
   describe('meta', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('footer', examples['with meta'])
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
     it('renders heading', () => {
       const $ = render('footer', examples['with meta'])
 
       const $component = $('.govuk-footer')
       const $heading = $component.find('h2.govuk-visually-hidden')
-      expect($heading.text()).toEqual('Items')
+      expect($heading.text()).toBe('Items')
     })
 
     it('renders default heading when none supplied', () => {
@@ -69,13 +46,13 @@ describe('footer', () => {
 
       const $component = $('.govuk-footer')
       const $heading = $component.find('h2.govuk-visually-hidden')
-      expect($heading.text()).toEqual('Support links')
+      expect($heading.text()).toBe('Support links')
     })
 
-    it('doesn\'t render footer link list when no items are provided', () => {
+    it("doesn't render footer link list when no items are provided", () => {
       const $ = render('footer', examples['with empty meta items'])
 
-      expect($('.govuk-footer__inline-list').length).toEqual(0)
+      expect($('.govuk-footer__inline-list')).toHaveLength(0)
     })
 
     it('renders links', () => {
@@ -84,8 +61,8 @@ describe('footer', () => {
       const $list = $('ul.govuk-footer__inline-list')
       const $items = $list.find('li.govuk-footer__inline-list-item')
       const $firstItem = $items.find('a.govuk-footer__link:first-child')
-      expect($items.length).toEqual(3)
-      expect($firstItem.attr('href')).toEqual('#1')
+      expect($items).toHaveLength(3)
+      expect($firstItem.attr('href')).toBe('#1')
       expect($firstItem.text()).toContain('Item 1')
     })
 
@@ -100,7 +77,9 @@ describe('footer', () => {
       const $ = render('footer', examples['meta html as text'])
 
       const $custom = $('.govuk-footer__meta-custom')
-      expect($custom.text()).toContain('GOV.UK Prototype Kit <strong>v7.0.1</strong>')
+      expect($custom.text()).toContain(
+        'GOV.UK Prototype Kit <strong>v7.0.1</strong>'
+      )
     })
 
     it('renders custom meta html', () => {
@@ -114,23 +93,16 @@ describe('footer', () => {
       const $ = render('footer', examples['with meta item attributes'])
 
       const $metaLink = $('.govuk-footer__meta .govuk-footer__link')
-      expect($metaLink.attr('data-attribute')).toEqual('my-attribute')
-      expect($metaLink.attr('data-attribute-2')).toEqual('my-attribute-2')
+      expect($metaLink.attr('data-attribute')).toBe('my-attribute')
+      expect($metaLink.attr('data-attribute-2')).toBe('my-attribute-2')
     })
   })
 
   describe('navigation', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('footer', examples['with navigation'])
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
     it('no items displayed when no item array is provided', () => {
       const $ = render('footer', examples['with empty navigation'])
 
-      expect($('.govuk-footer__navigation').length).toEqual(0)
+      expect($('.govuk-footer__navigation')).toHaveLength(0)
     })
 
     it('renders headings', () => {
@@ -140,8 +112,8 @@ describe('footer', () => {
       const $lastSection = $('.govuk-footer__section:last-child')
       const $firstHeading = $firstSection.find('h2.govuk-footer__heading')
       const $lastHeading = $lastSection.find('h2.govuk-footer__heading')
-      expect($firstHeading.text()).toEqual('Two column list')
-      expect($lastHeading.text()).toEqual('Single column list')
+      expect($firstHeading.text()).toBe('Two column list')
+      expect($lastHeading.text()).toBe('Single column list')
     })
 
     it('renders lists of links', () => {
@@ -150,8 +122,8 @@ describe('footer', () => {
       const $list = $('ul.govuk-footer__list')
       const $items = $list.find('li.govuk-footer__list-item')
       const $firstItem = $items.find('a.govuk-footer__link:first-child')
-      expect($items.length).toEqual(9)
-      expect($firstItem.attr('href')).toEqual('#1')
+      expect($items).toHaveLength(9)
+      expect($firstItem.attr('href')).toBe('#1')
       expect($firstItem.text()).toContain('Navigation item 1')
     })
 
@@ -159,8 +131,8 @@ describe('footer', () => {
       const $ = render('footer', examples['with navigation item attributes'])
 
       const $navigationLink = $('.govuk-footer__list .govuk-footer__link')
-      expect($navigationLink.attr('data-attribute')).toEqual('my-attribute')
-      expect($navigationLink.attr('data-attribute-2')).toEqual('my-attribute-2')
+      expect($navigationLink.attr('data-attribute')).toBe('my-attribute')
+      expect($navigationLink.attr('data-attribute-2')).toBe('my-attribute-2')
     })
 
     it('renders lists in columns', () => {
@@ -171,14 +143,20 @@ describe('footer', () => {
     })
 
     it('renders one-column section full width by default', () => {
-      const $ = render('footer', examples['with default width navigation (one column)'])
+      const $ = render(
+        'footer',
+        examples['with default width navigation (one column)']
+      )
 
       const $section = $('.govuk-footer__section')
       expect($section.hasClass('govuk-grid-column-full')).toBeTruthy()
     })
 
     it('renders two-column section full width by default', () => {
-      const $ = render('footer', examples['with default width navigation (two columns)'])
+      const $ = render(
+        'footer',
+        examples['with default width navigation (two columns)']
+      )
 
       const $section = $('.govuk-footer__section')
       expect($section.hasClass('govuk-grid-column-full')).toBeTruthy()
@@ -217,24 +195,36 @@ describe('footer', () => {
     })
 
     it('can be customised with `text` parameter', () => {
-      const $ = render('footer', examples['with custom text content licence and copyright notice'])
+      const $ = render(
+        'footer',
+        examples['with custom text content licence and copyright notice']
+      )
 
       const $licenceMessage = $('.govuk-footer__licence-description')
-      expect($licenceMessage.text()).toContain('Drwydded y Llywodraeth Agored v3.0')
+      expect($licenceMessage.text()).toContain(
+        'Drwydded y Llywodraeth Agored v3.0'
+      )
     })
 
     it('can be customised with `html` parameter', () => {
-      const $ = render('footer', examples['with custom HTML content licence and copyright notice'])
+      const $ = render(
+        'footer',
+        examples['with custom HTML content licence and copyright notice']
+      )
 
       const $licenceMessage = $('.govuk-footer__licence-description')
-      expect($licenceMessage.html()).toContain('<a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence-cymraeg/version/3/" rel="license">Drwydded y Llywodraeth Agored v3.0</a>')
+      expect($licenceMessage.html()).toContain(
+        '<a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence-cymraeg/version/3/" rel="license">Drwydded y Llywodraeth Agored v3.0</a>'
+      )
     })
 
     it('escapes HTML in the `text` parameter', () => {
       const $ = render('footer', examples['with HTML passed as text content'])
 
       const $licenceMessage = $('.govuk-footer__licence-description')
-      expect($licenceMessage.html()).toContain('&lt;a class=&quot;govuk-footer__link&quot; href=&quot;https://www.nationalarchives.gov.uk/doc/open-government-licence-cymraeg/version/3/&quot; rel=&quot;license&quot;&gt;Drwydded y Llywodraeth Agored v3.0&lt;/a&gt;')
+      expect($licenceMessage.html()).toContain(
+        '&lt;a class="govuk-footer__link" href="https://www.nationalarchives.gov.uk/doc/open-government-licence-cymraeg/version/3/" rel="license"&gt;Drwydded y Llywodraeth Agored v3.0&lt;/a&gt;'
+      )
     })
   })
 
@@ -247,24 +237,63 @@ describe('footer', () => {
     })
 
     it('can be customised with `text` parameter', () => {
-      const $ = render('footer', examples['with custom text content licence and copyright notice'])
+      const $ = render(
+        'footer',
+        examples['with custom text content licence and copyright notice']
+      )
 
       const $copyrightMessage = $('.govuk-footer__copyright-logo')
       expect($copyrightMessage.text()).toContain('© Hawlfraint y Goron')
     })
 
     it('can be customised with `html` parameter', () => {
-      const $ = render('footer', examples['with custom HTML content licence and copyright notice'])
+      const $ = render(
+        'footer',
+        examples['with custom HTML content licence and copyright notice']
+      )
 
       const $copyrightMessage = $('.govuk-footer__copyright-logo')
-      expect($copyrightMessage.html()).toContain('<span>Hawlfraint y Goron</span>')
+      expect($copyrightMessage.html()).toContain(
+        '<span>Hawlfraint y Goron</span>'
+      )
     })
 
     it('escapes HTML in the `text` parameter', () => {
       const $ = render('footer', examples['with HTML passed as text content'])
 
       const $copyrightMessage = $('.govuk-footer__copyright-logo')
-      expect($copyrightMessage.html()).toContain('&lt;span&gt;Hawlfraint y Goron&lt;/span&gt;')
+      expect($copyrightMessage.html()).toContain(
+        '&lt;span&gt;Hawlfraint y Goron&lt;/span&gt;'
+      )
+    })
+  })
+
+  describe('rebrand', () => {
+    it('Does not show the crown in the footer by default', () => {
+      const $ = render('footer', examples.default)
+
+      const $crown = $('.govuk-footer__crown')
+      expect($crown).toHaveLength(0)
+    })
+
+    it('Does render the crown if the `rebrand` option is set', () => {
+      const $ = render('footer', examples.rebrand)
+
+      const $crown = $('.govuk-footer__crown')
+      expect($crown).toHaveLength(1)
+    })
+
+    it('Does render the crown if the `govukRebrand` nunjucks global is set to true', () => {
+      const env = nunjucksEnv()
+      env.addGlobal('govukRebrand', true)
+
+      const $ = render('footer', {
+        ...examples.default,
+        env
+      })
+
+      const $crown = $('.govuk-footer__crown')
+      expect($crown).toHaveLength(1)
     })
   })
 })

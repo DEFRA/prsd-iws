@@ -2,9 +2,10 @@
 
 @include govuk-exports("govuk/component/error-summary") {
   .govuk-error-summary {
+    @include govuk-font($size: 19);
     @include govuk-text-colour;
     @include govuk-responsive-padding(4);
-    /*@include govuk-responsive-margin(8, "bottom");*/
+    @include govuk-responsive-margin(8, "bottom");
 
     border: $govuk-border-width solid $govuk-error-colour;
 
@@ -14,24 +15,34 @@
   }
 
   .govuk-error-summary__title {
-    @include govuk-font($size: 24, $weight: bold);
+    @include govuk-font-size($size: 24);
+    @include govuk-typography-weight-bold;
 
     margin-top: 0;
-    /*@include govuk-responsive-margin(4, "bottom");*/
+    @include govuk-responsive-margin(4, "bottom");
   }
 
   .govuk-error-summary__body {
-    @include govuk-font($size: 19);
-
     p {
-      margin-top: 0;
-      /*@include govuk-responsive-margin(4, "bottom");*/
+      margin-bottom: 0;
+    }
+
+    > * + * {
+      @include govuk-responsive-margin(4, "top");
+    }
+
+    > :last-child {
+      @include govuk-responsive-margin(1, "bottom");
     }
   }
 
   // Cross-component class - adjusts styling of list component
   .govuk-error-summary__list {
-    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  // Remove the bottom margin from the last list item
+  .govuk-error-summary__list li:last-child {
     margin-bottom: 0;
   }
 

@@ -726,7 +726,11 @@ button:focus,
 }
 
 #global-header a:focus {
-    color: #0b0c0c;
+    color: #1d70b8;
+}
+
+.govuk-logo-dot {
+    fill: #00ffe0;
 }
 
 @-ms-viewport {
@@ -755,12 +759,13 @@ button:focus,
 }
 
 #global-header {
-    background-color: #0b0c0c;
+    background-color: #1d70b8;
     width: 100%;
+    padding-bottom: 15px;
 }
 
     #global-header .header-wrapper {
-        background-color: #0b0c0c;
+        background-color: #1d70b8;
         max-width: 990px;
         margin: 0 auto;
         padding-top: 8px;
@@ -868,7 +873,7 @@ button:focus,
 }
 
 .govuk-notification-banner-content {
-    color: #0b0c0c;
+    color: #1d70b8;
     padding: 15px;
     background-color: #fff;
 }
@@ -1157,6 +1162,16 @@ hr {
     padding: 0;
 }
 
+/*.govuk-footer__section-break {
+    display: block;
+    border: 0;
+    height: 1px;
+    padding: 0;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    background: #8eb8dc;
+}*/
+
 .font-xsmall {
     font-family: "nta-extended", Arial, sans-serif;
     font-weight: 400;
@@ -1277,12 +1292,12 @@ ul, ol {
     text-align: right;
 }
 
-#session-link-sign-out{
+#session-link-sign-out {
     margin-left: 30px;
 }
 
-    @media (min-width: 641px) {
-        #link-sign-out, #session-link-sign-out {
+@media (min-width: 641px) {
+    #link-sign-out, #session-link-sign-out {
         font-size: 16px;
         line-height: 1.25;
     }

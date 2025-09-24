@@ -14,7 +14,7 @@
 @function _govuk-equilateral-height($base) {
   $square-root-of-three: 1.732;
 
-  @return calc($base / 2) * $square-root-of-three;
+  @return ($base / 2) * $square-root-of-three;
 }
 
 /// Arrow mixin
@@ -44,7 +44,7 @@
   border-style: solid;
   border-color: transparent; // 1
 
-  $perpendicular: calc($base / 2);
+  $perpendicular: $base / 2;
 
   @if not $height {
     $height: _govuk-equilateral-height($base);
@@ -53,7 +53,7 @@
   @if $direction == "up" {
     clip-path: polygon(50% 0%, 0% 100%, 100% 100%); // 3
 
-    border-width: 0 $perpendicular $height $perpendicular;
+    border-width: 0 $perpendicular $height;
     border-bottom-color: inherit; // 2
   } @else if $direction == "right" {
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%); // 3

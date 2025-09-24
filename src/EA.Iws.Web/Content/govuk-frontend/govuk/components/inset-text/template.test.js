@@ -1,39 +1,36 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('inset-text')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { getExamples } = require('@govuk-frontend/lib/components')
+const { indent } = require('nunjucks/src/filters')
+const { outdent } = require('outdent')
 
 describe('Inset text', () => {
+  let examples
+
+  beforeAll(async () => {
+    examples = await getExamples('inset-text')
+  })
+
   describe('by default', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('inset-text', examples.default)
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
     it('renders with classes', () => {
       const $ = render('inset-text', examples.classes)
 
       const $component = $('.govuk-inset-text')
-      expect($component.hasClass('app-inset-text--custom-modifier')).toBeTruthy()
+      expect(
+        $component.hasClass('app-inset-text--custom-modifier')
+      ).toBeTruthy()
     })
 
     it('renders with id', () => {
       const $ = render('inset-text', examples.id)
 
       const $component = $('.govuk-inset-text')
-      expect($component.attr('id')).toEqual('my-inset-text')
+      expect($component.attr('id')).toBe('my-inset-text')
     })
 
     it('renders nested components using `call`', () => {
-      const $ = render('inset-text', {}, '<div class="app-nested-component"></div>')
+      const $ = render('inset-text', {
+        callBlock: '<div class="app-nested-component"></div>'
+      })
 
       expect($('.govuk-inset-text .app-nested-component').length).toBeTruthy()
     })
@@ -42,23 +39,42 @@ describe('Inset text', () => {
       const $ = render('inset-text', examples['html as text'])
 
       const content = $('.govuk-inset-text').html().trim()
-      expect(content).toEqual('It can take &lt;b&gt;up to 8 weeks&lt;/b&gt; to register a lasting power of attorney if there are no mistakes in the application.')
+      expect(content).toBe(
+        'It can take &lt;b&gt;up to 8 weeks&lt;/b&gt; to register a lasting power of attorney if there are no mistakes in the application.'
+      )
     })
 
     it('allows HTML to be passed un-escaped', () => {
       const $ = render('inset-text', examples['with html'])
 
-      const mainContent = $('.govuk-inset-text .govuk-body:first-child').text().trim()
-      const warningContent = $('.govuk-inset-text .govuk-warning-text__text').text().trim()
-      expect(mainContent).toEqual('It can take up to 8 weeks to register a lasting power of attorney if there are no mistakes in the application.')
-      expect(warningContent).toEqual('Warning\n    You can be fined up to £5,000 if you don’t register.')
+      const mainContent = $('.govuk-inset-text .govuk-body:first-child')
+        .text()
+        .trim()
+
+      const warningContent = $('.govuk-inset-text .govuk-warning-text__text')
+        .text()
+        .trim()
+
+      expect(mainContent).toBe(
+        'It can take up to 8 weeks to register a lasting power of attorney if there are no mistakes in the application.'
+      )
+
+      expect(warningContent).toEqual(
+        indent(
+          outdent`
+            Warning
+            You can be fined up to £5,000 if you don’t register.
+          `,
+          6
+        )
+      )
     })
 
     it('renders with attributes', () => {
       const $ = render('inset-text', examples.attributes)
 
       const $component = $('.govuk-inset-text')
-      expect($component.attr('data-attribute')).toEqual('my data value')
+      expect($component.attr('data-attribute')).toBe('my data value')
     })
   })
 })

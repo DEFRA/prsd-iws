@@ -1,58 +1,80 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples, htmlWithClassName } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('select')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { htmlWithClassName } = require('@govuk-frontend/helpers/tests')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 const WORD_BOUNDARY = '\\b'
 const WHITESPACE = '\\s'
 
 describe('Select', () => {
+  let examples
+
+  beforeAll(async () => {
+    examples = await getExamples('select')
+  })
+
   describe('by default', () => {
-    it('passes accessibility tests', async () => {
-      const $ = render('select', examples.default)
-
-      const results = await axe($.html())
-      expect(results).toHaveNoViolations()
-    })
-
-    it('renders with id', () => {
+    it('autopopulates default id from name', () => {
       const $ = render('select', examples.default)
 
       const $component = $('.govuk-select')
-      expect($component.attr('id')).toEqual('select-1')
+      expect($component.attr('id')).toBe($component.attr('name'))
     })
 
     it('renders with name', () => {
       const $ = render('select', examples.default)
 
       const $component = $('.govuk-select')
-      expect($component.attr('name')).toEqual('select-1')
+      expect($component.attr('name')).toBe('select-1')
     })
 
     it('renders with items', () => {
       const $ = render('select', examples.default)
       const $items = $('.govuk-select option')
-      expect($items.length).toEqual(3)
+      expect($items).toHaveLength(3)
     })
 
-    it('renders item with value', () => {
+    it('includes the value attribute', () => {
       const $ = render('select', examples.default)
 
       const $firstItem = $('.govuk-select option:first-child')
-      expect($firstItem.attr('value')).toEqual('1')
+      expect($firstItem.attr('value')).toBe('1')
+    })
+
+    it('includes the value attribute when the value option is an empty string', () => {
+      const $ = render('select', examples['with falsy values'])
+
+      const $firstItem = $('.govuk-select option:nth(0)')
+      expect($firstItem.attr('value')).toBe('')
+    })
+
+    it('includes the value attribute when the value option is false', () => {
+      const $ = render('select', examples['with falsy values'])
+
+      const $secondItem = $('.govuk-select option:nth(1)')
+      expect($secondItem.attr('value')).toBe('false')
+    })
+
+    it('includes the value attribute when the value option is 0', () => {
+      const $ = render('select', examples['with falsy values'])
+
+      const $thirdItem = $('.govuk-select option:nth(2)')
+      expect($thirdItem.attr('value')).toBe('0')
+    })
+
+    it('omits the value attribute if no value option is provided', () => {
+      const $ = render('select', examples['without values'])
+
+      const $firstItem = $('.govuk-select option:first-child')
+      // Ideally we'd test for $firstItem.attr('value') == undefined but it's
+      // broken in Cheerio – https://github.com/cheeriojs/cheerio/issues/3237
+      expect($firstItem.toString()).not.toContain('value')
     })
 
     it('renders item with text', () => {
       const $ = render('select', examples.default)
 
       const $firstItem = $('.govuk-select option:first-child')
-      expect($firstItem.text()).toEqual('GOV.UK frontend option 1')
+      expect($firstItem.text()).toBe('GOV.UK frontend option 1')
     })
 
     it('renders item with selected', () => {
@@ -66,6 +88,13 @@ describe('Select', () => {
       const $ = render('select', examples['with selected value'])
 
       const $selectedItem = $('option[value="2"]')
+      expect($selectedItem.attr('selected')).toBeTruthy()
+    })
+
+    it('selects options with implicit value using selected value', () => {
+      const $ = render('select', examples['without values with selected value'])
+
+      const $selectedItem = $("option:contains('Green')")
       expect($selectedItem.attr('selected')).toBeTruthy()
     })
 
@@ -97,15 +126,23 @@ describe('Select', () => {
       expect($formGroup.hasClass('extra-class')).toBeTruthy()
     })
 
-    it('renders without falsely items', () => {
-      const $ = render('select', examples['with falsey values'])
+    it('renders without falsy items', () => {
+      const $ = render('select', examples['with falsy items'])
 
       const $items = $('.govuk-select option')
-      expect($items.length).toEqual(2)
+      expect($items).toHaveLength(2)
     })
   })
 
   describe('custom options', () => {
+    it('renders with id', () => {
+      const $ = render('select', examples.id)
+
+      const $component = $('.govuk-select')
+      expect($component.attr('id')).not.toBe($component.attr('name'))
+      expect($component.attr('id')).toBe('select-id')
+    })
+
     it('renders with classes', () => {
       const $ = render('select', examples['with full width override'])
 
@@ -117,14 +154,14 @@ describe('Select', () => {
       const $ = render('select', examples['with describedBy'])
 
       const $component = $('.govuk-select')
-      expect($component.attr('aria-describedby')).toMatch('some-id')
+      expect($component.attr('aria-describedby')).toMatch('test-target-element')
     })
 
     it('renders with attributes', () => {
       const $ = render('select', examples.attributes)
 
       const $component = $('.govuk-select')
-      expect($component.attr('data-attribute')).toEqual('my data value')
+      expect($component.attr('data-attribute')).toBe('my data value')
     })
 
     it('renders with attributes on items', () => {
@@ -133,12 +170,12 @@ describe('Select', () => {
       const $component = $('.govuk-select')
 
       const $firstInput = $component.find('option:first-child')
-      expect($firstInput.attr('data-attribute')).toEqual('ABC')
-      expect($firstInput.attr('data-second-attribute')).toEqual('DEF')
+      expect($firstInput.attr('data-attribute')).toBe('ABC')
+      expect($firstInput.attr('data-second-attribute')).toBe('DEF')
 
       const $secondInput = $component.find('option:last-child')
-      expect($secondInput.attr('data-attribute')).toEqual('GHI')
-      expect($secondInput.attr('data-second-attribute')).toEqual('JKL')
+      expect($secondInput.attr('data-attribute')).toBe('GHI')
+      expect($secondInput.attr('data-second-attribute')).toBe('JKL')
     })
   })
 
@@ -153,14 +190,13 @@ describe('Select', () => {
       const $ = render('select', examples.hint)
 
       const $select = $('.govuk-select')
-      const $hint = $('.govuk-hint')
+      const hintId = $('.govuk-hint').attr('id')
 
-      const hintId = new RegExp(
-        WORD_BOUNDARY + $hint.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WORD_BOUNDARY}`
       )
 
-      expect($select.attr('aria-describedby'))
-        .toMatch(hintId)
+      expect($select.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the select as "described by" the hint and parent fieldset', () => {
@@ -168,8 +204,7 @@ describe('Select', () => {
 
       const $select = $('.govuk-select')
 
-      expect($select.attr('aria-describedby'))
-        .toMatch('some-id')
+      expect($select.attr('aria-describedby')).toMatch('test-target-element')
     })
   })
 
@@ -184,14 +219,13 @@ describe('Select', () => {
       const $ = render('select', examples.error)
 
       const $input = $('.govuk-select')
-      const $errorMessage = $('.govuk-error-message')
+      const errorMessageId = $('.govuk-error-message').attr('id')
 
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + $errorMessage.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($input.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      expect($input.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the select as "described by" the error message and parent fieldset', () => {
@@ -199,8 +233,7 @@ describe('Select', () => {
 
       const $input = $('.govuk-select')
 
-      expect($input.attr('aria-describedby'))
-        .toMatch('some-id')
+      expect($input.attr('aria-describedby')).toMatch('test-target-element')
     })
 
     it('adds the error class to the select', () => {
@@ -226,12 +259,11 @@ describe('Select', () => {
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($component.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($component.attr('aria-describedby')).toMatch(describedByCombined)
     })
 
     it('associates the select as described by the hint, error message and parent fieldset', () => {
@@ -239,8 +271,9 @@ describe('Select', () => {
 
       const $component = $('.govuk-select')
 
-      expect($component.attr('aria-describedby'))
-        .toMatch('select-2-hint select-2-error')
+      expect($component.attr('aria-describedby')).toMatch(
+        'select-2-hint select-2-error'
+      )
     })
   })
 
@@ -262,7 +295,7 @@ describe('Select', () => {
       const $ = render('select', examples.default)
 
       const $label = $('.govuk-label')
-      expect($label.attr('for')).toEqual('select-1')
+      expect($label.attr('for')).toBe('select-1')
     })
   })
 })

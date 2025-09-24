@@ -1,20 +1,11 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('table')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 describe('Table', () => {
-  it('passes basic accessibility tests', async () => {
-    const $ = render('table', examples.default)
+  let examples
 
-    const results = await axe($.html())
-    expect(results).toHaveNoViolations()
+  beforeAll(async () => {
+    examples = await getExamples('table')
   })
 
   it('can have additional classes', () => {
@@ -26,7 +17,7 @@ describe('Table', () => {
   it('can have additional attributes', () => {
     const $ = render('table', examples.attributes)
 
-    expect($('.govuk-table').attr('data-foo')).toEqual('bar')
+    expect($('.govuk-table').attr('data-foo')).toBe('bar')
   })
 
   // =========================================================
@@ -35,17 +26,17 @@ describe('Table', () => {
 
   describe('captions', () => {
     it('can have custom text', () => {
-      const $ = render('table', examples['table with head and caption'])
+      const $ = render('table', examples['with head and caption'])
       const $caption = $('.govuk-table__caption')
 
       expect($caption.text()).toBe('Caption 1: Months and rates')
     })
 
     it('can have additional classes', () => {
-      const $ = render('table', examples['table with head and caption'])
+      const $ = render('table', examples['with head and caption'])
       const $caption = $('.govuk-table__caption')
 
-      expect($caption.hasClass('govuk-heading-m')).toBeTruthy()
+      expect($caption.hasClass('govuk-table__caption--m')).toBeTruthy()
     })
   })
 
@@ -55,10 +46,11 @@ describe('Table', () => {
 
   describe('column headers', () => {
     it('can be specified', () => {
-      const args = examples['table with head']
+      const args = examples['with head']
       const $ = render('table', args)
 
-      const headings = $('.govuk-table').find('thead tr th')
+      const headings = $('.govuk-table')
+        .find('thead tr th')
         .map((_, e) => $(e).text())
         .get()
 
@@ -74,7 +66,9 @@ describe('Table', () => {
 
       const $th = $('.govuk-table thead tr th')
 
-      expect($th.html()).toEqual('Foo &lt;script&gt;hacking.do(1337)&lt;/script&gt;')
+      expect($th.html()).toBe(
+        'Foo &lt;script&gt;hacking.do(1337)&lt;/script&gt;'
+      )
     })
 
     it('allow HTML when passed as HTML', () => {
@@ -82,11 +76,11 @@ describe('Table', () => {
 
       const $th = $('.govuk-table thead tr th')
 
-      expect($th.html()).toEqual('Foo <span>bar</span>')
+      expect($th.html()).toBe('Foo <span>bar</span>')
     })
 
     it('can have a format specified', () => {
-      const $ = render('table', examples['table with head'])
+      const $ = render('table', examples['with head'])
 
       const $th = $('.govuk-table thead tr th')
 
@@ -106,7 +100,7 @@ describe('Table', () => {
 
       const $th = $('.govuk-table thead tr th')
 
-      expect($th.attr('rowspan')).toEqual('2')
+      expect($th.attr('rowspan')).toBe('2')
     })
 
     it('can have colspan specified', () => {
@@ -114,7 +108,7 @@ describe('Table', () => {
 
       const $th = $('.govuk-table thead tr th')
 
-      expect($th.attr('colspan')).toEqual('2')
+      expect($th.attr('colspan')).toBe('2')
     })
 
     it('can have additional attributes', () => {
@@ -122,7 +116,7 @@ describe('Table', () => {
 
       const $th = $('.govuk-table thead tr th')
 
-      expect($th.attr('data-fizz')).toEqual('buzz')
+      expect($th.attr('data-fizz')).toBe('buzz')
     })
   })
 
@@ -135,13 +129,22 @@ describe('Table', () => {
       it('are not included', () => {
         const $ = render('table', examples.default)
 
-        const cells = $('.govuk-table').find('tbody tr td')
+        const cells = $('.govuk-table')
+          .find('tbody tr td')
           .map((_, e) => $(e).text())
           .get()
 
-        expect(cells).toEqual(
-          ['January', '£85', '£95', 'February', '£75', '£55', 'March', '£165', '£125']
-        )
+        expect(cells).toEqual([
+          'January',
+          '£85',
+          '£95',
+          'February',
+          '£75',
+          '£55',
+          'March',
+          '£165',
+          '£125'
+        ])
       })
     })
 
@@ -149,7 +152,8 @@ describe('Table', () => {
       it('are included', () => {
         const $ = render('table', examples['with firstCellIsHeader true'])
 
-        const headings = $('.govuk-table').find('tbody tr th')
+        const headings = $('.govuk-table')
+          .find('tbody tr th')
           .map((_, e) => $(e).text())
           .get()
 
@@ -157,11 +161,16 @@ describe('Table', () => {
       })
 
       it('have HTML escaped when passed as text', () => {
-        const $ = render('table', examples['firstCellIsHeader with html as text'])
+        const $ = render(
+          'table',
+          examples['firstCellIsHeader with html as text']
+        )
 
         const $th = $('.govuk-table tbody tr th')
 
-        expect($th.html()).toEqual('Foo &lt;script&gt;hacking.do(1337)&lt;/script&gt;')
+        expect($th.html()).toBe(
+          'Foo &lt;script&gt;hacking.do(1337)&lt;/script&gt;'
+        )
       })
 
       it('allow HTML when passed as HTML', () => {
@@ -169,7 +178,7 @@ describe('Table', () => {
 
         const $th = $('.govuk-table tbody tr th')
 
-        expect($th.html()).toEqual('Foo <span>bar</span>')
+        expect($th.html()).toBe('Foo <span>bar</span>')
       })
 
       it('are associated with their rows using scope="row"', () => {
@@ -177,7 +186,7 @@ describe('Table', () => {
 
         const $th = $('.govuk-table').find('tbody tr th')
 
-        expect($th.attr('scope')).toEqual('row')
+        expect($th.attr('scope')).toBe('row')
       })
 
       it('have the govuk-table__header class', () => {
@@ -197,19 +206,25 @@ describe('Table', () => {
       })
 
       it('can have rowspan specified', () => {
-        const $ = render('table', examples['firstCellIsHeader with rowspan and colspan'])
+        const $ = render(
+          'table',
+          examples['firstCellIsHeader with rowspan and colspan']
+        )
 
         const $th = $('.govuk-table').find('tbody tr th')
 
-        expect($th.attr('rowspan')).toEqual('2')
+        expect($th.attr('rowspan')).toBe('2')
       })
 
       it('can have colspan specified', () => {
-        const $ = render('table', examples['firstCellIsHeader with rowspan and colspan'])
+        const $ = render(
+          'table',
+          examples['firstCellIsHeader with rowspan and colspan']
+        )
 
         const $th = $('.govuk-table').find('tbody tr th')
 
-        expect($th.attr('colspan')).toEqual('2')
+        expect($th.attr('colspan')).toBe('2')
       })
 
       it('can have additional attributes', () => {
@@ -217,7 +232,7 @@ describe('Table', () => {
 
         const $th = $('.govuk-table').find('tbody tr th')
 
-        expect($th.attr('data-fizz')).toEqual('buzz')
+        expect($th.attr('data-fizz')).toBe('buzz')
       })
     })
   })
@@ -230,9 +245,15 @@ describe('Table', () => {
     it('can be specified', () => {
       const $ = render('table', examples.default)
 
-      const cells = $('.govuk-table').find('tbody tr')
+      const cells = $('.govuk-table')
+        .find('tbody tr')
         .map((_, tr) => {
-          return [$(tr).find('td').map((_, td) => $(td).text()).get()]
+          return [
+            $(tr)
+              .find('td')
+              .map((_, td) => $(td).text())
+              .get()
+          ]
         })
         .get()
 
@@ -243,12 +264,18 @@ describe('Table', () => {
       ])
     })
 
-    it('can be skipped when falsely', () => {
-      const $ = render('table', examples['with falsey items'])
+    it('can be skipped when falsy', () => {
+      const $ = render('table', examples['with falsy items'])
 
-      const cells = $('.govuk-table').find('tbody tr')
+      const cells = $('.govuk-table')
+        .find('tbody tr')
         .map((_, tr) => {
-          return [$(tr).find('td').map((_, td) => $(td).text()).get()]
+          return [
+            $(tr)
+              .find('td')
+              .map((_, td) => $(td).text())
+              .get()
+          ]
         })
         .get()
 
@@ -264,7 +291,9 @@ describe('Table', () => {
 
       const $td = $('.govuk-table td')
 
-      expect($td.html()).toEqual('Foo &lt;script&gt;hacking.do(1337)&lt;/script&gt;')
+      expect($td.html()).toBe(
+        'Foo &lt;script&gt;hacking.do(1337)&lt;/script&gt;'
+      )
     })
 
     it('allow HTML when passed as HTML', () => {
@@ -272,7 +301,7 @@ describe('Table', () => {
 
       const $td = $('.govuk-table td')
 
-      expect($td.html()).toEqual('Foo <span>bar</span>')
+      expect($td.html()).toBe('Foo <span>bar</span>')
     })
 
     it('can have a format specified', () => {
@@ -296,7 +325,7 @@ describe('Table', () => {
 
       const $td = $('.govuk-table td')
 
-      expect($td.attr('rowspan')).toEqual('2')
+      expect($td.attr('rowspan')).toBe('2')
     })
 
     it('can have colspan specified', () => {
@@ -304,7 +333,7 @@ describe('Table', () => {
 
       const $td = $('.govuk-table td')
 
-      expect($td.attr('colspan')).toEqual('2')
+      expect($td.attr('colspan')).toBe('2')
     })
 
     it('can have additional attributes', () => {
@@ -312,7 +341,7 @@ describe('Table', () => {
 
       const $td = $('.govuk-table td')
 
-      expect($td.attr('data-fizz')).toEqual('buzz')
+      expect($td.attr('data-fizz')).toBe('buzz')
     })
   })
 })

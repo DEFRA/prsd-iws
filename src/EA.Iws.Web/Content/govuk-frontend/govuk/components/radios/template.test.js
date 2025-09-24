@@ -1,23 +1,15 @@
-/**
- * @jest-environment jsdom
- */
-/* eslint-env jest */
-
-const axe = require('../../../../lib/axe-helper')
-
-const { render, getExamples, htmlWithClassName } = require('../../../../lib/jest-helpers')
-
-const examples = getExamples('radios')
+const { render } = require('@govuk-frontend/helpers/nunjucks')
+const { htmlWithClassName } = require('@govuk-frontend/helpers/tests')
+const { getExamples } = require('@govuk-frontend/lib/components')
 
 const WORD_BOUNDARY = '\\b'
 const WHITESPACE = '\\s'
 
 describe('Radios', () => {
-  it('default example passes accessibility tests', async () => {
-    const $ = render('radios', examples.default)
+  let examples
 
-    const results = await axe($.html())
-    expect(results).toHaveNoViolations()
+  beforeAll(async () => {
+    examples = await getExamples('radios')
   })
 
   it('render example with minimum required name and items', () => {
@@ -27,23 +19,23 @@ describe('Radios', () => {
 
     const $firstInput = $component.find('.govuk-radios__item:first-child input')
     const $firstLabel = $component.find('.govuk-radios__item:first-child label')
-    expect($firstInput.attr('name')).toEqual('example-default')
-    expect($firstInput.val()).toEqual('yes')
+    expect($firstInput.attr('name')).toBe('example-default')
+    expect($firstInput.val()).toBe('yes')
     expect($firstLabel.text()).toContain('Yes')
 
     const $lastInput = $component.find('.govuk-radios__item:last-child input')
     const $lastLabel = $component.find('.govuk-radios__item:last-child label')
-    expect($lastInput.attr('name')).toEqual('example-default')
-    expect($lastInput.val()).toEqual('no')
+    expect($lastInput.attr('name')).toBe('example-default')
+    expect($lastInput.val()).toBe('no')
     expect($lastLabel.text()).toContain('No')
   })
 
-  it('renders without falsely items', () => {
-    const $ = render('radios', examples['with falsey items'])
+  it('renders without falsy items', () => {
+    const $ = render('radios', examples['with falsy items'])
 
     const $component = $('.govuk-radios')
     const $items = $component.find('.govuk-radios__item input')
-    expect($items.length).toEqual(2)
+    expect($items).toHaveLength(2)
   })
 
   it('render classes', () => {
@@ -55,7 +47,7 @@ describe('Radios', () => {
   })
 
   it('renders initial aria-describedby on fieldset', () => {
-    const describedById = 'some-id'
+    const describedById = 'test-target-element'
 
     const $ = render('radios', examples['fieldset with describedBy'])
 
@@ -68,12 +60,15 @@ describe('Radios', () => {
 
     const $component = $('.govuk-radios')
 
-    expect($component.attr('data-attribute')).toEqual('value')
-    expect($component.attr('data-second-attribute')).toEqual('second-value')
+    expect($component.attr('data-attribute')).toBe('value')
+    expect($component.attr('data-second-attribute')).toBe('second-value')
   })
 
   it('render a custom class on the form group', () => {
-    const $ = render('radios', examples['with optional form-group classes showing group error'])
+    const $ = render(
+      'radios',
+      examples['with optional form-group classes showing group error']
+    )
 
     const $formGroup = $('.govuk-form-group')
     expect($formGroup.hasClass('govuk-form-group--error')).toBeTruthy()
@@ -85,15 +80,19 @@ describe('Radios', () => {
 
       const $component = $('.govuk-radios')
 
-      const $firstInput = $component.find('.govuk-radios__item:first-child input')
-      const $firstLabel = $component.find('.govuk-radios__item:first-child label')
-      expect($firstInput.attr('id')).toEqual('example-default')
-      expect($firstLabel.attr('for')).toEqual('example-default')
+      const $firstInput = $component.find(
+        '.govuk-radios__item:first-child input'
+      )
+      const $firstLabel = $component.find(
+        '.govuk-radios__item:first-child label'
+      )
+      expect($firstInput.attr('id')).toBe('example-default')
+      expect($firstLabel.attr('for')).toBe('example-default')
 
       const $lastInput = $component.find('.govuk-radios__item:last-child input')
       const $lastLabel = $component.find('.govuk-radios__item:last-child label')
-      expect($lastInput.attr('id')).toEqual('example-default-2')
-      expect($lastLabel.attr('for')).toEqual('example-default-2')
+      expect($lastInput.attr('id')).toBe('example-default-2')
+      expect($lastLabel.attr('for')).toBe('example-default-2')
     })
 
     it('render a matching label and input using custom idPrefix', () => {
@@ -101,15 +100,19 @@ describe('Radios', () => {
 
       const $component = $('.govuk-radios')
 
-      const $firstInput = $component.find('.govuk-radios__item:first-child input')
-      const $firstLabel = $component.find('.govuk-radios__item:first-child label')
-      expect($firstInput.attr('id')).toEqual('example-id-prefix')
-      expect($firstLabel.attr('for')).toEqual('example-id-prefix')
+      const $firstInput = $component.find(
+        '.govuk-radios__item:first-child input'
+      )
+      const $firstLabel = $component.find(
+        '.govuk-radios__item:first-child label'
+      )
+      expect($firstInput.attr('id')).toBe('example-id-prefix')
+      expect($firstLabel.attr('for')).toBe('example-id-prefix')
 
       const $lastInput = $component.find('.govuk-radios__item:last-child input')
       const $lastLabel = $component.find('.govuk-radios__item:last-child label')
-      expect($lastInput.attr('id')).toEqual('example-id-prefix-2')
-      expect($lastLabel.attr('for')).toEqual('example-id-prefix-2')
+      expect($lastInput.attr('id')).toBe('example-id-prefix-2')
+      expect($lastLabel.attr('for')).toBe('example-id-prefix-2')
     })
 
     it('render disabled', () => {
@@ -118,15 +121,17 @@ describe('Radios', () => {
       const $component = $('.govuk-radios')
 
       const $lastInput = $component.find('input[value="verify"]')
-      expect($lastInput.attr('disabled')).toEqual('disabled')
+      expect($lastInput.attr('disabled')).toBe('disabled')
     })
 
     it('render checked', () => {
-      const $ = render('radios', examples.prechecked)
+      const $ = render('radios', examples['with conditional item checked'])
 
       const $component = $('.govuk-radios')
-      const $lastInput = $component.find('.govuk-radios__item:last-child input')
-      expect($lastInput.attr('checked')).toEqual('checked')
+      const $firstInput = $component.find(
+        '.govuk-radios__item:first-child input'
+      )
+      expect($firstInput.attr('checked')).toBe('checked')
     })
 
     it('checks the radio that matches value', () => {
@@ -134,7 +139,7 @@ describe('Radios', () => {
 
       const $component = $('.govuk-radios')
       const $lastInput = $component.find('input[value="no"]')
-      expect($lastInput.attr('checked')).toEqual('checked')
+      expect($lastInput.attr('checked')).toBe('checked')
     })
 
     it('allows item.checked to override value', () => {
@@ -145,30 +150,35 @@ describe('Radios', () => {
     })
 
     describe('when they include attributes', () => {
-      it('it renders the attributes', () => {
+      it('renders the attributes', () => {
         const $ = render('radios', examples['items with attributes'])
 
         const $component = $('.govuk-radios')
 
-        const $firstInput = $component.find('.govuk-radios__item:first-child input')
-        expect($firstInput.attr('data-attribute')).toEqual('ABC')
-        expect($firstInput.attr('data-second-attribute')).toEqual('DEF')
+        const $firstInput = $component.find(
+          '.govuk-radios__item:first-child input'
+        )
+        expect($firstInput.attr('data-attribute')).toBe('ABC')
+        expect($firstInput.attr('data-second-attribute')).toBe('DEF')
 
-        const $lastInput = $component.find('.govuk-radios__item:last-child input')
-        expect($lastInput.attr('data-attribute')).toEqual('GHI')
-        expect($lastInput.attr('data-second-attribute')).toEqual('JKL')
+        const $lastInput = $component.find(
+          '.govuk-radios__item:last-child input'
+        )
+        expect($lastInput.attr('data-attribute')).toBe('GHI')
+        expect($lastInput.attr('data-second-attribute')).toBe('JKL')
       })
     })
 
     describe('when they include a hint', () => {
-      it('it renders the hint text', () => {
+      it('renders the hint text', () => {
         const $ = render('radios', examples['with hints on items'])
 
-        expect($('.govuk-radios__hint').text())
-          .toContain('You’ll have a user ID if you’ve registered for Self Assessment or filed a tax return online before.')
+        expect($('.govuk-radios__hint').text()).toContain(
+          'You’ll have a user ID if you’ve registered for Self Assessment or filed a tax return online before.'
+        )
       })
 
-      it('it renders the correct id attribute for the hint', () => {
+      it('renders the correct id attribute for the hint', () => {
         const $ = render('radios', examples['with hints on items'])
 
         expect($('.govuk-radios__hint').attr('id')).toBe('gateway-item-hint')
@@ -177,7 +187,9 @@ describe('Radios', () => {
       it('the input describedBy attribute matches the item hint id', () => {
         const $ = render('radios', examples['with hints on items'])
 
-        expect($('.govuk-radios__input').attr('aria-describedby')).toBe('gateway-item-hint')
+        expect($('.govuk-radios__input').attr('aria-describedby')).toBe(
+          'gateway-item-hint'
+        )
       })
     })
 
@@ -187,17 +199,26 @@ describe('Radios', () => {
 
         const $component = $('.govuk-radios')
 
-        const $hiddenConditional = $component.find('.govuk-radios__conditional').first()
+        const $hiddenConditional = $component
+          .find('.govuk-radios__conditional')
+          .first()
         expect($hiddenConditional.text()).toContain('Email address')
-        expect($hiddenConditional.hasClass('govuk-radios__conditional--hidden')).toBeTruthy()
+        expect(
+          $hiddenConditional.hasClass('govuk-radios__conditional--hidden')
+        ).toBeTruthy()
       })
 
       it('visible when checked because of checkedValue', () => {
-        const $ = render('radios', examples['with conditional items and pre-checked value'])
+        const $ = render(
+          'radios',
+          examples['with conditional items and pre-checked value']
+        )
 
         const $conditional = $('.govuk-radios__conditional').last()
         expect($conditional.text()).toContain('Mobile phone number')
-        expect($conditional.hasClass('govuk-radios__conditional--hidden')).toBeFalsy()
+        expect(
+          $conditional.hasClass('govuk-radios__conditional--hidden')
+        ).toBeFalsy()
       })
 
       it('visible by default when checked', () => {
@@ -205,9 +226,13 @@ describe('Radios', () => {
 
         const $component = $('.govuk-radios')
 
-        const $visibleConditional = $component.find('.govuk-radios__conditional').first()
+        const $visibleConditional = $component
+          .find('.govuk-radios__conditional')
+          .first()
         expect($visibleConditional.text()).toContain('Email')
-        expect($visibleConditional.hasClass('govuk-radios__conditional--hidden')).toBeFalsy()
+        expect(
+          $visibleConditional.hasClass('govuk-radios__conditional--hidden')
+        ).toBeFalsy()
       })
 
       it('with association to the input they are controlled by', () => {
@@ -216,9 +241,13 @@ describe('Radios', () => {
         const $component = $('.govuk-radios')
 
         const $firstInput = $component.find('.govuk-radios__input').first()
-        const $firstConditional = $component.find('.govuk-radios__conditional').first()
+        const $firstConditional = $component
+          .find('.govuk-radios__conditional')
+          .first()
 
-        expect($firstInput.attr('data-aria-controls')).toBe('conditional-how-contacted')
+        expect($firstInput.attr('data-aria-controls')).toBe(
+          'conditional-how-contacted'
+        )
         expect($firstConditional.attr('id')).toBe('conditional-how-contacted')
       })
 
@@ -226,7 +255,7 @@ describe('Radios', () => {
         const $ = render('radios', examples['with empty conditional'])
 
         const $component = $('.govuk-radios')
-        expect($component.find('.govuk-radios__conditional').length).toEqual(0)
+        expect($component.find('.govuk-radios__conditional')).toHaveLength(0)
       })
 
       it('does not associate radios with empty conditionals', () => {
@@ -234,6 +263,15 @@ describe('Radios', () => {
 
         const $input = $('.govuk-radios__input').first()
         expect($input.attr('data-aria-controls')).toBeFalsy()
+      })
+
+      // Indentation in nunjucks can mutate the value of textareas, since
+      // textarea value is defined between the html tags
+      it('does not add space to the input value of textareas inside conditionals', () => {
+        const $ = render('radios', examples['textarea in conditional'])
+
+        const $textarea = $('#conditional-textarea')
+        expect($textarea.text()).toBe('test\n')
       })
     })
 
@@ -273,14 +311,16 @@ describe('Radios', () => {
 
       const $fieldset = $('.govuk-fieldset')
 
-      expect($fieldset.attr('aria-describedby')).toMatch('example-multiple-hints-hint')
+      expect($fieldset.attr('aria-describedby')).toMatch(
+        'example-multiple-hints-hint'
+      )
     })
 
     it('associates the fieldset as "described by" the hint and parent fieldset', () => {
       const $ = render('radios', examples['with describedBy and hint'])
       const $fieldset = $('.govuk-fieldset')
 
-      expect($fieldset.attr('aria-describedby')).toMatch('some-id')
+      expect($fieldset.attr('aria-describedby')).toMatch('test-target-element')
     })
   })
 
@@ -295,7 +335,7 @@ describe('Radios', () => {
       const $ = render('radios', examples['with error message and idPrefix'])
       const $errorMessage = $('.govuk-error-message')
 
-      expect($errorMessage.attr('id')).toEqual('id-prefix-error')
+      expect($errorMessage.attr('id')).toBe('id-prefix-error')
     })
 
     it('falls back to using the name for the error message id', () => {
@@ -303,35 +343,36 @@ describe('Radios', () => {
 
       const $errorMessage = $('.govuk-error-message')
 
-      expect($errorMessage.attr('id')).toEqual('example-error-message-error')
+      expect($errorMessage.attr('id')).toBe('example-error-message-error')
     })
 
     it('associates the fieldset as "described by" the error message', () => {
       const $ = render('radios', examples['with fieldset and error message'])
 
       const $fieldset = $('.govuk-fieldset')
-      const $errorMessage = $('.govuk-error-message')
+      const errorMessageId = $('.govuk-error-message').attr('id')
 
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + $errorMessage.attr('id') + WORD_BOUNDARY
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($fieldset.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      expect($fieldset.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('associates the fieldset as "described by" the error message and parent fieldset', () => {
-      const $ = render('radios', examples['with fieldset, error message and describedBy'])
-
-      const $fieldset = $('.govuk-fieldset')
-      const $errorMessage = $('.govuk-error-message')
-
-      const errorMessageId = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + $errorMessage.attr('id') + WORD_BOUNDARY
+      const $ = render(
+        'radios',
+        examples['with fieldset, error message and describedBy']
       )
 
-      expect($fieldset.attr('aria-describedby'))
-        .toMatch(errorMessageId)
+      const $fieldset = $('.govuk-fieldset')
+      const errorMessageId = $('.govuk-error-message').attr('id')
+
+      const describedBy = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
+      )
+
+      expect($fieldset.attr('aria-describedby')).toMatch(describedBy)
     })
 
     it('renders with a form group wrapper that has an error state', () => {
@@ -350,27 +391,28 @@ describe('Radios', () => {
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($fieldset.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($fieldset.attr('aria-describedby')).toMatch(describedByCombined)
     })
 
     it('associates the fieldset as described by the hint, error message and parent fieldset', () => {
-      const $ = render('radios', examples['with hint, error message and describedBy'])
+      const $ = render(
+        'radios',
+        examples['with hint, error message and describedBy']
+      )
 
       const $fieldset = $('.govuk-fieldset')
       const errorMessageId = $('.govuk-error-message').attr('id')
       const hintId = $('.govuk-hint').attr('id')
 
-      const combinedIds = new RegExp(
-        WORD_BOUNDARY + 'some-id' + WHITESPACE + hintId + WHITESPACE + errorMessageId + WORD_BOUNDARY
+      const describedByCombined = new RegExp(
+        `${WORD_BOUNDARY}test-target-element${WHITESPACE}${hintId}${WHITESPACE}${errorMessageId}${WORD_BOUNDARY}`
       )
 
-      expect($fieldset.attr('aria-describedby'))
-        .toMatch(combinedIds)
+      expect($fieldset.attr('aria-describedby')).toMatch(describedByCombined)
     })
   })
 
@@ -378,7 +420,9 @@ describe('Radios', () => {
     it('have correct nesting order', () => {
       const $ = render('radios', examples.inline)
 
-      const $component = $('.govuk-form-group > .govuk-fieldset > .govuk-radios')
+      const $component = $(
+        '.govuk-form-group > .govuk-fieldset > .govuk-radios'
+      )
       expect($component.length).toBeTruthy()
     })
 
