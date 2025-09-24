@@ -24,7 +24,7 @@ SET @NotificationNumberCounter = 28;
 
 WHILE ( @Counter < 14)
 BEGIN
-	SET @NotificationCreateDate = CONVERT(DATETIME2, '2025-04-01');
+	SET @NotificationCreateDate = CONVERT(DATETIME2, '2025-10-01');
 	SET @Counter = @Counter + 1;
 	SET @NotificationNumberCounter = @NotificationNumberCounter + 1;
 	SET @NotificationStatus = 2;
@@ -284,8 +284,8 @@ VALUES (NEWID(),
 		@NumberOfShipments,
 		Cast(1000.0000 AS DECIMAL(18, 4)),
 		3,
-		Cast(N'2024-04-01' AS DATE),
-		Cast(N'2025-03-30' AS DATE),
+		Cast(N'2025-10-01' AS DATE),
+		Cast(N'2026-03-30' AS DATE),
 		1)
 
 SET @CarrierCollectionId = NEWID();
