@@ -1,7 +1,7 @@
 ﻿DECLARE @ValidFrom DATE;
 DECLARE @CompetentAuthority INT;
 
-SET @ValidFrom = '2025-04-01';
+SET @ValidFrom = '2025-10-01';
 SET @CompetentAuthority = 1; --EA (England)
 
 INSERT INTO [Lookup].[PricingStructure] (Id, CompetentAuthority, ShipmentQuantityRangeId, ActivityId, Price, PotentialRefund, ValidFrom) 
