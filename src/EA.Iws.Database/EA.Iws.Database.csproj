@@ -53,6 +53,12 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\TestData\20250908-0800-add-approved-sepa-internal-admin-user.sql" />
+    <Content Include="scripts\TestData\20250908-1047-create-ea-export-notifications-test-data-for-24-25.sql" />
+    <Content Include="scripts\TestData\20250908-1220-create-ea-export-notifications-test-data-for-25-26.sql" />
+    <Content Include="scripts\TestData\20250908-1315-create-ea-import-notifications-test-data-for-23-24.sql" />
+    <Content Include="scripts\TestData\20250908-1355-create-ea-import-notifications-test-data-for-24-25.sql" />
+    <Content Include="scripts\TestData\20250908-1430-create-ea-import-notifications-test-data-for-25-26.sql" />
     <Content Include="scripts\Update\0007-Support\20250610-1202-Alter-Notification-WasteCodeInfo-Table.sql" />
     <Content Include="scripts\Update\0007-Support\20240711-CCN067-Notification-Resubmitted-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20200918-328081-CR0044-add_ascension_island.sql" />
@@ -177,6 +183,7 @@
     <Content Include="scripts\Update\0007-Support\20250626-1159-Sepa-Price-Update-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20250804-1839-Sepa-address-update-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20250807-1735-Sepa-price-update-changes.sql" />
+    <Content Include="scripts\Update\0007-Support\20250903-1442-ea-price-matrices-for-2025-2026-changes.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
@@ -512,6 +519,7 @@
     <None Include="schema_compare.ps1" />
     <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
     <Content Include="scripts\TestData\20150511-164100-SFW-test-organisation.sql" />
+    <Content Include="scripts\TestData\20250908-0925-create-ea-export-notifications-test-data-for-before-24.sql" />
     <None Include="scripts\Update\0001-Release1\Sprint10\20150624-141556-add-table-recovery-info.sql" />
     <None Include="scripts\Update\0001-Release1\Sprint14\20150814-144111-delete-column-building-org-exporter-producer-importer-facility-carrier.sql" />
   </ItemGroup>

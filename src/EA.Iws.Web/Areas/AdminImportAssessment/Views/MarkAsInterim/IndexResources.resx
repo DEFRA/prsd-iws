@@ -124,7 +124,7 @@
     <value>Confirm interim status</value>
   </data>
   <data name="IsThisQuestionHeading" xml:space="preserve">
-    <value>Is this an iterim or non-interim notification?</value>
+    <value>Is this an interim or non-interim notification?</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Non-interim</value>
