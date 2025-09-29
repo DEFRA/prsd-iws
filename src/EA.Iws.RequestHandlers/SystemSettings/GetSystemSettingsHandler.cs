@@ -7,20 +7,20 @@
     using EA.Prsd.Core.Mediator;
     using System.Threading.Tasks;
 
-    internal class GetSystemSettingByIdHandler : IRequestHandler<GetSystemSettingById, SystemSettingData>
+    internal class GetSystemSettingsHandler : IRequestHandler<GetSystemSettings, SystemSettingData>
     {
         private readonly ISystemSettingRepository systemSettingRepository;
         private readonly IMap<SystemSetting, SystemSettingData> mapper;
 
-        public GetSystemSettingByIdHandler(ISystemSettingRepository systemSettingRepository, IMap<SystemSetting, SystemSettingData> mapper)
+        public GetSystemSettingsHandler(ISystemSettingRepository systemSettingRepository, IMap<SystemSetting, SystemSettingData> mapper)
         {
             this.systemSettingRepository = systemSettingRepository;
             this.mapper = mapper;
         }
 
-        public async Task<SystemSettingData> HandleAsync(GetSystemSettingById message)
+        public async Task<SystemSettingData> HandleAsync(GetSystemSettings systemSettings)
         {
-            var systemSetting = await systemSettingRepository.GetById(message.SystemSettingId);
+            var systemSetting = await systemSettingRepository.GetSystemSettings(systemSettings.CompetentAuthority, systemSettings.PriceTypeId);
 
             return mapper.Map(systemSetting);
         }
