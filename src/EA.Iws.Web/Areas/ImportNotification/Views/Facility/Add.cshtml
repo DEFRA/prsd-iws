@@ -48,7 +48,7 @@
                 </label>
             </div>
 
-            <div class="panel @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+            <div class="panel" id="companies-house-number">
                 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
                     @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
                     <span class="form-hint" id="RegNumHintUk">@BusinessResources.RegistrationNumberHintUK</span>
@@ -164,112 +164,112 @@
 
 @section scripts {
     <script type="text/javascript">
-        document.addEventListener("DOMContentLoaded", function () {
-            var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
-            if (isLimitedCompanyChecked) {
-                showImportFromCompHouseSection();
-            }
+
+    function hideFacilityFromCompanyHouseSection() {
+        $("#dvBtnImportName").hide();
+        $("#Business_Name").removeAttr('readonly');
+        $("#dvOrgNameDesction").hide();
+        $("#dvOrgNameDetails").show();
+        $("#dvRegNumber").show();
+        $('#companies-house-number').hide();
+        $("#dvAdditionalRegNumber").hide();
+        $("#hintImpButtonMsg").hide();
+        $("#hintOrgName").show();
+    }
+
+    function showFacilityFromCompanyHouseSection() {
+        $("#dvBtnImportName").show();
+        $("#btnImportName").show();
+        $("#Business_Name").attr('readonly', 'readonly');
+        $("#dvOrgNameDesction").show();
+        $("#dvOrgNameDetails").hide();
+        $("#dvRegNumber").hide();
+        $('#companies-house-number').show();
+        $("#dvAdditionalRegNumber").hide();
+        $("#hintImpButtonMsg").show();
+        $("#hintOrgName").hide();
+    }
+
+    function disabledFacilityImportNameButton() {
+        $('#btnImportName').attr('disabled', 'disabled');
+    }
+
+    function enabledFacilityImportNameButton() {
+        $('#btnImportName').removeAttr('disabled');
+    }
+
+    $(function () {
+        //On page load, controls hide
+        $("#btnImportName").hide();
+        $("#dvOrgNameDesction").hide();
+
+        //On page load, controls show
+        $("#hintOrgName").show();
+        $("#dvOrgNameDetails").show();
+
+        $('#SoleTrader').click(function () {
+            hideFacilityFromCompanyHouseSection();
+            $("#Business_Name").val("");
         });
 
-        function hideImportFromCompHouseSection() {
-            $("#btnImportName").hide();
-            $("#hintOrgName").show();
-            $("#Business_Name").removeAttr('readonly');
-            $("#dvOrgNameDesction").hide();
-            $("#dvOrgNameDetails").show();
-            $("#dvRegNumber").show();
-            $('#companies-house-number').hide();
-            $("#dvAdditionalRegNumber").hide();
-            $("#hintImpButtonMsg").hide();
+        $('#Partnership').click(function () {
+            hideFacilityFromCompanyHouseSection();
             $("#Business_Name").val("");
+        });
+
+        $('#LimitedCompany').click(function () {
+            showFacilityFromCompanyHouseSection();
+            $("#Business_Name").val("");
+        });
+
+        $('#Other').click(function () {
+            hideFacilityFromCompanyHouseSection();
+            $("#Business_Name").val("");
+        });
+
+        var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+        if (isLimitedCompany) {
+            showFacilityFromCompanyHouseSection();
+        } else {
+            hideFacilityFromCompanyHouseSection();
         }
 
-        function showImportFromCompHouseSection() {
-            $("#btnImportName").show();
-            $("#hintOrgName").hide();
-            $("#Business_Name").attr('readonly', 'readonly');
-            $("#dvOrgNameDesction").show();
-            $("#dvOrgNameDetails").hide();
-            $("#dvRegNumber").hide();
-            $('#companies-house-number').show();
-            $("#dvAdditionalRegNumber").show();
-            $("#hintImpButtonMsg").show();
+        var regNumber = $('#Business_RegistrationNumber').val();
+        if ((regNumber === null) || (regNumber === '')) {
+            disabledFacilityImportNameButton();
         }
 
-        function disabledImportNameButton() {
-            $('#btnImportName').attr('disabled', 'disabled');
-        }
-
-        function enabledImportNameButton() {
-            $('#btnImportName').removeAttr('disabled');
-        }
-
-        $(function () {
-            //On page load, controls hide
-            $("#btnImportName").hide();
-            $("#dvOrgNameDesction").hide();
-
-            //On page load, controls show
-            $("#hintOrgName").show();
-            $("#dvOrgNameDetails").show();
-
-            $("#dvAdditionalRegNumber").hide();
-            $("#hintImpButtonMsg").hide();
-
-            $("#lblPostCode").text("Post code");
-
-            $('#SoleTrader').click(function () {
-                hideImportFromCompHouseSection();
-            });
-
-            $('#Partnership').click(function () {
-                hideImportFromCompHouseSection();
-            });
-
-            $('#LimitedCompany').click(function () {
-                showImportFromCompHouseSection();
-            });
-
-            $('#Other').click(function () {
-                hideImportFromCompHouseSection();
-            });
-
+        $("#Business_RegistrationNumber").keyup(function () {
             var regNumber = $('#Business_RegistrationNumber').val();
             if ((regNumber === null) || (regNumber === '')) {
-                disabledImportNameButton();
+                disabledFacilityImportNameButton();
+            } else {
+                enabledFacilityImportNameButton();
             }
-
-            $("#Business_RegistrationNumber").keyup(function () {
-                var regNumber = $('#Business_RegistrationNumber').val();
-                if ((regNumber === null) || (regNumber === '')) {
-                    disabledImportNameButton();
-                } else {
-                    enabledImportNameButton();
-                }
-            });
-
-            $('#btnImportName').click(function () {
-                var regNumber = $('#Business_RegistrationNumber').val();
-                if ((regNumber !== null) && (regNumber !== '')) {
-                    $.ajax({
-                        url: 'GetCompanyName',
-                        type: 'Get',
-                        dataType: 'json',
-                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        data: { "registrationNumber": regNumber.toUpperCase() },
-                        success: function (result) {
-                            if (result.success) {
-                                $("#Business_Name").val(result.companyName);
-                                $("#errorMessage").text("");
-                            } else {
-                                $("#errorMessage").text(result.errorMsg);
-                                $("#Business_Name").val("");
-                            }
-                        }
-                    });
-                }
-                return false;
-            });
         });
+
+        $('#btnImportName').click(function () {
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber !== null) && (regNumber !== '')) {
+                $.ajax({
+                    url: '@Url.Action("GetCompanyName")',
+                    type: 'Get',
+                    dataType: 'json',
+                    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    data: { "registrationNumber": regNumber.toUpperCase() },
+                    success: function (result) {
+                        if (result.success) {
+                            $("#Business_Name").val(result.companyName);
+                            $("#errorMessage").text("");
+                        } else {
+                            $("#errorMessage").text(result.errorMsg);
+                            $("#Business_Name").val("");
+                        }
+                    }
+                });
+            }
+            return false;
+        });
+    });
     </script>
 }
