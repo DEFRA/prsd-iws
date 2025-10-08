@@ -71,7 +71,8 @@
                 Address = AddressTestData.GetValidTestAddress(countryId),
                 Contact = ContactTestData.GetValidTestContact(),
                 BusinessName = "Test exporter",
-                IsAddedToAddressBook = addedToAddressBook
+                IsAddedToAddressBook = addedToAddressBook,
+                Type = Core.Shared.BusinessType.LimitedCompany
             };
         }
 
@@ -82,7 +83,8 @@
                 Address = AddressTestData.GetValidTestAddress(countryId),
                 Contact = ContactTestData.GetValidTestContact(),
                 BusinessName = "Test producer",
-                IsAddedToAddressBook = addedToAddressBook
+                IsAddedToAddressBook = addedToAddressBook,
+                Type = Core.Shared.BusinessType.LimitedCompany
             };
         }
 
@@ -93,7 +95,8 @@
                 Address = AddressTestData.GetValidTestAddress(countryId),
                 Contact = ContactTestData.GetValidTestContact(),
                 BusinessName = "Test importer",
-                IsAddedToAddressBook = addedToAddressBook
+                IsAddedToAddressBook = addedToAddressBook,
+                Type = Core.Shared.BusinessType.LimitedCompany
             };
         }
 
@@ -107,7 +110,8 @@
                         Address = AddressTestData.GetValidTestAddress(countryId),
                         Contact = ContactTestData.GetValidTestContact(),
                         BusinessName = "Test facility",
-                        IsAddedToAddressBook = addedToAddressBook
+                        IsAddedToAddressBook = addedToAddressBook,
+                        Type = Core.Shared.BusinessType.LimitedCompany
                     }
             };
 
