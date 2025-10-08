@@ -88,6 +88,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Producer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation type.
+        /// </summary>
+        public static string OrganisationType {
+            get {
+                return ResourceManager.GetString("OrganisationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose an organisation type.
+        /// </summary>
+        public static string OrganisationTypeRequired {
+            get {
+                return ResourceManager.GetString("OrganisationTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
         /// </summary>
         public static string OrgNameHintMsg {

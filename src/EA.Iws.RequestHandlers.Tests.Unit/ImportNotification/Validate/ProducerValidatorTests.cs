@@ -152,7 +152,8 @@
                 Address = AddressTestData.GetValidTestAddress(),
                 Contact = ContactTestData.GetValidTestContact(),
                 BusinessName = "Mike and Eliot Bros.",
-                AreMultiple = false
+                AreMultiple = false,
+                Type = Core.Shared.BusinessType.LimitedCompany
             };
         }
     }

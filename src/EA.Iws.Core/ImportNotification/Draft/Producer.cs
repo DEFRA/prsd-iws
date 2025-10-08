@@ -18,7 +18,7 @@
         public Guid ImportNotificationId { get; private set; }
         public bool IsAddedToAddressBook { get; set; }
 
-        public BusinessType Type { get; set; }
+        public BusinessType? Type { get; set; }
 
         public string RegistrationNumber { get; set; }
 

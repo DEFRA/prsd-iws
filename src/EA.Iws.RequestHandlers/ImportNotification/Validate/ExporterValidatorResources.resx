@@ -123,6 +123,9 @@
   <data name="BusinessNameNotEmpty" xml:space="preserve">
     <value>please enter the organisation name</value>
   </data>
+  <data name="BusinessTypeNotEmpty" xml:space="preserve">
+    <value>please select the organisation type</value>
+  </data>
   <data name="ContactNotEmpty" xml:space="preserve">
     <value>please enter the contact details</value>
   </data>

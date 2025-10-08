@@ -151,7 +151,8 @@
             {
                 Address = AddressTestData.GetValidTestAddress(),
                 Contact = ContactTestData.GetValidTestContact(),
-                BusinessName = "Mike and Eliot Bros."
+                BusinessName = "Mike and Eliot Bros.",
+                Type = Core.Shared.BusinessType.LimitedCompany
             };
         }
     }
