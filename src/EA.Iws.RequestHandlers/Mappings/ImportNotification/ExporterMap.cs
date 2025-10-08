@@ -19,7 +19,7 @@
                 source.BusinessName,
                 mapper.Map<Domain.ImportNotification.Address>(source.Address),
                 mapper.Map<Domain.ImportNotification.Contact>(source.Contact),
-                source.Type,
+                source.Type.Value,
                 source.RegistrationNumber);
         }
     }
