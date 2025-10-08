@@ -56,7 +56,7 @@
                 BusinessName = (string.IsNullOrEmpty(model.Business.OrgTradingName) ? model.Business.Name : (model.Business.Name + " T/A " + model.Business.OrgTradingName)),
                 Contact = model.Contact.AsContact(),
                 IsAddedToAddressBook = model.IsAddedToAddressBook,
-                Type = model.BusinessType,
+                Type = model.BusinessType.Value,
                 RegistrationNumber = model.Business.RegistrationNumber
             };
 

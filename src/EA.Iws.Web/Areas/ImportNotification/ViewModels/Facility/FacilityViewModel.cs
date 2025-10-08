@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility
 {
+    using Core.ImportNotification.Draft;
+    using Core.Shared;
+    using EA.Iws.Web.Areas.ImportNotification.Views.Facility;
+    using Shared;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Core.ImportNotification.Draft;
-    using Core.Shared;
-    using Shared;
 
     public class FacilityViewModel
     {
@@ -16,7 +17,8 @@
 
         public BusinessViewModel Business { get; set; }
 
-        [Display(Name = "Type", ResourceType = typeof(FacilityViewModelResources))]
+        [Required(ErrorMessageResourceName = "OrganisationTypeRequired", ErrorMessageResourceType = typeof(AddResources))]
+        [Display(Name = "OrganisationType", ResourceType = typeof(AddResources))]
         public BusinessType? BusinessType { get; set; }
 
         public NotificationType NotificationType { get; set; }

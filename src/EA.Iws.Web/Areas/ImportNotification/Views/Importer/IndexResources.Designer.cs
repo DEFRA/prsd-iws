@@ -106,6 +106,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation type.
+        /// </summary>
+        public static string OrganisationType {
+            get {
+                return ResourceManager.GetString("OrganisationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose an organisation type.
+        /// </summary>
+        public static string OrganisationTypeRequired {
+            get {
+                return ResourceManager.GetString("OrganisationTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help with appropriate naming conventions.
         /// </summary>
         public static string OrgHelpSummary {

@@ -11,7 +11,7 @@
 
         public string BusinessName { get; set; }
 
-        public BusinessType Type { get; set; }
+        public BusinessType? Type { get; set; }
 
         public string RegistrationNumber { get; set; }
 
