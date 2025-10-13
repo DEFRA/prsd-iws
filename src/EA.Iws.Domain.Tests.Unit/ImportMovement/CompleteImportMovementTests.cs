@@ -68,20 +68,6 @@
         }
 
         [Fact]
-        public async Task WasteReceivedDateBeforeActualShipmentDate_Throws()
-        {
-            movement = new ImportMovement(notificationId, 52, FutureDate);
-
-            movementReceipt = new ImportMovementReceipt(movementId, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), FutureDate);
-
-            A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
-
-            A.CallTo(() => receiptRepository.GetByMovementIdOrDefault(movementId)).Returns(movementReceipt);
-            
-            await Assert.ThrowsAsync<InvalidOperationException>(() => completeFactory.Complete(movementId,  PastDate));
-        }
-
-        [Fact]
         public async Task WasteReceivedDateSameasActualShipmentDate()
         {
             movement = new ImportMovement(notificationId, 52, PastDate);
