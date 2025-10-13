@@ -23,10 +23,6 @@ namespace EA.Iws.Domain.ImportMovement
         {
             var movement = await movementRepository.Get(importMovementId);
 
-            if (date < movement.ActualShipmentDate)
-            {
-                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
-            }
             if (date > SystemTime.UtcNow.Date)
             {
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");
