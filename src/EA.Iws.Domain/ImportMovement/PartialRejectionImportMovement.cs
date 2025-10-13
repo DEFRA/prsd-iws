@@ -30,9 +30,13 @@
         {
             var movement = await movementRepository.Get(movementId);
 
-            if (date < movement.ActualShipmentDate)
+            if (string.IsNullOrEmpty(reason))
             {
-                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
+                throw new InvalidOperationException("The rejected reason cannot be null.");
+            }
+            if (rejectedQuantity >= actualQuantity)
+            {
+                throw new InvalidOperationException("The rejected quantity cannot be more than actual shipment quantity.");
             }
             if (date > SystemTime.UtcNow.Date)
             {

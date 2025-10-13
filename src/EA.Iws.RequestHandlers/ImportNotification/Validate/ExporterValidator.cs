@@ -33,6 +33,10 @@
             RuleFor(x => x.BusinessName)
                 .NotEmpty()
                 .WithLocalizedMessage(() => ExporterValidatorResources.BusinessNameNotEmpty);
+
+            RuleFor(x => x.Type)
+                .NotNull()
+                .WithLocalizedMessage(() => ExporterValidatorResources.BusinessTypeNotEmpty);
         }
 
         private bool ExporterContactIsNotEmpty(Exporter exporter)

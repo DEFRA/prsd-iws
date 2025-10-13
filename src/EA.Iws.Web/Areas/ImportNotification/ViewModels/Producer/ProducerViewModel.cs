@@ -2,6 +2,7 @@
 {
     using Core.ImportNotification.Draft;
     using EA.Iws.Core.Shared;
+    using EA.Iws.Web.Areas.ImportNotification.Views.Producer;
     using Shared;
     using System.ComponentModel.DataAnnotations;
 
@@ -17,8 +18,9 @@
 
         public bool IsAddedToAddressBook { get; set; }
 
-        [Display(Name = "Organisation type")]
-        public BusinessType BusinessType { get; set; }
+        [Required(ErrorMessageResourceName = "OrganisationTypeRequired", ErrorMessageResourceType = typeof(IndexResources))]
+        [Display(Name = "OrganisationType", ResourceType = typeof(IndexResources))]
+        public BusinessType? BusinessType { get; set; }
 
         public string RegistrationNumber { get; set; }
 

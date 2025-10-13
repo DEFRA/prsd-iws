@@ -75,21 +75,6 @@
         }
 
         [Fact]
-        public async Task WasteReceivedDateBeforeActualShipmentDate_Throws()
-        {
-            movement = new TestableMovement
-            {
-                Id = MovementId,
-                Date = FutureDate,
-                NotificationId = NotificationId
-            };
-
-            A.CallTo(() => movementRepository.GetById(MovementId)).Returns(movement);
-
-            await Assert.ThrowsAsync<InvalidOperationException>(() => partialRejectionFactory.PartailReject(movement.Id, PastDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes, 10, ShipmentQuantityUnits.Tonnes, Today));
-        }
-
-        [Fact]
         public async Task WasteReceivedDateSameasActualShipmentDate()
         {
             movement = new TestableMovement
