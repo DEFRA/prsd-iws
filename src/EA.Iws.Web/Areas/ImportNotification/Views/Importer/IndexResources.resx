@@ -132,6 +132,12 @@
   <data name="OrganisationSubtitle" xml:space="preserve">
     <value>Organisation</value>
   </data>
+  <data name="OrganisationType" xml:space="preserve">
+    <value>Organisation type</value>
+  </data>
+  <data name="OrganisationTypeRequired" xml:space="preserve">
+    <value>Choose an organisation type</value>
+  </data>
   <data name="OrgHelpSummary" xml:space="preserve">
     <value>Help with appropriate naming conventions</value>
   </data>

@@ -33,6 +33,10 @@
             RuleFor(x => x.BusinessName)
                 .NotEmpty()
                 .WithLocalizedMessage(() => ProducerValidatorResources.BusinessNameNotEmpty);
+
+            RuleFor(x => x.Type)
+                .NotEmpty()
+                .WithLocalizedMessage(() => ProducerValidatorResources.BusinessTypeNotEmpty);
         }
 
         private bool ProducerContactIsNotEmpty(Producer producer)

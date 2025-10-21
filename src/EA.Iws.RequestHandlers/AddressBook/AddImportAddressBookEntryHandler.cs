@@ -121,7 +121,7 @@
             }
             else
             {
-                business = FinalBusiness.CreateBusiness(producer.BusinessName, producer.Type, producer.RegistrationNumber, null);
+                business = FinalBusiness.CreateBusiness(producer.BusinessName, producer.Type.Value, producer.RegistrationNumber, null);
             }
 
             return new AddressBookRecord(address, business, contact);
@@ -141,7 +141,7 @@
             }
             else
             {
-                business = FinalBusiness.CreateBusiness(exporter.BusinessName, exporter.Type, exporter.RegistrationNumber, null);
+                business = FinalBusiness.CreateBusiness(exporter.BusinessName, exporter.Type.Value, exporter.RegistrationNumber, null);
             }
             return new AddressBookRecord(address, business, contact);
         }

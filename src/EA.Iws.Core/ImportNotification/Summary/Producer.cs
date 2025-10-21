@@ -15,7 +15,7 @@
 
         public bool AreMultiple { get; set; }
 
-        public BusinessType BusinessType { get; set; }
+        public BusinessType? BusinessType { get; set; }
 
         public string RegistrationNumber { get; set; }
 

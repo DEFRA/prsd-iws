@@ -136,17 +136,20 @@ BEGIN
 	IF @competentAuthority = 1 AND @submittedDate >= '2024-04-01'
 	BEGIN
 		--Use the new fees and logic
-		SELECT @fixedWasteCategoryFee = Price 
-		FROM [Lookup].[PricingFixedFee]
-		WHERE WasteCategoryTypeId IN (
-			SELECT nwt.WasteCategoryType FROM [Notification].[Notification] n
-			LEFT JOIN [Notification].[WasteType] nwt ON nwt.NotificationId = n.Id
-			WHERE n.id = @notificationId
-			UNION 
-			SELECT inwt.WasteCategoryType FROM [ImportNotification].[Notification] n
-			LEFT JOIN [ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
-			WHERE n.id = @notificationId)
-		AND CompetentAuthority = @competentAuthority
+		SET @fixedWasteCategoryFee = (
+		SELECT TOP 1 Price 
+			FROM [Lookup].[PricingFixedFee]
+			WHERE WasteCategoryTypeId IN (
+				SELECT nwt.WasteCategoryType FROM [Notification].[Notification] n
+				LEFT JOIN [Notification].[WasteType] nwt ON nwt.NotificationId = n.Id
+				WHERE n.id = @notificationId
+				UNION 
+				SELECT inwt.WasteCategoryType FROM [ImportNotification].[Notification] n
+				LEFT JOIN [ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
+				WHERE n.id = @notificationId)
+			AND CompetentAuthority = @competentAuthority AND ValidFrom <= @submittedDate
+			GROUP BY Price, ValidFrom 
+			ORDER BY ValidFrom DESC)
 
 		IF @fixedWasteCategoryFee > 0
 		BEGIN
@@ -212,7 +215,7 @@ BEGIN
 			LEFT JOIN ImportNotification.WasteComponent iwc ON iwc.ImportNotificationId = n.Id
 			WHERE n.id = @notificationId)
 			AND ValidFrom <= @submittedDate
-			GROUP BY Price, ValidFrom 
+			GROUP BY Price, ValidFrom
 			ORDER BY ValidFrom DESC);
 
 		SELECT @price += ISNULL(@wasteComponentFees, 0);
@@ -220,19 +223,20 @@ BEGIN
 
 	IF @competentAuthority = 2 AND @submittedDate >= '2024-04-01'
 	BEGIN
-		SET @fixedWasteCategoryFee = (SELECT TOP 1 Price
-		FROM [Lookup].[PricingFixedFee]
-		WHERE WasteCategoryTypeId IN (
-			SELECT nwt.WasteCategoryType 
-			FROM [Notification].[Notification] n
-			LEFT JOIN [Notification].[WasteType] nwt ON nwt.NotificationId = n.Id
-			WHERE n.id = @notificationId
-			UNION 
-			SELECT inwt.WasteCategoryType 
-			FROM [ImportNotification].[Notification] n
-			LEFT JOIN ImportNotification.WasteType inwt ON inwt.ImportNotificationId = n.Id
-			WHERE n.id = @notificationId)
-		AND CompetentAuthority = @competentAuthority)
+		SET @fixedWasteCategoryFee = (
+		SELECT TOP 1 Price 
+			FROM [Lookup].[PricingFixedFee]
+			WHERE WasteCategoryTypeId IN (
+				SELECT nwt.WasteCategoryType FROM [Notification].[Notification] n
+				LEFT JOIN [Notification].[WasteType] nwt ON nwt.NotificationId = n.Id
+				WHERE n.id = @notificationId
+				UNION 
+				SELECT inwt.WasteCategoryType FROM [ImportNotification].[Notification] n
+				LEFT JOIN [ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
+				WHERE n.id = @notificationId)
+			AND CompetentAuthority = @competentAuthority AND ValidFrom <= @submittedDate
+			GROUP BY Price, ValidFrom
+			ORDER BY ValidFrom DESC)
 
 		DECLARE @selfEnteringData BIT;
 		IF @fixedWasteCategoryFee > 0
