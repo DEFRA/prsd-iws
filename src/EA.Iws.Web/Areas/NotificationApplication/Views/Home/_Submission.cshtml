@@ -14,9 +14,9 @@
                 <div class="column" style="width:65%">
                     <div id="submit-side-bar" style="background-color:#f8f8f8">
                         <h3 style="text-align:center;">Notification access level:</h3>
-                        <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                            <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                        </div>
                     </div>
-                </div>
             }
             <div>
                 <br />
@@ -24,15 +24,20 @@
             <div>
                 @if (Model.ShowSubmitButton)
                 {
-                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { id = "btnSubmitNotification", @class = "govuk-button" })
+                    if (Model.CompetentAuthority == UKCompetentAuthority.England)
+                    {
+                        <button id="btnSubmitNotificationEA" class="govuk-button" data-module="govuk-button">Submit notification</button>
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { id = "btnSubmitNotification", @class = "govuk-button" })
+                    }
                 }
-
                 else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
                 {
                     <a href="#" class="govuk-button" disabled="disabled">Submit notification</a>
                     <p>You can submit this notification once you've completed all sections</p>
                 }
-
                 else if (Model.ShowResubmitButton)
                 {
                     using (Html.BeginForm("Resubmit", "Home", FormMethod.Post, new { id = Model.NotificationId }))
@@ -109,12 +114,11 @@
                 <div class="govuk-grid-column-full" style="padding: 0px !important">
                     <div id="submit-side-bar" class="submitsidebar">
                         <h3 style="text-align:center;">Notification access level:</h3>
-                        <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                            <h3 style="text-align:center;">@Model.AccessLevelText</h3>
+                        </div>
                     </div>
-                </div>
             }
         </div>
-
     </div>
 
     @if (!Model.IsNotificationComplete)
@@ -123,5 +127,26 @@
             <em>ALERT:</em> You need to address the highlighted section(s)
         </div>
     }
-
 </section>
+
+<div id="submit-confirmation-overlay" class="govuk-timeout-overlay js-hidden"></div>
+<div id="submit-confirmation-dialog" tabindex="-1" role="dialog" aria-modal="true" class="govuk-timeout-dialog js-hidden" aria-labelledby="submit-heading submit-message">
+    <div>
+        <h2 id="submit-heading" class="govuk-heading-m push--top">
+            About notification charges
+        </h2>
+        <p class="govuk-body govuk-timeout-dialog__message" aria-hidden="true">
+            The notification charge displayed is indicative based on the information you have provided. The final charge amount 
+            will be as displayed unless you are contacted by the competent authority after the notification has been reviewed
+            <br />
+        </p>
+        <div class="govuk-button-group">
+            <button id="submit-confirm-btn" class="govuk-button">
+                I understand
+            </button>
+            <a id="submit-cancel-btn" class="govuk-link">
+                Cancel
+            </a>
+        </div>
+    </div>
+</div>

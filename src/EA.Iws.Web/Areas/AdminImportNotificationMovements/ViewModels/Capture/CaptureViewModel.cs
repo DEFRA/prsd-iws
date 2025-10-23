@@ -202,10 +202,6 @@
 
             if (Receipt.IsComplete())
             {
-                if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
-                {
-                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
-                }
                 if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
                 {
                     yield return new ValidationResult(CaptureViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
@@ -242,11 +238,11 @@
             {
                 if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
                 {
-                    yield return new ValidationResult(String.Format(CaptureViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
+                    yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
                 if (Recovery.RecoveryDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(String.Format(CaptureViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
+                    yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
             }
 

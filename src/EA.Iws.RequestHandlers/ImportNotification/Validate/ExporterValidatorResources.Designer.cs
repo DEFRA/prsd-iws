@@ -79,6 +79,15 @@ namespace EA.Iws.RequestHandlers.ImportNotification.Validate {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to please select the organisation type.
+        /// </summary>
+        public static string BusinessTypeNotEmpty {
+            get {
+                return ResourceManager.GetString("BusinessTypeNotEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to please enter the contact details.
         /// </summary>
         public static string ContactNotEmpty {

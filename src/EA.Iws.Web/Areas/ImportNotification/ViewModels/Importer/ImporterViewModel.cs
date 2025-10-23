@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer
 {
+    using Core.ImportNotification.Draft;
+    using Core.Shared;
+    using EA.Iws.Web.Areas.ImportNotification.Views.Importer;
+    using Shared;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Core.ImportNotification.Draft;
-    using Core.Shared;
-    using Shared;
 
     public class ImporterViewModel
     {
@@ -14,7 +15,8 @@
 
         public BusinessViewModel Business { get; set; }
 
-        [Display(Name = "Type", ResourceType = typeof(ImporterViewModelResources))]
+        [Required(ErrorMessageResourceName = "OrganisationTypeRequired", ErrorMessageResourceType = typeof(IndexResources))]
+        [Display(Name = "OrganisationType", ResourceType = typeof(IndexResources))]
         public BusinessType? BusinessType { get; set; }
 
         public ContactViewModel Contact { get; set; }

@@ -11,6 +11,7 @@
 
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.AdditionalCharge.NotificationId)
+    @Html.HiddenFor(m => m.AdditionalCharge.IsAdditionalChargesRequired)
     @Html.HiddenFor(m => m.CompetentAuthority)
     @Html.HiddenFor(m => m.NotificationStatus)
     @Html.HiddenFor(m => m.ShowAdditionalCharge)
@@ -175,6 +176,7 @@
                         success: function (result) {
                             $('#AdditionalCharge_Amount').val(result);
                             $("#AdditionalCharge_Amount").removeAttr("readonly");
+                            $("#AdditionalCharge_IsAdditionalChargesRequired").val('true');
                         }
                     });
             });
@@ -182,6 +184,7 @@
             $('#additionalChargeNo').click(function () {
                 $('#AdditionalCharge_Amount').val(0);
                 $('#AdditionalCharge_Amount').attr('readonly', 'true');
+                $("#AdditionalCharge_IsAdditionalChargesRequired").val('false');
             });
         });
     </script>

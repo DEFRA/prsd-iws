@@ -180,10 +180,11 @@
                 }
             }
 
-            if (ActualShipmentDate.IsCompleted && Receipt.ReceivedDate.IsCompleted && (ActualShipmentDate.Date > Receipt.ReceivedDate.Date))
-            {
-                yield return new ValidationResult(CaptureViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
-            }
+            //This validation commented as per the customer requirement on 02/10/2025
+            //if (ActualShipmentDate.IsCompleted && Receipt.ReceivedDate.IsCompleted && (ActualShipmentDate.Date > Receipt.ReceivedDate.Date))
+            //{
+            //    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
+            //}
 
             if (Receipt.ShipmentTypes == ShipmentType.Accepted)
             {

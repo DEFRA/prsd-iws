@@ -1,16 +1,18 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Exporter
 {
-    using System.ComponentModel.DataAnnotations;
     using Core.ImportNotification.Draft;
     using EA.Iws.Core.Shared;
+    using EA.Iws.Web.Areas.ImportNotification.Views.Exporter;
     using Shared;
+    using System.ComponentModel.DataAnnotations;
 
     public class ExporterViewModel
     {
         public BusinessViewModel Business { get; set; }
 
-        [Display(Name = "Organisation type")]
-        public BusinessType BusinessType { get; set; }
+        [Required(ErrorMessageResourceName = "OrganisationTypeRequired", ErrorMessageResourceType = typeof(IndexResources))]
+        [Display(Name = "OrganisationType", ResourceType = typeof(IndexResources))]
+        public BusinessType? BusinessType { get; set; }
 
         public AddressViewModel Address { get; set; }
 

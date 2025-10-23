@@ -34,6 +34,11 @@
                                 (notificationStatus == NotificationStatus.DecisionRequiredBy) ||
                                 (notificationStatus == NotificationStatus.Reassessment))) ? true : false;
 
+            if (ShowAdditionalCharge == false)
+            {
+                AdditionalCharge.IsAdditionalChargesRequired = false;
+            }
+
             Address = new AddressData();
 
             Contact = new ContactData();
