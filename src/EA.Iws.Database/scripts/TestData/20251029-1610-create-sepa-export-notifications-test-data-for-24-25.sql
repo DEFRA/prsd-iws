@@ -107,7 +107,7 @@ VALUES (@FacilityCollectionId,
 		@IsInterim)
 
 INSERT [Notification].[Facility]
-	   ([Id],
+		([Id],
 		[Name],
 		[IsActualSiteOfTreatment],
 		[Type],
@@ -145,7 +145,7 @@ VALUES (NEWID(),
 		NULL)
 
 INSERT [Notification].[Importer]
-	   ([Id],
+		([Id],
 		[Name],
 		[Type],
 		[RegistrationNumber],
@@ -182,14 +182,14 @@ VALUES (NEWID(),
 
 SET @ProducerCollectionId = NEWID();
 INSERT [Notification].[ProducerCollection]
-	   ([Id],
+		([Id],
 		[NotificationId])
 VALUES (@ProducerCollectionId,
 		@NotificationId)
 
 SET @ProducerId = NEWID();
 INSERT [Notification].[Producer]
-	   ([Id],
+		([Id],
 		[Name],
 		[IsSiteOfExport],
 		[Type],
@@ -227,7 +227,7 @@ VALUES (@ProducerId,
 		NULL)
 
 INSERT [Notification].[Exporter]
-	   ([Id],
+		([Id],
 		[Name],
 		[Type],
 		[RegistrationNumber],
@@ -262,27 +262,27 @@ VALUES (NEWID(),
 		@NotificationId,
 		NULL)
 
-IF (@Counter = 1 OR @Counter = 8)
+IF (@Counter = 1 OR @Counter = 8 OR @Counter = 15 OR @Counter = 22)
 	BEGIN
 		SET @NumberOfShipments = 1;
 	END
-ELSE IF (@Counter = 2 OR @Counter = 9)
+ELSE IF (@Counter = 2 OR @Counter = 9 OR @Counter = 16 OR @Counter = 23)
 	BEGIN
 		SET @NumberOfShipments = 5;
 	END
-ELSE IF (@Counter = 3 OR @Counter = 10)
+ELSE IF (@Counter = 3 OR @Counter = 10 OR @Counter = 17 OR @Counter = 24)
 	BEGIN
 		SET @NumberOfShipments = 20;
 	END
-ELSE IF (@Counter = 4 OR @Counter = 11)
+ELSE IF (@Counter = 4 OR @Counter = 11 OR @Counter = 18 OR @Counter = 25)
 	BEGIN
 		SET @NumberOfShipments = 100;
 	END
-ELSE IF (@Counter = 5 OR @Counter = 12)
+ELSE IF (@Counter = 5 OR @Counter = 12 OR @Counter = 19 OR @Counter = 26)
 	BEGIN
 		SET @NumberOfShipments = 500;
 	END
-ELSE IF (@Counter = 6 OR @Counter = 13)
+ELSE IF (@Counter = 6 OR @Counter = 13 OR @Counter = 20 OR @Counter = 27)
 	BEGIN
 		SET @NumberOfShipments = 501;
 	END
@@ -292,7 +292,7 @@ ELSE
 	END
 
 INSERT [Notification].[ShipmentInfo]
-	   ([Id],
+		([Id],
 		[NotificationId],
 		[NumberOfShipments],
 		[Quantity],
@@ -311,13 +311,13 @@ VALUES (NEWID(),
 
 SET @CarrierCollectionId = NEWID();
 INSERT [Notification].[CarrierCollection]
-	   ([Id],
+		([Id],
 		[NotificationId])
 VALUES (@CarrierCollectionId,
 		@NotificationId)
 
 INSERT [Notification].[Carrier]
-	   ([Id],
+		([Id],
 		[Name],
 		[CarrierCollectionId],
 		[Type],
@@ -353,7 +353,7 @@ VALUES (NEWID(),
 		NULL)
 
 INSERT [Notification].[PackagingInfo]
-	   ([Id],
+		([Id],
 		[PackagingType],
 		[OtherDescription],
 		[NotificationId])
@@ -363,7 +363,7 @@ VALUES (NEWID(),
 		@NotificationId)
 
 INSERT [Notification].[PackagingInfo]
-	   ([Id],
+		([Id],
 		[PackagingType],
 		[OtherDescription],
 		[NotificationId])
@@ -381,25 +381,25 @@ INSERT INTO [Notification].[TransportRoute]
 
 DECLARE @CountryId UNIQUEIDENTIFIER;
 
-SELECT @CountryId = Id
-FROM   [Lookup].[Country]
-WHERE  [Name] = 'United Kingdom';
+SELECT	@CountryId = Id
+FROM	[Lookup].[Country]
+WHERE	[Name] = 'United Kingdom';
 
 DECLARE @CAId UNIQUEIDENTIFIER;
 
-SELECT @CAId = Id
-FROM   [Lookup].[CompetentAuthority]
-WHERE  [Code] = 'GB02';
+SELECT	@CAId = Id
+FROM	[Lookup].[CompetentAuthority]
+WHERE	[Code] = 'GB02';
 
 DECLARE @EntryId UNIQUEIDENTIFIER;
 DECLARE @ExitId UNIQUEIDENTIFIER;
 
-SELECT @EntryId = Id
-FROM   [Notification].[EntryOrExitPoint]
-WHERE  [Name] = 'Dover';
+SELECT	@EntryId = Id
+FROM	[Notification].[EntryOrExitPoint]
+WHERE	[Name] = 'Dover';
 
 INSERT [Notification].[StateOfExport]
-	   ([Id],
+		([Id],
 		[TransportRouteId],
 		[CountryId],
 		[CompetentAuthorityId],
@@ -410,20 +410,20 @@ VALUES (NEWID(),
 		@CAId,
 		@EntryId)
 
-SELECT @CountryId = Id
-FROM   [Lookup].[Country]
-WHERE  [Name] = 'France';
+SELECT	@CountryId = Id
+FROM	[Lookup].[Country]
+WHERE	[Name] = 'France';
 
-SELECT @CAId = Id
-FROM   [Lookup].[CompetentAuthority]
-WHERE  [Code] = 'F';
+SELECT	@CAId = Id
+FROM	[Lookup].[CompetentAuthority]
+WHERE	[Code] = 'F';
 
-SELECT @ExitId = Id
-FROM   [Notification].[EntryOrExitPoint]
-WHERE  [Name] = 'Bayonne';
+SELECT	@ExitId = Id
+FROM	[Notification].[EntryOrExitPoint]
+WHERE	[Name] = 'Bayonne';
 
 INSERT [Notification].[StateOfImport]
-	   ([Id],
+		([Id],
 		[TransportRouteId],
 		[CountryId],
 		[CompetentAuthorityId],
@@ -434,21 +434,21 @@ VALUES (NEWID(),
 		@CAId,
 		@ExitId)
 
-SELECT @CountryId = Id
-FROM   [Lookup].[country]
-WHERE  [Name] = 'France';
+SELECT	@CountryId = Id
+FROM	[Lookup].[country]
+WHERE	[Name] = 'France';
 
-SELECT @CAId = Id
-FROM   [Lookup].[CompetentAuthority]
-WHERE  [Code] = 'F';
+SELECT	@CAId = Id
+FROM	[Lookup].[CompetentAuthority]
+WHERE	[Code] = 'F';
 
-SELECT @EntryId = Id
-FROM   [Notification].[EntryOrExitPoint]
-WHERE  [Name] = 'Calais';
+SELECT	@EntryId = Id
+FROM	[Notification].[EntryOrExitPoint]
+WHERE	[Name] = 'Calais';
 
-SELECT @ExitId = Id
-FROM   [Notification].[EntryOrExitPoint]
-WHERE  [Name] = 'Lille';
+SELECT	@ExitId = Id
+FROM	[Notification].[EntryOrExitPoint]
+WHERE	[Name] = 'Lille';
 
 INSERT [Notification].[TransitState]
 		([Id],
