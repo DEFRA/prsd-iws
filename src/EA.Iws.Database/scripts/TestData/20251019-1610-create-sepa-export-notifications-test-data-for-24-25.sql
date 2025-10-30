@@ -15,29 +15,47 @@ DECLARE @NotificationStatus INT;
 DECLARE @NotificationType INT;
 DECLARE @NumberOfShipments INT;
 DECLARE @CompetentAuthority INT = 2;
+DECLARE @IsInterim INT;
 
 SELECT @UserId = Id
 	FROM	[Identity].[aspnetusers]
 	WHERE	[UserName] = 'sunily@sfwltd.co.uk';
 
 SET @Counter = 0;
-SET @NotificationNumberCounter = 14;
+SET @NotificationNumberCounter = 0;
 
-WHILE ( @Counter < 14)
+WHILE (@Counter < 28)
 BEGIN
 	SET @NotificationCreateDate = CONVERT(DATETIME2, '2024-04-01');
 	SET @Counter = @Counter + 1;
 	SET @NotificationNumberCounter = @NotificationNumberCounter + 1;
 	SET @NotificationStatus = 2;
-	SET @NotificationNumber = 'GB 0002 0090' + CONVERT(VARCHAR, @NotificationNumberCounter);
 
-IF @Counter <= 7
+	IF @Counter <= 9
+		BEGIN
+			SET @NotificationNumber = 'GB 0002 00900' + CONVERT(VARCHAR, @NotificationNumberCounter);
+		END
+	ELSE
+		BEGIN
+			SET @NotificationNumber = 'GB 0002 0090' + CONVERT(VARCHAR, @NotificationNumberCounter);
+		END
+
+IF @Counter <= 14
 	BEGIN
 		SET @NotificationType = 1;
 	END
 ELSE
 	BEGIN
 		SET @NotificationType = 2;
+	END
+
+IF (@Counter >= 8 AND @Counter <= 14) OR (@Counter >= 22 AND @Counter <= 28)
+	BEGIN
+		SET @IsInterim = 1;
+	END
+ELSE
+	BEGIN
+		SET @IsInterim = 0;
 	END
 
 INSERT [Notification].[Notification]
@@ -81,10 +99,12 @@ SET @FacilityCollectionId = NEWID();
 INSERT [Notification].[FacilityCollection] 
 		([Id],
 		 [NotificationId],
-		 [AllFacilitiesPreconsented])
+		 [AllFacilitiesPreconsented],
+		 [IsInterim])
 VALUES (@FacilityCollectionId,
 		@NotificationId,
-		1)
+		1,
+		@IsInterim)
 
 INSERT [Notification].[Facility]
 	   ([Id],
