@@ -59,7 +59,7 @@
     <Content Include="scripts\TestData\20250908-1315-create-ea-import-notifications-test-data-for-23-24.sql" />
     <Content Include="scripts\TestData\20250908-1355-create-ea-import-notifications-test-data-for-24-25.sql" />
     <Content Include="scripts\TestData\20250908-1430-create-ea-import-notifications-test-data-for-25-26.sql" />
-    <Content Include="scripts\TestData\20251019-1610-create-sepa-export-notifications-test-data-for-24-25.sql" />
+    <Content Include="scripts\TestData\20251029-1610-create-sepa-export-notifications-test-data-for-24-25.sql" />
     <Content Include="scripts\Update\0007-Support\20250610-1202-Alter-Notification-WasteCodeInfo-Table.sql" />
     <Content Include="scripts\Update\0007-Support\20240711-CCN067-Notification-Resubmitted-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20200918-328081-CR0044-add_ascension_island.sql" />
