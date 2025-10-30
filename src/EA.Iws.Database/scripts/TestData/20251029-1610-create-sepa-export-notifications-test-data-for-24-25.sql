@@ -268,19 +268,19 @@ IF (@Counter = 1 OR @Counter = 8)
 	END
 ELSE IF (@Counter = 2 OR @Counter = 9)
 	BEGIN
-		SET @NumberOfShipments = 6;
+		SET @NumberOfShipments = 5;
 	END
 ELSE IF (@Counter = 3 OR @Counter = 10)
 	BEGIN
-		SET @NumberOfShipments = 21;
+		SET @NumberOfShipments = 20;
 	END
 ELSE IF (@Counter = 4 OR @Counter = 11)
 	BEGIN
-		SET @NumberOfShipments = 101;
+		SET @NumberOfShipments = 100;
 	END
 ELSE IF (@Counter = 5 OR @Counter = 12)
 	BEGIN
-		SET @NumberOfShipments = 301;
+		SET @NumberOfShipments = 500;
 	END
 ELSE IF (@Counter = 6 OR @Counter = 13)
 	BEGIN
