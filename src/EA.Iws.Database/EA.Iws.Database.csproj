@@ -185,7 +185,8 @@
     <Content Include="scripts\Update\0007-Support\20250804-1839-Sepa-address-update-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20250807-1735-Sepa-price-update-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20250903-1442-ea-price-matrices-for-2025-2026-changes.sql" />
-    <Content Include="scripts\Update\0007-Support\20251029-1544-SEPA-2024-25-price-matrices-update.sql" />
+    <Content Include="scripts\Update\0007-Support\20251029-1544-SEPA-2024-25-price-matrices-update.sql" />    
+    <Content Include="scripts\Update\0007-Support\20251125-1610-Spanish-competent-authority-changes.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
