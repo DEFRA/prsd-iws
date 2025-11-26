@@ -22,7 +22,7 @@
         {
             var facility = await facilityRepository.GetByNotificationId(message.ImportNotificationId);
             
-            return mapper.Map<Core.ImportNotification.Summary.Facility>(facility.Facilities.SingleOrDefault());
+            return mapper.Map<Core.ImportNotification.Summary.Facility>(facility.Facilities.FirstOrDefault());
         }
     }
 }

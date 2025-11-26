@@ -150,15 +150,14 @@
 </body>
 </html>
 
-
 @{
     var sessionTimeoutInMinutes = System.Configuration.ConfigurationManager.AppSettings["Iws.SessionTimeoutInMinutes"];
     var sessionTimeoutWarningInMinutes = System.Configuration.ConfigurationManager.AppSettings["Iws.SessionTimeoutWarningInMinutes"];
 }
 
-<script>
-    var cookieConsent = GOVUK.getCookie("iws-cookie-consent");
+<script type="text/javascript">
 
+    var cookieConsent = GOVUK.getCookie("iws-cookie-consent");
     if (cookieConsent === null || cookieConsent === "null") {
         document.getElementById("global-cookie-message").style.display = "block";
     } else {
@@ -282,6 +281,43 @@
         document.getElementById("global-cookie-accept-message").style.display = "none";
         document.getElementById("global-cookie-reject-message").style.display = "none";
     }
+
+    // Session timeout
+    $("#session-link-sign-out").click(function () {
+        logout();
+    });
+
+    async function logout() {
+        let signOutUrl = null;
+        let logOffUrl = null;
+        if (location.host.includes('uat')) {
+            logOffUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/LogOff';
+            signOutUrl = location.protocol + '//' + location.host + '/' + location.pathname.split('/')[1] + '/Account/SessionSignedOut';
+        }
+        else {
+            logOffUrl = '/Account/LogOff';
+            signOutUrl = location.protocol + '//' + location.host + '/Account/SessionSignedOut';
+        }
+
+        await post(logOffUrl);
+        document.location.href = signOutUrl;
+    }
+
+    async function post(url) {
+        let tokenName = "__RequestVerificationToken";
+        let token = $('input[name=' + tokenName + ']').val();
+
+        let formData = new URLSearchParams();
+        formData.append(tokenName, token);
+
+        await $.ajax({
+            url: url,
+            type: "post",
+            data: formData.toString(),
+            contentType: 'application/x-www-form-urlencoded;charset=UTF-8'
+        });
+    }
+    //
 
     GOVUK.sessionTimeout.start(@sessionTimeoutInMinutes, @sessionTimeoutWarningInMinutes, "@Context.User.Identity.IsAuthenticated");
 </script>
