@@ -436,6 +436,7 @@
     <Compile Include="SharedUsers\DeleteSharedUserForNotification.cs" />
     <Compile Include="SharedUsers\GetSharedUserById.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationId.cs" />
+    <Compile Include="MessageBanner\GetMessageBanner.cs" />
     <Compile Include="SystemSettings\GetSystemSettingById.cs" />
     <Compile Include="SystemSettings\GetSystemSettings.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthorities.cs" />

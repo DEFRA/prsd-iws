@@ -875,6 +875,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MarkInterimStatusResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\IAdditionalChargeService.cs" />
@@ -1541,6 +1542,7 @@
     <Content Include="Views\Shared\EditorTemplates\AdditionalChargeData.cshtml" />
     <Content Include="Views\Shared\_SessionTimeout.cshtml" />
     <Content Include="Views\Account\SessionSignedOut.cshtml" />
+    <Content Include="Views\Shared\_IwsMessageBanner.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3975,6 +3977,7 @@
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionBaseViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonStringCollectionOptionalViewModel.cs" />
+    <Compile Include="ViewModels\Shared\MessageBannerViewModel.cs" />
     <Compile Include="ViewModels\Shared\YesNoChoiceViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\PackagingTypes\PackagingTypesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Shipment\ShipmentInfoViewModel.cs" />
