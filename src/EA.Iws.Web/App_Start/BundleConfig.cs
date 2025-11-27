@@ -45,10 +45,12 @@
                 "~/Scripts/govuk/govuk-template.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk-frontend").Include(
-                    "~/Scripts/govuk-frontend/govuk-frontend-4.0.1.min.js",
                     "~/Scripts/setup-govuk-frontend.js",
                     "~/govuk/vendor/polyfills/Function/prototype/bind.js",
                     "~/Scripts/show-hide-content.js"));
+
+            bundles.Add(new StyleBundle("~/Content/govuk-frontend").Include(
+                "~/Content/govuk-frontend.min.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk_iws").Include(
                 "~/Scripts/vendor/modernizr.custom.77028.js",
