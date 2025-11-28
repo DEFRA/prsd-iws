@@ -10,7 +10,7 @@
         </div>
         <div class="govuk-notification-banner__content">
             <h3>@Model.Title</h3>
-            <p>@Model.Description</p>
+            @Html.Raw(Model.Description)
         </div>
     </div>
 }
