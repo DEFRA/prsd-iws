@@ -280,11 +280,13 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_WasteRecovery.cshtml" />
     <Content Include="Areas\FinancialGuarantee\Views\web.config" />
     <Content Include="Areas\NotificationApplication\Views\Home\_OrganisationsInvolved.cshtml" />
+    <Content Include="Content\govuk-frontend.min.css" />
     <Content Include="Content\govuk-frontend\govuk\all.js" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\favicon.ico" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\favicon.svg" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-crest-2x.png" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-crest.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-crest.svg" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-icon-180.png" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-icon-192.png" />
     <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-icon-512.png" />
@@ -482,6 +484,7 @@
     <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\customs-office-required-radio-buttons.js" />
     <Content Include="Scripts\govuk-frontend\govuk-frontend-4.0.1.min.js" />
+    <Content Include="Scripts\govuk-frontend\govuk-frontend-5.13.0.min.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\helpers.js" />
     <Content Include="Scripts\internal-facility-table.js" />
@@ -5504,6 +5507,7 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ConsentPeriodExpiredResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsentPeriodExpiredResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityExceededResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5540,6 +5544,7 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpiredResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsentPeriodExpiredResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawnResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
