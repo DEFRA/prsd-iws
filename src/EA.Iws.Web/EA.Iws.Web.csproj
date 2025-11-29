@@ -982,6 +982,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\message-banner.js" />
     <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Scripts\session-timeout.js" />

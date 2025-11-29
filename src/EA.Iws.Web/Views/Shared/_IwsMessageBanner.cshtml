@@ -1,7 +1,4 @@
-﻿@model EA.Iws.Web.ViewModels.Shared.MessageBannerViewModel
-
-@if (Model != null && Model.IsActive)
-{
+﻿<div id="dvMessageBanner" style="display: none;margin-top:5px !important">
     <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
         <div class="govuk-notification-banner__header">
             <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
@@ -9,8 +6,8 @@
             </h2>
         </div>
         <div class="govuk-notification-banner__content">
-            <h3>@Model.Title</h3>
-            @Html.Raw(Model.Description)
+            <h3 id="title"></h3>
+            <span id="spDescription"></span>
         </div>
     </div>
-}
+</div>

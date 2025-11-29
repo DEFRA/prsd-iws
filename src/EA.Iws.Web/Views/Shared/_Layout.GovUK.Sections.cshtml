@@ -59,9 +59,7 @@
 
 <div class="govuk-width-container">
     @Html.Partial("_FeedbackBanner")
-    <div style="margin-top:5px;">
-        @Html.Action("MessageBanner", "Banner", new { area = string.Empty })
-    </div>
+    @Html.Partial("_IwsMessageBanner")
     <main id="content" class="govuk-main-wrapper app-main-class">
         @if (User.Identity.IsAuthenticated)
         {

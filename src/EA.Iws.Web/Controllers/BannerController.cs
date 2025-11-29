@@ -15,12 +15,11 @@
             this.mediator = mediator;
         }
 
-        // GET: Banner
         [HttpGet]
         [AllowAnonymous]
-        public ActionResult MessageBanner()
+        public async Task<JsonResult> MessageBannerAsync()
         {
-            var messageBannerData = Task.Run(() => mediator.SendAsync(new GetMessageBanner())).Result;
+            var messageBannerData = await mediator.SendAsync(new GetMessageBanner());
 
             if (messageBannerData != null)
             {
@@ -31,10 +30,10 @@
                     IsActive = true
                 };
 
-                return PartialView("_IwsMessageBanner", messageBannerViewModel);
+                return Json(messageBannerViewModel, JsonRequestBehavior.AllowGet);
             }
 
-            return PartialView("_IwsMessageBanner", new MessageBannerViewModel() { IsActive = false });
+            return Json(new MessageBannerViewModel() { IsActive = false }, JsonRequestBehavior.AllowGet);
         }
     }
 }
