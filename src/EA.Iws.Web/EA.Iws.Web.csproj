@@ -483,7 +483,6 @@
     <Content Include="Scripts\date-input\dateinput.js" />
     <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\customs-office-required-radio-buttons.js" />
-    <Content Include="Scripts\govuk-frontend\govuk-frontend-4.0.1.min.js" />
     <Content Include="Scripts\govuk-frontend\govuk-frontend-5.13.0.min.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\helpers.js" />
