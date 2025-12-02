@@ -8,6 +8,12 @@
         {
         }
 
+        public MessageBanner(string title, string description)
+        {
+            Title = title;
+            Description = description;
+        }
+
         public int ID { get; set; }
         public string Title { get; set; }
         public DateTime StartTime { get; set; }
