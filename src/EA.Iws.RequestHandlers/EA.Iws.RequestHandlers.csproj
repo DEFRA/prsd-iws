@@ -472,6 +472,7 @@
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
     <Compile Include="Mappings\NumberOfShipmentsHistoryMap.cs" />
     <Compile Include="Mappings\SharedUserMap.cs" />
+    <Compile Include="Mappings\MessageBannerMap.cs" />
     <Compile Include="Mappings\SystemSettingMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
@@ -711,6 +712,7 @@
     <Compile Include="SharedUsers\DeleteSharedUserForNotificationHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
+    <Compile Include="MessageBanner\GetMessageBannerHandler.cs" />
     <Compile Include="SystemSettings\GetSystemSettingByIdHandler.cs" />
     <Compile Include="SystemSettings\GetSystemSettingsHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />

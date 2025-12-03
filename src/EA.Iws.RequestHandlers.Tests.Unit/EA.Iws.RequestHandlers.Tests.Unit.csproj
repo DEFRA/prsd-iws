@@ -155,6 +155,7 @@
     <Compile Include="Mappings\BusinessTestBase.cs" />
     <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
+    <Compile Include="MessageBanner\GetMessageBannerHandlerTests.cs" />
     <Compile Include="MovementReceipt\GetMovementDateByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CancelMovementsHandlerTests.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandlerTests.cs" />
