@@ -7,7 +7,7 @@ SET @IsoAlpha2Code = (SELECT IsoAlpha2Code FROM [Lookup].[Country] WHERE [Name] 
 UPDATE
 		[Lookup].[CompetentAuthority]
 	SET
-		[IsTransitAuthority] = 0
+		[IsTransitAuthority] = 1
 	WHERE
 		[CountryId] = @CountryId AND [Code] = @IsoAlpha2Code;
 
@@ -28,4 +28,4 @@ INSERT INTO [Lookup].[CompetentAuthority]
 			,@IsoAlpha2Code
 			,@CountryId
 			,NULL
-			,1);
+			,0);
