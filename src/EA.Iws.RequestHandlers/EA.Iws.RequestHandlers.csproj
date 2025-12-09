@@ -175,6 +175,7 @@
     <Compile Include="CustomsOffice\GetEntryExitCustomsOfficeSelectionForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeSelectionForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeSelectionForNotificationByIdHandler.cs" />
+    <Compile Include="DeleteNotification\DeleteExportNotificationHandler.cs" />
     <Compile Include="Facilities\MarkInterimStatusToNotificationHandler.cs" />
     <Compile Include="Files\GetFileHandler.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />
@@ -689,6 +690,7 @@
     <Compile Include="Admin\GetNotificationInfoHandler.cs" />
     <Compile Include="Notification\GetArchivedNotificationByIdHandler.cs" />
     <Compile Include="Notification\GetArchiveNotificationsByUserHandler.cs" />
+    <Compile Include="Notification\GetExportNotificationIdHandler.cs" />
     <Compile Include="Notification\GetNotificationAdditionalChargesHandler.cs" />
     <Compile Include="Notification\GetNotificationAuditScreensHandler.cs" />
     <Compile Include="Notification\GetNotificationAuditTableHandler.cs" />

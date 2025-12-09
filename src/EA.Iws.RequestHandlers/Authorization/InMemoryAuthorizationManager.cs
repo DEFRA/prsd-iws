@@ -58,6 +58,7 @@
             { ExportNotificationPermissions.CanEditEwcCodes, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditOperationCodes, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanAddCarrier, new[] { UserRole.Administrator } },
+            { ExportNotificationPermissions.CanExternalUserDeleteNotification, new[] { UserRole.External } },
             { ExportMovementPermissions.CanCreateExportMovements, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportMovementPermissions.CanReadExportMovements, new[] { UserRole.Internal, UserRole.External, UserRole.Administrator, UserRole.ReadOnly } },
             { ExportMovementPermissions.CanReadExportMovementsExternal, new[] { UserRole.External } },

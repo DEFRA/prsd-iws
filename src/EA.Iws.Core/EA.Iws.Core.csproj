@@ -248,6 +248,7 @@
     <Compile Include="Notification\Audit\NotificationAuditScreenType.cs" />
     <Compile Include="Notification\Audit\NotificationAuditTable.cs" />
     <Compile Include="Notification\Audit\NotificationAuditType.cs" />
+    <Compile Include="Notification\DeleteExportNotificationDetails.cs" />
     <Compile Include="Notification\NotificationSharedUser.cs" />
     <Compile Include="Notification\NotificationSharedUserHistory.cs" />
     <Compile Include="Notification\UserNotificationsSummary.cs" />

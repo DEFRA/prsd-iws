@@ -1,0 +1,23 @@
+﻿<div id="govuk-service-navigation__container">
+    <ul class="govuk-service-navigation__list">
+        <li class="govuk-service-navigation__item">
+            @Html.ActionLink("Homepage", "Home", "Applicant", new { area = string.Empty }, null)
+        </li>
+        <li class="govuk-service-navigation__item">
+            @Html.ActionLink("New notification", "CompetentAuthority", "NewNotification", new { area = string.Empty }, null)
+        </li>
+        <li class="govuk-service-navigation__item">
+            @Html.ActionLink("Account details", "ChangeAccountDetails", "Registration", new { area = string.Empty }, null)
+        </li>
+        <li class="govuk-service-navigation__item">
+            @Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)
+        </li>
+        <li class="govuk-service-navigation__item">
+            @Html.ActionLink("Delete notification", "Index", "DeleteExportNotification")
+        </li>
+        <li>
+            @RenderSection("top_content_box", false)
+            @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+        </li>
+    </ul>
+</div>
