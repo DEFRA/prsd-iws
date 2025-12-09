@@ -3,13 +3,13 @@
     using EA.Iws.Requests.DeleteNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.Controllers;
-    using EA.Iws.Web.Infrastructure;
+    using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Iws.Web.ViewModels.DeleteExportNotification;
     using EA.Prsd.Core.Mediator;
-    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
+    [AuthorizeActivity(typeof(DeleteExportNotification))]
     public class DeleteExportNotificationController : Controller
     {
         private readonly IMediator mediator;

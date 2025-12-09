@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Views.DeleteExportNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification {0} has been deleted.
+        ///   Looks up a localized string similar to Notification {0} has been deleted successfully..
         /// </summary>
         public static string SuccessHeading {
             get {

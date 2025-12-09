@@ -213,7 +213,7 @@
                 return new DeleteExportNotificationDetails()
                 {
                     IsNotificationCanDeleted = false,
-                    ErrorMessage = "You don't have permission to delete the notification status as a " + EnumHelper.GetDisplayName(notificationStatus).ToLower()
+                    ErrorMessage = "You don't have permission to delete the notification status as a " + EnumHelper.GetDisplayName(notificationStatus).ToLower() + "."
                 };
             }
 
