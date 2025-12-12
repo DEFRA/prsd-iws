@@ -10,5 +10,3 @@ UPDATE
 		[IsoAlpha2Code] = @IsoAlpha2Code AND [Name] = 'Macedonia';
 
 GO
-PRINT N'Macedonia updated to North Macedonia successfully.';
-GO
