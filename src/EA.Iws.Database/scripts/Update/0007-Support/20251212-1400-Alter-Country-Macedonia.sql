@@ -1,8 +1,6 @@
-DECLARE @CountryId UNIQUEIDENTIFIER;
 DECLARE @IsoAlpha2Code NCHAR(2);
 
-SET @CountryId = (SELECT Id FROM [Lookup].[Country] WHERE [IsoAlpha2Code] = 'MK');
-SET @IsoAlpha2Code = (SELECT IsoAlpha2Code FROM [Lookup].[Country] WHERE [IsoAlpha2Code] = 'MK');
+SET @IsoAlpha2Code = 'MK';
 
 UPDATE
 		[Lookup].[Country]
