@@ -56,6 +56,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeCollection.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
     <Compile Include="IInterimMovementDocumentGenerator.cs" />
+    <Compile Include="IMessageBannerRepository.cs" />
     <Compile Include="ImportMovement\CancelImportMovement.cs" />
     <Compile Include="ImportMovement\CompleteImportMovement.cs" />
     <Compile Include="ImportMovement\ICompleteImportMovement.cs" />
@@ -444,6 +445,7 @@
     <Compile Include="NotificationApplication\Producer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="NotificationApplication\Shipment\ShipmentInfo.cs" />
+    <Compile Include="MessageBanner.cs" />
     <Compile Include="SystemSetting.cs" />
     <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />

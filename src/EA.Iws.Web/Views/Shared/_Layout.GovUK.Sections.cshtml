@@ -18,10 +18,6 @@
     @Html.Partial("_IwsHeader")
 }
 
-@*@section proposition_header {
-    @Html.Partial("_IwsNavigation")
-}*@
-
 @section after_header {
 
 }
@@ -63,6 +59,7 @@
 
 <div class="govuk-width-container">
     @Html.Partial("_FeedbackBanner")
+    @Html.Partial("_IwsMessageBanner")
     <main id="content" class="govuk-main-wrapper app-main-class">
         @if (User.Identity.IsAuthenticated)
         {

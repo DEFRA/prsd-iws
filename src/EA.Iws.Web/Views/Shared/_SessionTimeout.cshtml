@@ -1,5 +1,5 @@
 ﻿
-<div id="govuk-timeout-overlay" class="govuk-timeout-overlay" style="display:none"></div>
+<div id="govuk-timeout-overlay" class="govuk-timeout-overlay govuk-template--rebranded" style="display:none"></div>
 <div id="govuk-timeout-dialog" tabindex="-1" role="dialog" aria-modal="true" class="govuk-timeout-dialog" aria-labelledby="govuk-timeout-heading govuk-timeout-message" style="display:none">
     <div>
         <h2 id="govuk-timeout-heading" class="govuk-heading-m push--top">
@@ -17,12 +17,9 @@
                 Stay signed in
             </button>
 
-            @using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post, htmlAttributes: new { id = "logoutForm" }))
-            {
-                @Html.AntiForgeryToken()
-
-                <button class="session-link-submit govuk-link" id="session-link-sign-out" type="submit">Sign out</button>
-            }
+            <button id="session-link-sign-out" class="session-link-submit govuk-link" type="submit">
+                Sign out
+            </button>
         </div>
     </div>
 </div>
