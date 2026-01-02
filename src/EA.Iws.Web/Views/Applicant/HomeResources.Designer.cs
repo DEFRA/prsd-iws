@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete Notification.
+        ///   Looks up a localized string similar to Delete a notification.
         /// </summary>
         public static string DeleteNotification {
             get {

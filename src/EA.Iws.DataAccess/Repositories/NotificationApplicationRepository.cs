@@ -187,9 +187,18 @@
         public async Task<DeleteExportNotificationDetails> ValidateExportNotification(string exportNotificationNumber)
         {
             var notificationId = await context.NotificationApplications
-                    .Where(n => exportNotificationNumber.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
-                    .Select(n => (Guid?)n.Id)
-                    .SingleOrDefaultAsync();
+                                            .Where(n => exportNotificationNumber.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                                            .Select(n => (Guid?)n.Id)
+                                            .SingleOrDefaultAsync();
+
+            if (notificationId == null)
+            {
+                return new DeleteExportNotificationDetails()
+                {
+                    IsNotificationCanDeleted = false,
+                    ErrorMessage = "There is no notification with this notification number"
+                };
+            }
 
             try
             {
@@ -200,7 +209,7 @@
                 return new DeleteExportNotificationDetails()
                 {
                     IsNotificationCanDeleted = false,
-                    ErrorMessage = "You don't have permission to delete this notification."
+                    ErrorMessage = "You do not have permission to delete this notification"
                 };
             }
 
@@ -213,7 +222,7 @@
                 return new DeleteExportNotificationDetails()
                 {
                     IsNotificationCanDeleted = false,
-                    ErrorMessage = "You don't have permission to delete the notification status as a " + EnumHelper.GetDisplayName(notificationStatus).ToLower() + "."
+                    ErrorMessage = "You do not have permission to delete the notification once it has been " + EnumHelper.GetDisplayName(notificationStatus).ToLower()
                 };
             }
 

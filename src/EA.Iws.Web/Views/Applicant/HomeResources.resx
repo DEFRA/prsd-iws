@@ -127,7 +127,7 @@
     <value>create a new notification based on a previous one</value>
   </data>
   <data name="DeleteNotification" xml:space="preserve">
-    <value>Delete Notification</value>
+    <value>Delete a notification</value>
   </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error retrieving notifications, please try again.</value>
