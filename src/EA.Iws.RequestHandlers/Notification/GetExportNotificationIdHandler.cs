@@ -17,28 +17,29 @@
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<DeleteExportNotificationDetails> HandleAsync(GetExportNotificationId message)
+        public async Task<DeleteExportNotificationDetails> HandleAsync(GetExportNotificationId getExportNotification)
         {
-            var deleteExportNotificationDetails = await notificationApplicationRepository.ValidateExportNotification(FormatNotificationNumber(message.NotificationNumber));
+            string notificationNumber = FormatNotificationNumber(getExportNotification.NotificationNumber);
+            DeleteExportNotificationDetails deleteExportNotificationDetails = await notificationApplicationRepository.ValidateExportNotification(notificationNumber);
 
             return deleteExportNotificationDetails;
         }
 
-        private static string FormatNotificationNumber(string number)
+        private static string FormatNotificationNumber(string notificationNumber)
         {
-            if (string.IsNullOrWhiteSpace(number))
+            if (string.IsNullOrWhiteSpace(notificationNumber))
             {
                 return string.Empty;
             }
 
-            number = number.ToUpper().Replace(" ", string.Empty);
+            notificationNumber = notificationNumber.ToUpper().Replace(" ", string.Empty);
 
-            if (NotificationNumberRegex.IsMatch(number))
+            if (NotificationNumberRegex.IsMatch(notificationNumber))
             {
-                number = NotificationNumberRegex.Replace(number, "$1 $2 $3");
+                notificationNumber = NotificationNumberRegex.Replace(notificationNumber, "$1 $2 $3");
             }
 
-            return number;
+            return notificationNumber;
         }
     }
 }
