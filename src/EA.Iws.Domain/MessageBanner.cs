@@ -1,0 +1,23 @@
+﻿namespace EA.Iws.Domain
+{
+    using System;
+
+    public class MessageBanner
+    {
+        protected MessageBanner()
+        {
+        }
+
+        public MessageBanner(string title, string description)
+        {
+            Title = title;
+            Description = description;
+        }
+
+        public int ID { get; set; }
+        public string Title { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
+        public string Description { get; set; }
+    }
+}

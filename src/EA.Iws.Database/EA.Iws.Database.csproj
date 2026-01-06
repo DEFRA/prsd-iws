@@ -53,12 +53,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20251126-1353-Message_Banner-Changes.sql" />
     <Content Include="scripts\TestData\20250908-0800-add-approved-sepa-internal-admin-user.sql" />
     <Content Include="scripts\TestData\20250908-1047-create-ea-export-notifications-test-data-for-24-25.sql" />
     <Content Include="scripts\TestData\20250908-1220-create-ea-export-notifications-test-data-for-25-26.sql" />
     <Content Include="scripts\TestData\20250908-1315-create-ea-import-notifications-test-data-for-23-24.sql" />
     <Content Include="scripts\TestData\20250908-1355-create-ea-import-notifications-test-data-for-24-25.sql" />
     <Content Include="scripts\TestData\20250908-1430-create-ea-import-notifications-test-data-for-25-26.sql" />
+    <Content Include="scripts\TestData\20251029-1610-create-sepa-export-notifications-test-data-for-24-25.sql" />
     <Content Include="scripts\Update\0007-Support\20250610-1202-Alter-Notification-WasteCodeInfo-Table.sql" />
     <Content Include="scripts\Update\0007-Support\20240711-CCN067-Notification-Resubmitted-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20200918-328081-CR0044-add_ascension_island.sql" />
@@ -184,6 +186,9 @@
     <Content Include="scripts\Update\0007-Support\20250804-1839-Sepa-address-update-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20250807-1735-Sepa-price-update-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20250903-1442-ea-price-matrices-for-2025-2026-changes.sql" />
+    <Content Include="scripts\Update\0007-Support\20251029-1544-SEPA-2024-25-price-matrices-update.sql" />
+    <Content Include="scripts\Update\0007-Support\20251125-1610-Spanish-competent-authority-changes.sql" />
+    <Content Include="scripts\Update\0007-Support\20251212-1400-Alter-Country-Macedonia.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />

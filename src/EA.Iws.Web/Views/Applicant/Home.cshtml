@@ -8,7 +8,6 @@
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">@HomeResources.Header</h1>
-
         <h2 class="heading-medium">@HomeResources.HeaderStartNew</h2>
         <p>
             @HomeResources.Start <a href="https://www.gov.uk/importing-and-exporting-waste"
@@ -20,16 +19,18 @@
                                     data-category="Export notification"
                                     data-action="Supporting information">@HomeResources.SupportingInfo</a>
                                     @HomeResources.First
-
                                     <span class="visuallyhidden">@HomeResources.NewBrowserMessage</span>
                                     <br />
-                                    @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 },
-new { data_track = "element", data_category = "Export notification", data_action = "Copy", @class = "govuk-link" })@HomeResources.FullStop
+                                    @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, 
+                                                                             "CompetentAuthority",
+                                                                             "NewNotification", 
+                                                                             new { cfp = 1 },
+                                                                             new { data_track = "element", data_category = "Export notification", data_action = "Copy", @class = "govuk-link" })@HomeResources.FullStop
         </p>
 
         <p id="get-started" class="get-started group">
             @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null,
-                new { @class = "govuk-button", data_track = "element", data_category = "Export notification", data_action = "Start" })
+                             new { @class = "govuk-button", data_track = "element", data_category = "Export notification", data_action = "Start" })
         </p>
     </div>
     <div class="govuk-grid-column-one-third" id="submit-side-bar">
@@ -45,12 +46,16 @@ new { data_track = "element", data_category = "Export notification", data_action
 
 @if (ViewBag.Errors != null && ((IEnumerable<string>)ViewBag.Errors).Any())
 {
-    <p>@HomeResources.ErrorMessage</p>
+    <p>
+        @HomeResources.ErrorMessage
+    </p>
 }
 
 @if (Model.NumberOfNotifications == 0 && Model.SelectedNotificationStatus == null)
 {
-    <p>@HomeResources.MessageNoNotification</p>
+    <p>
+        @HomeResources.MessageNoNotification
+    </p>
 }
 else
 {
@@ -61,17 +66,16 @@ else
                 @Html.Gds().ValidationSummary()
                 @Html.AntiForgeryToken()
 
-            <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
-                @Html.Label(@HomeResources.SearchForNotification)
-                <br />
-                <br />
-                @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
-                @Html.Label(@HomeResources.SearchForNotificationNumber)
-                @Html.Gds().HintSpan(HomeResources.SearchHint)
-                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder, @class = "govuk-input" })
+                <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+                    <h6 class="govuk-label">@HomeResources.SearchForNotification</h6>
+                    <br />
+                    @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                    <h6 class="govuk-label">@HomeResources.SearchForNotificationNumber</h6>
+                    @Html.Gds().HintSpan(HomeResources.SearchHint)
+                    @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder, @class = "govuk-input" })
 
-                <button name="button" value="search" class="govuk-button" type="submit">@HomeResources.Search</button>
-            </div>
+                    <button name="button" value="search" class="govuk-button" type="submit">@HomeResources.Search</button>
+                </div>
             }
         </div>
     </div>
@@ -82,8 +86,7 @@ else
             {
                 @Html.AntiForgeryToken()
                 <div class="govuk-form-group">
-                    @Html.Label(@HomeResources.FilterByNotificationStatus)
-                    <br/>
+                    <h6 class="govuk-label">@HomeResources.FilterByNotificationStatus</h6>
                     @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "govuk-select" })
                     <button id="updateStatus" class="govuk-button" type="submit">@HomeResources.Update</button>
                 </div>
@@ -128,7 +131,9 @@ else
                             @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
                         </td>
                         <td class="govuk-table__cell">
-                            <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                            <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">
+                                @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;"))
+                            </span>
                         </td>
                         <td class="govuk-table__cell">
                             @Model.Notifications[i].Exporter
@@ -145,7 +150,9 @@ else
                         <td class="govuk-table__cell">
                             <a href="@Url.Action("Index", "Options", new { id = Model.Notifications[i].Id, area = "NotificationApplication" })" title="@Model.Notifications[i].NotificationNumber">
                                 @HomeResources.LinkChoose
-                                <span class="screen-reader-text">notification  @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", ""))</span>
+                                <span class="screen-reader-text">
+                                    notification  @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", ""))
+                                </span>
                             </a>
                         </td>
                     </tr>
@@ -164,12 +171,12 @@ else
 }
 
 @section scripts {
-    <script>
-    $(function() {
-        $("#updateStatus").hide();
-        $("#@Html.NameFor(m => m.SelectedNotificationStatus)").change(function() {
-            $("#updateStatus").parents("form").submit();
+    <script type="text/javascript">
+        $(function() {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedNotificationStatus)").change(function() {
+                $("#updateStatus").parents("form").submit();
+            });
         });
-    });
     </script>
 }
