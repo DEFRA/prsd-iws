@@ -123,6 +123,7 @@
     <Compile Include="CustomsOffice\GetEntryExitCustomsOfficeSelectionForNotificationById.cs" />
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeSelectionForNotificationById.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeSelectionForNotificationById.cs" />
+    <Compile Include="DeleteNotification\DeleteExportNotification.cs" />
     <Compile Include="Facilities\MarkInterimStatusToNotification.cs" />
     <Compile Include="Files\GetFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />
@@ -369,6 +370,7 @@
     <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetArchivedNotificationById.cs" />
     <Compile Include="Notification\GetArchiveNotificationsByUser.cs" />
+    <Compile Include="Notification\GetExportNotificationId.cs" />
     <Compile Include="Notification\GetNotificationAdditionalCharges.cs" />
     <Compile Include="Notification\GetNotificationAuditScreens.cs" />
     <Compile Include="Notification\GetNotificationAuditTable.cs" />

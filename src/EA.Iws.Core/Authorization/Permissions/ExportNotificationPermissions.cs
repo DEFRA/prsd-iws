@@ -47,5 +47,7 @@
         public const string CanEditOperationCodes = "Can edit operation codes";
 
         public const string CanAddCarrier = "Can Add Carrier";
+
+        public const string CanExternalUserDeleteNotification = "Can External User Delete Export Notification";
     }
 }

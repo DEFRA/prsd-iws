@@ -68,6 +68,7 @@
                     @if (!User.IsInternalUser())
                     {
                         @Html.ActionLink("Go to your homepage", "Home", "Applicant", new { area = string.Empty }, new { @class = "govuk-link" })
+                        @*@Html.Partial("_ExternalUserMenu")*@
                     }
                 </div>
                 <div id="top-content-box-container">
