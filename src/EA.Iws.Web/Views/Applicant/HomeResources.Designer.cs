@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete a notification.
+        /// </summary>
+        public static string DeleteNotification {
+            get {
+                return ResourceManager.GetString("DeleteNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error retrieving notifications, please try again..
         /// </summary>
         public static string ErrorMessage {

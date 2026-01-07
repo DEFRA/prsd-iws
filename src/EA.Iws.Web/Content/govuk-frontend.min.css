@@ -5361,7 +5361,7 @@
     }
 
     .govuk-template--rebranded .govuk-service-navigation__item, .govuk-template--rebranded .govuk-service-navigation__service-name {
-        padding: 15px 0;
+        padding: 10px 0;
         line-height: 1.5263157895
     }
 
@@ -5620,7 +5620,7 @@
 
 @media (min-width:40.0625em) {
     .govuk-service-navigation__list {
-        font-size: 1.1875rem;
+        font-size: 1.13rem;
         line-height: 1.3157894737
     }
 }

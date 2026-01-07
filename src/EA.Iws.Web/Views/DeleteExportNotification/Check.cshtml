@@ -1,0 +1,28 @@
+﻿@model EA.Iws.Web.ViewModels.DeleteExportNotification.DeleteViewModel
+@using Resources = EA.Iws.Web.Views.DeleteExportNotification.CheckResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="govuk-heading-l">@Resources.MainHeading @Model.NotificationNumber.ToNonBreakingString()</h1>
+
+        <p>@Resources.Guidance</p>
+
+        <div class="govuk-form-group">
+            @Html.ActionLink(@Resources.CancelLinkText, "Index", "Home")
+        </div>
+
+        @using (Html.BeginForm("Delete", "DeleteExportNotification", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.NotificationNumber)
+
+            <button type="submit" class="govuk-button">@Resources.ButtonText</button>
+        }
+
+    </div>
+</div>

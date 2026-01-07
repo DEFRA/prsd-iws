@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AdminExportAssessment\EditContactControllerTests.cs" />
     <Compile Include="Controllers\Admin\ArchiveNotificationControllerTests.cs" />
     <Compile Include="Controllers\BannerControllerTests.cs" />
+    <Compile Include="Controllers\DeleteExportNotification\DeleteExportNotificationControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\EditContactControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\FacilityControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\ImporterControllerTests.cs" />

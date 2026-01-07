@@ -1,14 +1,16 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using Core.Notification;
+    using Core.Shared;
+    using Domain.NotificationApplication;
+    using Domain.Security;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Prsd.Core.Helpers;
     using System;
     using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Notification;
-    using Core.Shared;
-    using Domain.NotificationApplication;
-    using Domain.Security;
 
     internal class NotificationApplicationRepository : INotificationApplicationRepository
     {
@@ -25,15 +27,16 @@
         public async Task<NotificationApplication> GetById(Guid id)
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(id);
+
             return await context.NotificationApplications.SingleAsync(n => n.Id == id);
         }
 
         public async Task<NotificationApplication> GetByMovementId(Guid movementId)
         {
             var notificationId = await context.Movements
-                .Where(m => m.Id == movementId)
-                .Select(m => m.NotificationId)
-                .SingleAsync();
+                                              .Where(m => m.Id == movementId)
+                                              .Select(m => m.NotificationId)
+                                              .SingleAsync();
 
             return await GetById(notificationId);
         }
@@ -41,9 +44,9 @@
         public async Task<string> GetNumber(Guid id)
         {
             return await context.NotificationApplications
-                .Where(n => n.Id == id)
-                .Select(n => n.NotificationNumber)
-                .SingleAsync();
+                                .Where(n => n.Id == id)
+                                .Select(n => n.NotificationNumber)
+                                .SingleAsync();
         }
 
         public async Task<Guid?> GetIdOrDefault(string number, bool isDeleteNotification)
@@ -51,25 +54,25 @@
             if (isDeleteNotification)
             {
                 return await context.NotificationApplications
-                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
-                    .Select(n => (Guid?)n.Id)
-                    .SingleOrDefaultAsync();
+                                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                                    .Select(n => (Guid?)n.Id)
+                                    .SingleOrDefaultAsync();
             }
             else
             {
                 return await context.NotificationApplications
-                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
-                    .Select(n => (Guid?)n.Id)
-                    .SingleOrDefaultAsync();
+                                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                                    .Select(n => (Guid?)n.Id)
+                                    .SingleOrDefaultAsync();
             }
         }
 
         public async Task<bool> GetIsArchived(Guid id)
         {
             return await context.NotificationApplications
-                .Where(n => n.Id == id)
-                .Select(n => n.IsArchived)
-                .SingleOrDefaultAsync();
+                                .Where(n => n.Id == id)
+                                .Select(n => n.IsArchived)
+                                .SingleOrDefaultAsync();
         }
 
         public void Add(NotificationApplication notification)
@@ -160,6 +163,75 @@
                 new SqlParameter("@Id", notificationId));
 
             return rowsAffected > 0;
+        }
+
+        public async Task<bool> DeleteExportNotification(Guid notificationId)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            NotificationStatus notificationStatus = await context.NotificationAssessments.Where(n => n.NotificationApplicationId == notificationId)
+                                                                                         .Select(n => n.Status)
+                                                                                         .SingleOrDefaultAsync();
+
+            if (notificationStatus == NotificationStatus.NotSubmitted)
+            {
+                var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"EXEC [Notification].[uspDeleteExportNotification] @NotificationId",
+                                                                                 new SqlParameter("@NotificationId", notificationId));
+
+                return rowsAffected > 0;
+            }
+
+            return false;
+        }
+
+        public async Task<DeleteExportNotificationDetails> ValidateExportNotification(string exportNotificationNumber)
+        {
+            var notificationId = await context.NotificationApplications
+                                              .Where(n => exportNotificationNumber.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                                              .Select(n => (Guid?)n.Id)
+                                              .SingleOrDefaultAsync();
+
+            if (notificationId == null)
+            {
+                return new DeleteExportNotificationDetails()
+                {
+                    IsNotificationCanDeleted = false,
+                    ErrorMessage = "There is no notification with this notification number"
+                };
+            }
+
+            try
+            {
+                await notificationApplicationAuthorization.EnsureAccessAsync(notificationId.GetValueOrDefault());
+            }
+            catch (Exception)
+            {
+                return new DeleteExportNotificationDetails()
+                {
+                    IsNotificationCanDeleted = false,
+                    ErrorMessage = "You do not have permission to delete this notification"
+                };
+            }
+
+            NotificationStatus notificationStatus = await context.NotificationAssessments.Where(n => n.NotificationApplicationId == notificationId)
+                                                                                         .Select(n => n.Status)
+                                                                                         .SingleOrDefaultAsync();
+
+            if (notificationStatus != NotificationStatus.NotSubmitted)
+            {
+                return new DeleteExportNotificationDetails()
+                {
+                    IsNotificationCanDeleted = false,
+                    ErrorMessage = "You do not have permission to delete the notification once it has been " + EnumHelper.GetDisplayName(notificationStatus).ToLower()
+                };
+            }
+
+            return new DeleteExportNotificationDetails()
+            {
+                IsNotificationCanDeleted = true,
+                ErrorMessage = string.Empty,
+                NotificationId = notificationId.GetValueOrDefault()
+            };
         }
     }
 }

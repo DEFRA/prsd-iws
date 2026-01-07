@@ -878,6 +878,7 @@
       <DependentUpon>MarkInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\DeleteExportNotificationController.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\IAdditionalChargeService.cs" />
@@ -1546,6 +1547,10 @@
     <Content Include="Views\Shared\_SessionTimeout.cshtml" />
     <Content Include="Views\Account\SessionSignedOut.cshtml" />
     <Content Include="Views\Shared\_IwsMessageBanner.cshtml" />
+    <Content Include="Views\Shared\_ExternalUserMenu.cshtml" />
+    <Content Include="Views\DeleteExportNotification\Index.cshtml" />
+    <Content Include="Views\DeleteExportNotification\Check.cshtml" />
+    <Content Include="Views\DeleteExportNotification\Confirm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1755,6 +1760,13 @@
     <Compile Include="RazorHelpers\TagBuilderExtensions.cs" />
     <Compile Include="RazorHelpers\TypeHelper.cs" />
     <Compile Include="Services\IAppConfiguration.cs" />
+    <Compile Include="ViewModels\DeleteExportNotification\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\DeleteExportNotification\IndexViewModel.cs" />
+    <Compile Include="ViewModels\DeleteExportNotification\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Registration\CreateUserViewModelBase.cs" />
     <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\DeleteCommentViewModel.cs" />
@@ -4062,6 +4074,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResultResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\DeleteExportNotification\CheckResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteExportNotification\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteExportNotification\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Feedback\FeedbackResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -5684,6 +5711,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RestrictToAllowedUploadTypesAttributeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\DeleteExportNotification\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
@@ -5760,6 +5791,18 @@
     <EmbeddedResource Include="Views\CopyFromNotification\ResultResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResultResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeleteExportNotification\CheckResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CheckResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeleteExportNotification\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeleteExportNotification\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Feedback\FeedbackResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
