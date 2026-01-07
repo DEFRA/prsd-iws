@@ -173,7 +173,7 @@
                                                                                          .Select(n => n.Status)
                                                                                          .SingleOrDefaultAsync();
 
-            if (notificationStatus.Equals(NotificationStatus.NotSubmitted))
+            if (notificationStatus == NotificationStatus.NotSubmitted)
             {
                 var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"EXEC [Notification].[uspDeleteExportNotification] @NotificationId",
                                                                                  new SqlParameter("@NotificationId", notificationId));
@@ -217,7 +217,7 @@
                                                                                          .Select(n => n.Status)
                                                                                          .SingleOrDefaultAsync();
 
-            if (!notificationStatus.Equals(NotificationStatus.NotSubmitted))
+            if (notificationStatus != NotificationStatus.NotSubmitted)
             {
                 return new DeleteExportNotificationDetails()
                 {
