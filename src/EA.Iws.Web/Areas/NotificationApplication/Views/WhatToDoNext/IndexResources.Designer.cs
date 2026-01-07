@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prepare a hard copy of the notification.
+        ///   Looks up a localized string similar to Notification successfully submitted.
         /// </summary>
         public static string MainHeading {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve successfully submitted this notification to us electronically. However, we can only consider it once we&apos;ve received the signed hard copy of your notification pack..
+        ///   Looks up a localized string similar to Your notification has been submitted electronically. Complete all steps below so that we can consider your application to ship waste under notification controls..
         /// </summary>
         public static string MainParagraph {
             get {
@@ -97,6 +97,60 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Print postage label.
+        /// </summary>
+        public static string PrintLabel {
+            get {
+                return ResourceManager.GetString("PrintLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send us:.
+        /// </summary>
+        public static string SendUsHeading {
+            get {
+                return ResourceManager.GetString("SendUsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - by email (preferred).
+        /// </summary>
+        public static string SendUsListItem1 {
+            get {
+                return ResourceManager.GetString("SendUsListItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to - or by post ({0}).
+        /// </summary>
+        public static string SendUsListItem2 {
+            get {
+                return ResourceManager.GetString("SendUsListItem2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A copy of the signed notification pack.
+        /// </summary>
+        public static string SendUsListItem3 {
+            get {
+                return ResourceManager.GetString("SendUsListItem3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A copy of your contract with the consignee.
+        /// </summary>
+        public static string SendUsListItem4 {
+            get {
+                return ResourceManager.GetString("SendUsListItem4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to What to do next:.
         /// </summary>
         public static string WhatToDoNextHeading {
@@ -106,7 +160,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to print and sign the notification.
+        ///   Looks up a localized string similar to Sign and date the Notification Document.
         /// </summary>
         public static string WhatToDoNextListItem1 {
             get {
@@ -115,7 +169,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to pay the charge.
+        ///   Looks up a localized string similar to Pay the charge.
         /// </summary>
         public static string WhatToDoNextListItem2 {
             get {
@@ -124,7 +178,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to complete your financial guarantee.
+        ///   Looks up a localized string similar to Arrange your financial guarantee.
         /// </summary>
         public static string WhatToDoNextListItem3 {
             get {
@@ -133,38 +187,11 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to reference and upload your annexes.
+        ///   Looks up a localized string similar to Reference and upload any annexes.
         /// </summary>
         public static string WhatToDoNextListItem4 {
             get {
                 return ResourceManager.GetString("WhatToDoNextListItem4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to print a postage label.
-        /// </summary>
-        public static string WhatToDoNextListItem5 {
-            get {
-                return ResourceManager.GetString("WhatToDoNextListItem5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to send us a copy of your contract with the consignee.
-        /// </summary>
-        public static string WhatToDoNextListItem6 {
-            get {
-                return ResourceManager.GetString("WhatToDoNextListItem6", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to post the notification to us.
-        /// </summary>
-        public static string WhatToDoNextListItem7 {
-            get {
-                return ResourceManager.GetString("WhatToDoNextListItem7", resourceCulture);
             }
         }
     }

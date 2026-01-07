@@ -1,37 +1,47 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext
 @model EA.Iws.Requests.Notification.WhatToDoNextData
 @{
-    ViewBag.Title = "What to do next";
-    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+  ViewBag.Title = "What to do next";
+  Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
 <header class="hgroup">
-    <h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
+  <h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
 </header>
 
 <p>
-    @IndexResources.MainParagraph
+  @IndexResources.MainParagraph
 </p>
 
 <h2 class="heading-medium">@IndexResources.WhatToDoNextHeading</h2>
 
 <ul class="list list-number">
-    <li>@IndexResources.WhatToDoNextListItem1</li>
-    <li>@IndexResources.WhatToDoNextListItem2</li>
-    <li>@IndexResources.WhatToDoNextListItem3</li>
-    <li>@IndexResources.WhatToDoNextListItem4</li>
-    <li>@IndexResources.WhatToDoNextListItem5</li>
-    <li>@IndexResources.WhatToDoNextListItem6</li>
-    <li>@IndexResources.WhatToDoNextListItem7</li>
+  <li>@IndexResources.WhatToDoNextListItem1</li>
+  <li>@IndexResources.WhatToDoNextListItem2</li>
+  <li>@IndexResources.WhatToDoNextListItem3</li>
+  <li>@IndexResources.WhatToDoNextListItem4</li>
 </ul>
 
+<h2 class="heading-medium">@IndexResources.SendUsHeading</h2>
+
+<ul class="list list-number">
+  <li>@IndexResources.SendUsListItem1</li>
+  <li>
+    @Html.Raw(string.Format(IndexResources.SendUsListItem2,
+      @Html.ActionLink(@IndexResources.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, null)))
+  </li>
+  <li>@IndexResources.SendUsListItem3</li>
+  <li>@IndexResources.SendUsListItem4</li>
+</ul>
+
+
 <div class="govuk-form-group">
-    @Html.Raw(string.Format(IndexResources.NotificationOptionsLinkMessage,
-        Html.ActionLink("notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)))
+  @Html.Raw(string.Format(IndexResources.NotificationOptionsLinkMessage,
+      Html.ActionLink("notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)))
 </div>
 
 <div class="govuk-form-group">
-    @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
+  @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
 </div>
 
 @Html.FeedbackLink()

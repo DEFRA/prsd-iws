@@ -70,11 +70,20 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can create more than one shipment prenotification at the same time if:.
+        ///   Looks up a localized string similar to You can only create more than one shipment prenotification at the same time if:.
         /// </summary>
         public static string CreateSummary {
             get {
                 return ResourceManager.GetString("CreateSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipments must be prenotified at least 3 working days before the waste shipment starts, but no more than 30 days before.
+        /// </summary>
+        public static string DatesWarningMessage {
+            get {
+                return ResourceManager.GetString("DatesWarningMessage", resourceCulture);
             }
         }
         
