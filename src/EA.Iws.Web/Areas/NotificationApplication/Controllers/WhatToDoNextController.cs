@@ -23,11 +23,13 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             var model = new WhatToDoNextData { Id = id };
-            return View(model);
-        }
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+
+            return View(response);
+    }
 
         [HttpGet]
         public async Task<ActionResult> Print(Guid id)

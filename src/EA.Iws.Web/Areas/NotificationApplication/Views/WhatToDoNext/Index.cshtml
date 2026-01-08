@@ -15,7 +15,7 @@
 
 <h2 class="heading-medium">@IndexResources.WhatToDoNextHeading</h2>
 
-<ul class="list list-number">
+<ul class="list list-number govuk-list">
   <li>@IndexResources.WhatToDoNextListItem1</li>
   <li>@IndexResources.WhatToDoNextListItem2</li>
   <li>@IndexResources.WhatToDoNextListItem3</li>
@@ -24,12 +24,12 @@
 
 <h2 class="heading-medium">@IndexResources.SendUsHeading</h2>
 
-<ul class="list list-number">
+<ul class="list list-number  govuk-list">
   <li>@IndexResources.SendUsListItem1</li>
   <li>
     @Html.Raw(string.Format(IndexResources.SendUsListItem2,
-      @Html.ActionLink(@IndexResources.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, null)))
-  </li>
+      @Html.ActionLink("Download a postage label (PDF)", "GetPostageLabel", "WhatToDoNext", new { competentAuthority = Model.CompetentAuthority, area = "NotificationApplication" }, null)))
+  </li>  
   <li>@IndexResources.SendUsListItem3</li>
   <li>@IndexResources.SendUsListItem4</li>
 </ul>
