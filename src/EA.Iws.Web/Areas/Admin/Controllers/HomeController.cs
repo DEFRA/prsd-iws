@@ -58,8 +58,7 @@
               return RedirectToAction(
                   actionName: "Index",
                   controllerName: "Home",
-                  routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" }
-              );
+                  routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
             }
 
             if (resultsCount == 1 && importSearchResults.First().NotificationNumber == model.SearchTerm)
@@ -67,8 +66,7 @@
               return RedirectToAction(
                   actionName: "Index",
                   controllerName: "Home",
-                  routeValues: new { id = searchResults.First().Id, area = "ImportNotification" }
-              );
+                  routeValues: new { id = searchResults.First().Id, area = "ImportNotification" });
             }
 
       return View(model);

@@ -106,7 +106,7 @@
 @section scripts {
     @Html.Partial("_Scripts")
 
-    <script>
+<script>
         $(function () {
             @if (!Model.IsReceived)
             {
@@ -116,6 +116,10 @@
             {
                 @:$("#Recovery_RecoveryDate_Date").focus();
             }
+            else if (ViewBag.IsSaved)
+            {
+                @:$("#NewShipmentNumber").focus();
+            }
         });
-    </script>
+</script>
 }

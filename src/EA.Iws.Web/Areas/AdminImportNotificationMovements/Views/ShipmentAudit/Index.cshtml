@@ -58,8 +58,13 @@
 </div>
 
 <div class="govuk-form-group">
+    @Html.ActionLink("Download shipment details", "Index", "Download")
+</div>
+
+<div class="govuk-form-group">
     @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
 </div>
+
 @section scripts
 {
 	@Html.Partial("_ShipmentGroupScript")
