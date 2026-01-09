@@ -19,6 +19,7 @@
         <tr>
             <td>
                 @baselOrOecdType code
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
@@ -28,6 +29,7 @@
         <tr>
             <td>
                 @(Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "EWC codes" : "EWC code") : "EWC code(s)")
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_EwcCodes.cshtml")
@@ -37,6 +39,7 @@
         <tr>
             <td>
                 @(Model.AreYCodesCompleted ? (Model.YCodes.Length > 1 ? "Y codes" : "Y code") : "Y code(s)")
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_YCodes.cshtml")
@@ -46,6 +49,7 @@
         <tr>
             <td>
                 @(Model.AreHCodesCompleted ? (Model.HCodes.Length > 1 ? "H or HP codes" : "H or HP code") : "H or HP code(s)")
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_HCodes.cshtml")
@@ -55,6 +59,7 @@
         <tr>
             <td>
                 @(Model.AreUnClassesCompleted ? (Model.UnClass.Length > 1 ? "UN classes" : "UN class") : "UN class(es)")
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_UNClasses.cshtml")
@@ -64,6 +69,7 @@
         <tr>
             <td>
                 @(Model.AreUnNumbersCompleted ? (Model.UnNumber.Length > 1 ? "UN numbers" : "UN number") : "UN number(s)")
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_UNNumbers.cshtml")
@@ -73,6 +79,7 @@
         <tr>
             <td>
                 Other codes
+                <p class="govuk-body-s">Block 14</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_OtherCodes.cshtml")

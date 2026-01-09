@@ -26,6 +26,7 @@
         <tr class = @codesClass> 
             <td>
                 @operationCodesLabel
+                <p class="govuk-body-s">Block 11</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_OperationCodes.cshtml")
@@ -45,6 +46,7 @@
             <tr class = @facilityClass>
                 <td>
                     Pre-consented facility
+                    <p class="govuk-body-s">Block 3</p>
                 </td>
                 <td>
                     @Html.Partial(viewLocation + "_PreconsentStatus.cshtml")
@@ -63,6 +65,7 @@
         <tr class = @technologyClass>
             <td>
                 Technology employed
+                <p class="govuk-body-s">Block 3</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_TechnologyEmployed.cshtml")
@@ -80,6 +83,7 @@
         <tr class = @exportClass>
             <td>
                 Reason for export
+                <p class="govuk-body-s">Block 11</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_ReasonForExport.cshtml")

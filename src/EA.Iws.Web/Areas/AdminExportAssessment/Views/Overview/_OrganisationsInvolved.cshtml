@@ -18,6 +18,7 @@
         <tr>
             <td>
                 Exporter
+                <p class="govuk-body-s">Block 1</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_Exporter.cshtml")
@@ -27,6 +28,7 @@
         <tr>
             <td>
                 Producers
+                <p class="govuk-body-s">Block 9</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_Producer.cshtml")
@@ -36,6 +38,7 @@
         <tr>
             <td>
                 Site of export
+                <p class="govuk-body-s">Block 9</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_SiteOfExport.cshtml")
@@ -45,6 +48,7 @@
         <tr>
             <td>
                 Importer
+                <p class="govuk-body-s">Block 2</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_Importer.cshtml")
@@ -54,6 +58,7 @@
         <tr>
             <td>
                 @(Model.NotificationType == NotificationType.Recovery ? "Recovery facilities" : "Disposal facilities")
+                <p class="govuk-body-s">Block 10</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_Facility.cshtml")
@@ -63,6 +68,7 @@
         <tr>
             <td>
                 @(Model.NotificationType == NotificationType.Recovery ? "Recovery site" : "Disposal site")
+                <p class="govuk-body-s">Block 10</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_SiteOfRecovery.cshtml")
