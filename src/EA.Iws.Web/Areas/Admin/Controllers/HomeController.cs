@@ -51,9 +51,7 @@
 
             model.AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary());
 
-            var resultsCount = searchResults?.Count ?? 0 + importSearchResults?.Count ?? 0;
-
-            if (resultsCount == 1 && searchResults.First().NotificationNumber == model.SearchTerm)
+            if (model.ExportSearchResults != null && model.ExportSearchResults.Count == 1 && searchResults.First().NotificationNumber == model.SearchTerm)
             {
               return RedirectToAction(
                   actionName: "Index",
@@ -61,12 +59,12 @@
                   routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
             }
 
-            if (resultsCount == 1 && importSearchResults.First().NotificationNumber == model.SearchTerm)
+            if (model.ImportSearchResults != null && model.ImportSearchResults.Count == 1 && importSearchResults.First().NotificationNumber == model.SearchTerm)
             {
               return RedirectToAction(
                   actionName: "Index",
                   controllerName: "Home",
-                  routeValues: new { id = searchResults.First().Id, area = "ImportNotification" });
+                  routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
             }
 
       return View(model);

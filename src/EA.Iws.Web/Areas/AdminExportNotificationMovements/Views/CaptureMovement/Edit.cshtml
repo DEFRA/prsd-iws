@@ -118,17 +118,17 @@
 
 <script>
         $(function () {
-            @if (ViewBag.IsSaved)
+            if (@ViewBag != null && @ViewBag.IsSaved ?? false)
             {
-                 @:$("#NewShipmentNumber").focus();
+                 $("#NewShipmentNumber").focus();
             }
             else if (!Model.IsReceived)
             {
-                @:$("#Receipt_ReceivedDate_Date").focus();
+                $("#Receipt_ReceivedDate_Date").focus();
             }
             else if (!Model.IsOperationCompleted)
             {
-                @:$("#Recovery_RecoveryDate_Date").focus();
+                $("#Recovery_RecoveryDate_Date").focus();
             }
         })
 </script>

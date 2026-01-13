@@ -143,6 +143,7 @@
                         <th scope="col" class="govuk-table__header">@Resources.SummaryTableReceived</th>
                         <th scope="col" class="govuk-table__header">@Resources.SummaryTableQuantity</th>
                         <th scope="col" class="govuk-table__header">@operationTitle</th>
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTitleAccepted</th>
                     </tr>
                 </thead>
 
@@ -179,6 +180,9 @@
                                 </td>
                                 <td class="govuk-table__cell">
                                     @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @(Model.TableData[i].WasShipmentAccepted.Value)
                                 </td>
                             </tr>
                         }

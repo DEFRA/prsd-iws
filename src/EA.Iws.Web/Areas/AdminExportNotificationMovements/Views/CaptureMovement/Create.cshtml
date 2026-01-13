@@ -66,17 +66,17 @@
 
 <script>
         $(function() {
-            @if (ViewBag.IsSaved)
+            if (@ViewBag != null && @ViewBag.IsSaved ?? false)
             {
-                @:$("#NewShipmentNumber").focus();
+                $("#NewShipmentNumber").focus();
             }
-            else if (Model.ShipmentNumber == null)
+            else if (@Model.ShipmentNumber == null)
             {
-                @:$("#ShipmentNumber").focus();
+                $("#ShipmentNumber").focus();
             }
             else
             {
-                @:$("#PrenotificationDate_Date").focus();
+                $("#PrenotificationDate_Date").focus();
             }
         });
 </script>
