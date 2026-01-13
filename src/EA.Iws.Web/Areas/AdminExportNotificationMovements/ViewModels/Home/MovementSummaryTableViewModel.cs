@@ -25,7 +25,9 @@
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
 
-        public MovementSummaryTableViewModel(MovementTableDataRow data)
+        public ShipmentType? WasShipmentAccepted { get; set; }
+
+    public MovementSummaryTableViewModel(MovementTableDataRow data)
         {
             Id = data.Id;
             Number = data.Number;
@@ -36,7 +38,8 @@
             Quantity = data.Quantity;
             Unit = data.QuantityUnits;
             RecoveredOrDisposedOf = data.CompletedDate;
-        }
+            WasShipmentAccepted = data.IsReceived ? ShipmentType.Accepted : (data.IsPartialRejection ? ShipmentType.Partially : ShipmentType.Rejected);
+    }
 
         public bool IsShipped()
         {

@@ -192,6 +192,9 @@
   <data name="SummaryTableStatus" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="SummaryTitleAccepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
   <data name="SummaryTitleActive" xml:space="preserve">
     <value>Active loads permitted:</value>
   </data>

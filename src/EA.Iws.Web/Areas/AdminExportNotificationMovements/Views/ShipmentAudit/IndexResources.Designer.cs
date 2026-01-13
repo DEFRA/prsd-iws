@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.ShipmentAudit 
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download shipment details.
+        /// </summary>
+        public static string DownloadExcel {
+            get {
+                return ResourceManager.GetString("DownloadExcel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter by:.
         /// </summary>
         public static string FilterBy {

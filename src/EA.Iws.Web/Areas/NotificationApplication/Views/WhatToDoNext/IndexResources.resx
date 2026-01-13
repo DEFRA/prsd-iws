@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MainHeading" xml:space="preserve">
-    <value>Prepare a hard copy of the notification</value>
+    <value>Notification successfully submitted</value>
   </data>
   <data name="MainParagraph" xml:space="preserve">
-    <value>You've successfully submitted this notification to us electronically. However, we can only consider it once we've received the signed hard copy of your notification pack.</value>
+    <value>Your notification has been submitted electronically. Complete all steps below so that we can consider your application to ship waste under notification controls.</value>
   </data>
   <data name="NotificationOptionsLinkMessage" xml:space="preserve">
     <value>You can complete all these steps from the {0} page.</value>
@@ -133,24 +133,33 @@
     <value>What to do next:</value>
   </data>
   <data name="WhatToDoNextListItem1" xml:space="preserve">
-    <value>print and sign the notification</value>
+    <value>Sign and date the Notification Document</value>
   </data>
   <data name="WhatToDoNextListItem2" xml:space="preserve">
-    <value>pay the charge</value>
+    <value>Pay the charge</value>
   </data>
   <data name="WhatToDoNextListItem3" xml:space="preserve">
-    <value>complete your financial guarantee</value>
+    <value>Arrange your financial guarantee</value>
   </data>
   <data name="WhatToDoNextListItem4" xml:space="preserve">
-    <value>reference and upload your annexes</value>
+    <value>Reference and upload any annexes</value>
   </data>
-  <data name="WhatToDoNextListItem5" xml:space="preserve">
-    <value>print a postage label</value>
+  <data name="SendUsHeading" xml:space="preserve">
+    <value>Send us:</value>
   </data>
-  <data name="WhatToDoNextListItem6" xml:space="preserve">
-    <value>send us a copy of your contract with the consignee</value>
+  <data name="SendUsListItem1" xml:space="preserve">
+    <value>- by email (preferred)</value>
   </data>
-  <data name="WhatToDoNextListItem7" xml:space="preserve">
-    <value>post the notification to us</value>
+  <data name="SendUsListItem2" xml:space="preserve">
+    <value>- or by post ({0})</value>
+  </data>
+  <data name="SendUsListItem3" xml:space="preserve">
+    <value>A copy of the signed notification pack</value>
+  </data>
+  <data name="SendUsListItem4" xml:space="preserve">
+    <value>A copy of your contract with the consignee</value>
+  </data>
+  <data name="PrintLabel" xml:space="preserve">
+    <value>Print postage label</value>
   </data>
 </root>

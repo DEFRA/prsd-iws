@@ -64,16 +64,20 @@
 @section scripts {
     @Html.Partial("_Scripts")
 
-    <script>
+<script>
         $(function() {
-            @if (Model.ShipmentNumber == null)
+            if (@ViewBag != null && @ViewBag.IsSaved ?? false)
             {
-                @:$("#ShipmentNumber").focus();
+                $("#NewShipmentNumber").focus();
+            }
+            else if (@Model.ShipmentNumber == null)
+            {
+                $("#ShipmentNumber").focus();
             }
             else
             {
-                @:$("#PrenotificationDate_Date").focus();
+                $("#PrenotificationDate_Date").focus();
             }
         });
-    </script>
+</script>
 }

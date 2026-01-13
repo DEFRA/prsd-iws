@@ -28,6 +28,7 @@
                 data.ReceivedDate = source.Receipt.Date;
                 data.Quantity = source.Receipt.QuantityReceived.Quantity;
                 data.QuantityUnits = source.Receipt.QuantityReceived.Units;
+                data.IsReceived = true;
             }
 
             if (source.Receipt == null && source.PartialRejection != null && source.PartialRejection.Count() > 0)
@@ -35,6 +36,7 @@
                 data.ReceivedDate = source.PartialRejection.FirstOrDefault().WasteReceivedDate;
                 data.Quantity = source.PartialRejection.FirstOrDefault().ActualQuantity;
                 data.QuantityUnits = source.PartialRejection.FirstOrDefault().ActualUnit;
+                data.IsPartialRejection = true;
 
                 if (source.PartialRejection.FirstOrDefault().WasteDisposedDate != null)
                 {

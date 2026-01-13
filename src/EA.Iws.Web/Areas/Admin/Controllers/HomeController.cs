@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Search;
     using Requests.NotificationAssessment;
+  using System.Linq;
+  using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Home;
 
     [AuthorizeActivity(typeof(GetNotificationAttentionSummary))]
@@ -50,7 +51,23 @@
 
             model.AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary());
 
-            return View(model);
+            if (model.ExportSearchResults != null && model.ExportSearchResults.Count == 1 && searchResults.First().NotificationNumber == model.SearchTerm)
+            {
+              return RedirectToAction(
+                  actionName: "Index",
+                  controllerName: "Home",
+                  routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
+            }
+
+            if (model.ImportSearchResults != null && model.ImportSearchResults.Count == 1 && importSearchResults.First().NotificationNumber == model.SearchTerm)
+            {
+              return RedirectToAction(
+                  actionName: "Index",
+                  controllerName: "Home",
+                  routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
+            }
+
+      return View(model);
         }
     }
 }
