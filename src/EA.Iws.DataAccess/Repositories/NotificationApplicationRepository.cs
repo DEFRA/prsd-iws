@@ -222,7 +222,7 @@
                 return new DeleteExportNotificationDetails()
                 {
                     IsNotificationCanDeleted = false,
-                    ErrorMessage = "You do not have permission to delete the notification once it has been " + EnumHelper.GetDisplayName(notificationStatus).ToLower()
+                    ErrorMessage = "You do not have permission to delete the notification once it has been " + EnumHelper.GetDisplayName(notificationStatus).ToLower() + ". Please contact the appropriate competent authority administrator"
                 };
             }
 
