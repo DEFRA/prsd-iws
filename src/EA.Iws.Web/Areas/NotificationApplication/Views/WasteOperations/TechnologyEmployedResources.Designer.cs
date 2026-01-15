@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;ll provide my details in an annex when I submit my notification.
+        ///   Looks up a localized string similar to I&apos;ll upload this information using the ‘Upload annexes and extra information’ link after I submit this notification..
         /// </summary>
         public static string AnnexProvided {
             get {

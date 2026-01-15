@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I will provide this detail in a separate annex with my notification submission..
+        ///   Looks up a localized string similar to I&apos;ll upload this information using the ‘Upload annexes and extra information’ link after I submit this notification..
         /// </summary>
         public static string Declaration {
             get {
