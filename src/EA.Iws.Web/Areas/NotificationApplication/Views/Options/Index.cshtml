@@ -252,6 +252,7 @@
                             <th>Received</th>
                             <th>Quantity</th>
                             <th>@operationTitle</th>
+                            <th>Accepted</th>
                         </tr>
                     </thead>
 
@@ -281,6 +282,9 @@
                                     </td>
                                     <td>
                                         @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @(Model.TableData[i].WasShipmentAccepted.Value)
                                     </td>
                                 </tr>
                             }

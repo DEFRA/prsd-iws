@@ -102,12 +102,6 @@
     </table>
 
     <div class="form-group">
-        @Resource.OptionsLinkPainTextA
-        @Html.ActionLink(@Resource.OptionsLinkText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-        @Resource.OptionsLinkPainTextB
-    </div>
-
-    <div class="form-group">
         <button id="uploadButton" class="govuk-button" type="submit" onclick="disableButton()">@Constants.ContinueButtonText</button>
 
         <label class="" id="uploadStatusLabel"></label>

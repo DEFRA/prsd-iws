@@ -21,7 +21,6 @@
         <thead class="govuk-table__head">
             <tr class="govuk-table__row">
                 <th scope="col" class="govuk-table__header">Name</th>
-                <th scope="col" class="govuk-table__header">Email</th>
                 <th scope="col" class="govuk-table__header">Action</th>
                 <th scope="col" class="govuk-table__header"></th>
                 <th scope="col" class="govuk-table__header">Assign role</th>
@@ -32,7 +31,6 @@
             {
                 <tr class="govuk-table__row @Html.Gds().FormGroupClass(m => m.Users[i])">
                     <td class="govuk-table__cell" title="@Html.DisplayFor(m => m.Users[i].UserData.Email)">@Html.DisplayFor(m => m.Users[i].UserData.FullName)</td>
-                    <td class="govuk-table__cell" >@Html.DisplayFor(m => m.Users[i].UserData.Email)</td>
                     <td class="govuk-table__cell">
                         @Html.HiddenFor(m => m.Users[i].UserData.Id)
                         @Html.HiddenFor(m => m.Users[i].UserData.Email)
