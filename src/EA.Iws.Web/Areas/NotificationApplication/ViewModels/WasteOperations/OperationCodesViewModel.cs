@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations
 {
+    using Core.OperationCodes;
+    using Core.Shared;
+  using EA.Iws.Core.Extensions;
+  using Prsd.Core.Helpers;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Core.OperationCodes;
-    using Core.Shared;
-    using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
     public class OperationCodesViewModel : IValidatableObject
@@ -46,6 +47,7 @@
 
             PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
                 .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
+                .OrderByInterimsFirst(x => x.Key)
                 .ToList();
         }
 
@@ -59,5 +61,5 @@
                 yield return new ValidationResult(error, new[] { "PossibleCodes" });
             }
         }
-    }
+  }
 }

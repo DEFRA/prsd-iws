@@ -1,13 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Core.Notification;
     using Core.Notification.Overview;
     using Core.Shared;
     using Core.TechnologyEmployed;
-    using Prsd.Core.Helpers;
+  using EA.Iws.Core.Extensions;
+  using EA.Iws.Core.OperationCodes;
+  using Prsd.Core.Helpers;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class RecoveryOperationViewModel
     {
@@ -37,9 +39,9 @@
             IsTechnologyEmployedCompleted = progress.HasTechnologyEmployed;
             IsReasonForExportCompleted = progress.HasReasonForExport;
             PreconstedAnswer = recoveryOperationInfo.PreconstedAnswer;
-            OperationCodes = recoveryOperationInfo.OperationCodes.OrderBy(c => c).Select(EnumHelper.GetDisplayName).ToList();
+            OperationCodes = recoveryOperationInfo.OperationCodes.OrderByInterimsFirst().Select(EnumHelper.GetDisplayName).ToList();
             TechnologyEmployed = recoveryOperationInfo.TechnologyEmployed;
             ReasonForExport = recoveryOperationInfo.ReasonForExport;
         }
-    }
+  }
 }
