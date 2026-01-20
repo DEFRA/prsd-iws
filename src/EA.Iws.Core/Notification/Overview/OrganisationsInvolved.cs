@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using EA.Iws.Core.NotificationAssessment;
     using Exporters;
     using Facilities;
     using Importer;
@@ -19,7 +18,7 @@
 
         public List<ProducerData> Producers { get; set; }
 
-        public ImporterData Importer { get; set; }       
+        public ImporterData Importer { get; set; }
 
         public List<FacilityData> Facilities { get; set; }
     }
