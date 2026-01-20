@@ -16,16 +16,6 @@
       return false;
     }
 
-    public static int CompareOperationCodes(OperationCode x, OperationCode y)
-    {
-      bool xi = IsInterimCode(x), yi = IsInterimCode(y);
-      if ((xi && yi) || (!xi && !yi))
-      { 
-        return x.CompareTo(y); 
-      }
-      return xi ? -1 : 1;
-    }
-
     public static IOrderedEnumerable<OperationCode> OrderByInterimsFirst(this IEnumerable<OperationCode> source)
     {
       if (source is null)
