@@ -5,7 +5,8 @@
     using Core.OperationCodes;
     using Core.Shared;
   using EA.Iws.Core.Extensions;
-  using Prsd.Core.Helpers;
+    using EA.Iws.Core.NotificationAssessment;
+    using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -18,19 +19,28 @@
         {
         }
 
-        public WasteOperationViewModel(NotificationDetails details, WasteOperation data)
+        public WasteOperationViewModel(NotificationDetails details, WasteOperation data, InterimStatus interimStatus)
         {
             ImportNotificationId = details.ImportNotificationId;
             NotificationType = details.NotificationType;
 
             var selectedCodes = data.OperationCodes ?? new OperationCode[0];
 
-            Codes = OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
+            if (interimStatus.IsInterim ?? false)
+            {
+                Codes = OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
                 .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
                 .OrderByInterimsFirst(x => x.Key)
                 .ToList();
-
-            TechnologyEmployed = data.TechnologyEmployed;
+            }
+            else
+            {
+                Codes = OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
+                .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
+                .OrderBy(c => c)
+                .ToList();
+            }
+                TechnologyEmployed = data.TechnologyEmployed;
         }
 
         public Guid ImportNotificationId { get; set; }

@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using Core.Notification;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Domain.ImportNotification;
     using NotificationAssessment;
     using WasteRecovery;
 
@@ -9,6 +11,8 @@
         public NotificationApplication Notification { get; private set; }
 
         public NotificationAssessment NotificationAssessment { get; private set; }
+
+        public FacilityCollection Facilities { get; private set; }
 
         public WasteRecovery.WasteRecovery WasteRecovery { get; private set; }
 
@@ -24,6 +28,7 @@
 
         public static NotificationApplicationOverview Load(NotificationApplication notification,
             NotificationAssessment assessment,
+            FacilityCollection facilities,
             WasteRecovery.WasteRecovery wasteRecovery,
             WasteDisposal wasteDisposal,
             Exporter.Exporter exporter,
@@ -37,6 +42,7 @@
                 Importer = importer,
                 Notification = notification,
                 NotificationAssessment = assessment,
+                Facilities = facilities,
                 WasteRecovery = wasteRecovery,
                 WasteDisposal = wasteDisposal,
                 Charge = charge,

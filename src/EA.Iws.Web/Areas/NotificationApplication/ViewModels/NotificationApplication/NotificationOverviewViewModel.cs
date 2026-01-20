@@ -46,7 +46,7 @@
             NotificationId = overviewData.NotificationId;
             NotificationNumber = overviewData.NotificationNumber;
             OrganisationsInvolvedViewModel = new OrganisationsInvolvedViewModel(overviewData.OrganisationsInvolved, overviewData.Progress);
-            RecoveryOperationViewModel = new RecoveryOperationViewModel(overviewData.RecoveryOperation, overviewData.Progress);
+            RecoveryOperationViewModel = new RecoveryOperationViewModel(overviewData.RecoveryOperation, overviewData.Progress, overviewData.InterimStatus);
             TransportationViewModel = new TransportationViewModel(overviewData.Transportation, overviewData.Progress);
             JourneyViewModel = new JourneyViewModel(overviewData.Journey, overviewData.Progress);
             ClassifyYourWasteViewModel = new ClassifyYourWasteViewModel(overviewData.WasteClassificationOverview, overviewData.Progress);

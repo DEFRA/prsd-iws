@@ -9,7 +9,7 @@
   {
     private static bool IsInterimCode(OperationCode code)
     {
-      if (code == OperationCode.R12 || code == OperationCode.R13 || code == OperationCode.D15 || code == OperationCode.D14 || code == OperationCode.D13 || code == OperationCode.D12)
+      if (code == OperationCode.R12 || code == OperationCode.R13 || code == OperationCode.D15 || code == OperationCode.D14 || code == OperationCode.D13)
       {
         return true;
       }

@@ -95,24 +95,10 @@
             {
                 new TestableOperationInfo { OperationCode = OperationCode.D5 },
                 new TestableOperationInfo { OperationCode = OperationCode.D1 },
-                new TestableOperationInfo { OperationCode = OperationCode.D12 },
+                new TestableOperationInfo { OperationCode = OperationCode.D13 },
             });
 
-            Assert.Equal("D12, D1, D5", result);
-        }
-
-        [Fact]
-        public void ThreeD_Interims_OrdersFirst()
-        {
-            var result = formatter.OperationInfosToCommaDelimitedList(new[]
-            {
-                new TestableOperationInfo { OperationCode = OperationCode.D5 },
-                new TestableOperationInfo { OperationCode = OperationCode.D15 },
-                new TestableOperationInfo { OperationCode = OperationCode.D14 },
-                new TestableOperationInfo { OperationCode = OperationCode.D12 }
-            });
-
-            Assert.Equal("D12, D14, D15, D5", result);
+            Assert.Equal("D13, D1, D5", result);
         }
 
         [Fact]
@@ -137,7 +123,7 @@
                 new TestableOperationInfo { OperationCode = OperationCode.D6 }
             });
 
-            Assert.Equal("D12, D13, D14, D15, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11", result);
+            Assert.Equal("D13, D14, D15, D1, D2, D3, D4, D5, D6, D7, D8, D9, D10, D11, D12,", result);
         }
 
         [Fact]

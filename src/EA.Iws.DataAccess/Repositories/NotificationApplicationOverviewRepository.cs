@@ -59,6 +59,10 @@
                 in db.ShipmentInfos
                     .Where(si => si.NotificationId == notification.Id)
                     .DefaultIfEmpty()
+                from facilities
+                in db.Facilities
+                    .Where(fc => fc.NotificationId == notification.Id)
+                    .DefaultIfEmpty()
                 select new
                 {
                     Notification = notification,
@@ -67,7 +71,8 @@
                     NotificationAssessment = assessment,
                     ShipmentInfo = shipmentInfo,
                     Exporter = exporter,
-                    Importer = importer
+                    Importer = importer,
+                    Facilities = facilities
                 };
 
             var data = await query.SingleAsync();
@@ -75,6 +80,7 @@
             return NotificationApplicationOverview.Load(
                 data.Notification,
                 data.NotificationAssessment,
+                data.Facilities,
                 data.WasteRecovery,
                 data.WasteDisposal,
                 data.Exporter,
