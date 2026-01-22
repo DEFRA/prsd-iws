@@ -1,11 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations
 {
+    using Core.OperationCodes;
+    using Core.Shared;
+  using EA.Iws.Core.Extensions;
+    using EA.Iws.Core.NotificationAssessment;
+    using Prsd.Core.Helpers;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    using Core.OperationCodes;
-    using Core.Shared;
-    using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
     public class OperationCodesViewModel : IValidatableObject
@@ -13,6 +15,8 @@
         public IList<KeyValuePairViewModel<OperationCode, bool>> PossibleCodes { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public InterimStatus InterimStatus { get; set; }
 
         public IList<string> DisplayValues
         {
@@ -40,13 +44,29 @@
         {
         }
 
-        public OperationCodesViewModel(NotificationType type, IEnumerable<OperationCode> selectedCodes)
+        public OperationCodesViewModel(NotificationType type, IEnumerable<OperationCode> selectedCodes, InterimStatus interimStatus)
         {
             NotificationType = type;
 
-            PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
+            InterimStatus = interimStatus;
+
+            var query = OperationCodeMetadata.GetCodesForOperation(type)
+                .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)));
+
+            if (interimStatus.IsInterim ?? false)
+            {
+                PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
                 .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
+                .OrderByInterimsFirst(x => x.Key)
                 .ToList();
+            }
+            else
+            {
+                PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
+                    .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
+                    .OrderBy(c => c)
+                    .ToList();
+            }                
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -59,5 +79,5 @@
                 yield return new ValidationResult(error, new[] { "PossibleCodes" });
             }
         }
-    }
+  }
 }

@@ -2,6 +2,7 @@
 {
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.Iws.Requests.NotificationAssessment;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -42,7 +43,10 @@
             var selectedCodes =
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-            var model = new OperationCodesViewModel(NotificationType.Recovery, selectedCodes);
+            var interimStatus =
+                    await mediator.SendAsync(new GetInterimStatus(id));
+
+            var model = new OperationCodesViewModel(NotificationType.Recovery, selectedCodes, interimStatus);
 
             return View(model);
         }
@@ -78,7 +82,10 @@
             var selectedCodes =
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-            var model = new OperationCodesViewModel(NotificationType.Disposal, selectedCodes);
+            var interimStatus = 
+                    await mediator.SendAsync(new GetInterimStatus(id));
+
+            var model = new OperationCodesViewModel(NotificationType.Disposal, selectedCodes, interimStatus);
 
             return View(model);
         }
