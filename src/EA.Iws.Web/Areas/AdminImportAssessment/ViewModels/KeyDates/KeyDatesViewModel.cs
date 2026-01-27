@@ -91,6 +91,8 @@
             get { return AssessmentStartedDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
         }
 
+        public bool ShowAssessmentDecisionLink { get; set; }
+
         public IList<NotificationAssessmentDecision> Decisions { get; set; } 
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
