@@ -128,6 +128,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AvailableDecisionsData.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportInterimStatus.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsUsersData.cs" />

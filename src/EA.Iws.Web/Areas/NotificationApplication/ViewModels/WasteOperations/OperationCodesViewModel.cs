@@ -64,7 +64,6 @@
             {
                 PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
                     .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
-                    .OrderBy(c => c)
                     .ToList();
             }                
         }

@@ -176,6 +176,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationCommentsUsers.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportInterimStatus.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />

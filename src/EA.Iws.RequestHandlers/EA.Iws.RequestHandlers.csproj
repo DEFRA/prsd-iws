@@ -287,6 +287,7 @@
     <Compile Include="ImportNotification\GetImportNotificationAdditionalChargesHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberByIdHandler.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationInterimStatusHandler.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
