@@ -82,9 +82,7 @@
             <div class="noti-links">
                 @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
                 {
-                    @Html.ActionLink("Bank guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-                    <br />
-                    @Html.ActionLink("Parent company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
+                    <a href="https://beta.sepa.scot/regulation/authorisations-and-compliance/waste-export-and-import" target="_blank" rel="external">Click here to view the Templates for the Financial Guarantee and Parent Company Guarantee on the SEPA website (opens in new window)</a>
                 }
                 else
                 {

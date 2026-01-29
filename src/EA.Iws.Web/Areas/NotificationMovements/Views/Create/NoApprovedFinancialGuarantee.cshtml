@@ -24,13 +24,15 @@
 }
 else
 {
-    <p class="text">
-        @Resource.SepaPreLinkText
-        @Html.ActionLink(Resource.SepaDownloadBankLink, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-        @Resource.Or
-        @Html.ActionLink(Resource.SepaDownloadParentLink, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
-        @Resource.SepaPostLinkText
-    </p>
+<p class="text">
+    @Resource.SepaPreLinkText
+    @Resource.SepaDownloadBankLink
+    @Resource.Or
+    @Resource.SepaDownloadParentLink
+    @Resource.SepaPostLinkText
+    <br />
+    Click <a href="https://beta.sepa.scot/regulation/authorisations-and-compliance/waste-export-and-import" target="_blank" rel="external">here</a> to view the Templates for the Financial Guarantee and Parent Company Guarantee on the SEPA website (opens in new window)</a>
+</p>
 }
 
 @Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "govuk-button" })

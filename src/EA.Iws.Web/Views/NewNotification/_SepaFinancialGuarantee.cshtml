@@ -8,7 +8,7 @@
     @SepaFinancialGuaranteeResources.SubmitFG
 </p>
 <p>
-    @Html.Raw(string.Format(SepaFinancialGuaranteeResources.PrintMessage,
-        Html.ActionLink(SepaFinancialGuaranteeResources.BankGuaranteeTemplate, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null),
-        Html.ActionLink(SepaFinancialGuaranteeResources.ParentCompanyTemplate, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)))
+    @SepaFinancialGuaranteeResources.PrintMessage
+    <br />
+    Click <a href="https://beta.sepa.scot/regulation/authorisations-and-compliance/waste-export-and-import" target="_blank" rel="external">here</a> to view the Templates for the Financial Guarantee and Parent Company Guarantee on the SEPA website (opens in new window)</a>
 </p>
