@@ -1,17 +1,19 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.AdminImportAssessment
 {
+    using Areas.AdminImportAssessment.Controllers;
+    using Areas.AdminImportAssessment.ViewModels.KeyDates;
+    using Core.ImportNotificationAssessment;
+    using EA.Iws.Web.Infrastructure.Authorization;
+    using FakeItEasy;
+    using Prsd.Core;
+    using Prsd.Core.Mediator;
+    using Requests.ImportNotificationAssessment;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Threading.Tasks;
-    using Areas.AdminImportAssessment.Controllers;
-    using Areas.AdminImportAssessment.ViewModels.KeyDates;
-    using Core.ImportNotificationAssessment;
-    using FakeItEasy;
-    using Prsd.Core;
-    using Prsd.Core.Mediator;
-    using Requests.ImportNotificationAssessment;
+    using System.Web.Mvc;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -27,10 +29,12 @@
         private readonly DateTime transmittedDate = new DateTime(2015, 8, 21);
         private readonly DateTime acknowledgedDate = new DateTime(2015, 8, 22);
         private readonly DateTime decisionRequiredDate = new DateTime(2015, 8, 22);
+        private readonly AuthorizationService authorizationService;
 
         public KeyDatesControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            authorizationService = A.Fake<AuthorizationService>();
 
             A.CallTo(
                 () => mediator.SendAsync(A<GetKeyDates>.That.Matches(p => p.ImportNotificationId == notificationId)))
@@ -42,7 +46,7 @@
                     DecisionRequiredByDate = decisionRequiredDate
                 });
 
-            controller = new KeyDatesController(mediator);
+            controller = new KeyDatesController(mediator, authorizationService);
         }
 
         [Fact]
@@ -52,6 +56,14 @@
 
             A.CallTo(() => mediator.SendAsync(A<GetKeyDates>.That.Matches(dates => dates.ImportNotificationId == notificationId)))
                 .MustHaveHappenedOnceExactly();
+        }
+
+        [Fact]
+        public async Task Index_SetsDecisionRequiredByDateIfPopulated()
+        {
+            var result = await controller.Index(notificationId, 0) as ViewResult;
+
+            Assert.Equal(decisionRequiredDate, ((KeyDatesViewModel)result.Model).DecisionDate.AsDateTime());
         }
 
         [Fact]
@@ -209,7 +221,7 @@
 
         private KeyDatesController GetMockAssessmentController(object viewModel)
         {
-            var assessmentController = new KeyDatesController(mediator);
+            var assessmentController = new KeyDatesController(mediator, authorizationService);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

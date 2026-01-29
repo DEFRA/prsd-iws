@@ -164,6 +164,10 @@
                 }
             </td>
             <td>
+                @if (Model.ShowAssessmentDecisionLink && Model.NotificationAcknowledgedDate.IsCompleted && !Model.Decisions.Any() && !Model.NotificationFileClosedDate.IsCompleted)
+                {
+                    @Html.ActionLink("Go to assessment decision", "Index", "Decision");
+                }
             </td>
         </tr>
 
