@@ -4,8 +4,8 @@
     using Core.ImportNotification.Draft;
     using Core.OperationCodes;
     using Core.Shared;
-  using EA.Iws.Core.Extensions;
-    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Core.Extensions;
+    using EA.Iws.Core.ImportNotificationAssessment;
     using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
@@ -19,7 +19,7 @@
         {
         }
 
-        public WasteOperationViewModel(NotificationDetails details, WasteOperation data, InterimStatus interimStatus)
+        public WasteOperationViewModel(NotificationDetails details, WasteOperation data, ImportInterimStatus interimStatus)
         {
             ImportNotificationId = details.ImportNotificationId;
             NotificationType = details.NotificationType;
@@ -37,7 +37,6 @@
             {
                 Codes = OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
                 .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
-                .OrderBy(c => c.Key)
                 .ToList();
             }
                 TechnologyEmployed = data.TechnologyEmployed;
