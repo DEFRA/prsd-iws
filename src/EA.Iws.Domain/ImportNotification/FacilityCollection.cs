@@ -29,7 +29,5 @@
         {
             get { return FacilitiesCollection.ToSafeIEnumerable(); }
         }
-
-        public bool? IsInterim { get; private set; }
     }
 }
