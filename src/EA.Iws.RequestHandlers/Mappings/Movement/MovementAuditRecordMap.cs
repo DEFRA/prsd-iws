@@ -21,14 +21,23 @@
         public ShipmentAuditRecord Map(MovementAudit audit)
         {
             bool isInternalUser = Task.Run(() => internalUserRepository.IsUserInternal(audit.UserId)).Result;
-            string userName = !isInternalUser ? "External User" : Task.Run(() => notificationUserRepository.GetUserByUserId(audit.UserId)).Result.FullName;
+            string userName;
+            if (isInternalUser)
+            {
+                userName = Task.Run(() => internalUserRepository.GetByUserId(audit.UserId)).Result.User.FullName;
+            }
+            else
+            {
+                userName = Task.Run(() => notificationUserRepository.GetUserByUserId(audit.UserId)).Result.FullName;
+            }
 
             return new ShipmentAuditRecord()
-            {
+            {   
                 ShipmentNumber = audit.ShipmentNumber,
                 AuditType = ((MovementAuditType)audit.Type),
                 DateAdded = audit.DateAdded,
-                UserName = userName
+                UserName = userName,
+                InternalExternal = isInternalUser ? "Internal User" : "External User" 
             };
         }
     }

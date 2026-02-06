@@ -16,7 +16,7 @@
 @if (Model.ShipmentAuditItems.Count > 0)
 {
 	<div class="form-group" id="audit-trail">
-		<table class="group-table">
+		<table class="govuk-table">
 			<thead class="govuk-table__head">
 				<tr class="govuk-table__row">
 					<th scope="col" class="govuk-table__header">
@@ -32,7 +32,10 @@
 						Time
 					</th>
 					<th scope="col" class="govuk-table__header">
-						User
+						User name
+					</th>
+					<th scope="col" class="govuk-table__header">
+						User type
 					</th>
 				</tr>
 			</thead>
@@ -55,6 +58,9 @@
 			        </td>
 			        <td class="govuk-table__cell">
 			            @auditRecord.UserName
+			        </td>
+			        <td class="govuk-table__cell">
+			            @auditRecord.InternalExternal
 			        </td>
 			    </tr>
 			}
