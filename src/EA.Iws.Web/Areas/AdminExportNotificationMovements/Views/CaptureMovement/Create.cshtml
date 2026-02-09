@@ -65,12 +65,15 @@
     @Html.Partial("_Scripts")
 
 <script>
-        $(function() {
-            if (@ViewBag != null && @ViewBag.IsSaved ?? false)
+    $(function () {
+            var isSaved = @(ViewBag.IsSaved == true ? "true" : "false");
+            var hasShipmentNumber = @(Model.ShipmentNumber == null ? "true" : "false");
+
+            if (isSaved)
             {
                 $("#NewShipmentNumber").focus();
             }
-            else if (@Model.ShipmentNumber == null)
+            else if (hasShipmentNumber)
             {
                 $("#ShipmentNumber").focus();
             }

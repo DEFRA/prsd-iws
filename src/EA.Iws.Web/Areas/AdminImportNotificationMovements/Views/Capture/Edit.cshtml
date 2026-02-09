@@ -107,16 +107,20 @@
     @Html.Partial("_Scripts")
 
 <script>
-        $(function () {
-           if (@ViewBag != null && @ViewBag.IsSaved ?? false)
+    $(function () {
+            var isSaved = @(ViewBag.IsSaved == true ? "true" : "false");
+            var isReceived = @(Model.IsReceived ? "true" : "false");
+            var isOperationCompleted = @(Model.IsOperationCompleted ? "true" : "false");
+
+            if (isSaved)
             {
                 $("#NewShipmentNumber").focus();
             }
-            else if (!@Model.IsReceived)
+            else if (!isReceived)
             {
                 $("#Receipt_ReceivedDate_Date").focus();
             }
-            else if (!Model.IsOperationCompleted)
+            else if (!isOperationCompleted)
             {
                 $("#Recovery_RecoveryDate_Date").focus();
             }
