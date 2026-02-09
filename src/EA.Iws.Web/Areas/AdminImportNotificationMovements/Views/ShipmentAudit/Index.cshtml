@@ -51,7 +51,7 @@
 }
 <br />
 
-@Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel, new ViewDataDictionary() { { "Filter", Model.SelectedFilter }, { "ShipmentNumber", Model.ShipmentNumber } })
+@Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel, new ViewDataDictionary() { { "Filter", Model.SelectedFilter }, { "ShipmentNumber", Model.ShipmentNumber }, { "IsImportNotification", true } })
 
 <div class="govuk-form-group">
 	@Html.ActionLink("Go to Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, new { @class = "govuk-button" })

@@ -9,13 +9,13 @@
         {
         }
 
-        public ShipmentAuditRecord(int shipmentNumber, MovementAuditType auditType, string userName,  DateTimeOffset dateAdded, string internalExternal)
+        public ShipmentAuditRecord(int shipmentNumber, MovementAuditType auditType, string userName,  DateTimeOffset dateAdded, string userType)
         {
             UserName = userName;
             ShipmentNumber = shipmentNumber;
             AuditType = auditType;
             DateAdded = dateAdded;
-            InternalExternal = internalExternal;
+            UserType = userType;
         }
 
         public string UserName { get; set; }
@@ -25,6 +25,6 @@
         public MovementAuditType AuditType { get; set; }
 
         public DateTimeOffset DateAdded { get; set; }
-        public string InternalExternal { get; set; }
+        public string UserType { get; set; }
     }
 }

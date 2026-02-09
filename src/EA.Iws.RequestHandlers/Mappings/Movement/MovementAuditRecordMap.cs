@@ -37,7 +37,7 @@
                 AuditType = ((MovementAuditType)audit.Type),
                 DateAdded = audit.DateAdded,
                 UserName = userName,
-                InternalExternal = isInternalUser ? "Internal User" : "External User" 
+                UserType = isInternalUser ? "Internal User" : "External User" 
             };
         }
     }
