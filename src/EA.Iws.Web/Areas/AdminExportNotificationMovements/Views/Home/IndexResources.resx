@@ -193,7 +193,7 @@
     <value>Status</value>
   </data>
   <data name="SummaryTitleAccepted" xml:space="preserve">
-    <value>Accepted</value>
+    <value>Outcome</value>
   </data>
   <data name="SummaryTitleActive" xml:space="preserve">
     <value>Active loads permitted:</value>
