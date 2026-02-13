@@ -286,7 +286,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accepted.
+        ///   Looks up a localized string similar to Outcome.
         /// </summary>
         public static string SummaryTitleAccepted {
             get {
