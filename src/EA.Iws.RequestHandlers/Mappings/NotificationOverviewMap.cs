@@ -9,6 +9,7 @@
     using Core.Notification.Overview;
     using Core.Producers;
     using Domain.NotificationApplication;
+    using EA.Iws.Core.NotificationAssessment;
     using Prsd.Core.Mapper;
 
     internal class NotificationOverviewMap : IMap<NotificationApplicationOverview, NotificationOverview>
@@ -36,6 +37,7 @@
                 Journey = mapper.Map<Journey>(source.Notification),
                 RecoveryOperation = mapper.Map<RecoveryOperation>(source.Notification),
                 OrganisationsInvolved = MapOrganisationsInvolved(source),
+                InterimStatus = MapInterimStatus(source),
                 Transportation = mapper.Map<Transportation>(source.Notification),
                 SubmitSummaryData = mapper.Map<SubmitSummaryData>(source.Notification),
                 WasteCodesOverview = mapper.Map<WasteCodesOverviewInfo>(source.Notification),
@@ -61,6 +63,18 @@
             };
 
             return organisationsInvolved;
+        }
+
+        private InterimStatus MapInterimStatus(NotificationApplicationOverview source)
+        {
+            var interimStatus = new InterimStatus
+            {
+                IsInterim = source.Facilities.IsInterim,
+                NotificationId = source.Notification.Id,
+                NotificationStatus = source.NotificationAssessment.Status
+            };
+
+            return interimStatus;
         }
     }
 }

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.Admin.Controllers;
@@ -19,7 +20,9 @@
         private readonly HomeController controller;
         private readonly IMediator mediator;
         private readonly BasicSearchViewModel postModel;
+        private readonly BasicSearchViewModel postModelSingle;
         private readonly IList<BasicSearchResult> searchResults;
+        private readonly IList<BasicSearchResult> searchResultSingle;
 
         public HomeControllerTests()
         {
@@ -80,6 +83,35 @@
             var result = await controller.Index(postModel) as ViewResult;
 
             Assert.Equal(searchResults, ((BasicSearchViewModel)result.Model).ExportSearchResults, new BasicSearchResultComparer());
+        }
+
+        [Fact]
+        public async Task PostIndex_SearchReturnsSingleReturnsRedirect()
+        {
+            var postModelSingle = new BasicSearchViewModel
+            {
+                SearchTerm = "GB 0001 000525"
+            };
+
+            var searchResultSingle = new[]
+            {
+                  new BasicSearchResult
+                  {
+                      ExporterName = "test",
+                      Id = new Guid("211C1DE8-906C-49DB-835C-4C2B78673B68"),
+                      NotificationNumber = "GB 0001 000525",
+                      WasteType = "RDF"
+                  }
+            };
+            A.CallTo(() => mediator.SendAsync(A<SearchExportNotifications>.Ignored)).Returns<IList<BasicSearchResult>>(searchResultSingle);
+
+            var result = await controller.Index(postModelSingle) as RedirectToRouteResult;
+
+            var redirect = Assert.IsType<RedirectToRouteResult>(result);
+            Assert.Equal("Index", redirect.RouteValues["action"]);
+            Assert.Equal("Home", redirect.RouteValues["controller"]);
+            Assert.Equal("AdminExportAssessment", redirect.RouteValues["area"]);
+            Assert.Equal(searchResultSingle.First().Id, redirect.RouteValues["id"]);
         }
 
         [Fact]

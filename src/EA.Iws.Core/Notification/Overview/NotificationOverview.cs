@@ -1,8 +1,9 @@
 ﻿namespace EA.Iws.Core.Notification.Overview
 {
-    using System;
+    using EA.Iws.Core.NotificationAssessment;
     using Notification;
     using Shared;
+    using System;
 
     public class NotificationOverview
     {
@@ -17,6 +18,8 @@
         public string NotificationNumber { get; set; }
 
         public OrganisationsInvolved OrganisationsInvolved { get; set; }
+
+        public InterimStatus InterimStatus { get; set; }
 
         public RecoveryOperation RecoveryOperation { get; set; }
 

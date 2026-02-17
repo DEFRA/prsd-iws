@@ -1,21 +1,24 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using EA.Iws.Core.Authorization.Permissions;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.KeyDates;
 
     [AuthorizeActivity(typeof(GetKeyDates))]
     public class KeyDatesController : Controller
     {
         private readonly IMediator mediator;
+        private readonly AuthorizationService authorizationService;
 
-        public KeyDatesController(IMediator mediator)
+        public KeyDatesController(IMediator mediator, AuthorizationService authorizationService)
         {
             this.mediator = mediator;
+            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -31,6 +34,8 @@
                 AddRelevantDateToNewDate(model);
             }
 
+            model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
+
             return View(model);
         }
 
@@ -40,6 +45,8 @@
         {
             if (!ModelState.IsValid)
             {
+                model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
+
                 return View(model);
             }
 

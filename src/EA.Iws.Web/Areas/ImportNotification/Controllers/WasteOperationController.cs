@@ -1,13 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
+    using Core.ImportNotification.Draft;
+    using EA.Iws.Requests.ImportNotificationAssessment;
+    using EA.Iws.Requests.NotificationAssessment;
+    using Infrastructure.Authorization;
+    using Prsd.Core.Mediator;
+    using Requests.ImportNotification;
     using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.ImportNotification.Draft;
-    using Infrastructure.Authorization;
-    using Prsd.Core.Mediator;
-    using Requests.ImportNotification;
     using ViewModels.WasteOperation;
 
     [AuthorizeActivity(typeof(SetDraftData<>))]
@@ -25,8 +27,9 @@
         {
             var details = await mediator.SendAsync(new GetNotificationDetails(id));
             var data = await mediator.SendAsync(new GetDraftData<WasteOperation>(id));
+            var importInterimStatus = await mediator.SendAsync(new GetImportInterimStatus(id));
 
-            var model = new WasteOperationViewModel(details, data);
+            var model = new WasteOperationViewModel(details, data, importInterimStatus);
 
             return View(model);
         }

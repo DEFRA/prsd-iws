@@ -126,11 +126,14 @@
   <data name="CopyNotification" xml:space="preserve">
     <value>create a new notification based on a previous one</value>
   </data>
+  <data name="DeleteNotification" xml:space="preserve">
+    <value>Delete a notification</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error retrieving notifications, please try again.</value>
   </data>
   <data name="FilterByNotificationStatus" xml:space="preserve">
-	<value>Filter by notification status:</value>
+    <value>Filter by notification status:</value>
   </data>
   <data name="First" xml:space="preserve">
     <value> first.</value>
@@ -176,7 +179,7 @@
   </data>
   <data name="SearchForNotificationNumber" xml:space="preserve">
     <value>Enter Notification Number:</value>
-  </data>	
+  </data>
   <data name="SearchHint" xml:space="preserve">
     <value>The notification number must be entered in full, for example GB0001009999</value>
   </data>

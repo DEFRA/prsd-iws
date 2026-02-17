@@ -106,16 +106,25 @@
 @section scripts {
     @Html.Partial("_Scripts")
 
-    <script>
-        $(function () {
-            @if (!Model.IsReceived)
+<script>
+    $(function () {
+            var isSaved = @(ViewBag.IsSaved == true ? "true" : "false");
+            var isReceived = @(Model.IsReceived ? "true" : "false");
+            var isOperationCompleted = @(Model.IsOperationCompleted ? "true" : "false");
+
+            if (isSaved)
             {
-                @:$("#Receipt_ReceivedDate_Date").focus();
+                $("#NewShipmentNumber").focus();
             }
-            else if (!Model.IsOperationCompleted)
+            else if (!isReceived)
             {
-                @:$("#Recovery_RecoveryDate_Date").focus();
+                $("#Receipt_ReceivedDate_Date").focus();
             }
+            else if (!isOperationCompleted)
+            {
+                $("#Recovery_RecoveryDate_Date").focus();
+            }
+
         });
-    </script>
+</script>
 }

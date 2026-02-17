@@ -34,7 +34,10 @@
             var selectedCodes =
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-            OperationCodesViewModel model = new OperationCodesViewModel(basicInfo.NotificationType, selectedCodes);
+            var interimStatus =
+                    await mediator.SendAsync(new GetInterimStatus(id));
+
+            OperationCodesViewModel model = new OperationCodesViewModel(basicInfo.NotificationType, selectedCodes, interimStatus);
             return View(model);
         }
 

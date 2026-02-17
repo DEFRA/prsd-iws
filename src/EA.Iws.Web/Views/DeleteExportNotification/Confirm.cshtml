@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.ViewModels.DeleteExportNotification.DeleteViewModel
+@using Resources = EA.Iws.Web.Views.DeleteExportNotification.ConfirmResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <div class="govuk-form-group">
+            @if (Model.Success)
+            {
+                <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resources.SuccessHeading, Model.NotificationNumber.ToNonBreakingString()))</h1>
+            }
+            else
+            {
+                <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resources.FailureHeading, Model.NotificationNumber.ToNonBreakingString()))</h1>
+            }
+        </div>
+
+        <div class="govuk-form-group">
+            @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home", null, new { @class = "govuk-button" })
+        </div>
+    </div>
+</div>

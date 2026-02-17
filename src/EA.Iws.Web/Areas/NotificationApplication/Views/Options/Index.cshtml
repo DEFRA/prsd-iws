@@ -39,6 +39,18 @@
     }
 }
 
+@helper DisplayString(string text, MovementStatus status)
+{
+    if (!string.IsNullOrEmpty(text) && status != MovementStatus.New && status != MovementStatus.Cancelled && status != MovementStatus.Submitted)
+    {
+        @(text)
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
+        @:- -
+    }
+}
+
 <div class="shipping-home">
 
     <div class="grid-row">
@@ -252,6 +264,7 @@
                             <th>Received</th>
                             <th>Quantity</th>
                             <th>@operationTitle</th>
+                            <th>Outcome</th>
                         </tr>
                     </thead>
 
@@ -281,6 +294,9 @@
                                     </td>
                                     <td>
                                         @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayString(Model.TableData[i].WasShipmentAccepted.Value.ToString(), Model.TableData[i].Status)
                                     </td>
                                 </tr>
                             }

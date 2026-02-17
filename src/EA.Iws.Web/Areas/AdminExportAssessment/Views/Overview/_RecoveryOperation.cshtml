@@ -16,6 +16,7 @@
         <tr>
             <td>
                 @(Model.NotificationType == NotificationType.Recovery ? "Recovery codes" : "Disposal codes")
+                <p class="govuk-body-s">Block 11</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_OperationCodes.cshtml")
@@ -27,6 +28,7 @@
             <tr>
                 <td>
                     Pre-consented facility
+                    <p class="govuk-body-s">Block 13</p>
                 </td>
                 <td>
                     @Html.Partial(viewLocation + "_PreconsentStatus.cshtml")
@@ -37,6 +39,7 @@
         <tr>
             <td>
                 @(Model.NotificationType == NotificationType.Recovery ? "Recovery technology" : "Disposal technology")
+                <p class="govuk-body-s">Block 11</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_TechnologyEmployed.cshtml")
@@ -46,6 +49,7 @@
         <tr>
             <td>
                 Reason for export
+                <p class="govuk-body-s">Block 11</p>
             </td>
             <td>
                 @Html.Partial(viewLocation + "_ReasonForExport.cshtml")

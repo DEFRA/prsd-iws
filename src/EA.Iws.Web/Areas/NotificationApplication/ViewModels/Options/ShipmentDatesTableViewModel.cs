@@ -25,6 +25,7 @@
         public ShipmentQuantityUnits? Unit { get; set; }
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
+            public ShipmentType? WasShipmentAccepted { get; set; }
         
         public ShipmentDatesTableViewModel(MovementTableDataRow data)
         {
@@ -38,6 +39,7 @@
             Quantity = data.Quantity;
             Unit = data.QuantityUnits;
             RecoveredOrDisposedOf = data.CompletedDate;
+            WasShipmentAccepted = data.IsReceived ? ShipmentType.Accepted : (data.IsPartialRejection ? ShipmentType.Partially : ShipmentType.Rejected);
         }
     }
 }

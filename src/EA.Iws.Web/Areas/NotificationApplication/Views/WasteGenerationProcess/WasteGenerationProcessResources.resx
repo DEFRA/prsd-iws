@@ -121,7 +121,7 @@
     <value>Please enter a description or check the box</value>
   </data>
   <data name="Detail" xml:space="preserve">
-    <value>I will provide the detail in a separate document with my submission</value>
+    <value>I'll upload this information using the ‘Upload annexes and extra information’ link after I submit this notification.</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Describe the process by which the waste was produced</value>

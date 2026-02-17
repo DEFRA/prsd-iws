@@ -878,6 +878,7 @@
       <DependentUpon>MarkInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\BannerController.cs" />
+    <Compile Include="Controllers\DeleteExportNotificationController.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\AdditionalChargeService.cs" />
     <Compile Include="Infrastructure\AdditionalCharge\IAdditionalChargeService.cs" />
@@ -1546,6 +1547,10 @@
     <Content Include="Views\Shared\_SessionTimeout.cshtml" />
     <Content Include="Views\Account\SessionSignedOut.cshtml" />
     <Content Include="Views\Shared\_IwsMessageBanner.cshtml" />
+    <Content Include="Views\Shared\_ExternalUserMenu.cshtml" />
+    <Content Include="Views\DeleteExportNotification\Index.cshtml" />
+    <Content Include="Views\DeleteExportNotification\Check.cshtml" />
+    <Content Include="Views\DeleteExportNotification\Confirm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1755,6 +1760,13 @@
     <Compile Include="RazorHelpers\TagBuilderExtensions.cs" />
     <Compile Include="RazorHelpers\TypeHelper.cs" />
     <Compile Include="Services\IAppConfiguration.cs" />
+    <Compile Include="ViewModels\DeleteExportNotification\DeleteViewModel.cs" />
+    <Compile Include="ViewModels\DeleteExportNotification\IndexViewModel.cs" />
+    <Compile Include="ViewModels\DeleteExportNotification\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Registration\CreateUserViewModelBase.cs" />
     <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\DeleteCommentViewModel.cs" />
@@ -4062,6 +4074,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResultResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\DeleteExportNotification\CheckResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteExportNotification\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DeleteExportNotification\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Feedback\FeedbackResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4377,6 +4404,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\RecoveryViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4563,6 +4591,7 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CaptureViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CaptureViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\ReceiptViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4600,6 +4629,7 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateEditResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateEditResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Delete\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4768,6 +4798,7 @@
     <EmbeddedResource Include="Areas\Admin\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\ImportNotification\InterimResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5036,6 +5067,7 @@
     <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Reject\RejectViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RejectViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Submit\SubmitViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5081,6 +5113,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Annex\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Annex\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5121,6 +5154,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\OtherWasteAdditionalInformationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>OtherWasteAdditionalInformationResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\OtherWasteResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5213,6 +5247,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DownloadUnavailableResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\FinancialGuaranteeUnavailableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5332,6 +5367,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteGenerationProcess\WasteGenerationProcessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteGenerationProcessResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\DisposalCodesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5345,6 +5381,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteOperations\TechnologyEmployedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TechnologyEmployedResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalCostResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5494,6 +5531,7 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoApprovedFinancialGuaranteeResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5556,6 +5594,7 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrenotificationBulkUploadResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5684,6 +5723,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RestrictToAllowedUploadTypesAttributeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\DeleteExportNotification\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\BusinessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
@@ -5761,6 +5804,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResultResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeleteExportNotification\CheckResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CheckResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeleteExportNotification\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\DeleteExportNotification\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Feedback\FeedbackResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FeedbackResources.Designer.cs</LastGenOutput>
@@ -5773,7 +5828,9 @@
     <EmbeddedResource Include="Views\NewNotification\CreatedResources.resx" />
     <EmbeddedResource Include="Views\NewNotification\GeneralFinancialGuaranteeResources.resx" />
     <EmbeddedResource Include="Views\NewNotification\NotificationTypeResources.resx" />
-    <EmbeddedResource Include="Views\NewNotification\SepaFinancialGuaranteeResources.resx" />
+    <EmbeddedResource Include="Views\NewNotification\SepaFinancialGuaranteeResources.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\NotificationSwitch\NotFoundResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotFoundResources.Designer.cs</LastGenOutput>
