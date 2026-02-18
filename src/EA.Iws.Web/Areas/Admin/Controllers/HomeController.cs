@@ -40,14 +40,14 @@
             bool exportMatch = false;
             bool importMatch = false;
 
-            if (searchResults != null)
+            if (searchResults != null && searchResults.Count() != 0)
             {
                 model.ExportSearchResults = searchResults;
                 exportMatch = searchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
                 == model.SearchTerm.ToLower().Replace(" ", string.Empty);
             }
 
-            if (importSearchResults != null)
+            if (importSearchResults != null && importSearchResults.Count() != 0)
             {
                 model.ImportSearchResults = importSearchResults;
                 importMatch = searchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
