@@ -36,7 +36,7 @@
         {
             var searchResults = await mediator.SendAsync(model.ToRequest());
             var importSearchResults = await mediator.SendAsync(new SearchImportNotifications(model.SearchTerm));
-            var searchNotificationNumber = string.IsNullOrEmpty(model.SearchTerm) ? "" : model.SearchTerm.ToLower().Replace(" ", string.Empty);
+            var searchNotificationNumber = string.IsNullOrEmpty(model.SearchTerm) ? string.Empty : model.SearchTerm.ToLower().Replace(" ", string.Empty);
 
             if (searchResults != null && searchResults.Count() != 0)
             {
