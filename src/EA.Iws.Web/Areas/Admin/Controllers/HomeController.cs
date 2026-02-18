@@ -44,10 +44,9 @@
 
                 if (searchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty).Equals(searchNotificationNumber))
                 {
-                    return RedirectToAction(
-                            actionName: "Index",
-                            controllerName: "Home",
-                            routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
+                    return RedirectToAction(actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
                 }
             }
 
@@ -57,10 +56,9 @@
 
                 if (importSearchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty).Equals(searchNotificationNumber))
                 {
-                    return RedirectToAction(
-                            actionName: "Index",
-                            controllerName: "Home",
-                            routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
+                    return RedirectToAction(actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
                 }
             }
 
