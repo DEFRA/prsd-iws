@@ -43,14 +43,14 @@
             if (searchResults != null && searchResults.Count() != 0)
             {
                 model.ExportSearchResults = searchResults;
-                exportMatch = searchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
+                exportMatch = searchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty)
                 == model.SearchTerm.ToLower().Replace(" ", string.Empty);
             }
 
             if (importSearchResults != null && importSearchResults.Count() != 0)
             {
                 model.ImportSearchResults = importSearchResults;
-                importMatch = importSearchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
+                importMatch = importSearchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty)
                 == model.SearchTerm.ToLower().Replace(" ", string.Empty);
             }
 
