@@ -50,7 +50,7 @@
             if (importSearchResults != null && importSearchResults.Count() != 0)
             {
                 model.ImportSearchResults = importSearchResults;
-                importMatch = searchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
+                importMatch = importSearchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
                 == model.SearchTerm.ToLower().Replace(" ", string.Empty);
             }
 
