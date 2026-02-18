@@ -30,5 +30,7 @@
         FileClosed = 13,
         [Display(Name = "Resubmitted")]
         Resubmitted = 14,
+        [Display(Name = "Under Prohibition")]
+        UnderProhibition = 15,
     }
 }

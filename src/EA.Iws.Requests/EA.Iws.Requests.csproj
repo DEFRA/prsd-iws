@@ -177,9 +177,11 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportInterimStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\RemoveUnderProhibitionStatus.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetArchiveReference.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
@@ -190,6 +192,7 @@
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
+    <Compile Include="ImportNotificationAssessment\SetUnderProhibitionStatus.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationRefund.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\DeleteTransaction.cs" />

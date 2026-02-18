@@ -15,6 +15,25 @@
 <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 <div>
+
+    
+
+    <div class="govuk-form-group">
+        @using (Html.BeginForm("Suspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="govuk-button">Suspend</button>
+        }
+
+        @using (Html.BeginForm("UnSuspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="govuk-button">Un‑suspend</button>
+        }
+    </div>
+
     @Resource.FirstParagraph
 
     <table title="Assessment dates currently recorded">
@@ -65,7 +84,7 @@
 
                     var text = string.Empty;
 
-                    if(!Model.PaymentIsComplete)
+                    if (!Model.PaymentIsComplete)
                     {
                         text = " (partial payment)";
                         @text
@@ -302,7 +321,7 @@
             else
             {
                 <input type="submit" class="govuk-button" value="@Resource.ButtonText" />
-            }
+            }            
         </div>
 
     }

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using EA.Iws.Core.Authorization.Permissions;
+    using EA.Iws.Core.ImportNotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
@@ -27,6 +28,7 @@
             var data = await mediator.SendAsync(new GetKeyDates(id));
 
             var model = new KeyDatesViewModel(data);
+            model.NotificationId = id;
 
             if (command.HasValue)
             {
@@ -35,7 +37,7 @@
             }
 
             model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
-
+            
             return View(model);
         }
 
@@ -74,7 +76,25 @@
             }
 
             return RedirectToAction("Index");
-        } 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Suspend(Guid id)
+        {
+            await mediator.SendAsync(new SetUnderProhibitionStatus(id, DateTime.Now));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnSuspend(Guid id)
+        {
+            await mediator.SendAsync(new SetUnderProhibitionStatus(id, DateTime.Now));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
 
         private void AddRelevantDateToNewDate(KeyDatesViewModel model)
         {

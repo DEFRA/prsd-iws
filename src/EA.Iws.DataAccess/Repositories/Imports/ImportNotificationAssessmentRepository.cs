@@ -49,5 +49,12 @@
         {
             return (await GetByNotification(notificationId)).Status;
         }
+
+        public async Task<ImportNotificationStatusChange> GetPreviousStatusChangeByNotification(Guid notificationId)
+        {
+            var notification = await GetByNotification(notificationId);
+            var result = notification.StatusChanges.OrderByDescending(x => x.ChangeDate).First();
+            return result;
+        }
     }
 }

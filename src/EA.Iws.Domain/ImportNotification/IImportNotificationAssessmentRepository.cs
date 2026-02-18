@@ -13,6 +13,8 @@
 
         Task<ImportNotificationStatus> GetStatusByNotification(Guid notificationId);
 
+        Task<ImportNotificationStatusChange> GetPreviousStatusChangeByNotification(Guid notificationId);
+
         void Add(ImportNotificationAssessment assessment);
 
         Task<DateTime?> GetConsentedDate(Guid notificationId);
