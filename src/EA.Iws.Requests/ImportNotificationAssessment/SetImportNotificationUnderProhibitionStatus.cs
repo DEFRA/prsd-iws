@@ -6,13 +6,13 @@
     using System;
 
     [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
-    public class RemoveUnderProhibitionStatus : IRequest<bool>
+    public class SetImportNotificationUnderProhibitionStatus : IRequest<bool>
     {
         public Guid ImportNotificationId { get; private set; }
 
         public DateTime UnderProhibitionDate { get; private set; }
 
-        public RemoveUnderProhibitionStatus(Guid importNotificationId, DateTime underProhibitionDate)
+        public SetImportNotificationUnderProhibitionStatus(Guid importNotificationId, DateTime underProhibitionDate)
         {
             ImportNotificationId = importNotificationId;
             UnderProhibitionDate = underProhibitionDate;

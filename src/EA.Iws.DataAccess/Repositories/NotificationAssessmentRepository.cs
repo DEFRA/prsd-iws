@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using Core.NotificationAssessment;
+    using Domain.NotificationAssessment;
+    using Domain.Security;
+    using EA.Iws.Domain.ImportNotificationAssessment;
     using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.NotificationAssessment;
-    using Domain.NotificationAssessment;
-    using Domain.Security;
 
     internal class NotificationAssessmentRepository : INotificationAssessmentRepository
     {
@@ -45,6 +46,20 @@
                     context.NotificationAssessments.Where(n => n.NotificationApplicationId == notificationId)
                         .Select(n => n.Status)
                         .SingleAsync();
+        }
+
+        public async Task<NotificationStatusChange> GetPreviousStatusChangeByNotification(Guid notificationId)
+        {
+            var notification = await GetByNotificationId(notificationId);
+            var result = notification.StatusChanges.OrderByDescending(x => x.ChangeDate).FirstOrDefault();
+            return result;
+        }
+
+        public async Task<NotificationStatus> GetPreviousStatusByNotification(Guid notificationId)
+        {
+            var notification = await GetByNotificationId(notificationId);
+            var result = notification.StatusChanges.OrderByDescending(x => x.ChangeDate).Skip(1).FirstOrDefault();
+            return result.Status;
         }
     }
 }

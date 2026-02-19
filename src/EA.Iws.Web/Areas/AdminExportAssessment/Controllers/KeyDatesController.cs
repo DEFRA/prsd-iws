@@ -39,6 +39,7 @@
 
             var model = new DateInputViewModel(data.Dates)
             {
+                NotificationId = id,
                 IsAreaAssigned = data.IsLocalAreaSet,
                 CompetentAuthority = data.CompetentAuthority,
                 AssessmentDecisions = data.DecisionHistory,
@@ -202,6 +203,30 @@
             }
 
             return Json(response.Value);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Suspend(Guid id)
+        {
+            try
+            {
+                await mediator.SendAsync(new SetUnderProhibitionStatus(id));
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return RedirectToAction("Index", "KeyDates");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnSuspend(Guid id)
+        {
+            await mediator.SendAsync(new RemoveUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
         }
 
         private async Task SetNotificationTransmitted(DateInputViewModel model)

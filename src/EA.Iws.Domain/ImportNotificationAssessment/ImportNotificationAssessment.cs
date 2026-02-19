@@ -29,7 +29,7 @@
             Withdraw = 10,
             FileClosed = 11,
             UnderProhibition = 12,
-            LiftProhibition =13
+            LiftProhibition = 13
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers

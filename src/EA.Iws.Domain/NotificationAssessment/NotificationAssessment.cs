@@ -1,17 +1,18 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Core.Admin;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using EA.Iws.Core.ImportNotificationAssessment;
     using NotificationApplication;
     using NotificationConsent;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class NotificationAssessment : Entity
     {
@@ -32,7 +33,9 @@
             Resubmit,
             AcceptChanges,
             RejectChanges,
-            Archive
+            Archive,
+            UnderProhibition,
+            LiftProhibition
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -56,6 +59,8 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, NotificationStatus> archiveTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> underProhibitionTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, NotificationStatus> liftProhibitionTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
 
@@ -111,86 +116,106 @@
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
             consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
             archiveTrigger = stateMachine.SetTriggerParameters<DateTime, NotificationStatus>(Trigger.Archive);
+            underProhibitionTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.UnderProhibition);
+            liftProhibitionTrigger = stateMachine.SetTriggerParameters<DateTime, NotificationStatus>(Trigger.LiftProhibition);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(NotificationStatus.NotSubmitted)
-                .Permit(Trigger.Submit, NotificationStatus.Submitted);
+                .Permit(Trigger.Submit, NotificationStatus.Submitted)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Submitted)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(Trigger.Submit, OnSubmit)
-                .Permit(Trigger.NotificationReceived, NotificationStatus.NotificationReceived);
+                .Permit(Trigger.NotificationReceived, NotificationStatus.NotificationReceived)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.NotificationReceived)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(receivedTrigger, OnReceived)
                 .PermitIf(Trigger.AssessmentCommenced, NotificationStatus.InAssessment, () => Dates.PaymentReceivedDate.HasValue)
-                .Permit(Trigger.Object, NotificationStatus.Objected);
+                .Permit(Trigger.Object, NotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.InAssessment)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(commencedTrigger, OnInAssessment)
                 .Permit(Trigger.NotificationComplete, NotificationStatus.ReadyToTransmit)
-                .Permit(Trigger.Object, NotificationStatus.Objected);
+                .Permit(Trigger.Object, NotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.ReadyToTransmit)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(completeTrigger, OnCompleted)
                 .Permit(Trigger.Transmit, NotificationStatus.Transmitted)
-                .Permit(Trigger.Object, NotificationStatus.Objected);
+                .Permit(Trigger.Object, NotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Transmitted)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(transmitTrigger, OnTransmitted)
                 .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Acknowledged, NotificationStatus.DecisionRequiredBy)
-                .Permit(Trigger.Object, NotificationStatus.Objected);
+                .Permit(Trigger.Object, NotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.DecisionRequiredBy)
                 .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
                 .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)
                 .Permit(Trigger.Object, NotificationStatus.Objected)
-                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn);
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.InDetermination)
-                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn);
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Withdrawn)
                 .OnEntryFrom(withdrawTrigger, OnWithdrawn)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Objected)
                 .OnEntryFrom(objectTrigger, OnObjected)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Consented)
                 .OnEntryFrom(consentedTrigger, OnConsented)
                 .Permit(Trigger.Unlock, NotificationStatus.ConsentedUnlock)
                 .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.ConsentWithdrawn)
                 .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Unlocked)
                 .SubstateOf(NotificationStatus.InDetermination)
-                .Permit(Trigger.Resubmit, NotificationStatus.Reassessment);
+                .Permit(Trigger.Resubmit, NotificationStatus.Reassessment)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.Reassessment)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .PermitIf(Trigger.AcceptChanges, NotificationStatus.Transmitted, () => Dates.TransmittedDate.HasValue && !Dates.AcknowledgedDate.HasValue)
                 .PermitIf(Trigger.AcceptChanges, NotificationStatus.DecisionRequiredBy, () => Dates.AcknowledgedDate.HasValue)
-                .Permit(Trigger.RejectChanges, NotificationStatus.Unlocked);
+                .Permit(Trigger.RejectChanges, NotificationStatus.Unlocked)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
             stateMachine.Configure(NotificationStatus.FileClosed)
                 .OnEntryFrom(archiveTrigger, OnFileClosed);
 
             stateMachine.Configure(NotificationStatus.ConsentedUnlock)
                 .SubstateOf(NotificationStatus.InDetermination)
-                .Permit(Trigger.Resubmit, NotificationStatus.Consented);
+                .Permit(Trigger.Resubmit, NotificationStatus.Consented)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
+
+            stateMachine.Configure(NotificationStatus.UnderProhibition)
+                .PermitDynamic(liftProhibitionTrigger, (date, previousStatus) => previousStatus);
 
             return stateMachine;
         }
@@ -370,6 +395,16 @@
                         NotificationApplicationId));
             }
             Dates.ArchiveReference = reference;
+        }
+
+        public void UnderProhibition(DateTime date)
+        {
+            stateMachine.Fire(underProhibitionTrigger, date);
+        }
+
+        public void LiftProhibition(DateTime date, NotificationStatus previousStatus)
+        {
+            stateMachine.Fire(liftProhibitionTrigger, date, previousStatus);
         }
     }
 }

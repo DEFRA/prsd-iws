@@ -7,26 +7,23 @@
     using System;
     using System.Threading.Tasks;
 
-    public class RemoveUnderProhibitionStatusHandler : IRequestHandler<RemoveUnderProhibitionStatus, bool>
+    public class SetImportNotificationUnderProhibitionStatusHandler : IRequestHandler<SetImportNotificationUnderProhibitionStatus, bool>
     {
         private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly ImportNotificationContext context;
 
-        public RemoveUnderProhibitionStatusHandler(IImportNotificationAssessmentRepository assessmentRepository,
+        public SetImportNotificationUnderProhibitionStatusHandler(IImportNotificationAssessmentRepository assessmentRepository,
             ImportNotificationContext context)
         {
             this.assessmentRepository = assessmentRepository;
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(RemoveUnderProhibitionStatus message)
+        public async Task<bool> HandleAsync(SetImportNotificationUnderProhibitionStatus message)
         {
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
-
-            var previousStatusChange = await assessmentRepository.GetPreviousStatusChangeByNotification(message.ImportNotificationId);
-            var previousStatus = previousStatusChange.PreviousStatus;
-
-            assessment.LiftProhibition(DateTime.Now, previousStatus);
+            // get previous status
+            assessment.UnderProhibition(DateTime.Now);
 
             await context.SaveChangesAsync();
 
