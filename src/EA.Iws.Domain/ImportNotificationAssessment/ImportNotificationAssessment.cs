@@ -28,7 +28,8 @@
             Object = 9,
             Withdraw = 10,
             FileClosed = 11,
-            UnderProhibition = 12
+            UnderProhibition = 12,
+            LiftProhibition =13
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -49,6 +50,7 @@
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, ImportNotificationStatus> fileClosedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> underProhibitionTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, ImportNotificationStatus> liftProhibitionTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -93,6 +95,7 @@
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
             fileClosedTrigger = stateMachine.SetTriggerParameters<DateTime, ImportNotificationStatus>(Trigger.FileClosed);
             underProhibitionTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.UnderProhibition);
+            liftProhibitionTrigger = stateMachine.SetTriggerParameters<DateTime, ImportNotificationStatus>(Trigger.LiftProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived)
@@ -163,7 +166,8 @@
             stateMachine.Configure(ImportNotificationStatus.FileClosed)
                 .OnEntryFrom(fileClosedTrigger, OnFileClosed);
 
-            stateMachine.Configure(ImportNotificationStatus.UnderProhibition);
+            stateMachine.Configure(ImportNotificationStatus.UnderProhibition)
+                .PermitDynamic(liftProhibitionTrigger, (date, previousStatus) => previousStatus);
 
             return stateMachine;
         }
@@ -268,6 +272,11 @@
         public void UnderProhibition(DateTime date)
         {
             stateMachine.Fire(underProhibitionTrigger, date);
+        }
+
+        public void LiftProhibition(DateTime date, ImportNotificationStatus previousStatus)
+        {
+            stateMachine.Fire(liftProhibitionTrigger, date, previousStatus);
         }
 
         public IEnumerable<DecisionType> GetAvailableDecisions()

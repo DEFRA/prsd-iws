@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using EA.Iws.Core.Authorization.Permissions;
-    using EA.Iws.Core.ImportNotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
@@ -91,7 +90,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> UnSuspend(Guid id)
         {
-            await mediator.SendAsync(new SetUnderProhibitionStatus(id, DateTime.Now));
+            await mediator.SendAsync(new RemoveUnderProhibitionStatus(id, DateTime.Now));
 
             return RedirectToAction("Index", "KeyDates");
         }
