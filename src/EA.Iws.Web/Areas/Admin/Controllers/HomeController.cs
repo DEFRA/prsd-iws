@@ -4,8 +4,8 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.Search;
     using Requests.NotificationAssessment;
-  using System.Linq;
-  using System.Threading.Tasks;
+    using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Home;
 
@@ -26,7 +26,7 @@
             {
                 AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary())
             };
-            
+
             return View(model);
         }
 
@@ -36,45 +36,37 @@
         {
             var searchResults = await mediator.SendAsync(model.ToRequest());
             var importSearchResults = await mediator.SendAsync(new SearchImportNotifications(model.SearchTerm));
+            var searchNotificationNumber = string.IsNullOrEmpty(model.SearchTerm) ? string.Empty : model.SearchTerm.ToLower().Replace(" ", string.Empty);
 
-            bool exportMatch = false;
-            bool importMatch = false;
-
-            if (searchResults != null)
+            if (searchResults != null && searchResults.Count() != 0)
             {
                 model.ExportSearchResults = searchResults;
-                exportMatch = searchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
-                == model.SearchTerm.ToLower().Replace(" ", string.Empty);
+
+                if (searchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty).Equals(searchNotificationNumber))
+                {
+                    return RedirectToAction(actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
+                }
             }
 
-            if (importSearchResults != null)
+            if (importSearchResults != null && importSearchResults.Count() != 0)
             {
                 model.ImportSearchResults = importSearchResults;
-                importMatch = searchResults.First().NotificationNumber.ToLower().Replace(" ", string.Empty)
-                == model.SearchTerm.ToLower().Replace(" ", string.Empty);
+
+                if (importSearchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty).Equals(searchNotificationNumber))
+                {
+                    return RedirectToAction(actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
+                }
             }
 
             model.HasSearched = true;
 
             model.AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary());
 
-            if (model.ExportSearchResults != null && model.ExportSearchResults.Count == 1 && exportMatch)
-            {
-              return RedirectToAction(
-                  actionName: "Index",
-                  controllerName: "Home",
-                  routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
-            }
-
-            if (model.ImportSearchResults != null && model.ImportSearchResults.Count == 1 && importMatch)
-            {
-              return RedirectToAction(
-                  actionName: "Index",
-                  controllerName: "Home",
-                  routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
-            }
-
-      return View(model);
+            return View(model);
         }
     }
 }
