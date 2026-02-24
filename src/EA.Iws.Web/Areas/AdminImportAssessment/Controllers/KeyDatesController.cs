@@ -26,8 +26,17 @@
         {
             var data = await mediator.SendAsync(new GetKeyDates(id));
 
+            try
+            {
+                var prohibitionData = await mediator.SendAsync(new GetImportNotificationProhibitionStatusChanges(id));
+            }
+            catch (Exception ex)
+            {
+            }
+
             var model = new KeyDatesViewModel(data);
             model.NotificationId = id;
+            model.ProhibitionHistory = await mediator.SendAsync(new GetImportNotificationProhibitionStatusChanges(id));
 
             if (command.HasValue)
             {

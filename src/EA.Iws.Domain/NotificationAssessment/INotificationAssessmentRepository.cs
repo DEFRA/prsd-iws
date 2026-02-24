@@ -2,6 +2,7 @@
 {
     using Core.NotificationAssessment;
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface INotificationAssessmentRepository
@@ -15,5 +16,7 @@
         Task<NotificationStatusChange> GetPreviousStatusChangeByNotification(Guid notificationId);
 
         Task<NotificationStatus> GetPreviousStatusByNotification(Guid notificationId);
+
+        Task<List<NotificationStatusChangeData>> GetUnderProhibitionHistory(Guid notificationId);
     }
 }

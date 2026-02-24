@@ -15,19 +15,26 @@
 }
 
 <div class="govuk-form-group">
-    @using (Html.BeginForm("Suspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
 
-        <button type="submit" class="govuk-button">Suspend</button>
+    @if (Model.CurrentStatus == NotificationStatus.UnderProhibition)
+    {
+        using (Html.BeginForm("UnSuspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="govuk-button">Un‑suspend</button>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("Suspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="govuk-button">Suspend</button>
+        }
     }
 
-    @using (Html.BeginForm("UnSuspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
-
-        <button type="submit" class="govuk-button">Un‑suspend</button>
-    }
 </div>
 
 <div>
@@ -262,6 +269,28 @@
             </td>
 
         </tr>
+
+        @for (int i = 0; i < Model.ProhibitionHistory.Count; i++)
+        {
+            <tr>
+                <td>
+                    @if (Model.ProhibitionHistory[i].Status == NotificationStatus.UnderProhibition)
+                    {
+                        <p>Under prohibition on</p>
+                    }
+                    else
+                    { <p>Lifted prohibition on</p>}
+                </td>
+                <td>
+                    @Model.ProhibitionHistory[i].ChangeDate.Value.ToString("d MMMM yyyy")
+                    @byText
+                    @Html.DisplayFor(m => m.ProhibitionHistory[i].FullName)
+
+                </td>
+                <td></td>
+
+            </tr>
+        }
 
     </table>
 </div>

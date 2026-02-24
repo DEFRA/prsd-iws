@@ -177,6 +177,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportInterimStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChanges.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
@@ -274,6 +275,7 @@
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
+    <Compile Include="NotificationAssessment\GetProhibitionStatusChanges.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitData.cs" />
     <Compile Include="NotificationAssessment\RemoveUnderProhibitionStatus.cs" />
     <Compile Include="NotificationAssessment\SetFacilityDetails.cs" />

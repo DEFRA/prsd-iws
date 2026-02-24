@@ -3,8 +3,8 @@
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
     using Domain.Security;
-    using EA.Iws.Domain.ImportNotificationAssessment;
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -60,6 +60,33 @@
             var notification = await GetByNotificationId(notificationId);
             var result = notification.StatusChanges.OrderByDescending(x => x.ChangeDate).Skip(1).FirstOrDefault();
             return result.Status;
+        }
+
+        public async Task<List<NotificationStatusChangeData>> GetUnderProhibitionHistory(Guid notificationId)
+        {
+            var notification = await GetByNotificationId(notificationId);
+
+            var result = notification.StatusChanges
+                .Where(x => x.Status == NotificationStatus.UnderProhibition ||
+                    notification.StatusChanges.Where(p => p.ChangeDate < x.ChangeDate)
+                    .OrderByDescending(p => p.ChangeDate)
+                    .Select(p => p.Status)
+                    .FirstOrDefault() == NotificationStatus.UnderProhibition)
+                .OrderByDescending(x => x.ChangeDate)
+                .Select(sc => new NotificationStatusChangeData
+                {
+                    Status = sc.Status,
+                    ChangeDate = sc.ChangeDate.Date,
+                    UserId = sc.UserId
+                })
+                .ToList();
+
+            foreach (var statusChange in result)
+            {
+                statusChange.FullName = await context.Users.Where(u => u.Id == statusChange.UserId).Select(x => x.FirstName + " " + x.Surname).SingleOrDefaultAsync();
+            }
+
+            return result;
         }
     }
 }

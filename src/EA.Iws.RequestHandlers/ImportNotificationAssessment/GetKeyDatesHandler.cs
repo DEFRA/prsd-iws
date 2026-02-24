@@ -47,6 +47,8 @@
             var interimStatus = await interimStatusRepository.GetByNotificationId(message.ImportNotificationId);
             var decisions = await notificationAssessmentDecisionRepository.GetByImportNotificationId(message.ImportNotificationId);
 
+            //var prohibitionHistory = await 
+
             var paymentReceived = await transactionCalculator.PaymentReceivedDate(message.ImportNotificationId) ??
                           await transactionCalculator.LatestPayment(message.ImportNotificationId);
             DateTime? paymentReceivedDate = null;

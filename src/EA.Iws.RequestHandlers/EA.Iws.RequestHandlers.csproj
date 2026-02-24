@@ -243,6 +243,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationCommentsUsersHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChangesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportDataHandler.cs" />
@@ -524,6 +525,7 @@
     <Compile Include="NotificationAssessment\GetNotificationCommentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsersHandler.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
+    <Compile Include="NotificationAssessment\GetProhibitionStatusChangesHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfImportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetTransactionByIdHandler.cs" />
