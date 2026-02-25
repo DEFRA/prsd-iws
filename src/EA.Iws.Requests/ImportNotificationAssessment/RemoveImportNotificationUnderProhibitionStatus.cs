@@ -12,10 +12,10 @@
 
         public DateTime UnderProhibitionDate { get; private set; }
 
-        public RemoveImportNotificationUnderProhibitionStatus(Guid importNotificationId, DateTime underProhibitionDate)
+        public RemoveImportNotificationUnderProhibitionStatus(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;
-            UnderProhibitionDate = underProhibitionDate;
+            UnderProhibitionDate = DateTime.UtcNow;
         }
     }
 }

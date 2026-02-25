@@ -23,7 +23,7 @@
         {
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
             // get previous status
-            assessment.UnderProhibition(DateTime.Now);
+            assessment.UnderProhibition(DateTime.UtcNow);
 
             await context.SaveChangesAsync();
 

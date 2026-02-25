@@ -18,20 +18,20 @@
 
     @if (Model.CurrentStatus == NotificationStatus.UnderProhibition)
     {
-        using (Html.BeginForm("UnSuspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
-            <button type="submit" class="govuk-button">Un‑suspend</button>
+            <button type="submit" class="govuk-button">Lift Prohibition</button>
         }
     }
     else
     {
-        using (Html.BeginForm("Suspend", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
         {
             @Html.AntiForgeryToken()
 
-            <button type="submit" class="govuk-button">Suspend</button>
+            <button type="submit" class="govuk-button">Under Prohibition</button>
         }
     }
 

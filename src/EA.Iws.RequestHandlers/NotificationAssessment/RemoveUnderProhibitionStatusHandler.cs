@@ -25,7 +25,7 @@
 
             var previousStatus = await assessmentRepository.GetPreviousStatusByNotification(message.NotificationId);
 
-            assessment.LiftProhibition(DateTime.Now, previousStatus);
+            assessment.LiftProhibition(DateTime.UtcNow, previousStatus);
 
             await context.SaveChangesAsync();
 

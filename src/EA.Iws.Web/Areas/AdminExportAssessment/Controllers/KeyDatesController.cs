@@ -209,7 +209,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Suspend(Guid id)
+        public async Task<ActionResult> UnderProhibition(Guid id)
         {
             await mediator.SendAsync(new SetUnderProhibitionStatus(id));
 
@@ -218,7 +218,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UnSuspend(Guid id)
+        public async Task<ActionResult> LiftProhibition(Guid id)
         {
             await mediator.SendAsync(new RemoveUnderProhibitionStatus(id));
 

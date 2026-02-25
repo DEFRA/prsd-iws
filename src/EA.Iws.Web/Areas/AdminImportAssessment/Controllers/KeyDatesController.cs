@@ -88,18 +88,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Suspend(Guid id)
+        public async Task<ActionResult> UnderProhibition(Guid id)
         {
-            await mediator.SendAsync(new SetImportNotificationUnderProhibitionStatus(id, DateTime.Now));
+            await mediator.SendAsync(new SetImportNotificationUnderProhibitionStatus(id));
 
             return RedirectToAction("Index", "KeyDates");
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UnSuspend(Guid id)
+        public async Task<ActionResult> LiftProhibition(Guid id)
         {
-            await mediator.SendAsync(new RemoveImportNotificationUnderProhibitionStatus(id, DateTime.Now));
+            await mediator.SendAsync(new RemoveImportNotificationUnderProhibitionStatus(id));
 
             return RedirectToAction("Index", "KeyDates");
         }
