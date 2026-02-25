@@ -15,7 +15,7 @@
     internal class ImportNotificationAssessmentRepository : IImportNotificationAssessmentRepository
     {
         private readonly ImportNotificationContext context;
-        private readonly IwsContext iws_context;
+        private readonly IwsContext iwsContext;
         private readonly IImportNotificationApplicationAuthorization authorization;
 
         public ImportNotificationAssessmentRepository(ImportNotificationContext context,
@@ -24,7 +24,7 @@
         {
             this.context = context;
             this.authorization = authorization;
-            this.iws_context = iws_context;
+            this.iwsContext = iws_context;
         }
 
         public async Task<ImportNotificationAssessment> GetByNotification(Guid notificationId)
@@ -81,7 +81,7 @@
 
             foreach (var statusChange in result)
             {
-                statusChange.FullName = await iws_context.Users.Where(u => u.Id == statusChange.UserId).Select(x => x.FirstName + " " + x.Surname).SingleOrDefaultAsync();
+                statusChange.FullName = await iwsContext.Users.Where(u => u.Id == statusChange.UserId).Select(x => x.FirstName + " " + x.Surname).SingleOrDefaultAsync();
             }
 
             return result;
