@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.ImportNotificationAssessment
 {
-    using System;
     using Core.ImportNotificationAssessment;
     using Domain.ImportNotificationAssessment;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Domain.NotificationAssessment;
+    using System;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -260,6 +262,72 @@
             assessment.Withdraw(AnyDate, "test");
 
             Assert.Equal(ImportNotificationStatus.Withdrawn, assessment.Status);
+        }
+
+        [Theory]
+        [InlineData(ImportNotificationStatus.New)]
+        [InlineData(ImportNotificationStatus.NotificationReceived)]
+        [InlineData(ImportNotificationStatus.Submitted)]
+        [InlineData(ImportNotificationStatus.AwaitingPayment)]
+        [InlineData(ImportNotificationStatus.AwaitingAssessment)]
+        [InlineData(ImportNotificationStatus.InAssessment)]
+        [InlineData(ImportNotificationStatus.ReadyToAcknowledge)]
+        [InlineData(ImportNotificationStatus.DecisionRequiredBy)]
+        [InlineData(ImportNotificationStatus.Consented)]
+        [InlineData(ImportNotificationStatus.ConsentWithdrawn)]
+        [InlineData(ImportNotificationStatus.Objected)]
+        [InlineData(ImportNotificationStatus.Withdrawn)]
+        [InlineData(ImportNotificationStatus.Resubmitted)]
+        public void CanUnderProhibitionFromAnyState(ImportNotificationStatus currentStatus)
+        {
+            SetNotificationAssessmentStatus(currentStatus);
+            assessment.UnderProhibition(AnyDate);
+
+            Assert.Equal(ImportNotificationStatus.UnderProhibition, assessment.Status);
+        }
+
+        [Theory]
+
+        [InlineData(ImportNotificationStatus.New)]
+        [InlineData(ImportNotificationStatus.NotificationReceived)]
+        [InlineData(ImportNotificationStatus.Submitted)]
+        [InlineData(ImportNotificationStatus.AwaitingPayment)]
+        [InlineData(ImportNotificationStatus.AwaitingAssessment)]
+        [InlineData(ImportNotificationStatus.InAssessment)]
+        [InlineData(ImportNotificationStatus.ReadyToAcknowledge)]
+        [InlineData(ImportNotificationStatus.DecisionRequiredBy)]
+        [InlineData(ImportNotificationStatus.Consented)]
+        [InlineData(ImportNotificationStatus.ConsentWithdrawn)]
+        [InlineData(ImportNotificationStatus.Objected)]
+        [InlineData(ImportNotificationStatus.Withdrawn)]
+        [InlineData(ImportNotificationStatus.Resubmitted)]
+        public void CanLiftProhibitionToAnyStatusFromUnderProhibition(ImportNotificationStatus previousStatus)
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.UnderProhibition);
+            assessment.LiftProhibition(AnyDate, previousStatus);
+
+            Assert.Equal(previousStatus, assessment.Status);
+        }
+
+        [Theory]
+        [InlineData(ImportNotificationStatus.New)]
+        [InlineData(ImportNotificationStatus.NotificationReceived)]
+        [InlineData(ImportNotificationStatus.Submitted)]
+        [InlineData(ImportNotificationStatus.AwaitingPayment)]
+        [InlineData(ImportNotificationStatus.AwaitingAssessment)]
+        [InlineData(ImportNotificationStatus.InAssessment)]
+        [InlineData(ImportNotificationStatus.ReadyToAcknowledge)]
+        [InlineData(ImportNotificationStatus.DecisionRequiredBy)]
+        [InlineData(ImportNotificationStatus.Consented)]
+        [InlineData(ImportNotificationStatus.ConsentWithdrawn)]
+        [InlineData(ImportNotificationStatus.Objected)]
+        [InlineData(ImportNotificationStatus.Withdrawn)]
+        [InlineData(ImportNotificationStatus.Resubmitted)]
+        public void CanOnlyLiftProhibitionFromUnderProhibition(ImportNotificationStatus currentStatus)
+        {
+            SetNotificationAssessmentStatus(currentStatus);
+
+            Assert.Throws<InvalidOperationException>(() => assessment.LiftProhibition(AnyDate, ImportNotificationStatus.Consented));
         }
     }
 }

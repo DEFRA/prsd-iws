@@ -1,17 +1,18 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Consent;
     using Core.Admin;
     using Core.ImportNotificationAssessment;
     using Core.Shared;
     using Decision;
+    using EA.Iws.Core.NotificationAssessment;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class ImportNotificationAssessment : Entity
     {
@@ -106,6 +107,12 @@
                 .Permit(Trigger.Submit, ImportNotificationStatus.AwaitingPayment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
                 .Permit(Trigger.Object, ImportNotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
+
+            stateMachine.Configure(ImportNotificationStatus.Submitted)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
+
+            stateMachine.Configure(ImportNotificationStatus.Resubmitted)
                 .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingPayment)

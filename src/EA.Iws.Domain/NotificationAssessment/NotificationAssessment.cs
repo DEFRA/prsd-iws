@@ -214,6 +214,9 @@
                 .Permit(Trigger.Resubmit, NotificationStatus.Consented)
                 .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
 
+            stateMachine.Configure(NotificationStatus.Resubmitted)
+                .Permit(Trigger.UnderProhibition, NotificationStatus.UnderProhibition);
+
             stateMachine.Configure(NotificationStatus.UnderProhibition)
                 .PermitDynamic(liftProhibitionTrigger, (date, previousStatus) => previousStatus);
 
