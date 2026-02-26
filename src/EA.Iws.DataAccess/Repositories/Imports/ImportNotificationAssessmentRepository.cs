@@ -60,7 +60,7 @@
         public async Task<ImportNotificationStatusChange> GetPreviousStatusChangeByNotification(Guid notificationId)
         {
             var notification = await GetByNotification(notificationId);
-            var result = notification.StatusChanges.OrderByDescending(x => x.ChangeDate).First();
+            var result = notification.StatusChanges.OrderByDescending(x => x.ChangeDate).FirstOrDefault();
             return result;
         }
 

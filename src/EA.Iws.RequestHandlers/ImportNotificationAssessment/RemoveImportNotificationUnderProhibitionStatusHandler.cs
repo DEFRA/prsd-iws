@@ -24,9 +24,12 @@
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
 
             var previousStatusChange = await assessmentRepository.GetPreviousStatusChangeByNotification(message.ImportNotificationId);
-            var previousStatus = previousStatusChange.PreviousStatus;
+            var previousStatus = previousStatusChange?.PreviousStatus;
 
-            assessment.LiftProhibition(DateTime.UtcNow, previousStatus);
+            if (previousStatus == null)
+            {
+                return false;
+            }
 
             await context.SaveChangesAsync();
 

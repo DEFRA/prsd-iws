@@ -23,7 +23,12 @@
         {
             var assessment = await assessmentRepository.GetByNotificationId(message.NotificationId);
 
-            var previousStatus = await assessmentRepository.GetPreviousStatusByNotification(message.NotificationId);
+            if (assessment == null)
+            {
+                return false;
+            }
+
+            var previousStatus = await assessmentRepository.GetPreviousStatusByNotification(message.NotificationId);            
 
             assessment.LiftProhibition(DateTime.UtcNow, previousStatus);
 

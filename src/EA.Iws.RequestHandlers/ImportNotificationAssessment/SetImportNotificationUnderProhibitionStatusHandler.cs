@@ -22,7 +22,12 @@
         public async Task<bool> HandleAsync(SetImportNotificationUnderProhibitionStatus message)
         {
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
-            // get previous status
+
+            if (assessment == null)
+            {
+                return false;
+            }
+
             assessment.UnderProhibition(DateTime.UtcNow);
 
             await context.SaveChangesAsync();

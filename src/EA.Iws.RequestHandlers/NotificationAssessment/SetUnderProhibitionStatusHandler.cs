@@ -22,7 +22,12 @@
         public async Task<bool> HandleAsync(SetUnderProhibitionStatus message)
         {
             var assessment = await assessmentRepository.GetByNotificationId(message.NotificationId);
-            // get previous status
+
+            if (assessment == null)
+            {
+                return false;
+            }
+
             assessment.UnderProhibition(DateTime.UtcNow);
 
             await context.SaveChangesAsync();
