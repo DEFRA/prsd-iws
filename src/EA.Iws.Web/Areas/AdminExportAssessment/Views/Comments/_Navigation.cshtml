@@ -1,25 +1,25 @@
 ﻿@using EA.Iws.Core.Admin
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments.CommentsViewModel
 
-<div class="govuk-tabs" data-module="govuk-tabs">
-    <ul class="govuk-tabs__list">
-        @if (Model.Type == NotificationShipmentsCommentsType.Notification)
+<nav class="tabbed-nav govuk-tabs">
+    @Html.ActionLink(
+        "Notification",
+        "Index",
+        "Comments",
+        new { id = Model.NotificationId, type = NotificationShipmentsCommentsType.Notification, filter = Model.SelectedFilter },
+        new
         {
-            <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-                @Html.ActionLink("Notification", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Notification }, new { @id = "notifications", @class = "govuk-tabs__tab" })
-            </li>
-            <li class="govuk-tabs__list-item">
-                @Html.ActionLink("Shipments", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Shipments }, new { @id = "shipments", @class = "govuk-tabs__tab" })
-            </li>
+            @class = "tabbed-tab govuk-tabs__list-item" + (Model.Type == NotificationShipmentsCommentsType.Notification ? " active" : "")
         }
-        else
+    )
+    @Html.ActionLink(
+        "Shipments",
+        "Index",
+        "Comments",
+        new { id = Model.NotificationId, type = NotificationShipmentsCommentsType.Shipments, filter = Model.SelectedFilter },
+        new
         {
-            <li class="govuk-tabs__list-item">
-                @Html.ActionLink("Notification", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Notification }, new { @id = "notifications", @class = "govuk-tabs__tab" })
-            </li>
-            <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-                @Html.ActionLink("Shipments", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Shipments }, new { @id = "shipments", @class = "govuk-tabs__tab" })
-            </li>
+            @class = "tabbed-tab govuk-tabs__list-item" + (Model.Type == NotificationShipmentsCommentsType.Shipments ? " active" : "")
         }
-    </ul>
-</div>
+    )
+</nav>
