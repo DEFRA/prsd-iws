@@ -30,6 +30,10 @@
             {
                 return false;
             }
+            else
+            {
+                assessment.LiftProhibition(DateTime.UtcNow, previousStatus.Value);
+            }                
 
             await context.SaveChangesAsync();
 
