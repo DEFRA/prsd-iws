@@ -190,6 +190,7 @@
     <Content Include="scripts\Update\0007-Support\20251029-1544-SEPA-2024-25-price-matrices-update.sql" />
     <Content Include="scripts\Update\0007-Support\20251125-1610-Spanish-competent-authority-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20251212-1400-Alter-Country-Macedonia.sql" />
+    <Content Include="scripts\Update\0007-Support\20260226-1600-EA-Prices-matrices-for-2026-2027-changes.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
