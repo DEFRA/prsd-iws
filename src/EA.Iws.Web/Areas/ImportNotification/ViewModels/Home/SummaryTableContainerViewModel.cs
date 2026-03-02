@@ -36,7 +36,8 @@
                                               details.Status == ImportNotificationStatus.Consented;
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
                                            details.Status != ImportNotificationStatus.NotificationReceived &&
-                                           details.Status != ImportNotificationStatus.FileClosed;
+                                           details.Status != ImportNotificationStatus.FileClosed &&
+                                           details.Status != ImportNotificationStatus.UnderProhibition;
             ShowChangeWasteTypesLink = canChangeWasteTypes && EditableStatus(details.Status);
             ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);
             CanEditContactDetails = canEditContactDetails && EditableStatus(details.Status);

@@ -113,6 +113,8 @@
 
         public bool ShowAdditionalCharge { get; set; }
 
+        public List<NotificationStatusChangeData> ProhibitionHistory {get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var dateInputViewModel = (DateInputViewModel)validationContext.ObjectInstance;

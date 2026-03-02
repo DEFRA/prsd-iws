@@ -15,6 +15,32 @@
 <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 <div>
+
+
+
+    <div class="govuk-form-group">
+
+        @if (Model.Status == ImportNotificationStatus.UnderProhibition)
+        {
+            using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="govuk-button">Set status of 'Under Prohibition'</button>
+            }
+        }
+
+    </div>
+
     @Resource.FirstParagraph
 
     <table title="Assessment dates currently recorded">
@@ -65,7 +91,7 @@
 
                     var text = string.Empty;
 
-                    if(!Model.PaymentIsComplete)
+                    if (!Model.PaymentIsComplete)
                     {
                         text = " (partial payment)";
                         @text
@@ -219,8 +245,36 @@
             </td>
 
         </tr>
-
     </table>
+    @if (Model.ProhibitionHistory.Count > 0)
+    {
+        <h2 class="govuk-heading-m">Status Change Log</h2>
+        <table title="Status Change Log">
+            @for (int i = 0; i < Model.ProhibitionHistory.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @if (Model.ProhibitionHistory[i].Status == ImportNotificationStatus.UnderProhibition)
+                        {
+                            <p>Under prohibition on</p>
+                        }
+                        else
+                        {
+                            <p>Removed under prohibition on</p>
+                        }
+                    </td>
+                    <td>
+                        @Model.ProhibitionHistory[i].ChangeDate.ToString("d MMMM yyyy")
+                        @byText
+                        @Html.DisplayFor(m => m.ProhibitionHistory[i].FullName)
+
+                    </td>
+                    <td></td>
+
+                </tr>
+            }
+        </table>
+    }
 </div>
 
 @if (Model.Command != 0)
@@ -252,7 +306,8 @@
 
         @Html.AntiForgeryToken()
 
-        <br/><br/>
+        <br />
+        <br />
 
         if (Model.Command == KeyDatesCommand.ArchiveReference)
         {
@@ -324,7 +379,7 @@ else
 {
     @section scripts{
         <script>
-            $(function() {
+            $(function () {
                 var link = $("td a").first();
 
                 if (link) {

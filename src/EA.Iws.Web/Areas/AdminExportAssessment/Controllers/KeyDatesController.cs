@@ -5,7 +5,7 @@
     using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.Shared;
-    using EA.Iws.Core.SystemSettings;    
+    using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
@@ -36,9 +36,11 @@
         public async Task<ActionResult> Index(Guid id, KeyDatesStatusEnum? command)
         {
             var data = await mediator.SendAsync(new GetKeyDatesSummaryInformation(id));
+            var prohibitionHistory = await mediator.SendAsync(new GetProhibitionStatusChanges(id));
 
             var model = new DateInputViewModel(data.Dates)
             {
+                NotificationId = id,
                 IsAreaAssigned = data.IsLocalAreaSet,
                 CompetentAuthority = data.CompetentAuthority,
                 AssessmentDecisions = data.DecisionHistory,
@@ -53,7 +55,8 @@
                                          (data.Dates.CurrentStatus == NotificationStatus.ConsentedUnlock) ||
                                          (data.Dates.CurrentStatus == NotificationStatus.Transmitted) ||
                                          (data.Dates.CurrentStatus == NotificationStatus.DecisionRequiredBy) ||
-                                         (data.Dates.CurrentStatus == NotificationStatus.Reassessment))) ? true : false
+                                         (data.Dates.CurrentStatus == NotificationStatus.Reassessment))) ? true : false,
+                ProhibitionHistory = prohibitionHistory
             };
 
             if (command != null)
@@ -202,6 +205,24 @@
             }
 
             return Json(response.Value);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnderProhibition(Guid id)
+        {
+            await mediator.SendAsync(new SetUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LiftProhibition(Guid id)
+        {
+            await mediator.SendAsync(new RemoveUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
         }
 
         private async Task SetNotificationTransmitted(DateInputViewModel model)

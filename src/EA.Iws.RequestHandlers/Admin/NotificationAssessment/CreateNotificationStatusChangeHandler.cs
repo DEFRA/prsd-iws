@@ -25,7 +25,7 @@
         {
             var notificationAssesmentInfo = await notificationAssessmentRepository.GetByNotificationId(notificationStatusChange.NotificationId);
             var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
-            notificationAssesmentInfo.AddStatusChangeRecord(new NotificationStatusChange(Core.NotificationAssessment.NotificationStatus.Resubmitted, user));
+            notificationAssesmentInfo.AddStatusChangeRecord(new NotificationStatusChange(Core.NotificationAssessment.NotificationStatus.Resubmitted, user.Id));
 
             await context.SaveChangesAsync();
 

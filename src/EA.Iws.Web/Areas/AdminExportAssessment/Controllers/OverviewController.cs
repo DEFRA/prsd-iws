@@ -52,13 +52,16 @@
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
-            model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
+            model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints && result.SubmitSummaryData.Status != NotificationStatus.FileClosed
+                                                                        && result.SubmitSummaryData.Status != NotificationStatus.UnderProhibition;
             model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
             model.JourneyViewModel.CanChangeTransitStateEntryExitPoint = canChangeTransitStateEntryExitPoint &&
                                                                          result.SubmitSummaryData.Status ==
                                                                          NotificationStatus.Consented;
-            model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
-            model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
+            model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer && result.SubmitSummaryData.Status != NotificationStatus.FileClosed
+                                                                        && result.SubmitSummaryData.Status != NotificationStatus.UnderProhibition;
+            model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails && result.SubmitSummaryData.Status != NotificationStatus.FileClosed
+                                                                        && result.SubmitSummaryData.Status != NotificationStatus.UnderProhibition;
             model.OrganisationsInvolvedViewModel.DisplayAllProducers = IsEditableStatus(result.SubmitSummaryData.Status);
             model.WasteCodeOverviewViewModel.CanEditEWCCodes = canEditEwcCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.WasteCodeOverviewViewModel.CanEditYCodes = canEditYCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;

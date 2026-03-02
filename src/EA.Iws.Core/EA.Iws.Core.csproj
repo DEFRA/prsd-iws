@@ -133,6 +133,7 @@
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsUsersData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeData.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
     <Compile Include="ImportNotificationMovements\MovementsSummary.cs" />
@@ -241,6 +242,7 @@
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
     <Compile Include="NotificationAssessment\NotificationCommentsUsersData.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatusChangeData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="Notification\AdditionalCharge\AdditionalChargeType.cs" />
     <Compile Include="Notification\AdditionalCharge\NotificationAdditionalChargeForDisplay.cs" />

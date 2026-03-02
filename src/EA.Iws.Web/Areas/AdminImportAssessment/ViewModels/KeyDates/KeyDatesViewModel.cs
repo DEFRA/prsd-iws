@@ -95,6 +95,8 @@
 
         public IList<NotificationAssessmentDecision> Decisions { get; set; } 
 
+        public List<ImportNotificationStatusChangeData> ProhibitionHistory { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Command != KeyDatesCommand.ArchiveReference && !NewDate.IsCompleted)

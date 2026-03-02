@@ -36,6 +36,8 @@
         ConsentedUnlock = 15,
         [Display(Name = "Resubmitted")]
         Resubmitted = 16,
+        [Display(Name = "Under Prohibition")]
+        UnderProhibition = 17,
         [Display(Name = "In Determination")]
         InDetermination = 100
     }

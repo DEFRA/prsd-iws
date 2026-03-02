@@ -36,5 +36,7 @@
         public UKCompetentAuthority CompententAuthority { get; set; }
 
         public ImportNotificationStatus Status { get; set; }
+
+        public List<ImportNotificationStatusChangeData> ProhibitionHistory { get; set; }
     }
 }
