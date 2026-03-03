@@ -58,12 +58,7 @@
         {
             get
             {
-                return new SelectList(new[]
-                {
-                    "Illegal Shipment",
-                    "Did not proceed as intended",
-                    "Accident occurred during transport"
-                });
+                return new SelectList(EnumHelper.GetValues(typeof(StatsMarking)), dataTextField: "Value", dataValueField: "Value");
             }
         }
 
