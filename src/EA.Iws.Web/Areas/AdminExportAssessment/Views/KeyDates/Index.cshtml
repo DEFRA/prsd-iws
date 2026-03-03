@@ -21,12 +21,8 @@
         using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            <p>
-                Under Prohibition status:
-            </p>
 
-            @*<button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>*@
-            <button type="submit" class="govuk-button">Remove</button>
+            <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
         }
     }
     else
@@ -35,7 +31,7 @@
         {
             @Html.AntiForgeryToken()
 
-            <button type="submit" class="govuk-button">Set status of 'Under Prohibition'</button>
+            <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
         }
     }
 
