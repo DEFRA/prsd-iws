@@ -18,5 +18,13 @@
 
             return user;
         }
+
+        public static User Create(Guid id, string firstName, string lastName, string phoneNumber, string email, DateTime? lastLoginDate)
+        {
+            var user = Create(id, firstName, lastName, phoneNumber, email);
+            ObjectInstantiator<User>.SetProperty(u => u.LastLoginDate, lastLoginDate, user);
+
+            return user;
+        }
     }
 }
