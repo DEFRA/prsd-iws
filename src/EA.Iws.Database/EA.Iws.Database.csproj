@@ -53,6 +53,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\TestData\20260311-1739-create-ea-import-notifications-test-data-for-26-27.sql" />
+    <Content Include="scripts\TestData\20260311-1646-create-ea-export-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\Update\0007-Support\20260225-Under-Prohibition-new-status.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0017-uspDeleteExportNotification.sql" />
     <Content Include="scripts\Update\0007-Support\20251126-1353-Message_Banner-Changes.sql" />
