@@ -9,7 +9,7 @@
         BaselTable9 = 2,
         [Display(Name = "Accident occurred during transport")]
         BaselTable10 = 3,
-        [Display(Name = "Illegal Shipment (Repatration)")]
-        IllegalShipmentRepatration = 4
+        [Display(Name = "Illegal Shipment (Repatriation)")]
+        IllegalShipmentRepatriation = 4
     }
 }
