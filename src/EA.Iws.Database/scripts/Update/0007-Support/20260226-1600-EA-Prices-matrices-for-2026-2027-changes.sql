@@ -72,40 +72,40 @@ INSERT INTO [Lookup].[PricingStructure] (Id, CompetentAuthority, ShipmentQuantit
 
 --1 = EA Fixed Additional Charge for each data change
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
-	VALUES (@CompetentAuthority, 1, @ValidFrom, 97);
+	VALUES (@CompetentAuthority, 1, @ValidFrom, 97.03);
 
 --2 = EA Import Disposal/Recovery custom per 100 (or part of) shipments over 1000 additional charge
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
-	VALUES (@CompetentAuthority, 2, @ValidFrom, 1428);
+	VALUES (@CompetentAuthority, 2, @ValidFrom, 1428.27);
 
 --3 = EA Export Recovery custom per 100 (or part of) shipments over 1000 additional charge
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
-	VALUES (@CompetentAuthority, 3, @ValidFrom, 1415);
+	VALUES (@CompetentAuthority, 3, @ValidFrom, 1415.25);
 
 --4 = EA Export Disposal custom per 100 (or part of) shipments over 1000 additional charge
 INSERT INTO [Lookup].[SystemSettings] ([CompetentAuthority] , [PriceType], [ValidFrom] ,[Price])
-	VALUES (@CompetentAuthority, 4, @ValidFrom, 1583);
+	VALUES (@CompetentAuthority, 4, @ValidFrom, 1583.28);
 
 --11 = Single ship
 INSERT INTO [Lookup].[PricingFixedFee] ([Id], [WasteComponentTypeId], [WasteCategoryTypeId], [Price], [ValidFrom], [CompetentAuthority])
-	VALUES ('89B21D05-9F5C-4BD7-8765-E2D6D6C11211', NULL, 11, 9689, @ValidFrom, @CompetentAuthority);
+	VALUES ('89B21D05-9F5C-4BD7-8765-E2D6D6C11211', NULL, 11, 9689.02, @ValidFrom, @CompetentAuthority);
 
 --12 = Platform/Rig
 INSERT INTO [Lookup].[PricingFixedFee] ([Id], [WasteComponentTypeId], [WasteCategoryTypeId], [Price], [ValidFrom], [CompetentAuthority])
-	VALUES ('6D4E9C52-0589-408C-9E7F-2BFD33D65A3B', NULL, 12, 9689, @ValidFrom, @CompetentAuthority);
+	VALUES ('6D4E9C52-0589-408C-9E7F-2BFD33D65A3B', NULL, 12, 9689.02, @ValidFrom, @CompetentAuthority);
 
 --1 = Mercury
 INSERT INTO [Lookup].[PricingFixedFee] ([Id] ,[WasteComponentTypeId] ,[WasteCategoryTypeId] ,[Price] ,[ValidFrom], [CompetentAuthority])
-	VALUES ('A8E8AE73-1C23-4BF3-80B5-28C9E0A90AAD', 1, NULL, 339, @ValidFrom, @CompetentAuthority);
+	VALUES ('A8E8AE73-1C23-4BF3-80B5-28C9E0A90AAD', 1, NULL, 339.61, @ValidFrom, @CompetentAuthority);
 
 --2 = FGas
 INSERT INTO [Lookup].[PricingFixedFee] ([Id] ,[WasteComponentTypeId] ,[WasteCategoryTypeId] ,[Price] ,[ValidFrom], [CompetentAuthority])
-	VALUES ('77E350DA-CD06-48A7-84B9-3CB983420A3D', 2, NULL, 339, @ValidFrom, @CompetentAuthority);
+	VALUES ('77E350DA-CD06-48A7-84B9-3CB983420A3D', 2, NULL, 339.61, @ValidFrom, @CompetentAuthority);
 
 --3 = NORM
 INSERT INTO [Lookup].[PricingFixedFee] ([Id] ,[WasteComponentTypeId] ,[WasteCategoryTypeId] ,[Price] ,[ValidFrom], [CompetentAuthority])
-	VALUES ('229C0D3D-EBB5-4576-8372-816C3F1CA077', 3, NULL, 339, @ValidFrom, @CompetentAuthority);
+	VALUES ('229C0D3D-EBB5-4576-8372-816C3F1CA077', 3, NULL, 339.61, @ValidFrom, @CompetentAuthority);
 
 --4 = ODS
 INSERT INTO [Lookup].[PricingFixedFee] ([Id] ,[WasteComponentTypeId] ,[WasteCategoryTypeId] ,[Price] ,[ValidFrom], [CompetentAuthority])
-	VALUES ('CAAC6903-81A3-4A1A-9127-3E30AF35ED66', 4, NULL, 339, @ValidFrom, @CompetentAuthority);
+	VALUES ('CAAC6903-81A3-4A1A-9127-3E30AF35ED66', 4, NULL, 339.61, @ValidFrom, @CompetentAuthority);
