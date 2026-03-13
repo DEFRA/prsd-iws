@@ -179,6 +179,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The rejected quantity cannot be more than received shipment quantity..
+        /// </summary>
+        public static string RejectQuantityMoreThanActualQuantity {
+            get {
+                return ResourceManager.GetString("RejectQuantityMoreThanActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide a reason for rejection.
         /// </summary>
         public static string RejectReasonRequired {
