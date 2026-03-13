@@ -67,6 +67,22 @@
         </tr>
 
         <tr>
+            <td>@Html.DisplayNameFor(m => m.NotificationChargeDate)</td>
+            <td>
+                @if (Model.NotificationChargeDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationChargeDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+
+        <tr>
             <td>Payment received</td>
             <td>
                 @if (Model.PaymentReceivedDate.HasValue)

@@ -3,6 +3,7 @@
     using Core.ComponentRegistration;
     using Shipment;
     using System;
+    using System.Data;
     using System.Threading.Tasks;
 
     [AutoRegister]
@@ -24,7 +25,7 @@
             this.numberOfShipmentsHistotyRepository = numberOfShipmentsHistotyRepository;
         }
 
-        public async Task<decimal> GetValue(Guid notificationId)
+        public async Task<decimal> GetValue(Guid notificationId, DateTime? chargeDate)
         {
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
 
@@ -44,19 +45,19 @@
 
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            return await GetPrice(numberOfShipments, notification);
+            return await GetPrice(numberOfShipments, notification, chargeDate);
         }
 
-        public async Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments)
+        public async Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments, DateTime? chargeDate)
         {
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            return await GetPrice(numberOfShipments, notification);
+            return await GetPrice(numberOfShipments, notification, chargeDate);
         }
 
-        private async Task<decimal> GetPrice(int numberOfShipments, NotificationApplication notification)
+        private async Task<decimal> GetPrice(int numberOfShipments, NotificationApplication notification, DateTime? chargeDate)
         {
-            var res = await priceRepository.GetPriceAndRefundByNotificationId(notification.Id);
+            var res = await priceRepository.GetPriceAndRefundByNotificationId(notification.Id, chargeDate);
             if (res == null)
             {
                 throw new Exception("GetPriceAndRefundByNotificationId(" + notification.Id + ") failed, please investigate");

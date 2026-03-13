@@ -4467,6 +4467,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\ShipmentAudit\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4609,6 +4610,7 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

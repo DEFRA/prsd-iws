@@ -33,7 +33,7 @@
         public AddNotificationTransactionHandlerTests()
         {
             var chargeCalculator = A.Fake<INotificationChargeCalculator>();
-            A.CallTo(() => chargeCalculator.GetValue(A<Guid>.Ignored)).Returns(TotalBillable);
+            A.CallTo(() => chargeCalculator.GetValue(A<Guid>.Ignored, A<DateTime?>.Ignored)).Returns(TotalBillable);
 
             transactions = new List<NotificationTransaction>();
             var transactionRepository = A.Fake<INotificationTransactionRepository>();

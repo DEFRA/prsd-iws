@@ -28,6 +28,7 @@
                     D.[WithdrawnDate],
                     D.[ObjectedDate],
                     D.[ConsentedDate],
+                    D.[NotificationChargeDate],
                     C.[From] AS [ConsentValidFromDate],
                     C.[To] AS [ConsentValidToDate]
                 FROM
@@ -52,7 +53,8 @@
                 ,@ObjectedDate
                 ,@ConsentedDate
                 ,@ConsentValidFromDate
-                ,@ConsentValidToDate",
+                ,@ConsentValidToDate
+                ,@NotificationChargeDate",
                 new SqlParameter("@NotificationId", data.NotificationId),
                 new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
                 new SqlParameter("@CommencementDate", (object)data.CommencementDate ?? DBNull.Value),
@@ -63,7 +65,8 @@
                 new SqlParameter("@ObjectedDate", (object)data.ObjectedDate ?? DBNull.Value),
                 new SqlParameter("@ConsentedDate", (object)data.ConsentedDate ?? DBNull.Value),
                 new SqlParameter("@ConsentValidFromDate", (object)data.ConsentValidFromDate ?? DBNull.Value),
-                new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value));
+                new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value),
+                new SqlParameter("@NotificationChargeDate", (object)data.NotificationChargeDate ?? DBNull.Value));
         }
 
         public async Task SetDecisionRequiredByDateForNotification(Guid notificationAssessmentId, DateTime? decisionRequiredByDate)
