@@ -220,7 +220,7 @@
     <value>Download an interim movement document</value>
   </data>
   <data name="NoShipmentOptionsText" xml:space="preserve">
-    <value>You can start creating shipments once your notification has been consented and your financial guarantee is approved.</value>
+    <value>The current status of this notification does not allow the pre-notification or inputting of shipment data. Please contact the relevant Competent Authority for assistance.</value>
   </data>
   <data name="ContinueWithButtonText" xml:space="preserve">
     <value>Continue with this notification</value>
