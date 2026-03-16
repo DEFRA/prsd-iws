@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -87,6 +88,27 @@
             }
 
             return result;
+        }
+
+        public async Task<DateTime?> GetSubmitedDate(Guid notificationId)
+        {
+            var result = await context.Database.SqlQuery<DateTimeOffset?>(
+                @"
+                SELECT TOP (1)
+                    nsc.ChangeDate AS ChangeDate
+                FROM [Notification].[Notification] AS n
+                LEFT JOIN [Notification].[NotificationAssessment] AS na
+                    ON na.NotificationApplicationId = n.Id
+                LEFT JOIN [Notification].[NotificationStatusChange] AS nsc
+                    ON nsc.NotificationAssessmentId = na.Id
+                LEFT JOIN [Notification].[NotificationDates] AS nd
+                    ON nd.NotificationAssessmentId = na.Id
+                WHERE n.Id = @notificationId
+                  AND nsc.[Status] IN (2, 16)
+                ORDER BY nsc.ChangeDate DESC;",
+                new SqlParameter("@NotificationId", notificationId)).FirstOrDefaultAsync();
+
+            return result?.UtcDateTime;
         }
     }
 }

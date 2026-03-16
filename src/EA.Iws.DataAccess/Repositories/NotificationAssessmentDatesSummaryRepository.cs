@@ -45,7 +45,7 @@
             return NotificationDatesSummary.Load(
                 assessment.Status,
                 assessment.Dates.NotificationReceivedDate,
-                assessment.Dates.NotificationChargeDate,
+                assessment.Dates.NotificationChargeDate ?? await notificationAssessmentRepository.GetSubmitedDate(notification.Id),
                 notificationId,
                 paymentReceivedDate,
                 await transactionCalculator.IsPaymentComplete(notificationId),

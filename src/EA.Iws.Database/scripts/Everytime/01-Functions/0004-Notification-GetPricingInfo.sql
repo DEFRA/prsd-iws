@@ -5,7 +5,8 @@ IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
 GO
 
 ALTER FUNCTION [Notification].[GetPricingInfo](
-	@notificationId		UNIQUEIDENTIFIER)
+	@notificationId		UNIQUEIDENTIFIER,
+	@chargeDate		DATETIMEOFFSET NULL)
 RETURNS @PricingInfo TABLE
 (
 	Price MONEY NULL,
@@ -24,27 +25,34 @@ BEGIN
 	DECLARE @additionalChargeTotal MONEY;
 	DECLARE @wasteComponentFees MONEY;
 	
-	SELECT @submittedDate = ChangeDate
+	SELECT @submittedDate = ChangeDate, 
+	@chargeDate = CASE WHEN @chargeDate IS NULL THEN NotificationChargeDate ELSE @chargeDate END
 	 FROM (
-		SELECT TOP 1 nsc.ChangeDate AS ChangeDate
+		SELECT TOP 1 nsc.ChangeDate AS ChangeDate, 
+		nd.NotificationChargeDate as NotificationChargeDate
 		FROM
 			[Notification].[Notification] N
 			LEFT JOIN [Notification].[NotificationAssessment] na ON na.NotificationApplicationId = N.Id
 			LEFT JOIN [Notification].[NotificationStatusChange] nsc ON nsc.NotificationAssessmentId = na.Id
+			LEFT JOIN [Notification].[NotificationDates] nd ON nd.NotificationAssessmentId = na.Id
 		WHERE N.Id = @notificationId AND nsc.[Status] IN (2, 16)
 		ORDER BY nsc.ChangeDate DESC
 		UNION
 		SELECT
-			TOP 1 nsc.ChangeDate
+			TOP 1 nsc.ChangeDate, 
+			nd.NotificationChargeDate as NotificationChargeDate
 		FROM 
 			[ImportNotification].[Notification] N
 			LEFT JOIN [ImportNotification].[NotificationAssessment] na ON na.NotificationApplicationId = N.Id
 			LEFT JOIN [ImportNotification].[NotificationStatusChange] nsc ON nsc.NotificationAssessmentId = na.Id
+			LEFT JOIN [Notification].[NotificationDates] nd ON nd.NotificationAssessmentId = na.Id
 		WHERE N.Id = @notificationId AND nsc.NewStatus IN (2, 14)
 		ORDER BY nsc.ChangeDate DESC
 		) AS DATA;
 
 	SELECT @submittedDate = (CASE WHEN @submittedDate IS NULL THEN GETDATE() ELSE @submittedDate END);
+
+	SELECT @chargeDate = (CASE WHEN @chargeDate IS NULL THEN @submittedDate ELSE @chargeDate END);
 
 	SELECT
 		@numberOfShipments = NumberOfShipments,
@@ -125,15 +133,15 @@ BEGIN
 	WHERE
 		ps.CompetentAuthority = @competentAuthority
 		AND ps.ActivityId = @activityId
-		AND ps.ValidFrom <= @submittedDate
+		AND ps.ValidFrom <= @chargeDate
 		AND (@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
 	ORDER BY ValidFrom DESC;
 
-	--Getting Notification Additional charge totals
-	SET @additionalChargeTotal = ISNULL((SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
-	SET @additionalChargeTotal += ISNULL((SELECT SUM(ChargeAmount) FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
+	--Getting Notification Additional charge totals (exclude EditChargeDate charges)
+	SET @additionalChargeTotal = ISNULL((SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId AND ChangeDetailType <> 14), 0);
+	SET @additionalChargeTotal += ISNULL((SELECT SUM(ChargeAmount) FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @notificationId  AND ChangeDetailType <> 14), 0);
 
-	IF @competentAuthority = 1 AND @submittedDate >= '2024-04-01'
+	IF @competentAuthority = 1 AND @chargeDate >= '2024-04-01'
 	BEGIN
 		--Use the new fees and logic
 		SET @fixedWasteCategoryFee = (
@@ -147,7 +155,7 @@ BEGIN
 				SELECT inwt.WasteCategoryType FROM [ImportNotification].[Notification] n
 				LEFT JOIN [ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
 				WHERE n.id = @notificationId)
-			AND CompetentAuthority = @competentAuthority AND ValidFrom <= @submittedDate
+			AND CompetentAuthority = @competentAuthority AND ValidFrom <= @chargeDate
 			GROUP BY Price, ValidFrom 
 			ORDER BY ValidFrom DESC)
 
@@ -172,21 +180,21 @@ BEGIN
 				'F0407E39-C9BA-4519-B659-A4C9010901C7', 'DAF51836-41E0-4324-93AE-A4C9010901C7', 
 				'E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7')
 			BEGIN
-				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 2 AND ValidFrom <= @submittedDate ORDER BY ValidFrom DESC)
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 2 AND ValidFrom <= @chargeDate ORDER BY ValidFrom DESC)
 			END
 			
 			--Export Recovery IsInterim 0, ActivityId = 75496653-C767-44D2-AA27-A4C9010901C7
 			--Export Recovery IsInterim 1, ActivityId = 71CC7688-63D3-4312-BAD2-A4C9010901C7
 			IF @activityId IN ('75496653-C767-44D2-AA27-A4C9010901C7', '71CC7688-63D3-4312-BAD2-A4C9010901C7')
 			BEGIN
-				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 3 AND ValidFrom <= @submittedDate ORDER BY ValidFrom DESC)
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 3 AND ValidFrom <= @chargeDate ORDER BY ValidFrom DESC)
 			END
 
 			--Export Disposal IsInterim 0, ActivityId = 12AF7EA4-1E60-4D35-B965-A4C9010901C7
 			--Export Disposal IsInterim 1, ActivityId = 8385CAD7-E5F0-4765-A46B-A4C9010901C7
 			IF @activityId IN ('12AF7EA4-1E60-4D35-B965-A4C9010901C7', '8385CAD7-E5F0-4765-A46B-A4C9010901C7')
 			BEGIN
-				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 4 AND ValidFrom <= @submittedDate ORDER BY ValidFrom DESC)
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 4 AND ValidFrom <= @chargeDate ORDER BY ValidFrom DESC)
 			END
 
 			--Refund is the price minus the price for the lowest range
@@ -199,7 +207,7 @@ BEGIN
 			WHERE
 				ps.CompetentAuthority = @competentAuthority
 				AND ps.ActivityId = @activityId
-				AND ps.ValidFrom <= @submittedDate
+				AND ps.ValidFrom <= @chargeDate
 				AND (1 >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR 1 <= sqr.RangeTo))
 			ORDER BY ValidFrom DESC;
 		END
@@ -214,14 +222,14 @@ BEGIN
 			FROM [ImportNotification].[Notification] n
 			LEFT JOIN ImportNotification.WasteComponent iwc ON iwc.ImportNotificationId = n.Id
 			WHERE n.id = @notificationId)
-			AND ValidFrom <= @submittedDate
+			AND ValidFrom <= @chargeDate
 			GROUP BY Price, ValidFrom
 			ORDER BY ValidFrom DESC);
 
 		SELECT @price += ISNULL(@wasteComponentFees, 0);
 	END;
 
-	IF @competentAuthority = 2 AND @submittedDate >= '2024-04-01'
+	IF @competentAuthority = 2 AND @chargeDate >= '2024-04-01'
 	BEGIN
 		SET @fixedWasteCategoryFee = (
 		SELECT TOP 1 Price 
@@ -234,7 +242,7 @@ BEGIN
 				SELECT inwt.WasteCategoryType FROM [ImportNotification].[Notification] n
 				LEFT JOIN [ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
 				WHERE n.id = @notificationId)
-			AND CompetentAuthority = @competentAuthority AND ValidFrom <= @submittedDate
+			AND CompetentAuthority = @competentAuthority AND ValidFrom <= @chargeDate
 			GROUP BY Price, ValidFrom
 			ORDER BY ValidFrom DESC)
 

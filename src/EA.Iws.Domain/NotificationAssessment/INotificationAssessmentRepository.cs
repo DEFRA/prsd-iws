@@ -18,5 +18,7 @@
         Task<NotificationStatus> GetPreviousStatusByNotification(Guid notificationId);
 
         Task<List<NotificationStatusChangeData>> GetUnderProhibitionHistory(Guid notificationId);
+
+        Task<DateTime?> GetSubmitedDate(Guid notificationId);
     }
 }

@@ -54,8 +54,14 @@
                 WithdrawnDate = model.WithdrawnDate.AsDateTime(),
                 TransmittedDate = model.TransmittedDate.AsDateTime()
             };
-            
-            await mediator.SendAsync(new SetExportKeyDatesOverride(data));
+
+            try 
+            {
+                await mediator.SendAsync(new SetExportKeyDatesOverride(data));
+            }
+            catch (Exception ex)
+            {
+            }
 
             return RedirectToAction("Index", "KeyDates");
         }

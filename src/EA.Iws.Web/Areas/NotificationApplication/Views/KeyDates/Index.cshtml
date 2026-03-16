@@ -48,6 +48,20 @@
                         <td>--</td>
                     </tr>
                     <tr>
+                        <td>Notification charge</td>
+                        <td>
+                            @if (Model.NotificationChargeDate.HasValue)
+                            {
+                                @Html.Gds().DisplayDateFor(m => m.NotificationChargeDate.GetValueOrDefault())
+                            }
+                            else
+                            {
+                                @nullMarker
+                            }
+                        </td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
                         <td>Payment received</td>
                         <td>
                             @if (Model.PaymentReceivedDate.HasValue)
@@ -149,8 +163,8 @@
                                 }
                                 else
                                 {
-                                     @Html.Raw("--");
-                                }                                
+                                    @Html.Raw("--");
+                                }
                             </td>
                         </tr>
                     }
