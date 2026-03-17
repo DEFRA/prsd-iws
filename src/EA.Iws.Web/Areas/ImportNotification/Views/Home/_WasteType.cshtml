@@ -7,6 +7,11 @@
         {
             if (Model.Details.Composition.Composition.Value == ChemicalComposition.Other && Model.Details.WasteType != null)
             {
+                if (Model.ShowChangeWasteTypesLink)
+                {
+                    <div class="change-answer">@Html.ActionLink("Change", "WasteCodes", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
+                }
+
                 if (Model.Details.WasteType != null && Model.Details.WasteType.WasteCategoryType.HasValue)
                 {
                     <dl>

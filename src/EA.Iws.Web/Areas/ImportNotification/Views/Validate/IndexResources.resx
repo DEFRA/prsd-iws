@@ -118,7 +118,8 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="GuidanceComplete" xml:space="preserve">
-    <value>Please note: Once you’ve submitted this import notification, you won’t be able to edit the data.</value>
+    <value />
+    <comment>Please note: Once you’ve submitted this import notification, you won’t be able to edit the data.</comment>
   </data>
   <data name="GuidanceIncomplete" xml:space="preserve">
     <value>You still need to enter some information before you can submit it. Check the list below for data that is still required from each section of the notification.</value>

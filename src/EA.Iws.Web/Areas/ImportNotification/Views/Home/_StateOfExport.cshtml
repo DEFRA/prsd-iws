@@ -6,7 +6,12 @@
     <div class="overview-block-element">
         @if (Model.Details.StateOfExport != null && !Model.Details.StateOfExport.IsEmpty())
         {
-            
+
+            if (Model.ShowChangeEntryExitPointLink)
+            {
+                <div class="change-answer">@Html.ActionLink("Change", "ExitPoint", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
+            }
+
             <div class="sub-title">@Resource.CountryText</div>
             if (!string.IsNullOrWhiteSpace(Model.Details.StateOfExport.CountryName))
             {
@@ -35,11 +40,6 @@
             else
             {
                 <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
-            }
-
-            if (Model.ShowChangeEntryExitPointLink)
-            {
-                <div class="change-answer">@Html.ActionLink("Change", "ExitPoint", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
             }
         }
         else
