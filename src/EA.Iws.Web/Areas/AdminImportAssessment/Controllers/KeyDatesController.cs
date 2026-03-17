@@ -27,6 +27,8 @@
             var data = await mediator.SendAsync(new GetKeyDates(id));
 
             var model = new KeyDatesViewModel(data);
+            model.NotificationId = id;
+            model.ProhibitionHistory = await mediator.SendAsync(new GetImportNotificationProhibitionStatusChanges(id));
 
             if (command.HasValue)
             {
@@ -35,7 +37,7 @@
             }
 
             model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
-
+            
             return View(model);
         }
 
@@ -74,7 +76,25 @@
             }
 
             return RedirectToAction("Index");
-        } 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnderProhibition(Guid id)
+        {
+            await mediator.SendAsync(new SetImportNotificationUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LiftProhibition(Guid id)
+        {
+            await mediator.SendAsync(new RemoveImportNotificationUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
 
         private void AddRelevantDateToNewDate(KeyDatesViewModel model)
         {

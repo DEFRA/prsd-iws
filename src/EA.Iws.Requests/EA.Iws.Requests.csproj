@@ -177,9 +177,11 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportInterimStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChanges.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\RemoveImportNotificationUnderProhibitionStatus.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetArchiveReference.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
@@ -190,6 +192,7 @@
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportNotificationUnderProhibitionStatus.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationRefund.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\DeleteTransaction.cs" />
@@ -272,9 +275,12 @@
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
+    <Compile Include="NotificationAssessment\GetProhibitionStatusChanges.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitData.cs" />
+    <Compile Include="NotificationAssessment\RemoveUnderProhibitionStatus.cs" />
     <Compile Include="NotificationAssessment\SetFacilityDetails.cs" />
     <Compile Include="NotificationAssessment\SetProducerDetails.cs" />
+    <Compile Include="NotificationAssessment\SetUnderProhibitionStatus.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExit.cs" />
     <Compile Include="NotificationAssessment\TransitStateWithEntryOrExitPointsData.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCode.cs" />

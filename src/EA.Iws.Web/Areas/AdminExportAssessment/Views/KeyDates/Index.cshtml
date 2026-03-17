@@ -14,6 +14,29 @@
     var byText = " by ";
 }
 
+<div class="govuk-form-group">
+
+    @if (Model.CurrentStatus == NotificationStatus.UnderProhibition)
+    {
+        using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
+        }
+    }
+    else
+    {
+        using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+
+            <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
+        }
+    }
+
+</div>
+
 <div>
     These are the dates so far:
 
@@ -246,168 +269,196 @@
             </td>
 
         </tr>
-
     </table>
-</div>
-
-@if (Model.Command != 0)
-{
-    using (Html.BeginForm("Index", "KeyDates", FormMethod.Post))
+    @if (Model.ProhibitionHistory.Count > 0)
     {
-        @Html.Gds().ValidationSummary()
-        @Html.HiddenFor(m => m.NotificationId)
-        @Html.HiddenFor(m => m.Command)
-        @Html.HiddenFor(m => m.PaymentReceivedDate)
-        @Html.HiddenFor(m => m.PaymentIsComplete)
-        @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
-        @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
-        @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
-        @Html.HiddenFor(m => m.CommencementDate.Day)
-        @Html.HiddenFor(m => m.CommencementDate.Month)
-        @Html.HiddenFor(m => m.CommencementDate.Year)
-        @Html.HiddenFor(m => m.IsAreaAssigned)
-        @Html.HiddenFor(m => m.IsInterim)
-        @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
-        @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
-        @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
-        @Html.HiddenFor(m => m.NotificationTransmittedDate.Day)
-        @Html.HiddenFor(m => m.NotificationTransmittedDate.Month)
-        @Html.HiddenFor(m => m.NotificationTransmittedDate.Year)
-        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
-        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
-        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
-        @Html.HiddenFor(m => m.DecisionDate.Day)
-        @Html.HiddenFor(m => m.DecisionDate.Month)
-        @Html.HiddenFor(m => m.DecisionDate.Year)
-        @Html.HiddenFor(m => m.NotificationFileClosedDate.Day)
-        @Html.HiddenFor(m => m.NotificationFileClosedDate.Month)
-        @Html.HiddenFor(m => m.NotificationFileClosedDate.Year)
+        <h2 class="govuk-heading-m">Status Change Log</h2>
+        <table title="Status Change Log">
 
-        for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
-        {
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].NotificationId)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].Date)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedFrom)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedTo)
-            @Html.HiddenFor(m => m.AssessmentDecisions[i].Status)
+            @for (int i = 0; i < Model.ProhibitionHistory.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @if (Model.ProhibitionHistory[i].Status == NotificationStatus.UnderProhibition)
+                        {
+                            <p>Under prohibition on</p>
+                        }
+                        else
+                        {
+                            <p>Removed under prohibition on</p>
+                        }
+                    </td>
+                    <td>
+                        @Model.ProhibitionHistory[i].ChangeDate.Value.ToString("d MMMM yyyy")
+                        @byText
+                        @Html.DisplayFor(m => m.ProhibitionHistory[i].FullName)
+
+                    </td>
+                    <td></td>
+                </tr>
+            }
+            </table>
         }
+        </div>
 
-        @Html.AntiForgeryToken()
-
-        <br />
-        <br />
-
-        if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
+        @if (Model.Command != 0)
         {
-            <fieldset>
-                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
-                    @Html.Gds().LabelFor(m => m.ArchiveReference, false)
-                    @Html.Gds().ValidationMessageFor(m => m.ArchiveReference)
-                    @Html.Gds().TextBoxFor(m => m.ArchiveReference, new { @Maxlength = 100 })
+            using (Html.BeginForm("Index", "KeyDates", FormMethod.Post))
+            {
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationId)
+                @Html.HiddenFor(m => m.Command)
+                @Html.HiddenFor(m => m.PaymentReceivedDate)
+                @Html.HiddenFor(m => m.PaymentIsComplete)
+                @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
+                @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
+                @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
+                @Html.HiddenFor(m => m.CommencementDate.Day)
+                @Html.HiddenFor(m => m.CommencementDate.Month)
+                @Html.HiddenFor(m => m.CommencementDate.Year)
+                @Html.HiddenFor(m => m.IsAreaAssigned)
+                @Html.HiddenFor(m => m.IsInterim)
+                @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
+                @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
+                @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
+                @Html.HiddenFor(m => m.NotificationTransmittedDate.Day)
+                @Html.HiddenFor(m => m.NotificationTransmittedDate.Month)
+                @Html.HiddenFor(m => m.NotificationTransmittedDate.Year)
+                @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
+                @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
+                @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
+                @Html.HiddenFor(m => m.DecisionDate.Day)
+                @Html.HiddenFor(m => m.DecisionDate.Month)
+                @Html.HiddenFor(m => m.DecisionDate.Year)
+                @Html.HiddenFor(m => m.NotificationFileClosedDate.Day)
+                @Html.HiddenFor(m => m.NotificationFileClosedDate.Month)
+                @Html.HiddenFor(m => m.NotificationFileClosedDate.Year)
+
+                for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
+                {
+                    @Html.HiddenFor(m => m.AssessmentDecisions[i].NotificationId)
+                    @Html.HiddenFor(m => m.AssessmentDecisions[i].Date)
+                    @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedFrom)
+                    @Html.HiddenFor(m => m.AssessmentDecisions[i].ConsentedTo)
+                    @Html.HiddenFor(m => m.AssessmentDecisions[i].Status)
+                }
+
+                @Html.AntiForgeryToken()
+
+                <br />
+                <br />
+
+                if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
+                {
+                    <fieldset>
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
+                            @Html.Gds().LabelFor(m => m.ArchiveReference, false)
+                            @Html.Gds().ValidationMessageFor(m => m.ArchiveReference)
+                            @Html.Gds().TextBoxFor(m => m.ArchiveReference, new { @Maxlength = 100 })
+                        </div>
+                    </fieldset>
+                }
+                else
+                {
+                    <fieldset>
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
+                            @Html.Gds().ValidationMessageFor(m => m.NewDate)
+                            @Html.Gds().HintParagraph("For example, 31 3 2015")
+                            @Html.EditorFor(m => m.NewDate)
+                        </div>
+                    </fieldset>
+                }
+
+                if (Model.Command == KeyDatesStatusEnum.AssessmentCommenced)
+                {
+                    <fieldset>
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
+                            @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
+                            @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
+                            @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30 })
+                        </div>
+                    </fieldset>
+                }
+                else
+                {
+                    @Html.HiddenFor(m => m.NameOfOfficer)
+                }
+
+
+                <br />
+
+                <div class="govuk-form-group">
+                    @if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
+                    {
+                        <input type="submit" class="govuk-button" value="@IndexResources.ArchieveReferenceButtonText" />
+                    }
+                    else
+                    {
+                        <input type="submit" class="govuk-button" value="@IndexResources.ButtonText" />
+                    }
+
                 </div>
-            </fieldset>
+            }
+
+            @section scripts{
+                <script>
+                    $(function () {
+                        // On page load with a date input, moves the cursor to the first input box.
+                        var input = $("form #NewDate_Day");
+
+                        if (input) {
+                            input.focus();
+                        }
+                    });
+                </script>
+            }
         }
         else
         {
-            <fieldset>
-                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
-                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
-                    @Html.Gds().ValidationMessageFor(m => m.NewDate)
-                    @Html.Gds().HintParagraph("For example, 31 3 2015")
-                    @Html.EditorFor(m => m.NewDate)
-                </div>
-            </fieldset>
-        }
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.AdditionalCharge)
 
-        if (Model.Command == KeyDatesStatusEnum.AssessmentCommenced)
-        {
-            <fieldset>
-                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
-                    @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
-                    @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
-                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30 })
-                </div>
-            </fieldset>
-        }
-        else
-        {
-            @Html.HiddenFor(m => m.NameOfOfficer)
-        }
+            @section scripts{
+                <script>
+                    $(function () {
+                        var link = $("td a").first();
 
-
-        <br />
-
-        <div class="govuk-form-group">
-            @if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
-            {
-                <input type="submit" class="govuk-button" value="@IndexResources.ArchieveReferenceButtonText" />
+                        if (link) {
+                            link.focus();
+                        }
+                    })
+                </script>
             }
-            else
+        }
+
+        @if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy || Model.CurrentStatus == NotificationStatus.Transmitted || Model.CurrentStatus == NotificationStatus.Consented)
+        {
+            using (Html.BeginForm("UnlockNotification", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
             {
-                <input type="submit" class="govuk-button" value="@IndexResources.ButtonText" />
+                @Html.HiddenFor(m => m.NotificationId)
+
+                @Html.AntiForgeryToken()
+
+                <br />
+                <div class="govuk-form-group">
+                    <input type="submit" class="govuk-button" value="Unlock notification for updates" />
+                </div>
             }
+        }
 
-        </div>
-    }
+        @if (Model.CurrentStatus == NotificationStatus.Unlocked || Model.CurrentStatus == NotificationStatus.ConsentedUnlock)
+        {
+            <br />
+            <p>To make changes to this notification you need to go to the external overview.</p>
 
-    @section scripts{
-        <script>
-            $(function () {
-                // On page load with a date input, moves the cursor to the first input box.
-                var input = $("form #NewDate_Day");
+            @Html.ActionLink("Go to external notification overview",
+                "Index",
+                "Home",
+                new { area = "NotificationApplication", id = Model.NotificationId },
+                null)
+        }
 
-                if (input) {
-                    input.focus();
-                }
-            });
-        </script>
-    }
-}
-else
-{
-    @Html.Gds().ValidationSummary()
-    @Html.HiddenFor(m => m.AdditionalCharge)
-
-    @section scripts{
-        <script>
-            $(function () {
-                var link = $("td a").first();
-
-                if (link) {
-                    link.focus();
-                }
-            })
-        </script>
-    }
-}
-
-@if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy || Model.CurrentStatus == NotificationStatus.Transmitted || Model.CurrentStatus == NotificationStatus.Consented)
-{
-    using (Html.BeginForm("UnlockNotification", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
-    {
-        @Html.HiddenFor(m => m.NotificationId)
-
-        @Html.AntiForgeryToken()
-
-        <br />
-        <div class="govuk-form-group">
-            <input type="submit" class="govuk-button" value="Unlock notification for updates" />
-        </div>
-    }
-}
-
-@if (Model.CurrentStatus == NotificationStatus.Unlocked || Model.CurrentStatus == NotificationStatus.ConsentedUnlock)
-{
-    <br />
-    <p>To make changes to this notification you need to go to the external overview.</p>
-
-    @Html.ActionLink("Go to external notification overview",
-        "Index",
-        "Home",
-        new { area = "NotificationApplication", id = Model.NotificationId },
-        null)
-}
-
-@section menu {
-    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
-}
+        @section menu {
+            @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+        }

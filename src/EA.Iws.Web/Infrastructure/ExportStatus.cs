@@ -34,6 +34,7 @@
                 case NotificationStatus.Objected:
                 case NotificationStatus.Withdrawn:
                 case NotificationStatus.ConsentWithdrawn:
+                case NotificationStatus.UnderProhibition:
                     statusColor = "s-red";
                     break;
 
