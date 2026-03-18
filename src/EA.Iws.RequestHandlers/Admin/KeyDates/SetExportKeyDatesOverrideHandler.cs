@@ -2,15 +2,10 @@
 {
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
-    using EA.Iws.Core.Notification.AdditionalCharge;
-    using EA.Iws.DataAccess;
     using EA.Iws.Domain;
     using EA.Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Admin.KeyDates;
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
 
     internal class SetExportKeyDatesOverrideHandler : IRequestHandler<SetExportKeyDatesOverride, Unit>
@@ -18,29 +13,17 @@
         private readonly IKeyDatesOverrideRepository repository;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly INotificationApplicationRepository applicationRepository;
-        private readonly INotificationChargeCalculator notificationChargeCalculator;
-        private readonly INotificationAdditionalChargeRepository additionalChargeRepository;
-        private readonly IUserContext userContext;
-        private readonly INotificationUserRepository notificationUserRepository;
         private readonly DecisionRequiredBy decisionRequiredBy;
 
         public SetExportKeyDatesOverrideHandler(IKeyDatesOverrideRepository repository,
             INotificationAssessmentRepository assessmentRepository,
             INotificationApplicationRepository applicationRepository,
-            INotificationChargeCalculator notificationChargeCalculator,
-            DecisionRequiredBy decisionRequiredBy,
-            INotificationAdditionalChargeRepository additionalChargeRepository,
-            IUserContext userContext,
-            INotificationUserRepository notificationUserRepository)
+            DecisionRequiredBy decisionRequiredBy)
         {
             this.repository = repository;
             this.assessmentRepository = assessmentRepository;
             this.applicationRepository = applicationRepository;
-            this.notificationChargeCalculator = notificationChargeCalculator;
             this.decisionRequiredBy = decisionRequiredBy;
-            this.additionalChargeRepository = additionalChargeRepository;
-            this.userContext = userContext;
-            this.notificationUserRepository = notificationUserRepository;
         }
 
         public async Task<Unit> HandleAsync(SetExportKeyDatesOverride message)

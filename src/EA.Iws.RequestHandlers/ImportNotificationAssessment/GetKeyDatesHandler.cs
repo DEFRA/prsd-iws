@@ -41,49 +41,42 @@
 
         public async Task<KeyDatesData> HandleAsync(GetKeyDates message)
         {
-            try
+            var notification = await notificationRepository.Get(message.ImportNotificationId);
+            var consultation = await consultationRepository.GetByNotificationId(message.ImportNotificationId);
+            var assessment = await notificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
+            var interimStatus = await interimStatusRepository.GetByNotificationId(message.ImportNotificationId);
+            var decisions = await notificationAssessmentDecisionRepository.GetByImportNotificationId(message.ImportNotificationId);
+
+            var paymentReceived = await transactionCalculator.PaymentReceivedDate(message.ImportNotificationId) ??
+                          await transactionCalculator.LatestPayment(message.ImportNotificationId);
+            DateTime? paymentReceivedDate = null;
+
+            if (paymentReceived != null)
             {
-                var notification = await notificationRepository.Get(message.ImportNotificationId);
-                var consultation = await consultationRepository.GetByNotificationId(message.ImportNotificationId);
-                var assessment = await notificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
-                var interimStatus = await interimStatusRepository.GetByNotificationId(message.ImportNotificationId);
-                var decisions = await notificationAssessmentDecisionRepository.GetByImportNotificationId(message.ImportNotificationId);
-
-                var paymentReceived = await transactionCalculator.PaymentReceivedDate(message.ImportNotificationId) ??
-                              await transactionCalculator.LatestPayment(message.ImportNotificationId);
-                DateTime? paymentReceivedDate = null;
-
-                if (paymentReceived != null)
-                {
-                    paymentReceivedDate = paymentReceived.Date;
-                }
-
-                return new KeyDatesData
-                {
-                    NotificationReceived = assessment.Dates.NotificationReceivedDate,
-                    NotificationChargeDate = assessment.Dates.NotificationChargeDate ??
-                        await notificationAssessmentRepository.GetSubmitedDate(message.ImportNotificationId),
-                    PaymentReceived = paymentReceivedDate,
-                    IsPaymentComplete = assessment.Dates.PaymentReceivedDate.HasValue &&
-                    await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0),
-                    NameOfOfficer = assessment.Dates.NameOfOfficer,
-                    AssessmentStarted = assessment.Dates.AssessmentStartedDate,
-                    NotificationCompletedDate = assessment.Dates.NotificationCompletedDate,
-                    AcknowlegedDate = assessment.Dates.AcknowledgedDate,
-                    DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment),
-                    IsInterim = interimStatus.IsInterim,
-                    FileClosedDate = assessment.Dates.FileClosedDate,
-                    ArchiveReference = assessment.Dates.ArchiveReference,
-                    DecisionHistory = decisions ?? new List<NotificationAssessmentDecision>(),
-                    CompententAuthority = notification.CompetentAuthority,
-                    IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue,
-                    Status = assessment.Status
-                };
+                paymentReceivedDate = paymentReceived.Date;
             }
-            catch (Exception ex)
+
+            return new KeyDatesData
             {
-            }
-            return new KeyDatesData();
+                NotificationReceived = assessment.Dates.NotificationReceivedDate,
+                NotificationChargeDate = assessment.Dates.NotificationChargeDate ??
+                    await notificationAssessmentRepository.GetSubmitedDate(message.ImportNotificationId),
+                PaymentReceived = paymentReceivedDate,
+                IsPaymentComplete = assessment.Dates.PaymentReceivedDate.HasValue &&
+                await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0),
+                NameOfOfficer = assessment.Dates.NameOfOfficer,
+                AssessmentStarted = assessment.Dates.AssessmentStartedDate,
+                NotificationCompletedDate = assessment.Dates.NotificationCompletedDate,
+                AcknowlegedDate = assessment.Dates.AcknowledgedDate,
+                DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment),
+                IsInterim = interimStatus.IsInterim,
+                FileClosedDate = assessment.Dates.FileClosedDate,
+                ArchiveReference = assessment.Dates.ArchiveReference,
+                DecisionHistory = decisions ?? new List<NotificationAssessmentDecision>(),
+                CompententAuthority = notification.CompetentAuthority,
+                IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue,
+                Status = assessment.Status
+            };
         }
     }
 }

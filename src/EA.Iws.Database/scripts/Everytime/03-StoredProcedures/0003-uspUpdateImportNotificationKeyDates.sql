@@ -30,7 +30,7 @@ BEGIN
           ,[NotificationCompletedDate] = CASE WHEN [NotificationCompletedDate] IS NULL THEN NULL ELSE ISNULL(@CompleteDate, [NotificationCompletedDate]) END
           ,[AcknowledgedDate] = CASE WHEN [AcknowledgedDate] IS NULL THEN NULL ELSE ISNULL(@AcknowledgedDate, [AcknowledgedDate]) END
           ,[ConsentedDate] = CASE WHEN [ConsentedDate] IS NULL THEN NULL ELSE ISNULL(@ConsentedDate, [ConsentedDate]) END
-		  ,[NotificationChargeDate] = ISNULL(@NotificationChargeDate, [NotificationChargeDate])
+          ,[NotificationChargeDate] = ISNULL(@NotificationChargeDate, [NotificationChargeDate])
      WHERE [NotificationAssessmentId] = @NotificationAssessmentId;
 
      UPDATE [ImportNotification].[Objection]

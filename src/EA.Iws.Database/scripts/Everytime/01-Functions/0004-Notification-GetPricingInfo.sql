@@ -4,14 +4,6 @@ IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
 	EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
 GO
 
-USE [EA.Iws]
-GO
-/****** Object:  UserDefinedFunction [Notification].[GetPricingInfo]    Script Date: 18/03/2026 09:09:14 ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-
 ALTER FUNCTION [Notification].[GetPricingInfo](
 	@notificationId		UNIQUEIDENTIFIER)
 RETURNS @PricingInfo TABLE

@@ -42,8 +42,5 @@
 
         [Display(Name = "Edit facility details", Description = "Edit facility details")]
         EditFacilityDetails = 13,
-
-        [Display(Name = "Edit charge date", Description = "Edit charge date")]
-        EditChargeDate = 14,
     }
 }
