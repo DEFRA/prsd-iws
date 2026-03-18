@@ -6,6 +6,6 @@
 
     public interface IPriceRepository
     {
-        Task<PriceAndRefund> GetPriceAndRefundByNotificationId(Guid notificationId, DateTime? chargeDate = null);
+        Task<PriceAndRefund> GetPriceAndRefundByNotificationId(Guid notificationId);
     }
 }

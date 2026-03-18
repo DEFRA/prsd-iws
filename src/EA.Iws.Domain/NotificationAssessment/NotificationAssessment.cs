@@ -3,7 +3,6 @@
     using Core.Admin;
     using Core.NotificationAssessment;
     using Core.Shared;
-    using EA.Iws.Core.ImportNotificationAssessment;
     using NotificationApplication;
     using NotificationConsent;
     using Prsd.Core;
@@ -289,6 +288,11 @@
             Dates.StatusAtFileClosed = statusAtFileClosed;
         }
 
+        private void OnResubmit(DateTime resubmitDate)
+        {
+            Dates.NotificationChargeDate = resubmitDate;
+        }
+
         public void Submit(INotificationProgressService progressService)
         {
             if (!progressService.IsComplete(NotificationApplicationId))
@@ -302,6 +306,11 @@
         public void AddStatusChangeRecord(NotificationStatusChange statusChange)
         {
             Guard.ArgumentNotNull(() => statusChange, statusChange);
+
+            if (statusChange.Status == NotificationStatus.Resubmitted)
+            {
+                OnResubmit(statusChange.ChangeDate.UtcDateTime);
+            }
 
             StatusChangeCollection.Add(statusChange);
         }

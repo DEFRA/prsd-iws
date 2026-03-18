@@ -151,6 +151,6 @@
     <value>Decision required by</value>
   </data>
   <data name="NotificationChargeDate" xml:space="preserve">
-    <value>Notification Charge</value>
+    <value>Notification charge calculation date</value>
   </data>
 </root>

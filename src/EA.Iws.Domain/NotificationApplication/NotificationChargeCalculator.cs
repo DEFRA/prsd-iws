@@ -25,7 +25,7 @@
             this.numberOfShipmentsHistotyRepository = numberOfShipmentsHistotyRepository;
         }
 
-        public async Task<decimal> GetValue(Guid notificationId, DateTime? chargeDate)
+        public async Task<decimal> GetValue(Guid notificationId)
         {
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
 
@@ -45,19 +45,19 @@
 
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            return await GetPrice(numberOfShipments, notification, chargeDate);
+            return await GetPrice(numberOfShipments, notification);
         }
 
-        public async Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments, DateTime? chargeDate)
+        public async Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments)
         {
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            return await GetPrice(numberOfShipments, notification, chargeDate);
+            return await GetPrice(numberOfShipments, notification);
         }
 
-        private async Task<decimal> GetPrice(int numberOfShipments, NotificationApplication notification, DateTime? chargeDate)
+        private async Task<decimal> GetPrice(int numberOfShipments, NotificationApplication notification)
         {
-            var res = await priceRepository.GetPriceAndRefundByNotificationId(notification.Id, chargeDate);
+            var res = await priceRepository.GetPriceAndRefundByNotificationId(notification.Id);
             if (res == null)
             {
                 throw new Exception("GetPriceAndRefundByNotificationId(" + notification.Id + ") failed, please investigate");

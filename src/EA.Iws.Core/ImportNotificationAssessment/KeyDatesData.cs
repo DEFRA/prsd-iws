@@ -9,6 +9,8 @@
     {
         public DateTime? NotificationReceived { get; set; }
 
+        public DateTime? NotificationChargeDate { get; set; }
+
         public DateTime? PaymentReceived { get; set; }
 
         public DateTime? AssessmentStarted { get; set; }

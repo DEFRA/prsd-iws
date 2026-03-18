@@ -5,8 +5,8 @@
 
     public interface INotificationChargeCalculator
     {
-        Task<decimal> GetValue(Guid notificationId, DateTime? chargeDate = null);
+        Task<decimal> GetValue(Guid notificationId);
 
-        Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments, DateTime? chargeDate = null);
+        Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments);
     }
 }

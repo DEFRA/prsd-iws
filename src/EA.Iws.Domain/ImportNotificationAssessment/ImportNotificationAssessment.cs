@@ -225,6 +225,11 @@
                 StatusChangeCollection = new List<ImportNotificationStatusChange>();
             }
 
+            if (statusChange.NewStatus == ImportNotificationStatus.Resubmitted)
+            {
+                OnResubmit(statusChange.ChangeDate.UtcDateTime);
+            }
+
             StatusChangeCollection.Add(statusChange);
         }
 
@@ -242,6 +247,11 @@
         {
             Dates.FileClosedDate = fileClosedDate;
             Dates.StatusAtFileClosed = statusAtFileClosed;
+        }
+
+        private void OnResubmit(DateTime resubmitDate)
+        {
+            Dates.NotificationChargeDate = resubmitDate;
         }
 
         public void Submit()

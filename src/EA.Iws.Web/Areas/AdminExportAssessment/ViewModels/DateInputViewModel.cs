@@ -56,7 +56,7 @@
         [Display(Name = "Notification received")]
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
 
-        [Display(Name = "Notification charge")]
+        [Display(Name = "Notification charge calculation date")]
         public OptionalDateInputViewModel NotificationChargeDate { get; set; }
 
         [Display(Name = "Payment received")]

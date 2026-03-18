@@ -55,13 +55,7 @@
                 TransmittedDate = model.TransmittedDate.AsDateTime()
             };
 
-            try 
-            {
-                await mediator.SendAsync(new SetExportKeyDatesOverride(data));
-            }
-            catch (Exception ex)
-            {
-            }
+            await mediator.SendAsync(new SetExportKeyDatesOverride(data));
 
             return RedirectToAction("Index", "KeyDates");
         }

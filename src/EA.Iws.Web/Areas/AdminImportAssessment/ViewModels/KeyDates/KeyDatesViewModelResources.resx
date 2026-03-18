@@ -183,6 +183,9 @@
   <data name="NotificationAcknowledgedDate" xml:space="preserve">
     <value>Acknowledged on</value>
   </data>
+  <data name="NotificationChargeDate" xml:space="preserve">
+    <value>Charge Date</value>
+  </data>
   <data name="NotificationCompletedDate" xml:space="preserve">
     <value>Date completed</value>
   </data>

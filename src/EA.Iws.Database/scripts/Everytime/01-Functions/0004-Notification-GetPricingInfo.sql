@@ -4,9 +4,16 @@ IF OBJECT_ID('[Notification].[GetPricingInfo]') IS NULL
 	EXEC('CREATE FUNCTION [Notification].[GetPricingInfo]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
 GO
 
+USE [EA.Iws]
+GO
+/****** Object:  UserDefinedFunction [Notification].[GetPricingInfo]    Script Date: 18/03/2026 09:09:14 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
 ALTER FUNCTION [Notification].[GetPricingInfo](
-	@notificationId		UNIQUEIDENTIFIER,
-	@chargeDate		DATETIMEOFFSET NULL)
+	@notificationId		UNIQUEIDENTIFIER)
 RETURNS @PricingInfo TABLE
 (
 	Price MONEY NULL,
@@ -21,12 +28,13 @@ BEGIN
 	DECLARE @tradeDirection INT;
 	DECLARE @isInterim BIT;
 	DECLARE @submittedDate DATETIMEOFFSET;
+	DECLARE @chargeDate DATETIMEOFFSET;
 	DECLARE @fixedWasteCategoryFee MONEY;
 	DECLARE @additionalChargeTotal MONEY;
 	DECLARE @wasteComponentFees MONEY;
 	
 	SELECT @submittedDate = ChangeDate, 
-	@chargeDate = CASE WHEN @chargeDate IS NULL THEN NotificationChargeDate ELSE @chargeDate END
+	@chargeDate = NotificationChargeDate
 	 FROM (
 		SELECT TOP 1 nsc.ChangeDate AS ChangeDate, 
 		nd.NotificationChargeDate as NotificationChargeDate
@@ -45,7 +53,7 @@ BEGIN
 			[ImportNotification].[Notification] N
 			LEFT JOIN [ImportNotification].[NotificationAssessment] na ON na.NotificationApplicationId = N.Id
 			LEFT JOIN [ImportNotification].[NotificationStatusChange] nsc ON nsc.NotificationAssessmentId = na.Id
-			LEFT JOIN [Notification].[NotificationDates] nd ON nd.NotificationAssessmentId = na.Id
+			LEFT JOIN [ImportNotification].[NotificationDates] nd ON nd.NotificationAssessmentId = na.Id
 		WHERE N.Id = @notificationId AND nsc.NewStatus IN (2, 14)
 		ORDER BY nsc.ChangeDate DESC
 		) AS DATA;
@@ -137,9 +145,9 @@ BEGIN
 		AND (@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
 	ORDER BY ValidFrom DESC;
 
-	--Getting Notification Additional charge totals (exclude EditChargeDate charges)
-	SET @additionalChargeTotal = ISNULL((SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId AND ChangeDetailType <> 14), 0);
-	SET @additionalChargeTotal += ISNULL((SELECT SUM(ChargeAmount) FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @notificationId  AND ChangeDetailType <> 14), 0);
+	--Getting Notification Additional charge totals
+	SET @additionalChargeTotal = ISNULL((SELECT SUM(ChargeAmount) FROM [Notification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
+	SET @additionalChargeTotal += ISNULL((SELECT SUM(ChargeAmount) FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
 
 	IF @competentAuthority = 1 AND @chargeDate >= '2024-04-01'
 	BEGIN

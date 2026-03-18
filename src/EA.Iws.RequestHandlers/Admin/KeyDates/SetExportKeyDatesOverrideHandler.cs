@@ -55,18 +55,6 @@
                 await repository.SetDecisionRequiredByDateForNotification(assessment.Id, message.Data.DecisionRequiredByDate);
             }
 
-            if (previousDate.NotificationChargeDate != message.Data.NotificationChargeDate)
-            {
-                var previousChargeDate = previousDate.NotificationChargeDate ?? await assessmentRepository.GetSubmitedDate(notification.Id);
-                var previousCharge = await notificationChargeCalculator.GetValue(notification.Id, previousDate.NotificationChargeDate);
-                var newCharge = await notificationChargeCalculator.GetValue(notification.Id, message.Data.NotificationChargeDate);
-                var user = await notificationUserRepository.GetUserByUserId(userContext.UserId.ToString());
-                var comment = "From " + previousChargeDate.Value.ToString("dd/MM/yyyy") + " to " + message.Data.NotificationChargeDate.Value.ToString("dd/MM/yyyy") + " by " + user.FullName;
-                var chargeDifference = new AdditionalCharge(notification.Id, DateTime.UtcNow, newCharge - previousCharge, (int)AdditionalChargeType.EditChargeDate, comment);
-
-                await additionalChargeRepository.AddAdditionalCharge(chargeDifference);
-            }
-
             await repository.SetKeyDatesForNotification(message.Data);
 
             return Unit.Value;

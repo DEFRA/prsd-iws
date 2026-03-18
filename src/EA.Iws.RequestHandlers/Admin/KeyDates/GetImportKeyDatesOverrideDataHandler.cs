@@ -30,6 +30,7 @@
             var keyDates = await repository.GetKeyDatesForNotification(message.NotificationId);
 
             keyDates.DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment);
+            keyDates.NotificationChargeDate = keyDates.NotificationChargeDate ?? await assessmentRepository.GetSubmitedDate(message.NotificationId);
 
             return keyDates;
         }
