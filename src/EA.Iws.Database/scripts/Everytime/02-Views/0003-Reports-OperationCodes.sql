@@ -8,7 +8,8 @@ AS
         N.Id AS NotificationId,
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         O.Id as OperationCodeId,
-        O.Name
+        O.[Name],
+        O.IsInterim
     FROM [Notification].[OperationCodes] OC
     INNER JOIN [Notification].[Notification] N ON OC.NotificationId = N.Id
     INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
@@ -19,7 +20,8 @@ AS
         N.Id AS NotificationId,
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         O.Id as OperationCodeId,
-        O.Name
+        O.[Name],
+        O.IsInterim
     FROM [ImportNotification].[WasteOperation] WO
     INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
     INNER JOIN [ImportNotification].[Notification] N ON WO.ImportNotificationId = N.Id
