@@ -3,6 +3,7 @@
     using Core.Admin;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using EA.Iws.Core.Admin.KeyDates;
     using NotificationApplication;
     using NotificationConsent;
     using Prsd.Core;
@@ -66,7 +67,7 @@
         public NotificationStatus Status { get; private set; }
 
         protected virtual ICollection<NotificationStatusChange> StatusChangeCollection { get; set; }
-        
+
         public IEnumerable<NotificationStatusChange> StatusChanges
         {
             get { return StatusChangeCollection.ToSafeIEnumerable(); }
@@ -76,7 +77,7 @@
 
         public bool CanEditNotification
         {
-            get 
+            get
             {
                 return stateMachine.IsInState(NotificationStatus.NotSubmitted)
                        || stateMachine.IsInState(NotificationStatus.Submitted)
@@ -417,6 +418,29 @@
         public void LiftProhibition(DateTime date, NotificationStatus previousStatus)
         {
             stateMachine.Fire(liftProhibitionTrigger, date, previousStatus);
+        }
+
+        public void UpdateKeyDates(KeyDatesOverrideData keyDates)
+        {
+            Dates.NotificationReceivedDate =
+                Dates.NotificationReceivedDate != null ? keyDates.NotificationReceivedDate : Dates.NotificationReceivedDate;
+            Dates.CommencementDate =
+                Dates.CommencementDate != null ? keyDates.CommencementDate : Dates.CommencementDate;
+            Dates.CompleteDate =
+                Dates.CompleteDate != null ? keyDates.CompleteDate : Dates.CompleteDate;
+            Dates.TransmittedDate =
+                Dates.TransmittedDate != null ? keyDates.TransmittedDate : Dates.TransmittedDate;
+            Dates.AcknowledgedDate =
+                Dates.AcknowledgedDate != null ? keyDates.AcknowledgedDate : Dates.AcknowledgedDate;
+            Dates.WithdrawnDate =
+                Dates.WithdrawnDate != null ? keyDates.WithdrawnDate : Dates.WithdrawnDate;
+            Dates.ObjectedDate =
+                Dates.ObjectedDate != null ? keyDates.ObjectedDate : Dates.ObjectedDate;
+            Dates.ConsentedDate =
+                Dates.ConsentedDate != null ? keyDates.ConsentedDate : Dates.ConsentedDate;
+
+            Dates.NotificationChargeDate =
+                keyDates.NotificationChargeDate ?? Dates.NotificationChargeDate;
         }
     }
 }

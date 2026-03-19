@@ -2,8 +2,6 @@
 {
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
-    using EA.Iws.Domain;
-    using EA.Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Admin.KeyDates;
     using System.Threading.Tasks;
@@ -31,7 +29,6 @@
             var assessment = await assessmentRepository.GetByNotificationId(message.Data.NotificationId);
             var notification = await applicationRepository.GetById(message.Data.NotificationId);
             var currentDecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(notification, assessment);
-            var previousDate = await repository.GetKeyDatesForNotification(message.Data.NotificationId);
 
             if (currentDecisionRequiredByDate != message.Data.DecisionRequiredByDate)
             {

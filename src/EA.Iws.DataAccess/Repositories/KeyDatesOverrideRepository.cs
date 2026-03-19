@@ -1,18 +1,23 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using Core.Admin.KeyDates;
+    using Domain.NotificationAssessment;
+    using EA.Iws.Domain.NotificationConsent;
     using System;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using Core.Admin.KeyDates;
-    using Domain.NotificationAssessment;
 
     internal class KeyDatesOverrideRepository : IKeyDatesOverrideRepository
     {
         private readonly IwsContext context;
+        private readonly INotificationAssessmentRepository notificationAssessmentRepository;
+        private readonly INotificationConsentRepository notificationConsentRepository;
 
-        public KeyDatesOverrideRepository(IwsContext context)
+        public KeyDatesOverrideRepository(IwsContext context, INotificationAssessmentRepository notificationAssessmentRepository, INotificationConsentRepository notificationConsentRepository)
         {
             this.context = context;
+            this.notificationAssessmentRepository = notificationAssessmentRepository;
+            this.notificationConsentRepository = notificationConsentRepository;
         }
 
         public async Task<KeyDatesOverrideData> GetKeyDatesForNotification(Guid notificationId)
@@ -42,31 +47,43 @@
 
         public async Task SetKeyDatesForNotification(KeyDatesOverrideData data)
         {
-            await context.Database.ExecuteSqlCommandAsync(@"[Notification].[uspUpdateExportNotificationKeyDates] 
-                @NotificationId
-                ,@NotificationReceivedDate
-                ,@CommencementDate
-                ,@CompleteDate
-                ,@TransmittedDate
-                ,@AcknowledgedDate
-                ,@WithdrawnDate
-                ,@ObjectedDate
-                ,@ConsentedDate
-                ,@ConsentValidFromDate
-                ,@ConsentValidToDate
-                ,@NotificationChargeDate",
-                new SqlParameter("@NotificationId", data.NotificationId),
-                new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
-                new SqlParameter("@CommencementDate", (object)data.CommencementDate ?? DBNull.Value),
-                new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
-                new SqlParameter("@TransmittedDate", (object)data.TransmittedDate ?? DBNull.Value),
-                new SqlParameter("@AcknowledgedDate", (object)data.AcknowledgedDate ?? DBNull.Value),
-                new SqlParameter("@WithdrawnDate", (object)data.WithdrawnDate ?? DBNull.Value),
-                new SqlParameter("@ObjectedDate", (object)data.ObjectedDate ?? DBNull.Value),
-                new SqlParameter("@ConsentedDate", (object)data.ConsentedDate ?? DBNull.Value),
-                new SqlParameter("@ConsentValidFromDate", (object)data.ConsentValidFromDate ?? DBNull.Value),
-                new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value),
-                new SqlParameter("@NotificationChargeDate", (object)data.NotificationChargeDate ?? DBNull.Value));
+            //await context.Database.ExecuteSqlCommandAsync(@"[Notification].[uspUpdateExportNotificationKeyDates] 
+            //    @NotificationId
+            //    ,@NotificationReceivedDate
+            //    ,@CommencementDate
+            //    ,@CompleteDate
+            //    ,@TransmittedDate
+            //    ,@AcknowledgedDate
+            //    ,@WithdrawnDate
+            //    ,@ObjectedDate
+            //    ,@ConsentedDate
+            //    ,@ConsentValidFromDate
+            //    ,@ConsentValidToDate
+            //    ,@NotificationChargeDate",
+            //    new SqlParameter("@NotificationId", data.NotificationId),
+            //    new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
+            //    new SqlParameter("@CommencementDate", (object)data.CommencementDate ?? DBNull.Value),
+            //    new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
+            //    new SqlParameter("@TransmittedDate", (object)data.TransmittedDate ?? DBNull.Value),
+            //    new SqlParameter("@AcknowledgedDate", (object)data.AcknowledgedDate ?? DBNull.Value),
+            //    new SqlParameter("@WithdrawnDate", (object)data.WithdrawnDate ?? DBNull.Value),
+            //    new SqlParameter("@ObjectedDate", (object)data.ObjectedDate ?? DBNull.Value),
+            //    new SqlParameter("@ConsentedDate", (object)data.ConsentedDate ?? DBNull.Value),
+            //    new SqlParameter("@ConsentValidFromDate", (object)data.ConsentValidFromDate ?? DBNull.Value),
+            //    new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value),
+            //    new SqlParameter("@NotificationChargeDate", (object)data.NotificationChargeDate ?? DBNull.Value));
+
+            var assessment = await notificationAssessmentRepository.GetByNotificationId(data.NotificationId);
+            assessment.UpdateKeyDates(data);
+
+            var consent = await notificationConsentRepository.GetByNotificationId(data.NotificationId);
+
+            if (data.ConsentValidFromDate != null && data.ConsentValidToDate != null)
+            {
+                consent.ConsentRange = new Domain.DateRange(data.ConsentValidFromDate.Value, data.ConsentValidToDate.Value);
+            }
+
+            await context.SaveChangesAsync();
         }
 
         public async Task SetDecisionRequiredByDateForNotification(Guid notificationAssessmentId, DateTime? decisionRequiredByDate)

@@ -24,5 +24,13 @@
             UserId = userId;
             NotificationId = notificationId;
         }
+
+        public void UpdateDateRange(DateTime? fromDate, DateTime? toDate)
+        {
+            if (fromDate != null && toDate != null)
+            {
+                ConsentRange = new DateRange(fromDate.Value, fromDate.Value);
+            }
+        }
     }
 }

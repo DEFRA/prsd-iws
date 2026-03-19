@@ -5,7 +5,7 @@
     using Core.ImportNotificationAssessment;
     using Core.Shared;
     using Decision;
-    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Core.Admin.KeyDates;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -344,6 +344,23 @@
                         NotificationApplicationId));
             }
             Dates.ArchiveReference = reference;
+        }
+
+        public void UpdateKeyDates(KeyDatesOverrideData keyDates)
+        {
+            Dates.NotificationReceivedDate =
+                Dates.NotificationReceivedDate != null ? keyDates.NotificationReceivedDate : Dates.NotificationReceivedDate;
+            Dates.AssessmentStartedDate =
+                Dates.AssessmentStartedDate != null ? keyDates.CommencementDate : Dates.AssessmentStartedDate;
+            Dates.NotificationCompletedDate =
+                Dates.NotificationCompletedDate != null ? keyDates.CompleteDate : Dates.NotificationCompletedDate;
+            Dates.AcknowledgedDate =
+                Dates.AcknowledgedDate != null ? keyDates.AcknowledgedDate : Dates.AcknowledgedDate;
+            Dates.ConsentedDate =
+                Dates.ConsentedDate != null ? keyDates.ConsentedDate : Dates.ConsentedDate;
+
+            Dates.NotificationChargeDate =
+                keyDates.NotificationChargeDate ?? Dates.NotificationChargeDate;
         }
     }
 }
