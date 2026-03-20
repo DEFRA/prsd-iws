@@ -45,6 +45,9 @@
                 return View(model);
             }
 
+            var isRejected = model.ShipmentTypes == ShipmentType.Rejected;
+            var isPartiallyRejected = model.ShipmentTypes == ShipmentType.Partially;
+
             var data = new ImportMovementSummaryData
             {
                 Data = new ImportMovementData
@@ -53,22 +56,24 @@
                     ActualDate = model.ActualShipmentDate.Value,
                     PreNotificationDate = model.PrenotificationDate.HasValue ? model.PrenotificationDate.Value : (DateTime?)null
                 },
-              ReceiptData = new ImportMovementReceiptData
-              {
-                  ReceiptDate = (!model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
-                  ActualQuantity = model.ActualQuantity,
-                  ReceiptUnits = model.Units,
-                  RejectionReason = model.RejectionReason,
-              },                
+                ReceiptData = new ImportMovementReceiptData
+                {
+                    ReceiptDate = (!isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                    ActualQuantity = model.ActualQuantity,
+                    ReceiptUnits = model.Units,
+                    RejectionReason = model.RejectionReason,
+                },
                 HasNoPrenotification = model.PrenotificationDate.HasValue ? false : true,
-                RejectionDate = (model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                RejectionDate = (isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 RecoveryData = new ImportMovementRecoveryData
                 {
                     OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null
                 },
                 Comments = model.Comments,
                 StatsMarking = model.StatsMarking,
-                IsRejected = model.IsRejected,
+                IsReceived = model.ShipmentTypes == ShipmentType.Accepted,
+                IsRejected = isRejected,
+                IsPartiallyRejected = isPartiallyRejected,
                 MovementId = movementId,
                 RejectedQuantity = model.RejectedQuantity,
                 RejectedUnit = model.RejectedUnits

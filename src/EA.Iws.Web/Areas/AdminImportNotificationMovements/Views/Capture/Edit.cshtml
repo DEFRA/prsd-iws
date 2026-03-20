@@ -49,6 +49,13 @@
                     @Html.HiddenFor(m => m.Receipt.RejectedUnits)
                     @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
+
+                    if (Model.ShowShipmentDataOverride)
+                    {
+                        <p>
+                            @Html.ActionLink("Edit receipt data", "Index", "MovementOverride", new { id = Model.NotificationId, movementId = Model.MovementId }, new { @class = "govuk-link" })
+                        </p>
+                    }
                 }
                 else
                 {
@@ -68,19 +75,28 @@
                 {
                     @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
                     @Html.Partial("_OperationReadOnly", Model.Recovery)
+
+                    if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                    {
+                        <hr id="hrAfterRecovery" style="display:none" />
+                    }
+                    else
+                    {
+                        <hr id="hrAfterRecovery" style="display:block" />
+                    }
                 }
                 else if (!Model.IsRejected)
                 {
                     @Html.EditorFor(m => m.Recovery)
-                }
 
-                if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
-                {
-                    <hr id="hrAfterRecovery" style="display:none" />
-                }
-                else
-                {
-                    <hr id="hrAfterRecovery" style="display:block" />
+                    if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                    {
+                        <hr id="hrAfterRecovery" style="display:none" />
+                    }
+                    else
+                    {
+                        <hr id="hrAfterRecovery" style="display:block" />
+                    }
                 }
 
                 if (Model.HasComments)
@@ -106,7 +122,7 @@
 @section scripts {
     @Html.Partial("_Scripts")
 
-<script>
+    <script>
     $(function () {
             var isSaved = @(ViewBag.IsSaved == true ? "true" : "false");
             var isReceived = @(Model.IsReceived ? "true" : "false");
@@ -126,5 +142,5 @@
             }
 
         });
-</script>
+    </script>
 }

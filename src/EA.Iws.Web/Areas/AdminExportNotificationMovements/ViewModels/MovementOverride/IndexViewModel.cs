@@ -31,7 +31,7 @@
         public DateTime? ReceivedDate { get; set; }
 
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(IndexViewModelResources))]
-        public bool WasShipmentAccepted { get; set; }
+        public ShipmentType ShipmentTypes { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(IndexViewModelResources))]
         [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(IndexViewModelResources), IsOptional = true)]
@@ -109,6 +109,8 @@
 
         public IndexViewModel()
         {
+            ShipmentTypes = ShipmentType.Accepted;
+            PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 
         public IndexViewModel(MovementReceiptAndRecoveryData data)
@@ -140,7 +142,6 @@
             ActualQuantity = data.ActualQuantity;
             ReceivedDate = data.ReceiptDate;
             Units = data.ReceiptUnits ?? data.NotificationUnits;
-            WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason);
             RejectionReason = data.RejectionReason;
             PossibleUnits = data.PossibleUnits;
             NotificationType = data.NotificationType;
@@ -149,9 +150,22 @@
             RejectedUnits = data.RejectedUnit;
             IsPartiallyRejected = data.IsPartiallyRejected;
 
-            if (!data.IsReceived && !data.IsRejected && !data.IsPartiallyRejected)
+            // Set ShipmentTypes based on current status
+            if (data.IsReceived)
             {
-                IsReceived = true;
+                ShipmentTypes = ShipmentType.Accepted;
+            }
+            else if (data.IsPartiallyRejected)
+            {
+                ShipmentTypes = ShipmentType.Partially;
+            }
+            else if (data.IsRejected)
+            {
+                ShipmentTypes = ShipmentType.Rejected;
+            }
+            else
+            {
+                ShipmentTypes = ShipmentType.Accepted;
             }
         }
 
@@ -172,27 +186,27 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (ReceivedDate.HasValue && WasShipmentAccepted && !ActualQuantity.HasValue)
+            if (ReceivedDate.HasValue && ShipmentTypes == ShipmentType.Accepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
-            if (IsPartiallyRejected == true && !ActualQuantity.HasValue)
+            if (ShipmentTypes == ShipmentType.Partially && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
-            if ((IsPartiallyRejected == true || IsRejected == true) && !RejectedQuantity.HasValue)
+            if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && !RejectedQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.RejectedQuantityRequired, new[] { "RejectedQuantity" });
             }
 
-            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))
+            if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrEmpty(RejectionReason))
             {
                 yield return new ValidationResult(IndexViewModelResources.RejectionReasonRequired, new[] { "RejectionReason" });
             }
 
-            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
+            if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
             {
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }

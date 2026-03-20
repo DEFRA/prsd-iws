@@ -1,6 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementOverride.IndexViewModel
 @using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.MovementOverride.IndexResources
 @using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement
 
 @{
     ViewBag.Title = Resource.Title;
@@ -18,10 +19,6 @@
                 @Html.HiddenFor(m => m.NotificationType)
                 @Html.HiddenFor(m => m.ShipmentNumber)
                 @Html.HiddenFor(m => m.HasNoPrenotification)
-                @Html.HiddenFor(m => m.WasShipmentAccepted)
-                @Html.HiddenFor(m => m.IsReceived)
-                @Html.HiddenFor(m => m.IsOperationCompleted)
-                @Html.HiddenFor(m => m.IsRejected)
                 @Html.HiddenFor(m => m.IsPartiallyRejected)
                 var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
                 var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
@@ -73,60 +70,59 @@
                             @Html.Gds().TextBoxFor(m => m.ReceivedDate, new { data_datable = "ddmmyy", @class = "form-control-narrow govuk-input govuk-!-width-one-quarter", @Value = Model.ReceivedDate.HasValue ? Model.ReceivedDate.Value.ToString("dd/MM/yy") : Model.ReceivedDate.ToString() })
                         </div>
 
-                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasShipmentAccepted)">
-                            @Html.LabelFor(m => m.WasShipmentAccepted, new { @class = "form-label-bold" })
-                            @Html.Gds().ValidationMessageFor(m => m.WasShipmentAccepted)
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ShipmentTypes)">
                             <fieldset class="govuk-fieldset">
+                                <legend class="govuk-fieldset__legend">
+                                    <label class="form-label-bold">Was the shipment accepted?</label>
+                                </legend>
                                 <div class="govuk-radios" data-module="govuk-radios">
-                                    @if (Model.IsReceived)
-                                    {
-                                        <p>Yes</p>
-                                    }
-                                    else if (Model.IsRejected)
-                                    {
-                                        <p>No</p>
-                                    }
-                                    else if (Model.IsPartiallyRejected)
-                                    {
-                                        <p>Partially</p>
-                                    }
-                                    else
-                                    {
-                                        <div class="govuk-radios__item">
-                                            @Html.RadioButtonFor(m => m.WasShipmentAccepted, true, new { id = "yes", @class = "govuk-radios__input" })
-                                            <label class="govuk-label govuk-radios__label" for="yes">
-                                                Yes
-                                            </label>
-                                        </div>
+                                    <div class="govuk-radios__item">
+                                        @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "ShipmentTypes_Accepted", @class = "govuk-radios__input" })
+                                        <label class="govuk-label govuk-radios__label" for="ShipmentTypes_Accepted">
+                                            Yes
+                                        </label>
+                                    </div>
 
-                                        <div class="govuk-radios__item" data-target="rejected">
-                                            @Html.RadioButtonFor(m => m.WasShipmentAccepted, false, new { id = "partially", @class = "govuk-radios__input" })
-                                            <label class="govuk-label govuk-radios__label" for="partially">
-                                                Partially
-                                            </label>
-                                        </div>
+                                    <div class="govuk-radios__item">
+                                        @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Partially, new { id = "ShipmentTypes_Partially", @class = "govuk-radios__input" })
+                                        <label class="govuk-label govuk-radios__label" for="ShipmentTypes_Partially">
+                                            Partially
+                                        </label>
+                                    </div>
 
-                                        <div class="govuk-radios__item" data-target="rejected">
-                                            @Html.RadioButtonFor(m => m.WasShipmentAccepted, false, new { id = "no", @class = "govuk-radios__input" })
-                                            <label class="govuk-label govuk-radios__label" for="no">
-                                                No
-                                            </label>
-                                        </div>
-                                    }
-                                    <div class="@(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
-                                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
-                                            @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
-                                            @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
-                                            @Html.TextAreaFor(m => m.RejectionReason, new { @class = "govuk-textarea movement-override", rows = 10 })
-                                        </div>
+                                    <div class="govuk-radios__item">
+                                        @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Rejected, new { id = "ShipmentTypes_Rejected", @class = "govuk-radios__input" })
+                                        <label class="govuk-label govuk-radios__label" for="ShipmentTypes_Rejected">
+                                            No
+                                        </label>
                                     </div>
                                 </div>
                             </fieldset>
                         </div>
-                    </div>
-                    if (Model.IsReceived)
-                    {
-                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
+
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvRejectionReason" style="display: @(Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected ? "block" : "none")">
+                            @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                            @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
+                            @Html.TextAreaFor(m => m.RejectionReason, new { @class = "govuk-textarea movement-override", rows = 10 })
+                        </div>
+
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display: @(Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected ? "block" : "none")">
+                            <h3 class="heading-small" style="margin-top: 0">@Resource.RejectedQuantityQuestion</h3>
+                            <p>@Resource.RejectedQuantityHint</p>
+                            @Html.LabelFor(m => m.RejectedQuantity, new { @class = "form-label" })
+                            @Html.Gds().ValidationMessageFor(m => m.RejectedQuantity)
+                            @Html.Gds().ValidationMessageFor(m => m.RejectedUnits)
+                            <div class="grid-row">
+                                <div class="column-third">
+                                    @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
+                                </div>
+                                <div class="column-third">
+                                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "govuk-select" })
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display: @(Model.ShipmentTypes == ShipmentType.Accepted || Model.ShipmentTypes == ShipmentType.Partially ? "block" : "none")">
                             <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
                             <p>@Resource.ActualQuantityHint</p>
                             @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
@@ -145,85 +141,19 @@
                                 </div>
                             </div>
                         </div>
-                    }
-                    else if (Model.IsRejected)
-                    {
-                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
-                            <h3 class="heading-small" style="margin-top: 0">@Resource.RejectedQuantityQuestion</h3>
-                            <p>@Resource.RejectedQuantityHint</p>
-                            @Html.LabelFor(m => m.RejectedQuantity, new { @class = "form-label" })
-                            @Html.Gds().ValidationMessageFor(m => m.RejectedQuantity)
-                            @Html.Gds().ValidationMessageFor(m => m.RejectedUnits)
-                            <div class="grid-row">
-                                <div class="column-third">
-                                    @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
-                                </div>
-                                <div class="column-third">
-                                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "govuk-select" })
-                                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
-                                    {
-                                        @Html.HiddenFor(m => m.PossibleUnits[i])
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    }
-                    else
-                    {
-                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
-                            <h3 class="heading-small" style="margin-top: 0">@Resource.RejectedQuantityQuestion</h3>
-                            <p>@Resource.RejectedQuantityHint</p>
-                            @Html.LabelFor(m => m.RejectedQuantity, new { @class = "form-label" })
-                            @Html.Gds().ValidationMessageFor(m => m.RejectedQuantity)
-                            @Html.Gds().ValidationMessageFor(m => m.RejectedUnits)
-                            <div class="grid-row">
-                                <div class="column-third">
-                                    @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
-                                </div>
-                                <div class="column-third">
-                                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "govuk-select" })
-                                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
-                                    {
-                                        @Html.HiddenFor(m => m.PossibleUnits[i])
-                                    }
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
-                            <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
-                            <p>@Resource.ActualQuantityHint</p>
-                            @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
-                            @Html.Gds().ValidationMessageFor(m => m.ActualQuantity)
-                            @Html.Gds().ValidationMessageFor(m => m.Units)
-                            <div class="grid-row">
-                                <div class="column-third">
-                                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
-                                </div>
-                                <div class="column-third">
-                                    @Html.Gds().DropDownListFor(m => m.Units, Model.UnitSelectList, new { @class = "govuk-select" })
-                                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
-                                    {
-                                        @Html.HiddenFor(m => m.PossibleUnits[i])
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    }
-
-                    <hr />
+                        <hr />
+                    </div>
                 }
-                if (!Model.IsRejected)
-                {
-                    <div>
-                        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Date)">
-                            @Html.LabelFor(m => m.Date, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
-                            @Html.Gds().ValidationMessageFor(m => m.Date)
-                            @Html.Gds().TextBoxFor(m => m.Date, new { data_datable = "ddmmyy", @class = "form-control-narrow govuk-input govuk-!-width-one-quarter", @Value = Model.Date.HasValue ? Model.Date.Value.ToString("dd/MM/yy") : Model.Date.ToString() })
-                        </div>
+
+                <div id="dvRecoveryDate" style="display: @(Model.ShipmentTypes != ShipmentType.Rejected ? "block" : "none")">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Date)">
+                        @Html.LabelFor(m => m.Date, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
+                        @Html.Gds().ValidationMessageFor(m => m.Date)
+                        @Html.Gds().TextBoxFor(m => m.Date, new { data_datable = "ddmmyy", @class = "form-control-narrow govuk-input govuk-!-width-one-quarter", @Value = Model.Date.HasValue ? Model.Date.Value.ToString("dd/MM/yy") : Model.Date.ToString() })
                     </div>
                     <hr />
-                }
+                </div>
 
                 @Html.Partial("_ShipmentComments")
 
@@ -257,10 +187,37 @@
         }
         togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
 
+        function toggleShipmentTypeFields() {
+            var selectedValue = $('input[name="ShipmentTypes"]:checked').val();
+
+            if (selectedValue === 'Accepted') {
+                $('#dvRejectionReason').hide();
+                $('#dvRejectedQuantity').hide();
+                $('#dvActualQuantity').show();
+                $('#dvRecoveryDate').show();
+            } else if (selectedValue === 'Partially') {
+                $('#dvRejectionReason').show();
+                $('#dvRejectedQuantity').show();
+                $('#dvActualQuantity').show();
+                $('#dvRecoveryDate').show();
+            } else if (selectedValue === 'Rejected') {
+                $('#dvRejectionReason').show();
+                $('#dvRejectedQuantity').show();
+                $('#dvActualQuantity').hide();
+                $('#dvRecoveryDate').hide();
+            }
+        }
+
         $(function () {
             $("#HasNoPrenotification").click(function () {
                 togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
             });
+
+            $('input[name="ShipmentTypes"]').change(function () {
+                toggleShipmentTypeFields();
+            });
+
+            toggleShipmentTypeFields();
 
             $('.container').stickem();
         });

@@ -49,6 +49,13 @@
                     @Html.HiddenFor(m => m.Receipt.RejectedUnits)
                     @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
+
+                    if (Model.ShowShipmentDatesOverride)
+                    {
+                        <p>
+                            @Html.ActionLink("Edit receipt data", "Index", "MovementOverride", new { id = Model.NotificationId, movementId = Model.MovementId }, new { @class = "govuk-link" })
+                        </p>
+                    }
                 }
                 else
                 {
