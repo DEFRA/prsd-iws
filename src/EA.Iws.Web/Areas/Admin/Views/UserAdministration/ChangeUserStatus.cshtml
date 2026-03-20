@@ -12,6 +12,7 @@
             <th>@Resources.Name</th>
             <th>@Resources.Role</th>
             <th>@Resources.Status</th>
+            <th style="min-width: 150px;">@Resources.LastLogin</th>
             <th>Action</th>
         </tr>
     </thead>
@@ -23,12 +24,13 @@
                 @Html.AntiForgeryToken()
                 @Html.Hidden("UserId", Model.Users[i].UserId)
 
-                <tr>
-                    <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
-                    <td class="font-xsmall">@Model.Users[i].Role</td>
-                    <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i), @class = "govuk-select" })</td>
-                    <td><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
-                </tr>
+        <tr>
+            <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
+            <td class="font-xsmall">@Model.Users[i].Role</td>
+            <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i), @class = "govuk-select" })</td>
+            <td class="font-xsmall">@(Model.Users[i].LastLoginDate.HasValue ? Model.Users[i].LastLoginDate.Value.ToString("dd MMM yyyy HH:mm") : "")</td>
+            <td><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
+        </tr>
             }
         }
     </tbody>

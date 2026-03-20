@@ -9,5 +9,6 @@
         public string FirstName { get; set; }
         public string Surname { get; set; }
         public Guid? OrganisationId { get; private set; }
+        public DateTime? LastLoginDate { get; set; }
     }
 }

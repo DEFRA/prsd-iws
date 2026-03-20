@@ -21,5 +21,12 @@
                 SELECT * FROM [Notification].[GetPricingInfo] (@NotificationId)",
                 new SqlParameter("@NotificationId", notificationId)).FirstOrDefaultAsync();
         }
+
+        public async Task<PriceAndRefund> GetDraftImportNotificationPrice(Guid notificationId)
+        {
+            return await context.Database.SqlQuery<PriceAndRefund>(@"SELECT * FROM [ImportNotification].[GetDraftPricing] (@NotificationId)",
+                                                                   new SqlParameter("@NotificationId", notificationId))
+                                         .FirstOrDefaultAsync();
+        }
     }
 }

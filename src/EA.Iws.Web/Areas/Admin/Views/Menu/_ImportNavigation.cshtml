@@ -90,7 +90,7 @@
 
 
 	@if (Model.Details.Status == ImportNotificationStatus.Consented || Model.Details.Status == ImportNotificationStatus.ConsentWithdrawn
-					 || Model.Details.Status == ImportNotificationStatus.FileClosed)
+					 || Model.Details.Status == ImportNotificationStatus.FileClosed || Model.Details.Status == ImportNotificationStatus.UnderProhibition)
 	{
 		<li class="@GetClassForSection(ImportNavigationSection.Shipments, "active")">
 			<h3 class="@GetClassForSection(ImportNavigationSection.Shipments, "current")">
