@@ -62,30 +62,6 @@
 
         public async Task SetKeyDatesForNotification(KeyDatesOverrideData data)
         {
-            //await context.Database.ExecuteSqlCommandAsync(@"[ImportNotification].[uspUpdateImportNotificationKeyDates] 
-            //    @NotificationId
-            //    ,@NotificationReceivedDate
-            //    ,@AssessmentStartedDate
-            //    ,@CompleteDate
-            //    ,@AcknowledgedDate
-            //    ,@WithdrawnDate
-            //    ,@ObjectedDate
-            //    ,@ConsentedDate
-            //    ,@ConsentValidFromDate
-            //    ,@ConsentValidToDate
-            //    ,@NotificationChargeDate",
-            //    new SqlParameter("@NotificationId", data.NotificationId),
-            //    new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
-            //    new SqlParameter("@AssessmentStartedDate", (object)data.CommencementDate ?? DBNull.Value),
-            //    new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
-            //    new SqlParameter("@AcknowledgedDate", (object)data.AcknowledgedDate ?? DBNull.Value),
-            //    new SqlParameter("@WithdrawnDate", (object)data.WithdrawnDate ?? DBNull.Value),
-            //    new SqlParameter("@ObjectedDate", (object)data.ObjectedDate ?? DBNull.Value),
-            //    new SqlParameter("@ConsentedDate", (object)data.ConsentedDate ?? DBNull.Value),
-            //    new SqlParameter("@ConsentValidFromDate", (object)data.ConsentValidFromDate ?? DBNull.Value),
-            //    new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value),
-            //    new SqlParameter("@NotificationChargeDate", (object)data.NotificationChargeDate ?? DBNull.Value));
-
             var assessment = await importNotificationAssessmentRepository.GetByNotification(data.NotificationId);
             assessment.UpdateKeyDates(data);
 
