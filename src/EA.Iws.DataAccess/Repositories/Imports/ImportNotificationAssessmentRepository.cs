@@ -88,7 +88,7 @@
         public async Task<DateTime?> GetSubmitedDate(Guid notificationId)
         {
             var assessment = await GetByNotification(notificationId);
-            var submittedStatuses = new List<ImportNotificationStatus> { ImportNotificationStatus.Submitted, ImportNotificationStatus.Resubmitted };
+            var submittedStatuses = new List<ImportNotificationStatus> { ImportNotificationStatus.NotificationReceived, ImportNotificationStatus.Resubmitted };
             var submittedStatusChange = assessment.StatusChanges.Where(x => submittedStatuses.Contains(x.NewStatus))
                 .OrderByDescending(x => x.ChangeDate)
                 .FirstOrDefault();
