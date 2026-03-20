@@ -62,7 +62,7 @@ SELECT
             FROM [Notification].[OperationCodes] OC
             INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
             WHERE OC.NotificationId = N.Id
-            ORDER BY O.Id
+            ORDER BY O.IsInterim DESC, O.Id ASC
             FOR XML PATH('')
             ), 1, 1, '' ) AS OperationCodes,
         I.[Name] AS [ImporterName],
@@ -238,7 +238,7 @@ SELECT
             INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
             LEFT JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
             WHERE WO.ImportNotificationId = N.Id
-            ORDER BY O.Id
+            ORDER BY O.IsInterim DESC, O.Id ASC
             FOR XML PATH('')
             ), 1, 1, '' ) AS OperationCodes,
         I.[Name] AS [ImporterName],
