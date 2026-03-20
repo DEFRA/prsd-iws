@@ -3,6 +3,11 @@
 <div class="overview-block">
     @if (Model.Details.WasteOperation != null && !string.IsNullOrWhiteSpace(Model.Details.WasteOperation.TechnologyEmployed))
     {
+        if (Model.ShowChangeWasteOperationLink)
+        {
+            <div class="change-answer">@Html.ActionLink("Change", "WasteOperation", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
+        }
+
         <div class="overview-block-element">
             @Html.DisplayFor(m => m.Details.WasteOperation.TechnologyEmployed)
         </div>

@@ -53,6 +53,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Everytime\01-Functions\005-ImportNotification.GetDraftPricing.sql" />
+    <Content Include="scripts\TestData\20260311-1739-create-ea-import-notifications-test-data-for-26-27.sql" />
+    <Content Include="scripts\TestData\20260311-1646-create-ea-export-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\Update\0007-Support\20260225-Under-Prohibition-new-status.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0017-uspDeleteExportNotification.sql" />
     <Content Include="scripts\Update\0007-Support\20251126-1353-Message_Banner-Changes.sql" />
@@ -193,6 +196,7 @@
     <Content Include="scripts\Update\0007-Support\20251212-1400-Alter-Country-Macedonia.sql" />
     <Content Include="scripts\Update\0007-Support\20260226-1600-EA-Prices-matrices-for-2026-2027-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20260310-Notification-charge-override.sql" />
+    <Content Include="scripts\Update\0007-Support\20260304-0900-Alter-Identity-AspNetUsers-add-LastLoginDate.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />

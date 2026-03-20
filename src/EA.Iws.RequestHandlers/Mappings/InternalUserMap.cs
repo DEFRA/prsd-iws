@@ -28,7 +28,8 @@
                 Status = source.Status,
                 JobTitle = source.JobTitle,
                 PhoneNumber = source.User.PhoneNumber,
-                Role = UserRole.Internal
+                Role = UserRole.Internal,
+                LastLoginDate = source.User.LastLoginDate
             };
         }
 

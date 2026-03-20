@@ -268,7 +268,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can start creating shipments once your notification has been consented and your financial guarantee is approved..
+        ///   Looks up a localized string similar to The current status of this notification does not allow the pre-notification or inputting of shipment data. Please contact the relevant Competent Authority for assistance..
         /// </summary>
         public static string NoShipmentOptionsText {
             get {
