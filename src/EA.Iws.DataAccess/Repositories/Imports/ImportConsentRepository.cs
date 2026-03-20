@@ -24,8 +24,8 @@
 
         public async Task<ImportConsent> GetByNotificationIdOrDefault(Guid notificationId)
         {
-            var result = await context.ImportConsents.SingleOrDefaultAsync(c => c.NotificationId == notificationId);
-            return result;
+            await authorization.EnsureAccessAsync(notificationId);
+            return await context.ImportConsents.SingleOrDefaultAsync(c => c.NotificationId == notificationId);
         }
     }
 }

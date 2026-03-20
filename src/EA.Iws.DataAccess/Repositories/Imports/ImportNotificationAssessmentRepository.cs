@@ -4,12 +4,9 @@
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
     using Domain.Security;
-    using EA.Iws.Core.NotificationAssessment;
-    using EA.Iws.Domain.NotificationAssessment;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -90,23 +87,13 @@
 
         public async Task<DateTime?> GetSubmitedDate(Guid notificationId)
         {
-            var result = await context.Database.SqlQuery<DateTimeOffset?>(
-                @"
-                SELECT TOP (1)
-                    nsc.ChangeDate AS ChangeDate
-                FROM [ImportNotification].[Notification] N
-                LEFT JOIN [ImportNotification].[NotificationAssessment] na
-                    ON na.NotificationApplicationId = N.Id
-                LEFT JOIN [ImportNotification].[NotificationStatusChange] nsc
-                    ON nsc.NotificationAssessmentId = na.Id
-                LEFT JOIN [Notification].[NotificationDates] nd
-                    ON nd.NotificationAssessmentId = na.Id
-                WHERE N.Id = @notificationId
-                    AND nsc.NewStatus IN (2, 14)
-                ORDER BY nsc.ChangeDate DESC",
-                new SqlParameter("@NotificationId", notificationId)).FirstOrDefaultAsync();
+            var assessment = await GetByNotification(notificationId);
+            var submittedStatuses = new List<ImportNotificationStatus> { ImportNotificationStatus.Submitted, ImportNotificationStatus.Resubmitted };
+            var submittedStatusChange = assessment.StatusChanges.Where(x => submittedStatuses.Contains(x.NewStatus))
+                .OrderByDescending(x => x.ChangeDate)
+                .FirstOrDefault();
 
-            return result?.UtcDateTime;
+            return submittedStatusChange?.ChangeDate.UtcDateTime;
         }
     }
 }
