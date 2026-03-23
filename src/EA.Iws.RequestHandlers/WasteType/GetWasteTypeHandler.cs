@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.WasteType
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.WasteType;
     using DataAccess;

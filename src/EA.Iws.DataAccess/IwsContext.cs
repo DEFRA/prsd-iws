@@ -13,6 +13,7 @@
     using Domain.NotificationAssessment;
     using Domain.NotificationConsent;
     using Domain.TransportRoute;
+    using EA.Iws.Domain.OperationCodes;
     using Mappings.Exports;
     using Prsd.Core.Domain;
     using Prsd.Core.Domain.Auditing;
@@ -54,6 +55,8 @@
         public virtual DbSet<EntryOrExitPoint> EntryOrExitPoints { get; set; }
 
         public virtual DbSet<WasteCode> WasteCodes { get; set; }
+
+        public virtual DbSet<OperationCode> OperationCodes { get; set; }
 
         public virtual DbSet<PricingStructure> PricingStructures { get; set; }
 

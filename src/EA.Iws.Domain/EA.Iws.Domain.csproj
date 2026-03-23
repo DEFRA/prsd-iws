@@ -389,6 +389,8 @@
     <Compile Include="NotificationAssessment\NotificationSubmittedEvent.cs" />
     <Compile Include="NotificationConsent\ConsentNotification.cs" />
     <Compile Include="NotificationConsent\INotificationConsentRepository.cs" />
+    <Compile Include="OperationCodes\IOperationCodeRepository.cs" />
+    <Compile Include="OperationCodes\OperationCode.cs" />
     <Compile Include="Percentage.cs" />
     <Compile Include="NotificationApplication\ProducerBusiness.cs" />
     <Compile Include="Movement\Movement.cs" />

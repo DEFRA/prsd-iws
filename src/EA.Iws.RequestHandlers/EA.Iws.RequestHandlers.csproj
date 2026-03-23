@@ -717,6 +717,7 @@
     <Compile Include="Authorization\AuthorizeActivityHandler.cs" />
     <Compile Include="Notification\GetNotificationTypeHandler.cs" />
     <Compile Include="Notification\SharedUserAdded.cs" />
+    <Compile Include="OperationCodes\GetOperationCodesByNotificationTypeHandler.cs" />
     <Compile Include="SharedUsers\CheckIfSharedUserExistsHandler.cs" />
     <Compile Include="SharedUsers\DeleteSharedUserForNotificationHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />

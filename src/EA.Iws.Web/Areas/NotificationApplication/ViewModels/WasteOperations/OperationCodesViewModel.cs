@@ -2,7 +2,7 @@
 {
     using Core.OperationCodes;
     using Core.Shared;
-  using EA.Iws.Core.Extensions;
+    using EA.Iws.Core.Extensions;
     using EA.Iws.Core.NotificationAssessment;
     using Prsd.Core.Helpers;
     using System.Collections.Generic;
@@ -65,7 +65,7 @@
                 PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
                     .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
                     .ToList();
-            }                
+            }
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -78,5 +78,5 @@
                 yield return new ValidationResult(error, new[] { "PossibleCodes" });
             }
         }
-  }
+    }
 }

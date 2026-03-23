@@ -13,6 +13,7 @@
     using Domain;
     using Domain.NotificationApplication;
     using OI = ObjectInstantiator<Domain.NotificationApplication.NotificationApplication>;
+    using OperationCode = Core.OperationCodes.OperationCode;
 
     public static class NotificationApplicationFactory
     {

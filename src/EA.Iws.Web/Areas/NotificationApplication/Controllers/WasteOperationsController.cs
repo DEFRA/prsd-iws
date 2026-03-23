@@ -40,11 +40,11 @@
         [HttpGet]
         public async Task<ActionResult> RecoveryCodes(Guid id)
         {
-            var selectedCodes =
-                    await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
+            var selectedCodes = await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-            var interimStatus =
-                    await mediator.SendAsync(new GetInterimStatus(id));
+            var interimStatus = await mediator.SendAsync(new GetInterimStatus(id));
+
+            //var operationCodes = await mediator.SendAsync(new GetRecoveryOperationCodes());
 
             var model = new OperationCodesViewModel(NotificationType.Recovery, selectedCodes, interimStatus);
 
@@ -71,7 +71,7 @@
                     existingsCodes.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.RecoveryCodes);
 
-            return backToOverview.GetValueOrDefault() ? 
+            return backToOverview.GetValueOrDefault() ?
                 RedirectToAction("Index", "Home")
                 : RedirectToAction("TechnologyEmployed", "WasteOperations");
         }
@@ -82,7 +82,7 @@
             var selectedCodes =
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
-            var interimStatus = 
+            var interimStatus =
                     await mediator.SendAsync(new GetInterimStatus(id));
 
             var model = new OperationCodesViewModel(NotificationType.Disposal, selectedCodes, interimStatus);
@@ -145,7 +145,7 @@
                     existingTechnologyEmployedData.HasTechnologyEmployed ? NotificationAuditType.Updated : NotificationAuditType.Added,
                     NotificationAuditScreenType.TechnologyEmployed);
 
-            return backToOverview.GetValueOrDefault() ? 
+            return backToOverview.GetValueOrDefault() ?
                 RedirectToAction("Index", "Home")
                 : RedirectToAction("Index", "ReasonForExport");
         }

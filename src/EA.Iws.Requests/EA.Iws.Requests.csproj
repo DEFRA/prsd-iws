@@ -411,6 +411,7 @@
     <Compile Include="Notification\NotificationBasicInformation.cs" />
     <Compile Include="Notification\SubmitNotification.cs" />
     <Compile Include="Notification\WhatToDoNextPaymentData.cs" />
+    <Compile Include="OperationCodes\GetOperationCodesByNotificationType.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUser.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetails.cs" />
     <Compile Include="Carriers\AddCarrierToNotification.cs" />
