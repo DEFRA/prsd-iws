@@ -383,6 +383,7 @@
     <EmbeddedResource Include="Shared\AdditionalChargeDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdditionalChargeDataResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Shared\AddressDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

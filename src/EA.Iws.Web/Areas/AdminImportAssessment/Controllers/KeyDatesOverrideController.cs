@@ -49,6 +49,7 @@
                 DecisionRequiredByDate = model.DecisionRequiredByDate.AsDateTime(),
                 NotificationId = id,
                 NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
+                NotificationChargeDate = model.NotificationChargeDate.AsDateTime(),
                 ObjectedDate = model.ObjectedDate.AsDateTime(),
                 WithdrawnDate = model.WithdrawnDate.AsDateTime()
             };

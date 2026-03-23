@@ -88,5 +88,16 @@
 
             return result;
         }
+
+        public async Task<DateTime?> GetSubmitedDate(Guid notificationId)
+        {
+            var assessment = await GetByNotificationId(notificationId);
+            var submittedStatuses = new List<NotificationStatus> { NotificationStatus.Submitted, NotificationStatus.Resubmitted };
+            var submittedStatusChange = assessment.StatusChanges.Where(x => submittedStatuses.Contains(x.Status))
+                .OrderByDescending(x => x.ChangeDate)
+                .FirstOrDefault();
+
+            return submittedStatusChange?.ChangeDate.UtcDateTime;
+        }
     }
 }

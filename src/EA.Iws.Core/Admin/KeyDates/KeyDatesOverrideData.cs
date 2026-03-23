@@ -8,6 +8,8 @@
 
         public DateTime? NotificationReceivedDate { get; set; }
 
+        public DateTime? NotificationChargeDate { get; set; }
+
         public DateTime? CommencementDate { get; set; }
 
         public DateTime? CompleteDate { get; set; }

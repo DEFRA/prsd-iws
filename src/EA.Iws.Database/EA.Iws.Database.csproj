@@ -195,6 +195,7 @@
     <Content Include="scripts\Update\0007-Support\20251125-1610-Spanish-competent-authority-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20251212-1400-Alter-Country-Macedonia.sql" />
     <Content Include="scripts\Update\0007-Support\20260226-1600-EA-Prices-matrices-for-2026-2027-changes.sql" />
+    <Content Include="scripts\Update\0007-Support\20260310-Notification-charge-override.sql" />
     <Content Include="scripts\Update\0007-Support\20260304-0900-Alter-Identity-AspNetUsers-add-LastLoginDate.sql" />
     <Content Include="scripts\Update\0007-Support\20260319-1550-Alter-lookup-OperationCode-add-IsInterim.sql" />
     <Content Include="scripts\Update\placeholder.txt" />

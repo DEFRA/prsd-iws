@@ -8,6 +8,8 @@
     {
         public DateTime? NotificationReceivedDate { get; internal set; }
 
+        public DateTime? NotificationChargeDate { get; internal set; }
+
         public DateTime? PaymentReceivedDate { get; internal set; }
 
         public DateTime? AssessmentStartedDate { get; internal set; }

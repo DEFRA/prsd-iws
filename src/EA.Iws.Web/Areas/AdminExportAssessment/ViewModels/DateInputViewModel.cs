@@ -15,6 +15,7 @@
         public DateInputViewModel()
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(true);
+            NotificationChargeDate = new OptionalDateInputViewModel(true);
             CommencementDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationTransmittedDate = new OptionalDateInputViewModel(true);
@@ -31,6 +32,7 @@
             CurrentStatus = dates.CurrentStatus;
             NotificationId = dates.NotificationId;
             NotificationReceivedDate = new OptionalDateInputViewModel(dates.NotificationReceivedDate, true);
+            NotificationChargeDate = new OptionalDateInputViewModel(dates.NotificationChargeDate, true);
             PaymentReceivedDate = dates.PaymentReceivedDate;
             PaymentIsComplete = dates.PaymentIsComplete;
             CommencementDate = new OptionalDateInputViewModel(dates.CommencementDate, true);
@@ -53,6 +55,9 @@
 
         [Display(Name = "Notification received")]
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
+
+        [Display(Name = "Notification charge calculation date")]
+        public OptionalDateInputViewModel NotificationChargeDate { get; set; }
 
         [Display(Name = "Payment received")]
         public DateTime? PaymentReceivedDate { get; set; }

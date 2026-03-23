@@ -1,18 +1,36 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
+    using Core.Admin.KeyDates;
+    using Domain.ImportNotificationAssessment;
+    using EA.Iws.Domain.ImportNotification;
+    using EA.Iws.Domain.ImportNotificationAssessment.Consent;
+    using EA.Iws.Domain.ImportNotificationAssessment.Decision;
     using System;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using Core.Admin.KeyDates;
-    using Domain.ImportNotificationAssessment;
 
     internal class KeyDatesOverrideRepository : IKeyDatesOverrideRepository
     {
         private readonly IwsContext context;
+        private readonly ImportNotificationContext importContext;
+        private readonly IImportNotificationAssessmentRepository importNotificationAssessmentRepository;
+        private readonly IImportConsentRepository importConsentRepository;
+        private readonly IImportWithdrawnRepository importWithdrawnRepository;
+        private readonly IImportObjectionRepository importObjectionRepository;
 
-        public KeyDatesOverrideRepository(IwsContext context)
+        public KeyDatesOverrideRepository(IwsContext context,
+            ImportNotificationContext importContext,
+            IImportNotificationAssessmentRepository importNotificationAssessmentRepository,
+            IImportConsentRepository importConsentRepository,
+            IImportWithdrawnRepository importWithdrawnRepository,
+            IImportObjectionRepository importObjectionRepository)
         {
             this.context = context;
+            this.importContext = importContext;
+            this.importNotificationAssessmentRepository = importNotificationAssessmentRepository;
+            this.importConsentRepository = importConsentRepository;
+            this.importWithdrawnRepository = importWithdrawnRepository;
+            this.importObjectionRepository = importObjectionRepository;
         }
 
         public async Task<KeyDatesOverrideData> GetKeyDatesForNotification(Guid notificationId)
@@ -21,6 +39,7 @@
                 SELECT
                     NA.[NotificationApplicationId] AS [NotificationId],
                     D.[NotificationReceivedDate],
+                    D.[NotificationChargeDate],
                     D.[AssessmentStartedDate] AS [CommencementDate],
                     D.[NotificationCompletedDate] AS [CompleteDate],
                     NULL AS [TransmittedDate],
@@ -43,27 +62,22 @@
 
         public async Task SetKeyDatesForNotification(KeyDatesOverrideData data)
         {
-            await context.Database.ExecuteSqlCommandAsync(@"[ImportNotification].[uspUpdateImportNotificationKeyDates] 
-                @NotificationId
-                ,@NotificationReceivedDate
-                ,@AssessmentStartedDate
-                ,@CompleteDate
-                ,@AcknowledgedDate
-                ,@WithdrawnDate
-                ,@ObjectedDate
-                ,@ConsentedDate
-                ,@ConsentValidFromDate
-                ,@ConsentValidToDate",
-                new SqlParameter("@NotificationId", data.NotificationId),
-                new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
-                new SqlParameter("@AssessmentStartedDate", (object)data.CommencementDate ?? DBNull.Value),
-                new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
-                new SqlParameter("@AcknowledgedDate", (object)data.AcknowledgedDate ?? DBNull.Value),
-                new SqlParameter("@WithdrawnDate", (object)data.WithdrawnDate ?? DBNull.Value),
-                new SqlParameter("@ObjectedDate", (object)data.ObjectedDate ?? DBNull.Value),
-                new SqlParameter("@ConsentedDate", (object)data.ConsentedDate ?? DBNull.Value),
-                new SqlParameter("@ConsentValidFromDate", (object)data.ConsentValidFromDate ?? DBNull.Value),
-                new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value));
+            var assessment = await importNotificationAssessmentRepository.GetByNotification(data.NotificationId);
+            assessment.UpdateKeyDates(data);
+
+            var consent = await importConsentRepository.GetByNotificationIdOrDefault(data.NotificationId);
+            if (data.ConsentValidFromDate != null && data.ConsentValidToDate != null)
+            {
+                consent?.UpdateDateRange(data.ConsentValidFromDate.Value, data.ConsentValidToDate.Value);
+            }
+
+            var withdrawn = await importWithdrawnRepository.GetByNotificationIdOrDefault(data.NotificationId);
+            withdrawn?.UpdateDate(data.WithdrawnDate);
+
+            var objection = await importObjectionRepository.GetByNotificationIdOrDefault(data.NotificationId);
+            objection?.UpdateDate(data.ObjectedDate);
+
+            await importContext.SaveChangesAsync();
         }
 
         public async Task SetDecisionRequiredByDateForNotification(Guid notificationAssessmentId, DateTime? decisionRequiredByDate)

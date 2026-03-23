@@ -4,8 +4,6 @@
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
     using Domain.Security;
-    using EA.Iws.Core.NotificationAssessment;
-    using EA.Iws.Domain.NotificationAssessment;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
@@ -85,6 +83,17 @@
             }
 
             return result;
+        }
+
+        public async Task<DateTime?> GetSubmitedDate(Guid notificationId)
+        {
+            var assessment = await GetByNotification(notificationId);
+            var submittedStatuses = new List<ImportNotificationStatus> { ImportNotificationStatus.NotificationReceived, ImportNotificationStatus.Resubmitted };
+            var submittedStatusChange = assessment.StatusChanges.Where(x => submittedStatuses.Contains(x.NewStatus))
+                .OrderByDescending(x => x.ChangeDate)
+                .FirstOrDefault();
+
+            return submittedStatusChange?.ChangeDate.UtcDateTime;
         }
     }
 }
