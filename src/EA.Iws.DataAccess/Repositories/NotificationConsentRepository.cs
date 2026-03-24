@@ -25,7 +25,7 @@
         public async Task<Consent> GetByNotificationId(Guid notificationId)
         {
             await authorization.EnsureAccessAsync(notificationId);
-            return await context.Consents.SingleAsync(c => c.NotificationApplicationId == notificationId);
+            return await context.Consents.SingleOrDefaultAsync(c => c.NotificationApplicationId == notificationId);
         }
     }
 }
