@@ -49,13 +49,6 @@
                     @Html.HiddenFor(m => m.Receipt.RejectedUnits)
                     @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
-
-                    if (Model.ShowShipmentDataOverride)
-                    {
-                        <p>
-                            @Html.ActionLink("Edit receipt data", "Index", "MovementOverride", new { id = Model.NotificationId, movementId = Model.MovementId }, new { @class = "govuk-link" })
-                        </p>
-                    }
                 }
                 else
                 {
@@ -99,14 +92,16 @@
                     }
                 }
 
-                if (Model.HasComments)
+                @* Only show comments section if there are comments or stats marking with values *@
+                if (!string.IsNullOrWhiteSpace(Model.StatsMarking) || !string.IsNullOrWhiteSpace(Model.Comments))
                 {
                     @Html.HiddenFor(m => m.StatsMarking)
                     @Html.HiddenFor(m => m.Comments)
                     @Html.Partial("_CommentsReadOnly")
                 }
-                else
+                else if (!Model.IsReceived && !Model.IsRejected && !Model.IsPartiallyRejected)
                 {
+                    @* Show editable comments only when receipt has not been captured yet *@
                     @Html.Partial("_Comments")
                 }
 

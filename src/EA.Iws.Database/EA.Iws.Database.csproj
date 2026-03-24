@@ -197,6 +197,8 @@
     <Content Include="scripts\Update\0007-Support\20260226-1600-EA-Prices-matrices-for-2026-2027-changes.sql" />
     <Content Include="scripts\Update\0007-Support\20260304-0900-Alter-Identity-AspNetUsers-add-LastLoginDate.sql" />
     <Content Include="scripts\Update\0007-Support\20260319-1550-Alter-lookup-OperationCode-add-IsInterim.sql" />
+    <Content Include="scripts\Update\0007-Support\20260323-1200-Alter-uspUpdateExportMovementData-stored-procedure.sql" />
+    <Content Include="scripts\Update\0007-Support\20260323-1500-Alter-uspUpdateImportMovementData-stored-procedure.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
