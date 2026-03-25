@@ -163,7 +163,9 @@
 
             stateMachine.Configure(MovementStatus.New)
                 .Permit(Trigger.Submit, MovementStatus.Submitted)
-                .Permit(Trigger.ReceiveInternal, MovementStatus.Received);
+                .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
+                .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected)
+                .Permit(Trigger.Reject, MovementStatus.Rejected);
 
             stateMachine.Configure(MovementStatus.Submitted)
                 .OnEntryFrom(submittedTrigger, OnSubmitted)
