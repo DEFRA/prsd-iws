@@ -132,6 +132,18 @@
   <data name="DownloadExcel" xml:space="preserve">
     <value>Download shipment details</value>
   </data>
+  <data name="ErrorConsentDate" xml:space="preserve">
+    <value>consent date exceeded</value>
+  </data>
+  <data name="ErrorEarlyShipment" xml:space="preserve">
+    <value>early shipment</value>
+  </data>
+  <data name="ErrorOverTonnage" xml:space="preserve">
+    <value>over tonnage</value>
+  </data>
+  <data name="ErrorPrenotification" xml:space="preserve">
+    <value>prenotification</value>
+  </data>
   <data name="GoToButtonText" xml:space="preserve">
     <value>Go to notification overview</value>
   </data>

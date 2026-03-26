@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotificationAssessment;
+    using EA.Iws.Requests.ImportNotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
@@ -38,8 +39,9 @@
             var movementData = await mediator.SendAsync(new GetImportMovementsSummary(id));
             var tableData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id, page));
             var canDeleteMovement = await authorizationService.AuthorizeActivity(typeof(DeleteMovement));
+            var keyDates = await mediator.SendAsync(new GetKeyDates(id));
 
-            var model = new MovementSummaryViewModel(movementData, tableData);
+            var model = new MovementSummaryViewModel(movementData, tableData, keyDates);
 
             model.CanDeleteMovement = canDeleteMovement && movementData.NotificationStatus != ImportNotificationStatus.FileClosed;
 

@@ -106,6 +106,42 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to consent date exceeded.
+        /// </summary>
+        public static string ErrorConsentDate {
+            get {
+                return ResourceManager.GetString("ErrorConsentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to early shipment.
+        /// </summary>
+        public static string ErrorEarlyShipment {
+            get {
+                return ResourceManager.GetString("ErrorEarlyShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to over tonnage.
+        /// </summary>
+        public static string ErrorOverTonnage {
+            get {
+                return ResourceManager.GetString("ErrorOverTonnage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to prenotification.
+        /// </summary>
+        public static string ErrorPrenotification {
+            get {
+                return ResourceManager.GetString("ErrorPrenotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification overview.
         /// </summary>
         public static string GoToButtonText {

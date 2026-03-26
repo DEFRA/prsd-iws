@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Core.NotificationAssessment;
+    using EA.Iws.Requests.NotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -37,8 +38,9 @@
 
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status, page));
             var canDeleteMovement = await authorizationService.AuthorizeActivity(typeof(DeleteMovement));
+            var keyDates = await mediator.SendAsync(new GetKeyDatesSummaryInformation(id));
 
-            var model = new MovementSummaryViewModel(id, movementsSummary);
+            var model = new MovementSummaryViewModel(id, movementsSummary, keyDates);
             model.SelectedMovementStatus = (MovementStatus?)status;
             model.CanDeleteMovement = canDeleteMovement && movementsSummary.SummaryData.NotificationStatus != NotificationStatus.FileClosed;
 
