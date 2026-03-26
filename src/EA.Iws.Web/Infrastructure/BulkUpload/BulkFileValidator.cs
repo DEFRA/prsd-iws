@@ -134,7 +134,6 @@
 
         private void RemoveEmptyColumns(DataTable dataTable)
         {
-
             var columnsToRemove = new List<string>();
 
             foreach (DataColumn col in dataTable.Columns)
@@ -148,7 +147,9 @@
                 });
 
                 if (allBlank)
+                {
                     columnsToRemove.Add(col.ColumnName);
+                }
             }
 
             foreach (string colName in columnsToRemove)
