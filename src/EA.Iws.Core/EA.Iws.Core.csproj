@@ -261,6 +261,7 @@
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Reports\Compliance\ComplianceReportDates.cs" />
     <Compile Include="Reports\Compliance\ComplianceTextFields.cs" />
+    <Compile Include="Reports\EAReportList.cs" />
     <Compile Include="Reports\FOI\FOIOutputColumns.cs" />
     <Compile Include="Reports\FOI\FOIReportDates.cs" />
     <Compile Include="Reports\FOI\FOIReportTextFields.cs" />

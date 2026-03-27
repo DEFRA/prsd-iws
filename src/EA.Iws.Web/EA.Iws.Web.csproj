@@ -877,6 +877,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MarkInterimStatusResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\Controllers\EADataReportsController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\EADataReports\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\EADataReports\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\Views\EADataReports\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\DeleteExportNotificationController.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
@@ -908,6 +920,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\AdditionalCharge\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatus.cshtml" />
     <Content Include="Content\iws\_session-timeout.scss" />
+    <Content Include="Areas\Reports\Views\EADataReports\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -5643,6 +5656,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ComplianceGuidanceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\EADataReports\IndexViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
@@ -5683,6 +5700,10 @@
     <EmbeddedResource Include="Areas\Reports\Views\Compliance\ComplianceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ComplianceResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\EADataReports\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
