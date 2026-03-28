@@ -14,18 +14,19 @@
         protected const string ActualSiteOfTreatment = "ActualSite";
         private readonly IList<FacilityViewModel> data;
 
-        public IReadOnlyList<FacilityViewModel> Data 
+        public IReadOnlyList<FacilityViewModel> Data
         {
             get
             {
                 return data.ToList();
-            } 
+            }
         }
 
         public FacilityBlock(IList<MergeField> mergeFields, FacilityCollection facilityCollection)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
 
+            // Facilities are already ordered by OrdinalPosition from the domain.
             var numberOfFacilities = facilityCollection.Facilities.Count();
             data = facilityCollection.Facilities.Select(p => new FacilityViewModel(p, numberOfFacilities)).ToList();
 
@@ -45,34 +46,32 @@
 
             TocText = "Annex " + annexNumber + " - Disposal or recovery facility";
 
-            if (data.Count == 2)
+            // Always display the first facility (by ordinal position) in Block 10
+            // with full name and address, per regulatory requirements.
+            var firstFacility = data[0];
+            MergeFacilityToMainDocument(FacilityViewModel.GetFirstFacilityWithAnnexReference(firstFacility, annexNumber), properties);
+
+            // Remove the first facility so it does not appear again in the annex.
+            data.RemoveAt(0);
+
+            // Find and merge the actual site of treatment into the annex.
+            // If the first facility was also the actual site, it has already been
+            // removed from data, so use the original reference instead.
+            if (firstFacility.IsActualSite)
             {
-                //if the user enters two facilities:
-                //the facility that is the "actual site" goes into an annex
-                //the other site goes onto the notification document in block 10 
-                if (data[0].IsActualSite)
-                {
-                    MergeFacilityToMainDocument(FacilityViewModel.GetSeeAnnexInstructionForFacilityCaseTwoFacilities(data[1], annexNumber), properties);
-                }
-                else
-                {
-                    MergeFacilityToMainDocument(FacilityViewModel.GetSeeAnnexInstructionForFacilityCaseTwoFacilities(data[0], annexNumber), properties);
-                }
+                MergeActualSiteOfTreatmentInAnnex(firstFacility, properties);
             }
             else
             {
-                //The main document should show "See Annex" for all data if there is an annex.
-                MergeFacilityToMainDocument(FacilityViewModel.GetSeeAnnexInstructionForFacility(annexNumber), properties);
+                var indexOfActualSite = data.Where(x => x.IsActualSite).Select(data.IndexOf).Single();
+                MergeActualSiteOfTreatmentInAnnex(data[indexOfActualSite], properties);
+                data.RemoveAt(indexOfActualSite);
             }
-
-            var indexOfActualSite = data.Where(x => x.IsActualSite).Select(data.IndexOf).Single();
-            MergeActualSiteOfTreatmentInAnnex(data[indexOfActualSite], properties);
-            data.RemoveAt(indexOfActualSite);
 
             MergeAnnexNumber(annexNumber);
 
-            //If we only need actual site of treatment in the annex, clear the remaining annex fields and exit at this point.
-            if (data.Count < 2)
+            // If there are no remaining facilities beyond the actual site, clear the table.
+            if (data.Count < 1)
             {
                 ClearMultipleFacilitiesTable();
                 return;
