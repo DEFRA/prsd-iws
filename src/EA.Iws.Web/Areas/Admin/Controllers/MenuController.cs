@@ -33,6 +33,12 @@
         {
             var model = CreateAdminLinksViewModel(section);
 
+            var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
+            if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
+            {
+                model.ShowEAReportLinks = true;
+            }
+
             return PartialView("_HomeNavigation", model);
         }
 

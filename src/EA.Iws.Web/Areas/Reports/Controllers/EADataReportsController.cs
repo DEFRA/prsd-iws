@@ -73,7 +73,7 @@
                 var stream = new MemoryStream(package.GetAsByteArray());
                 var fileName = string.Format("EADataReports-{0}-{1}.xlsx", fromDate.ToShortDateString(), toDate.ToShortDateString());
 
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EADataReports.xlsx");
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
             }
         }
     }
