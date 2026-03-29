@@ -1,15 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
-    using EA.Iws.Core.Admin.Reports;
     using EA.Iws.Requests.Admin.Reports;
-    using EA.Iws.Web.Infrastructure;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
+    using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.EADataReports;
 
-    //[AuthorizeActivity(typeof(GetEADataReport))]
+    [AuthorizeActivity(typeof(GetEADataReport))]
     public class EADataReportsController : Controller
     {
         private readonly IMediator mediator;
@@ -19,7 +19,6 @@
             this.mediator = mediator;
         }
 
-        // GET: Reports/EADataReports
         [HttpGet]
         public ActionResult Index()
         {
@@ -35,16 +34,46 @@
                 return View(model);
             }
 
-            var from = model.From.AsDateTime().Value;
-            var to = model.To.AsDateTime().Value;
+            var fromDate = model.From.AsDateTime().Value;
+            var toDate = model.To.AsDateTime().Value;
+            var reportData = await mediator.SendAsync(new GetEADataReport(fromDate, toDate, model.SelectedValues.ToList()));
 
-            //var report = await mediator.SendAsync(new GetEADataReport(from, to));
+            using (var package = new OfficeOpenXml.ExcelPackage())
+            {
+                foreach (var filename in model.SelectedValues)
+                {
+                    if (filename == Core.Reports.EAReportList.ShipmentReport)
+                    {
+                        var sheet = package.Workbook.Worksheets.Add("Shipment Report");
+                        sheet.Cells["A1"].LoadFromCollection(reportData.ShipmentReportData, true);
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                    }
 
-            //var fileName = string.Format("export-stats-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
+                    if (filename == Core.Reports.EAReportList.FinanceReport)
+                    {
+                        var sheet = package.Workbook.Worksheets.Add("Finance Report");
+                        sheet.Cells["A1"].LoadFromCollection(reportData.FinanceReportData, true);
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                    }
 
-            //return new XlsxActionResult<ExportStatsData>(report, fileName);
+                    if (filename == Core.Reports.EAReportList.ProducerReport)
+                    {
+                        var sheet = package.Workbook.Worksheets.Add("Producer Report");
+                        sheet.Cells["A1"].LoadFromCollection(reportData.ProducerReportData, true);
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                    }
 
-            return null;
+                    if (filename == Core.Reports.EAReportList.FOIReport)
+                    {
+                        var sheet = package.Workbook.Worksheets.Add("FOI Report");
+                        sheet.Cells["A1"].LoadFromCollection(reportData.FreedomOfInformationReportData, true);
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                    }
+                }
+                var stream = new MemoryStream(package.GetAsByteArray());
+
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EADataReports.xlsx");
+            }
         }
     }
 }

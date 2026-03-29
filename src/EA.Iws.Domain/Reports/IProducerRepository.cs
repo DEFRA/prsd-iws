@@ -12,5 +12,7 @@
         Task<IEnumerable<ProducerData>> GetProducerReport(ProducerReportDates dateType, DateTime from, DateTime to,
             ProducerReportTextFields? textFieldType, TextFieldOperator? operatorType, string textSearch,
             UKCompetentAuthority competentAuthority);
+
+        Task<IEnumerable<ProducerData>> GetProducerReport(DateTime fromDate, DateTime toDate);
     }
 }

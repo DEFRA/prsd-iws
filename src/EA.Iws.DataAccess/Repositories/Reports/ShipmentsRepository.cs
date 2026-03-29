@@ -17,7 +17,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, 
+        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority,
             ShipmentsReportDates dateType, ShipmentReportTextFields? textFieldType,
             TextFieldOperator? textFieldOperatorType, string textSearch)
         {
@@ -81,6 +81,58 @@
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Shipment>> GetEAShipmentData(DateTime from, DateTime to)
+        {
+            var query = @"SELECT DISTINCT 
+                            [NotificationNumber],
+                            [ImportOrExport],
+                            [Exporter],
+                            [NotifierCompanyType],
+                            [Importer],
+                            [ConsigneeCompanyType],
+                            [Facility],
+                            [FacilityCompanyType],
+                            [BaselOecdCode],
+                            [ShipmentNumber],
+                            [ActualDateOfShipment],
+                            [ConsentFrom],
+                            [ConsentTo],
+                            [PrenotificationDate],
+                            [ReceivedDate],
+                            [CompletedDate],
+                            [QuantityReceived],
+                            [QuantityReceivedUnitId] AS [Units],
+                            [ChemicalCompositionTypeId],
+                            [ChemicalComposition],
+                            [LocalArea],
+                            [TotalQuantity],
+                            [TotalQuantityUnitsId],
+                            [EntryPort],
+                            [DestinationCountry],
+                            [ExitPort],
+                            [OriginatingCountry],
+                            [Status],
+                            [EwcCodes],
+                            [OperationCodes],
+                            [RejectedQuantity],
+                            [RejectedShipmentDate],
+                            [RejectedReason],
+                            CASE WHEN YCode IS NULL THEN 'NA' ELSE YCode END AS [YCode],
+                            CASE WHEN HCode IS NULL THEN 'NA' ELSE HCode END AS [HCode],
+                            CASE WHEN UNClass IS NULL THEN 'NA' ELSE UNClass END AS [UNClass],
+                            [ActionedByExternalUser]
+                        FROM [Reports].[ShipmentsCache]
+                        WHERE [CompetentAuthorityId] = @ca AND [NotificationReceivedDate] BETWEEN @from AND @to
+                        ORDER BY
+                            [NotificationNumber],
+                            [ShipmentNumber]";
+
+            return await context.Database.SqlQuery<Shipment>(string.Format(query),
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to),
+                new SqlParameter("@ca", (int)UKCompetentAuthority.England)).ToArrayAsync();
         }
     }
 }

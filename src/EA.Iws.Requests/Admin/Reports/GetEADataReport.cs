@@ -1,24 +1,27 @@
 ﻿namespace EA.Iws.Requests.Admin.Reports
 {
+    using EA.Iws.Core.Admin.Reports;
     using EA.Iws.Core.Authorization;
     using EA.Iws.Core.Authorization.Permissions;
+    using EA.Iws.Core.Reports;
+    using EA.Prsd.Core.Mediator;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     [RequestAuthorization(ReportingPermissions.CanViewEADataReport)]
-    public class GetEADataReport
+    public class GetEADataReport : IRequest<EADataReportsData>
     {
-        public GetEADataReport(DateTime @from, DateTime to)
+        public GetEADataReport(DateTime fromDate, DateTime toDate, List<EAReportList> selectedReportList)
         {
-            From = @from;
-            To = to;
+            FromDate = fromDate;
+            ToDate = toDate;
+            SelectedReportList = selectedReportList;
         }
 
-        public DateTime From { get; private set; }
+        public DateTime FromDate { get; private set; }
 
-        public DateTime To { get; private set; }
+        public DateTime ToDate { get; private set; }
+
+        public List<EAReportList> SelectedReportList { get; private set; }
     }
 }

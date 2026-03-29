@@ -34,10 +34,10 @@
 
             EAReportLists = new List<KeyValuePairViewModel<EAReportList, bool>>
             {
-                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.ShipmentReport, false),
-                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FinanceReport, false),
-                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.ProducerReport, false),
-                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FOIReport, false)
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.ShipmentReport, true),
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FinanceReport, true),
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.ProducerReport, true),
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FOIReport, true)
             };
         }
 

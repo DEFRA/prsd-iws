@@ -65,5 +65,33 @@
                 new SqlParameter("@to", to),
                 new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
         }
+
+        public async Task<IEnumerable<ProducerData>> GetProducerReport(DateTime fromDate, DateTime toDate)
+        {
+            var query = @"SELECT DISTINCT
+	                         [NotificationNumber]
+	                        ,[NotifierName]
+	                        ,[ProducerName]
+	                        ,[ProducerAddress1]
+	                        ,[ProducerAddress2]
+	                        ,[ProducerTownOrCity]
+	                        ,[ProducerPostCode]
+	                        ,[SiteOfExport]
+	                        ,[LocalArea]
+	                        ,[WasteType]
+	                        ,[NotificationStatus]
+	                        ,[ConsigneeName]
+                        FROM 
+	                        [Reports].[ProducerCache]
+                        WHERE
+	                        [CompetentAuthorityId] = @competentAuthority AND [NotificationReceivedDate] BETWEEN @from AND @to
+                        ORDER BY
+                            [NotificationNumber]";
+
+            return await context.Database.SqlQuery<ProducerData>(string.Format(query),
+                new SqlParameter("@from", fromDate),
+                new SqlParameter("@to", toDate),
+                new SqlParameter("@competentAuthority", (int)UKCompetentAuthority.England)).ToArrayAsync();
+        }
     }
 }
