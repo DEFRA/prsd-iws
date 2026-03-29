@@ -54,6 +54,10 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="scripts\Everytime\01-Functions\0005-ImportNotification.GetDraftPricing.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0018-uspShipmentReportData.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0019-uspFinanceReportData.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0020-uspuspProducerReportData.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0021-uspFreedomOfInformationReportData.sql" />
     <Content Include="scripts\TestData\20260311-1739-create-ea-import-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\TestData\20260311-1646-create-ea-export-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\Update\0007-Support\20260225-Under-Prohibition-new-status.sql" />

@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
+    using Core.Notification;
+    using Core.Reports;
+    using Domain.Reports;
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using Core.Notification;
-    using Core.Reports;
-    using Domain.Reports;
 
     internal class ShipmentsRepository : IShipmentsRepository
     {
@@ -83,56 +83,13 @@
                 new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }
 
-        public async Task<IEnumerable<Shipment>> GetEAShipmentData(DateTime from, DateTime to)
+        public async Task<IEnumerable<Shipment>> GetEAShipmentData(DateTime fromDate, DateTime toDate)
         {
-            var query = @"SELECT DISTINCT 
-                            [NotificationNumber],
-                            [ImportOrExport],
-                            [Exporter],
-                            [NotifierCompanyType],
-                            [Importer],
-                            [ConsigneeCompanyType],
-                            [Facility],
-                            [FacilityCompanyType],
-                            [BaselOecdCode],
-                            [ShipmentNumber],
-                            [ActualDateOfShipment],
-                            [ConsentFrom],
-                            [ConsentTo],
-                            [PrenotificationDate],
-                            [ReceivedDate],
-                            [CompletedDate],
-                            [QuantityReceived],
-                            [QuantityReceivedUnitId] AS [Units],
-                            [ChemicalCompositionTypeId],
-                            [ChemicalComposition],
-                            [LocalArea],
-                            [TotalQuantity],
-                            [TotalQuantityUnitsId],
-                            [EntryPort],
-                            [DestinationCountry],
-                            [ExitPort],
-                            [OriginatingCountry],
-                            [Status],
-                            [EwcCodes],
-                            [OperationCodes],
-                            [RejectedQuantity],
-                            [RejectedShipmentDate],
-                            [RejectedReason],
-                            CASE WHEN YCode IS NULL THEN 'NA' ELSE YCode END AS [YCode],
-                            CASE WHEN HCode IS NULL THEN 'NA' ELSE HCode END AS [HCode],
-                            CASE WHEN UNClass IS NULL THEN 'NA' ELSE UNClass END AS [UNClass],
-                            [ActionedByExternalUser]
-                        FROM [Reports].[ShipmentsCache]
-                        WHERE [CompetentAuthorityId] = @ca AND [NotificationReceivedDate] BETWEEN @from AND @to
-                        ORDER BY
-                            [NotificationNumber],
-                            [ShipmentNumber]";
-
-            return await context.Database.SqlQuery<Shipment>(string.Format(query),
-                new SqlParameter("@from", from),
-                new SqlParameter("@to", to),
-                new SqlParameter("@ca", (int)UKCompetentAuthority.England)).ToArrayAsync();
+            return await context.Database.SqlQuery<Shipment>(@"[Reports].[uspShipmentReportData] @CompetentAuthority, @FromDate, @ToDate",
+                                                                new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                new SqlParameter("@FromDate", fromDate),
+                                                                new SqlParameter("@ToDate", toDate))
+                                        .ToArrayAsync();
         }
     }
 }

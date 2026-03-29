@@ -66,53 +66,13 @@
                 new SqlParameter("@to", to)).ToArrayAsync();
         }
 
-        public async Task<IEnumerable<FinanceReportData>> GetFinanceReport(DateTime from, DateTime to)
+        public async Task<IEnumerable<FinanceReportData>> GetFinanceReport(DateTime fromDate, DateTime toDate)
         {
-            return await context.Database.SqlQuery<FinanceReportData>(
-                @"SELECT
-                    [NotificationNumber],
-                    [CreatedBy],
-                    [Notifier],
-                    [NotifierAddress],
-                    [NotifierPostalCode],
-                    [Consignee],
-                    [ConsigneeAddress],
-                    [ConsigneePostalCode],
-                    [Facility],
-                    [FacilityAddress],
-                    [FacilityPostalCode],
-                    [ReceivedDate],
-                    [PaymentReceivedDate],
-                    [TotalBillable],
-                    [TotalPaid],
-                    [LatestPaymentDate],
-                    [AmountToRefund],
-                    [TotalRefunded],
-                    [LatestRefundDate],
-                    [IntendedNumberOfShipments],
-                    [IntendedQuantity],
-                    [Units],
-                    [TotalShipmentsMade],
-                    [ImportOrExport],
-                    [NotificationType],
-                    [Preconsented],
-                    [HasMultipleFacilities],
-                    [ConsentFrom],
-                    [ConsentTo],
-                    [Status],
-                    [IsInterim],
-                    [PaymentComments]
-                  FROM
-                    [Reports].[Finance]
-                  WHERE
-                    [CompetentAuthorityId] = @ca
-                  AND
-                    [ReceivedDate] BETWEEN @from AND @to
-                  ORDER BY
-                    [NotificationNumber]",
-                new SqlParameter("@ca", (int)UKCompetentAuthority.England),
-                new SqlParameter("@from", from),
-                new SqlParameter("@to", to)).ToArrayAsync();
+            return await context.Database.SqlQuery<FinanceReportData>(@"[Reports].[uspFinanceReportData] @CompetentAuthority, @FromDate, @ToDate",
+                                                                            new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                            new SqlParameter("@FromDate", fromDate),
+                                                                            new SqlParameter("@ToDate", toDate))
+                                        .ToArrayAsync();
         }
     }
 }
