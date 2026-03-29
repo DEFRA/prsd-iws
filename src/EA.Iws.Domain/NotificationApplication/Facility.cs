@@ -64,6 +64,6 @@
 
         public bool IsActualSiteOfTreatment { get; internal set; }
 
-        public int OrdinalPosition { get; internal set; }
+        public int OrdinalPosition { get; set; }
     }
 }

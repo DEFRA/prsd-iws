@@ -40,7 +40,7 @@
 
         public bool IsActualSiteOfTreatment { get; private set; }
 
-        public int OrdinalPosition { get; internal set; }
+        public int OrdinalPosition { get; set; }
 
         public void UpdateFacilityDetails(Contact contact, string businessName, Address address)
         {
