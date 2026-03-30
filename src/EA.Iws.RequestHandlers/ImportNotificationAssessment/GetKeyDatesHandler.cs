@@ -59,6 +59,8 @@
             return new KeyDatesData
             {
                 NotificationReceived = assessment.Dates.NotificationReceivedDate,
+                NotificationChargeDate = assessment.Dates.NotificationChargeDate ??
+                    await notificationAssessmentRepository.GetSubmitedDate(message.ImportNotificationId),
                 PaymentReceived = paymentReceivedDate,
                 IsPaymentComplete = assessment.Dates.PaymentReceivedDate.HasValue &&
                 await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0),

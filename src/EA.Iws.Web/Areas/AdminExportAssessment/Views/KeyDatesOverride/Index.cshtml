@@ -20,6 +20,12 @@
                 @Html.EditorFor(m => m.NotificationReceivedDate)
             </div>
         }
+                
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NotificationChargeDate) @Html.Gds().FormGroupClass(m => m.NotificationChargeDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
+                @Html.Gds().LabelFor(m => m.NotificationChargeDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.NotificationChargeDate)
+                @Html.EditorFor(m => m.NotificationChargeDate)
+            </div>
 
         @if (Model.CommencementDate.IsCompleted)
         {

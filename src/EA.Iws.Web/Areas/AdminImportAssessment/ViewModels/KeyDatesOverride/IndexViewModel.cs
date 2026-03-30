@@ -9,6 +9,7 @@
         public IndexViewModel()
         {
             NotificationReceivedDate = new DateInputViewmodel(true, false);
+            NotificationChargeDate = new DateInputViewmodel(true, false);
             CommencementDate = new DateInputViewmodel(true, false);
             CompleteDate = new DateInputViewmodel(true, false);
             AcknowledgedDate = new DateInputViewmodel(true, false);
@@ -23,6 +24,7 @@
         public IndexViewModel(KeyDatesOverrideData data)
         {
             NotificationReceivedDate = new DateInputViewmodel(data.NotificationReceivedDate, true, false);
+            NotificationChargeDate = new DateInputViewmodel(data.NotificationChargeDate, true, false);
             CommencementDate = new DateInputViewmodel(data.CommencementDate, true, false);
             CompleteDate = new DateInputViewmodel(data.CompleteDate, true, false);
             AcknowledgedDate = new DateInputViewmodel(data.AcknowledgedDate, true, false);
@@ -36,6 +38,9 @@
 
         [Display(Name = "NotificationReceivedDate", ResourceType = typeof(IndexViewModelResources))]
         public DateInputViewmodel NotificationReceivedDate { get; set; }
+
+        [Display(Name = "NotificationChargeDate", ResourceType = typeof(IndexViewModelResources))]
+        public DateInputViewmodel NotificationChargeDate { get; set; }
 
         [Display(Name = "CommencementDate", ResourceType = typeof(IndexViewModelResources))]
         public DateInputViewmodel CommencementDate { get; set; }

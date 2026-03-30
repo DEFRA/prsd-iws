@@ -91,7 +91,7 @@
             await handler.HandleAsync(receivedEvent);
 
             Assert.Equal(UserId.ToString(),
-                notificationAssessment.StatusChanges.Single(sc => sc.Status == NotificationStatus.Submitted).User.Id);
+                notificationAssessment.StatusChanges.Single(sc => sc.Status == NotificationStatus.Submitted).UserId);
         }
     }
 }

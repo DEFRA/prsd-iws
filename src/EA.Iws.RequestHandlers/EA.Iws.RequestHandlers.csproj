@@ -243,10 +243,12 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationCommentsUsersHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChangesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotificationHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\RemoveImportNotificationUnderProhibitionStatusHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetArchiveReferenceHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
@@ -256,6 +258,7 @@
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDateHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportNotificationUnderProhibitionStatusHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPaymentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationRefundHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\DeleteTransactionHandler.cs" />
@@ -522,12 +525,14 @@
     <Compile Include="NotificationAssessment\GetNotificationCommentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsersHandler.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
+    <Compile Include="NotificationAssessment\GetProhibitionStatusChangesHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfImportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetTransactionByIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitDataHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
+    <Compile Include="NotificationAssessment\RemoveUnderProhibitionStatusHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetFacilityDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
@@ -535,6 +540,7 @@
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetProducerDetailsHandler.cs" />
+    <Compile Include="NotificationAssessment\SetUnderProhibitionStatusHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCodeHandler.cs" />
     <Compile Include="NotificationAssessment\SetOperationCodesHandler.cs" />

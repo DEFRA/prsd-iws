@@ -1,0 +1,215 @@
+﻿GO
+
+IF OBJECT_ID('[ImportNotification].[GetDraftPricing]') IS NULL
+	EXEC('CREATE FUNCTION [ImportNotification].[GetDraftPricing]() RETURNS @PricingInfo TABLE (Price MONEY NULL, PotentialRefund MONEY NULL) AS BEGIN RETURN END;')
+GO
+
+-- =====================================================================
+-- Author:		Sreedhar Bangarugari
+-- Create date:	13/03/2026
+-- Description:	This function to get the Import notification Draft price
+-- =====================================================================
+ALTER FUNCTION [ImportNotification].[GetDraftPricing](@notificationId UNIQUEIDENTIFIER)
+RETURNS @PricingInfo TABLE
+(
+	Price MONEY NULL,
+	PotentialRefund MONEY NULL
+)
+AS
+BEGIN
+
+	DECLARE @numberOfShipments INT;
+	DECLARE @competentAuthority INT;
+	DECLARE @notificationType INT;
+	DECLARE @tradeDirection INT;
+	DECLARE @isInterim BIT;
+	DECLARE @submittedDate DATETIMEOFFSET;
+	DECLARE @chargeDate DATETIMEOFFSET;
+	DECLARE @fixedWasteCategoryFee MONEY;
+	DECLARE @additionalChargeTotal MONEY;
+	DECLARE @wasteComponentFees MONEY;
+
+	SELECT @submittedDate = ChangeDate,
+		   @chargeDate = NotificationChargeDate
+	 FROM (
+		SELECT
+			TOP 1 NSC.ChangeDate,
+				  nd.NotificationChargeDate as NotificationChargeDate
+		FROM 
+			[ImportNotification].[Notification] N
+		LEFT JOIN [ImportNotification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
+		LEFT JOIN [ImportNotification].[NotificationStatusChange] NSC ON NSC.NotificationAssessmentId = NA.Id
+		LEFT JOIN [ImportNotification].[NotificationDates] nd ON nd.NotificationAssessmentId = na.Id
+		WHERE N.Id = @notificationId AND NSC.NewStatus IN (2, 14)
+		ORDER BY 
+			NSC.ChangeDate DESC
+		) AS DATA;
+
+	SELECT @submittedDate = (CASE WHEN @submittedDate IS NULL THEN GETDATE() ELSE @submittedDate END);
+
+	SELECT @chargeDate = (CASE WHEN @chargeDate IS NULL THEN @submittedDate ELSE @chargeDate END);
+
+	SELECT
+		@numberOfShipments = NumberOfShipments,
+		@competentAuthority = CompetentAuthority,
+		@notificationType = NotificationType,
+		@tradeDirection = TradeDirection,
+		@isInterim = CASE WHEN IsInterim IS NOT NULL THEN IsInterim ELSE CASE WHEN NumberOfFacilities > 1 THEN 1 ELSE 0 END END
+	FROM (
+		SELECT
+			N.Id,
+			JSON_VALUE(S.[Value], '$.TotalShipments') AS NumberOfShipments,
+			N.CompetentAuthority,
+			N.NotificationType,
+			2 AS TradeDirection,
+			I.IsInterim,
+			COUNT(I.IsInterim) AS NumberOfFacilities
+		FROM
+			[ImportNotification].[Notification] N
+		INNER JOIN [Draft].[Import] S ON S.ImportNotificationId = N.Id AND S.[Type] = 'EA.Iws.Core.ImportNotification.Draft.Shipment'
+		LEFT JOIN [ImportNotification].[InterimStatus] I ON I.ImportNotificationId = N.Id
+		WHERE N.Id = @notificationId
+		GROUP BY
+			N.Id,
+			JSON_VALUE(S.[Value], '$.TotalShipments'),
+			N.CompetentAuthority,
+			N.NotificationType,
+			I.IsInterim) AS DATA;
+
+	DECLARE @numberOfShipmentsMade INT;
+	SELECT  @numberOfShipmentsMade = COUNT(MovementId) FROM [Reports].[Movements] WHERE NotificationId = @notificationId;
+	DECLARE @activityId UNIQUEIDENTIFIER;
+
+	SELECT
+		@activityId = Id
+	FROM
+		[Lookup].[Activity]
+	WHERE
+		TradeDirection = @tradeDirection AND 
+		NotificationType = @notificationType AND 
+		IsInterim = @isInterim;
+
+	DECLARE @price MONEY;
+	DECLARE @potentialRefund MONEY;
+
+	SELECT TOP 1
+		@price = ps.[Price],
+		@potentialRefund = CASE WHEN @numberOfShipmentsMade > 0 THEN 0 ELSE ps.[PotentialRefund] END
+	FROM
+		[Lookup].[PricingStructure] ps
+	LEFT JOIN 
+		[Lookup].[ShipmentQuantityRange] sqr ON sqr.Id = ps.ShipmentQuantityRangeId
+	WHERE
+		ps.CompetentAuthority = @competentAuthority AND
+		ps.ActivityId = @activityId AND
+		ps.ValidFrom <= @chargeDate AND 
+		(@numberOfShipments >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR @numberOfShipments <= sqr.RangeTo))
+	ORDER BY ValidFrom DESC;
+
+	--Getting Notification Additional charge totals	
+	SET @additionalChargeTotal += ISNULL((SELECT SUM(ChargeAmount) FROM [ImportNotification].[AdditionalCharges] WHERE NotificationId = @notificationId), 0);
+
+	IF @competentAuthority = 1 AND @chargeDate >= '2024-04-01'
+	BEGIN
+		--Use the new fees and logic
+		SET @fixedWasteCategoryFee = (
+		SELECT TOP 1 Price 
+			FROM [Lookup].[PricingFixedFee]
+			WHERE WasteCategoryTypeId IN (
+				SELECT inwt.WasteCategoryType FROM [ImportNotification].[Notification] n
+				LEFT JOIN [ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
+				WHERE n.id = @notificationId) AND CompetentAuthority = @competentAuthority AND ValidFrom <= @chargeDate
+			GROUP BY Price, ValidFrom 
+			ORDER BY ValidFrom DESC)
+
+		IF @fixedWasteCategoryFee > 0
+		BEGIN
+			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
+			INSERT @PricingInfo
+			SELECT @fixedWasteCategoryFee, 0;
+			RETURN;
+		END;
+
+		IF @numberOfShipments > 1000
+		BEGIN
+			DECLARE @hundreds INT
+			SET @hundreds = (@numberOfShipments - 901) / 100
+
+			IF @activityId IN (
+				'F0407E39-C9BA-4519-B659-A4C9010901C7', 'DAF51836-41E0-4324-93AE-A4C9010901C7',
+				'E5D7D07A-1FC3-45AC-AE0F-A4C9010901C7', 'BE00F07B-41E1-4C03-9BB9-A4C9010901C7')
+			BEGIN
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 2 AND ValidFrom <= @chargeDate ORDER BY ValidFrom DESC)
+			END
+
+			IF @activityId IN ('75496653-C767-44D2-AA27-A4C9010901C7', '71CC7688-63D3-4312-BAD2-A4C9010901C7')
+			BEGIN
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 3 AND ValidFrom <= @chargeDate ORDER BY ValidFrom DESC)
+			END
+
+			IF @activityId IN ('12AF7EA4-1E60-4D35-B965-A4C9010901C7', '8385CAD7-E5F0-4765-A46B-A4C9010901C7')
+			BEGIN
+				SET @price += (SELECT TOP 1 [Price] * @hundreds FROM [Lookup].[SystemSettings] WHERE CompetentAuthority = 1 AND PriceType = 4 AND ValidFrom <= @chargeDate ORDER BY ValidFrom DESC)
+			END
+
+			--Refund is the price minus the price for the lowest range
+			--So rather than calculate the refund based on something like the logic above just subtract the price for lowest range from calculated price above
+			SELECT TOP 1
+				@potentialRefund = CASE WHEN @numberOfShipmentsMade > 0 THEN 0 ELSE (@price - ps.Price) END
+			FROM
+				[Lookup].[PricingStructure] ps
+			LEFT JOIN
+				[Lookup].[ShipmentQuantityRange] sqr ON sqr.Id = ps.ShipmentQuantityRangeId
+			WHERE
+				ps.CompetentAuthority = @competentAuthority AND
+				ps.ActivityId = @activityId AND
+				ps.ValidFrom <= @chargeDate AND
+				(1 >= sqr.RangeFrom AND (sqr.RangeTo IS NULL OR 1 <= sqr.RangeTo))
+			ORDER BY ValidFrom DESC;
+		END
+
+		SET @wasteComponentFees = (SELECT TOP 1 SUM(Price) FROM [Lookup].[PricingFixedFee] WHERE WasteComponentTypeId IN (
+			SELECT
+				iwc.WasteComponentType 
+			FROM
+				[ImportNotification].[Notification] n
+			LEFT JOIN
+				[ImportNotification].[WasteComponent] iwc ON iwc.ImportNotificationId = n.Id
+			WHERE n.id = @notificationId) AND ValidFrom <= @chargeDate
+			GROUP BY Price, ValidFrom
+			ORDER BY ValidFrom DESC);
+
+		SELECT @price += ISNULL(@wasteComponentFees, 0);
+	END;
+
+	IF @competentAuthority = 2 AND @chargeDate >= '2024-04-01'
+	BEGIN
+		SET @fixedWasteCategoryFee = (
+		SELECT TOP 1 Price 
+			FROM [Lookup].[PricingFixedFee]
+			WHERE WasteCategoryTypeId IN (
+				SELECT 
+					inwt.WasteCategoryType
+				FROM 
+					[ImportNotification].[Notification] n
+				LEFT JOIN 
+					[ImportNotification].[WasteType] inwt ON inwt.ImportNotificationId = n.Id
+				WHERE n.id = @notificationId) AND CompetentAuthority = @competentAuthority AND ValidFrom <= @chargeDate
+			GROUP BY Price, ValidFrom
+			ORDER BY ValidFrom DESC)
+		
+		IF @fixedWasteCategoryFee > 0
+		BEGIN
+			SELECT @fixedWasteCategoryFee += ISNULL(@additionalChargeTotal, 0);
+			INSERT @PricingInfo
+			SELECT @fixedWasteCategoryFee, 0;
+			RETURN;
+		END;
+	END;
+
+	SELECT @price += ISNULL(@additionalChargeTotal, 0);
+	INSERT @PricingInfo
+	SELECT @price, @potentialRefund;
+
+	RETURN;
+END;

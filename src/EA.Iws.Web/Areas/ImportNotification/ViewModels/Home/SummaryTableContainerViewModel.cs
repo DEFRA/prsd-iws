@@ -32,11 +32,12 @@
         {
             Details = details;
             ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived;
-            ShowChangeNumberOfShipmentsLink = canChangeNumberOfShipments &&
-                                              details.Status == ImportNotificationStatus.Consented;
+            ShowChangeNumberOfShipmentsLink = canChangeNumberOfShipments && details.Status != ImportNotificationStatus.New &&
+                                                                            details.Status != ImportNotificationStatus.NotificationReceived &&
+                                                                            details.Status != ImportNotificationStatus.FileClosed;
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
-                                           details.Status != ImportNotificationStatus.NotificationReceived &&
-                                           details.Status != ImportNotificationStatus.FileClosed;
+                                                                      details.Status != ImportNotificationStatus.NotificationReceived &&
+                                                                      details.Status != ImportNotificationStatus.FileClosed;
             ShowChangeWasteTypesLink = canChangeWasteTypes && EditableStatus(details.Status);
             ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);
             CanEditContactDetails = canEditContactDetails && EditableStatus(details.Status);

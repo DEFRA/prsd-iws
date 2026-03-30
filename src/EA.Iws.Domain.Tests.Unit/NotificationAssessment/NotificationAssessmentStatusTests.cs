@@ -25,6 +25,7 @@
         private DateTime consentedDate = new DateTime(2015, 9, 1);
         private DateTime withdrawnDate = new DateTime(2015, 9, 10);
         private DateTime fileClosedDate = new DateTime(2015, 12, 1);
+        private DateTime underProhibitionDate = new DateTime(2015, 12, 1);
         private static readonly string AnyString = "Where is Wilfred hiding?";
 
         public NotificationAssessmentStatusTests()
@@ -539,6 +540,80 @@
         public void SetArchiveReference_FileClosedDateIsNotSet_Throws()
         {
             Assert.Throws<InvalidOperationException>(() => notificationAssessment.SetArchiveReference("ref"));
+        }
+
+        [Theory]
+        [InlineData(NotificationStatus.NotSubmitted)]
+        [InlineData(NotificationStatus.Submitted)]
+        [InlineData(NotificationStatus.NotificationReceived)]
+        [InlineData(NotificationStatus.InAssessment)]
+        [InlineData(NotificationStatus.ReadyToTransmit)]
+        [InlineData(NotificationStatus.Transmitted)]
+        [InlineData(NotificationStatus.DecisionRequiredBy)]
+        [InlineData(NotificationStatus.Withdrawn)]
+        [InlineData(NotificationStatus.Objected)]
+        [InlineData(NotificationStatus.Consented)]
+        [InlineData(NotificationStatus.ConsentWithdrawn)]
+        [InlineData(NotificationStatus.Unlocked)]
+        [InlineData(NotificationStatus.Reassessment)]
+        [InlineData(NotificationStatus.ConsentedUnlock)]
+        [InlineData(NotificationStatus.Resubmitted)]
+        [InlineData(NotificationStatus.InDetermination)]
+        public void CanUnderProhibitionFromAnyState(NotificationStatus currentStatus)
+        {
+            SetNotificationStatus(currentStatus);
+            notificationAssessment.UnderProhibition(underProhibitionDate);
+
+            Assert.Equal(NotificationStatus.UnderProhibition, notificationAssessment.Status);
+        }
+
+        [Theory]
+        [InlineData(NotificationStatus.NotSubmitted)]
+        [InlineData(NotificationStatus.Submitted)]
+        [InlineData(NotificationStatus.NotificationReceived)]
+        [InlineData(NotificationStatus.InAssessment)]
+        [InlineData(NotificationStatus.ReadyToTransmit)]
+        [InlineData(NotificationStatus.Transmitted)]
+        [InlineData(NotificationStatus.DecisionRequiredBy)]
+        [InlineData(NotificationStatus.Withdrawn)]
+        [InlineData(NotificationStatus.Objected)]
+        [InlineData(NotificationStatus.Consented)]
+        [InlineData(NotificationStatus.ConsentWithdrawn)]
+        [InlineData(NotificationStatus.Unlocked)]
+        [InlineData(NotificationStatus.Reassessment)]
+        [InlineData(NotificationStatus.ConsentedUnlock)]
+        [InlineData(NotificationStatus.Resubmitted)]
+        [InlineData(NotificationStatus.InDetermination)]
+        public void CanLiftProhibitionToAnyStatusFromUnderProhibition(NotificationStatus previousStatus)
+        {
+            SetNotificationStatus(NotificationStatus.UnderProhibition);
+            notificationAssessment.LiftProhibition(underProhibitionDate, previousStatus);
+
+            Assert.Equal(previousStatus, notificationAssessment.Status);
+        }
+
+        [Theory]
+        [InlineData(NotificationStatus.NotSubmitted)]
+        [InlineData(NotificationStatus.Submitted)]
+        [InlineData(NotificationStatus.NotificationReceived)]
+        [InlineData(NotificationStatus.InAssessment)]
+        [InlineData(NotificationStatus.ReadyToTransmit)]
+        [InlineData(NotificationStatus.Transmitted)]
+        [InlineData(NotificationStatus.DecisionRequiredBy)]
+        [InlineData(NotificationStatus.Withdrawn)]
+        [InlineData(NotificationStatus.Objected)]
+        [InlineData(NotificationStatus.Consented)]
+        [InlineData(NotificationStatus.ConsentWithdrawn)]
+        [InlineData(NotificationStatus.Unlocked)]
+        [InlineData(NotificationStatus.Reassessment)]
+        [InlineData(NotificationStatus.ConsentedUnlock)]
+        [InlineData(NotificationStatus.Resubmitted)]
+        [InlineData(NotificationStatus.InDetermination)]
+        public void CanOnlyLiftProhibitionFromUnderProhibition(NotificationStatus currentStatus)
+        {
+            SetNotificationStatus(currentStatus);
+
+            Assert.Throws<InvalidOperationException>(() => notificationAssessment.LiftProhibition(underProhibitionDate, NotificationStatus.Consented));
         }
     }
 }

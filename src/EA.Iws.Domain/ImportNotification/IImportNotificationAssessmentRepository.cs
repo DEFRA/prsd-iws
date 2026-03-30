@@ -1,9 +1,10 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
-    using System;
-    using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
     using ImportNotificationAssessment;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
 
     public interface IImportNotificationAssessmentRepository
     {
@@ -13,8 +14,14 @@
 
         Task<ImportNotificationStatus> GetStatusByNotification(Guid notificationId);
 
+        Task<ImportNotificationStatusChange> GetPreviousStatusChangeByNotification(Guid notificationId);
+
+        Task<List<ImportNotificationStatusChangeData>> GetUnderProhibitionHistory(Guid notificationId);
+
         void Add(ImportNotificationAssessment assessment);
 
         Task<DateTime?> GetConsentedDate(Guid notificationId);
+
+        Task<DateTime?> GetSubmitedDate(Guid notificationId);
     }
 }

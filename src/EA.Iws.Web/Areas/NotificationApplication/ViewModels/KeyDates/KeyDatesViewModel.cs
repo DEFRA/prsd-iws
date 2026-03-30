@@ -9,6 +9,7 @@
         public KeyDatesViewModel(NotificationDatesData dates)
         {
             NotificationReceivedDate = dates.NotificationReceivedDate;
+            NotificationChargeDate = dates.NotificationChargeDate;
             PaymentReceivedDate = dates.PaymentReceivedDate;
             CommencementDate = dates.CommencementDate;
             CompletedDate = dates.CompletedDate;
@@ -25,6 +26,8 @@
         public Guid NotificationId { get; set; }
 
         public DateTime? NotificationReceivedDate { get; set; }
+
+        public DateTime? NotificationChargeDate { get; set; }
 
         public DateTime? PaymentReceivedDate { get; set; }
 

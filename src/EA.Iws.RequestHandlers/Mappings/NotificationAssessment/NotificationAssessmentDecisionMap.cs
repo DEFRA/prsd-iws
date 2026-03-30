@@ -32,7 +32,8 @@
                 AcknowledgedOnDate = source.Dates.AcknowledgedDate.GetValueOrDefault(),
                 IsPreconsented = Task.Run(() => facilityRepository.GetByNotificationId(source.NotificationApplicationId)).Result.AllFacilitiesPreconsented.GetValueOrDefault(),
                 ConsentedDate = source.Dates.ConsentedDate,
-                NotificationReceivedDate = source.Dates.NotificationReceivedDate
+                NotificationReceivedDate = source.Dates.NotificationReceivedDate,
+                NotificationChargeDate = source.Dates.NotificationChargeDate
             };
 
             return data;

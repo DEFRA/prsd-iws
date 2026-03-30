@@ -32,9 +32,18 @@
         {
             var shipment = await shipmentRepository.GetByNotificationIdOrDefault(importNotificationId);
 
+            //If the shipment is null, it means the import notification is in draft status.
             if (shipment == null)
             {
-                return 0;
+                try
+                {
+                    return await GetDraftPrice(importNotificationId);
+                }
+                catch
+                {
+                    //If the import notification is incomplete (shipment quantity or type missing), the get price function should return 0.
+                    return 0;
+                }
             }
 
             var numberOfShipments = shipment.NumberOfShipments;
@@ -74,6 +83,17 @@
             }
 
             return res.Price;
+        }
+
+        private async Task<decimal> GetDraftPrice(Guid importNotificationId)
+        {
+            var result = await priceRepository.GetDraftImportNotificationPrice(importNotificationId);
+            if (result == null)
+            {
+                throw new Exception("GetDraftImportNotificationPrice(" + importNotificationId + ") failed, please investigate");
+            }
+
+            return result.Price;
         }
     }
 }

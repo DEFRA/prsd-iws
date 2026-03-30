@@ -43,7 +43,7 @@
 
             if (message.OldNumberOfShipments != message.NewNumberOfShipments)
             {
-                notificationAssesmentInfo.AddStatusChangeRecord(new NotificationStatusChange(Core.NotificationAssessment.NotificationStatus.Resubmitted, user));
+                notificationAssesmentInfo.AddStatusChangeRecord(new NotificationStatusChange(Core.NotificationAssessment.NotificationStatus.Resubmitted, user.Id));
             }
 
             await context.SaveChangesAsync();

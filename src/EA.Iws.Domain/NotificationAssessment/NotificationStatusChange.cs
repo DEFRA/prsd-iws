@@ -11,18 +11,16 @@
         {
         }
 
-        public NotificationStatusChange(NotificationStatus status, User user)
+        public NotificationStatusChange(NotificationStatus status, string userId)
         {
-            Guard.ArgumentNotNull(() => user, user);
-
-            User = user;
+            UserId = userId;
             Status = status;
             ChangeDate = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
         }
 
         public NotificationStatus Status { get; private set; }
 
-        public User User { get; private set; }
+        public string UserId { get; private set; }
 
         public DateTimeOffset ChangeDate { get; private set; }
     }

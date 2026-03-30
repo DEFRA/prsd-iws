@@ -13,7 +13,9 @@ ALTER PROCEDURE [Notification].[uspUpdateExportNotificationKeyDates]
     @ObjectedDate DATE,
     @ConsentedDate DATE,
     @ConsentValidFromDate DATE,
-    @ConsentValidToDate DATE
+    @ConsentValidToDate DATE,
+    @NotificationChargeDate DATE
+
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -33,6 +35,7 @@ BEGIN
           ,[WithdrawnDate] = CASE WHEN [WithdrawnDate] IS NULL THEN NULL ELSE ISNULL(@WithdrawnDate, [WithdrawnDate]) END
           ,[ObjectedDate] = CASE WHEN [ObjectedDate] IS NULL THEN NULL ELSE ISNULL(@ObjectedDate, [ObjectedDate]) END
           ,[ConsentedDate] = CASE WHEN [ConsentedDate] IS NULL THEN NULL ELSE ISNULL(@ConsentedDate, [ConsentedDate]) END
+          ,[NotificationChargeDate] = ISNULL(@NotificationChargeDate, [NotificationChargeDate])
      WHERE [NotificationAssessmentId] = @NotificationAssessmentId;
 
      UPDATE [Notification].[Consent]

@@ -9,7 +9,7 @@ AS
         STUFF(( SELECT ', ' + OC.Name AS [text()]
                FROM [Reports].[OperationCodes] OC
                WHERE OC.NotificationId = O.NotificationId
-               ORDER BY OC.OperationCodeId
+               ORDER BY OC.IsInterim DESC, OC.OperationCodeId ASC
                FOR XML PATH('')
              ), 1, 1, '' ) AS OperationCodes
     FROM ( SELECT DISTINCT NotificationId FROM [Reports].[OperationCodes] ) O

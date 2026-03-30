@@ -58,12 +58,7 @@
         {
             get
             {
-                return new SelectList(new[]
-                {
-                    "Illegal Shipment",
-                    "Did not proceed as intended",
-                    "Accident occurred during transport"
-                });
+                return new SelectList(EnumHelper.GetValues(typeof(StatsMarking)), dataTextField: "Value", dataValueField: "Value");
             }
         }
 
@@ -216,6 +211,12 @@
             if (!Receipt.ActualQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Partially)
             {
                 yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+            }
+
+            if (Receipt.ActualQuantity.HasValue && Receipt.RejectedQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Partially
+                && Receipt.ActualQuantity <= Receipt.RejectedQuantity)
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.RejectQuantityMoreThanActualQuantity, new[] { "Receipt.RejectedQuantity" });
             }
 
             if ((!Receipt.RejectedQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Rejected) ||

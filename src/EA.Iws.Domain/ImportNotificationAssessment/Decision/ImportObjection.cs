@@ -18,6 +18,14 @@
             Reasons = reasons;
         }
 
+        public void UpdateDate(DateTime? date)
+        {
+            if (Date != null)
+            {
+                Date = date ?? Date;
+            }
+        }
+
         private ImportObjection()
         {
         }

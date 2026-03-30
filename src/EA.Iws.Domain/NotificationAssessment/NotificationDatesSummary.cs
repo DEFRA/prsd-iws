@@ -9,6 +9,8 @@
 
         public DateTime? NotificationReceivedDate { get; private set; }
 
+        public DateTime? NotificationChargeDate { get; private set; }
+
         public Guid NotificationId { get; private set; }
 
         public DateTime? PaymentReceivedDate { get; private set; }
@@ -34,6 +36,7 @@
         public static NotificationDatesSummary Load(
             NotificationStatus currentStatus,
             DateTime? notificationReceivedDate,
+            DateTime? notificationChargeDate,
             Guid notificationId,
             DateTime? paymentReceivedDate,
             bool paymentIsComplete,
@@ -50,6 +53,7 @@
             {
                 CurrentStatus = currentStatus,
                 NotificationReceivedDate = notificationReceivedDate,
+                NotificationChargeDate = notificationChargeDate,
                 NotificationId = notificationId,
                 PaymentReceivedDate = paymentReceivedDate,
                 PaymentIsComplete = paymentIsComplete,

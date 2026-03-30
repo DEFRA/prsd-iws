@@ -125,6 +125,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDatesOverride {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification charge calculation date.
+        /// </summary>
+        public static string NotificationChargeDate {
+            get {
+                return ResourceManager.GetString("NotificationChargeDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification received.
         /// </summary>
         public static string NotificationReceivedDate {

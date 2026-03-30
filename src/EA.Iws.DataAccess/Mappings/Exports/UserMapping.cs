@@ -13,6 +13,7 @@
             Property(x => x.Surname).IsRequired().HasMaxLength(256);
             Property(x => x.Email).IsRequired().HasMaxLength(256);
             Property(x => x.PhoneNumber).IsOptional();
+            Property(x => x.LastLoginDate).IsOptional();
         }
     }
 }

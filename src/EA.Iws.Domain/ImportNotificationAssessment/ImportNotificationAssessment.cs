@@ -1,17 +1,18 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using Consent;
     using Core.Admin;
     using Core.ImportNotificationAssessment;
     using Core.Shared;
     using Decision;
+    using EA.Iws.Core.Admin.KeyDates;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class ImportNotificationAssessment : Entity
     {
@@ -27,7 +28,9 @@
             WithdrawConsent = 8,
             Object = 9,
             Withdraw = 10,
-            FileClosed = 11
+            FileClosed = 11,
+            UnderProhibition = 12,
+            LiftProhibition = 13
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -47,6 +50,8 @@
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgeTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, ImportNotificationStatus> fileClosedTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> underProhibitionTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, ImportNotificationStatus> liftProhibitionTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -90,64 +95,86 @@
             consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
             fileClosedTrigger = stateMachine.SetTriggerParameters<DateTime, ImportNotificationStatus>(Trigger.FileClosed);
+            underProhibitionTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.UnderProhibition);
+            liftProhibitionTrigger = stateMachine.SetTriggerParameters<DateTime, ImportNotificationStatus>(Trigger.LiftProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.New)
-                .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
+                .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.NotificationReceived)
                 .OnEntryFrom(receivedTrigger, OnReceived)
                 .Permit(Trigger.Submit, ImportNotificationStatus.AwaitingPayment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
+
+            stateMachine.Configure(ImportNotificationStatus.Submitted)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
+
+            stateMachine.Configure(ImportNotificationStatus.Resubmitted)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingPayment)
                 .SubstateOf(ImportNotificationStatus.Submitted)
                 .Permit(Trigger.FullyPaid, ImportNotificationStatus.AwaitingAssessment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingAssessment)
                 .SubstateOf(ImportNotificationStatus.Submitted)
                 .OnEntryFrom(fullyPaidTrigger, OnFullyPaid)
                 .Permit(Trigger.BeginAssessment, ImportNotificationStatus.InAssessment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
             
             stateMachine.Configure(ImportNotificationStatus.InAssessment)
                 .OnEntryFrom(beginAssessmentTrigger, OnAssessmentStarted)
                 .Permit(Trigger.CompleteNotification, ImportNotificationStatus.ReadyToAcknowledge)
                 .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn);
+                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.ReadyToAcknowledge)
                 .OnEntryFrom(completeNotificationTrigger, OnNotificationCompleted)
                 .Permit(Trigger.Acknowledge, ImportNotificationStatus.DecisionRequiredBy)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.DecisionRequiredBy)
                 .OnEntryFrom(acknowledgeTrigger, OnAcknowledged)
                 .Permit(Trigger.Consent, ImportNotificationStatus.Consented)
                 .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn);
+                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.Consented)
                 .OnEntryFrom(consentedTrigger, OnConsented)
                 .Permit(Trigger.WithdrawConsent, ImportNotificationStatus.ConsentWithdrawn)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.ConsentWithdrawn)
                 .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.Objected)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed)
+                .Permit(Trigger.UnderProhibition, ImportNotificationStatus.UnderProhibition);
 
             stateMachine.Configure(ImportNotificationStatus.FileClosed)
                 .OnEntryFrom(fileClosedTrigger, OnFileClosed);
+
+            stateMachine.Configure(ImportNotificationStatus.UnderProhibition)
+                .PermitDynamic(liftProhibitionTrigger, (date, previousStatus) => previousStatus);
 
             return stateMachine;
         }
@@ -198,6 +225,11 @@
                 StatusChangeCollection = new List<ImportNotificationStatusChange>();
             }
 
+            if (statusChange.NewStatus == ImportNotificationStatus.Resubmitted)
+            {
+                OnResubmit(statusChange.ChangeDate.UtcDateTime);
+            }
+
             StatusChangeCollection.Add(statusChange);
         }
 
@@ -215,6 +247,11 @@
         {
             Dates.FileClosedDate = fileClosedDate;
             Dates.StatusAtFileClosed = statusAtFileClosed;
+        }
+
+        private void OnResubmit(DateTime resubmitDate)
+        {
+            Dates.NotificationChargeDate = resubmitDate;
         }
 
         public void Submit()
@@ -247,6 +284,16 @@
         public void WithdrawConsent(DateTime withdrawalDate, string reasonsForWithdrawal)
         {
             stateMachine.Fire(withdrawConsentTrigger, withdrawalDate, reasonsForWithdrawal);
+        }
+
+        public void UnderProhibition(DateTime date)
+        {
+            stateMachine.Fire(underProhibitionTrigger, date);
+        }
+
+        public void LiftProhibition(DateTime date, ImportNotificationStatus previousStatus)
+        {
+            stateMachine.Fire(liftProhibitionTrigger, date, previousStatus);
         }
 
         public IEnumerable<DecisionType> GetAvailableDecisions()
@@ -297,6 +344,23 @@
                         NotificationApplicationId));
             }
             Dates.ArchiveReference = reference;
+        }
+
+        public void UpdateKeyDates(KeyDatesOverrideData keyDates)
+        {
+            Dates.NotificationReceivedDate =
+                Dates.NotificationReceivedDate != null ? keyDates.NotificationReceivedDate : Dates.NotificationReceivedDate;
+            Dates.AssessmentStartedDate =
+                Dates.AssessmentStartedDate != null ? keyDates.CommencementDate : Dates.AssessmentStartedDate;
+            Dates.NotificationCompletedDate =
+                Dates.NotificationCompletedDate != null ? keyDates.CompleteDate : Dates.NotificationCompletedDate;
+            Dates.AcknowledgedDate =
+                Dates.AcknowledgedDate != null ? keyDates.AcknowledgedDate : Dates.AcknowledgedDate;
+            Dates.ConsentedDate =
+                Dates.ConsentedDate != null ? keyDates.ConsentedDate : Dates.ConsentedDate;
+
+            Dates.NotificationChargeDate =
+                keyDates.NotificationChargeDate ?? Dates.NotificationChargeDate;
         }
     }
 }
