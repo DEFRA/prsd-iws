@@ -107,7 +107,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank Guarantee template.
+        ///   Looks up a localized string similar to Financial Guarantee template.
         /// </summary>
         public static string SepaDownloadBankLink {
             get {

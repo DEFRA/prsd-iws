@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes
 {
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using EA.Iws.Core.Notification.Overview;
+    using EA.Iws.Core.Extensions;
+    using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.OperationCodes;
     using EA.Iws.Core.Shared;
     using EA.Iws.Web.ViewModels.Shared;
     using EA.Prsd.Core.Helpers;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using Web.Areas.AdminExportAssessment.Views.OperationCodes;
 
     public class OperationCodesViewModel : IValidatableObject
@@ -57,12 +58,23 @@
         {
         }
 
-        public OperationCodesViewModel(NotificationType type, IEnumerable<OperationCode> selectedCodes)
+        public OperationCodesViewModel(NotificationType type, IEnumerable<OperationCode> selectedCodes, InterimStatus interimStatus)
         {
             this.NotificationType = type;
-            PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
+
+            if (interimStatus.IsInterim ?? false)
+            {
+                PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
+                                .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
+                                .OrderByInterimsFirst(x => x.Key)
+                                .ToList();
+            }
+            else
+            {
+                PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
                 .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
                 .ToList();
+            }            
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

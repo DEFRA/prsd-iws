@@ -69,6 +69,7 @@
     <Compile Include="Documents\BulkType.cs" />
     <Compile Include="Documents\FileUploadType.cs" />
     <Compile Include="Extensions\Extensions.cs" />
+    <Compile Include="Extensions\OrderingExtension.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />
@@ -127,10 +128,12 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AvailableDecisionsData.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportInterimStatus.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsUsersData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeData.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
     <Compile Include="ImportNotificationMovements\MovementsSummary.cs" />
@@ -239,6 +242,7 @@
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
     <Compile Include="NotificationAssessment\NotificationCommentsUsersData.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatusChangeData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="Notification\AdditionalCharge\AdditionalChargeType.cs" />
     <Compile Include="Notification\AdditionalCharge\NotificationAdditionalChargeForDisplay.cs" />
@@ -248,6 +252,7 @@
     <Compile Include="Notification\Audit\NotificationAuditScreenType.cs" />
     <Compile Include="Notification\Audit\NotificationAuditTable.cs" />
     <Compile Include="Notification\Audit\NotificationAuditType.cs" />
+    <Compile Include="Notification\DeleteExportNotificationDetails.cs" />
     <Compile Include="Notification\NotificationSharedUser.cs" />
     <Compile Include="Notification\NotificationSharedUserHistory.cs" />
     <Compile Include="Notification\UserNotificationsSummary.cs" />
@@ -378,6 +383,7 @@
     <EmbeddedResource Include="Shared\AdditionalChargeDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdditionalChargeDataResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Shared\AddressDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

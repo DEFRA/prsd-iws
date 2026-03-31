@@ -25,5 +25,7 @@
         public DateTime? ConsentedDate { get; set; }
 
         public DateTime? NotificationReceivedDate { get; set; }
+
+        public DateTime? NotificationChargeDate { get; set; }
     }
 }

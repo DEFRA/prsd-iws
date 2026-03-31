@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteGenerationProcess 
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I will provide the detail in a separate document with my submission.
+        ///   Looks up a localized string similar to I&apos;ll upload this information using the ‘Upload annexes and extra information’ link after I submit this notification..
         /// </summary>
         public static string Detail {
             get {

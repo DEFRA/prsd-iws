@@ -286,6 +286,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Outcome.
+        /// </summary>
+        public static string SummaryTitleAccepted {
+            get {
+                return ResourceManager.GetString("SummaryTitleAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active loads permitted:.
         /// </summary>
         public static string SummaryTitleActive {

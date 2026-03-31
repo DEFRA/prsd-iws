@@ -8,6 +8,8 @@
 
         public DateTime? NotificationReceivedDate { get; set; }
 
+        public DateTime? NotificationChargeDate { get; set; }
+
         public Guid NotificationId { get; set; }
 
         public DateTime? PaymentReceivedDate { get; set; }

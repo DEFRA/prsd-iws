@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Validate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please note: Once you’ve submitted this import notification, you won’t be able to edit the data..
+        ///   Looks up a localized string similar to .
         /// </summary>
         public static string GuidanceComplete {
             get {

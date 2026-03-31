@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Search;
     using Requests.NotificationAssessment;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Home;
 
     [AuthorizeActivity(typeof(GetNotificationAttentionSummary))]
@@ -25,7 +26,7 @@
             {
                 AttentionSummaryTable = await mediator.SendAsync(new GetNotificationAttentionSummary())
             };
-            
+
             return View(model);
         }
 
@@ -35,15 +36,30 @@
         {
             var searchResults = await mediator.SendAsync(model.ToRequest());
             var importSearchResults = await mediator.SendAsync(new SearchImportNotifications(model.SearchTerm));
+            var searchNotificationNumber = string.IsNullOrEmpty(model.SearchTerm) ? string.Empty : model.SearchTerm.ToLower().Replace(" ", string.Empty);
 
-            if (searchResults != null)
+            if (searchResults != null && searchResults.Count() != 0)
             {
                 model.ExportSearchResults = searchResults;
+
+                if (searchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty).Equals(searchNotificationNumber))
+                {
+                    return RedirectToAction(actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = searchResults.First().Id, area = "AdminExportAssessment" });
+                }
             }
 
-            if (importSearchResults != null)
+            if (importSearchResults != null && importSearchResults.Count() != 0)
             {
                 model.ImportSearchResults = importSearchResults;
+
+                if (importSearchResults.FirstOrDefault().NotificationNumber.ToLower().Replace(" ", string.Empty).Equals(searchNotificationNumber))
+                {
+                    return RedirectToAction(actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = importSearchResults.First().Id, area = "ImportNotification" });
+                }
             }
 
             model.HasSearched = true;

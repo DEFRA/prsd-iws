@@ -24,13 +24,15 @@
 }
 else
 {
-    <p class="text">
-        @Resource.SepaPreLinkText
-        @Html.ActionLink(Resource.SepaDownloadBankLink, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-        @Resource.Or
-        @Html.ActionLink(Resource.SepaDownloadParentLink, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
-        @Resource.SepaPostLinkText
-    </p>
+<p class="text">
+    @Resource.SepaPreLinkText
+    @Resource.SepaDownloadBankLink
+    @Resource.Or
+    @Resource.SepaDownloadParentLink
+    @Resource.SepaPostLinkText
+    <br />
+    The templates can be viewed and downloaded directly from the SEPA website.
+</p>
 }
 
 @Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "govuk-button" })

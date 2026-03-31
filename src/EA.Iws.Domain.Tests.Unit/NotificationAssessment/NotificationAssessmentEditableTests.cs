@@ -40,6 +40,7 @@
         [InlineData(NotificationStatus.ReadyToTransmit)]
         [InlineData(NotificationStatus.Transmitted)]
         [InlineData(NotificationStatus.DecisionRequiredBy)]
+        [InlineData(NotificationStatus.UnderProhibition)]
         public void CanNotEditNotification(NotificationStatus status)
         {
             SetNotificationStatus(status);

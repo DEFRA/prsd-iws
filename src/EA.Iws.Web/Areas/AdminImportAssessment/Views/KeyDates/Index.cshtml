@@ -15,208 +15,282 @@
 <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 <div>
-    @Resource.FirstParagraph
 
-    <table title="Assessment dates currently recorded">
-        <tr>
-            <th>@Resource.DateNameColumnHeader</th>
-            <th>@Resource.DateColumnHeader</th>
-            <th>@Resource.LinkColumnHeader</th>
-        </tr>
-        <tr>
-            <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
-            <td>
-                @if (Model.NotificationReceivedDate.IsCompleted)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td>
-            </td>
-        </tr>
 
-        <tr>
-            <td>
-                Interim or non-interim
-            </td>
-            <td>
-                @if (Model.IsInterim)
-                {
-                    <text>Interim</text>
-                }
-                else
-                {
-                    <text>Non-interim</text>
-                }
-            </td>
-            <td></td>
-        </tr>
 
-        <tr>
-            <td>Payment received</td>
-            <td>
-                @if (Model.PaymentReceivedDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+    <div class="govuk-form-group">
 
-                    var text = string.Empty;
-
-                    if(!Model.PaymentIsComplete)
-                    {
-                        text = " (partial payment)";
-                        @text
-                    }
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Assessment started</td>
-            <td>
-                @if (Model.AssessmentStartedDate.IsCompleted)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.AssessmentStartedDate.AsDateTime().GetValueOrDefault())
-                    @byText
-                    @Html.DisplayFor(m => m.NameOfOfficer)
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td>
-                @if (Model.PaymentIsComplete && !Model.AssessmentStartedDate.IsCompleted)
-                {
-                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null)
-                }
-            </td>
-
-        </tr>
-
-        <tr>
-            <td>Notification complete</td>
-            <td>
-                @if (Model.NotificationCompleteDate.IsCompleted)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td>
-                @if (Model.AssessmentStartedDate.IsCompleted && !Model.NotificationCompleteDate.IsCompleted)
-                {
-                    if (!Model.IsAreaAssigned && Model.CompetentAuthority == UKCompetentAuthority.England)
-                    {
-                        @Html.ActionLink("Go to Assign an Area", "Index", "AssignArea")
-                    }
-                    else
-                    {
-                        @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null)
-                    }
-                }
-            </td>
-        </tr>
-
-        <tr>
-            <td>Acknowledged on</td>
-            <td>
-                @if (Model.NotificationAcknowledgedDate.IsCompleted)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td>
-                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationAcknowledgedDate.IsCompleted
-                    && Model.Status != ImportNotificationStatus.Objected)
-                {
-                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null)
-                }
-            </td>
-
-        </tr>
-
-        <tr>
-            <td>Decision required by</td>
-            <td>
-                @if (Model.DecisionDate.IsCompleted)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td>
-            </td>
-        </tr>
-
-        @for (int i = 0; i < Model.Decisions.Count; i++)
+        @if (Model.Status == ImportNotificationStatus.UnderProhibition)
         {
-            <tr>
-                <td>
-                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
-                </td>
-                <td>
-                    @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
-                </td>
-                <td>
-                    @if (Model.Decisions[i].Status == NotificationStatus.Consented)
-                    {
-                        @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
-                    }
-                </td>
-            </tr>
+            using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
+            }
+        }
+        else
+        {
+            using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+
+                <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
+            }
         }
 
-        <tr>
-            <td>File closed on</td>
-            <td>
-                @if (Model.NotificationFileClosedDate.IsCompleted)
+    </div>
+
+    @Resource.FirstParagraph
+
+<table title="Assessment dates currently recorded">
+    <tr>
+        <th>@Resource.DateNameColumnHeader</th>
+        <th>@Resource.DateColumnHeader</th>
+        <th>@Resource.LinkColumnHeader</th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
+        <td>
+            @if (Model.NotificationReceivedDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Notification charge calculation date</td>
+        <td>
+            @if (Model.NotificationChargeDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.NotificationChargeDate.AsDateTime().GetValueOrDefault())
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            Interim or non-interim
+        </td>
+        <td>
+            @if (Model.IsInterim)
+            {
+                <text>Interim</text>
+            }
+            else
+            {
+                <text>Non-interim</text>
+            }
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>Payment received</td>
+        <td>
+            @if (Model.PaymentReceivedDate.HasValue)
+            {
+                @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+
+                var text = string.Empty;
+
+                if (!Model.PaymentIsComplete)
                 {
-                    @Html.Gds().DisplayDateFor(m => m.NotificationFileClosedDate.AsDateTime().GetValueOrDefault())
+                    text = " (partial payment)";
+                    @text
+                }
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td></td>
+    </tr>
+
+    <tr>
+        <td>Assessment started</td>
+        <td>
+            @if (Model.AssessmentStartedDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.AssessmentStartedDate.AsDateTime().GetValueOrDefault())
+                @byText
+                @Html.DisplayFor(m => m.NameOfOfficer)
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+            @if (Model.PaymentIsComplete && !Model.AssessmentStartedDate.IsCompleted)
+            {
+                @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null)
+            }
+        </td>
+
+    </tr>
+
+    <tr>
+        <td>Notification complete</td>
+        <td>
+            @if (Model.NotificationCompleteDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+            @if (Model.AssessmentStartedDate.IsCompleted && !Model.NotificationCompleteDate.IsCompleted)
+            {
+                if (!Model.IsAreaAssigned && Model.CompetentAuthority == UKCompetentAuthority.England)
+                {
+                    @Html.ActionLink("Go to Assign an Area", "Index", "AssignArea")
                 }
                 else
                 {
-                    @nullMarker
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null)
                 }
+            }
+        </td>
+    </tr>
+
+    <tr>
+        <td>Acknowledged on</td>
+        <td>
+            @if (Model.NotificationAcknowledgedDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+            @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationAcknowledgedDate.IsCompleted
+                && Model.Status != ImportNotificationStatus.Objected)
+            {
+                @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null)
+            }
+        </td>
+
+    </tr>
+
+    <tr>
+        <td>Decision required by</td>
+        <td>
+            @if (Model.DecisionDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+            @if (Model.ShowAssessmentDecisionLink && Model.NotificationAcknowledgedDate.IsCompleted && !Model.Decisions.Any() && !Model.NotificationFileClosedDate.IsCompleted)
+            {
+                @Html.ActionLink("Go to assessment decision", "Index", "Decision");
+            }
+        </td>
+    </tr>
+
+    @for (int i = 0; i < Model.Decisions.Count; i++)
+    {
+        <tr>
+            <td>
+                @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
             </td>
             <td>
-                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.Decisions.Any())
+                @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
+            </td>
+            <td>
+                @if (Model.Decisions[i].Status == NotificationStatus.Consented)
                 {
-                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.FileClosed }, null)
-                }
-                else if (Model.NotificationFileClosedDate.IsCompleted && string.IsNullOrWhiteSpace(Model.ArchiveReference))
-                {
-                    @Html.ActionLink("Add archive reference", "Index", "KeyDates", new { command = KeyDatesCommand.ArchiveReference }, null)
-                }
-                else if (!string.IsNullOrWhiteSpace(Model.ArchiveReference))
-                {
-                    @Model.ArchiveReference
-                    @:&nbsp;
-                    @Html.ActionLink("Update", "Index", "KeyDates", new { command = KeyDatesCommand.ArchiveReference }, null)
+                    @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
                 }
             </td>
-
         </tr>
+    }
 
-    </table>
+    <tr>
+        <td>File closed on</td>
+        <td>
+            @if (Model.NotificationFileClosedDate.IsCompleted)
+            {
+                @Html.Gds().DisplayDateFor(m => m.NotificationFileClosedDate.AsDateTime().GetValueOrDefault())
+            }
+            else
+            {
+                @nullMarker
+            }
+        </td>
+        <td>
+            @if (!Model.NotificationFileClosedDate.IsCompleted && Model.Decisions.Any())
+            {
+                @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.FileClosed }, null)
+            }
+            else if (Model.NotificationFileClosedDate.IsCompleted && string.IsNullOrWhiteSpace(Model.ArchiveReference))
+            {
+                @Html.ActionLink("Add archive reference", "Index", "KeyDates", new { command = KeyDatesCommand.ArchiveReference }, null)
+            }
+            else if (!string.IsNullOrWhiteSpace(Model.ArchiveReference))
+            {
+                @Model.ArchiveReference
+                @:&nbsp;
+                @Html.ActionLink("Update", "Index", "KeyDates", new { command = KeyDatesCommand.ArchiveReference }, null)
+            }
+        </td>
+
+    </tr>
+</table>
+    @if (Model.ProhibitionHistory.Count > 0)
+    {
+        <h2 class="govuk-heading-m">Status Change Log</h2>
+        <table title="Status Change Log">
+            @for (int i = 0; i < Model.ProhibitionHistory.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @if (Model.ProhibitionHistory[i].Status == ImportNotificationStatus.UnderProhibition)
+                        {
+                            <p>Under prohibition on</p>
+                        }
+                        else
+                        {
+                            <p>Removed under prohibition on</p>
+                        }
+                    </td>
+                    <td>
+                        @Model.ProhibitionHistory[i].ChangeDate.ToString("d MMMM yyyy")
+                        @byText
+                        @Html.DisplayFor(m => m.ProhibitionHistory[i].FullName)
+
+                    </td>
+                    <td></td>
+
+                </tr>
+            }
+        </table>
+    }
 </div>
 
 @if (Model.Command != 0)
@@ -248,7 +322,8 @@
 
         @Html.AntiForgeryToken()
 
-        <br/><br/>
+        <br />
+        <br />
 
         if (Model.Command == KeyDatesCommand.ArchiveReference)
         {
@@ -320,7 +395,7 @@ else
 {
     @section scripts{
         <script>
-            $(function() {
+            $(function () {
                 var link = $("td a").first();
 
                 if (link) {

@@ -121,7 +121,10 @@
     <value>What's the actual date of the shipment(s)?</value>
   </data>
   <data name="CreateSummary" xml:space="preserve">
-    <value>You can create more than one shipment prenotification at the same time if:</value>
+    <value>You can only create more than one shipment prenotification at the same time if:</value>
+  </data>
+  <data name="DatesWarningMessage" xml:space="preserve">
+    <value>Shipments must be prenotified at least 3 working days before the waste shipment starts, but no more than 30 days before</value>
   </data>
   <data name="NunmberToCreateHint" xml:space="preserve">
     <value>This is the number of shipments with the same waste quantities and packaging types.</value>

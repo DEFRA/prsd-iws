@@ -7,5 +7,7 @@
     public interface IPriceRepository
     {
         Task<PriceAndRefund> GetPriceAndRefundByNotificationId(Guid notificationId);
+
+        Task<PriceAndRefund> GetDraftImportNotificationPrice(Guid notificationId);
     }
 }

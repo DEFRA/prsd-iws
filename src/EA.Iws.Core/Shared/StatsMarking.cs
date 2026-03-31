@@ -8,6 +8,8 @@
         [Display(Name = "Did not proceed as intended")]
         BaselTable9 = 2,
         [Display(Name = "Accident occurred during transport")]
-        BaselTable10 = 3
+        BaselTable10 = 3,
+        [Display(Name = "Illegal Shipment (Repatriation)")]
+        IllegalShipmentRepatriation = 4
     }
 }

@@ -260,6 +260,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Charge Date.
+        /// </summary>
+        public static string NotificationChargeDate {
+            get {
+                return ResourceManager.GetString("NotificationChargeDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date completed.
         /// </summary>
         public static string NotificationCompletedDate {

@@ -13,6 +13,7 @@
                 CurrentStatus = source.CurrentStatus,
                 NotificationId = source.NotificationId,
                 NotificationReceivedDate = source.NotificationReceivedDate,
+                NotificationChargeDate = source.NotificationChargeDate,
                 PaymentReceivedDate = source.PaymentReceivedDate,
                 PaymentIsComplete = source.PaymentIsComplete,
                 CommencementDate = source.CommencementDate,

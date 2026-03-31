@@ -133,7 +133,7 @@
     <value>or</value>
   </data>
   <data name="SepaDownloadBankLink" xml:space="preserve">
-    <value>Bank Guarantee template</value>
+    <value>Financial Guarantee template</value>
   </data>
   <data name="SepaDownloadParentLink" xml:space="preserve">
     <value>Parent Company template</value>

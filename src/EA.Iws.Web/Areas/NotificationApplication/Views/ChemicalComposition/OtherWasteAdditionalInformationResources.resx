@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Declaration" xml:space="preserve">
-    <value>I will provide this detail in a separate annex with my notification submission.</value>
+    <value>I'll upload this information using the ‘Upload annexes and extra information’ link after I submit this notification.</value>
   </data>
   <data name="DescriptionHint" xml:space="preserve">
     <value>Please limit your answer to 256 characters</value>

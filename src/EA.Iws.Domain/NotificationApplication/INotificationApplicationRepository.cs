@@ -26,5 +26,9 @@
         Task<UKCompetentAuthority> GetNotificationCompetentAuthority(Guid id);
 
         Task<bool> GetIsArchived(Guid notificationId);
+
+        Task<bool> DeleteExportNotification(Guid notificationId);
+
+        Task<DeleteExportNotificationDetails> ValidateExportNotification(string exportNotificationNumber);
     }
 }

@@ -38,6 +38,8 @@
 
         public string UserName { get; private set; }
 
+        public DateTime? LastLoginDate { get; private set; }
+
         public virtual Organisation Organisation { get; private set; }
 
         public void LinkToOrganisation(Organisation organisation)

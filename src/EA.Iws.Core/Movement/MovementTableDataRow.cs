@@ -26,5 +26,8 @@
         public ShipmentQuantityUnits? QuantityUnits { get; set; }
 
         public DateTime? CompletedDate { get; set; }
-    }
+
+        public bool IsReceived { get; set; }
+        public bool IsPartialRejection { get; set; }
+  }
 }

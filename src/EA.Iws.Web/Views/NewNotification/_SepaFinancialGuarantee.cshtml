@@ -8,7 +8,7 @@
     @SepaFinancialGuaranteeResources.SubmitFG
 </p>
 <p>
-    @Html.Raw(string.Format(SepaFinancialGuaranteeResources.PrintMessage,
-        Html.ActionLink(SepaFinancialGuaranteeResources.BankGuaranteeTemplate, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null),
-        Html.ActionLink(SepaFinancialGuaranteeResources.ParentCompanyTemplate, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)))
+    @SepaFinancialGuaranteeResources.PrintMessage
+    <br />
+    The templates can be viewed and downloaded directly from the SEPA website.
 </p>

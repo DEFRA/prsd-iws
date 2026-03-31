@@ -14,6 +14,7 @@
         public KeyDatesViewModel()
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(true);
+            NotificationChargeDate = new OptionalDateInputViewModel(true);
             AssessmentStartedDate = new OptionalDateInputViewModel(true);
             NotificationCompleteDate = new OptionalDateInputViewModel(true);
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(true);
@@ -26,6 +27,7 @@
         public KeyDatesViewModel(KeyDatesData keyDates)
         {
             NotificationReceivedDate = new OptionalDateInputViewModel(keyDates.NotificationReceived, true);
+            NotificationChargeDate = new OptionalDateInputViewModel(keyDates.NotificationChargeDate, true);
             PaymentReceivedDate = keyDates.PaymentReceived;
             PaymentIsComplete = keyDates.IsPaymentComplete;
             AssessmentStartedDate = new OptionalDateInputViewModel(keyDates.AssessmentStarted, true);
@@ -51,6 +53,9 @@
 
         [Display(Name = "NotificationReceivedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
+
+        [Display(Name = "NotificationChargeDate", ResourceType = typeof(KeyDatesViewModelResources))]
+        public OptionalDateInputViewModel NotificationChargeDate { get; set; }
 
         [Display(Name = "PaymentReceivedDate", ResourceType = typeof(KeyDatesViewModelResources))]
         public DateTime? PaymentReceivedDate { get; set; }
@@ -91,7 +96,11 @@
             get { return AssessmentStartedDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
         }
 
+        public bool ShowAssessmentDecisionLink { get; set; }
+
         public IList<NotificationAssessmentDecision> Decisions { get; set; } 
+
+        public List<ImportNotificationStatusChangeData> ProhibitionHistory { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -21,6 +21,12 @@
             </div>
         }
 
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NotificationChargeDate) @Html.Gds().FormGroupClass(m => m.NotificationChargeDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationChargeDate.Month) @Html.Gds().FormGroupClass(m => m.NotificationChargeDate.Year)">
+            @Html.Gds().LabelFor(m => m.NotificationChargeDate, showOptionalLabel: false)
+            @Html.Gds().ValidationMessageFor(m => m.NotificationChargeDate)
+            @Html.EditorFor(m => m.NotificationChargeDate)
+        </div>
+
         @if (Model.CommencementDate.IsCompleted)
         {
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CommencementDate) @Html.Gds().FormGroupClass(m => m.CommencementDate.Day) @Html.Gds().FormGroupClass(m => m.CommencementDate.Month) @Html.Gds().FormGroupClass(m => m.CommencementDate.Year)">
@@ -47,9 +53,9 @@
                 @Html.EditorFor(m => m.AcknowledgedDate)
             </div>
         }
-		@if (Model.DecisionRequiredByDate.IsCompleted)
-		{
-           <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Year)">
+        @if (Model.DecisionRequiredByDate.IsCompleted)
+        {
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Year)">
                 @Html.Gds().LabelFor(m => m.DecisionRequiredByDate, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.DecisionRequiredByDate)
                 @Html.EditorFor(m => m.DecisionRequiredByDate)

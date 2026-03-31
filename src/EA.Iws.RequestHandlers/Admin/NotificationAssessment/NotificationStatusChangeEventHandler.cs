@@ -21,7 +21,7 @@
         {
             var user = await context.Users.SingleAsync(u => u.Id == userContext.UserId.ToString());
 
-            @event.NotificationAssessment.AddStatusChangeRecord(new NotificationStatusChange(@event.TargetStatus, user));
+            @event.NotificationAssessment.AddStatusChangeRecord(new NotificationStatusChange(@event.TargetStatus, user.Id));
 
             await context.SaveChangesAsync();
         }

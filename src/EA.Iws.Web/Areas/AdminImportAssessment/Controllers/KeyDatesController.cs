@@ -1,21 +1,24 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using EA.Iws.Core.Authorization.Permissions;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.KeyDates;
 
     [AuthorizeActivity(typeof(GetKeyDates))]
     public class KeyDatesController : Controller
     {
         private readonly IMediator mediator;
+        private readonly AuthorizationService authorizationService;
 
-        public KeyDatesController(IMediator mediator)
+        public KeyDatesController(IMediator mediator, AuthorizationService authorizationService)
         {
             this.mediator = mediator;
+            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -24,6 +27,8 @@
             var data = await mediator.SendAsync(new GetKeyDates(id));
 
             var model = new KeyDatesViewModel(data);
+            model.NotificationId = id;
+            model.ProhibitionHistory = await mediator.SendAsync(new GetImportNotificationProhibitionStatusChanges(id));
 
             if (command.HasValue)
             {
@@ -31,6 +36,8 @@
                 AddRelevantDateToNewDate(model);
             }
 
+            model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
+            
             return View(model);
         }
 
@@ -40,6 +47,8 @@
         {
             if (!ModelState.IsValid)
             {
+                model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
+
                 return View(model);
             }
 
@@ -67,7 +76,25 @@
             }
 
             return RedirectToAction("Index");
-        } 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UnderProhibition(Guid id)
+        {
+            await mediator.SendAsync(new SetImportNotificationUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> LiftProhibition(Guid id)
+        {
+            await mediator.SendAsync(new RemoveImportNotificationUnderProhibitionStatus(id));
+
+            return RedirectToAction("Index", "KeyDates");
+        }
 
         private void AddRelevantDateToNewDate(KeyDatesViewModel model)
         {

@@ -304,8 +304,6 @@
     <Content Include="Documents\NotificationMergeTemplate.docx" />
     <Content Include="Documents\NRWFinancialGuaranteeForm.pdf" />
     <Content Include="Documents\NIEAFinancialGuaranteeForm.pdf" />
-    <Content Include="Documents\SEPABankGuaranteeTemplate.doc" />
-    <Content Include="Documents\SEPAParentCompanyTemplate.doc" />
     <Content Include="Documents\MovementMergeTemplate.docx" />
     <Content Include="Documents\EaAddress.pdf" />
     <Content Include="Documents\NieaAddress.pdf" />

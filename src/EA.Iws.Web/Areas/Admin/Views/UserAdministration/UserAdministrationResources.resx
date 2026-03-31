@@ -126,6 +126,12 @@
   <data name="ChangeUserStatusTitle" xml:space="preserve">
     <value>Change user status</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="LastLogin" xml:space="preserve">
+    <value>Last login date</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Name</value>
   </data>

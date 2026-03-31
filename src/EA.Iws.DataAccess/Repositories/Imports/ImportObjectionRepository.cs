@@ -26,7 +26,7 @@
         public async Task<ImportObjection> GetByNotificationIdOrDefault(Guid notificationId)
         {
             await authorization.EnsureAccessAsync(notificationId);
-            return await context.ImportObjections.SingleAsync(o => o.NotificationId == notificationId);
+            return await context.ImportObjections.SingleOrDefaultAsync(o => o.NotificationId == notificationId);
         }
 
         public void Add(ImportObjection importObjection)

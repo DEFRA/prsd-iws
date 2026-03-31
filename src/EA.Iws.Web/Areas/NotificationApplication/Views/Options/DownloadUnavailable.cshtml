@@ -9,9 +9,17 @@
 <div class="grid-row column-two-thirds">
     <h1 class="govuk-heading-l">@Resources.Title</h1>
 
+    <div class="govuk-warning-text">
+        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+        <strong class="govuk-warning-text__text">
+            <span class="govuk-visually-hidden">Warning</span>
+            @Resources.Warning
+        </strong>
+    </div>
+
     <div class="govuk-form-group">@Resources.Text</div>
 
     <div class="govuk-form-group">
-        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "govuk-button"})
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "govuk-button" })
     </div>
 </div>

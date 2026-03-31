@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to While this notification is incomplete, you won&apos;t be able to download or print it. Once you have completed and submitted it online, you can download, print, sign and post it to us..
+        ///   Looks up a localized string similar to While this notification is incomplete, you won&apos;t be able to download or print it. Once you have completed and submitted it online, you can download a copy to sign and send to us..
         /// </summary>
         public static string Text {
             get {
@@ -80,11 +80,20 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t download or print your notification yet.
+        ///   Looks up a localized string similar to Download Unavailable.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t download or print your notification yet.
+        /// </summary>
+        public static string Warning {
+            get {
+                return ResourceManager.GetString("Warning", resourceCulture);
             }
         }
     }
