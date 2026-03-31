@@ -44,6 +44,9 @@
                 return View(model);
             }
 
+            var isRejected = model.ShipmentTypes == ShipmentType.Rejected;
+            var isPartiallyRejected = model.ShipmentTypes == ShipmentType.Partially;
+
             var data = new MovementReceiptAndRecoveryData
             {
                 Id = movementId,
@@ -51,16 +54,19 @@
                 ActualDate = model.ActualShipmentDate.Value,
                 HasNoPrenotification = model.PrenotificationDate.HasValue ? false : true,
                 PrenotificationDate = model.PrenotificationDate.HasValue ? model.PrenotificationDate.Value : (DateTime?)null,
-                ReceiptDate = (!model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                ReceiptDate = (!isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 ActualQuantity = model.ActualQuantity,
                 ReceiptUnits = model.Units,
-                RejectionDate = (model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                RejectionDate = (isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null,
                 RejectionReason = model.RejectionReason,
                 Comments = model.Comments,
                 StatsMarking = model.StatsMarking,
                 RejectedQuantity = model.RejectedQuantity,
-                RejectedUnit = model.RejectedUnits
+                RejectedUnit = model.RejectedUnits,
+                IsReceived = model.ShipmentTypes == ShipmentType.Accepted,
+                IsRejected = isRejected,
+                IsPartiallyRejected = isPartiallyRejected
             };
 
             await mediator.SendAsync(new SetMovementReceiptAndRecoveryData(data));
