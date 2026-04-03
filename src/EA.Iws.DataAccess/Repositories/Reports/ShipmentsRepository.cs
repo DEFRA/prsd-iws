@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
+    using Core.Notification;
+    using Core.Reports;
+    using Domain.Reports;
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using Core.Notification;
-    using Core.Reports;
-    using Domain.Reports;
 
     internal class ShipmentsRepository : IShipmentsRepository
     {
@@ -17,7 +17,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, 
+        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority,
             ShipmentsReportDates dateType, ShipmentReportTextFields? textFieldType,
             TextFieldOperator? textFieldOperatorType, string textSearch)
         {
@@ -81,6 +81,15 @@
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Shipment>> GetEAShipmentData(DateTime fromDate, DateTime toDate)
+        {
+            return await context.Database.SqlQuery<Shipment>(@"[Reports].[uspShipmentReportData] @CompetentAuthority, @FromDate, @ToDate",
+                                                                new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                new SqlParameter("@FromDate", fromDate),
+                                                                new SqlParameter("@ToDate", toDate))
+                                        .ToArrayAsync();
         }
     }
 }

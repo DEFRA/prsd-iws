@@ -1,4 +1,5 @@
-﻿<ul>
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
+<ul>
     <li>@Html.ActionLink("Export stats", "Index", "ExportStats", new { area = "Reports" }, null)</li>
     <li>@Html.ActionLink("Import stats", "Index", "ImportStats", new { area = "Reports" }, null)</li>
     <li>@Html.ActionLink("Shipments report", "Index", "Shipments", new { area = "Reports" }, null)</li>
@@ -8,6 +9,10 @@
     <li>@Html.ActionLink("Producer report", "Index", "Producer", new { area = "Reports" }, null)</li>
     <li>@Html.ActionLink("FOI report", "Index", "FreedomOfInformation", new { area = "Reports" }, null)</li>
     <li>@Html.ActionLink("Export Movement Documents Input", "Index", "ExportMovements", new { area = "Reports" }, null)</li>
-	<li>@Html.ActionLink("Compliance report", "Index", "Compliance", new { area = "Reports" }, null)</li>
+    <li>@Html.ActionLink("Compliance report", "Index", "Compliance", new { area = "Reports" }, null)</li>
     <li>@Html.ActionLink("Financial guarantees", "Index", "FinancialGuarantees", new { area = "Reports" }, null)</li>
+    @if (Model.ShowEAReportLinks)
+    {
+        <li>@Html.ActionLink("Download EA reports data", "Index", "EADataReports", new { area = "Reports" }, null)</li>
+    }
 </ul>

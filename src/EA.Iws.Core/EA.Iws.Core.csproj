@@ -58,6 +58,7 @@
     <Compile Include="Admin\Reports\ComplianceDataColourGuidance.cs" />
     <Compile Include="Admin\Reports\ComplianceDataGuidance.cs" />
     <Compile Include="Admin\Reports\ComplianceDataReport.cs" />
+    <Compile Include="Admin\Reports\EADataReportsData.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
@@ -261,6 +262,7 @@
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Reports\Compliance\ComplianceReportDates.cs" />
     <Compile Include="Reports\Compliance\ComplianceTextFields.cs" />
+    <Compile Include="Reports\EAReportList.cs" />
     <Compile Include="Reports\FOI\FOIOutputColumns.cs" />
     <Compile Include="Reports\FOI\FOIReportDates.cs" />
     <Compile Include="Reports\FOI\FOIReportTextFields.cs" />

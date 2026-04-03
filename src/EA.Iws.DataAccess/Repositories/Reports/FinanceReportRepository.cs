@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
+    using Core.Notification;
+    using Domain.Reports;
+    using EA.Iws.Core.Admin.Reports;
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
-    using Core.Notification;
-    using Domain.Reports;
 
     internal class FinanceReportRepository : IFinanceReportRepository
     {
@@ -63,6 +64,15 @@
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<FinanceReportData>> GetFinanceReport(DateTime fromDate, DateTime toDate)
+        {
+            return await context.Database.SqlQuery<FinanceReportData>(@"[Reports].[uspFinanceReportData] @CompetentAuthority, @FromDate, @ToDate",
+                                                                            new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                            new SqlParameter("@FromDate", fromDate),
+                                                                            new SqlParameter("@ToDate", toDate))
+                                        .ToArrayAsync();
         }
     }
 }

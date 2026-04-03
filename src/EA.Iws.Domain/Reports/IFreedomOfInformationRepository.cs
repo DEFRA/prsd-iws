@@ -13,5 +13,7 @@
         Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, FOIReportDates dateType, FOIReportTextFields? searchField,
             TextFieldOperator? searchType,
             string comparisonText);
+
+        Task<IEnumerable<FreedomOfInformationData>> GetFOIReport(DateTime from, DateTime to);
     }
 }

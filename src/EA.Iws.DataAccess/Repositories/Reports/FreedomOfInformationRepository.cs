@@ -1,15 +1,14 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.SqlClient;
-    using System.Threading.Tasks;
     using Core.Admin.Reports;
     using Core.Notification;
     using Core.Reports;
     using Core.Reports.FOI;
-    using Core.WasteType;
     using Domain.Reports;
+    using System;
+    using System.Collections.Generic;
+    using System.Data.SqlClient;
+    using System.Threading.Tasks;
 
     internal class FreedomOfInformationRepository : IFreedomOfInformationRepository
     {
@@ -157,11 +156,20 @@
                     [LocalArea],
                     [Officer]";
 
-              return await context.Database.SqlQuery<FreedomOfInformationData>(string.Format(query, textFilter),
-                new SqlParameter("@from", from),
-                new SqlParameter("@to", to),
-                new SqlParameter("@competentAuthority", (int)competentAuthority),
-                new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
+            return await context.Database.SqlQuery<FreedomOfInformationData>(string.Format(query, textFilter),
+              new SqlParameter("@from", from),
+              new SqlParameter("@to", to),
+              new SqlParameter("@competentAuthority", (int)competentAuthority),
+              new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<FreedomOfInformationData>> GetFOIReport(DateTime fromDate, DateTime toDate)
+        {
+            return await context.Database.SqlQuery<FreedomOfInformationData>(@"[Reports].[uspFreedomOfInformationReportData] @CompetentAuthority, @FromDate, @ToDate",
+                                                                                new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                                new SqlParameter("@FromDate", fromDate),
+                                                                                new SqlParameter("@ToDate", toDate))
+                                        .ToArrayAsync();
         }
     }
 }

@@ -65,5 +65,14 @@
                 new SqlParameter("@to", to),
                 new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
         }
+
+        public async Task<IEnumerable<ProducerData>> GetProducerReport(DateTime fromDate, DateTime toDate)
+        {
+            return await context.Database.SqlQuery<ProducerData>(@"[Reports].[uspProducerReportData] @CompetentAuthority, @FromDate, @ToDate",
+                                                                        new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                        new SqlParameter("@FromDate", fromDate),
+                                                                        new SqlParameter("@ToDate", toDate))
+                                        .ToArrayAsync();
+        }
     }
 }
