@@ -31,6 +31,5 @@
 
         public UserRole Role { get; set; }
         public DateTime? LastLoginDate { get; set; }
-
     }
 }
