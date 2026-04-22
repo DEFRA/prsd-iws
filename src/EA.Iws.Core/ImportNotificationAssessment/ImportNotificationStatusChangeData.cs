@@ -1,12 +1,7 @@
-﻿using EA.Iws.Core.Registration.Users;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EA.Iws.Core.ImportNotificationAssessment
+﻿namespace EA.Iws.Core.ImportNotificationAssessment
 {
+    using EA.Iws.Core.Registration.Users;
+    using System;
     public class ImportNotificationStatusChangeData
     {
         public ImportNotificationStatus Status { get; set; }
@@ -18,6 +13,5 @@ namespace EA.Iws.Core.ImportNotificationAssessment
         public User User { get; set; }
 
         public DateTime ChangeDate { get; set; }
-
     }
 }
