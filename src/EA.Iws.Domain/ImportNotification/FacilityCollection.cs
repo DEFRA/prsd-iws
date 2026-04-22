@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
 
@@ -17,6 +18,8 @@
             ImportNotificationId = importNotificationId;
             AllFacilitiesPreconsented = allFacilitiesPreconsented;
             FacilitiesCollection = new List<Facility>(facilities);
+
+            AssignOrdinalPositions();
         }
 
         public Guid ImportNotificationId { get; private set; }
@@ -27,7 +30,16 @@
 
         public IEnumerable<Facility> Facilities
         {
-            get { return FacilitiesCollection.ToSafeIEnumerable(); }
+            get { return FacilitiesCollection == null ? Enumerable.Empty<Facility>() : FacilitiesCollection.OrderBy(f => f.OrdinalPosition); }
+        }
+
+        private void AssignOrdinalPositions()
+        {
+            var position = 1;
+            foreach (var facility in FacilitiesCollection)
+            {
+                facility.OrdinalPosition = position++;
+            }
         }
     }
 }
