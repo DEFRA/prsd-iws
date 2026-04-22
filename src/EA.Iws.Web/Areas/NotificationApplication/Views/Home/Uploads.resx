@@ -117,55 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddSharedUser" xml:space="preserve">
-    <value>Add email</value>
+  <data name="AlreadyProvidedText" xml:space="preserve">
+    <value>This annex has already been provided</value>
   </data>
-  <data name="AwaitingSharedUsers" xml:space="preserve">
-    <value>Awaiting shared users</value>
+  <data name="AnnexColumnTitle" xml:space="preserve">
+    <value>Document</value>
   </data>
-  <data name="ChosenSharedUsers" xml:space="preserve">
-    <value>Your chosen shared users</value>
+  <data name="AnnexNameColumnTitle" xml:space="preserve">
+    <value>Document title</value>
   </data>
-  <data name="ConfirmResponsibility" xml:space="preserve">
-    <value>You are currently owner of this notification. You can share it with other IWS Online registered users.</value>
+  <data name="AwaitingUpload" xml:space="preserve">
+    <value>Awaiting Upload</value>
   </data>
-  <data name="EmailHint" xml:space="preserve">
-    <value>This is the email address that was used to register their account and they enter when logging into the service. If they are not registered to use IWS Online, they will need to do this first.</value>
+  <data name="BrowseLink" xml:space="preserve">
+    <value>Browse</value>
   </data>
-  <data name="EnterEmail" xml:space="preserve">
-    <value>To share this notification, enter their email address into the box below and click ‘Add’. Once shared, you can remove access via the ‘Remove’ option below.</value>
+  <data name="BrowseLinkText" xml:space="preserve">
+    <value>for a file to upload</value>
   </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
+  <data name="CompositionOfWaste" xml:space="preserve">
+    <value>Composition of waste</value>
   </data>
-  <data name="SharedUser" xml:space="preserve">
-    <value>Shared User</value>
+  <data name="DownloadPackLinkText" xml:space="preserve">
+    <value>Download your notification pack</value>
   </data>
-  <data name="SharedUserTableTitle" xml:space="preserve">
-    <value>Shared Users</value>
+  <data name="FirstListItemA" xml:space="preserve">
+    <value>Check your </value>
   </data>
-  <data name="ShareNotificationTitle" xml:space="preserve">
-    <value>Share this notification with other users</value>
+  <data name="FirstListItemB" xml:space="preserve">
+    <value> for the instructions which you'll need to reference your separate annexes</value>
   </data>
-  <data name="ShareNotificationConfirmShareUsers" xml:space="preserve">
-    <value>This notification will be shared with:</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Reference and upload your annexes</value>
   </data>
-  <data name="ShareNotificationConfirmTitle" xml:space="preserve">
-    <value>Are you sure you want to share notification {notification} with these users?</value>
+  <data name="NoAnnexesButton" xml:space="preserve">
+    <value>Continue</value>
   </data>
-  <data name="Back" xml:space="preserve">
-    <value>Back to share access</value>
+  <data name="NoAnnexesRequired" xml:space="preserve">
+    <value>You have indicated that there are no annexes required for your notification.</value>
   </data>
-  <data name="NotificationOption" xml:space="preserve">
-    <value>Go to notification options</value>
+  <data name="OptionsLinkPainTextA" xml:space="preserve">
+    <value>You can also complete this step from the </value>
   </data>
-  <data name="Email" xml:space="preserve">
-    <value>Email</value>
+  <data name="OptionsLinkPainTextB" xml:space="preserve">
+    <value> page.</value>
   </data>
-  <data name="EmailWarning" xml:space="preserve">
-    <value>This email address must match the other user's IWS Online login email.</value>
+  <data name="OptionsLinkText" xml:space="preserve">
+    <value>notification options</value>
   </data>
-  <data name="EmailRequirement" xml:space="preserve">
-    <value>Make sure the other user has an active IWS Online account and knows why you’re sharing the notification with them.</value>
+  <data name="PackLinkText" xml:space="preserve">
+    <value>notification pack</value>
+  </data>
+  <data name="Paragraph1" xml:space="preserve">
+    <value>Earlier in the notification process, you indicated that you'd like to provide more information separately. You can upload these files here as annexes.</value>
+  </data>
+  <data name="Paragraph2" xml:space="preserve">
+    <value>To help our automatic annex generation process, please make sure that you state the notification and annex numbers at the start of each document.</value>
+  </data>
+  <data name="ProcessOfGeneration" xml:space="preserve">
+    <value>Process of generation</value>
+  </data>
+  <data name="SecondListItem" xml:space="preserve">
+    <value>Insert your separate annexes in the right numerical order in amongst the system-generated annexes</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>How to do this:</value>
+  </data>
+  <data name="TechnologyEmployed" xml:space="preserve">
+    <value>Technology employed</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Annexes</value>
+  </data>
+  <data name="UploadAnnexes" xml:space="preserve">
+    <value>Upload annexes and extra information</value>
+  </data>
+  <data name="Uploaded" xml:space="preserve">
+    <value>Uploaded</value>
   </data>
 </root>

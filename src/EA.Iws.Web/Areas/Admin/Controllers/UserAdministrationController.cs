@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.UserAdministration;
+    using EA.Iws.Core.Admin;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
@@ -20,13 +22,30 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageNewUsers()
+        public async Task<ActionResult> ManageNewUsers(string userStatus)
         {
             var users = await mediator.SendAsync(new GetNewInternalUsers());
+            List<InternalUserData> filteredUsers;
+
+            if (string.IsNullOrEmpty(userStatus) || userStatus == "all")
+            {
+                filteredUsers = new List<InternalUserData>(users);
+            }
+            else
+            {
+                if (userStatus == "inactive")
+                {
+                    filteredUsers = users.Where(u => u.Status == InternalUserStatus.Inactive).ToList();
+                }
+                else
+                {
+                    filteredUsers = users.Where(u => u.Status != InternalUserStatus.Inactive).ToList();
+                }
+            }
 
             return View(new NewUsersListViewModel
             {
-                Users = users.Select(u => new UserApprovalViewModel(u)).ToArray()
+                Users = filteredUsers.Select(u => new UserApprovalViewModel(u)).ToArray()
             });
         }
 
@@ -51,11 +70,28 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ChangeUserRole()
+        public async Task<ActionResult> ChangeUserRole(string userStatus)
         {
             var users = await mediator.SendAsync(new GetExistingInternalUsers());
+            List<InternalUserData> filteredUsers;
 
-            var model = new ExistingUsersListViewModel(users);
+            if (string.IsNullOrEmpty(userStatus) || userStatus == "all")
+            {
+                filteredUsers = new List<InternalUserData>(users);
+            }
+            else
+            {
+                if (userStatus == "inactive")
+                {
+                    filteredUsers = users.Where(u => u.Status == InternalUserStatus.Inactive).ToList();
+                }
+                else
+                {
+                    filteredUsers = users.Where(u => u.Status != InternalUserStatus.Inactive).ToList();
+                }
+            }
+
+            var model = new ExistingUsersListViewModel(filteredUsers);
 
             return View(model);
         }
@@ -77,11 +113,28 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ChangeUserStatus()
+        public async Task<ActionResult> ChangeUserStatus(string userStatus)
         {
             var users = await mediator.SendAsync(new GetExistingInternalUsers());
+            List<InternalUserData> filteredUsers;
 
-            var model = new ExistingUsersListViewModel(users);
+            if (string.IsNullOrEmpty(userStatus) || userStatus == "all")
+            {
+                filteredUsers = new List<InternalUserData>(users);
+            }
+            else
+            {
+                if (userStatus == "inactive")
+                {
+                    filteredUsers = users.Where(u => u.Status == InternalUserStatus.Inactive).ToList();
+                }
+                else
+                {
+                    filteredUsers = users.Where(u => u.Status != InternalUserStatus.Inactive).ToList();
+                }
+            }
+
+            var model = new ExistingUsersListViewModel(filteredUsers);
 
             return View(model);
         }

@@ -74,6 +74,13 @@
                 <div id="dvAccessLevelBody">
                     <label>@Model.AccessLevelText</label>
                 </div>
+                @if (Model.IsOwner)
+                {
+                    <div>
+                        @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
+                        @Html.ActionLink(Resource.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    </div>
+                }
             </div>
         </div>
     </div>
