@@ -168,7 +168,7 @@
             if (decisions != null && decisions.Any())
             {
                 var mostRecentConsentedDecision = decisions.OrderByDescending(d => d.Date).FirstOrDefault(d => d.Status == NotificationStatus.Consented);
-                var mostRecentConsentedDate = mostRecentConsentedDecision.Date;
+                var mostRecentConsentedDate = mostRecentConsentedDecision.ConsentedTo;
 
                 foreach (var row in tableData)
                 {
