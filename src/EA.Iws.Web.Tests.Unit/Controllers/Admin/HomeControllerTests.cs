@@ -20,9 +20,7 @@
         private readonly HomeController controller;
         private readonly IMediator mediator;
         private readonly BasicSearchViewModel postModel;
-        private readonly BasicSearchViewModel postModelSingle;
         private readonly IList<BasicSearchResult> searchResults;
-        private readonly IList<BasicSearchResult> searchResultSingle;
 
         public HomeControllerTests()
         {

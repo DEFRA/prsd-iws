@@ -157,7 +157,10 @@
                 ,@RecoveryDate
                 ,@CreatedBy
                 ,@RejectedQuantity
-                ,@RejectedUnit",
+                ,@RejectedUnit
+                ,@IsReceived
+                ,@IsRejected
+                ,@IsPartiallyRejected",
                 new SqlParameter("@NotificationId", data.Data.NotificationId),
                 new SqlParameter("@MovementId", data.MovementId),
                 new SqlParameter("@PrenotificationDate", (object)data.Data.PreNotificationDate ?? DBNull.Value),
@@ -176,7 +179,10 @@
                 new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
                 new SqlParameter("@CreatedBy", createdBy),
                 new SqlParameter("@RejectedQuantity", (object)data.RejectedQuantity ?? DBNull.Value),
-                new SqlParameter("@RejectedUnit", (object)data.RejectedUnit ?? DBNull.Value));
+                new SqlParameter("@RejectedUnit", (object)data.RejectedUnit ?? DBNull.Value),
+                new SqlParameter("@IsReceived", data.IsReceived),
+                new SqlParameter("@IsRejected", data.IsRejected),
+                new SqlParameter("@IsPartiallyRejected", data.IsPartiallyRejected));
         }
 
         public async Task<IEnumerable<ImportMovement>> GetImportMovementsByIds(Guid notificationId, IEnumerable<Guid> movementIds)

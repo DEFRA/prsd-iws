@@ -118,6 +118,8 @@
 
                 PadMissingColumn(dataTable, type);
 
+                RemoveEmptyColumns(dataTable);
+
                 result = IsDataTableValid(dataTable) ? MessageLevel.Success : MessageLevel.Error;
 
                 DataTable = dataTable;
@@ -128,6 +130,32 @@
             }
 
             return new RuleResult<BulkFileRules>(BulkFileRules.FileParse, result);
+        }
+
+        private void RemoveEmptyColumns(DataTable dataTable)
+        {
+            var columnsToRemove = new List<string>();
+
+            foreach (DataColumn col in dataTable.Columns)
+            {
+                bool allBlank = dataTable.AsEnumerable().All(row =>
+                {
+                    var value = row[col];
+                    return value == null
+                        || value == DBNull.Value
+                        || string.IsNullOrWhiteSpace(value.ToString());
+                });
+
+                if (allBlank)
+                {
+                    columnsToRemove.Add(col.ColumnName);
+                }
+            }
+
+            foreach (string colName in columnsToRemove)
+            {
+                dataTable.Columns.Remove(colName);
+            }
         }
 
         private static bool IsDataTableValid(DataTable dataTable)

@@ -286,7 +286,7 @@
 
         </tr>
     </table>
-    @if (Model.ProhibitionHistory.Count > 0)
+    @if (Model.ProhibitionHistory != null && Model.ProhibitionHistory.Count > 0)
     {
         <h2 class="govuk-heading-m">Status Change Log</h2>
         <table title="Status Change Log">

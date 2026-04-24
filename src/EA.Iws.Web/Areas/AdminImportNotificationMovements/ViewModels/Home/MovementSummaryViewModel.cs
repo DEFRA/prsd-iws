@@ -3,9 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using Core.ImportNotificationAssessment;
     using Core.ImportNotificationMovements;
     using Core.Shared;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Home;
     using Prsd.Core.Helpers;
 
     public class MovementSummaryViewModel
@@ -36,7 +39,7 @@
         {
         }
 
-        public MovementSummaryViewModel(Summary data, MovementsSummary movementsSummary)
+        public MovementSummaryViewModel(Summary data, MovementsSummary movementsSummary, string preNotificationWarnings, string earlyShipmentWarnings, string consentedDateWarnings)
         {
             NotificationId = data.Id;
             IntendedShipments = data.IntendedShipments;
@@ -49,6 +52,11 @@
             PageSize = movementsSummary.PageSize;
             PageNumber = movementsSummary.PageNumber;
             NumberofShipments = movementsSummary.NumberofShipments;
+
+            QuantityRemainingValue = data.QuantityRemainingTotal;
+            PreNotificationWarnings = preNotificationWarnings;
+            EarlyShipmentWarnings = earlyShipmentWarnings;
+            ConsentedDateWarnings = consentedDateWarnings;
         }
 
         public bool ShowShipmentOptions()
@@ -66,5 +74,13 @@
         public int PageNumber { get; set; }
 
         public int NumberofShipments { get; set; }
+
+        public decimal QuantityRemainingValue { get; set; }
+
+        public string PreNotificationWarnings { get; set; }
+
+        public string EarlyShipmentWarnings { get; set; }
+
+        public string ConsentedDateWarnings { get; set; }
     }
 }
