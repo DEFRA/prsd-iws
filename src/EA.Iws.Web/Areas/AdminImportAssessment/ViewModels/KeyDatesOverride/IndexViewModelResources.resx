@@ -142,7 +142,7 @@
     <value>Objected</value>
   </data>
   <data name="WithdrawnDate" xml:space="preserve">
-    <value>Withdrawn</value>
+    <value>Notification Withdrawn</value>
   </data>
   <data name="DecisionRequiredByDate" xml:space="preserve">
     <value>Decision required by</value>

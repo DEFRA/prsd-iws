@@ -4270,6 +4270,7 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\NumberOfShipments\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4504,6 +4505,7 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
