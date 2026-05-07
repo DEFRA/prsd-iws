@@ -859,6 +859,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeResource.Designer.cs">
+      <DependentUpon>ExitCustomsOfficeResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntryCustomsOfficeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteCategoryViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteComponentViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MarkInterimStatusViewModel.cs" />
@@ -5109,6 +5119,14 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\WasteType\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExitCustomsOfficeResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntryCustomsOfficeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\Annex\AnnexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
