@@ -9,6 +9,5 @@
         public ImportNotificationStatus NotificationStatus { get; set; }
 
         public bool? IsInterim { get; set; }
-
     }
 }

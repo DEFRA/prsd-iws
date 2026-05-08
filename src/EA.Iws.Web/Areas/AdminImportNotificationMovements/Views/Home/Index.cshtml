@@ -43,64 +43,96 @@ else
             @Resource.ShipmentSummaryTitle
         </h1>
 
+        @{ string overTonnageErrorClass = Model.QuantityRemainingValue < 0 ? "dot-red" : String.Empty; }
+        @{ string preNotificationErrorClass = Model.PreNotificationWarnings.Length > 0 ? "dot-red" : String.Empty; }
+        @{ string earlyShipmentErrorClass = Model.EarlyShipmentWarnings.Length > 0 ? "dot-red" : String.Empty; }
+        @{ string consentedDateErrorClass = Model.ConsentedDateWarnings.Length > 0 ? "dot-red" : String.Empty; }
+
+        @if (Model.QuantityRemainingValue < 0 || Model.PreNotificationWarnings.Length > 0 || Model.EarlyShipmentWarnings.Length > 0 || Model.ConsentedDateWarnings.Length > 0)
+        {
+            <div class="govuk-error-summary">
+                <h2 class="govuk-error-summary__title">There is a problem</h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        @if (Model.QuantityRemainingValue < 0)
+                        {
+                            <li><span class="@overTonnageErrorClass"></span> @Resource.ErrorOverTonnage</li>
+                        }
+                        @if (Model.ConsentedDateWarnings.Length > 0)
+                        {
+                            <li><span class="@consentedDateErrorClass"></span> @Resource.ErrorConsentDate @Model.ConsentedDateWarnings</li>
+                        }
+                        @if (Model.PreNotificationWarnings.Length > 0)
+                        {
+                            <li><span class="@preNotificationErrorClass"></span> @Resource.ErrorPrenotification @Model.PreNotificationWarnings</li>
+                        }
+                        @if (Model.EarlyShipmentWarnings.Length > 0)
+                        {
+                            <li><span class="@earlyShipmentErrorClass"></span> @Resource.ErrorEarlyShipment @Model.EarlyShipmentWarnings</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        }
+
         <div class="grid-row">
             <div class="column-half">
                 <table class="odd-table">
                     <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
                     <tbody>
-                    <tr>
-                        <td>@Resource.TotalNumber</td>
-                        <td>@Model.IntendedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.NumberUsed</td>
-                        <td>@Model.UsedShipments</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.TotalQuantityReceived</td>
-                        <td>@Model.QuantityReceivedTotal</td>
-                    </tr>
-                    <tr>
-                        <td>@Resource.TotalQuantityRemaining</td>
-                        <td>@Model.QuantityRemainingTotal</td>
-                    </tr>
+                        <tr>
+                            <td>@Resource.TotalNumber</td>
+                            <td>@Model.IntendedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.NumberUsed</td>
+                            <td>@Model.UsedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityReceived</td>
+                            <td>@Model.QuantityReceivedTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityRemaining</td>
+                            <td>@Model.QuantityRemainingTotal</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
             <div class="column-half">
-                    <div class="nav-bloc">
-                        <h2 class="heading-small">@Resource.ShipingOptions</h2>
-                        <nav>
-                            @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
+                <div class="nav-bloc">
+                    <h2 class="heading-small">@Resource.ShipingOptions</h2>
+                    <nav>
+                        @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
+                        {
+                            @Html.ActionLink(Resource.Cancel, "Index", "Cancel")
+
+                            if (Model.CanDeleteMovement)
                             {
-                                @Html.ActionLink(Resource.Cancel, "Index", "Cancel")
-
-                                if (Model.CanDeleteMovement)
-                                {
-                                    @Html.ActionLink(Resource.Delete, "Index", "Delete")
-                                }
-
+                                @Html.ActionLink(Resource.Delete, "Index", "Delete")
                             }
-                            @Html.ActionLink(Resource.RejectedMovements, "List", "RejectedMovement")
 
-							@Html.ActionLink(Resource.ShipmentAuditLink, "Index", "ShipmentAudit")
+                        }
+                        @Html.ActionLink(Resource.RejectedMovements, "List", "RejectedMovement")
 
-                            @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
-                        </nav>
+                        @Html.ActionLink(Resource.ShipmentAuditLink, "Index", "ShipmentAudit")
+
+                        @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
+                    </nav>
+                </div>
+
+                @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
+                {
+                    <div class="govuk-form-group">
+                        <h2 class="heading-small">@Resource.Record</h2>
+                        @using (Html.BeginForm("Search", "Home"))
+                        {
+                            @Html.AntiForgeryToken()
+                            <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resource.SearchPlaceholder" />
+                            <button class="govuk-button">@Resource.SearchButton</button>
+                        }
                     </div>
-
-                    @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
-                    {
-                        <div class="govuk-form-group">
-                            <h2 class="heading-small">@Resource.Record</h2>
-                            @using (Html.BeginForm("Search", "Home"))
-                            {
-                                @Html.AntiForgeryToken()
-                                <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resource.SearchPlaceholder"/>
-                                <button class="govuk-button">@Resource.SearchButton</button>
-                            }
-                        </div>
-                    }
+                }
             </div>
         </div>
     </div>

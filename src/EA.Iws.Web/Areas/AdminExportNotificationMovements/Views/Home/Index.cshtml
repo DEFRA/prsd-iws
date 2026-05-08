@@ -56,6 +56,38 @@
         @Resources.MainHeading
     </h1>
 
+    @{ string overTonnageErrorClass = Model.QuantityRemainingValue < 0 ? "dot-red" : String.Empty; }
+    @{ string preNotificationErrorClass = Model.PreNotificationWarnings.Length > 0 ? "dot-red" : String.Empty; }
+    @{ string earlyShipmentErrorClass = Model.EarlyShipmentWarnings.Length > 0 ? "dot-red" : String.Empty; }
+    @{ string consentedDateErrorClass = Model.ConsentedDateWarnings.Length > 0 ? "dot-red" : String.Empty; }
+
+    @if (Model.QuantityRemainingValue < 0 || Model.PreNotificationWarnings.Length > 0 || Model.EarlyShipmentWarnings.Length > 0 || Model.ConsentedDateWarnings.Length > 0)
+    {
+            <div class="govuk-error-summary">
+                <h2 class="govuk-error-summary__title">There is a problem</h2>
+                <div class="govuk-error-summary__body">
+                    <ul class="govuk-list govuk-error-summary__list">
+                        @if (Model.QuantityRemainingValue < 0)
+                        {
+                            <li><span class="@overTonnageErrorClass"></span> @Resources.ErrorOverTonnage</li>
+                        }
+                        @if (Model.ConsentedDateWarnings.Length > 0)
+                        {
+                            <li><span class="@consentedDateErrorClass"></span> @Resources.ErrorConsentDate @Model.ConsentedDateWarnings</li>
+                        }
+                        @if (Model.PreNotificationWarnings.Length > 0)
+                        {
+                            <li><span class="@preNotificationErrorClass"></span> @Resources.ErrorPrenotification @Model.PreNotificationWarnings</li>
+                        }
+                        @if (Model.EarlyShipmentWarnings.Length > 0)
+                        {
+                            <li><span class="@earlyShipmentErrorClass"></span> @Resources.ErrorEarlyShipment @Model.EarlyShipmentWarnings</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+    }
+
     <div class="grid-row">
         <div class="column-half">
             <table class="odd-table govuk-table">

@@ -1,10 +1,13 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CaptureViewModel
 
 <div class="form-group">
-    <h3 class="heading-small">@Html.DisplayNameFor(m => m.StatsMarking)</h3>
-    <p>@Html.DisplayFor(m => m.StatsMarking)</p>
+    @if (!string.IsNullOrWhiteSpace(Model.StatsMarking))
+    {
+        <h3 class="heading-small">@Html.DisplayNameFor(m => m.StatsMarking)</h3>
+        <p>@Html.DisplayFor(m => m.StatsMarking)</p>
+    }
 
-    @if (!Model.IsRejected && !Model.IsPartiallyRejected)
+    @if (!string.IsNullOrWhiteSpace(Model.Comments))
     {
         <h3 class="heading-small">@Html.DisplayNameFor(m => m.Comments)</h3>
         <p>@Html.DisplayFor(m => m.Comments)</p>

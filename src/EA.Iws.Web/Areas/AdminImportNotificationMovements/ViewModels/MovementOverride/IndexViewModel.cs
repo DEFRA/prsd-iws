@@ -65,6 +65,8 @@
 
         public bool IsPartiallyRejected { get; set; }
 
+        public ShipmentType ShipmentTypes { get; set; }
+
         [Display(Name = "HasComments", ResourceType = typeof(IndexViewModelResources))]
         public bool HasComments { get; set; }
 
@@ -140,6 +142,9 @@
             RejectedQuantity = data.RejectedQuantity;
             RejectedUnits = data.RejectedUnit;
 
+            // Set ShipmentTypes based on current status
+            ShipmentTypes = IsReceived ? ShipmentType.Accepted : (IsRejected ? ShipmentType.Rejected : ShipmentType.Partially);
+            
             NotificationType = data.Data.NotificationType;
             Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value : (DateTime?)null;
 
@@ -176,27 +181,27 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualShipmentDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (ReceivedDate.HasValue && WasAccepted && !ActualQuantity.HasValue)
+            if (ReceivedDate.HasValue && ShipmentTypes == ShipmentType.Accepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
-            if (IsPartiallyRejected == true && !ActualQuantity.HasValue)
+            if (ShipmentTypes == ShipmentType.Partially && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
-            if ((IsPartiallyRejected == true || IsRejected == true) && !RejectedQuantity.HasValue)
+            if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && !RejectedQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.RejectedQuantityRequired, new[] { "RejectedQuantity" });
             }
 
-            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))
+            if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrEmpty(RejectionReason))
             {
                 yield return new ValidationResult(IndexViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
             }
 
-            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
+            if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
             {
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
