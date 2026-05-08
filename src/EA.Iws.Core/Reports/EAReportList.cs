@@ -12,5 +12,9 @@
         ProducerReport = 3,
         [Display(Name = "FOIReport", Description = "FOI report")]
         FOIReport = 4,
+        [Display(Name = "DataExportNotification", Description = "Data Export Notification")]
+        DataExportNotification = 5,
+        [Display(Name = "DataImportNotification", Description = "Data Import Notification")]
+        DataImportNotification = 6,
     }
 }

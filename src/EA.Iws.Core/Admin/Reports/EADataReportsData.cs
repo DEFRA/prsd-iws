@@ -9,5 +9,9 @@
         public ProducerData[] ProducerReportData { get; set; }
 
         public FreedomOfInformationData[] FreedomOfInformationReportData { get; set; }
+
+        public DataExportNotificationData[] DataExportNotificationData { get; set; }
+
+        public DataImportNotificationData[] DataImportNotificationData { get; set; }
     }
 }

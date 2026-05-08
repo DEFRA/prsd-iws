@@ -37,7 +37,9 @@
                 new KeyValuePairViewModel<EAReportList, bool>(EAReportList.ShipmentReport, true),
                 new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FinanceReport, true),
                 new KeyValuePairViewModel<EAReportList, bool>(EAReportList.ProducerReport, true),
-                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FOIReport, true)
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.FOIReport, true),
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.DataExportNotification, true),
+                new KeyValuePairViewModel<EAReportList, bool>(EAReportList.DataImportNotification, true)
             };
         }
 

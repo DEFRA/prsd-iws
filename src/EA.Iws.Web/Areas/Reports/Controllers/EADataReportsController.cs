@@ -69,6 +69,20 @@
                         sheet.Cells["A1"].LoadFromCollection(reportData.FreedomOfInformationReportData, true);
                         sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
                     }
+
+                    if (filename == Core.Reports.EAReportList.DataExportNotification)
+                    {
+                        var sheet = package.Workbook.Worksheets.Add("Data Export Notification");
+                        sheet.Cells["A1"].LoadFromCollection(reportData.DataExportNotificationData, true);
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                    }
+
+                    if (filename == Core.Reports.EAReportList.DataImportNotification)
+                    {
+                        var sheet = package.Workbook.Worksheets.Add("Data Import Notification");
+                        sheet.Cells["A1"].LoadFromCollection(reportData.DataImportNotificationData, true);
+                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                    }
                 }
                 var stream = new MemoryStream(package.GetAsByteArray());
                 var fileName = string.Format("EADataReports-{0}-{1}.xlsx", fromDate.ToShortDateString(), toDate.ToShortDateString());
