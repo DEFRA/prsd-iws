@@ -6,3 +6,6 @@ GO
 
 ALTER TABLE [Reports].[ShipmentsCache] ADD [RegistrationNumber] NVARCHAR(64) NULL;
 GO
+
+ALTER TABLE [Reports].[FreedomOfInformationCache] ADD [ConsentWithdrawnDate] DATE NULL;
+GO

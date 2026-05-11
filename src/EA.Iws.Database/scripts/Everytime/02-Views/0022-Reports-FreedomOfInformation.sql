@@ -107,7 +107,8 @@ AS
 			ELSE NULL
 		END AS [SiteOfExportName],
 		D.[NameOfOfficer] AS [Officer],
-		ORG.RegistrationNumber AS 'RegistrationNumber'
+		ORG.RegistrationNumber AS 'RegistrationNumber',
+		D.ConsentWithdrawnDate
 	FROM [Notification].[Notification] N
 	LEFT JOIN [Identity].[AspNetUsers] U ON U.Id = N.[UserId]
 	LEFT JOIN [Notification].[Organisation] ORG ON ORG.Id = U.OrganisationId
@@ -277,7 +278,8 @@ AS
 		D.WithdrawnDate,
 		NULL as [SiteOfExportName],
 		D.[NameOfOfficer] AS [Officer],
-		'' AS 'RegistrationNumber'
+		NULL AS 'RegistrationNumber',
+		D.ConsentWithdrawnDate
 	FROM [ImportNotification].[Notification] N
 	INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
 	INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]

@@ -6,11 +6,11 @@ SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- =============================================
+-- ====================================================
 -- Author:		Sreedhar Bangarugari
 -- Create date: 29-03-2026
 -- Description:	Get Freedom Of Information report data
--- =============================================
+-- ====================================================
 ALTER PROCEDURE [Reports].[uspFreedomOfInformationReportData]
 	@CompetentAuthority INT,
 	@FromDate DATE,
@@ -79,7 +79,8 @@ BEGIN
 		[FileClosedDate],
 		[LocalArea],
 		[Officer],
-		[RegistrationNumber]
+		[RegistrationNumber],
+		[ConsentWithdrawnDate]
 	FROM 
 		[Reports].[FreedomOfInformationCache]
 	WHERE 
@@ -134,6 +135,7 @@ BEGIN
 		[FileClosedDate],
 		[LocalArea],
 		[Officer],
-		[RegistrationNumber]
+		[RegistrationNumber],
+		[ConsentWithdrawnDate]
 END
 GO

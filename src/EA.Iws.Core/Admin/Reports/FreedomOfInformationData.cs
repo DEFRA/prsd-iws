@@ -135,5 +135,8 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Registration Number")]
         public string RegistrationNumber { get; set; }
+
+        [DisplayName("Consent withdrawn date")]
+        public DateTime? ConsentWithdrawnDate { get; set; }
     }
 }

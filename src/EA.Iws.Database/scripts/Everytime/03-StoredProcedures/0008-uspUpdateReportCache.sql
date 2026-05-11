@@ -71,7 +71,8 @@ BEGIN
 		[WithdrawnDate],
 		[SiteOfExportName],
 		[Officer],
-		[RegistrationNumber])
+		[RegistrationNumber],
+		[ConsentWithdrawnDate])
 	SELECT
 		[NotificationNumber],
 		[ImportOrExport],
@@ -134,7 +135,8 @@ BEGIN
 		[WithdrawnDate],
 		[SiteOfExportName],
 		[Officer],
-		[RegistrationNumber]
+		[RegistrationNumber],
+		[ConsentWithdrawnDate]
 	FROM [Reports].[FreedomOfInformation];
 
 	INSERT INTO [Reports].[ShipmentsCache] (
