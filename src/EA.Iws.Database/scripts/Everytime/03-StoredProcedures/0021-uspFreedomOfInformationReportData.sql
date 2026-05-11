@@ -78,7 +78,8 @@ BEGIN
 		[IsFinancialGuaranteeApproved],
 		[FileClosedDate],
 		[LocalArea],
-		[Officer]
+		[Officer],
+		[RegistrationNumber]
 	FROM 
 		[Reports].[FreedomOfInformationCache]
 	WHERE 
@@ -132,6 +133,7 @@ BEGIN
 		[IsFinancialGuaranteeApproved],
 		[FileClosedDate],
 		[LocalArea],
-		[Officer]
+		[Officer],
+		[RegistrationNumber]
 END
 GO

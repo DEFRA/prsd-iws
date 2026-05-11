@@ -109,5 +109,8 @@
 
         [DisplayName("Actioned by External User")]
         public string ActionedByExternalUser { get; set; }
+
+        [DisplayName("Registration Number")]
+        public string RegistrationNumber { get; set; }
     }
 }

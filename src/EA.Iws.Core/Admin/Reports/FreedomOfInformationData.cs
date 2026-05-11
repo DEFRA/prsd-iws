@@ -132,5 +132,8 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Officer name")]
         public string Officer { get; set; }
+
+        [DisplayName("Registration Number")]
+        public string RegistrationNumber { get; set; }
     }
 }

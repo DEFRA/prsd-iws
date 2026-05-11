@@ -29,7 +29,8 @@ BEGIN
 		[LocalArea],
 		[WasteType],
 		[NotificationStatus],
-		[ConsigneeName]
+		[ConsigneeName],
+		[RegistrationNumber]
 	FROM
 		[Reports].[ProducerCache]
 	WHERE
