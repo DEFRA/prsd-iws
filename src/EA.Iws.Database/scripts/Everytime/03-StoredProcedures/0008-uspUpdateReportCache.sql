@@ -6,296 +6,302 @@ ALTER PROCEDURE [Reports].[uspUpdateReportCache]
 AS
 BEGIN
 
-    DELETE FROM [Reports].[FreedomOfInformationCache];
-    DELETE FROM [Reports].[ShipmentsCache];
+	DELETE FROM [Reports].[FreedomOfInformationCache];
+	DELETE FROM [Reports].[ShipmentsCache];
 
-    INSERT INTO [Reports].[FreedomOfInformationCache] (
-           [NotificationNumber]
-          ,[ImportOrExport]
-          ,[IsInterim]
-          ,[ReceivedDate]
-          ,[CompetentAuthorityId]
-          ,[NotifierName]
-          ,[NotifierAddress]
-          ,[NotifierPostalCode]
-          ,[ProducerName]
-          ,[ProducerAddress]
-          ,[ProducerPostalCode]
-          ,[PointOfExport]
-          ,[PointOfEntry]
-          ,[ImportCountryName]
-          ,[ChemicalCompositionTypeId]
-          ,[NameOfWaste]
-          ,[WasteComponentTypes]
-          ,[EWC]
-          ,[YCode]
-          ,[HCode]
-          ,[OperationCodes]
-          ,[ImporterName]
-          ,[ImporterAddress]
-          ,[ImporterPostalCode]
-          ,[FacilityName]
-          ,[FacilityAddress]
-          ,[FacilityPostalCode]
-          ,[IntendedQuantity]
-          ,[IntendedQuantityUnit]
-          ,[IntendedQuantityUnitId]
-          ,[ConsentFrom]
-          ,[ConsentTo]
-          ,[LocalArea]
-          ,[MovementNumber]
-          ,[MovementReceivedDate]
-          ,[MovementCompletedDate]
-          ,[MovementQuantityReceviedUnitId]
-          ,[MovementQuantityReceived]
-          ,[BaselOecdCode]
-          ,[ExportCountryName]
-		  ,[NotifierType]
-		  ,[NotifierContactName]
-		  ,[NotifierContactEmail]
-		  ,[ProducerType]
-		  ,[ProducerContactEmail]
-		  ,[TransitStates]
-		  ,[ImporterType]
-		  ,[ImporterContactName]
-		  ,[ImporterContactEmail]
-		  ,[NotificationStatus]
-          ,[NotificationStatusAtFileClosed]
-		  ,[DecisionRequiredByDate]
-		  ,[IsFinancialGuaranteeApproved]
-		  ,[FileClosedDate]
-		  ,[TechnologyEmployed]
-		  ,[ActualDate]
-		  ,[AcknowledgedDate]
-		  ,[ObjectionDate]
-		  ,[WithdrawnDate]
-		  ,[SiteOfExportName]
-		  ,[Officer] )
-    SELECT [NotificationNumber]
-          ,[ImportOrExport]
-          ,[IsInterim]
-          ,[ReceivedDate]
-          ,[CompetentAuthorityId]
-          ,[NotifierName]
-          ,[NotifierAddress]
-          ,[NotifierPostalCode]
-          ,[ProducerName]
-          ,[ProducerAddress]
-          ,[ProducerPostalCode]
-          ,[PointOfExport]
-          ,[PointOfEntry]
-          ,[ImportCountryName]
-          ,[ChemicalCompositionTypeId]
-          ,[NameOfWaste]
-          ,[WasteComponentTypes]
-          ,[EWC]
-          ,[YCode]
-          ,[HCode]
-          ,[OperationCodes]
-          ,[ImporterName]
-          ,[ImporterAddress]
-          ,[ImporterPostalCode]
-          ,[FacilityName]
-          ,[FacilityAddress]
-          ,[FacilityPostalCode]
-          ,[IntendedQuantity]
-          ,[IntendedQuantityUnit]
-          ,[IntendedQuantityUnitId]
-          ,[ConsentFrom]
-          ,[ConsentTo]
-          ,[LocalArea]
-          ,[MovementNumber]
-          ,[MovementReceivedDate]
-          ,[MovementCompletedDate]
-          ,[MovementQuantityReceviedUnitId]
-          ,[MovementQuantityReceived]
-          ,[BaselOecdCode]
-          ,[ExportCountryName]
-		  ,[NotifierType]
-		  ,[NotifierContactName]
-		  ,[NotifierContactEmail]
-		  ,[ProducerType]
-		  ,[ProducerContactEmail]
-		  ,[TransitStates]
-		  ,[ImporterType]
-		  ,[ImporterContactName]
-		  ,[ImporterContactEmail]
-		  ,[NotificationStatus]
-          ,[NotificationStatusAtFileClosed]
-		  ,[DecisionRequiredByDate]
-		  ,[IsFinancialGuaranteeApproved]
-		  ,[FileClosedDate]
-		  ,[TechnologyEmployed]
-		  ,[ActualDate]
-		  ,[AcknowledgedDate]
-		  ,[ObjectionDate]
-		  ,[WithdrawnDate]
-		  ,[SiteOfExportName]
-		  ,[Officer]
-      FROM [Reports].[FreedomOfInformation];
+	INSERT INTO [Reports].[FreedomOfInformationCache] (
+		[NotificationNumber],
+		[ImportOrExport],
+		[IsInterim],
+		[ReceivedDate],
+		[CompetentAuthorityId],
+		[NotifierName],
+		[NotifierAddress],
+		[NotifierPostalCode],
+		[ProducerName],
+		[ProducerAddress],
+		[ProducerPostalCode],
+		[PointOfExport],
+		[PointOfEntry],
+		[ImportCountryName],
+		[ChemicalCompositionTypeId],
+		[NameOfWaste],
+		[WasteComponentTypes],
+		[EWC],
+		[YCode],
+		[HCode],
+		[OperationCodes],
+		[ImporterName],
+		[ImporterAddress],
+		[ImporterPostalCode],
+		[FacilityName],
+		[FacilityAddress],
+		[FacilityPostalCode],
+		[IntendedQuantity],
+		[IntendedQuantityUnit],
+		[IntendedQuantityUnitId],
+		[ConsentFrom],
+		[ConsentTo],
+		[LocalArea],
+		[MovementNumber],
+		[MovementReceivedDate],
+		[MovementCompletedDate],
+		[MovementQuantityReceviedUnitId],
+		[MovementQuantityReceived],
+		[BaselOecdCode],
+		[ExportCountryName],
+		[NotifierType],
+		[NotifierContactName],
+		[NotifierContactEmail],
+		[ProducerType],
+		[ProducerContactEmail],
+		[TransitStates],
+		[ImporterType],
+		[ImporterContactName],
+		[ImporterContactEmail],
+		[NotificationStatus],
+		[NotificationStatusAtFileClosed],
+		[DecisionRequiredByDate],
+		[IsFinancialGuaranteeApproved],
+		[FileClosedDate],
+		[TechnologyEmployed],
+		[ActualDate],
+		[AcknowledgedDate],
+		[ObjectionDate],
+		[WithdrawnDate],
+		[SiteOfExportName],
+		[Officer],
+		[RegistrationNumber])
+	SELECT
+		[NotificationNumber],
+		[ImportOrExport],
+		[IsInterim],
+		[ReceivedDate],
+		[CompetentAuthorityId],
+		[NotifierName],
+		[NotifierAddress],
+		[NotifierPostalCode],
+		[ProducerName],
+		[ProducerAddress],
+		[ProducerPostalCode],
+		[PointOfExport],
+		[PointOfEntry],
+		[ImportCountryName],
+		[ChemicalCompositionTypeId],
+		[NameOfWaste],
+		[WasteComponentTypes],
+		[EWC],
+		[YCode],
+		[HCode],
+		[OperationCodes],
+		[ImporterName],
+		[ImporterAddress],
+		[ImporterPostalCode],
+		[FacilityName],
+		[FacilityAddress],
+		[FacilityPostalCode],
+		[IntendedQuantity],
+		[IntendedQuantityUnit],
+		[IntendedQuantityUnitId],
+		[ConsentFrom],
+		[ConsentTo],
+		[LocalArea],
+		[MovementNumber],
+		[MovementReceivedDate],
+		[MovementCompletedDate],
+		[MovementQuantityReceviedUnitId],
+		[MovementQuantityReceived],
+		[BaselOecdCode],
+		[ExportCountryName],
+		[NotifierType],
+		[NotifierContactName],
+		[NotifierContactEmail],
+		[ProducerType],
+		[ProducerContactEmail],
+		[TransitStates],
+		[ImporterType],
+		[ImporterContactName],
+		[ImporterContactEmail],
+		[NotificationStatus],
+		[NotificationStatusAtFileClosed],
+		[DecisionRequiredByDate],
+		[IsFinancialGuaranteeApproved],
+		[FileClosedDate],
+		[TechnologyEmployed],
+		[ActualDate],
+		[AcknowledgedDate],
+		[ObjectionDate],
+		[WithdrawnDate],
+		[SiteOfExportName],
+		[Officer],
+		[RegistrationNumber]
+	FROM [Reports].[FreedomOfInformation];
 
-    INSERT INTO [Reports].[ShipmentsCache] (
-           [NotificationId]
-          ,[NotificationNumber]
-          ,[CompetentAuthorityId]
-          ,[Exporter]
-          ,[NotifierCompanyType]
-          ,[Importer]
-          ,[ConsigneeCompanyType]
-          ,[Facility]
-          ,[FacilityCompanyType]
-          ,[ShipmentNumber]
-          ,[ActualDateOfShipment]
-          ,[ConsentFrom]
-          ,[ConsentTo]
-          ,[PrenotificationDate]
-          ,[ReceivedDate]
-          ,[CompletedDate]
-          ,[QuantityReceived]
-          ,[QuantityReceivedUnit]
-          ,[QuantityReceivedUnitId]
-          ,[ChemicalCompositionTypeId]
-          ,[ChemicalComposition]
-          ,[LocalArea]
-          ,[TotalQuantity]
-          ,[TotalQuantityUnits]
-          ,[TotalQuantityUnitsId]
-          ,[EntryPort]
-          ,[DestinationCountry]
-          ,[ExitPort]
-          ,[OriginatingCountry]
-          ,[Status]
-          ,[NotificationReceivedDate]
-          ,[EwcCodes]
-          ,[ImportOrExport]
-          ,[BaselOecdCode]
-          ,[OperationCodes]
-          ,[YCode]
-          ,[HCode]
-          ,[UNClass]
-		  ,[SiteOfExportName]
-          ,[RejectedQuantity]
-		  ,[RejectedShipmentDate] 
-          ,[RejectedReason]
-          ,[ActionedByExternalUser])
-    SELECT [NotificationId]
-          ,[NotificationNumber]
-          ,[CompetentAuthorityId]
-          ,[Exporter]
-          ,[NotifierCompanyType]
-          ,[Importer]
-		  ,[ConsigneeCompanyType]
-          ,[Facility]
-		  ,[FacilityCompanyType]
-          ,[ShipmentNumber]
-          ,[ActualDateOfShipment]
-          ,[ConsentFrom]
-          ,[ConsentTo]
-          ,[PrenotificationDate]
-          ,[ReceivedDate]
-          ,[CompletedDate]
-          ,[QuantityReceived]
-          ,[QuantityReceivedUnit]
-          ,[QuantityReceivedUnitId]
-          ,[ChemicalCompositionTypeId]
-          ,[ChemicalComposition]
-          ,[LocalArea]
-          ,[TotalQuantity]
-          ,[TotalQuantityUnits]
-          ,[TotalQuantityUnitsId]
-          ,[EntryPort]
-          ,[DestinationCountry]
-          ,[ExitPort]
-          ,[OriginatingCountry]
-          ,[Status]
-          ,[NotificationReceivedDate]
-          ,[EwcCodes]
-          ,[ImportOrExport]
-          ,[BaselOecdCode]
-          ,[OperationCodes]
-          ,[YCode]
-          ,[HCode]
-          ,[UNClass]
-		  ,[SiteOfExportName]
-          ,[RejectedQuantity]
-		  ,[RejectedShipmentDate]
-          ,[RejectedReason]
-          ,[ActionedByExternalUser]
-      FROM [Reports].[Shipments];
+	INSERT INTO [Reports].[ShipmentsCache] (
+		[NotificationId],
+		[NotificationNumber],
+		[CompetentAuthorityId],
+		[Exporter],
+		[NotifierCompanyType],
+		[Importer],
+		[ConsigneeCompanyType],
+		[Facility],
+		[FacilityCompanyType],
+		[ShipmentNumber],
+		[ActualDateOfShipment],
+		[ConsentFrom],
+		[ConsentTo],
+		[PrenotificationDate],
+		[ReceivedDate],
+		[CompletedDate],
+		[QuantityReceived],
+		[QuantityReceivedUnit],
+		[QuantityReceivedUnitId],
+		[ChemicalCompositionTypeId],
+		[ChemicalComposition],
+		[LocalArea],
+		[TotalQuantity],
+		[TotalQuantityUnits],
+		[TotalQuantityUnitsId],
+		[EntryPort],
+		[DestinationCountry],
+		[ExitPort],
+		[OriginatingCountry],
+		[Status],
+		[NotificationReceivedDate],
+		[EwcCodes],
+		[ImportOrExport],
+		[BaselOecdCode],
+		[OperationCodes],
+		[YCode],
+		[HCode],
+		[UNClass],
+		[SiteOfExportName],
+		[RejectedQuantity],
+		[RejectedShipmentDate],
+		[RejectedReason],
+		[ActionedByExternalUser],
+		[RegistrationNumber])
+	SELECT
+		[NotificationId],
+		[NotificationNumber],
+		[CompetentAuthorityId],
+		[Exporter],
+		[NotifierCompanyType],
+		[Importer],
+		[ConsigneeCompanyType],
+		[Facility],
+		[FacilityCompanyType],
+		[ShipmentNumber],
+		[ActualDateOfShipment],
+		[ConsentFrom],
+		[ConsentTo],
+		[PrenotificationDate],
+		[ReceivedDate],
+		[CompletedDate],
+		[QuantityReceived],
+		[QuantityReceivedUnit],
+		[QuantityReceivedUnitId],
+		[ChemicalCompositionTypeId],
+		[ChemicalComposition],
+		[LocalArea],
+		[TotalQuantity],
+		[TotalQuantityUnits],
+		[TotalQuantityUnitsId],
+		[EntryPort],
+		[DestinationCountry],
+		[ExitPort],
+		[OriginatingCountry],
+		[Status],
+		[NotificationReceivedDate],
+		[EwcCodes],
+		[ImportOrExport],
+		[BaselOecdCode],
+		[OperationCodes],
+		[YCode],
+		[HCode],
+		[UNClass],
+		[SiteOfExportName],
+		[RejectedQuantity],
+		[RejectedShipmentDate],
+		[RejectedReason],
+		[ActionedByExternalUser],
+		[RegistrationNumber]
+	FROM [Reports].[Shipments];
 
 	--Update the ActionedByExternalUser, this is Y if any MovementAudit action has been carried out by an external user.
-	Select ma.NotificationId, ma.Shipmentnumber INTO [#MovementAuditExternalUserTempTable]
-	from [Notification].[MovementAudit] ma
-	Where ma.[Type] IN (1, 3, 4, 5)
-	AND ma.UserId NOT IN (select UserId from [Person].[InternalUser])
-	Group by ma.NotificationId, ma.ShipmentNumber
+	SELECT ma.NotificationId, ma.Shipmentnumber INTO [#MovementAuditExternalUserTempTable]
+	FROM [Notification].[MovementAudit] ma
+	WHERE ma.[Type] IN (1, 3, 4, 5)
+	AND ma.UserId NOT IN (SELECT UserId FROM [Person].[InternalUser])
+	GROUP BY ma.NotificationId, ma.ShipmentNumber
 
-	update sc 
-	SET sc.ActionedByExternalUser = 'Y'
-	FROM [Reports].[ShipmentsCache] sc
-	INNER JOIN [#MovementAuditExternalUserTempTable] MA
-	ON MA.NotificationId = sc.NotificationId AND Ma.ShipmentNumber = sc.ShipmentNumber
+	UPDATE sc SET sc.ActionedByExternalUser = 'Y' FROM [Reports].[ShipmentsCache] sc
+	INNER JOIN [#MovementAuditExternalUserTempTable] MA ON MA.NotificationId = sc.NotificationId AND Ma.ShipmentNumber = sc.ShipmentNumber
 
 	DROP TABLE [#MovementAuditExternalUserTempTable];
 
 	DELETE FROM [Reports].[ProducerCache];
 
 	INSERT INTO [Reports].[ProducerCache](
-			[NotificationNumber] 
-			,[CompetentAuthorityId] 
-			,[NotifierName] 
-			,[ProducerName] 
-			,[ProducerAddress1] 
-			,[ProducerAddress2] 
-			,[ProducerTownOrCity] 
-			,[ProducerPostCode] 
-			,[SiteOfExport] 
-			,[LocalArea] 
-			,[WasteType] 
-			,[NotificationStatus]
-			,[ConsigneeName] 
-			,[ConsentFrom] 
-			,[ConsentTo] 
-			,[NotificationReceivedDate] 
-			,[MovementReceivedDate] 
-			,[MovementCompletedDate] 
-			,[EwcCode] 
-			,[YCode] 
-			,[PointOfExit] 
-			,[PointOfEntry] 
-			,[ExportCountryName] 
-			,[ImportCountryName] 
-			,[SiteOfExportName] 
-			,[FacilityName] )
-    SELECT DISTINCT p.* FROM (
-        SELECT [NotificationNumber] 
-		        ,[CompetentAuthorityId] 
-		        ,[NotifierName] 
-		        ,[ProducerName] 
-		        ,[ProducerAddress1] 
-		        ,[ProducerAddress2] 
-		        ,[ProducerTownOrCity] 
-		        ,[ProducerPostCode] 
-		        ,[SiteOfExport] 
-		        ,[LocalArea] 
-		        ,[WasteType] 
-		        ,[NotificationStatus]
-		        ,[ConsigneeName] 
-		        ,[ConsentFrom] 
-		        ,[ConsentTo] 
-		        ,[NotificationReceivedDate] 
-		        ,[MovementReceivedDate] 
-		        ,[MovementCompletedDate] 
-		        ,[EwcCode] 
-		        ,[YCode] 
-		        ,[PointOfExit] 
-		        ,[PointOfEntry] 
-		        ,[ExportCountryName] 
-		        ,[ImportCountryName] 
-		        ,[SiteOfExportName] 
-		        ,[FacilityName] 
-        FROM [Reports].[Producers]
-    ) p
+		[NotificationNumber],
+		[CompetentAuthorityId],
+		[NotifierName],
+		[ProducerName],
+		[ProducerAddress1],
+		[ProducerAddress2],
+		[ProducerTownOrCity],
+		[ProducerPostCode],
+		[SiteOfExport],
+		[LocalArea],
+		[WasteType],
+		[NotificationStatus],
+		[ConsigneeName],
+		[ConsentFrom],
+		[ConsentTo],
+		[NotificationReceivedDate],
+		[MovementReceivedDate],
+		[MovementCompletedDate],
+		[EwcCode],
+		[YCode],
+		[PointOfExit],
+		[PointOfEntry],
+		[ExportCountryName],
+		[ImportCountryName],
+		[SiteOfExportName],
+		[FacilityName],
+		[RegistrationNumber])
+	SELECT DISTINCT p.* FROM (
+		SELECT 
+			[NotificationNumber],
+			[CompetentAuthorityId],
+			[NotifierName],
+			[ProducerName],
+			[ProducerAddress1],
+			[ProducerAddress2],
+			[ProducerTownOrCity],
+			[ProducerPostCode],
+			[SiteOfExport],
+			[LocalArea],
+			[WasteType],
+			[NotificationStatus],
+			[ConsigneeName],
+			[ConsentFrom],
+			[ConsentTo],
+			[NotificationReceivedDate],
+			[MovementReceivedDate],
+			[MovementCompletedDate],
+			[EwcCode],
+			[YCode],
+			[PointOfExit],
+			[PointOfEntry],
+			[ExportCountryName],
+			[ImportCountryName],
+			[SiteOfExportName],
+			[FacilityName],
+			[RegistrationNumber]
+		FROM [Reports].[Producers]
+	) p
 
 END
 GO
