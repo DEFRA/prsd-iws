@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to prenotification.
+        ///   Looks up a localized string similar to late prenotification.
         /// </summary>
         public static string ErrorPrenotification {
             get {
