@@ -819,6 +819,11 @@
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AccountManagementControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountManagementControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\AdditionalChargeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\AdditionalCharge\AdditionalChargeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\AdditionalCharge\IndexResources.Designer.cs">
@@ -4248,6 +4253,10 @@
     <EmbeddedResource Include="Areas\AddressBook\Views\Edit\AddEditResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEditResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\AccountManagementControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountManagementControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
