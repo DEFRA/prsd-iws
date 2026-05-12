@@ -138,5 +138,7 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Consent withdrawn date")]
         public DateTime? ConsentWithdrawnDate { get; set; }
+
+        public string CustomsCode { get; protected set; }
     }
 }

@@ -58,7 +58,8 @@
                 ActionedByExternalUser = source.ActionedByExternalUser,
                 RejectedQuantity = source.RejectedQuantity,
                 RejectedShipmentDate = source.RejectedShipmentDate,
-                RegistrationNumber = source.RegistrationNumber
+                RegistrationNumber = source.RegistrationNumber,
+                CustomsCode = source.CustomsCode
             };
         }
 

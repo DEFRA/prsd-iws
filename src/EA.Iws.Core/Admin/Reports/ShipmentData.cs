@@ -95,6 +95,9 @@
         [DisplayName("UN Class")]
         public string UNClass { get; set; }
 
+        [DisplayName("Customs Code")]
+        public string CustomsCode { get; set; }
+
         [DisplayName("Shipment Status")]
         public string ShipmentStatus { get; set; }
 
