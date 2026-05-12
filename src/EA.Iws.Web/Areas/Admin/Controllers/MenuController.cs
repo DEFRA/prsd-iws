@@ -115,6 +115,12 @@
                 HasComments = hasComments
             };
 
+            var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
+            if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
+            {
+                model.ShowEAReportLinks = true;
+            }
+
             return PartialView("_ImportNavigation", model);
         }
 
@@ -150,6 +156,12 @@
                 ShowFinancialGuaranteeDatesOverride = showFinancialGuaranteeDatesOverride,
                 HasComments = hasComments
             };
+
+            var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
+            if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
+            {
+                model.ShowEAReportLinks = true;
+            }
 
             return PartialView("_ExportNavigation", model);
         }

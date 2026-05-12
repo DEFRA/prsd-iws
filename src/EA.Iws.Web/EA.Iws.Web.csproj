@@ -851,6 +851,7 @@
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationReviewViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Menu\ReportLinkViewModel.cs" />
     <Compile Include="Areas\Admin\Views\ArchiveNotification\ArchiveNotificationResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

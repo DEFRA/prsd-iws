@@ -3,7 +3,7 @@
     using Core.ImportNotification;
     using Infrastructure;
 
-    public class ImportNavigationViewModel
+    public class ImportNavigationViewModel : ReportLinkViewModel
     {
         public ImportNavigationSection ActiveSection { get; set; }
 
