@@ -33,9 +33,12 @@
                     [Consented],
                     [Officer],
                     [ConsentTo],
-                    [SubmittedDate]
-                FROM [Reports].[DataImportNotifications]
-                WHERE [CompetentAuthorityId] = @ca AND [NotificationReceived] BETWEEN @from AND @to",
+                    [SubmittedDate],
+                    [ConsentWithdrawnDate]
+                FROM 
+                    [Reports].[DataImportNotifications]
+                WHERE 
+                    [CompetentAuthorityId] = @ca AND [NotificationReceived] BETWEEN @from AND @to",
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToArrayAsync();

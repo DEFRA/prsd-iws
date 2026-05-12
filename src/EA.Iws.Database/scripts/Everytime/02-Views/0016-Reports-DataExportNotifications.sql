@@ -28,7 +28,8 @@ AS
 			) AS DATE
 		) AS DecisionDate,
 		SB.SubmittedBy,
-		CAST(SB.SubmittedDate AS DATE) AS SubmittedDate
+		CAST(SB.SubmittedDate AS DATE) AS SubmittedDate,
+		CAST(D.ConsentWithdrawnDate AS DATE) AS ConsentWithdrawnDate
 	FROM [Notification].[Notification] N
 	LEFT JOIN [Notification].[FacilityCollection] FC ON FC.NotificationId = N.Id
 	INNER JOIN [Notification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
