@@ -72,7 +72,8 @@ BEGIN
 		[SiteOfExportName],
 		[Officer],
 		[RegistrationNumber],
-		[ConsentWithdrawnDate])
+		[ConsentWithdrawnDate],
+		[CustomsCode])
 	SELECT
 		[NotificationNumber],
 		[ImportOrExport],
@@ -136,7 +137,8 @@ BEGIN
 		[SiteOfExportName],
 		[Officer],
 		[RegistrationNumber],
-		[ConsentWithdrawnDate]
+		[ConsentWithdrawnDate],
+		[CustomsCode]
 	FROM [Reports].[FreedomOfInformation];
 
 	INSERT INTO [Reports].[ShipmentsCache] (
@@ -178,6 +180,7 @@ BEGIN
 		[YCode],
 		[HCode],
 		[UNClass],
+		[CustomsCode],
 		[SiteOfExportName],
 		[RejectedQuantity],
 		[RejectedShipmentDate],
@@ -223,6 +226,7 @@ BEGIN
 		[YCode],
 		[HCode],
 		[UNClass],
+		[CustomsCode]
 		[SiteOfExportName],
 		[RejectedQuantity],
 		[RejectedShipmentDate],
@@ -304,6 +308,5 @@ BEGIN
 			[RegistrationNumber]
 		FROM [Reports].[Producers]
 	) p
-
 END
 GO

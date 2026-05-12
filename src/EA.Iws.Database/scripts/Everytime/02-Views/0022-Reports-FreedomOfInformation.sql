@@ -30,41 +30,47 @@ AS
 					'Other - ' + WC.[Name] + ' - ' + WT.[ChemicalCompositionName]
 					END
 			ELSE CCT.[Description] END AS [NameOfWaste],
-        STUFF(( SELECT ', ' + WCT.Name AS [text()]
-            FROM [Notification].[WasteComponentInfo] WCOI
-            LEFT JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCOI.WasteComponentType 
-            WHERE N.Id = WCOI.NotificationId
-            ORDER BY WCOI.WasteComponentType
-            FOR XML PATH('')
-            ), 1, 2, '' ) AS [WasteComponentTypes],
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [Notification].[WasteCodeInfo] WCI
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 3
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [EWC],
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [Notification].[WasteCodeInfo] WCI
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 4
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [YCode],
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [Notification].[WasteCodeInfo] WCI
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 5
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [HCode],
-        STUFF(( SELECT ', ' + O.Name AS [text()]
-            FROM [Notification].[OperationCodes] OC
-            INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
-            WHERE OC.NotificationId = N.Id
-            ORDER BY O.IsInterim DESC, O.Id ASC
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS OperationCodes,
+		STUFF(( SELECT ', ' + WCT.Name AS [text()]
+			FROM [Notification].[WasteComponentInfo] WCOI
+			LEFT JOIN [Lookup].[WasteComponentType] WCT ON WCT.Id = WCOI.WasteComponentType 
+			WHERE N.Id = WCOI.NotificationId
+			ORDER BY WCOI.WasteComponentType
+			FOR XML PATH('')
+			), 1, 2, '' ) AS [WasteComponentTypes],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+			FROM [Notification].[WasteCodeInfo] WCI
+			LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+			WHERE WCI.NotificationId = N.Id AND WC.CodeType = 3
+			ORDER BY 1
+			FOR XML PATH('')
+			), 1, 1, '' ) AS [EWC],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+			FROM [Notification].[WasteCodeInfo] WCI
+			LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+			WHERE WCI.NotificationId = N.Id AND WC.CodeType = 4
+			ORDER BY 1
+			FOR XML PATH('')
+			), 1, 1, '' ) AS [YCode],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+			FROM [Notification].[WasteCodeInfo] WCI
+			LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+			WHERE WCI.NotificationId = N.Id AND WC.CodeType = 5
+			ORDER BY 1
+			FOR XML PATH('')
+			), 1, 1, '' ) AS [HCode],
+		STUFF(( SELECT ', ' + WCI.CustomCode AS [text()]
+			FROM [Notification].[WasteCodeInfo] WCI
+			WHERE WCI.NotificationId = N.Id AND WCI.CodeType = 10
+			ORDER BY 1
+			FOR XML PATH('')
+			), 1, 1, '' ) AS [CustomsCode],
+		STUFF(( SELECT ', ' + O.Name AS [text()]
+			FROM [Notification].[OperationCodes] OC
+			INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
+			WHERE OC.NotificationId = N.Id
+			ORDER BY O.IsInterim DESC, O.Id ASC
+			FOR XML PATH('')
+			), 1, 1, '' ) AS OperationCodes,
 		I.[Name] AS [ImporterName],
 		[Reports].[ConcatenateAddress](I.[Address1], I.[Address2], I.[TownOrCity], I.[PostalCode], I.[Region], I.[Country]) AS [ImporterAddress],
 		I.[PostalCode] AS [ImporterPostalCode],
@@ -119,25 +125,25 @@ AS
 	INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
 	INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
 	INNER JOIN [Notification].[Producer] P
-        ON P.Id = 
-        (
-            SELECT TOP 1 P1.Id
-            FROM [Notification].[ProducerCollection] AS PC
-            INNER JOIN [Notification].[Producer] AS P1
-            ON PC.Id = P1.ProducerCollectionId
-            WHERE PC.NotificationId = N.Id
-            ORDER BY P1.[IsSiteOfExport] DESC
-        )
-    INNER JOIN [Notification].[Facility] F
-        ON F.Id = 
-        (
-            SELECT TOP 1 F1.Id
-            FROM [Notification].[FacilityCollection] AS FC
-            INNER JOIN [Notification].[Facility] AS F1
-            ON FC.Id = F1.FacilityCollectionId
-            WHERE NotificationId = N.Id
-            ORDER BY F1.IsActualSiteOfTreatment DESC
-        )
+		ON P.Id = 
+		(
+			SELECT TOP 1 P1.Id
+			FROM [Notification].[ProducerCollection] AS PC
+			INNER JOIN [Notification].[Producer] AS P1
+			ON PC.Id = P1.ProducerCollectionId
+			WHERE PC.NotificationId = N.Id
+			ORDER BY P1.[IsSiteOfExport] DESC
+		)
+	INNER JOIN [Notification].[Facility] F
+		ON F.Id = 
+		(
+		SELECT TOP 1 F1.Id
+		FROM [Notification].[FacilityCollection] AS FC
+		INNER JOIN [Notification].[Facility] AS F1
+		ON FC.Id = F1.FacilityCollectionId
+		WHERE NotificationId = N.Id
+		ORDER BY F1.IsActualSiteOfTreatment DESC
+		)
 	INNER JOIN [Notification].[TransportRoute] TR ON TR.NotificationId = N.Id
 	INNER JOIN [Notification].[StateOfExport] SE ON SE.TransportRouteId = TR.Id
 	INNER JOIN [Notification].[StateOfImport] SI ON SI.TransportRouteId = TR.Id
@@ -231,6 +237,7 @@ AS
             order by 1
             FOR XML PATH('')
             ), 1, 1, '' ) AS [HCode],
+		NULL AS [CustomsCode],
         STUFF(( SELECT ', ' + O.Name AS [text()]
             FROM [ImportNotification].[WasteOperation] WO
             INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
