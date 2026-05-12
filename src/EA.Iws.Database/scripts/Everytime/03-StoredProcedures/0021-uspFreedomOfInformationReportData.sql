@@ -80,7 +80,8 @@ BEGIN
 		[LocalArea],
 		[Officer],
 		[RegistrationNumber],
-		[ConsentWithdrawnDate]
+		[ConsentWithdrawnDate],
+		[CustomsCode]
 	FROM 
 		[Reports].[FreedomOfInformationCache]
 	WHERE 
@@ -136,6 +137,7 @@ BEGIN
 		[LocalArea],
 		[Officer],
 		[RegistrationNumber],
-		[ConsentWithdrawnDate]
+		[ConsentWithdrawnDate],
+		[CustomsCode]
 END
 GO
