@@ -47,5 +47,8 @@
 
         [DisplayName("Consent valid To date")]
         public DateTime? ConsentTo { get; set; }
+
+        [DisplayName("Submitted date")]
+        public DateTime? SubmittedDate { get; set; }
     }
 }
