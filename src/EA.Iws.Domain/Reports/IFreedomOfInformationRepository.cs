@@ -14,6 +14,6 @@
             TextFieldOperator? searchType,
             string comparisonText);
 
-        Task<IEnumerable<FreedomOfInformationData>> GetFOIReport(DateTime from, DateTime to);
+        Task<IEnumerable<FreedomOfInformationData>> GetFOIReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority);
     }
 }

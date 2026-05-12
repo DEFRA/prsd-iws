@@ -11,11 +11,10 @@
 
     internal class GetEADataReportHandler : IRequestHandler<GetEADataReport, EADataReportsData>
     {
-        private readonly IShipmentsRepository shipmentsRepository;
         private readonly IMapWithParameter<Shipment, UKCompetentAuthority, ShipmentData> shipmentMapper;
         private readonly IMapWithParameter<DataExportNotification, UKCompetentAuthority, DataExportNotificationData> dataExportMapper;
         private readonly IMapWithParameter<DataImportNotification, UKCompetentAuthority, DataImportNotificationData> dataImportMapper;
-
+        private readonly IShipmentsRepository shipmentsRepository;
         private readonly IFinanceReportRepository financeReportRepository;
         private readonly IProducerRepository producerReportRepository;
         private readonly IFreedomOfInformationRepository foiRepository;
@@ -34,25 +33,24 @@
             Domain.IInternalUserRepository internalUserRepository)
         {
             this.shipmentsRepository = shipmentsRepository;
-            this.shipmentMapper = shipmentMapper;
-
             this.financeReportRepository = financeReportRepository;
             this.producerReportRepository = producerReportRepository;
             this.foiRepository = foiRepository;
             this.exportNotificationsRepository = exportNotificationsRepository;
-            this.dataExportMapper = dataExportMapper;
             this.importNotificationsRepository = importNotificationsRepository;
+            this.shipmentMapper = shipmentMapper;
+            this.dataExportMapper = dataExportMapper;
             this.dataImportMapper = dataImportMapper;
         }
 
         public async Task<EADataReportsData> HandleAsync(GetEADataReport message)
         {
-            var shipmentData = await shipmentsRepository.GetEAShipmentData(message.FromDate, message.ToDate);
-            var financeData = await financeReportRepository.GetFinanceReport(message.FromDate, message.ToDate);
-            var producerData = await producerReportRepository.GetProducerReport(message.FromDate, message.ToDate);
-            var foiReportData = await foiRepository.GetFOIReport(message.FromDate, message.ToDate);
-            var dataExportNotification = await exportNotificationsRepository.Get(message.FromDate, message.ToDate, UKCompetentAuthority.England);
-            var dataImportNotification = await importNotificationsRepository.Get(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var shipmentData = await shipmentsRepository.GetShipmentReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var financeData = await financeReportRepository.GetFinanceReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var producerData = await producerReportRepository.GetProducerReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var foiReportData = await foiRepository.GetFOIReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var dataExportNotification = await exportNotificationsRepository.GetDataExportNotificationData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var dataImportNotification = await importNotificationsRepository.GetDataImportNotificationData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
 
             var reportsData = new EADataReportsData()
             {

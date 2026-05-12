@@ -83,10 +83,10 @@
                 new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }
 
-        public async Task<IEnumerable<Shipment>> GetEAShipmentData(DateTime fromDate, DateTime toDate)
+        public async Task<IEnumerable<Shipment>> GetShipmentReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<Shipment>(@"[Reports].[uspShipmentReportData] @CompetentAuthority, @FromDate, @ToDate",
-                                                                new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                new SqlParameter("@CompetentAuthority", (int)competentAuthority),
                                                                 new SqlParameter("@FromDate", fromDate),
                                                                 new SqlParameter("@ToDate", toDate))
                                         .ToArrayAsync();

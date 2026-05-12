@@ -16,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<DataImportNotification>> Get(DateTime @from, DateTime to, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<DataImportNotification>> GetDataImportNotificationData(DateTime @from, DateTime to, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<DataImportNotification>(
                 @"SELECT 

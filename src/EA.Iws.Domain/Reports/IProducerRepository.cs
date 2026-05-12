@@ -13,6 +13,6 @@
             ProducerReportTextFields? textFieldType, TextFieldOperator? operatorType, string textSearch,
             UKCompetentAuthority competentAuthority);
 
-        Task<IEnumerable<ProducerData>> GetProducerReport(DateTime fromDate, DateTime toDate);
+        Task<IEnumerable<ProducerData>> GetProducerReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority);
     }
 }

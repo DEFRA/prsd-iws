@@ -66,10 +66,10 @@
                 new SqlParameter("@to", to)).ToArrayAsync();
         }
 
-        public async Task<IEnumerable<FinanceReportData>> GetFinanceReport(DateTime fromDate, DateTime toDate)
+        public async Task<IEnumerable<FinanceReportData>> GetFinanceReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<FinanceReportData>(@"[Reports].[uspFinanceReportData] @CompetentAuthority, @FromDate, @ToDate",
-                                                                            new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                            new SqlParameter("@CompetentAuthority", (int)competentAuthority),
                                                                             new SqlParameter("@FromDate", fromDate),
                                                                             new SqlParameter("@ToDate", toDate))
                                         .ToArrayAsync();

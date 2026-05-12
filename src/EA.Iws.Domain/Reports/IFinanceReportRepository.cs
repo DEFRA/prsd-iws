@@ -10,6 +10,6 @@
     {
         Task<IEnumerable<Finance>> GetFinanceReport(DateTime from, DateTime to, UKCompetentAuthority competentAuthority);
 
-        Task<IEnumerable<FinanceReportData>> GetFinanceReport(DateTime from, DateTime to);
+        Task<IEnumerable<FinanceReportData>> GetFinanceReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority);
     }
 }

@@ -7,6 +7,6 @@
 
     public interface IExportNotificationsRepository
     {
-        Task<IEnumerable<DataExportNotification>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority);
+        Task<IEnumerable<DataExportNotification>> GetDataExportNotificationData(DateTime from, DateTime to, UKCompetentAuthority competentAuthority);
     }
 }

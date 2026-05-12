@@ -163,10 +163,10 @@
               new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }
 
-        public async Task<IEnumerable<FreedomOfInformationData>> GetFOIReport(DateTime fromDate, DateTime toDate)
+        public async Task<IEnumerable<FreedomOfInformationData>> GetFOIReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<FreedomOfInformationData>(@"[Reports].[uspFreedomOfInformationReportData] @CompetentAuthority, @FromDate, @ToDate",
-                                                                                new SqlParameter("@CompetentAuthority", (int)UKCompetentAuthority.England),
+                                                                                new SqlParameter("@CompetentAuthority", (int)competentAuthority),
                                                                                 new SqlParameter("@FromDate", fromDate),
                                                                                 new SqlParameter("@ToDate", toDate))
                                         .ToArrayAsync();
