@@ -2,10 +2,12 @@
 {
     using EA.Iws.Core.Admin.Reports;
     using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Reports;
     using EA.Iws.Domain.Reports;
     using EA.Iws.Requests.Admin.Reports;
     using EA.Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
 
@@ -45,22 +47,64 @@
 
         public async Task<EADataReportsData> HandleAsync(GetEADataReport message)
         {
-            var shipmentData = await shipmentsRepository.GetShipmentReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
-            var financeData = await financeReportRepository.GetFinanceReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
-            var producerData = await producerReportRepository.GetProducerReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
-            var foiReportData = await foiRepository.GetFOIReportData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
-            var dataExportNotification = await exportNotificationsRepository.GetDataExportNotificationData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
-            var dataImportNotification = await importNotificationsRepository.GetDataImportNotificationData(message.FromDate, message.ToDate, UKCompetentAuthority.England);
+            var authority = UKCompetentAuthority.England;
+            var fromDate = message.FromDate;
+            var toDate = message.ToDate;
 
-            var reportsData = new EADataReportsData()
+            var selectedReports = message.SelectedReportList?.ToHashSet() ?? new HashSet<EAReportList>();
+
+            var reportsData = new EADataReportsData();
+
+            if (selectedReports.Contains(EAReportList.ShipmentReport))
             {
-                ShipmentReportData = shipmentData.Select(shipmentDatas => shipmentMapper.Map(shipmentDatas, UKCompetentAuthority.England)).ToArray(),
-                FinanceReportData = financeData.ToArray(),
-                ProducerReportData = producerData.ToArray(),
-                FreedomOfInformationReportData = foiReportData.ToArray(),
-                DataExportNotificationData = dataExportNotification.Select(exportData => dataExportMapper.Map(exportData, UKCompetentAuthority.England)).ToArray(),
-                DataImportNotificationData = dataImportNotification.Select(importData => dataImportMapper.Map(importData, UKCompetentAuthority.England)).ToArray()
-            };
+                var data = await shipmentsRepository
+                    .GetShipmentReportData(fromDate, toDate, authority);
+
+                reportsData.ShipmentReportData = data?.Select(x => shipmentMapper.Map(x, authority))
+                    .ToArray();
+            }
+
+            if (selectedReports.Contains(EAReportList.FinanceReport))
+            {
+                var data = await financeReportRepository
+                    .GetFinanceReportData(fromDate, toDate, authority);
+
+                reportsData.FinanceReportData = data?.ToArray();
+            }
+
+            if (selectedReports.Contains(EAReportList.ProducerReport))
+            {
+                var data = await producerReportRepository
+                    .GetProducerReportData(fromDate, toDate, authority);
+
+                reportsData.ProducerReportData = data?.ToArray();
+            }
+
+            if (selectedReports.Contains(EAReportList.FOIReport))
+            {
+                var data = await foiRepository
+                    .GetFOIReportData(fromDate, toDate, authority);
+
+                reportsData.FreedomOfInformationReportData = data?.ToArray();
+            }
+
+            if (selectedReports.Contains(EAReportList.DataExportNotification))
+            {
+                var data = await exportNotificationsRepository
+                    .GetDataExportNotificationData(fromDate, toDate, authority);
+
+                reportsData.DataExportNotificationData = data?.Select(x => dataExportMapper.Map(x, authority))
+                    .ToArray();
+            }
+
+            if (selectedReports.Contains(EAReportList.DataImportNotification))
+            {
+                var data = await importNotificationsRepository
+                    .GetDataImportNotificationData(fromDate, toDate, authority);
+
+                reportsData.DataImportNotificationData = data?.Select(x => dataImportMapper.Map(x, authority))
+                    .ToArray();
+            }
 
             return reportsData;
         }
