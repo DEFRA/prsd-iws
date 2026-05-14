@@ -1,8 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
+    using ClosedXML.Excel;
+    using EA.Iws.Core.Reports;
     using EA.Iws.Requests.Admin.Reports;
     using EA.Iws.Web.Infrastructure.Authorization;
+    using EA.Prsd.Core.Helpers;
     using EA.Prsd.Core.Mediator;
+    using System.Collections.Generic;
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
@@ -36,59 +40,90 @@
 
             var fromDate = model.From.AsDateTime().Value;
             var toDate = model.To.AsDateTime().Value;
-            var reportData = await mediator.SendAsync(new GetEADataReport(fromDate, toDate, model.SelectedValues.ToList()));
+            var selectedReports = model.SelectedValues.ToList();
 
-            using (var package = new OfficeOpenXml.ExcelPackage())
+            var reportData = await mediator.SendAsync(
+                new GetEADataReport(fromDate, toDate, selectedReports));
+
+            using (var workbook = new XLWorkbook())
             {
-                foreach (var filename in model.SelectedValues)
+                foreach (var report in selectedReports)
                 {
-                    if (filename == Core.Reports.EAReportList.ShipmentReport)
+                    switch (report)
                     {
-                        var sheet = package.Workbook.Worksheets.Add("Shipment Report");
-                        sheet.Cells["A1"].LoadFromCollection(reportData.ShipmentReportData, true);
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
-                    }
+                        case EAReportList.ShipmentReport:
+                            AddWorksheet(
+                                workbook,
+                                EnumHelper.GetDescription(EAReportList.ShipmentReport),
+                                reportData.ShipmentReportData);
+                            break;
 
-                    if (filename == Core.Reports.EAReportList.FinanceReport)
-                    {
-                        var sheet = package.Workbook.Worksheets.Add("Finance Report");
-                        sheet.Cells["A1"].LoadFromCollection(reportData.FinanceReportData, true);
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
-                    }
+                        case EAReportList.FinanceReport:
+                            AddWorksheet(
+                                workbook,
+                                EnumHelper.GetDescription(EAReportList.FinanceReport),
+                                reportData.FinanceReportData);
+                            break;
 
-                    if (filename == Core.Reports.EAReportList.ProducerReport)
-                    {
-                        var sheet = package.Workbook.Worksheets.Add("Producer Report");
-                        sheet.Cells["A1"].LoadFromCollection(reportData.ProducerReportData, true);
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
-                    }
+                        case EAReportList.ProducerReport:
+                            AddWorksheet(
+                                workbook,
+                                EnumHelper.GetDescription(EAReportList.ProducerReport),
+                                reportData.ProducerReportData);
+                            break;
 
-                    if (filename == Core.Reports.EAReportList.FOIReport)
-                    {
-                        var sheet = package.Workbook.Worksheets.Add("FOI Report");
-                        sheet.Cells["A1"].LoadFromCollection(reportData.FreedomOfInformationReportData, true);
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
-                    }
+                        case EAReportList.FOIReport:
+                            AddWorksheet(
+                                workbook,
+                                EnumHelper.GetDescription(EAReportList.FOIReport),
+                                reportData.FreedomOfInformationReportData);
+                            break;
 
-                    if (filename == Core.Reports.EAReportList.DataExportNotification)
-                    {
-                        var sheet = package.Workbook.Worksheets.Add("Data Export Notification");
-                        sheet.Cells["A1"].LoadFromCollection(reportData.DataExportNotificationData, true);
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
-                    }
+                        case EAReportList.DataExportNotification:
+                            AddWorksheet(
+                                workbook,
+                                EnumHelper.GetDescription(EAReportList.DataExportNotification),
+                                reportData.DataExportNotificationData);
+                            break;
 
-                    if (filename == Core.Reports.EAReportList.DataImportNotification)
-                    {
-                        var sheet = package.Workbook.Worksheets.Add("Data Import Notification");
-                        sheet.Cells["A1"].LoadFromCollection(reportData.DataImportNotificationData, true);
-                        sheet.Cells[sheet.Dimension.Address].AutoFitColumns();
+                        case EAReportList.DataImportNotification:
+                            AddWorksheet(
+                                workbook,
+                                EnumHelper.GetDescription(EAReportList.DataImportNotification),
+                                reportData.DataImportNotificationData);
+                            break;
                     }
                 }
-                var stream = new MemoryStream(package.GetAsByteArray());
-                var fileName = string.Format("EADataReports-{0}-{1}.xlsx", fromDate.ToShortDateString(), toDate.ToShortDateString());
 
-                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+                using (var memoryStream = new MemoryStream())
+                {
+                    workbook.SaveAs(memoryStream);
+                    memoryStream.Position = 0;
+
+                    var fileName =
+                        $"EADataReport-{fromDate:yyyyMMdd}-{toDate:yyyyMMdd}.xlsx";
+
+                    return File(
+                        memoryStream.ToArray(),
+                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                        fileName);
+                }
             }
+        }
+
+        private static void AddWorksheet<T>(XLWorkbook workbook, string sheetName, IEnumerable<T> data)
+        {
+            var worksheet = workbook.Worksheets.Add(sheetName);
+
+            worksheet.Cell(1, 1).InsertTable(data);
+
+            var headerRange = worksheet.Range(1, 1, 1, worksheet.LastColumnUsed().ColumnNumber());
+
+            headerRange.Style.Font.Bold = true;
+            headerRange.Style.Fill.BackgroundColor = XLColor.LimeGreen;
+
+            worksheet.SheetView.FreezeRows(1);
+            worksheet.Columns().AdjustToContents();
         }
     }
 }
