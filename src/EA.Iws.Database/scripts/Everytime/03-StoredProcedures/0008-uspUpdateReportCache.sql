@@ -180,7 +180,6 @@ BEGIN
 		[YCode],
 		[HCode],
 		[UNClass],
-		[CustomsCode],
 		[SiteOfExportName],
 		[RejectedQuantity],
 		[RejectedShipmentDate],
@@ -226,7 +225,6 @@ BEGIN
 		[YCode],
 		[HCode],
 		[UNClass],
-		[CustomsCode]
 		[SiteOfExportName],
 		[RejectedQuantity],
 		[RejectedShipmentDate],
@@ -308,5 +306,6 @@ BEGIN
 			[RegistrationNumber]
 		FROM [Reports].[Producers]
 	) p
+
 END
 GO
