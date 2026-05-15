@@ -147,6 +147,8 @@
                     {
                         @Html.AntiForgeryToken()
                         <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control govuk-input" style="width:250px" placeholder="@Resources.SearchPlaceholder" />
+                        <input type="hidden" name="status" value="@Model.SelectedMovementStatus" />
+                        <input type="hidden" name="page" value="@Model.PageNumber" />
                         <button class="govuk-button">@Resources.SearchButton</button>
                     }
                 </div>

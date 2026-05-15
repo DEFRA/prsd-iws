@@ -7,7 +7,10 @@
     using System.Web.Mvc;
     using Core.Notification.Audit;
     using Core.WasteType;
+    using EA.Iws.Core.Extensions;
+    using EA.Iws.Core.IntendedShipments;
     using EA.Iws.Core.WasteComponentType;
+    using EA.Iws.Requests.IntendedShipments;
     using EA.Iws.Requests.WasteComponentType;
     using EA.Prsd.Core.Helpers;
     using Infrastructure;
@@ -102,12 +105,44 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> WasteCategory(WasteCategoryViewModel model, bool? backToOverview = null)
         {
+            IntendedShipmentData shipmentData = null;
+
+            try
+            {
+                shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(model.NotificationId));
+            }
+            catch (Exception)
+            {
+                // If the shipment data cannot be retrieved then the validation should not be applied as it cannot be confirmed if there are multiple shipments or not.
+            }
+
+            string shipmentErrorMessage = "Only one shipment is allowed for the selected waste category.";
+            bool shipmentErrorUsed = false;
+
+            if (shipmentData != null && shipmentData.HasShipmentData)
+            {
+                if ((shipmentData.NumberOfShipments > 1) &&
+                    (model.WasteCategoryType.SelectedValue == WasteCategoryType.Singleship.GetDisplayName() || 
+                     model.WasteCategoryType.SelectedValue == WasteCategoryType.Platformrig.GetDisplayName()))
+                {
+                    ModelState.AddModelError("WasteCategoryType.SelectedValue", shipmentErrorMessage);
+                    shipmentErrorUsed = true;
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 if (ModelState["WasteCategoryType.SelectedValue"] != null && ModelState["WasteCategoryType.SelectedValue"].Errors.Count == 1)
                 {
                     ModelState["WasteCategoryType.SelectedValue"].Errors.Clear();
-                    ModelState.AddModelError("WasteCategoryType.SelectedValue", "Select the appropriate waste category");
+                    if (shipmentErrorUsed)
+                    {
+                        ModelState.AddModelError("WasteCategoryType.SelectedValue", shipmentErrorMessage);
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("WasteCategoryType.SelectedValue", "Select the appropriate waste category");
+                    }
                 }
                 return View(model);
             }
