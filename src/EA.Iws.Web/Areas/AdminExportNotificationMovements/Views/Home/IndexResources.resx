@@ -142,7 +142,7 @@
     <value>over tonnage</value>
   </data>
   <data name="ErrorPrenotification" xml:space="preserve">
-    <value>prenotification</value>
+    <value>late prenotification</value>
   </data>
   <data name="GoToButtonText" xml:space="preserve">
     <value>Go to notification overview</value>
