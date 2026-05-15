@@ -170,6 +170,24 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementO
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recovery date.
+        /// </summary>
+        public static string RecoveryDateLabel {
+            get {
+                return ResourceManager.GetString("RecoveryDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please remove the recovery date as it cannot be set when the shipment is rejected.
+        /// </summary>
+        public static string RecoveryDateMustBeCleared {
+            get {
+                return ResourceManager.GetString("RecoveryDateMustBeCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide the rejected quantity.
         /// </summary>
         public static string RejectedQuantityRequired {
@@ -211,6 +229,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementO
         public static string StatsMarking {
             get {
                 return ResourceManager.GetString("StatsMarking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please remove the WSR/Basel annual stats marking as it is not required when the shipment is accepted.
+        /// </summary>
+        public static string StatsMustBeCleared {
+            get {
+                return ResourceManager.GetString("StatsMustBeCleared", resourceCulture);
             }
         }
         
