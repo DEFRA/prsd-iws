@@ -153,6 +153,12 @@
   <data name="ReceivedDateRequired" xml:space="preserve">
     <value>Please provide the received date</value>
   </data>
+  <data name="RecoveryDateLabel" xml:space="preserve">
+    <value>Recovery date</value>
+  </data>
+  <data name="RecoveryDateMustBeCleared" xml:space="preserve">
+    <value>Please remove the recovery date as it cannot be set when the shipment is rejected</value>
+  </data>
   <data name="RejectedQuantityRequired" xml:space="preserve">
     <value>Please provide the rejected quantity</value>
   </data>
@@ -167,6 +173,9 @@
   </data>
   <data name="StatsMarking" xml:space="preserve">
     <value>WSR/Basel annual stats marking (when required)</value>
+  </data>
+  <data name="StatsMustBeCleared" xml:space="preserve">
+    <value>Please remove the WSR/Basel annual stats marking as it is not required when the shipment is accepted</value>
   </data>
   <data name="WasShipmentAcceptedLabel" xml:space="preserve">
     <value>Was the shipment accepted?</value>

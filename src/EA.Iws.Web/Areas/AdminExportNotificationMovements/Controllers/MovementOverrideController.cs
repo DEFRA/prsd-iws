@@ -54,10 +54,10 @@
                 ActualDate = model.ActualShipmentDate.Value,
                 HasNoPrenotification = model.PrenotificationDate.HasValue ? false : true,
                 PrenotificationDate = model.PrenotificationDate.HasValue ? model.PrenotificationDate.Value : (DateTime?)null,
-                ReceiptDate = (!isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                ReceiptDate = model.ShipmentTypes == ShipmentType.Accepted && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 ActualQuantity = model.ActualQuantity,
                 ReceiptUnits = model.Units,
-                RejectionDate = (isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                RejectionDate = (isRejected || isPartiallyRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null,
                 RejectionReason = model.RejectionReason,
                 Comments = model.Comments,
@@ -75,7 +75,7 @@
                 id, model.ShipmentNumber,
                 User.GetUserId(),
                 MovementAuditType.Edited);
-            return RedirectToAction("Edit", "CaptureMovement",  new { movementId });
+            return RedirectToAction("Edit", "CaptureMovement", new { movementId });
         }
 
         [HttpPost]
