@@ -74,7 +74,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPayment(PaymentDetailsViewModel model, string submitButton)
         {
-            bool paymentDateIsInTheFuture = model.PaymentDate.AsDateTime().HasValue && model.PaymentDate.AsDateTime().Value > DateTime.Now;
+            bool paymentDateIsInTheFuture = model.PaymentDate.AsDateTime().HasValue && model.PaymentDate.AsDateTime().Value > DateTime.UtcNow;
             bool submitButtonYes = false;
             bool submitButtonNo = false;
             
