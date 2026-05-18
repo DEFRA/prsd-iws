@@ -1,10 +1,15 @@
-﻿@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
+﻿@using EA.Iws.Core.Admin
+@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
 @using Resources = EA.Iws.Web.Areas.Admin.Views.UserAdministration.UserAdministrationResources
 @{
     ViewBag.Title = Resources.ChangeUserStatusTitle;
 }
 
 <h1 class="govuk-heading-l">@Resources.ChangeUserStatusTitle</h1>
+
+@Html.ActionLink(Resources.ActiveUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = InternalUserStatus.Approved }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.InactiveUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = InternalUserStatus.Inactive }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.AllUsersButton, "ChangeUserStatus", "UserAdministration", new { @class = "govuk-button--secondary" })
 
 <table class="govuk-form-group" title="@Resources.ChangeUserStatusTitle">
     <thead>
@@ -24,13 +29,13 @@
                 @Html.AntiForgeryToken()
                 @Html.Hidden("UserId", Model.Users[i].UserId)
 
-        <tr>
-            <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
-            <td class="font-xsmall">@Model.Users[i].Role</td>
-            <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i), @class = "govuk-select" })</td>
-            <td class="font-xsmall">@(Model.Users[i].LastLoginDate.HasValue ? Model.Users[i].LastLoginDate.Value.ToString("dd MMM yyyy HH:mm") : "")</td>
-            <td><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
-        </tr>
+                <tr>
+                    <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
+                    <td class="font-xsmall">@Model.Users[i].Role</td>
+                    <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i), @class = "govuk-select" })</td>
+                    <td class="font-xsmall">@(Model.Users[i].LastLoginDate.HasValue ? Model.Users[i].LastLoginDate.Value.ToString("dd MMM yyyy HH:mm") : "")</td>
+                    <td><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
+                </tr>
             }
         }
     </tbody>

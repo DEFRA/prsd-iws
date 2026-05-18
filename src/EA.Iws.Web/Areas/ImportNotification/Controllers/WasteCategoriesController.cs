@@ -1,12 +1,16 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
-    using EA.Iws.Requests.ImportNotification;
-    using EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteCategories;
-    using EA.Iws.Web.Infrastructure.Authorization;
-    using EA.Prsd.Core.Mediator;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using EA.Iws.Core.IntendedShipments;
+    using EA.Iws.Core.WasteType;
+    using EA.Iws.Requests.ImportNotification;
+    using EA.Iws.Requests.IntendedShipments;
+    using EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteCategories;
+    using EA.Iws.Web.Infrastructure.Authorization;
+    using EA.Prsd.Core.Helpers;
+    using EA.Prsd.Core.Mediator;
 
     [AuthorizeActivity(typeof(SetDraftData<>))]
     public class WasteCategoriesController : Controller
@@ -37,6 +41,28 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, WasteCategoriesViewModel model)
         {
+            IntendedShipmentData shipmentData = null;
+            string shipmentErrorMessage = "Only one shipment is allowed for the selected waste category.";
+
+            try
+            {
+                shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
+            }
+            catch
+            {
+                // If the shipment data cannot be retrieved then the validation should not be applied as it cannot be confirmed if there are multiple shipments or not.
+            }
+
+            if (shipmentData != null && shipmentData.HasShipmentData)
+            {
+                if ((shipmentData.NumberOfShipments > 1) &&
+                    (model.WasteCategories.SelectedValue == EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)WasteCategoryType.Singleship) ||
+                     model.WasteCategories.SelectedValue == EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)WasteCategoryType.Platformrig)))
+                {
+                    ModelState.AddModelError("WasteCategoryType.SelectedValue", shipmentErrorMessage);
+                }
+            }
+
             if (!ModelState.IsValid)
             {
                 return View(model);

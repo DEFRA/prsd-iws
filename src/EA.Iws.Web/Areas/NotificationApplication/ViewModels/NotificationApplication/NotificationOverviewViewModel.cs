@@ -12,6 +12,8 @@
 
         public Guid NotificationId { get; set; }
 
+        public AnnexPlusViewModel AnnexPlusViewModel { get; set; }
+
         public OrganisationsInvolvedViewModel OrganisationsInvolvedViewModel { get; set; }
 
         public RecoveryOperationViewModel RecoveryOperationViewModel { get; set; }

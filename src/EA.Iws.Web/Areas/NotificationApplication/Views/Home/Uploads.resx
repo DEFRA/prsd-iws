@@ -117,37 +117,82 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AcknowledgedDate" xml:space="preserve">
-    <value>Acknowledged on</value>
+  <data name="AlreadyProvidedText" xml:space="preserve">
+    <value>This annex has already been provided</value>
   </data>
-  <data name="CommencementDate" xml:space="preserve">
-    <value>Assessment started</value>
+  <data name="AnnexColumnTitle" xml:space="preserve">
+    <value>Document</value>
   </data>
-  <data name="CompleteDate" xml:space="preserve">
-    <value>Notification complete</value>
+  <data name="AnnexNameColumnTitle" xml:space="preserve">
+    <value>Document title</value>
   </data>
-  <data name="ConsentedDate" xml:space="preserve">
-    <value>Consent date</value>
+  <data name="AwaitingUpload" xml:space="preserve">
+    <value>Awaiting Upload</value>
   </data>
-  <data name="ConsentValidFromDate" xml:space="preserve">
-    <value>Consent valid from</value>
+  <data name="BrowseLink" xml:space="preserve">
+    <value>Browse</value>
   </data>
-  <data name="ConsentValidToDate" xml:space="preserve">
-    <value>Consent valid to</value>
+  <data name="BrowseLinkText" xml:space="preserve">
+    <value>for a file to upload</value>
   </data>
-  <data name="NotificationReceivedDate" xml:space="preserve">
-    <value>Notification received</value>
+  <data name="CompositionOfWaste" xml:space="preserve">
+    <value>Composition of waste</value>
   </data>
-  <data name="ObjectedDate" xml:space="preserve">
-    <value>Objected</value>
+  <data name="DownloadPackLinkText" xml:space="preserve">
+    <value>Download your notification pack</value>
   </data>
-  <data name="WithdrawnDate" xml:space="preserve">
-    <value>Notification Withdrawn</value>
+  <data name="FirstListItemA" xml:space="preserve">
+    <value>Check your </value>
   </data>
-  <data name="DecisionRequiredByDate" xml:space="preserve">
-    <value>Decision required by</value>
+  <data name="FirstListItemB" xml:space="preserve">
+    <value> for the instructions which you'll need to reference your separate annexes</value>
   </data>
-  <data name="NotificationChargeDate" xml:space="preserve">
-    <value>Notification charge calculation date</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Reference and upload your annexes</value>
+  </data>
+  <data name="NoAnnexesButton" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="NoAnnexesRequired" xml:space="preserve">
+    <value>You have indicated that there are no annexes required for your notification.</value>
+  </data>
+  <data name="OptionsLinkPainTextA" xml:space="preserve">
+    <value>You can also complete this step from the </value>
+  </data>
+  <data name="OptionsLinkPainTextB" xml:space="preserve">
+    <value> page.</value>
+  </data>
+  <data name="OptionsLinkText" xml:space="preserve">
+    <value>notification options</value>
+  </data>
+  <data name="PackLinkText" xml:space="preserve">
+    <value>notification pack</value>
+  </data>
+  <data name="Paragraph1" xml:space="preserve">
+    <value>Earlier in the notification process, you indicated that you'd like to provide more information separately. You can upload these files here as annexes.</value>
+  </data>
+  <data name="Paragraph2" xml:space="preserve">
+    <value>To help our automatic annex generation process, please make sure that you state the notification and annex numbers at the start of each document.</value>
+  </data>
+  <data name="ProcessOfGeneration" xml:space="preserve">
+    <value>Process of generation</value>
+  </data>
+  <data name="SecondListItem" xml:space="preserve">
+    <value>Insert your separate annexes in the right numerical order in amongst the system-generated annexes</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>How to do this:</value>
+  </data>
+  <data name="TechnologyEmployed" xml:space="preserve">
+    <value>Technology employed</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Annexes</value>
+  </data>
+  <data name="UploadAnnexes" xml:space="preserve">
+    <value>Upload annexes and extra information</value>
+  </data>
+  <data name="Uploaded" xml:space="preserve">
+    <value>Uploaded</value>
   </data>
 </root>

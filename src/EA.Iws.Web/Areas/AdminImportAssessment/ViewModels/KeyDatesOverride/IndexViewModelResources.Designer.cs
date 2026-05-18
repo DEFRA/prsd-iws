@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDatesOverride {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Withdrawn.
+        ///   Looks up a localized string similar to Notification Withdrawn.
         /// </summary>
         public static string WithdrawnDate {
             get {
