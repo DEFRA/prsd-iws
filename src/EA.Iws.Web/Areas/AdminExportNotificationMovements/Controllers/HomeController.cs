@@ -10,11 +10,11 @@
     using Core.Movement;
     using Core.NotificationAssessment;
     using DocumentFormat.OpenXml.EMMA;
-    using EA.Iws.Core.Extensions;
     using EA.Iws.Core.WasteType;
     using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.WasteType;
     using EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Home;
+    using EA.Prsd.Core.Helpers;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -107,7 +107,7 @@
                     (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
                      wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
                 {
-                    ModelState.AddModelError("ShipmentNumber", "Only one shipment is allowed for Waste Category Type: " + wasteTypeData.WasteCategoryType.GetDisplayName());
+                    ModelState.AddModelError("ShipmentNumber", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
                 }
             }
 

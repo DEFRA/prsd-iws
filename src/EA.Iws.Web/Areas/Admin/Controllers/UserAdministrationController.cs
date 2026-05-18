@@ -22,18 +22,18 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageNewUsers(string userStatus)
+        public async Task<ActionResult> ManageNewUsers(InternalUserStatus? userStatus)
         {
             var users = await mediator.SendAsync(new GetNewInternalUsers());
             List<InternalUserData> filteredUsers;
 
-            if (string.IsNullOrEmpty(userStatus) || userStatus == "all")
+            if (userStatus == null)
             {
                 filteredUsers = new List<InternalUserData>(users);
             }
             else
             {
-                if (userStatus == "inactive")
+                if (userStatus == InternalUserStatus.Inactive)
                 {
                     filteredUsers = users.Where(u => u.Status == InternalUserStatus.Inactive).ToList();
                 }
@@ -70,18 +70,18 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ChangeUserRole(string userStatus)
+        public async Task<ActionResult> ChangeUserRole(InternalUserStatus? userStatus)
         {
             var users = await mediator.SendAsync(new GetExistingInternalUsers());
             List<InternalUserData> filteredUsers;
 
-            if (string.IsNullOrEmpty(userStatus) || userStatus == "all")
+            if (userStatus == null)
             {
                 filteredUsers = new List<InternalUserData>(users);
             }
             else
             {
-                if (userStatus == "inactive")
+                if (userStatus == InternalUserStatus.Inactive)
                 {
                     filteredUsers = users.Where(u => u.Status == InternalUserStatus.Inactive).ToList();
                 }
@@ -113,18 +113,18 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ChangeUserStatus(string userStatus)
+        public async Task<ActionResult> ChangeUserStatus(InternalUserStatus? userStatus)
         {
             var users = await mediator.SendAsync(new GetExistingInternalUsers());
             List<InternalUserData> filteredUsers;
 
-            if (string.IsNullOrEmpty(userStatus) || userStatus == "all")
+            if (userStatus == null)
             {
                 filteredUsers = new List<InternalUserData>(users);
             }
             else
             {
-                if (userStatus == "inactive")
+                if (userStatus == InternalUserStatus.Inactive)
                 {
                     filteredUsers = users.Where(u => u.Status == InternalUserStatus.Inactive).ToList();
                 }

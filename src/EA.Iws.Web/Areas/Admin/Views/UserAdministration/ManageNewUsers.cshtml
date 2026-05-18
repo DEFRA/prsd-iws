@@ -9,9 +9,9 @@
 
 <h1 class="govuk-heading-l">Manage new users</h1>
 
-@Html.ActionLink(@Resources.ActiveUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = "active" }, new { @class = "govuk-button--secondary" })
-@Html.ActionLink(@Resources.InactiveUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = "inactive" }, new { @class = "govuk-button--secondary" })
-@Html.ActionLink(@Resources.AllUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = "all" }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(@Resources.ActiveUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = InternalUserStatus.Approved }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(@Resources.InactiveUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = InternalUserStatus.Inactive }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(@Resources.AllUsersButton, "ManageNewUsers", "UserAdministration", new { @class = "govuk-button--secondary" })
 
 <p>Displaying @Model.Users.Count @usersNoun</p>
 

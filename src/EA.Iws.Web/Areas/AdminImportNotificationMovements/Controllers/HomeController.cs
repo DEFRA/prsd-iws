@@ -8,7 +8,6 @@
     using System.Web.Mvc;
     using Core.ImportNotificationAssessment;
     using DocumentFormat.OpenXml.EMMA;
-    using EA.Iws.Core.Extensions;
     using EA.Iws.Core.ImportNotificationMovements;
     using EA.Iws.Core.Movement;
     using EA.Iws.Core.NotificationAssessment;
@@ -17,6 +16,7 @@
     using EA.Iws.Requests.ImportNotificationAssessment;
     using EA.Iws.Requests.NotificationMovements;
     using EA.Iws.Requests.WasteType;
+    using EA.Prsd.Core.Helpers;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
@@ -89,7 +89,7 @@
             {
                 wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
             }
-            catch (Exception)
+            catch
             {
                 // This is a test to make sure that if the waste type data cannot be retrieved, the user can still save the shipment data.
                 // The waste type data is only used to validate the total shipments field, so if it cannot be retrieved, we will not perform that validation.
@@ -101,7 +101,7 @@
                     (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
                      wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
                 {
-                    ModelState.AddModelError("ShipmentNumber", "Only one shipment is allowed for Waste Category Type: " + wasteTypeData.WasteCategoryType.GetDisplayName());
+                    ModelState.AddModelError("ShipmentNumber", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
                 }
             }
 

@@ -1,26 +1,25 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
-    using Core.Authorization.Permissions;
-    using Core.Notification.Audit;
-    using EA.Iws.Core.Extensions;
+    using EA.Iws.Core.Authorization.Permissions;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
-    using EA.Iws.Core.Shared;
+    using EA.Iws.Core.Notification.Audit;
     using EA.Iws.Core.SystemSettings;
     using EA.Iws.Core.WasteType;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Requests.WasteType;
+    using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.NumberOfShipments;
+    using EA.Iws.Web.Infrastructure;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
-    using Infrastructure;
-    using Infrastructure.Authorization;
-    using Prsd.Core.Mediator;
-    using Requests.NotificationAssessment;
-    using ViewModels.NumberOfShipments;
+    using EA.Iws.Web.Infrastructure.Authorization;
+    using EA.Prsd.Core.Helpers;
+    using EA.Prsd.Core.Mediator;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [AuthorizeActivity(ExportNotificationPermissions.CanChangeNumberOfShipmentsOnExportNotification)]
     public class NumberOfShipmentsController : Controller
@@ -64,7 +63,7 @@
                     (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
                      wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
                 {
-                    ModelState.AddModelError("Number", "Only one shipment is allowed for Waste Category Type: " + wasteTypeData.WasteCategoryType.GetDisplayName());
+                    ModelState.AddModelError("Number", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
                 }
             }
 

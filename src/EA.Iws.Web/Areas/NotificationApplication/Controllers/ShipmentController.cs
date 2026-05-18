@@ -1,11 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.Notification.Audit;
-    using DocumentFormat.OpenXml.Office2010.PowerPoint;
-    using EA.Iws.Core.Extensions;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.SystemSettings;
@@ -13,9 +8,13 @@
     using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Requests.WasteType;
+    using EA.Prsd.Core.Helpers;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.IntendedShipments;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Shipment;
 
     [Authorize]
@@ -74,7 +73,7 @@
                     (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
                      wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
                 {
-                    ModelState.AddModelError("NumberOfShipments", "Only one shipment is allowed for Waste Category Type: " + wasteTypeData.WasteCategoryType.GetDisplayName());
+                    ModelState.AddModelError("NumberOfShipments", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
                 }
             }
 

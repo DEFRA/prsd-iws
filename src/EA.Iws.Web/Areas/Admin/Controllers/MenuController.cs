@@ -104,9 +104,9 @@
 
             var keyDates = Task.Run(() => mediator.SendAsync(new GetKeyDates(id))).Result;
 
-            var decisions = new List<NotificationAssessmentDecision>(
-                keyDates.DecisionHistory.Where(d => d.Status == NotificationStatus.Consented));
-            var mostRecentConsentedDecision = decisions.OrderByDescending(d => d.Date).FirstOrDefault(d => d.Status == NotificationStatus.Consented);
+            var mostRecentConsentedDecision = keyDates.DecisionHistory.Where(d => d.Status == NotificationStatus.Consented)
+                                                                      .OrderByDescending(d => d.Date)
+                                                                      .FirstOrDefault();
 
             DateTime? consentExpiryDate = null;
             if (mostRecentConsentedDecision != null)
@@ -156,9 +156,9 @@
 
             var keyDates = Task.Run(() => mediator.SendAsync(new GetKeyDatesSummaryInformation(id))).Result;
 
-            var decisions = new List<NotificationAssessmentDecision>(
-                keyDates.DecisionHistory.Where(d => d.Status == NotificationStatus.Consented));
-            var mostRecentConsentedDecision = decisions.OrderByDescending(d => d.Date).FirstOrDefault(d => d.Status == NotificationStatus.Consented);
+            var mostRecentConsentedDecision = keyDates.DecisionHistory.Where(d => d.Status == NotificationStatus.Consented)
+                                                                      .OrderByDescending(d => d.Date)
+                                                                      .FirstOrDefault();
 
             DateTime? consentExpiryDate = null;
             if (mostRecentConsentedDecision != null)

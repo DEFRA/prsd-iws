@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
+﻿@using EA.Iws.Core.Admin
+@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
 @using Resources = EA.Iws.Web.Areas.Admin.Views.UserAdministration.UserAdministrationResources
 @{
     ViewBag.Title = Resources.ChangeUserStatusTitle;
@@ -6,9 +7,9 @@
 
 <h1 class="govuk-heading-l">@Resources.ChangeUserStatusTitle</h1>
 
-@Html.ActionLink(Resources.ActiveUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = "active" }, new { @class = "govuk-button--secondary" })
-@Html.ActionLink(Resources.InactiveUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = "inactive" }, new { @class = "govuk-button--secondary" })
-@Html.ActionLink(Resources.AllUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = "all" }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.ActiveUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = InternalUserStatus.Approved }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.InactiveUsersButton, "ChangeUserStatus", "UserAdministration", new { userStatus = InternalUserStatus.Inactive }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.AllUsersButton, "ChangeUserStatus", "UserAdministration", new { @class = "govuk-button--secondary" })
 
 <table class="govuk-form-group" title="@Resources.ChangeUserStatusTitle">
     <thead>

@@ -7,7 +7,6 @@
     using System.Web.Mvc;
     using Core.Notification.Audit;
     using Core.WasteType;
-    using EA.Iws.Core.Extensions;
     using EA.Iws.Core.IntendedShipments;
     using EA.Iws.Core.WasteComponentType;
     using EA.Iws.Requests.IntendedShipments;
@@ -111,7 +110,7 @@
             {
                 shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(model.NotificationId));
             }
-            catch (Exception)
+            catch
             {
                 // If the shipment data cannot be retrieved then the validation should not be applied as it cannot be confirmed if there are multiple shipments or not.
             }
@@ -122,8 +121,8 @@
             if (shipmentData != null && shipmentData.HasShipmentData)
             {
                 if ((shipmentData.NumberOfShipments > 1) &&
-                    (model.WasteCategoryType.SelectedValue == WasteCategoryType.Singleship.GetDisplayName() || 
-                     model.WasteCategoryType.SelectedValue == WasteCategoryType.Platformrig.GetDisplayName()))
+                    (model.WasteCategoryType.SelectedValue == EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)WasteCategoryType.Singleship) || 
+                     model.WasteCategoryType.SelectedValue == EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)WasteCategoryType.Platformrig)))
                 {
                     ModelState.AddModelError("WasteCategoryType.SelectedValue", shipmentErrorMessage);
                     shipmentErrorUsed = true;

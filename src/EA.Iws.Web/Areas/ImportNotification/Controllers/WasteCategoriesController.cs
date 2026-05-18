@@ -3,13 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using EA.Iws.Core.Extensions;
     using EA.Iws.Core.IntendedShipments;
     using EA.Iws.Core.WasteType;
     using EA.Iws.Requests.ImportNotification;
     using EA.Iws.Requests.IntendedShipments;
     using EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteCategories;
     using EA.Iws.Web.Infrastructure.Authorization;
+    using EA.Prsd.Core.Helpers;
     using EA.Prsd.Core.Mediator;
 
     [AuthorizeActivity(typeof(SetDraftData<>))]
@@ -48,7 +48,7 @@
             {
                 shipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
             }
-            catch (Exception)
+            catch
             {
                 // If the shipment data cannot be retrieved then the validation should not be applied as it cannot be confirmed if there are multiple shipments or not.
             }
@@ -56,8 +56,8 @@
             if (shipmentData != null && shipmentData.HasShipmentData)
             {
                 if ((shipmentData.NumberOfShipments > 1) &&
-                    (model.WasteCategories.SelectedValue == WasteCategoryType.Singleship.GetDisplayName() ||
-                     model.WasteCategories.SelectedValue == WasteCategoryType.Platformrig.GetDisplayName()))
+                    (model.WasteCategories.SelectedValue == EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)WasteCategoryType.Singleship) ||
+                     model.WasteCategories.SelectedValue == EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)WasteCategoryType.Platformrig)))
                 {
                     ModelState.AddModelError("WasteCategoryType.SelectedValue", shipmentErrorMessage);
                 }
