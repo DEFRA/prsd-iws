@@ -7,7 +7,6 @@
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
     using Domain.ImportNotificationAssessment.Transactions;
-    using Domain.NotificationAssessment;
     using FakeItEasy;
     using Xunit;
 
@@ -31,8 +30,11 @@
             A.CallTo(() => importNotificationAssessmentRepository.GetByNotification(notificationId))
                 .Returns(assessment);
 
-            A.CallTo(() => importNotificationTransactionCalculator.Balance(notificationId))
-                .Returns(1000);
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(1000m);
+
+            A.CallTo(() => importNotificationTransactionRepository.GetTransactions(notificationId))
+                .Returns(new List<ImportNotificationTransaction>());
 
             transaction = new ImportPaymentTransaction(
                 importNotificationTransactionRepository,
@@ -51,22 +53,59 @@
         {
             var transactionDate = new DateTime(2018, 1, 1);
 
-            A.CallTo(() => importNotificationTransactionCalculator.Balance(notificationId))
-                .Returns(1000);
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(1000m);
             A.CallTo(() => importNotificationTransactionRepository.GetTransactions(notificationId))
-                .Returns(new List<ImportNotificationTransaction>() { CreateNotificationTransaction(1000, transactionDate) });
+                .Returns(new List<ImportNotificationTransaction>());
 
             await transaction.Save(notificationId, transactionDate, 1000, PaymentMethod.Card, null, null);
 
-            Assert.Equal(assessment.Dates.PaymentReceivedDate, transactionDate);
+            Assert.Equal(transactionDate, assessment.Dates.PaymentReceivedDate);
         }
 
         [Fact]
         public async Task Save_PaymentNotFullyReceived_ReceivedDateNull()
         {
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(1000m);
+
             await transaction.Save(notificationId, new DateTime(2018, 1, 1), 999, PaymentMethod.Card, null, null);
 
             Assert.Null(assessment.Dates.PaymentReceivedDate);
+        }
+
+        [Fact]
+        public async Task Save_PartialPaymentsThenFullPayment_SetsCorrectReceivedDate()
+        {
+            var firstPaymentDate = new DateTime(2018, 1, 1);
+            var secondPaymentDate = new DateTime(2018, 2, 1);
+
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(1000m);
+            A.CallTo(() => importNotificationTransactionRepository.GetTransactions(notificationId))
+                .Returns(new List<ImportNotificationTransaction>
+                {
+                    CreateNotificationTransaction(600, firstPaymentDate)
+                });
+
+            await transaction.Save(notificationId, secondPaymentDate, 400, PaymentMethod.Card, null, null);
+
+            Assert.Equal(secondPaymentDate, assessment.Dates.PaymentReceivedDate);
+        }
+
+        [Fact]
+        public async Task Save_NonAwaitingPaymentStatus_SetsReceivedDateDirectly()
+        {
+            var transactionDate = new DateTime(2025, 7, 14);
+
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(6700m);
+            A.CallTo(() => importNotificationTransactionRepository.GetTransactions(notificationId))
+                .Returns(new List<ImportNotificationTransaction>());
+
+            await transaction.Save(notificationId, transactionDate, 6700, PaymentMethod.Card, null, null);
+
+            Assert.Equal(transactionDate, assessment.Dates.PaymentReceivedDate);
         }
 
         [Fact]
@@ -78,13 +117,13 @@
             A.CallTo(() => importNotificationTransactionRepository.GetById(transactionId))
                 .Returns(notificationTransaction);
 
-            // Set payment to fully received
-            A.CallTo(() => importNotificationTransactionCalculator.Balance(notificationId))
-                .Returns(0);
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(1000m);
+            A.CallTo(() => importNotificationTransactionRepository.GetTransactions(notificationId))
+                .Returns(new List<ImportNotificationTransaction> { notificationTransaction });
 
             assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 
-            // Delete payment, balance now £600
             await transaction.Delete(notificationId, transactionId);
 
             Assert.Null(assessment.Dates.PaymentReceivedDate);
@@ -96,24 +135,21 @@
             var expectedPaymentDate = new DateTime(2018, 2, 2);
             var transactionId = new Guid("F7DF1DD7-E356-47E2-8C9C-281C4A824F94");
             var transactionToDelete = CreateNotificationTransaction(100, new DateTime(2018, 4, 4));
-            var transactionRemaining = CreateNotificationTransaction(200, expectedPaymentDate);
+            var transactionRemaining = CreateNotificationTransaction(1000, expectedPaymentDate);
 
             A.CallTo(() => importNotificationTransactionRepository.GetById(transactionId))
                 .Returns(transactionToDelete);
 
-            // Set payment to overpaid
-            A.CallTo(() => importNotificationTransactionCalculator.Balance(notificationId))
-                .Returns(-200);
-
+            A.CallTo(() => importNotificationTransactionCalculator.TotalBillable(notificationId))
+                .Returns(1000m);
             A.CallTo(() => importNotificationTransactionRepository.GetTransactions(notificationId))
-                .Returns(new List<ImportNotificationTransaction>() { CreateNotificationTransaction(200, expectedPaymentDate) });
+                .Returns(new List<ImportNotificationTransaction> { transactionToDelete, transactionRemaining });
 
             assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 
-            // Delete payment, balance now -£100
             await transaction.Delete(notificationId, transactionId);
 
-            Assert.Equal(assessment.Dates.PaymentReceivedDate, expectedPaymentDate);
+            Assert.Equal(expectedPaymentDate, assessment.Dates.PaymentReceivedDate);
         }
     }
 }
