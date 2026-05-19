@@ -35,14 +35,14 @@
             <div class="column-half">
                 <div class="noti-price">
                     <span class="text">Notification<br />charges</span>
-                    <span class="price">@Html.Raw(Model.Charge.ToString("C0", nfi))</span>
+                    <span class="price">@Html.Raw(Model.Charge.ToString("C2", nfi))</span>
                 </div>
             </div>
 
             <div class="column-half">
                 <div class="noti-price">
                     <span class="text">Amount<br />paid</span>
-                    <span class="price">@Html.Raw(Model.AmountPaid.ToString("C0", nfi))</span>
+                    <span class="price">@Html.Raw(Model.AmountPaid.ToString("C2", nfi))</span>
                 </div>
             </div>
         </div>
