@@ -113,9 +113,9 @@
             DateTime? consentedDate = null;
             if (mostRecentConsentedDecision != null)
             {
-                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo ?? null;
-                consentStartDate = mostRecentConsentedDecision.ConsentedFrom ?? null;
-                consentedDate = mostRecentConsentedDecision.Date;
+                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo;
+                consentStartDate = mostRecentConsentedDecision.ConsentedFrom;
+                consentedDate = (DateTime?)mostRecentConsentedDecision.Date;
             }
 
             var showConsentedDateInRed = ShowConsentExpiryDateInRed(details.AllFacilitiesPreconsented, consentExpiryDate);
@@ -171,9 +171,9 @@
             DateTime? consentedDate = null;
             if (mostRecentConsentedDecision != null)
             {
-                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo ?? null;
-                consentStartDate = mostRecentConsentedDecision.ConsentedFrom ?? null;
-                consentedDate = mostRecentConsentedDecision.Date;
+                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo;
+                consentStartDate = mostRecentConsentedDecision.ConsentedFrom;
+                consentedDate = (DateTime?)mostRecentConsentedDecision.Date;
             }
 
             var showConsentedDateInRed = ShowConsentExpiryDateInRed(data.AllFacilitiesPreconsented, consentExpiryDate);
@@ -190,7 +190,7 @@
                 ShowConsentExpiryDateInRed = showConsentedDateInRed,
                 ConsentExpiryDate = consentExpiryDate,
                 ConsentStartDate = consentStartDate,
-                ConsentedDate = consentedDate
+                ConsentedDate = consentedDate ?? null
             };
 
             return PartialView("_ExportNavigation", model);
