@@ -24,7 +24,7 @@
         ConsentWithdrawn = 10,
         [Display(Name = "Objected")]
         Objected = 11,
-        [Display(Name = "Withdrawn")]
+        [Display(Name = "Notification Withdrawn")]
         Withdrawn = 12,
         [Display(Name = "File closed")]
         FileClosed = 13,

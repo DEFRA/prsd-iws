@@ -117,37 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AcknowledgedDate" xml:space="preserve">
-    <value>Acknowledged on</value>
-  </data>
-  <data name="CommencementDate" xml:space="preserve">
-    <value>Assessment started</value>
-  </data>
-  <data name="CompleteDate" xml:space="preserve">
-    <value>Notification complete</value>
-  </data>
-  <data name="ConsentedDate" xml:space="preserve">
-    <value>Consent date</value>
-  </data>
-  <data name="ConsentValidFromDate" xml:space="preserve">
-    <value>Consent valid from</value>
-  </data>
-  <data name="ConsentValidToDate" xml:space="preserve">
-    <value>Consent valid to</value>
-  </data>
-  <data name="NotificationReceivedDate" xml:space="preserve">
-    <value>Notification received</value>
-  </data>
-  <data name="ObjectedDate" xml:space="preserve">
-    <value>Objected</value>
-  </data>
-  <data name="WithdrawnDate" xml:space="preserve">
-    <value>Notification Withdrawn</value>
-  </data>
-  <data name="DecisionRequiredByDate" xml:space="preserve">
-    <value>Decision required by</value>
-  </data>
-  <data name="NotificationChargeDate" xml:space="preserve">
-    <value>Notification charge calculation date</value>
+  <data name="EUExit" xml:space="preserve">
+    <value>An Exit Customs Office must be selected when exiting the European Union.</value>
   </data>
 </root>

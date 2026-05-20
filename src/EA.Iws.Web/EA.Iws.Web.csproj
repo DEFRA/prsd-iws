@@ -819,6 +819,11 @@
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AccountManagementControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AccountManagementControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\AdditionalChargeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\AdditionalCharge\AdditionalChargeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\AdditionalCharge\IndexResources.Designer.cs">
@@ -860,9 +865,21 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeResource.Designer.cs">
+      <DependentUpon>ExitCustomsOfficeResource.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntryCustomsOfficeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteCategoryViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ChemicalComposition\WasteComponentViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MarkInterimStatusViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\AnnexPlusViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\AnnexViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategoryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -889,6 +906,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+	</Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Home\Uploads.Designer.cs">
+      <DependentUpon>Uploads.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Controllers\BannerController.cs" />
     <Compile Include="Controllers\DeleteExportNotificationController.cs" />
@@ -922,6 +944,7 @@
     <Content Include="Areas\NotificationApplication\Views\Facility\MarkInterimStatus.cshtml" />
     <Content Include="Content\iws\_session-timeout.scss" />
     <Content Include="Areas\Reports\Views\EADataReports\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Home\_Uploads.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4245,6 +4268,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEditResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\AccountManagementControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AccountManagementControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
@@ -4276,6 +4303,7 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\NumberOfShipments\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4510,6 +4538,7 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\PaymentDetails\PaymentDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5114,6 +5143,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Controllers\ExitCustomsOfficeResource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExitCustomsOfficeResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Controllers\EntryCustomsOfficeResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>EntryCustomsOfficeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\Annex\AnnexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnnexViewModelResources.Designer.cs</LastGenOutput>
@@ -5243,6 +5280,11 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\HCode\HCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Home\Uploads.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Uploads.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Home\ResubmissionSuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -1,16 +1,21 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Text.RegularExpressions;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Core.CustomsOffice;
     using Core.Notification.Audit;
     using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Shared;
+    using EA.Iws.Core.TransportRoute;
     using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.TransportRoute;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
     using Requests.Shared;
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels.CustomsOffice;
 
     [Authorize]
@@ -77,10 +82,17 @@
         public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model, bool? backToOverview = null)
         {
             var countries = await mediator.SendAsync(new GetEuropeanUnionCountries());
+            var route = await mediator.SendAsync(new GetTransportRouteSummaryForNotification(id));
 
             model.Countries = model.SelectedCountry.HasValue
                 ? new SelectList(countries, "Id", "Name", model.SelectedCountry.Value)
                 : new SelectList(countries, "Id", "Name");
+
+            var exitedEU = GetExitedEU(route, countries);
+            if (exitedEU && model.SelectedCountry == null)
+            {
+                ModelState.AddModelError("SelectedCountry", ExitCustomsOfficeResource.EUExit);
+            }
 
             if (!ModelState.IsValid)
             {
@@ -126,6 +138,45 @@
             }
 
             return RedirectToAction("Index", "Shipment", new { id });
+        }
+
+        private bool GetExitedEU(TransportRouteData route, CountryData[] countries)
+        {
+            var routeEndsInEU = countries.Where(c => c.Name.Equals(route.StateOfImportData.Country.Name)).Any();
+
+            var countEUTransitStates = route.TransitStatesData.Where(t => countries.Where(c => c.Name.Equals(t.Country.Name)).Any()).Count();
+            var countTransitStates = route.TransitStatesData.Count();
+
+            if (!routeEndsInEU && countEUTransitStates > 0)
+            {
+                return true; 
+            }
+
+            if (countEUTransitStates != countTransitStates)
+            {
+                // This means we have a mixture of EU and Non-EU transist states and we must work out if the route has exited the EU or not.
+                // This assumes the transit states are in order
+
+                var foundEU = false;
+                foreach (var transit in route.TransitStatesData)
+                {
+                    var isEU = countries.Any(c => c.Name.Equals(transit.Country.Name));
+
+                    if (isEU)
+                    {
+                        foundEU = true;
+                    }
+                    else
+                    {
+                        if (foundEU)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

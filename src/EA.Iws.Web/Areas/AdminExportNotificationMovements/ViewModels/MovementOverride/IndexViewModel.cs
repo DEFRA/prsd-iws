@@ -210,6 +210,16 @@
             {
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
+
+            if (ShipmentTypes == ShipmentType.Rejected && Date.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.RecoveryDateMustBeCleared, new[] { "Date" });
+            }
+
+            if (ShipmentTypes == ShipmentType.Accepted && !string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(IndexViewModelResources.StatsMustBeCleared, new[] { "StatsMarking" });
+            }
         }
 
         public void SetSummaryData(InternalMovementSummary summaryData)

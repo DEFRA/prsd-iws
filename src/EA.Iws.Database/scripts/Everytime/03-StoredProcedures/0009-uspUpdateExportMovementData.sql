@@ -31,30 +31,31 @@ BEGIN
 
     BEGIN TRAN
 
-    --UPDATE MOVEMENT
+    -- UPDATE MOVEMENT core fields (always)
     UPDATE [Notification].[Movement]
-    SET [Date] = ISNULL(@ActualDate, [Date]) 
-    ,[PrenotificationDate] = @PrenotificationDate 
-    ,[HasNoPrenotification] = ISNULL(@HasNoPrenotification, [HasNoPrenotification]) 
-    ,[StatsMarking] = @StatsMarking 
-    ,[Comments] = @Comments 
-    WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
+    SET [Date]                = ISNULL(@ActualDate, [Date])
+       ,[PrenotificationDate] = @PrenotificationDate
+       ,[HasNoPrenotification]= ISNULL(@HasNoPrenotification, [HasNoPrenotification])
+       ,[StatsMarking]        = @StatsMarking
+       ,[Comments]            = @Comments
+    WHERE [Id] = @MovementId AND [NotificationId] = @NotificationId
 
-    -- Handle status changes
+    -- ACCEPTED (Received)
     IF @IsReceived = 1
     BEGIN
-        -- Delete any existing rejection/partial rejection records
-        DELETE FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId
-        DELETE FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId
+        -- Remove all rejection/partial rejection/operation receipt data
+        DELETE FROM [Notification].[MovementRejection]        WHERE [MovementId] = @MovementId
+        DELETE FROM [Notification].[MovementPartialRejection]  WHERE [MovementId] = @MovementId
+        DELETE FROM [Notification].[MovementOperationReceipt]  WHERE [MovementId] = @MovementId
 
-        -- Update or insert receipt
-        IF EXISTS(SELECT * FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId)
+        -- Update or insert receipt record
+        IF EXISTS(SELECT 1 FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId)
         BEGIN
             UPDATE [Notification].[MovementReceipt]
-            SET [Date] = ISNULL(@ReceiptDate, [Date]) 
-            ,[Quantity] = ISNULL(@Quantity, [Quantity])
-            ,[Unit] = ISNULL(@Unit, [Unit])
-            WHERE [MovementId] = @MovementId 
+            SET [Date]     = ISNULL(@ReceiptDate, [Date])
+               ,[Quantity] = ISNULL(@Quantity, [Quantity])
+               ,[Unit]     = ISNULL(@Unit, [Unit])
+            WHERE [MovementId] = @MovementId
         END
         ELSE IF @ReceiptDate IS NOT NULL AND @Quantity IS NOT NULL AND @Unit IS NOT NULL
         BEGIN
@@ -62,25 +63,27 @@ BEGIN
             VALUES (NEWID(), @MovementId, @ReceiptDate, @Quantity, @Unit, @CreatedBy, GETUTCDATE())
         END
 
-        -- Update movement status to Received
         UPDATE [Notification].[Movement]
         SET [Status] = 3 -- Received
         WHERE [Id] = @MovementId
     END
+
+    -- REJECTED
     ELSE IF @IsRejected = 1
     BEGIN
-        -- Delete any existing receipt/partial rejection records
-        DELETE FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId
-        DELETE FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId
+        -- Remove all receipt/partial rejection/operation receipt data
+        DELETE FROM [Notification].[MovementReceipt]           WHERE [MovementId] = @MovementId
+        DELETE FROM [Notification].[MovementPartialRejection]  WHERE [MovementId] = @MovementId
+        DELETE FROM [Notification].[MovementOperationReceipt]  WHERE [MovementId] = @MovementId
 
-        -- Update or insert rejection
-        IF EXISTS(SELECT * FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId)
+        -- Update or insert rejection record — always overwrite, no ISNULL, to allow full amendments
+        IF EXISTS(SELECT 1 FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId)
         BEGIN
             UPDATE [Notification].[MovementRejection]
-            SET [Date] = ISNULL(@RejectiontDate, [Date]) 
-                ,[Reason] = ISNULL(@RejectionReason, [Reason])
-                ,[RejectedQuantity] = @RejectedQuantity
-                ,[RejectedUnit] = @RejectedUnit
+            SET [Date]             = @RejectiontDate
+               ,[Reason]           = @RejectionReason
+               ,[RejectedQuantity] = @RejectedQuantity
+               ,[RejectedUnit]     = @RejectedUnit
             WHERE [MovementId] = @MovementId
         END
         ELSE IF @RejectiontDate IS NOT NULL
@@ -89,28 +92,29 @@ BEGIN
             VALUES (NEWID(), @MovementId, @RejectiontDate, @RejectionReason, @RejectedQuantity, @RejectedUnit)
         END
 
-        -- Update movement status to Rejected
         UPDATE [Notification].[Movement]
         SET [Status] = 5 -- Rejected
         WHERE [Id] = @MovementId
     END
+
+    -- PARTIALLY REJECTED
     ELSE IF @IsPartiallyRejected = 1
     BEGIN
-        -- Delete any existing receipt/rejection records
-        DELETE FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId
-        DELETE FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId
+        -- Remove all receipt/rejection data
+        DELETE FROM [Notification].[MovementReceipt]    WHERE [MovementId] = @MovementId
+        DELETE FROM [Notification].[MovementRejection]  WHERE [MovementId] = @MovementId
 
-        -- Update or insert partial rejection
-        IF EXISTS(SELECT * FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId)
+        -- Update or insert partial rejection record — always overwrite, no ISNULL, to allow full amendments
+        IF EXISTS(SELECT 1 FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId)
         BEGIN
             UPDATE [Notification].[MovementPartialRejection]
-            SET [WasteReceivedDate] = ISNULL(@RejectiontDate, [WasteReceivedDate]) 
-                ,[Reason] = ISNULL(@RejectionReason, [Reason])
-                ,[RejectedQuantity] = @RejectedQuantity
-                ,[RejectedUnit] = @RejectedUnit
-                ,[ActualQuantity] = @Quantity
-                ,[ActualUnit] = @Unit
-                ,[WasteDisposedDate] = @RecoveryDate
+            SET [WasteReceivedDate] = @RejectiontDate
+               ,[Reason]            = @RejectionReason
+               ,[ActualQuantity]    = @Quantity
+               ,[ActualUnit]        = @Unit
+               ,[RejectedQuantity]  = @RejectedQuantity
+               ,[RejectedUnit]      = @RejectedUnit
+               ,[WasteDisposedDate] = @RecoveryDate
             WHERE [MovementId] = @MovementId
         END
         ELSE IF @RejectiontDate IS NOT NULL
@@ -119,58 +123,36 @@ BEGIN
             VALUES (NEWID(), @MovementId, @RejectiontDate, @RejectionReason, @Quantity, @Unit, @RejectedQuantity, @RejectedUnit, @RecoveryDate)
         END
 
-        -- Update movement status to PartiallyRejected
-        UPDATE [Notification].[Movement]
-        SET [Status] = 6 -- PartiallyRejected
-        WHERE [Id] = @MovementId
-    END
-    ELSE
-    BEGIN
-        -- Original logic for non-status-change updates
-        IF EXISTS(SELECT * FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId)
+        -- Handle recovery date and operation receipt
+        IF @RecoveryDate IS NOT NULL
         BEGIN
-            UPDATE [Notification].[MovementReceipt]
-            SET [Date] = ISNULL(@ReceiptDate, [Date]) 
-            ,[Quantity] = ISNULL(@Quantity, [Quantity])
-            ,[Unit] = ISNULL(@Unit, [Unit])
-            WHERE [MovementId] = @MovementId 
-        END
-        
-        IF EXISTS(SELECT * FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId)
-        BEGIN
-            UPDATE [Notification].[MovementRejection]
-            SET [Date] = ISNULL(@RejectiontDate, [Date]) 
-                ,[Reason] = ISNULL(@RejectionReason, [Reason])
-                ,[RejectedQuantity] = @RejectedQuantity
-                ,[RejectedUnit] = @RejectedUnit
-            WHERE [MovementId] = @MovementId
-        END
+            IF EXISTS(SELECT 1 FROM [Notification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId)
+            BEGIN
+                UPDATE [Notification].[MovementOperationReceipt]
+                SET [Date] = @RecoveryDate
+                WHERE [MovementId] = @MovementId
+            END
+            ELSE
+            BEGIN
+                INSERT INTO [Notification].[MovementOperationReceipt] ([Id], [MovementId], [Date], [CreatedBy], [CreatedOnDate])
+                VALUES (NEWID(), @MovementId, @RecoveryDate, @CreatedBy, GETUTCDATE())
+            END
 
-        IF EXISTS(SELECT * FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId)
+            UPDATE [Notification].[Movement]
+            SET [Status] = 4 -- Completed
+            WHERE [Id] = @MovementId
+        END
+        ELSE
         BEGIN
-            UPDATE [Notification].[MovementPartialRejection]
-            SET [WasteReceivedDate] = ISNULL(@RejectiontDate, [WasteReceivedDate]) 
-                ,[Reason] = ISNULL(@RejectionReason, [Reason])
-                ,[RejectedQuantity] = @RejectedQuantity
-                ,[RejectedUnit] = @RejectedUnit
-                ,[ActualQuantity] = @Quantity
-                ,[ActualUnit] = @Unit
-                ,[WasteDisposedDate] = @RecoveryDate
-            WHERE [MovementId] = @MovementId
+            -- Recovery date cleared — remove operation receipt and revert to PartiallyRejected
+            DELETE FROM [Notification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId
+
+            UPDATE [Notification].[Movement]
+            SET [Status] = 8 -- PartiallyRejected
+            WHERE [Id] = @MovementId
         END
     END
 
-    --UPDATE RECOVERY
-    IF EXISTS(SELECT * FROM [Notification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId)
-    BEGIN
-        IF(@RecoveryDate IS NOT NULL)
-        BEGIN
-            UPDATE [Notification].[MovementOperationReceipt]
-            SET [Date] = @RecoveryDate 
-            WHERE [MovementId] = @MovementId 
-        END
-    END
-    
     COMMIT;
 END
 GO

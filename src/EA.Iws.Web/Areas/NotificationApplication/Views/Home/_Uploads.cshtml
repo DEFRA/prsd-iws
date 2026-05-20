@@ -1,0 +1,86 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AnnexPlusViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Home.Uploads
+@using EA.Iws.Core.NotificationAssessment
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th>
+                <h2 class="heading-medium">Required Annexes</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Documents
+            </td>
+            <td>
+                <table class="overview-table">
+                    <thead>
+                        <tr>
+                            <th>@Resource.AnnexNameColumnTitle</th>
+                            <th>@Resource.AnnexColumnTitle</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.Annex.ProcessOfGenerationStatus.IsRequired)
+                        {
+                            <tr>
+                                <td>@Html.LabelFor(m => m.Annex.ProcessOfGeneration, Resource.ProcessOfGeneration)</td>
+                                @if (Model.Annex.ProcessOfGenerationStatus.FileId.HasValue)
+                                {
+                                    <td>@Resource.Uploaded</td>
+                                }
+                                else
+                                {
+                                    <td>@Resource.AwaitingUpload</td>
+                                }
+                            </tr>
+                        }
+                        @if (Model.Annex.TechnologyEmployedStatus.IsRequired)
+                        {
+                            <tr>
+                                <td>@Html.LabelFor(m => m.Annex.TechnologyEmployed, Resource.TechnologyEmployed)</td>
+                                @if (Model.Annex.TechnologyEmployedStatus.FileId.HasValue)
+                                {
+                                    <td>@Resource.Uploaded</td>
+                                }
+                                else
+                                {
+                                    <td>@Resource.AwaitingUpload</td>
+                                }
+                            </tr>
+                        }
+                        @if (Model.Annex.WasteCompositionStatus.IsRequired)
+                        {
+                            <tr>
+                                <td>@Html.LabelFor(m => m.Annex.Composition, Resource.CompositionOfWaste)</td>
+                                @if (Model.Annex.WasteCompositionStatus.FileId.HasValue)
+                                {
+                                    <td>@Resource.Uploaded</td>
+                                }
+                                else
+                                {
+                                    <td>@Resource.AwaitingUpload</td>
+                                }
+                            </tr>
+                        }
+                        <tr>
+                            <td>
+                                @if (Model.Status == NotificationStatus.NotSubmitted)
+                                {
+                                    @Html.ActionLink(Resource.UploadAnnexes, "AnnexUploadUnavailable", "Options", new { id = Model.Annex.NotificationId, area = "NotificationApplication" }, null)
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(Resource.UploadAnnexes, "Index", "Annex", new { id = Model.Annex.NotificationId, area = "NotificationApplication" }, null)
+                                }
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </tbody>
+</table>

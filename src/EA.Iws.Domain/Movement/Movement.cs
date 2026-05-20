@@ -180,7 +180,10 @@
                 .OnEntryFrom(acceptedTrigger, OnReceived)
                 .OnEntryFrom(internallyAcceptedTrigger, OnInternallyReceived)
                 .Permit(Trigger.Complete, MovementStatus.Completed)
-                .Permit(Trigger.CompleteInternal, MovementStatus.Completed);
+                .Permit(Trigger.CompleteInternal, MovementStatus.Completed)
+                .Permit(Trigger.Reject, MovementStatus.Rejected)
+                .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected)
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
 
             stateMachine.Configure(MovementStatus.Completed)
                 .OnEntryFrom(completedTrigger, OnCompleted)
@@ -238,6 +241,11 @@
 
             var rejection = new MovementRejection(Id, dateReceived, reason, quantity, unit);
 
+            if (Status == MovementStatus.Received)
+            {
+                Receipt = null;
+            }
+
             stateMachine.Fire(Trigger.Reject);
 
             return rejection;
@@ -256,6 +264,11 @@
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
             var rejection = new MovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposeddDate);
+
+            if (Status == MovementStatus.Received)
+            {
+                Receipt = null;
+            }
 
             stateMachine.Fire(Trigger.PartialReject);
 
@@ -296,6 +309,11 @@
 
         public void Cancel()
         {
+            if (Status == MovementStatus.Received)
+            {
+                Receipt = null;
+            }
+
             stateMachine.Fire(Trigger.Cancel);
         }
 

@@ -8,6 +8,23 @@
     @(Model.ActiveSection == section ? className : string.Empty)
 }
 
+@helper GetStyleForConsentExpiryDate()
+{
+    if (Model.ShowConsentExpiryDateInRed)
+    {
+        @("color:red")
+    }
+}
+
+@helper FormatConsentedExpiryDate()
+{
+    if (Model.ConsentExpiryDate.HasValue)
+    {
+        @Model.ConsentExpiryDate.Value.ToString("dd/MM/yyyy")
+    }
+}
+
+
 <div id="accordion" class="accordion-export">
     <div class="notification-number">
         <p class="bold-medium">
@@ -19,6 +36,10 @@
             }
             <br />
             <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Data.Status)</span>
+            @if (Model.Data.Status == NotificationStatus.Consented)
+            {
+                <span class="assigned-area" style="@GetStyleForConsentExpiryDate()">@FormatConsentedExpiryDate()</span>
+            }
             <br />
             <span class="assigned-area"> @(Model.Data.IsInterim.GetValueOrDefault() ? Resources.isInterim : Resources.nonInterim)</span>
             @if (Model.Data.AllFacilitiesPreconsented.HasValue && Model.Data.AllFacilitiesPreconsented.Value)

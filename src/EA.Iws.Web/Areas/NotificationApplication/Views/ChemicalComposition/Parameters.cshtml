@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <div class="grid-row">
-                    <div class="column-half">
+                    <div> <!-- class="column-half"-->
                         <div class="grid-row">
                             @{
                                 var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
@@ -63,12 +63,32 @@
                             }
                             <div class="column-half">
                                 <label class="visuallyhidden">@(sectionTitle + ParametersResources.MinConcentration)</label>
-                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ParametersResources.Min + placeholderText, title = sectionTitle + ParametersResources.MinConcentration, id = idText })
+                                <div class="govuk-input__wrapper">
+                                    <div class="govuk-input__prefix" aria-hidden="true">Min</div>
+                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration,
+                                        new
+                                        {
+                                            placeholder = ParametersResources.Min + placeholderText,
+                                            title = sectionTitle + ParametersResources.MinConcentration,
+                                            id = idText
+                                        })
+                                    <div class="govuk-input__suffix" aria-hidden="true">%</div>
+                                </div>
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                             </div>
                             <div class="column-half">
                                 <label class="visuallyhidden">@(sectionTitle + ParametersResources.MaxConcentration)</label>
-                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = ParametersResources.Max + placeholderText, title = sectionTitle + ParametersResources.MaxConcentration })
+                                <div class="govuk-input__wrapper">
+                                    <div class="govuk-input__prefix" aria-hidden="true">Max</div>
+                                    @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration,
+                                        new
+                                        {
+                                            placeholder = ParametersResources.Max + placeholderText,
+                                            title = sectionTitle + ParametersResources.MaxConcentration,
+                                            id = idText
+                                        })
+                                    <div class="govuk-input__suffix" aria-hidden="true">%</div>
+                                </div>
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                             </div>
                         </div>
