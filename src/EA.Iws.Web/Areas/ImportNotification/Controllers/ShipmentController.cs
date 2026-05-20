@@ -4,9 +4,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
-    using EA.Iws.Core.WasteType;
-    using EA.Iws.Requests.WasteType;
-    using EA.Prsd.Core.Helpers;
     using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -39,33 +36,6 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, ShipmentViewModel model)
         {
-            WasteTypeData wasteTypeData = null;
-
-            try
-            {
-                wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
-            }
-            catch 
-            {
-                // This is a test to make sure that if the waste type data cannot be retrieved, the user can still save the shipment data.
-                // The waste type data is only used to validate the total shipments field, so if it cannot be retrieved, we will not perform that validation.
-            }
-
-            if (model.TotalShipments != null && wasteTypeData != null)
-            {
-                if ((model.TotalShipments > 1) &&
-                    (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
-                     wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
-                {
-                    ModelState.AddModelError("TotalShipments", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
-                }
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
             var data = mapper.Map<Shipment>(model, id);
 
             await mediator.SendAsync(new SetDraftData<Shipment>(id, data));

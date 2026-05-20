@@ -2,19 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.IdentityModel.Protocols.WSTrust;
     using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
     using Core.NotificationAssessment;
-    using DocumentFormat.OpenXml.EMMA;
-    using EA.Iws.Core.WasteType;
     using EA.Iws.Requests.NotificationAssessment;
-    using EA.Iws.Requests.WasteType;
     using EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Home;
-    using EA.Prsd.Core.Helpers;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -82,57 +77,11 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Search(Guid id, int? shipmentNumber, int? status, int page = 1)
+        public async Task<ActionResult> Search(Guid id, int? shipmentNumber)
         {
             if (!shipmentNumber.HasValue || shipmentNumber.Value <= 0)
             {
                 return RedirectToAction("Index");
-            }
-
-            WasteTypeData wasteTypeData = null;
-
-            try
-            {
-                wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
-            }
-            catch (Exception)
-            {
-                // This is a test to make sure that if the waste type data cannot be retrieved, the user can still save the shipment data.
-                // The waste type data is only used to validate the total shipments field, so if it cannot be retrieved, we will not perform that validation.
-            }
-
-            if (shipmentNumber != null && wasteTypeData == null)
-            {
-                if ((shipmentNumber > 1) &&
-                    (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
-                     wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
-                {
-                    ModelState.AddModelError("ShipmentNumber", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
-                }
-            }
-
-            if (!ModelState.IsValid)
-            {
-                var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status, page));
-                var canDeleteMovement = await authorizationService.AuthorizeActivity(typeof(DeleteMovement));
-                var keyDates = await mediator.SendAsync(new GetKeyDatesSummaryInformation(id));
-
-                TableData = new List<MovementSummaryTableViewModel>(
-                    movementsSummary.ShipmentTableData.OrderByDescending(m => m.Number)
-                        .Select(p => new MovementSummaryTableViewModel(p)));
-                Decisions = new List<NotificationAssessmentDecision>(
-                    keyDates.DecisionHistory.Where(d => d.Status == EA.Iws.Core.NotificationAssessment.NotificationStatus.Consented));
-
-                PreNotificationWarnings = GetPreNotificationWarnings(TableData);
-                EarlyShipmentWarnings = GetEarlyShipmentWarnings(TableData);
-                ConsentedDateWarnings = GetConsentedDateExceededWarnings(Decisions, TableData);
-
-                var model = new MovementSummaryViewModel(id, movementsSummary, PreNotificationWarnings, EarlyShipmentWarnings, ConsentedDateWarnings);
-
-                model.SelectedMovementStatus = (MovementStatus?)status;
-                model.CanDeleteMovement = canDeleteMovement && movementsSummary.SummaryData.NotificationStatus != NotificationStatus.FileClosed;
-
-                return View(model);
             }
 
             var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
