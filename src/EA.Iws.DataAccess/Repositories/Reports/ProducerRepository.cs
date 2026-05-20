@@ -1,21 +1,25 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
-    using Core.Admin.Reports;
-    using Core.Notification;
-    using Core.Reports;
-    using Domain.Reports;
     using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
+    using Core.Admin.Reports;
+    using Core.Notification;
+    using Core.Reports;
+    using Domain.Reports;
+    using Domain.Security;
 
     internal class ProducerRepository : IProducerRepository
     {
+        private readonly INotificationApplicationAuthorization authorization;
         private readonly IwsContext context;
 
-        public ProducerRepository(IwsContext context)
+        public ProducerRepository(IwsContext context,
+            INotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<IEnumerable<ProducerData>> GetProducerReport(ProducerReportDates dateType,
@@ -60,15 +64,6 @@
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
-        }
-
-        public async Task<IEnumerable<ProducerData>> GetProducerReportData(DateTime fromDate, DateTime toDate, UKCompetentAuthority competentAuthority)
-        {
-            return await context.Database.SqlQuery<ProducerData>(@"[Reports].[uspProducerReportData] @CompetentAuthority, @FromDate, @ToDate",
-                                                                        new SqlParameter("@CompetentAuthority", (int)competentAuthority),
-                                                                        new SqlParameter("@FromDate", fromDate),
-                                                                        new SqlParameter("@ToDate", toDate))
-                                        .ToArrayAsync();
         }
     }
 }

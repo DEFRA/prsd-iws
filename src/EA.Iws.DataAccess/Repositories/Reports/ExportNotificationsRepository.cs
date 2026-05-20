@@ -16,31 +16,28 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<DataExportNotification>> GetDataExportNotificationData(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<DataExportNotification>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<DataExportNotification>(
-                @"SELECT 
-                        [NotificationNumber],
-                        [NotificationType],
-                        [Preconsented],
-                        [Status],
-                        [NotificationReceived],
-                        [PaymentReceived],
-                        [AssessmentStarted],
-                        [ApplicationCompleted],
-                        [Transmitted],
-                        [Acknowledged],
-                        [DecisionDate],
-                        [Consented],
-                        [Officer],
-                        [SubmittedBy],
-                        [ConsentTo],
-                        [SubmittedDate],
-                        [ConsentWithdrawnDate]
-                    FROM 
-                        [Reports].[DataExportNotifications]
-                    WHERE 
-                        [CompetentAuthorityId] = @ca AND [NotificationReceived] BETWEEN @from AND @to",
+                @"SELECT	[NotificationNumber],
+                            [NotificationType],
+                            [Preconsented],
+                            [Status],
+                            [NotificationReceived],
+                            [PaymentReceived],
+                            [AssessmentStarted],
+                            [ApplicationCompleted],
+                            [Transmitted],
+                            [Acknowledged],
+                            [DecisionDate],
+                            [Consented],
+                            [Officer],
+                            [SubmittedBy],
+                            [ConsentTo]
+                    FROM	[Reports].[DataExportNotifications]
+
+                    WHERE	[CompetentAuthorityId] = @ca
+                    AND     [NotificationReceived] BETWEEN @from AND @to",
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToArrayAsync();
