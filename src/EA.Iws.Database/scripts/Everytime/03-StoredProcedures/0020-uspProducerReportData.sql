@@ -9,7 +9,7 @@ GO
 -- =============================================
 -- Author:		Sreedhar Bangarugari
 -- Create date: 29-03-2026
--- Description:	Get Finance report data
+-- Description:	Get Producer report data
 -- =============================================
 ALTER PROCEDURE [Reports].[uspProducerReportData]
 	@CompetentAuthority INT,

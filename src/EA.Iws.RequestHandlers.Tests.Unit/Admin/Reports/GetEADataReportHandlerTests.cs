@@ -55,8 +55,7 @@
                 exportNotificationsRepository,
                 dataExportMapper,
                 importNotificationsRepository,
-                dataImportMapper,
-                A.Fake<Domain.IInternalUserRepository>());
+                dataImportMapper);
         }
 
         [Fact]

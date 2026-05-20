@@ -31,8 +31,7 @@
             IExportNotificationsRepository exportNotificationsRepository,
             IMapWithParameter<DataExportNotification, UKCompetentAuthority, DataExportNotificationData> dataExportMapper,
             IImportNotificationsRepository importNotificationsRepository,
-            IMapWithParameter<DataImportNotification, UKCompetentAuthority, DataImportNotificationData> dataImportMapper,
-            Domain.IInternalUserRepository internalUserRepository)
+            IMapWithParameter<DataImportNotification, UKCompetentAuthority, DataImportNotificationData> dataImportMapper)
         {
             this.shipmentsRepository = shipmentsRepository;
             this.financeReportRepository = financeReportRepository;

@@ -51,5 +51,5 @@ AS
 		ORDER BY NSC.ChangeDate ASC
 	) SB
 
-	WHERE NA.[Status] <> 1;
+	WHERE NA.[Status] <> 1; -- Not submitted
 GO
