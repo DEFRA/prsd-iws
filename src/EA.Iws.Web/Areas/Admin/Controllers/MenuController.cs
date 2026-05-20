@@ -37,6 +37,12 @@
         {
             var model = CreateAdminLinksViewModel(section);
 
+            var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
+            if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
+            {
+                model.ShowEAReportLinks = true;
+            }
+
             return PartialView("_HomeNavigation", model);
         }
 
@@ -135,6 +141,12 @@
                 ConsentedDate = consentedDate
             };
 
+            var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
+            if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
+            {
+                model.ShowEAReportLinks = true;
+            }
+
             return PartialView("_ImportNavigation", model);
         }
 
@@ -192,6 +204,12 @@
                 ConsentStartDate = consentStartDate,
                 ConsentedDate = consentedDate ?? null
             };
+
+            var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
+            if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
+            {
+                model.ShowEAReportLinks = true;
+            }
 
             return PartialView("_ExportNavigation", model);
         }

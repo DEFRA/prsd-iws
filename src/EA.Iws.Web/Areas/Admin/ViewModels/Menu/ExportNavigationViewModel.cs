@@ -3,7 +3,7 @@
     using Core.NotificationAssessment;
     using Infrastructure;
 
-    public class ExportNavigationViewModel
+    public class ExportNavigationViewModel : ReportLinkViewModel
     {
         public NotificationAssessmentSummaryInformationData Data { get; set; }
 

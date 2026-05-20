@@ -35,5 +35,7 @@
         public string SubmittedBy { get; protected set; }
 
         public DateTime? ConsentTo { get; protected set; }
+
+        public DateTime? SubmittedDate { get; protected set; }
     }
 }
