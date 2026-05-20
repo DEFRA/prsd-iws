@@ -109,9 +109,13 @@
                                                                       .FirstOrDefault();
 
             DateTime? consentExpiryDate = null;
+            DateTime? consentStartDate = null;
+            DateTime? consentedDate = null;
             if (mostRecentConsentedDecision != null)
             {
-                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo ?? null;
+                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo;
+                consentStartDate = mostRecentConsentedDecision.ConsentedFrom;
+                consentedDate = (DateTime?)mostRecentConsentedDecision.Date;
             }
 
             var showConsentedDateInRed = ShowConsentExpiryDateInRed(details.AllFacilitiesPreconsented, consentExpiryDate);
@@ -126,7 +130,9 @@
                 ShowKeyDatesOverride = showKeyDatesOverride,
                 HasComments = hasComments,
                 ShowConsentExpiryDateInRed = showConsentedDateInRed,
-                ConsentExpiryDate = consentExpiryDate
+                ConsentExpiryDate = consentExpiryDate,
+                ConsentStartDate = consentStartDate,
+                ConsentedDate = consentedDate
             };
 
             return PartialView("_ImportNavigation", model);
@@ -161,9 +167,13 @@
                                                                       .FirstOrDefault();
 
             DateTime? consentExpiryDate = null;
+            DateTime? consentStartDate = null;
+            DateTime? consentedDate = null;
             if (mostRecentConsentedDecision != null)
             {
-                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo ?? null;
+                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo;
+                consentStartDate = mostRecentConsentedDecision.ConsentedFrom;
+                consentedDate = (DateTime?)mostRecentConsentedDecision.Date;
             }
 
             var showConsentedDateInRed = ShowConsentExpiryDateInRed(data.AllFacilitiesPreconsented, consentExpiryDate);
@@ -178,7 +188,9 @@
                 ShowFinancialGuaranteeDatesOverride = showFinancialGuaranteeDatesOverride,
                 HasComments = hasComments,
                 ShowConsentExpiryDateInRed = showConsentedDateInRed,
-                ConsentExpiryDate = consentExpiryDate
+                ConsentExpiryDate = consentExpiryDate,
+                ConsentStartDate = consentStartDate,
+                ConsentedDate = consentedDate ?? null
             };
 
             return PartialView("_ExportNavigation", model);

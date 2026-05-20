@@ -8,22 +8,41 @@
     @(Model.ActiveSection == section ? className : string.Empty)
 }
 
-@helper GetStyleForConsentExpiryDate()
+@helper FormatConsentedStartDate()
 {
-    if (Model.ShowConsentExpiryDateInRed)
+    string result = string.Empty;
+
+    if (Model.ConsentStartDate.HasValue)
     {
-        @("color:red")
+        result = @Model.ConsentStartDate.Value.ToString("dd MMM yyyy");
     }
+
+    @result
 }
 
 @helper FormatConsentedExpiryDate()
 {
+    string result = string.Empty;
+
     if (Model.ConsentExpiryDate.HasValue)
     {
-        @Model.ConsentExpiryDate.Value.ToString("dd/MM/yyyy")
+        result = @Model.ConsentExpiryDate.Value.ToString("dd MMM yyyy");
     }
+
+    @result
 }
 
+@helper FormatConsentedDate()
+{
+    string result = string.Empty;
+
+    if (Model.ConsentedDate.HasValue)
+    {
+        result = @Model.ConsentedDate.Value.ToString("dd MMM yyyy");
+    }
+
+    @result
+}
 
 <div id="accordion" class="accordion-export">
     <div class="notification-number">
@@ -35,11 +54,25 @@
                 <span class="assigned-area">@Model.Data.Area</span>
             }
             <br />
-            <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Data.Status)</span>
-            @if (Model.Data.Status == NotificationStatus.Consented)
-            {
-                <span class="assigned-area" style="@GetStyleForConsentExpiryDate()">@FormatConsentedExpiryDate()</span>
-            }
+            <table>
+                <tr>
+                    <td style="vertical-align:top">
+                        <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Data.Status)</span>
+                    </td>
+                    @if (Model.Data.Status == NotificationStatus.Consented)
+                    {
+                        <td style="vertical-align:top">
+                            <span class="assigned-area consented-dates-expired">@FormatConsentedDate()</span>
+                        </td>
+                        <td style="vertical-align:top">
+                            <span style="overflow-wrap:break-word; text-align:right">
+                                <span class="assigned-area consented-dates-expired">@FormatConsentedStartDate() to</span>
+                                <span class="assigned-area consented-dates-expired">@FormatConsentedExpiryDate()</span>
+                            </span>
+                        </td>
+                    }
+                </tr>
+            </table>
             <br />
             <span class="assigned-area"> @(Model.Data.IsInterim.GetValueOrDefault() ? Resources.isInterim : Resources.nonInterim)</span>
             @if (Model.Data.AllFacilitiesPreconsented.HasValue && Model.Data.AllFacilitiesPreconsented.Value)
