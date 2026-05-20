@@ -38,5 +38,8 @@
 
         [DisplayName("Consignee name")]
         public string ConsigneeName { get; set; }
+
+        [DisplayName("Registration Number")]
+        public string RegistrationNumber { get; set; }
     }
 }
