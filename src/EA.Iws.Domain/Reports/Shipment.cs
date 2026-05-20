@@ -76,9 +76,5 @@ namespace EA.Iws.Domain.Reports
         public string RejectedReason { get; protected set; }
 
         public string ActionedByExternalUser { get; protected set; }
-
-        public string RegistrationNumber { get; set; }
-
-        public string CustomsCode { get; protected set; }
     }
 }

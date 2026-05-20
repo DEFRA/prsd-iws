@@ -2,7 +2,7 @@
 {
     using Infrastructure;
 
-    public class AdminLinksViewModel : ReportLinkViewModel
+    public class AdminLinksViewModel
     {
         public bool ShowApproveNewInternalUserLink { get; set; }
 

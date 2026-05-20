@@ -165,7 +165,6 @@
     <Compile Include="Controllers\AdminExportNotificationMovements\MovementOverrideControllerTests.cs" />
     <Compile Include="Controllers\AdminImportNotificationMovements\MovementOverrideControllerTests.cs" />
     <Compile Include="Controllers\Admin\ArchiveNotificationControllerTests.cs" />
-    <Compile Include="Controllers\Admin\Reports\EADataReportsControllerTests.cs" />
     <Compile Include="Controllers\BannerControllerTests.cs" />
     <Compile Include="Controllers\DeleteExportNotification\DeleteExportNotificationControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\EditContactControllerTests.cs" />

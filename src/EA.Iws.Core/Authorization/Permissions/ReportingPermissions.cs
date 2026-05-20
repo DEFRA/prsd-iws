@@ -23,7 +23,5 @@
         public const string CanViewProducerReport = "Can View Producer Report";
 
         public const string CanViewComplianceReport = "Can View Compliance Report";
-
-        public const string CanViewEADataReport = "Can View EA Data Report";
     }
 }

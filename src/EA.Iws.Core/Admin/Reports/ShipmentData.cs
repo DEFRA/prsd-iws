@@ -95,9 +95,6 @@
         [DisplayName("UN Class")]
         public string UNClass { get; set; }
 
-        [DisplayName("Customs Code")]
-        public string CustomsCode { get; set; }
-
         [DisplayName("Shipment Status")]
         public string ShipmentStatus { get; set; }
 
@@ -112,8 +109,5 @@
 
         [DisplayName("Actioned by External User")]
         public string ActionedByExternalUser { get; set; }
-
-        [DisplayName("Registration Number")]
-        public string RegistrationNumber { get; set; }
     }
 }
