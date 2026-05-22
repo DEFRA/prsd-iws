@@ -124,13 +124,22 @@
     <value>This is the email address that was used to register their account and they enter when logging into the service. If they are not registered to use IWS Online, they will need to do this first.</value>
   </data>
   <data name="ChangeOwnerTitle" xml:space="preserve">
-    <value>Assign this notification to another user</value>
+    <value>Transfer this notification to another user</value>
   </data>
   <data name="ConfirmResponsibility" xml:space="preserve">
     <value>It is your responsibility as the current owner to advise the new owner of what they can and can't do on your notification. Once transferred, assigning a notification allows the new owner to perform the same activities as the current owner.</value>
   </data>
   <data name="ConfirmTitle" xml:space="preserve">
     <value>Are you sure you want to assign notification {0} to another user?</value>
+  </data>
+  <data name="EmailWarning" xml:space="preserve">
+    <value>This email address must match the other user's IWS Online login email.</value>
+  </data>
+  <data name="IfYouWantTo" xml:space="preserve">
+    <value>If you want to retain ownership you should </value>
+  </data>
+  <data name="IfYouWantTo2" xml:space="preserve">
+    <value> instead.</value>
   </data>
   <data name="NotificationReassigned" xml:space="preserve">
     <value>Notification {0} has been successfully assigned to {1}.</value>
@@ -147,8 +156,14 @@
   <data name="ReviewLink" xml:space="preserve">
     <value>Review user access levels</value>
   </data>
+  <data name="ShareNotification" xml:space="preserve">
+    <value>Share notification with other users</value>
+  </data>
   <data name="SuccessTitle" xml:space="preserve">
     <value>Notification owner changed</value>
+  </data>
+  <data name="ToTransfer" xml:space="preserve">
+    <value>To transfer this notification, enter their email address into the box below and click 'Continue'.</value>
   </data>
   <data name="Transfer" xml:space="preserve">
     <value>To transfer the notification, go to</value>
@@ -161,5 +176,8 @@
   </data>
   <data name="YouAreCurrentlyTheOwner" xml:space="preserve">
     <value>You are currently the owner of this notification.</value>
+  </data>
+  <data name="YouCanTransfer" xml:space="preserve">
+    <value>You can transfer this notification to another IWS Online user. If you transfer it, you'll lose access unless the new owner shares it with you.</value>
   </data>
 </root>

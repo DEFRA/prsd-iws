@@ -198,16 +198,16 @@
 
         private bool ShowConsentExpiryDateInRed(bool? allFacilitiesPreConsented, DateTime? consentExpiryDate)
         {
-            var oneYearAgo = DateTime.UtcNow.AddYears(-1);
-            var threeYearsAgo = DateTime.UtcNow.AddYears(-3);
+            var oneYearAgo = DateTime.UtcNow.Date.AddYears(-1);
+            var threeYearsAgo = DateTime.UtcNow.Date.AddYears(-3);
 
             if (consentExpiryDate == null)
             {
                 return false;
             }   
 
-            bool moreThanOneYearAgo = (oneYearAgo >= consentExpiryDate);
-            bool moreThanThreeYearAgo = (threeYearsAgo >= consentExpiryDate);
+            bool moreThanOneYearAgo = (oneYearAgo.Date >= consentExpiryDate.Value.Date);
+            bool moreThanThreeYearAgo = (threeYearsAgo.Date >= consentExpiryDate.Value.Date);
 
             if (allFacilitiesPreConsented == null)
             {

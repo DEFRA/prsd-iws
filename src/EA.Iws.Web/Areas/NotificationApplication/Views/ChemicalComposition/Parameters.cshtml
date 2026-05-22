@@ -57,8 +57,13 @@
                     <div> <!-- class="column-half"-->
                         <div class="grid-row">
                             @{
-                                var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
-                                                       || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                                //var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
+                                //                       || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                                var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue) ? 
+                                                        ParametersResources.MegajoulesUnits : 
+                                                        (Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? 
+                                                            ParametersResources.MilligramsUnits : 
+                                                            " %";
                                 var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
                             }
                             <div class="column-half">
@@ -68,11 +73,11 @@
                                     @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration,
                                         new
                                         {
-                                            placeholder = ParametersResources.Min + placeholderText,
+                                            placeholder = ParametersResources.Min + " " + placeholderText,
                                             title = sectionTitle + ParametersResources.MinConcentration,
                                             id = idText
                                         })
-                                    <div class="govuk-input__suffix" aria-hidden="true">%</div>
+                                    <div class="govuk-input__suffix" aria-hidden="true">@placeholderText</div>
                                 </div>
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
                             </div>
@@ -83,11 +88,11 @@
                                     @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration,
                                         new
                                         {
-                                            placeholder = ParametersResources.Max + placeholderText,
+                                            placeholder = ParametersResources.Max + " " + placeholderText,
                                             title = sectionTitle + ParametersResources.MaxConcentration,
                                             id = idText
                                         })
-                                    <div class="govuk-input__suffix" aria-hidden="true">%</div>
+                                    <div class="govuk-input__suffix" aria-hidden="true">@placeholderText</div>
                                 </div>
                                 @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
                             </div>

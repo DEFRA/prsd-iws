@@ -66,18 +66,14 @@
                                 }
                             </tr>
                         }
-                        <tr>
-                            <td>
-                                @if (Model.Status == NotificationStatus.NotSubmitted)
-                                {
-                                    @Html.ActionLink(Resource.UploadAnnexes, "AnnexUploadUnavailable", "Options", new { id = Model.Annex.NotificationId, area = "NotificationApplication" }, null)
-                                }
-                                else
-                                {
+                        @if (Model.Status != NotificationStatus.NotSubmitted)
+                        {
+                            <tr>
+                                <td>
                                     @Html.ActionLink(Resource.UploadAnnexes, "Index", "Annex", new { id = Model.Annex.NotificationId, area = "NotificationApplication" }, null)
-                                }
-                            </td>
-                        </tr>
+                                </td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </td>
