@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The date you have entered in the future. Do you want to continue?.
+        ///   Looks up a localized string similar to The date you have entered is in the future. Do you want to continue?.
         /// </summary>
         internal static string FutureDateQuery {
             get {

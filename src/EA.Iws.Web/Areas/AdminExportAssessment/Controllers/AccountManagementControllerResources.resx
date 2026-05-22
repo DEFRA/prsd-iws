@@ -121,6 +121,6 @@
     <value>Change the payment date.</value>
   </data>
   <data name="FutureDateQuery" xml:space="preserve">
-    <value>The date you have entered in the future. Do you want to continue?</value>
+    <value>The date you have entered is in the future. Do you want to continue?</value>
   </data>
 </root>
