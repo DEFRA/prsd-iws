@@ -1,16 +1,20 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Core.CustomsOffice;
     using Core.Notification.Audit;
+    using EA.Iws.Api.Client.Models;
     using EA.Iws.Core.Notification;
+    using EA.Iws.Core.Shared;
     using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.TransportRoute;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
     using Requests.Shared;
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels.CustomsOffice;
 
     [Authorize]
@@ -78,10 +82,27 @@
         public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model, bool? backToOverview = null)
         {
             var countries = await mediator.SendAsync(new GetEuropeanUnionCountries());
+            var route = await mediator.SendAsync(new GetTransportRouteSummaryForNotification(id));
 
             model.Countries = model.SelectedCountry.HasValue
                 ? new SelectList(countries, "Id", "Name", model.SelectedCountry.Value)
                 : new SelectList(countries, "Id", "Name");
+
+            var matches = countries.Where(c => c.Name.Equals(route.StateOfImportData.Country.Name));
+            if (matches.Any() && model.SelectedCountry == null)
+            {
+                ModelState.AddModelError("SelectedCountry", EntryCustomsOfficeResources.EUEntryImport);
+            }
+
+            foreach (var transitState in route.TransitStatesData)
+            {
+                var matches2 = countries.Where(c => c.Name.Equals(transitState.Country.Name));
+                if (matches2.Any() && model.SelectedCountry == null)
+                {
+                    ModelState.AddModelError("SelectedCountry", EntryCustomsOfficeResources.EUEntryTransit);
+                    break;
+                }   
+            }
 
             if (!ModelState.IsValid)
             {

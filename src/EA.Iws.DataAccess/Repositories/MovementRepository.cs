@@ -229,7 +229,10 @@
                 ,@RecoveryDate
                 ,@CreatedBy
                 ,@RejectedQuantity
-                ,@RejectedUnit",
+                ,@RejectedUnit
+                ,@IsReceived
+                ,@IsRejected
+                ,@IsPartiallyRejected",
                 new SqlParameter("@NotificationId", data.NotificationId),
                 new SqlParameter("@MovementId", data.Id),
                 new SqlParameter("@PrenotificationDate", (object)data.PrenotificationDate ?? DBNull.Value),
@@ -249,7 +252,10 @@
                 new SqlParameter("@RecoveryDate", (object)data.OperationCompleteDate ?? DBNull.Value),
                 new SqlParameter("@CreatedBy", createdBy),
                 new SqlParameter("@RejectedQuantity", (object)data.RejectedQuantity ?? DBNull.Value),
-                new SqlParameter("@RejectedUnit", (object)data.RejectedUnit ?? DBNull.Value));
+                new SqlParameter("@RejectedUnit", (object)data.RejectedUnit ?? DBNull.Value),
+                new SqlParameter("@IsReceived", data.IsReceived),
+                new SqlParameter("@IsRejected", data.IsRejected),
+                new SqlParameter("@IsPartiallyRejected", data.IsPartiallyRejected));
         }
     }
 }

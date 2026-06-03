@@ -35,7 +35,7 @@
 
         </div>
     </div>
-    
+
     <div class="grid-row">
         <div class="column-two-thirds">
             <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentDate) @Html.Gds().FormGroupClass(m => m.PaymentDate.Day) @Html.Gds().FormGroupClass(m => m.PaymentDate.Month) @Html.Gds().FormGroupClass(m => m.PaymentDate.Year)">
@@ -56,8 +56,19 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <p> <button class="govuk-button" type="submit">@PaymentDetailsResources.SubmitButton</button></p>
-    </div>
-
+    if (Model.FutureDateYesNoButtonsVisible)
+    {
+        <div class="form-group">
+            <p>
+                <button class="govuk-button" type="submit" name="submitButton" value="FutureDateYes">Yes</button>
+                <button class="govuk-button govuk-button--secondary" type="submit" name="submitButton" value="FutureDateNo">No</button>
+            </p>
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            <p> <button class="govuk-button" type="submit">@PaymentDetailsResources.SubmitButton</button></p>
+        </div>
+    }
 }
