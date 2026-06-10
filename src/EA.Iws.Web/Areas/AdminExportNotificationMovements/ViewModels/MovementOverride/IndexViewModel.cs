@@ -31,7 +31,7 @@
         public DateTime? ReceivedDate { get; set; }
 
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(IndexViewModelResources))]
-        public ShipmentType ShipmentTypes { get; set; }
+        public ShipmentType? ShipmentTypes { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(IndexViewModelResources))]
         [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(IndexViewModelResources), IsOptional = true)]
@@ -109,7 +109,6 @@
 
         public IndexViewModel()
         {
-            ShipmentTypes = ShipmentType.Accepted;
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 
@@ -163,10 +162,6 @@
             {
                 ShipmentTypes = ShipmentType.Rejected;
             }
-            else
-            {
-                ShipmentTypes = ShipmentType.Accepted;
-            }
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -219,6 +214,28 @@
             if (ShipmentTypes == ShipmentType.Accepted && !string.IsNullOrWhiteSpace(StatsMarking))
             {
                 yield return new ValidationResult(IndexViewModelResources.StatsMustBeCleared, new[] { "StatsMarking" });
+            }
+
+            // Leaving "Was the shipment accepted?" unanswered (null) is valid - it lets an internal
+            // user edit other fields on a prenotified movement
+            // without marking it as received. Only when Accepted is explicitly chosen do we require
+            // the full receipt detail, so a Received status can never be saved without a receipt.
+            if (ShipmentTypes == ShipmentType.Accepted)
+            {
+                if (!ReceivedDate.HasValue)
+                {
+                    yield return new ValidationResult("Please provide the received date", new[] { "ReceivedDate" });
+                }
+
+                if (!ActualQuantity.HasValue)
+                {
+                    yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                }
+
+                if (!Units.HasValue)
+                {
+                    yield return new ValidationResult("Please select the units for the quantity received", new[] { "Units" });
+                }
             }
         }
 

@@ -2,9 +2,14 @@ IF OBJECT_ID('[Notification].[uspUpdateExportMovementData]') IS NULL
     EXEC('CREATE PROCEDURE [Notification].[uspUpdateExportMovementData] AS SET NOCOUNT ON;')
 GO
 
-/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    
+/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]
 Script Date: 23/03/2026 12:00:00
-Description: Record shipment data screen allow Was the shipment accepted? field editable and all associated fields ******/
+Description: Record shipment data screen allow Was the shipment accepted? field editable and all associated fields.
+             Each outcome branch refuses to change Movement.Status unless the corresponding child row
+             exists or can be inserted from the supplied parameters. Without these guards the SP could
+             leave Movement.Status pointing at an outcome (Received / Rejected / PartiallyRejected) with
+             no backing row, which violates the invariant NotificationMovementsQuantity.Received relies on
+             and crashes the movements summary page. ******/
 ALTER PROCEDURE [Notification].[uspUpdateExportMovementData] 
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
@@ -31,7 +36,8 @@ BEGIN
 
     BEGIN TRAN
 
-    -- UPDATE MOVEMENT core fields (always)
+    -- UPDATE MOVEMENT core fields (always). This is the only work done when no outcome flag is set,
+    -- i.e. an internal user editing only the actual shipment date on a prenotified movement.
     UPDATE [Notification].[Movement]
     SET [Date]                = ISNULL(@ActualDate, [Date])
        ,[PrenotificationDate] = @PrenotificationDate
@@ -43,6 +49,15 @@ BEGIN
     -- ACCEPTED (Received)
     IF @IsReceived = 1
     BEGIN
+        -- Refuse to mark the movement as Received unless we have a receipt to back it up.
+        IF NOT EXISTS (SELECT 1 FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId)
+           AND (@ReceiptDate IS NULL OR @Quantity IS NULL OR @Unit IS NULL)
+        BEGIN
+            ROLLBACK TRAN;
+            RAISERROR('Cannot mark movement as Received: ReceiptDate, Quantity and Unit are all required when no existing MovementReceipt exists.', 16, 1);
+            RETURN;
+        END
+
         -- Remove all rejection/partial rejection/operation receipt data
         DELETE FROM [Notification].[MovementRejection]        WHERE [MovementId] = @MovementId
         DELETE FROM [Notification].[MovementPartialRejection]  WHERE [MovementId] = @MovementId
@@ -71,6 +86,15 @@ BEGIN
     -- REJECTED
     ELSE IF @IsRejected = 1
     BEGIN
+        -- Refuse to mark the movement as Rejected unless we have a rejection to back it up.
+        IF NOT EXISTS (SELECT 1 FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId)
+           AND @RejectiontDate IS NULL
+        BEGIN
+            ROLLBACK TRAN;
+            RAISERROR('Cannot mark movement as Rejected: RejectionDate is required when no existing MovementRejection exists.', 16, 1);
+            RETURN;
+        END
+
         -- Remove all receipt/partial rejection/operation receipt data
         DELETE FROM [Notification].[MovementReceipt]           WHERE [MovementId] = @MovementId
         DELETE FROM [Notification].[MovementPartialRejection]  WHERE [MovementId] = @MovementId
@@ -100,6 +124,16 @@ BEGIN
     -- PARTIALLY REJECTED
     ELSE IF @IsPartiallyRejected = 1
     BEGIN
+        -- Refuse to mark the movement as PartiallyRejected (or Completed, when a recovery date is
+        -- supplied) unless we have a partial rejection to back it up.
+        IF NOT EXISTS (SELECT 1 FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId)
+           AND @RejectiontDate IS NULL
+        BEGIN
+            ROLLBACK TRAN;
+            RAISERROR('Cannot mark movement as PartiallyRejected: RejectionDate is required when no existing MovementPartialRejection exists.', 16, 1);
+            RETURN;
+        END
+
         -- Remove all receipt/rejection data
         DELETE FROM [Notification].[MovementReceipt]    WHERE [MovementId] = @MovementId
         DELETE FROM [Notification].[MovementRejection]  WHERE [MovementId] = @MovementId
