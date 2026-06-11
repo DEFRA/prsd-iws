@@ -158,7 +158,27 @@
                     <hr />
                 </div>
 
-                <div id="dvStatsMarking" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)" style="display: @(Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected || (Model.ShipmentTypes == ShipmentType.Accepted && !string.IsNullOrWhiteSpace(Model.StatsMarking)) ? "block" : "none")">
+                @* Do you want to enter comments? - shown for Accepted / no outcome.
+                   Hidden for Partially/Rejected where stats marking is mandatory (mirrors the Capture page). *@
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasComments)" id="dvCommentsOptions"
+                     style="display: @(Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected ? "none" : "block")">
+                    @Html.LabelFor(m => m.HasComments, new { @class = "form-label-bold" })
+                    @Html.Gds().ValidationMessageFor(m => m.HasComments)
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            @Html.RadioButtonFor(m => m.HasComments, true, new { id = "Comments-Yes", @class = "govuk-radios__input" })
+                            <label class="govuk-label govuk-radios__label" for="Comments-Yes">Yes</label>
+                        </div>
+                        <div class="govuk-radios__item">
+                            @Html.RadioButtonFor(m => m.HasComments, false, new { id = "Comments-No", @class = "govuk-radios__input" })
+                            <label class="govuk-label govuk-radios__label" for="Comments-No">No</label>
+                        </div>
+                    </div>
+                </div>
+
+                @* Stats marking - only shown for Partially/Rejected outcomes *@
+                <div id="dvStatsMarking" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)"
+                     style="display: @(Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected ? "block" : "none")">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend">
                             <label class="form-label-bold">@Html.DisplayNameFor(m => m.StatsMarking)</label>
@@ -168,7 +188,9 @@
                     </fieldset>
                 </div>
 
-                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Comments)">
+                @* Comments free text - shown only when "Do you want to enter comments?" = Yes (Accepted / no outcome) *@
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Comments)" id="dvComments"
+                     style="display: @(Model.ShipmentTypes != ShipmentType.Partially && Model.ShipmentTypes != ShipmentType.Rejected && Model.HasComments ? "block" : "none")">
                     @Html.LabelFor(m => m.Comments, new { @class = "form-label-bold" })
                     @Html.Gds().ValidationMessageFor(m => m.Comments)
                     @Html.TextAreaFor(m => m.Comments, new { @class = "govuk-textarea", rows = 5 })
@@ -204,6 +226,26 @@
         }
         togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
 
+        function toggleCommentsFields() {
+            var selectedValue = $('input[name="ShipmentTypes"]:checked').val();
+            var hasComments = $('input[name="HasComments"]:checked').val();
+            var isRejectionType = (selectedValue === 'Partially' || selectedValue === 'Rejected');
+
+            // Stats marking is only relevant for Partially/Rejected outcomes.
+            if (isRejectionType) {
+                $('#dvStatsMarking').show();
+            } else {
+                $('#dvStatsMarking').hide();
+            }
+
+            // Free-text comments are offered via the HasComments toggle for Accepted / no outcome only.
+            if (!isRejectionType && hasComments === 'True') {
+                $('#dvComments').show();
+            } else {
+                $('#dvComments').hide();
+            }
+        }
+
         function toggleShipmentTypeFields() {
             var selectedValue = $('input[name="ShipmentTypes"]:checked').val();
 
@@ -212,25 +254,22 @@
                 $('#dvRejectedQuantity').hide();
                 $('#dvActualQuantity').show();
                 $('#dvRecoveryDate').show();
-                var statsValue = $('#StatsMarking').val();
-                if (statsValue && statsValue !== '') {
-                    $('#dvStatsMarking').show();
-                } else {
-                    $('#dvStatsMarking').hide();
-                }
+                $('#dvCommentsOptions').show();
             } else if (selectedValue === 'Partially') {
                 $('#dvRejectionReason').show();
                 $('#dvRejectedQuantity').show();
                 $('#dvActualQuantity').show();
                 $('#dvRecoveryDate').show();
-                $('#dvStatsMarking').show();
+                $('#dvCommentsOptions').hide();
             } else if (selectedValue === 'Rejected') {
                 $('#dvRejectionReason').show();
                 $('#dvRejectedQuantity').show();
                 $('#dvActualQuantity').hide();
                 $('#dvRecoveryDate').show();
-                $('#dvStatsMarking').show();
+                $('#dvCommentsOptions').hide();
             }
+
+            toggleCommentsFields();
         }
 
         $(function () {
@@ -240,6 +279,10 @@
 
             $('input[name="ShipmentTypes"]').change(function () {
                 toggleShipmentTypeFields();
+            });
+
+            $('input[name="HasComments"]').change(function () {
+                toggleCommentsFields();
             });
 
             toggleShipmentTypeFields();

@@ -181,11 +181,6 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (ReceivedDate.HasValue && ShipmentTypes == ShipmentType.Accepted && !ActualQuantity.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
-            }
-
             if (ShipmentTypes == ShipmentType.Partially && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
@@ -211,15 +206,9 @@
                 yield return new ValidationResult(IndexViewModelResources.RecoveryDateMustBeCleared, new[] { "Date" });
             }
 
-            if (ShipmentTypes == ShipmentType.Accepted && !string.IsNullOrWhiteSpace(StatsMarking))
-            {
-                yield return new ValidationResult(IndexViewModelResources.StatsMustBeCleared, new[] { "StatsMarking" });
-            }
-
             // Leaving "Was the shipment accepted?" unanswered (null) is valid - it lets an internal
-            // user edit other fields on a prenotified movement
-            // without marking it as received. Only when Accepted is explicitly chosen do we require
-            // the full receipt detail, so a Received status can never be saved without a receipt.
+            // user edit other fields on a prenotified movement without marking it as received.
+            // Only when Accepted is explicitly chosen do we require the full receipt detail.
             if (ShipmentTypes == ShipmentType.Accepted)
             {
                 if (!ReceivedDate.HasValue)

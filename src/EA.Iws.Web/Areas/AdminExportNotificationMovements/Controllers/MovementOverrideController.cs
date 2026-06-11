@@ -60,8 +60,10 @@
                 RejectionDate = (isRejected || isPartiallyRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null,
                 RejectionReason = model.RejectionReason,
-                Comments = model.Comments,
-                StatsMarking = model.StatsMarking,
+                Comments = model.HasComments ? model.Comments : null,
+                StatsMarking = (isRejected || isPartiallyRejected)
+                   ? model.StatsMarking
+                   : null,  // Always null for Accepted, ignore HasComments
                 RejectedQuantity = model.RejectedQuantity,
                 RejectedUnit = model.RejectedUnits,
                 IsReceived = model.ShipmentTypes == ShipmentType.Accepted,

@@ -58,10 +58,9 @@ BEGIN
             RETURN;
         END
 
-        -- Remove all rejection/partial rejection/operation receipt data
+        -- Remove all rejection/partial rejection data only; operation receipt is handled below
         DELETE FROM [Notification].[MovementRejection]        WHERE [MovementId] = @MovementId
         DELETE FROM [Notification].[MovementPartialRejection]  WHERE [MovementId] = @MovementId
-        DELETE FROM [Notification].[MovementOperationReceipt]  WHERE [MovementId] = @MovementId
 
         -- Update or insert receipt record
         IF EXISTS(SELECT 1 FROM [Notification].[MovementReceipt] WHERE [MovementId] = @MovementId)
@@ -78,9 +77,34 @@ BEGIN
             VALUES (NEWID(), @MovementId, @ReceiptDate, @Quantity, @Unit, @CreatedBy, GETUTCDATE())
         END
 
-        UPDATE [Notification].[Movement]
-        SET [Status] = 3 -- Received
-        WHERE [Id] = @MovementId
+        -- Handle recovery date and operation receipt
+        IF @RecoveryDate IS NOT NULL
+        BEGIN
+            IF EXISTS(SELECT 1 FROM [Notification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId)
+            BEGIN
+                UPDATE [Notification].[MovementOperationReceipt]
+                SET [Date] = @RecoveryDate
+                WHERE [MovementId] = @MovementId
+            END
+            ELSE
+            BEGIN
+                INSERT INTO [Notification].[MovementOperationReceipt] ([Id], [MovementId], [Date], [CreatedBy], [CreatedOnDate])
+                VALUES (NEWID(), @MovementId, @RecoveryDate, @CreatedBy, GETUTCDATE())
+            END
+
+            UPDATE [Notification].[Movement]
+            SET [Status] = 4 -- Completed
+            WHERE [Id] = @MovementId
+        END
+        ELSE
+        BEGIN
+            -- Recovery date cleared - remove operation receipt and set status to Received
+            DELETE FROM [Notification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId
+
+            UPDATE [Notification].[Movement]
+            SET [Status] = 3 -- Received
+            WHERE [Id] = @MovementId
+        END
     END
 
     -- REJECTED
@@ -100,7 +124,7 @@ BEGIN
         DELETE FROM [Notification].[MovementPartialRejection]  WHERE [MovementId] = @MovementId
         DELETE FROM [Notification].[MovementOperationReceipt]  WHERE [MovementId] = @MovementId
 
-        -- Update or insert rejection record — always overwrite, no ISNULL, to allow full amendments
+        -- Update or insert rejection record - always overwrite, no ISNULL, to allow full amendments
         IF EXISTS(SELECT 1 FROM [Notification].[MovementRejection] WHERE [MovementId] = @MovementId)
         BEGIN
             UPDATE [Notification].[MovementRejection]
@@ -138,7 +162,7 @@ BEGIN
         DELETE FROM [Notification].[MovementReceipt]    WHERE [MovementId] = @MovementId
         DELETE FROM [Notification].[MovementRejection]  WHERE [MovementId] = @MovementId
 
-        -- Update or insert partial rejection record — always overwrite, no ISNULL, to allow full amendments
+        -- Update or insert partial rejection record - always overwrite, no ISNULL, to allow full amendments
         IF EXISTS(SELECT 1 FROM [Notification].[MovementPartialRejection] WHERE [MovementId] = @MovementId)
         BEGIN
             UPDATE [Notification].[MovementPartialRejection]
@@ -178,7 +202,7 @@ BEGIN
         END
         ELSE
         BEGIN
-            -- Recovery date cleared — remove operation receipt and revert to PartiallyRejected
+            -- Recovery date cleared - remove operation receipt and revert to PartiallyRejected
             DELETE FROM [Notification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId
 
             UPDATE [Notification].[Movement]
