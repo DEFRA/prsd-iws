@@ -181,6 +181,12 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
             }
 
+            // Add validation for ReceivedDate when Rejected/Partially selected
+            if ((ShipmentTypes == ShipmentType.Rejected || ShipmentTypes == ShipmentType.Partially) && !ReceivedDate.HasValue)
+            {
+                yield return new ValidationResult("Please provide the date when the waste was received", new[] { "ReceivedDate" });
+            }
+
             if (ShipmentTypes == ShipmentType.Partially && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
@@ -199,11 +205,6 @@
             if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
             {
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
-            }
-
-            if (ShipmentTypes == ShipmentType.Rejected && Date.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.RecoveryDateMustBeCleared, new[] { "Date" });
             }
 
             // Leaving "Was the shipment accepted?" unanswered (null) is valid - it lets an internal
