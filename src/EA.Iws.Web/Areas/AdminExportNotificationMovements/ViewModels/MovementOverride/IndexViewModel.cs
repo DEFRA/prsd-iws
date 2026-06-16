@@ -31,7 +31,7 @@
         public DateTime? ReceivedDate { get; set; }
 
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(IndexViewModelResources))]
-        public ShipmentType ShipmentTypes { get; set; }
+        public ShipmentType? ShipmentTypes { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(IndexViewModelResources))]
         [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(IndexViewModelResources), IsOptional = true)]
@@ -109,7 +109,6 @@
 
         public IndexViewModel()
         {
-            ShipmentTypes = ShipmentType.Accepted;
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 
@@ -163,10 +162,6 @@
             {
                 ShipmentTypes = ShipmentType.Rejected;
             }
-            else
-            {
-                ShipmentTypes = ShipmentType.Accepted;
-            }
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -186,9 +181,10 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (ReceivedDate.HasValue && ShipmentTypes == ShipmentType.Accepted && !ActualQuantity.HasValue)
+            // Add validation for ReceivedDate when Rejected/Partially selected
+            if ((ShipmentTypes == ShipmentType.Rejected || ShipmentTypes == ShipmentType.Partially) && !ReceivedDate.HasValue)
             {
-                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                yield return new ValidationResult("Please provide the date when the waste was received", new[] { "ReceivedDate" });
             }
 
             if (ShipmentTypes == ShipmentType.Partially && !ActualQuantity.HasValue)
@@ -211,14 +207,25 @@
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
 
-            if (ShipmentTypes == ShipmentType.Rejected && Date.HasValue)
+            // Leaving "Was the shipment accepted?" unanswered (null) is valid - it lets an internal
+            // user edit other fields on a prenotified movement without marking it as received.
+            // Only when Accepted is explicitly chosen do we require the full receipt detail.
+            if (ShipmentTypes == ShipmentType.Accepted)
             {
-                yield return new ValidationResult(IndexViewModelResources.RecoveryDateMustBeCleared, new[] { "Date" });
-            }
+                if (!ReceivedDate.HasValue)
+                {
+                    yield return new ValidationResult("Please provide the received date", new[] { "ReceivedDate" });
+                }
 
-            if (ShipmentTypes == ShipmentType.Accepted && !string.IsNullOrWhiteSpace(StatsMarking))
-            {
-                yield return new ValidationResult(IndexViewModelResources.StatsMustBeCleared, new[] { "StatsMarking" });
+                if (!ActualQuantity.HasValue)
+                {
+                    yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                }
+
+                if (!Units.HasValue)
+                {
+                    yield return new ValidationResult("Please select the units for the quantity received", new[] { "Units" });
+                }
             }
         }
 
