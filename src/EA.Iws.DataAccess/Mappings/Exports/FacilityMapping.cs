@@ -10,6 +10,7 @@
             ToTable("Facility", "Notification");
 
             Property(x => x.IsActualSiteOfTreatment).IsRequired();
+            Property(x => x.OrdinalPosition).IsRequired();
         }
     }
 }

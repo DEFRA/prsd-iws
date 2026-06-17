@@ -8,7 +8,7 @@
     public class Facility : Entity
     {
         protected Facility()
-        {    
+        {
         }
 
         public Facility(string businessName, BusinessType businessType,
@@ -39,6 +39,8 @@
         public Contact Contact { get; private set; }
 
         public bool IsActualSiteOfTreatment { get; private set; }
+
+        public int OrdinalPosition { get; internal set; }
 
         public void UpdateFacilityDetails(Contact contact, string businessName, Address address)
         {

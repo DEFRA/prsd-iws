@@ -129,5 +129,60 @@
 
             Assert.False(newFacilityCollection.HasMultipleFacilities);
         }
+
+        [Fact]
+        public void AddFacility_FirstFacility_HasOrdinalPositionOne()
+        {
+            var newFacilityCollection = new FacilityCollection(notification.Id);
+            var facility = newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+
+            Assert.Equal(1, facility.OrdinalPosition);
+        }
+
+        [Fact]
+        public void AddFacility_SecondFacility_HasOrdinalPositionTwo()
+        {
+            var newFacilityCollection = new FacilityCollection(notification.Id);
+            newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+            var second = newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+
+            Assert.Equal(2, second.OrdinalPosition);
+        }
+
+        [Fact]
+        public void AddFacility_ThirdFacility_HasOrdinalPositionThree()
+        {
+            var newFacilityCollection = new FacilityCollection(notification.Id);
+            newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+            newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+            var third = newFacilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+
+            Assert.Equal(3, third.OrdinalPosition);
+        }
+
+        [Fact]
+        public void Facilities_ReturnedInOrdinalOrder()
+        {
+            var positions = facilityCollection.Facilities.Select(f => f.OrdinalPosition).ToList();
+
+            Assert.Equal(1, positions[0]);
+            Assert.Equal(2, positions[1]);
+        }
+
+        [Fact]
+        public void AddFacility_AfterExistingFacilities_GetsNextOrdinalPosition()
+        {
+            // facilityCollection already has 2 facilities from constructor
+            var third = facilityCollection.AddFacility(ObjectFactory.CreateEmptyBusiness(),
+                ObjectFactory.CreateDefaultAddress(), ObjectFactory.CreateEmptyContact());
+
+            Assert.Equal(3, third.OrdinalPosition);
+        }
     }
 }

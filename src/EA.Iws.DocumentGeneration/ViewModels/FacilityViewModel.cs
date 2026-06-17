@@ -75,5 +75,27 @@
             facility.ActualSite = seeAnnexNotice;
             return facility;
         }
+
+        /// <summary>
+        /// Returns a FacilityViewModel that displays the first facility's full details
+        /// in Block 10, with a "See Annex" reference for the actual site of treatment.
+        /// </summary>
+        public static FacilityViewModel GetFirstFacilityWithAnnexReference(FacilityViewModel facility, int annexNumber)
+        {
+            var seeAnnexNotice = "See Annex " + annexNumber;
+            return new FacilityViewModel
+            {
+                Name = facility.Name,
+                address = facility.address,
+                RegistrationNumber = facility.RegistrationNumber,
+                ContactPerson = facility.ContactPerson,
+                Telephone = facility.Telephone,
+                Fax = facility.Fax ?? string.Empty,
+                Email = facility.Email,
+                IsActualSite = facility.IsActualSite,
+                ActualSite = seeAnnexNotice,
+                AnnexMessage = string.Empty
+            };
+        }
     }
 }

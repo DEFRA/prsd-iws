@@ -13,11 +13,12 @@
         {
         }
 
-        internal Facility(Business business, Address address, Contact contact)
+        internal Facility(Business business, Address address, Contact contact, int ordinalPosition)
         {
             Business = business;
             Address = address;
             Contact = contact;
+            OrdinalPosition = ordinalPosition;
         }
 
         public void UpdateContactAndBusiness(Contact contact, Business business, Address addressData)
@@ -62,5 +63,7 @@
         }
 
         public bool IsActualSiteOfTreatment { get; internal set; }
+
+        public int OrdinalPosition { get; internal set; }
     }
 }

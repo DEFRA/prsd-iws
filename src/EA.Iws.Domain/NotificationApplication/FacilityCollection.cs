@@ -28,7 +28,7 @@
 
         public IEnumerable<Facility> Facilities
         {
-            get { return FacilitiesCollection.ToSafeIEnumerable(); }
+            get { return FacilitiesCollection == null ? Enumerable.Empty<Facility>() : FacilitiesCollection.OrderBy(f => f.OrdinalPosition); }
         }
 
         public bool? IsInterim { get; private set; }
@@ -40,7 +40,11 @@
 
         public Facility AddFacility(Business business, Address address, Contact contact)
         {
-            var facility = new Facility(business, address, contact);
+            var nextPosition = FacilitiesCollection.Any()
+                ? FacilitiesCollection.Max(f => f.OrdinalPosition) + 1
+                : 1;
+
+            var facility = new Facility(business, address, contact, nextPosition);
 
             FacilitiesCollection.Add(facility);
             return facility;
