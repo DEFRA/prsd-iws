@@ -58,10 +58,12 @@
                 ActualQuantity = model.ActualQuantity,
                 ReceiptUnits = model.Units,
                 RejectionDate = (isRejected || isPartiallyRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
-                OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null,
+                OperationCompleteDate = isRejected ? null : (model.Date.HasValue ? model.Date.Value : (DateTime?)null),  // Force null for Rejected
                 RejectionReason = model.RejectionReason,
-                Comments = model.Comments,
-                StatsMarking = model.StatsMarking,
+                Comments = model.HasComments ? model.Comments : null,
+                StatsMarking = (isRejected || isPartiallyRejected)
+                   ? model.StatsMarking
+                   : (model.HasComments ? model.StatsMarking : null),
                 RejectedQuantity = model.RejectedQuantity,
                 RejectedUnit = model.RejectedUnits,
                 IsReceived = model.ShipmentTypes == ShipmentType.Accepted,
