@@ -14,6 +14,11 @@
     @(Model.ActiveSection == section ? className : string.Empty)
 }
 
+@helper GetClassForConsentedDates()
+{
+    @(Model.ShowConsentExpiryDateInRed ? "consented-dates-expired" : string.Empty)
+}
+
 @helper FormatConsentedStartDate()
 {
     string result = string.Empty;
@@ -68,12 +73,12 @@
                     @if (Model.Details.Status == ImportNotificationStatus.Consented)
                     {
                         <td style="vertical-align:top">
-                            <span class="assigned-area consented-dates-expired">@FormatConsentedDate()</span>
+                            <span class="assigned-area @GetClassForConsentedDates()">@FormatConsentedDate()</span>
                         </td>
                         <td style="vertical-align:top">
                             <span style="overflow-wrap:break-word; text-align:right">
-                                <span class="assigned-area consented-dates-expired">@FormatConsentedStartDate() to</span>
-                                <span class="assigned-area consented-dates-expired">@FormatConsentedExpiryDate()</span>
+                                <span class="assigned-area @GetClassForConsentedDates()">@FormatConsentedStartDate() to</span>
+                                <span class="assigned-area @GetClassForConsentedDates()">@FormatConsentedExpiryDate()</span>
                             </span>
                         </td>
                     }

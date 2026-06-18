@@ -1,25 +1,23 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
-    using EA.Iws.Core.Authorization.Permissions;
+    using Core.Authorization.Permissions;
+    using Core.Notification.Audit;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
-    using EA.Iws.Core.Notification.Audit;
-    using EA.Iws.Core.SystemSettings;
-    using EA.Iws.Core.WasteType;
+    using EA.Iws.Core.Shared;
     using EA.Iws.Requests.AdditionalCharge;
     using EA.Iws.Requests.Notification;
-    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.SystemSettings;
-    using EA.Iws.Requests.WasteType;
-    using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.NumberOfShipments;
-    using EA.Iws.Web.Infrastructure;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
-    using EA.Iws.Web.Infrastructure.Authorization;
-    using EA.Prsd.Core.Helpers;
-    using EA.Prsd.Core.Mediator;
+    using Infrastructure;
+    using Infrastructure.Authorization;
+    using Prsd.Core.Mediator;
+    using Requests.NotificationAssessment;
+    using ViewModels.NumberOfShipments;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using EA.Iws.Core.SystemSettings;
 
     [AuthorizeActivity(ExportNotificationPermissions.CanChangeNumberOfShipmentsOnExportNotification)]
     public class NumberOfShipmentsController : Controller
@@ -43,30 +41,8 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, IndexViewModel model)
+        public ActionResult Index(Guid id, IndexViewModel model)
         {
-            WasteTypeData wasteTypeData = null;
-
-            try
-            {
-                wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
-            }
-            catch (Exception)
-            {
-                // This is a test to make sure that if the waste type data cannot be retrieved, the user can still save the shipment data.
-                // The waste type data is only used to validate the total shipments field, so if it cannot be retrieved, we will not perform that validation.
-            }
-
-            if (model.Number != null && wasteTypeData != null)
-            {
-                if ((model.Number > 1) &&
-                    (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
-                     wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
-                {
-                    ModelState.AddModelError("Number", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
-                }
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(model);

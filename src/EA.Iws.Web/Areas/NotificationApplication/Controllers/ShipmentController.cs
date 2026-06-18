@@ -4,11 +4,8 @@
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.SystemSettings;
-    using EA.Iws.Core.WasteType;
     using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.SystemSettings;
-    using EA.Iws.Requests.WasteType;
-    using EA.Prsd.Core.Helpers;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.IntendedShipments;
@@ -55,28 +52,6 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, ShipmentInfoViewModel model, bool? backToOverview = null)
         {
-            WasteTypeData wasteTypeData = null;
-
-            try
-            {
-                wasteTypeData = await mediator.SendAsync(new GetWasteType(id));
-            }
-            catch (Exception) 
-            {
-                // This is a test to make sure that if the waste type data cannot be retrieved, the user can still save the shipment data.
-                // The waste type data is only used to validate the total shipments field, so if it cannot be retrieved, we will not perform that validation.
-            }
-
-            if (int.TryParse(model.NumberOfShipments, out int numberOfShipments) && wasteTypeData != null)
-            {
-                if ((numberOfShipments > 1) &&
-                    (wasteTypeData.WasteCategoryType == WasteCategoryType.Singleship || 
-                     wasteTypeData.WasteCategoryType == WasteCategoryType.Platformrig))
-                {
-                    ModelState.AddModelError("NumberOfShipments", "Only one shipment is allowed for Waste Category Type: " + EnumHelper.GetDisplayName<WasteCategoryType>((WasteCategoryType)wasteTypeData.WasteCategoryType));
-                }
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(model);

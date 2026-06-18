@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Assign this notification to another user.
+        ///   Looks up a localized string similar to Transfer this notification to another user.
         /// </summary>
         public static string ChangeOwnerTitle {
             get {
@@ -102,6 +102,33 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         public static string ConfirmTitle {
             get {
                 return ResourceManager.GetString("ConfirmTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This email address must match the other user&apos;s IWS Online login email..
+        /// </summary>
+        public static string EmailWarning {
+            get {
+                return ResourceManager.GetString("EmailWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you want to retain ownership you should .
+        /// </summary>
+        public static string IfYouWantTo {
+            get {
+                return ResourceManager.GetString("IfYouWantTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  instead..
+        /// </summary>
+        public static string IfYouWantTo2 {
+            get {
+                return ResourceManager.GetString("IfYouWantTo2", resourceCulture);
             }
         }
         
@@ -151,11 +178,29 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share notification with other users.
+        /// </summary>
+        public static string ShareNotification {
+            get {
+                return ResourceManager.GetString("ShareNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification owner changed.
         /// </summary>
         public static string SuccessTitle {
             get {
                 return ResourceManager.GetString("SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To transfer this notification, enter their email address into the box below and click &apos;Continue&apos;..
+        /// </summary>
+        public static string ToTransfer {
+            get {
+                return ResourceManager.GetString("ToTransfer", resourceCulture);
             }
         }
         
@@ -192,6 +237,15 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         public static string YouAreCurrentlyTheOwner {
             get {
                 return ResourceManager.GetString("YouAreCurrentlyTheOwner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can transfer this notification to another IWS Online user. If you transfer it, you&apos;ll lose access unless the new owner shares it with you..
+        /// </summary>
+        public static string YouCanTransfer {
+            get {
+                return ResourceManager.GetString("YouCanTransfer", resourceCulture);
             }
         }
     }

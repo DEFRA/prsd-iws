@@ -7,8 +7,21 @@
 <div class="grid-row">
     <div class="column-two-thirds">
         <h1 class="govuk-heading-l">@Resources.ChangeOwnerTitle</h1>
-
         <p>@Resources.YouAreCurrentlyTheOwner</p>
+        <p>@Resources.YouCanTransfer</p>
+        <p>@Resources.ToTransfer</p>
+        <p>
+            @Resources.IfYouWantTo
+            @Html.ActionLink(Resources.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+            @Resources.IfYouWantTo2
+        </p>
+        <div class="govuk-warning-text">
+            <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+            <strong class="govuk-warning-text__text">
+                <span class="govuk-visually-hidden">Warning</span>
+                @Resources.EmailWarning
+            </strong>
+        </div>
 
         @using (Html.BeginForm())
         {
@@ -17,8 +30,6 @@
             @Html.HiddenFor(m => m.NotificationId)
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
-                @Html.Gds().LabelFor(m => m.EmailAddress)
-                @Html.Gds().HintParagraph(Resources.ChangeOwnerHint)
                 @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
                 @Html.Gds().TextBoxFor(m => m.EmailAddress)
             </div>

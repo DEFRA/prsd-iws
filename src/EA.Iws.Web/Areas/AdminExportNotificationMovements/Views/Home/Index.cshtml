@@ -40,7 +40,7 @@
 
 @helper DisplayString(string text, MovementStatus status)
 {
-    if (!string.IsNullOrEmpty(text) && status != MovementStatus.New && status != MovementStatus.Cancelled && status != MovementStatus.Submitted )
+    if (!string.IsNullOrEmpty(text) && status != MovementStatus.New && status != MovementStatus.Cancelled && status != MovementStatus.Submitted)
     {
         @(text)
     }
@@ -63,29 +63,29 @@
 
     @if (Model.QuantityRemainingValue < 0 || Model.PreNotificationWarnings.Length > 0 || Model.EarlyShipmentWarnings.Length > 0 || Model.ConsentedDateWarnings.Length > 0)
     {
-            <div class="govuk-error-summary">
-                <h2 class="govuk-error-summary__title">There is a problem</h2>
-                <div class="govuk-error-summary__body">
-                    <ul class="govuk-list govuk-error-summary__list">
-                        @if (Model.QuantityRemainingValue < 0)
-                        {
-                            <li><span class="@overTonnageErrorClass"></span> @Resources.ErrorOverTonnage</li>
-                        }
-                        @if (Model.ConsentedDateWarnings.Length > 0)
-                        {
-                            <li><span class="@consentedDateErrorClass"></span> @Resources.ErrorConsentDate @Model.ConsentedDateWarnings</li>
-                        }
-                        @if (Model.PreNotificationWarnings.Length > 0)
-                        {
-                            <li><span class="@preNotificationErrorClass"></span> @Resources.ErrorPrenotification @Model.PreNotificationWarnings</li>
-                        }
-                        @if (Model.EarlyShipmentWarnings.Length > 0)
-                        {
-                            <li><span class="@earlyShipmentErrorClass"></span> @Resources.ErrorEarlyShipment @Model.EarlyShipmentWarnings</li>
-                        }
-                    </ul>
-                </div>
+        <div class="govuk-error-summary">
+            <h2 class="govuk-error-summary__title">There is a problem</h2>
+            <div class="govuk-error-summary__body">
+                <ul class="govuk-list govuk-error-summary__list">
+                    @if (Model.QuantityRemainingValue < 0)
+                    {
+                        <li><span class="@overTonnageErrorClass"></span> @Resources.ErrorOverTonnage</li>
+                    }
+                    @if (Model.ConsentedDateWarnings.Length > 0)
+                    {
+                        <li><span class="@consentedDateErrorClass"></span> @Resources.ErrorConsentDate @Model.ConsentedDateWarnings</li>
+                    }
+                    @if (Model.PreNotificationWarnings.Length > 0)
+                    {
+                        <li><span class="@preNotificationErrorClass"></span> @Resources.ErrorPrenotification @Model.PreNotificationWarnings</li>
+                    }
+                    @if (Model.EarlyShipmentWarnings.Length > 0)
+                    {
+                        <li><span class="@earlyShipmentErrorClass"></span> @Resources.ErrorEarlyShipment @Model.EarlyShipmentWarnings</li>
+                    }
+                </ul>
             </div>
+        </div>
     }
 
     <div class="grid-row">
@@ -147,8 +147,6 @@
                     {
                         @Html.AntiForgeryToken()
                         <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control govuk-input" style="width:250px" placeholder="@Resources.SearchPlaceholder" />
-                        <input type="hidden" name="status" value="@Model.SelectedMovementStatus" />
-                        <input type="hidden" name="page" value="@Model.PageNumber" />
                         <button class="govuk-button">@Resources.SearchButton</button>
                     }
                 </div>
@@ -228,7 +226,7 @@
                                     @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
                                 </td>
                                 <td class="govuk-table__cell">
-                                    @DisplayString(Model.TableData[i].WasShipmentAccepted.Value.ToString(), Model.TableData[i].Status)
+                                    @DisplayString(Model.TableData[i].WasShipmentAccepted.HasValue ? Model.TableData[i].WasShipmentAccepted.Value.ToString() : string.Empty, Model.TableData[i].Status)
                                 </td>
                             </tr>
                         }
