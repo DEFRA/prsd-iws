@@ -61,7 +61,7 @@ AS
 					order by 1
 					FOR XML PATH('')
 					), 1, 1, '' ) AS [FacilityName],
-		ORG.RegistrationNumber AS 'RegistrationNumber'
+		P.RegistrationNumber AS 'RegistrationNumber'
 	FROM
 		[Notification].[Notification] N
 		LEFT JOIN [Identity].[AspNetUsers] U ON U.Id = N.[UserId]
@@ -152,7 +152,7 @@ AS
 			order by 1
 			FOR XML PATH('')
 			), 1, 1, '' ) AS [FacilityName],
-		'' AS 'RegistrationNumber'
+		P.RegistrationNumber AS 'RegistrationNumber'
 	FROM
 		[ImportNotification].[Notification] N
 		INNER JOIN [ImportNotification].[Exporter] E ON E.ImportNotificationId = N.Id
