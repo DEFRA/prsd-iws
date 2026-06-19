@@ -24,10 +24,10 @@
                     AND     [ImportOrExport] = @importOrExport
                     AND     (@ewc IS NULL OR ([EwcCode] LIKE '%' + @ewc + '%'))
                     AND     (@baselOecd IS NULL OR ([BaselOecdCode] LIKE '%' + @baselOecd + '%'))
-                    AND     (@producerName IS NULL OR [ProducerName] LIKE '%' + @producerName + '%')
-                    AND     (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%')
-                    AND     (@exporterName IS NULL OR [ExporterName] LIKE '%' + @exporterName + '%')
-                    AND     (@facilityName IS NULL OR [FacilityName] LIKE '%' + @facilityName + '%')
+                    AND     (@producerName IS NULL OR [ProducerName] LIKE '%' + @producerName + '%' OR [ProducerRegNumber] LIKE '%' + @producerName + '%')
+                    AND     (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%' OR [ImporterRegNumber] LIKE '%' + @importerName + '%')
+                    AND     (@exporterName IS NULL OR [ExporterName] LIKE '%' + @exporterName + '%' OR [ExporterRegNumber] LIKE '%' + @exporterName + '%')
+                    AND     (@facilityName IS NULL OR [FacilityName] LIKE '%' + @facilityName + '%' OR [FacilityRegNumber] LIKE '%' + @facilityName + '%')
                     AND     (@importCountryName IS NULL OR [CountryOfImport] LIKE '%' + @importCountryName + '%')
                     AND     (@exitPointName IS NULL OR [ExitPointName] LIKE '%' + @exitPointName + '%')
                     AND     (@entryPointName IS NULL OR [EntryPointName] LIKE '%' + @entryPointName + '%')
@@ -68,29 +68,39 @@
 
             var queryFormat = @"
                 SELECT
-                    N.[Id],
-                    N.[NotificationNumber],
-                    NS.[Description] AS [NotificationStatus],
-                    E.[Name] AS [ExporterName],
-                    CCT.[Description] AS [WasteType],
-                    CASE WHEN NS.[Description] IN ('{1}', '{2}') AND FG.Id IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) 
-                        END AS [ShowShipmentSummaryLink]
-                FROM
-                    [Notification].[Notification] N
-                    INNER JOIN [Notification].[NotificationAssessment] NA 
-                        INNER JOIN [Lookup].[NotificationStatus] NS ON NA.[Status] = NS.Id
+                    N.Id,
+                    N.NotificationNumber,
+                    NS.Description AS NotificationStatus,
+                    E.Name AS ExporterName,
+                    CCT.Description AS WasteType,
+                    CASE
+                        WHEN NS.Description IN ('{1}', '{2}')
+                                AND FG.Id IS NOT NULL
+                        THEN CAST(1 AS BIT)
+                        ELSE CAST(0 AS BIT)
+                    END AS ShowShipmentSummaryLink
+                FROM [Notification].[Notification] N
+                INNER JOIN [Notification].[NotificationAssessment] NA
                     ON N.Id = NA.NotificationApplicationId
-                    LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
-                    LEFT JOIN [Notification].[WasteType] WT 
-                        INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON WT.ChemicalCompositionType = CCT.Id
+                INNER JOIN [Lookup].[NotificationStatus] NS
+                    ON NA.Status = NS.Id
+                LEFT JOIN [Notification].[Exporter] E
+                    ON N.Id = E.NotificationId
+                LEFT JOIN [Notification].[WasteType] WT
                     ON N.Id = WT.NotificationId
-                    LEFT JOIN  [Notification].[FinancialGuaranteeCollection] FGC ON FGC.[NotificationId] = N.Id
-                        LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
-                            (SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
-                            WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
-                            AND (FG1.Status = {3} OR FG1.Status = {4}))
-                WHERE
-                    N.[Id] IN ({0})";
+                LEFT JOIN [Lookup].[ChemicalCompositionType] CCT
+                    ON WT.ChemicalCompositionType = CCT.Id
+                LEFT JOIN [Notification].[FinancialGuaranteeCollection] FGC
+                    ON FGC.NotificationId = N.Id
+                OUTER APPLY
+                (
+                    SELECT TOP (1)
+                        FG1.Id
+                    FROM [Notification].[FinancialGuarantee] FG1
+                    WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
+                        AND FG1.Status IN ({3}, {4})
+                ) FG
+                WHERE N.Id IN ({0});";
 
             var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
                 EnumHelper.GetDisplayName(NotificationStatus.Consented),
