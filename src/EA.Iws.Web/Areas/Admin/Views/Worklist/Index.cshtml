@@ -5,115 +5,122 @@
 
 @{
     ViewBag.Title = "Worklist";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<h1 class="govuk-heading-l">Worklist</h1>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
 
-<div class="govuk-tabs">
-    <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
-            <a class="govuk-tabs__tab" href="#exports">Exports</a>
-        </li>
-        <li class="govuk-tabs__list-item">
-            <a class="govuk-tabs__tab" href="#imports">Imports</a>
-        </li>
-        <li class="govuk-tabs__list-item">
-            <a class="govuk-tabs__tab" href="#newly-submitted">Newly Submitted</a>
-        </li>
-    </ul>
+        <h1 class="govuk-heading-l">Worklist</h1>
 
-    <div class="govuk-tabs__panel" id="exports">
+        <div class="govuk-tabs">
+            <ul class="govuk-tabs__list">
+                <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                    <a class="govuk-tabs__tab" href="#exports">Exports</a>
+                </li>
+                <li class="govuk-tabs__list-item">
+                    <a class="govuk-tabs__tab" href="#imports">Imports</a>
+                </li>
+                <li class="govuk-tabs__list-item">
+                    <a class="govuk-tabs__tab" href="#newly-submitted">Newly Submitted</a>
+                </li>
+            </ul>
 
-        @using (Html.BeginForm("Index", "Worklist", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            <div class="govuk-form-group">
-                @Html.LabelFor(m => m.ExportsFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
-                @Html.TextBoxFor(m => m.ExportsFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
-            </div>
-            <div class="govuk-form-group">
-                @Html.LabelFor(m => m.ExportsFilter.Officer, "Officer", new { @class = "govuk-label" })
-                @Html.TextBoxFor(m => m.ExportsFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
-            </div>
-            <div class="govuk-form-group">
-                @Html.LabelFor(m => m.ExportsFilter.Status, "Status", new { @class = "govuk-label" })
-                @Html.DropDownListFor(m => m.ExportsFilter.Status,
-                    new SelectList(EnumHelper.GetValues(typeof(NotificationStatus)), "Key", "Value", Model.ExportsFilter.Status.HasValue ? (int?)Model.ExportsFilter.Status.Value : null),
-                    "All statuses",
-                    new { @class = "govuk-select" })
-            </div>
-            <button type="submit" class="govuk-button">Filter</button>
-        }
+            <div class="govuk-tabs__panel" id="exports">
 
-        @if (Model.ExportsResult != null && Model.ExportsResult.Results.Count > 0)
-        {
-            <table class="govuk-table">
-                <thead class="govuk-table__head">
-                    <tr class="govuk-table__row">
-                        <th scope="col" class="govuk-table__header">Notification number</th>
-                        <th scope="col" class="govuk-table__header">Notifier</th>
-                        <th scope="col" class="govuk-table__header">Officer</th>
-                        <th scope="col" class="govuk-table__header">Date picked up</th>
-                        <th scope="col" class="govuk-table__header">Working days</th>
-                        <th scope="col" class="govuk-table__header">Transmitted</th>
-                        <th scope="col" class="govuk-table__header">Acknowledged</th>
-                        <th scope="col" class="govuk-table__header">Decision required</th>
-                        <th scope="col" class="govuk-table__header">Days remaining</th>
-                        <th scope="col" class="govuk-table__header">Consented</th>
-                        <th scope="col" class="govuk-table__header">Last action date</th>
-                        <th scope="col" class="govuk-table__header">Last action</th>
-                        <th scope="col" class="govuk-table__header">Last comment</th>
-                        <th scope="col" class="govuk-table__header">Status</th>
-                    </tr>
-                </thead>
-                <tbody class="govuk-table__body">
-                    @foreach (var row in Model.ExportsResult.Results)
+                @using (Html.BeginForm("Index", "Worklist", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="govuk-form-group">
+                        @Html.LabelFor(m => m.ExportsFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
+                        @Html.TextBoxFor(m => m.ExportsFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
+                    </div>
+                    <div class="govuk-form-group">
+                        @Html.LabelFor(m => m.ExportsFilter.Officer, "Officer", new { @class = "govuk-label" })
+                        @Html.TextBoxFor(m => m.ExportsFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
+                    </div>
+                    <div class="govuk-form-group">
+                        @Html.LabelFor(m => m.ExportsFilter.Status, "Status", new { @class = "govuk-label" })
+                        @Html.DropDownListFor(m => m.ExportsFilter.Status,
+                            new SelectList(EnumHelper.GetValues(typeof(NotificationStatus)), "Key", "Value", Model.ExportsFilter.Status.HasValue ? (int?)Model.ExportsFilter.Status.Value : null),
+                            "All statuses",
+                            new { @class = "govuk-select" })
+                    </div>
+                    <button type="submit" class="govuk-button">Filter</button>
+                }
+
+                @if (Model.ExportsResult != null && Model.ExportsResult.Results.Count > 0)
+                {
+                    <table class="govuk-table">
+                        <thead class="govuk-table__head">
+                            <tr class="govuk-table__row">
+                                <th scope="col" class="govuk-table__header">Notification number</th>
+                                <th scope="col" class="govuk-table__header">Notifier</th>
+                                <th scope="col" class="govuk-table__header">Officer</th>
+                                <th scope="col" class="govuk-table__header">Date picked up</th>
+                                <th scope="col" class="govuk-table__header">Working days</th>
+                                <th scope="col" class="govuk-table__header">Transmitted</th>
+                                <th scope="col" class="govuk-table__header">Acknowledged</th>
+                                <th scope="col" class="govuk-table__header">Decision required</th>
+                                <th scope="col" class="govuk-table__header">Days remaining</th>
+                                <th scope="col" class="govuk-table__header">Consented</th>
+                                <th scope="col" class="govuk-table__header">Last action date</th>
+                                <th scope="col" class="govuk-table__header">Last action</th>
+                                <th scope="col" class="govuk-table__header">Last comment</th>
+                                <th scope="col" class="govuk-table__header">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="govuk-table__body">
+                            @foreach (var row in Model.ExportsResult.Results)
+                            {
+                                <tr class="govuk-table__row">
+                                    <td class="govuk-table__cell">
+                                        @Html.ActionLink(
+                                            linkText: row.NotificationNumber.ToNonBreakingString(),
+                                            actionName: "Index",
+                                            controllerName: "Home",
+                                            routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
+                                            htmlAttributes: null)
+                                    </td>
+                                    <td class="govuk-table__cell">@row.Notifier</td>
+                                    <td class="govuk-table__cell">@row.Officer</td>
+                                    <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
+                                    <td class="govuk-table__cell">@row.WorkingDaysInAssessment</td>
+                                    <td class="govuk-table__cell">@(row.TransmittedDate.HasValue ? Html.Gds().DisplayShortDate(row.TransmittedDate.Value).ToString() : string.Empty)</td>
+                                    <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
+                                    <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
+                                    <td class="govuk-table__cell">@row.DaysRemaining</td>
+                                    <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
+                                    <td class="govuk-table__cell">@(row.LastActionDate.HasValue ? row.LastActionDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
+                                    <td class="govuk-table__cell">@row.LastActionType</td>
+                                    <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
+                                    <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(NotificationStatus))[(int)row.Status]</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                    @Html.Pager(Model.ExportsResult.PageSize, Model.ExportsResult.PageNumber, Model.ExportsResult.TotalCount).Options(o =>
                     {
-                        <tr class="govuk-table__row">
-                            <td class="govuk-table__cell">
-                                @Html.ActionLink(
-                                    linkText: row.NotificationNumber.ToNonBreakingString(),
-                                    actionName: "Index",
-                                    controllerName: "Home",
-                                    routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
-                                    htmlAttributes: null)
-                            </td>
-                            <td class="govuk-table__cell">@row.Notifier</td>
-                            <td class="govuk-table__cell">@row.Officer</td>
-                            <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
-                            <td class="govuk-table__cell">@row.WorkingDaysInAssessment</td>
-                            <td class="govuk-table__cell">@(row.TransmittedDate.HasValue ? Html.Gds().DisplayShortDate(row.TransmittedDate.Value).ToString() : string.Empty)</td>
-                            <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
-                            <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
-                            <td class="govuk-table__cell">@row.DaysRemaining</td>
-                            <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
-                            <td class="govuk-table__cell">@(row.LastActionDate.HasValue ? row.LastActionDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
-                            <td class="govuk-table__cell">@row.LastActionType</td>
-                            <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
-                            <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(NotificationStatus))[(int)row.Status]</td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+                        o.AddRouteValue("filter.NotificationNumber", Model.ExportsFilter.NotificationNumber);
+                        o.AddRouteValue("filter.Officer", Model.ExportsFilter.Officer);
+                        o.AddRouteValue("filter.Status", Model.ExportsFilter.Status.HasValue ? (object)(int)Model.ExportsFilter.Status.Value : null);
+                    })
+                }
+                else
+                {
+                    <p class="govuk-body">No export notifications found matching the current filter.</p>
+                }
+            </div>
 
-            @Html.Pager(Model.ExportsResult.PageSize, Model.ExportsResult.PageNumber, Model.ExportsResult.TotalCount).Options(o =>
-            {
-                o.AddRouteValue("filter.NotificationNumber", Model.ExportsFilter.NotificationNumber);
-                o.AddRouteValue("filter.Officer", Model.ExportsFilter.Officer);
-                o.AddRouteValue("filter.Status", Model.ExportsFilter.Status.HasValue ? (object)(int)Model.ExportsFilter.Status.Value : null);
-            })
-        }
-        else
-        {
-            <p class="govuk-body">No export notifications found matching the current filter.</p>
-        }
-    </div>
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="imports">
+                <p class="govuk-body">Imports worklist — coming soon.</p>
+            </div>
 
-    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="imports">
-        <p class="govuk-body">Imports worklist — coming soon.</p>
-    </div>
+            <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="newly-submitted">
+                <p class="govuk-body">Newly Submitted worklist — coming soon.</p>
+            </div>
+        </div>
 
-    <div class="govuk-tabs__panel govuk-tabs__panel--hidden" id="newly-submitted">
-        <p class="govuk-body">Newly Submitted worklist — coming soon.</p>
     </div>
 </div>
