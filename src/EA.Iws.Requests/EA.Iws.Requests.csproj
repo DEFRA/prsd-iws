@@ -273,6 +273,7 @@
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />
     <Compile Include="NotificationAssessment\CreateNotificationStatusChange.cs" />
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
+    <Compile Include="NotificationAssessment\GetExportWorklist.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
     <Compile Include="NotificationAssessment\GetProhibitionStatusChanges.cs" />

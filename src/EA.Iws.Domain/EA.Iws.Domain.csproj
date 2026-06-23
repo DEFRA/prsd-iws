@@ -351,10 +351,12 @@
     <Compile Include="NotificationAssessment\CompleteNotification.cs" />
     <Compile Include="NotificationAssessment\Consultation.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
+    <Compile Include="NotificationAssessment\ExportWorklistSummary.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequired.cs" />
     <Compile Include="NotificationAssessment\IConsultationRepository.cs" />
     <Compile Include="NotificationAssessment\IDecisionRequiredByCalculator.cs" />
     <Compile Include="DaysRemainingCalculator.cs" />
+    <Compile Include="NotificationAssessment\IExportWorklistRepository.cs" />
     <Compile Include="NotificationAssessment\IKeyDatesOverrideRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationCommentRepository.cs" />

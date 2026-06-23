@@ -521,6 +521,7 @@
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetExportNotificationTransactionsHandler.cs" />
+    <Compile Include="NotificationAssessment\GetExportWorklistHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsersHandler.cs" />
