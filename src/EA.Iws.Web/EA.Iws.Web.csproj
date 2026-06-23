@@ -935,6 +935,7 @@
     <Content Include="Content\iws\_session-timeout.scss" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Uploads.cshtml" />
     <Content Include="Areas\Admin\Views\Worklist\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Worklist\_Layout.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
