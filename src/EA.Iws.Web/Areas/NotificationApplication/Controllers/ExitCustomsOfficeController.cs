@@ -142,14 +142,14 @@
 
         private bool GetExitedEU(TransportRouteData route, CountryData[] countries)
         {
-            var routeEndsInEU = countries.Where(c => c.Name.Equals(route.StateOfImportData.Country.Name)).Any();
+            var routeEndsInEU = countries.Where(c => c.Name.Equals(route?.StateOfImportData?.Country?.Name)).Any();
 
             var countEUTransitStates = route.TransitStatesData.Where(t => countries.Where(c => c.Name.Equals(t.Country.Name)).Any()).Count();
             var countTransitStates = route.TransitStatesData.Count();
 
             if (!routeEndsInEU && countEUTransitStates > 0)
             {
-                return true; 
+                return true;
             }
 
             if (countEUTransitStates != countTransitStates)
