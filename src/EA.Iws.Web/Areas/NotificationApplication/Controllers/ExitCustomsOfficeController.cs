@@ -144,33 +144,36 @@
         {
             var routeEndsInEU = countries.Where(c => c.Name.Equals(route?.StateOfImportData?.Country?.Name)).Any();
 
-            var countEUTransitStates = route.TransitStatesData.Where(t => countries.Where(c => c.Name.Equals(t.Country.Name)).Any()).Count();
-            var countTransitStates = route.TransitStatesData.Count();
-
-            if (!routeEndsInEU && countEUTransitStates > 0)
+            if (route.TransitStatesData != null)
             {
-                return true;
-            }
+                var countEUTransitStates = route.TransitStatesData.Where(t => countries.Where(c => c.Name.Equals(t.Country.Name)).Any()).Count();
+                var countTransitStates = route.TransitStatesData.Count();
 
-            if (countEUTransitStates != countTransitStates)
-            {
-                // This means we have a mixture of EU and Non-EU transist states and we must work out if the route has exited the EU or not.
-                // This assumes the transit states are in order
-
-                var foundEU = false;
-                foreach (var transit in route.TransitStatesData)
+                if (!routeEndsInEU && countEUTransitStates > 0)
                 {
-                    var isEU = countries.Any(c => c.Name.Equals(transit.Country.Name));
+                    return true;
+                }
 
-                    if (isEU)
+                if (countEUTransitStates != countTransitStates)
+                {
+                    // This means we have a mixture of EU and Non-EU transist states and we must work out if the route has exited the EU or not.
+                    // This assumes the transit states are in order
+
+                    var foundEU = false;
+                    foreach (var transit in route.TransitStatesData)
                     {
-                        foundEU = true;
-                    }
-                    else
-                    {
-                        if (foundEU)
+                        var isEU = countries.Any(c => c.Name.Equals(transit.Country.Name));
+
+                        if (isEU)
                         {
-                            return true;
+                            foundEU = true;
+                        }
+                        else
+                        {
+                            if (foundEU)
+                            {
+                                return true;
+                            }
                         }
                     }
                 }
