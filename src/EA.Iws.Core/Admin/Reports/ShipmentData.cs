@@ -121,8 +121,5 @@
 
         [DisplayName("Actioned by External User")]
         public string ActionedByExternalUser { get; set; }
-
-        [DisplayName("Producer Registration Number")]
-        public string ProducerRegistrationNumber { get; set; }
     }
 }
