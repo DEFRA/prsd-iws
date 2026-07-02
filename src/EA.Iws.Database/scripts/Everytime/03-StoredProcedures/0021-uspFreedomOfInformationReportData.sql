@@ -79,9 +79,12 @@ BEGIN
 		[FileClosedDate],
 		[LocalArea],
 		[Officer],
-		[RegistrationNumber],
 		[ConsentWithdrawnDate],
-		[CustomsCode]
+		[CustomsCode],
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber]
 	FROM 
 		[Reports].[FreedomOfInformationCache]
 	WHERE 
@@ -136,8 +139,11 @@ BEGIN
 		[FileClosedDate],
 		[LocalArea],
 		[Officer],
-		[RegistrationNumber],
 		[ConsentWithdrawnDate],
-		[CustomsCode]
+		[CustomsCode],
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber]
 END
 GO

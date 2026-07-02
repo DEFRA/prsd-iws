@@ -9,8 +9,14 @@
         [DisplayName("Notifier name")]
         public string NotifierName { get; set; }
 
+        [DisplayName("Notifier Registration Number")]
+        public string ExporterRegistrationNumber { get; set; }
+
         [DisplayName("Producer name")]
         public string ProducerName { get; set; }
+
+        [DisplayName("Producer Registration Number")]
+        public string ProducerRegistrationNumber { get; set; }
 
         [DisplayName("Producer address 1")]
         public string ProducerAddress1 { get; set; }
@@ -23,7 +29,7 @@
 
         [DisplayName("Producer postcode")]
         public string ProducerPostcode { get; set; }
-        
+
         [DisplayName("Site of export/Postcode")]
         public string SiteOfExport { get; set; }
 
@@ -39,7 +45,8 @@
         [DisplayName("Consignee name")]
         public string ConsigneeName { get; set; }
 
-        [DisplayName("Registration Number")]
-        public string RegistrationNumber { get; set; }
+        [DisplayName("Consignee Registration Number")]
+        public string ImporterRegistrationNumber { get; set; }
+
     }
 }

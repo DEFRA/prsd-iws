@@ -71,9 +71,12 @@ BEGIN
 		[WithdrawnDate],
 		[SiteOfExportName],
 		[Officer],
-		[RegistrationNumber],
 		[ConsentWithdrawnDate],
-		[CustomsCode])
+		[CustomsCode],
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber])
 	SELECT
 		[NotificationNumber],
 		[ImportOrExport],
@@ -136,9 +139,12 @@ BEGIN
 		[WithdrawnDate],
 		[SiteOfExportName],
 		[Officer],
-		[RegistrationNumber],
 		[ConsentWithdrawnDate],
-		[CustomsCode]
+		[CustomsCode],
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber]
 	FROM [Reports].[FreedomOfInformation];
 
 	INSERT INTO [Reports].[ShipmentsCache] (
@@ -185,7 +191,10 @@ BEGIN
 		[RejectedShipmentDate],
 		[RejectedReason],
 		[ActionedByExternalUser],
-		[RegistrationNumber])
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber])
 	SELECT
 		[NotificationId],
 		[NotificationNumber],
@@ -230,7 +239,10 @@ BEGIN
 		[RejectedShipmentDate],
 		[RejectedReason],
 		[ActionedByExternalUser],
-		[RegistrationNumber]
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber]
 	FROM [Reports].[Shipments];
 
 	--Update the ActionedByExternalUser, this is Y if any MovementAudit action has been carried out by an external user.
@@ -274,7 +286,10 @@ BEGIN
 		[ImportCountryName],
 		[SiteOfExportName],
 		[FacilityName],
-		[RegistrationNumber])
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber])
 	SELECT DISTINCT p.* FROM (
 		SELECT 
 			[NotificationNumber],
@@ -303,9 +318,10 @@ BEGIN
 			[ImportCountryName],
 			[SiteOfExportName],
 			[FacilityName],
-			[RegistrationNumber]
+			[ExporterRegistrationNumber],
+			[ImporterRegistrationNumber],
+			[FacilityRegistrationNumber],
+			[ProducerRegistrationNumber]
 		FROM [Reports].[Producers]
 	) p
-
 END
-GO

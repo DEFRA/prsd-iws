@@ -103,7 +103,10 @@ AS
 			ELSE ''
 		END AS [SiteOfExportName],
 		'N' AS [ActionedByExternalUser],
-		ORG.RegistrationNumber AS 'RegistrationNumber'
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		SiteOfExport.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM [Notification].[Movement] AS M
 
 	INNER JOIN [Notification].[Notification] AS N ON M.NotificationId = N.Id
@@ -210,19 +213,19 @@ AS
 		COALESCE(MR_U.Description, MPR_U.Description) AS [QuantityReceivedUnit],
 		COALESCE(MR_U.Id, MPR_U.Id) AS [QuantityReceivedUnitId],
 		WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
-        CASE
-            WHEN WT.Name IS NULL THEN CCT.Description
-            ELSE CCT.Description + ' - ' + WT.Name
-        END AS [ChemicalComposition],
-        LA.[Name] AS [LocalArea],
-        SI.Quantity AS TotalQuantity,
-        SI_U.Description AS TotalQuantityUnits,
-        SI.Units AS TotalQuantityUnitsId,
-        TR.EntryPoint AS EntryPort,
-        TR.ImportCountryName AS DestinationCountry,
-        TR.ExitPoint AS ExitPort,
-        TR.ExportCountryName AS OriginatingCountry,
-        CASE WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
+		CASE
+			WHEN WT.Name IS NULL THEN CCT.Description
+			ELSE CCT.Description + ' - ' + WT.Name
+		END AS [ChemicalComposition],
+		LA.[Name] AS [LocalArea],
+		SI.Quantity AS TotalQuantity,
+		SI_U.Description AS TotalQuantityUnits,
+		SI.Units AS TotalQuantityUnitsId,
+		TR.EntryPoint AS EntryPort,
+		TR.ImportCountryName AS DestinationCountry,
+		TR.ExitPoint AS ExitPort,
+		TR.ExportCountryName AS OriginatingCountry,
+		CASE WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
 			ELSE 
 				CASE WHEN MOR.Date IS NOT NULL THEN 'Completed'
 					ELSE 
@@ -240,51 +243,54 @@ AS
 						END
 				END
 		END AS [Status],
-        ND.[NotificationReceivedDate],
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-                FROM [ImportNotification].[WasteType] WT
-                INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-                LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-                WHERE WT.ImportNotificationId = M.NotificationId AND WC.CodeType = 3
-                order by 1
-                FOR XML PATH('')
-                ), 1, 1, '' ) AS [EwcCodes],
-        STUFF(( SELECT ', ' + O.Name AS [text()]
-            FROM [ImportNotification].[WasteOperation] WO
-            INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
-            LEFT JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
-            WHERE WO.ImportNotificationId = N.Id
-            ORDER BY O.IsInterim DESC, O.Id ASC
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS OperationCodes,
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 4
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [YCode],
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 5
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [HCode],
-        STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 6
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [UNClass],
+		ND.[NotificationReceivedDate],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+				FROM [ImportNotification].[WasteType] WT
+				INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+				LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+				WHERE WT.ImportNotificationId = M.NotificationId AND WC.CodeType = 3
+				ORDER BY 1
+				FOR XML PATH('')
+			), 1, 1, '' ) AS [EwcCodes],
+		STUFF(( SELECT ', ' + O.Name AS [text()]
+				FROM [ImportNotification].[WasteOperation] WO
+				INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
+				LEFT JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
+				WHERE WO.ImportNotificationId = N.Id
+				ORDER BY O.IsInterim DESC, O.Id ASC
+				FOR XML PATH('')
+			), 1, 1, '' ) AS OperationCodes,
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+				FROM [ImportNotification].[WasteType] WT
+				INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+				LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+				WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 4
+				ORDER BY 1
+				FOR XML PATH('')
+			), 1, 1, '' ) AS [YCode],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+				FROM [ImportNotification].[WasteType] WT
+				INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+				LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+				WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 5
+				ORDER BY 1
+				FOR XML PATH('')
+			), 1, 1, '' ) AS [HCode],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+				FROM [ImportNotification].[WasteType] WT
+				INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+				INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+				WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 6
+				ORDER BY 1
+				FOR XML PATH('')
+			), 1, 1, '' ) AS [UNClass],
 			NULL AS [CustomsCode],
 		P.[Name] [SiteOfExportName],
 		'N/A' AS [ActionedByExternalUser],
-		'' AS 'RegistrationNumber'
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM [ImportNotification].[Movement] AS M
 
 	INNER JOIN [ImportNotification].[Notification] AS N ON M.NotificationId = N.Id

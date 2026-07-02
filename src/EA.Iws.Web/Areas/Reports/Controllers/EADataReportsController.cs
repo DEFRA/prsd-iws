@@ -6,9 +6,13 @@
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Helpers;
     using EA.Prsd.Core.Mediator;
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.EADataReports;
@@ -42,8 +46,7 @@
             var toDate = model.To.AsDateTime().Value;
             var selectedReports = model.SelectedValues.ToList();
 
-            var reportData = await mediator.SendAsync(
-                new GetEADataReport(fromDate, toDate, selectedReports));
+            var reportData = await mediator.SendAsync(new GetEADataReport(fromDate, toDate, selectedReports));
 
             using (var workbook = new XLWorkbook())
             {
@@ -115,15 +118,36 @@
         {
             var worksheet = workbook.Worksheets.Add(sheetName);
 
-            worksheet.Cell(1, 1).InsertTable(data);
+            IList<PropertyInfo> properties = typeof(T).GetProperties();
+            AddHeaderRow(properties, worksheet);
+
+            worksheet.Cell(2, 1).Value = data.AsEnumerable();
 
             var headerRange = worksheet.Range(1, 1, 1, worksheet.LastColumnUsed().ColumnNumber());
-
             headerRange.Style.Font.Bold = true;
             headerRange.Style.Fill.BackgroundColor = XLColor.LimeGreen;
 
             worksheet.SheetView.FreezeRows(1);
             worksheet.Columns().AdjustToContents();
+        }
+
+        private static void AddHeaderRow(IList<PropertyInfo> properties, IXLWorksheet worksheet)
+        {
+            for (var i = 0; i < properties.Count(); i++)
+            {
+                var property = properties[i];
+
+                var attr = (DisplayNameAttribute)Attribute.GetCustomAttribute(property, typeof(DisplayNameAttribute));
+
+                var columnName = attr == null ? SplitCamelCase(property.Name) : attr.DisplayName;
+
+                worksheet.Cell(1, i + 1).Value = columnName;
+            }
+        }
+
+        private static string SplitCamelCase(string input)
+        {
+            return Regex.Replace(input, "(?<=[a-z])([A-Z])", " $1", RegexOptions.Compiled);
         }
     }
 }

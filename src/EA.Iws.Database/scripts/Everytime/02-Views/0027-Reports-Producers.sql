@@ -61,7 +61,10 @@ AS
 					order by 1
 					FOR XML PATH('')
 					), 1, 1, '' ) AS [FacilityName],
-		P.RegistrationNumber AS 'RegistrationNumber'
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM
 		[Notification].[Notification] N
 		LEFT JOIN [Identity].[AspNetUsers] U ON U.Id = N.[UserId]
@@ -78,6 +81,14 @@ AS
 			INNER JOIN [Notification].[Producer] AS P1 ON PC.Id = P1.ProducerCollectionId
 			WHERE PC.NotificationId = N.Id AND [IsSiteOfExport] = 1
 			ORDER BY P1.[IsSiteOfExport] DESC
+		)
+		INNER JOIN [Notification].[Facility] AS F ON F.Id = 
+		(
+			SELECT TOP 1 F1.Id
+			FROM [Notification].[FacilityCollection] AS FC
+			INNER JOIN	[Notification].[Facility] AS F1 ON FC.Id = F1.FacilityCollectionId
+			WHERE FC.NotificationId = N.Id
+			ORDER BY F1.IsActualSiteOfTreatment DESC
 		)
 		LEFT JOIN [Notification].[Consultation] CON
 		INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id ON CON.NotificationId = N.Id
@@ -152,7 +163,10 @@ AS
 			order by 1
 			FOR XML PATH('')
 			), 1, 1, '' ) AS [FacilityName],
-		P.RegistrationNumber AS 'RegistrationNumber'
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM
 		[ImportNotification].[Notification] N
 		INNER JOIN [ImportNotification].[Exporter] E ON E.ImportNotificationId = N.Id
@@ -180,4 +194,12 @@ AS
 			WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
 		INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+		INNER JOIN [ImportNotification].[Facility] AS F ON F.Id = 
+		(
+			SELECT TOP 1 F1.Id
+			FROM [ImportNotification].[FacilityCollection] AS FC
+			INNER JOIN [ImportNotification].[Facility] AS F1 ON FC.Id = F1.FacilityCollectionId
+			WHERE FC.ImportNotificationId = N.Id
+			ORDER BY F1.IsActualSiteOfTreatment DESC
+		)
 GO
