@@ -12,7 +12,7 @@ namespace EA.Iws.Requests.NotificationAssessment
 
         public string Officer { get; set; }
 
-        public NotificationStatus? Status { get; set; }
+        public NotificationStatus[] Statuses { get; set; }
 
         public int PageNumber { get; set; }
     }

@@ -8,6 +8,6 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.Worklist
 
         public string Officer { get; set; }
 
-        public NotificationStatus? Status { get; set; }
+        public NotificationStatus[] SelectedStatuses { get; set; }
     }
 }

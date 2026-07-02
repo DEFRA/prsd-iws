@@ -54,7 +54,7 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
                 internalUser.CompetentAuthority,
                 message.NotificationNumber,
                 message.Officer,
-                message.Status,
+                message.Statuses,
                 pageNumber,
                 PageSize);
 
@@ -107,8 +107,8 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
                 DecisionRequiredDate = decisionRequiredBy,
                 DaysRemaining = daysRemaining,
                 ConsentedDate = summary.ConsentedDate,
-                LastActionDate = summary.LastAuditDate,
-                LastActionType = summary.LastAuditType,
+                LastActionDate = summary.LastActionDate,
+                LastActionType = summary.LastActionType,
                 LastCommentDate = summary.LastCommentDate,
                 Status = summary.Status
             };

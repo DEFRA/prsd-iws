@@ -1,5 +1,6 @@
 namespace EA.Iws.DataAccess.Repositories
 {
+    using System;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -20,23 +21,24 @@ namespace EA.Iws.DataAccess.Repositories
             UKCompetentAuthority competentAuthority,
             string notificationNumber,
             string officer,
-            NotificationStatus? status,
+            NotificationStatus[] statuses,
             int pageNumber,
             int pageSize)
         {
-            var query = context.NotificationAssessments
-                .Join(context.NotificationApplications,
-                    assessment => assessment.NotificationApplicationId,
-                    notification => notification.Id,
-                    (assessment, notification) => new { Assessment = assessment, Notification = notification })
-                .Where(x => x.Notification.CompetentAuthority == competentAuthority)
-                .GroupJoin(context.Exporters,
-                    x => x.Notification.Id,
-                    exporter => exporter.NotificationId,
-                    (x, exporters) => new { x.Assessment, x.Notification, Exporters = exporters })
-                .SelectMany(
-                    x => x.Exporters.DefaultIfEmpty(),
-                    (x, exporter) => new { x.Assessment, x.Notification, Exporter = exporter });
+            var query =
+                context.NotificationAssessments
+                    .Join(context.NotificationApplications,
+                        assessment => assessment.NotificationApplicationId,
+                        notification => notification.Id,
+                        (assessment, notification) => new { Assessment = assessment, Notification = notification })
+                    .Where(x => x.Notification.CompetentAuthority == competentAuthority)
+                    .GroupJoin(context.Exporters,
+                        x => x.Notification.Id,
+                        exporter => exporter.NotificationId,
+                        (x, exporters) => new { x.Assessment, x.Notification, Exporters = exporters })
+                    .SelectMany(
+                        x => x.Exporters.DefaultIfEmpty(),
+                        (x, exporter) => new { x.Assessment, x.Notification, Exporter = exporter });
 
             if (!string.IsNullOrWhiteSpace(notificationNumber))
             {
@@ -48,9 +50,9 @@ namespace EA.Iws.DataAccess.Repositories
                 query = query.Where(x => x.Assessment.Dates.NameOfOfficer.Contains(officer));
             }
 
-            if (status.HasValue)
+            if (statuses != null && statuses.Length > 0)
             {
-                query = query.Where(x => x.Assessment.Status == status.Value);
+                query = query.Where(x => statuses.Contains(x.Assessment.Status));
             }
 
             var totalCount = await query.CountAsync();
@@ -75,7 +77,7 @@ namespace EA.Iws.DataAccess.Repositories
                     LastAuditDate = context.NotificationAudit
                         .Where(a => a.NotificationId == x.Notification.Id)
                         .OrderByDescending(a => a.DateAdded)
-                        .Select(a => (System.DateTimeOffset?)a.DateAdded)
+                        .Select(a => (DateTimeOffset?)a.DateAdded)
                         .FirstOrDefault(),
                     LastAuditType = context.NotificationAudit
                         .Where(a => a.NotificationId == x.Notification.Id)
@@ -85,7 +87,7 @@ namespace EA.Iws.DataAccess.Repositories
                     LastCommentDate = context.NotificationComments
                         .Where(c => c.NotificationId == x.Notification.Id)
                         .OrderByDescending(c => c.DateAdded)
-                        .Select(c => (System.DateTimeOffset?)c.DateAdded)
+                        .Select(c => (DateTimeOffset?)c.DateAdded)
                         .FirstOrDefault()
                 }).ToArrayAsync();
 

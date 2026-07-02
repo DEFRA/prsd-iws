@@ -10,7 +10,7 @@ namespace EA.Iws.Domain.NotificationAssessment
             UKCompetentAuthority competentAuthority,
             string notificationNumber,
             string officer,
-            NotificationStatus? status,
+            NotificationStatus[] statuses,
             int pageNumber,
             int pageSize);
     }
@@ -18,6 +18,7 @@ namespace EA.Iws.Domain.NotificationAssessment
     public class ExportWorklistQueryResult
     {
         public ExportWorklistSummary[] PagedRows { get; set; }
+
         public int TotalCount { get; set; }
     }
 }

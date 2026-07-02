@@ -1,34 +1,23 @@
 namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using Core.FinancialGuarantee;
     using Core.NotificationAssessment;
 
     public class ExportWorklistSummary
     {
         public Guid NotificationId { get; private set; }
-
         public string NotificationNumber { get; private set; }
-
         public string Notifier { get; private set; }
-
         public string Officer { get; private set; }
-
         public DateTime? DatePickedUpByOfficer { get; private set; }
-
         public DateTime? TransmittedDate { get; private set; }
-
         public DateTime? AcknowledgedDate { get; private set; }
-
         public DateTime? ConsentedDate { get; private set; }
-
-        public DateTime? DecisionRequiredByDateOverride { get; private set; }
-
+        public DateTime? DecisionRequiredDate { get; private set; }
         public NotificationStatus Status { get; private set; }
-
-        public DateTimeOffset? LastAuditDate { get; private set; }
-
-        public string LastAuditType { get; private set; }
-
+        public DateTimeOffset? LastActionDate { get; private set; }
+        public string LastActionType { get; private set; }
         public DateTimeOffset? LastCommentDate { get; private set; }
 
         public static ExportWorklistSummary Load(
@@ -40,10 +29,10 @@ namespace EA.Iws.Domain.NotificationAssessment
             DateTime? transmittedDate,
             DateTime? acknowledgedDate,
             DateTime? consentedDate,
-            DateTime? decisionRequiredByDateOverride,
+            DateTime? decisionRequiredDate,
             NotificationStatus status,
-            DateTimeOffset? lastAuditDate,
-            string lastAuditType,
+            DateTimeOffset? lastActionDate,
+            string lastActionType,
             DateTimeOffset? lastCommentDate)
         {
             return new ExportWorklistSummary
@@ -56,10 +45,10 @@ namespace EA.Iws.Domain.NotificationAssessment
                 TransmittedDate = transmittedDate,
                 AcknowledgedDate = acknowledgedDate,
                 ConsentedDate = consentedDate,
-                DecisionRequiredByDateOverride = decisionRequiredByDateOverride,
+                DecisionRequiredDate = decisionRequiredDate,
                 Status = status,
-                LastAuditDate = lastAuditDate,
-                LastAuditType = lastAuditType,
+                LastActionDate = lastActionDate,
+                LastActionType = lastActionType,
                 LastCommentDate = lastCommentDate
             };
         }

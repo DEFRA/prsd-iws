@@ -1,5 +1,6 @@
 namespace EA.Iws.Core.NotificationAssessment
 {
+    using EA.Iws.Core.FinancialGuarantee;
     using System;
 
     public class ExportWorklistTableData

@@ -2,6 +2,7 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
@@ -25,9 +26,9 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
                 ExportsFilter = filter ?? new ExportWorklistFilterViewModel(),
                 ExportsResult = await mediator.SendAsync(new GetExportWorklist
                 {
-                    NotificationNumber = filter == null ? null : filter.NotificationNumber,
-                    Officer = filter == null ? null : filter.Officer,
-                    Status = filter == null ? null : filter.Status,
+                    NotificationNumber = filter?.NotificationNumber,
+                    Officer = filter?.Officer,
+                    Statuses = filter?.SelectedStatuses,
                     PageNumber = page
                 })
             };
@@ -39,13 +40,30 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Index(WorklistViewModel model)
         {
-            return RedirectToAction("Index", new
+            var routeValues = new RouteValueDictionary
             {
-                notificationNumber = model.ExportsFilter.NotificationNumber,
-                officer = model.ExportsFilter.Officer,
-                status = model.ExportsFilter.Status,
-                page = 1
-            });
+                { "page", 1 }
+            };
+
+            if (!string.IsNullOrWhiteSpace(model.ExportsFilter.NotificationNumber))
+            {
+                routeValues.Add("filter.NotificationNumber", model.ExportsFilter.NotificationNumber);
+            }
+
+            if (!string.IsNullOrWhiteSpace(model.ExportsFilter.Officer))
+            {
+                routeValues.Add("filter.Officer", model.ExportsFilter.Officer);
+            }
+
+            if (model.ExportsFilter.SelectedStatuses != null && model.ExportsFilter.SelectedStatuses.Length > 0)
+            {
+                for (int i = 0; i < model.ExportsFilter.SelectedStatuses.Length; i++)
+                {
+                    routeValues.Add(string.Format("filter.SelectedStatuses[{0}]", i), (int)model.ExportsFilter.SelectedStatuses[i]);
+                }
+            }
+
+            return RedirectToAction("Index", routeValues);
         }
     }
 }
