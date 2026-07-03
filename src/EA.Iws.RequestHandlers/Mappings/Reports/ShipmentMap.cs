@@ -60,7 +60,6 @@
                 RejectedShipmentDate = source.RejectedShipmentDate,
                 ExporterRegistrationNumber = source.ExporterRegistrationNumber,
                 ImporterRegistrationNumber = source.ImporterRegistrationNumber,
-                ProducerRegistrationNumber = source.ProducerRegistrationNumber,
                 FacilityRegistrationNumber = source.FacilityRegistrationNumber,
                 CustomsCode = source.CustomsCode
             };

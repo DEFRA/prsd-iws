@@ -47,6 +47,5 @@
 
         [DisplayName("Consignee Registration Number")]
         public string ImporterRegistrationNumber { get; set; }
-
     }
 }
