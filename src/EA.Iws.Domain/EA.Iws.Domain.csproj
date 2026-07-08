@@ -112,6 +112,7 @@
     <Compile Include="ImportNotificationAssessment\IImportNotificationAssessmentDecisionRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationCommentRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\IImportWorklistRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IKeyDatesOverrideRepository.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationComment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
@@ -141,11 +142,14 @@
     <Compile Include="ImportNotification\IImportNotificationAssessmentRepository.cs" />
     <Compile Include="ImportNotification\IImportNotificationSearchRepository.cs" />
     <Compile Include="ImportNotification\IImportNotificationOverviewRepository.cs" />
+    <Compile Include="ImportNotification\IImportWorklistRepository.cs" />
     <Compile Include="ImportNotification\IInterimStatusRepository.cs" />
     <Compile Include="ImportNotification\Importer.cs" />
     <Compile Include="ImportNotification\ImportNotificationCreatedEvent.cs" />
     <Compile Include="ImportNotification\ImportNotificationOverview.cs" />
     <Compile Include="ImportNotification\ImportNotificationSearchResult.cs" />
+    <Compile Include="ImportNotification\ImportWorklistQueryResult.cs" />
+    <Compile Include="ImportNotification\ImportWorklistSummary.cs" />
     <Compile Include="ImportNotification\InterimStatus.cs" />
     <Compile Include="ImportNotification\INumberOfShipmentsHistotyRepository.cs" />
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
@@ -351,6 +355,7 @@
     <Compile Include="NotificationAssessment\CompleteNotification.cs" />
     <Compile Include="NotificationAssessment\Consultation.cs" />
     <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
+    <Compile Include="NotificationAssessment\ExportWorklistQueryResult.cs" />
     <Compile Include="NotificationAssessment\ExportWorklistSummary.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequired.cs" />
     <Compile Include="NotificationAssessment\IConsultationRepository.cs" />

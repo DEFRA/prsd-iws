@@ -1,10 +1,14 @@
 namespace EA.Iws.Web.Areas.Admin.Controllers
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using System.Web.Routing;
+    using Core.ImportNotificationAssessment;
+    using Core.NotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.ImportNotificationAssessment;
     using Requests.NotificationAssessment;
     using ViewModels.Worklist;
 
@@ -19,47 +23,117 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(ExportWorklistFilterViewModel filter, int page = 1)
+        public async Task<ActionResult> Index(
+            ExportWorklistFilterViewModel exportFilter, 
+            ImportWorklistFilterViewModel importFilter, 
+            int page = 1, 
+            string tab = "export")
         {
-            var model = new WorklistViewModel
+            var model = new WorklistViewModel();
+
+            // Define allowed statuses for exports
+            model.ExportStatuses = new[]
             {
-                ExportsFilter = filter ?? new ExportWorklistFilterViewModel(),
-                ExportsResult = await mediator.SendAsync(new GetExportWorklist
-                {
-                    NotificationNumber = filter?.NotificationNumber,
-                    Officer = filter?.Officer,
-                    Statuses = filter?.SelectedStatuses,
-                    PageNumber = page
-                })
+                NotificationStatus.NotificationReceived,
+                NotificationStatus.InAssessment,
+                NotificationStatus.ReadyToTransmit,
+                NotificationStatus.Transmitted,
+                NotificationStatus.DecisionRequiredBy,
+                NotificationStatus.Withdrawn,
+                NotificationStatus.Objected,
+                NotificationStatus.Consented
             };
+
+            // Define allowed statuses for imports
+            model.ImportStatuses = new[]
+            {
+                ImportNotificationStatus.NotificationReceived,
+                ImportNotificationStatus.AwaitingAssessment,
+                ImportNotificationStatus.InAssessment,
+                ImportNotificationStatus.ReadyToAcknowledge,
+                ImportNotificationStatus.DecisionRequiredBy,
+                ImportNotificationStatus.Consented,
+                ImportNotificationStatus.Objected,
+                ImportNotificationStatus.ConsentWithdrawn,
+                ImportNotificationStatus.Withdrawn
+            };
+
+            if (tab == "import")
+            {
+                model.ImportFilter = importFilter ?? new ImportWorklistFilterViewModel();
+                model.ImportResult = await mediator.SendAsync(new GetImportWorklist
+                {
+                    NotificationNumber = importFilter?.NotificationNumber,
+                    Officer = importFilter?.Officer,
+                    Statuses = importFilter?.SelectedStatuses,
+                    PageNumber = page
+                });
+            }
+            else
+            {
+                model.ExportFilter = exportFilter ?? new ExportWorklistFilterViewModel();
+                model.ExportResult = await mediator.SendAsync(new GetExportWorklist
+                {
+                    NotificationNumber = exportFilter?.NotificationNumber,
+                    Officer = exportFilter?.Officer,
+                    Statuses = exportFilter?.SelectedStatuses,
+                    PageNumber = page
+                });
+            }
+
+            ViewBag.CurrentTab = tab;
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(WorklistViewModel model)
+        public ActionResult Index(WorklistViewModel model, string tab = "export")
         {
             var routeValues = new RouteValueDictionary
             {
+                { "tab", tab },
                 { "page", 1 }
             };
 
-            if (!string.IsNullOrWhiteSpace(model.ExportsFilter.NotificationNumber))
+            if (tab == "import")
             {
-                routeValues.Add("filter.NotificationNumber", model.ExportsFilter.NotificationNumber);
-            }
-
-            if (!string.IsNullOrWhiteSpace(model.ExportsFilter.Officer))
-            {
-                routeValues.Add("filter.Officer", model.ExportsFilter.Officer);
-            }
-
-            if (model.ExportsFilter.SelectedStatuses != null && model.ExportsFilter.SelectedStatuses.Length > 0)
-            {
-                for (int i = 0; i < model.ExportsFilter.SelectedStatuses.Length; i++)
+                if (!string.IsNullOrWhiteSpace(model.ImportFilter.NotificationNumber))
                 {
-                    routeValues.Add(string.Format("filter.SelectedStatuses[{0}]", i), (int)model.ExportsFilter.SelectedStatuses[i]);
+                    routeValues.Add("importFilter.NotificationNumber", model.ImportFilter.NotificationNumber);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.ImportFilter.Officer))
+                {
+                    routeValues.Add("importFilter.Officer", model.ImportFilter.Officer);
+                }
+
+                if (model.ImportFilter.SelectedStatuses != null && model.ImportFilter.SelectedStatuses.Length > 0)
+                {
+                    for (int i = 0; i < model.ImportFilter.SelectedStatuses.Length; i++)
+                    {
+                        routeValues.Add(string.Format("importFilter.SelectedStatuses[{0}]", i), (int)model.ImportFilter.SelectedStatuses[i]);
+                    }
+                }
+            }
+            else
+            {
+                if (!string.IsNullOrWhiteSpace(model.ExportFilter.NotificationNumber))
+                {
+                    routeValues.Add("exportFilter.NotificationNumber", model.ExportFilter.NotificationNumber);
+                }
+
+                if (!string.IsNullOrWhiteSpace(model.ExportFilter.Officer))
+                {
+                    routeValues.Add("exportFilter.Officer", model.ExportFilter.Officer);
+                }
+
+                if (model.ExportFilter.SelectedStatuses != null && model.ExportFilter.SelectedStatuses.Length > 0)
+                {
+                    for (int i = 0; i < model.ExportFilter.SelectedStatuses.Length; i++)
+                    {
+                        routeValues.Add(string.Format("exportFilter.SelectedStatuses[{0}]", i), (int)model.ExportFilter.SelectedStatuses[i]);
+                    }
                 }
             }
 

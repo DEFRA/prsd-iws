@@ -134,6 +134,8 @@
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsUsersData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportWorklistResult.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportWorklistTableData.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
     <Compile Include="ImportNotificationMovements\MovementsSummary.cs" />

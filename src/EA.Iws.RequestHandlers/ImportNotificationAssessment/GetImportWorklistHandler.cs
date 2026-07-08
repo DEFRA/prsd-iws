@@ -1,0 +1,106 @@
+﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment
+{
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using Core.ImportNotificationAssessment;
+    using Domain;
+    using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
+    using Prsd.Core.Mediator;
+    using Requests.ImportNotificationAssessment;
+
+    internal class GetImportWorklistHandler : IRequestHandler<GetImportWorklist, ImportWorklistResult>
+    {
+        private const int PageSize = 25;
+
+        private readonly IImportWorklistRepository worklistRepository;
+        private readonly IImportNotificationAssessmentRepository importNotificationAssessmentRepository;
+        private readonly IImportNotificationRepository importNotificationRepository;
+        private readonly IWorkingDayCalculator workingDayCalculator;
+        private readonly IInternalUserRepository internalUserRepository;
+        private readonly IUserContext userContext;
+
+        public GetImportWorklistHandler(
+            IImportWorklistRepository worklistRepository,
+            IImportNotificationAssessmentRepository importNotificationAssessmentRepository,
+            IImportNotificationRepository importNotificationRepository,
+            IWorkingDayCalculator workingDayCalculator,
+            IInternalUserRepository internalUserRepository,
+            IUserContext userContext)
+        {
+            this.worklistRepository = worklistRepository;
+            this.importNotificationAssessmentRepository = importNotificationAssessmentRepository;
+            this.importNotificationRepository = importNotificationRepository;
+            this.workingDayCalculator = workingDayCalculator;
+            this.internalUserRepository = internalUserRepository;
+            this.userContext = userContext;
+        }
+
+        public async Task<ImportWorklistResult> HandleAsync(GetImportWorklist message)
+        {
+            var internalUser = await internalUserRepository.GetByUserId(userContext.UserId);
+
+            var pageNumber = message.PageNumber < 1 ? 1 : message.PageNumber;
+
+            var queryResult = await worklistRepository.GetByCompetentAuthority(
+                internalUser.CompetentAuthority,
+                message.NotificationNumber,
+                message.Officer,
+                message.Statuses,
+                pageNumber,
+                PageSize);
+
+            var tableRows = new List<ImportWorklistTableData>();
+            foreach (var summary in queryResult.PagedRows)
+            {
+                tableRows.Add(await BuildTableData(summary));
+            }
+
+            return new ImportWorklistResult
+            {
+                Results = tableRows,
+                TotalCount = queryResult.TotalCount,
+                PageNumber = pageNumber,
+                PageSize = PageSize
+            };
+        }
+
+        private async Task<ImportWorklistTableData> BuildTableData(ImportWorklistSummary summary)
+        {
+            var notification = await importNotificationRepository.Get(summary.NotificationId);
+
+            var daysRemaining = summary.DecisionRequiredDate.HasValue
+                ? (summary.DecisionRequiredDate.Value - SystemTime.UtcNow).Days
+                : (int?)null;
+
+            int? workingDaysInAssessment = null;
+            if (summary.DatePickedUpByOfficer.HasValue)
+            {
+                workingDaysInAssessment = workingDayCalculator.GetWorkingDays(
+                    summary.DatePickedUpByOfficer.Value,
+                    SystemTime.UtcNow,
+                    false,
+                    notification.CompetentAuthority);
+            }
+
+            return new ImportWorklistTableData
+            {
+                NotificationId = summary.NotificationId,
+                NotificationNumber = summary.NotificationNumber,
+                Exporter = summary.Exporter,
+                Officer = summary.Officer,
+                DatePickedUpByOfficer = summary.DatePickedUpByOfficer,
+                NotificationReceivedDate = summary.NotificationReceivedDate,
+                AcknowledgedDate = summary.AcknowledgedDate,
+                ConsentedDate = summary.ConsentedDate,
+                DecisionRequiredDate = summary.DecisionRequiredDate,
+                Status = summary.Status,
+                WorkingDaysInAssessment = workingDaysInAssessment,
+                DaysRemaining = daysRemaining,
+                LastCommentDate = summary.LastCommentDate
+            };
+        }
+    }
+}

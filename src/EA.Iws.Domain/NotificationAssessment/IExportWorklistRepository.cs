@@ -1,8 +1,8 @@
 namespace EA.Iws.Domain.NotificationAssessment
 {
-    using System.Threading.Tasks;
     using Core.Notification;
     using Core.NotificationAssessment;
+    using System.Threading.Tasks;
 
     public interface IExportWorklistRepository
     {
@@ -13,12 +13,5 @@ namespace EA.Iws.Domain.NotificationAssessment
             NotificationStatus[] statuses,
             int pageNumber,
             int pageSize);
-    }
-
-    public class ExportWorklistQueryResult
-    {
-        public ExportWorklistSummary[] PagedRows { get; set; }
-
-        public int TotalCount { get; set; }
     }
 }

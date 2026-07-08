@@ -244,6 +244,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChangesHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportWorklistHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportDataHandler.cs" />

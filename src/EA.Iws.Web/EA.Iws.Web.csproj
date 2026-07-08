@@ -844,6 +844,7 @@
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationReviewViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Worklist\ExportWorklistFilterViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Worklist\ImportWorklistFilterViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Worklist\WorklistViewModel.cs" />
     <Compile Include="Areas\Admin\Views\ArchiveNotification\ArchiveNotificationResources.Designer.cs">
       <AutoGen>True</AutoGen>
