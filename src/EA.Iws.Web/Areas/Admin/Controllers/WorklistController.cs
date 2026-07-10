@@ -17,6 +17,13 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
     {
         private readonly IMediator mediator;
 
+        // Default import statuses
+        private static readonly ImportNotificationStatus[] DefaultImportStatuses = new[]
+        {
+            ImportNotificationStatus.ReadyToAcknowledge,
+            ImportNotificationStatus.InAssessment
+        };
+
         public WorklistController(IMediator mediator)
         {
             this.mediator = mediator;
@@ -58,27 +65,53 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
                 ImportNotificationStatus.Withdrawn
             };
 
+            // ONLY load data for the active tab
             if (tab == "import")
             {
+                // Initialize import filter
                 model.ImportFilter = importFilter ?? new ImportWorklistFilterViewModel();
+                
+                // Check if any filter parameters were provided
+                bool hasImportFilters = !string.IsNullOrWhiteSpace(model.ImportFilter.NotificationNumber) ||
+                                       !string.IsNullOrWhiteSpace(model.ImportFilter.Officer) ||
+                                       (model.ImportFilter.SelectedStatuses != null && model.ImportFilter.SelectedStatuses.Length > 0);
+
+                // Apply default statuses if no filters were provided
+                if (!hasImportFilters)
+                {
+                    model.ImportFilter.SelectedStatuses = DefaultImportStatuses;
+                }
+
+                // Load ONLY import data
                 model.ImportResult = await mediator.SendAsync(new GetImportWorklist
                 {
-                    NotificationNumber = importFilter?.NotificationNumber,
-                    Officer = importFilter?.Officer,
-                    Statuses = importFilter?.SelectedStatuses,
+                    NotificationNumber = model.ImportFilter.NotificationNumber,
+                    Officer = model.ImportFilter.Officer,
+                    Statuses = model.ImportFilter.SelectedStatuses,
                     PageNumber = page
                 });
+
+                // Initialize empty export filter (but don't load data)
+                model.ExportFilter = new ExportWorklistFilterViewModel();
+                model.ExportResult = null;
             }
             else
             {
+                // Initialize export filter
                 model.ExportFilter = exportFilter ?? new ExportWorklistFilterViewModel();
+                
+                // Load ONLY export data
                 model.ExportResult = await mediator.SendAsync(new GetExportWorklist
                 {
-                    NotificationNumber = exportFilter?.NotificationNumber,
-                    Officer = exportFilter?.Officer,
-                    Statuses = exportFilter?.SelectedStatuses,
+                    NotificationNumber = model.ExportFilter.NotificationNumber,
+                    Officer = model.ExportFilter.Officer,
+                    Statuses = model.ExportFilter.SelectedStatuses,
                     PageNumber = page
                 });
+
+                // Initialize empty import filter (but don't load data)
+                model.ImportFilter = new ImportWorklistFilterViewModel();
+                model.ImportResult = null;
             }
 
             ViewBag.CurrentTab = tab;
