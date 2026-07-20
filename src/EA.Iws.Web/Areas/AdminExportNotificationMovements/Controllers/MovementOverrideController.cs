@@ -46,6 +46,7 @@
 
             var isRejected = model.ShipmentTypes == ShipmentType.Rejected;
             var isPartiallyRejected = model.ShipmentTypes == ShipmentType.Partially;
+            var isAccepted = model.ShipmentTypes == ShipmentType.Accepted;
 
             var data = new MovementReceiptAndRecoveryData
             {
@@ -54,19 +55,18 @@
                 ActualDate = model.ActualShipmentDate.Value,
                 HasNoPrenotification = model.PrenotificationDate.HasValue ? false : true,
                 PrenotificationDate = model.PrenotificationDate.HasValue ? model.PrenotificationDate.Value : (DateTime?)null,
-                ReceiptDate = model.ShipmentTypes == ShipmentType.Accepted && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                ReceiptDate = isAccepted && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 ActualQuantity = model.ActualQuantity,
                 ReceiptUnits = model.Units,
                 RejectionDate = (isRejected || isPartiallyRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 OperationCompleteDate = isRejected ? null : (model.Date.HasValue ? model.Date.Value : (DateTime?)null),  // Force null for Rejected
                 RejectionReason = model.RejectionReason,
                 Comments = model.HasComments ? model.Comments : null,
-                StatsMarking = (isRejected || isPartiallyRejected)
-                   ? model.StatsMarking
-                   : (model.HasComments ? model.StatsMarking : null),
+                // StatsMarking is only set for Rejected/Partially outcomes; always NULL for Accepted
+                StatsMarking = (isRejected || isPartiallyRejected) ? model.StatsMarking : null,
                 RejectedQuantity = model.RejectedQuantity,
                 RejectedUnit = model.RejectedUnits,
-                IsReceived = model.ShipmentTypes == ShipmentType.Accepted,
+                IsReceived = isAccepted,
                 IsRejected = isRejected,
                 IsPartiallyRejected = isPartiallyRejected
             };

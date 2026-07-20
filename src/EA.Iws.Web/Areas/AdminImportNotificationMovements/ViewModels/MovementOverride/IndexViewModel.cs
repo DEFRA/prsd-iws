@@ -34,6 +34,7 @@
         public DateTime? ReceivedDate { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(IndexViewModelResources))]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(IndexViewModelResources), IsOptional = true)]
         public decimal? ActualQuantity { get; set; }
 
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(IndexViewModelResources))]
@@ -65,7 +66,8 @@
 
         public bool IsPartiallyRejected { get; set; }
 
-        public ShipmentType ShipmentTypes { get; set; }
+        // Nullable to allow unanswered state
+        public ShipmentType? ShipmentTypes { get; set; }
 
         [Display(Name = "HasComments", ResourceType = typeof(IndexViewModelResources))]
         public bool HasComments { get; set; }
@@ -104,6 +106,7 @@
 
         public IndexViewModel()
         {
+            PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 
         public IndexViewModel(ImportMovementSummaryData data)
@@ -143,15 +146,21 @@
             RejectedUnits = data.RejectedUnit;
 
             // Set ShipmentTypes based on current status
-            ShipmentTypes = IsReceived ? ShipmentType.Accepted : (IsRejected ? ShipmentType.Rejected : ShipmentType.Partially);
+            if (data.IsReceived)
+            {
+                ShipmentTypes = ShipmentType.Accepted;
+            }
+            else if (data.IsPartiallyRejected)
+            {
+                ShipmentTypes = ShipmentType.Partially;
+            }
+            else if (data.IsRejected)
+            {
+                ShipmentTypes = ShipmentType.Rejected;
+            }
             
             NotificationType = data.Data.NotificationType;
             Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value : (DateTime?)null;
-
-            if (!data.ReceiptData.IsReceived && !data.ReceiptData.IsRejected && !data.IsPartiallyRejected)
-            {
-                IsReceived = true;
-            }
         }
 
         public void SetSummaryData(Summary summaryData)
@@ -181,9 +190,10 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualShipmentDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (ReceivedDate.HasValue && ShipmentTypes == ShipmentType.Accepted && !ActualQuantity.HasValue)
+            // Add validation for ReceivedDate when Rejected/Partially selected
+            if ((ShipmentTypes == ShipmentType.Rejected || ShipmentTypes == ShipmentType.Partially) && !ReceivedDate.HasValue)
             {
-                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                yield return new ValidationResult("Please provide the date when the waste was received", new[] { "ReceivedDate" });
             }
 
             if (ShipmentTypes == ShipmentType.Partially && !ActualQuantity.HasValue)
@@ -204,6 +214,27 @@
             if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
             {
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
+            }
+
+            // Leaving "Was the shipment accepted?" unanswered (null) is valid - it lets an internal
+            // user edit other fields on a prenotified movement without marking it as received.
+            // Only when Accepted is explicitly chosen do we require the full receipt detail.
+            if (ShipmentTypes == ShipmentType.Accepted)
+            {
+                if (!ReceivedDate.HasValue)
+                {
+                    yield return new ValidationResult("Please provide the received date", new[] { "ReceivedDate" });
+                }
+
+                if (!ActualQuantity.HasValue)
+                {
+                    yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+                }
+
+                if (!Units.HasValue)
+                {
+                    yield return new ValidationResult("Please select the units for the quantity received", new[] { "Units" });
+                }
             }
         }
     }
