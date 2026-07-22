@@ -104,9 +104,10 @@ BEGIN
                 END
             END
 
-            -- Delete any existing receipt/partial rejection records
+            -- Delete any existing receipt/partial rejection records AND recovery/disposal date
             DELETE FROM [ImportNotification].[MovementReceipt] WHERE [MovementId] = @MovementId
             DELETE FROM [ImportNotification].[MovementPartialRejection] WHERE [MovementId] = @MovementId
+            DELETE FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId
 
             -- Update or insert rejection
             IF EXISTS(SELECT 1 FROM [ImportNotification].[MovementRejection] WHERE [MovementId] = @MovementId)
@@ -157,7 +158,7 @@ BEGIN
                    ,[RejectedUnit] = ISNULL(@RejectedUnit, [RejectedUnit])
                    ,[ActualQuantity] = ISNULL(@Quantity, [ActualQuantity])
                    ,[ActualUnit] = ISNULL(@Unit, [ActualUnit])
-                   ,[WasteDisposedDate] = ISNULL(@RecoveryDate, [WasteDisposedDate])
+                   ,[WasteDisposedDate] = @RecoveryDate  -- Changed from ISNULL to allow NULL clearing
                 WHERE [MovementId] = @MovementId
             END
             ELSE
@@ -209,14 +210,29 @@ BEGIN
             END
         END
 
-        --UPDATE RECOVERY
-        IF EXISTS(SELECT 1 FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId)
+        -- UPDATE or INSERT RECOVERY/DISPOSAL DATE for Accepted and Partially Rejected outcomes
+        -- For Rejected outcomes, the row is already deleted above
+        IF @IsRejected <> 1 OR @IsRejected IS NULL
         BEGIN
-            IF(@RecoveryDate IS NOT NULL)
+            IF EXISTS(SELECT 1 FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId)
             BEGIN
-                UPDATE [ImportNotification].[MovementOperationReceipt]
-                SET [Date] = @RecoveryDate 
-                WHERE [MovementId] = @MovementId 
+                IF @RecoveryDate IS NOT NULL
+                BEGIN
+                    UPDATE [ImportNotification].[MovementOperationReceipt]
+                    SET [Date] = @RecoveryDate 
+                    WHERE [MovementId] = @MovementId 
+                END
+                ELSE
+                BEGIN
+                    -- Recovery date is NULL - delete the existing row to clear it
+                    DELETE FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId] = @MovementId
+                END
+            END
+            ELSE IF @RecoveryDate IS NOT NULL
+            BEGIN
+                -- Insert new recovery date row if date is provided and row doesn't exist
+                INSERT INTO [ImportNotification].[MovementOperationReceipt] ([Id], [MovementId], [Date])
+                VALUES (NEWID(), @MovementId, @RecoveryDate)
             END
         END
         

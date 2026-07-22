@@ -34,7 +34,7 @@
         public DateTime? ReceivedDate { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(IndexViewModelResources))]
-        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(IndexViewModelResources), IsOptional = true)]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
         public decimal? ActualQuantity { get; set; }
 
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(IndexViewModelResources))]
