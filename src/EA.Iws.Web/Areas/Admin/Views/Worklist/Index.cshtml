@@ -10,6 +10,29 @@
     var currentTab = ViewBag.CurrentTab as string ?? "export";
 }
 
+@functions {
+    string GetWorkingDaysColorClass(int? workingDays)
+    {
+        if (!workingDays.HasValue)
+        {
+            return string.Empty;
+        }
+
+        if (workingDays.Value <= 5)
+        {
+            return "govuk-tag--green";
+        }
+        else if (workingDays.Value <= 15)
+        {
+            return "govuk-tag--yellow";
+        }
+        else
+        {
+            return "govuk-tag--red";
+        }
+    }
+}
+
 <h1 class="govuk-heading-l">Worklist</h1>
 
 <div class="govuk-tabs">
@@ -140,7 +163,12 @@
                                     <td class="govuk-table__cell">@row.Officer</td>
                                     <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(NotificationStatus))[(int)row.Status]</td>
                                     <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@row.WorkingDaysInAssessment</td>
+                                    <td class="govuk-table__cell">
+                                        @if (row.WorkingDaysInAssessment.HasValue)
+                                        {
+                                            <strong class="govuk-tag @GetWorkingDaysColorClass(row.WorkingDaysInAssessment)">@row.WorkingDaysInAssessment</strong>
+                                        }
+                                    </td>
                                     <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@row.DaysRemaining</td>
@@ -283,14 +311,19 @@
                                             linkText: row.NotificationNumber.ToNonBreakingString(),
                                             actionName: "Index",
                                             controllerName: "Home",
-                                            routeValues: new { id = row.NotificationId, area = "AdminImportAssessment" },
+                                            routeValues: new { id = row.NotificationId, area = "ImportNotification" },
                                             htmlAttributes: null)
                                     </td>
                                     <td class="govuk-table__cell">@row.Exporter</td>
                                     <td class="govuk-table__cell">@row.Officer</td>
                                     <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(ImportNotificationStatus))[(int)row.Status]</td>
                                     <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@row.WorkingDaysInAssessment</td>
+                                    <td class="govuk-table__cell">
+                                        @if (row.WorkingDaysInAssessment.HasValue)
+                                        {
+                                            <strong class="govuk-tag @GetWorkingDaysColorClass(row.WorkingDaysInAssessment)">@row.WorkingDaysInAssessment</strong>
+                                        }
+                                    </td>
                                     <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@row.DaysRemaining</td>
