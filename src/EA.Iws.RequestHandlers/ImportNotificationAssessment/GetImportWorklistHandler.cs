@@ -6,6 +6,7 @@
     using Domain;
     using Domain.ImportNotification;
     using Domain.ImportNotificationAssessment;
+    using Domain.ImportNotificationAssessment.Decision;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
@@ -21,6 +22,7 @@
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly IInternalUserRepository internalUserRepository;
         private readonly IUserContext userContext;
+        private readonly DecisionRequiredBy decisionRequiredByCalculator;
 
         public GetImportWorklistHandler(
             IImportWorklistRepository worklistRepository,
@@ -28,7 +30,8 @@
             IImportNotificationRepository importNotificationRepository,
             IWorkingDayCalculator workingDayCalculator,
             IInternalUserRepository internalUserRepository,
-            IUserContext userContext)
+            IUserContext userContext,
+            DecisionRequiredBy decisionRequiredByCalculator)
         {
             this.worklistRepository = worklistRepository;
             this.importNotificationAssessmentRepository = importNotificationAssessmentRepository;
@@ -36,6 +39,7 @@
             this.workingDayCalculator = workingDayCalculator;
             this.internalUserRepository = internalUserRepository;
             this.userContext = userContext;
+            this.decisionRequiredByCalculator = decisionRequiredByCalculator;
         }
 
         public async Task<ImportWorklistResult> HandleAsync(GetImportWorklist message)
@@ -71,10 +75,27 @@
         {
             var notification = await importNotificationRepository.Get(summary.NotificationId);
 
-            var daysRemaining = summary.DecisionRequiredDate.HasValue
-                ? (summary.DecisionRequiredDate.Value - SystemTime.UtcNow).Days
-                : (int?)null;
+            // Calculate decision required date if not stored
+            var decisionRequiredDate = summary.DecisionRequiredDate;
+            if (!decisionRequiredDate.HasValue && summary.AcknowledgedDate.HasValue)
+            {
+                var assessment = await importNotificationAssessmentRepository.GetByNotification(summary.NotificationId);
+                if (assessment != null)
+                {
+                    decisionRequiredDate = await decisionRequiredByCalculator.GetDecisionRequiredByDate(assessment);
+                }
+            }
 
+            // Calculate days remaining from today to decision required date
+            // Negative values indicate overdue
+            string daysRemaining = null;
+            if (decisionRequiredDate.HasValue)
+            {
+                var days = (int)(decisionRequiredDate.Value.Date - SystemTime.UtcNow.Date).TotalDays;
+                daysRemaining = days.ToString();
+            }
+
+            // Calculate working days in assessment from date picked up by officer to today
             int? workingDaysInAssessment = null;
             if (summary.DatePickedUpByOfficer.HasValue)
             {
@@ -95,7 +116,7 @@
                 NotificationReceivedDate = summary.NotificationReceivedDate,
                 AcknowledgedDate = summary.AcknowledgedDate,
                 ConsentedDate = summary.ConsentedDate,
-                DecisionRequiredDate = summary.DecisionRequiredDate,
+                DecisionRequiredDate = decisionRequiredDate,
                 Status = summary.Status,
                 WorkingDaysInAssessment = workingDaysInAssessment,
                 DaysRemaining = daysRemaining,

@@ -15,7 +15,7 @@
         public DateTime? DecisionRequiredDate { get; set; }
         public ImportNotificationStatus Status { get; set; }
         public int? WorkingDaysInAssessment { get; set; }
-        public int? DaysRemaining { get; set; }
+        public string DaysRemaining { get; set; }
         public DateTimeOffset? LastCommentDate { get; set; }
     }
 }
