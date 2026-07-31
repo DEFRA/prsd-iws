@@ -217,18 +217,22 @@
                             @Html.LabelFor(m => m.ImportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
                             @Html.TextBoxFor(m => m.ImportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
                         </div>
-                    </div>
-                    <div class="column-one-half">
                         <div class="govuk-form-group">
                             @Html.LabelFor(m => m.ImportFilter.Officer, "Officer", new { @class = "govuk-label" })
                             @Html.TextBoxFor(m => m.ImportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
                         </div>
                     </div>
+                    <div class="column-one-half">
+                        @*<div class="govuk-form-group">
+                            @Html.LabelFor(m => m.ImportFilter.Officer, "Officer", new { @class = "govuk-label" })
+                            @Html.TextBoxFor(m => m.ImportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
+                        </div>*@
+                    </div>
                 </div>
                 <div class="govuk-form-group">
                     <fieldset class="govuk-fieldset">
                         <legend class="govuk-fieldset__legend govuk-label">
-                            Status
+                            Notification Status
                         </legend>
                         <div class="grid-row">
                             <div class="column-one-half">
@@ -240,11 +244,31 @@
                                         var statusText = EnumHelper.GetValues(typeof(ImportNotificationStatus))[statusValue];
                                         var isChecked = Model.ImportFilter.SelectedStatuses != null && Model.ImportFilter.SelectedStatuses.Contains(allowedStatus);
                                         <div class="govuk-checkboxes__item">
-                                            <input class="govuk-checkboxes__input" 
-                                                   type="checkbox" 
-                                                   name="ImportFilter.SelectedStatuses" 
-                                                   id="import_status_@statusValue" 
-                                                   value="@statusValue" 
+                                            <input class="govuk-checkboxes__input"
+                                                   type="checkbox"
+                                                   name="ImportFilter.SelectedStatuses"
+                                                   id="import_status_@statusValue"
+                                                   value="@statusValue"
+                                                   @(isChecked ? "checked" : "") />
+                                            <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue">
+                                                @statusText
+                                            </label>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="govuk-checkboxes">
+                                    @for (int i = (Model.ImportStatuses.Length + 1) / 2; i < Model.ImportStatuses.Length; i++)
+                                    {
+                                        var allowedStatus = Model.ImportStatuses[i];
+                                        var statusValue = (int)allowedStatus;
+                                        var statusText = EnumHelper.GetValues(typeof(ImportNotificationStatus))[statusValue];
+                                        var isChecked = Model.ImportFilter.SelectedStatuses != null && Model.ImportFilter.SelectedStatuses.Contains(allowedStatus);
+                                        <div class="govuk-checkboxes__item">
+                                            <input class="govuk-checkboxes__input"
+                                                   type="checkbox"
+                                                   name="ImportFilter.SelectedStatuses"
+                                                   id="import_status_@statusValue"
+                                                   value="@statusValue"
                                                    @(isChecked ? "checked" : "") />
                                             <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue">
                                                 @statusText
@@ -253,7 +277,7 @@
                                     }
                                 </div>
                             </div>
-                            <div class="column-one-half">
+                            @*<div class="column-one-half">
                                 <div class="govuk-checkboxes">
                                     @for (int i = (Model.ImportStatuses.Length + 1) / 2; i < Model.ImportStatuses.Length; i++)
                                     {
@@ -274,7 +298,7 @@
                                         </div>
                                     }
                                 </div>
-                            </div>
+                            </div>*@
                         </div>
                     </fieldset>
                 </div>
@@ -292,7 +316,7 @@
                                 <th scope="col" class="govuk-table__header">Notification number</th>
                                 <th scope="col" class="govuk-table__header">Exporter</th>
                                 <th scope="col" class="govuk-table__header">Officer</th>
-                                <th scope="col" class="govuk-table__header">Status</th>
+                                <th scope="col" class="govuk-table__header">Notification Status</th>
                                 <th scope="col" class="govuk-table__header">Date picked up</th>
                                 <th scope="col" class="govuk-table__header">Working days</th>
                                 <th scope="col" class="govuk-table__header">Acknowledged</th>
