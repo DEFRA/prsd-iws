@@ -19,6 +19,7 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
         private readonly INotificationAssessmentRepository notificationAssessmentRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly DecisionRequiredBy decisionRequiredByCalculator;
+        private readonly DaysRemainingCalculator daysRemainingCalculator;
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly IInternalUserRepository internalUserRepository;
         private readonly IUserContext userContext;
@@ -28,6 +29,7 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
             INotificationAssessmentRepository notificationAssessmentRepository,
             INotificationApplicationRepository notificationApplicationRepository,
             DecisionRequiredBy decisionRequiredByCalculator,
+            DaysRemainingCalculator daysRemainingCalculator,
             IWorkingDayCalculator workingDayCalculator,
             IInternalUserRepository internalUserRepository,
             IUserContext userContext)
@@ -36,6 +38,7 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
             this.notificationAssessmentRepository = notificationAssessmentRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.decisionRequiredByCalculator = decisionRequiredByCalculator;
+            this.daysRemainingCalculator = daysRemainingCalculator;
             this.workingDayCalculator = workingDayCalculator;
             this.internalUserRepository = internalUserRepository;
             this.userContext = userContext;
@@ -77,13 +80,12 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
 
             var decisionRequiredBy = await decisionRequiredByCalculator.GetDecisionRequiredByDate(notification, assessment);
 
-            // Calculate days remaining from today to decision required date
-            // Negative values indicate overdue
+            // Calculate days remaining using the same logic as "Notifications requiring attention"
+            // Returns either number of days or "Overdue"
             string daysRemaining = null;
             if (decisionRequiredBy.HasValue)
             {
-                var days = (int)(decisionRequiredBy.Value.Date - SystemTime.UtcNow.Date).TotalDays;
-                daysRemaining = days.ToString();
+                daysRemaining = daysRemainingCalculator.Calculate(decisionRequiredBy.Value);
             }
 
             // Calculate working days in assessment from date picked up by officer to today

@@ -23,6 +23,7 @@
         private readonly IInternalUserRepository internalUserRepository;
         private readonly IUserContext userContext;
         private readonly DecisionRequiredBy decisionRequiredByCalculator;
+        private readonly DaysRemainingCalculator daysRemainingCalculator;
 
         public GetImportWorklistHandler(
             IImportWorklistRepository worklistRepository,
@@ -31,7 +32,8 @@
             IWorkingDayCalculator workingDayCalculator,
             IInternalUserRepository internalUserRepository,
             IUserContext userContext,
-            DecisionRequiredBy decisionRequiredByCalculator)
+            DecisionRequiredBy decisionRequiredByCalculator,
+            DaysRemainingCalculator daysRemainingCalculator)
         {
             this.worklistRepository = worklistRepository;
             this.importNotificationAssessmentRepository = importNotificationAssessmentRepository;
@@ -40,6 +42,7 @@
             this.internalUserRepository = internalUserRepository;
             this.userContext = userContext;
             this.decisionRequiredByCalculator = decisionRequiredByCalculator;
+            this.daysRemainingCalculator = daysRemainingCalculator;
         }
 
         public async Task<ImportWorklistResult> HandleAsync(GetImportWorklist message)
@@ -86,13 +89,12 @@
                 }
             }
 
-            // Calculate days remaining from today to decision required date
-            // Negative values indicate overdue
+            // Calculate days remaining using the same logic as "Notifications requiring attention"
+            // Returns either number of days or "Overdue"
             string daysRemaining = null;
             if (decisionRequiredDate.HasValue)
             {
-                var days = (int)(decisionRequiredDate.Value.Date - SystemTime.UtcNow.Date).TotalDays;
-                daysRemaining = days.ToString();
+                daysRemaining = daysRemainingCalculator.Calculate(decisionRequiredDate.Value);
             }
 
             // Calculate working days in assessment from date picked up by officer to today
