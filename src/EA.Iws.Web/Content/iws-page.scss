@@ -11,3 +11,16 @@ a {
 .js-hidden {
     display: none !important;
 }
+
+.dot-red {
+    height: 15px;
+    width: 15px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.consented-dates-expired {
+    color: red;
+    white-space: nowrap;
+}

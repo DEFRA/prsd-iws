@@ -207,5 +207,33 @@
                 toggleBaselOecdCode(false);
             });
         });
+
+        $(function () {
+            $("#SelectedTradeDirection").change(function () {
+                if ($(this).val() != "") {
+                    var text = $(this).find("option:selected").text();
+                    SetNotificationStatusesDirection(text);
+                } else {
+                    SetNotificationStatusesDirection("");
+                }
+            });
+        });
+
+        function SetNotificationStatusesDirection(text) {
+            var optgroups = $("#SelectedNotificationStatusId optgroup");
+
+            $.each(optgroups, function () {
+                var optgroup = $(this);
+                let label = optgroup.attr("label");
+
+                if (text == "") {
+                    optgroup.show();
+                } else if (label == text) {
+                    optgroup.show();
+                } else {
+                    optgroup.hide();
+                }
+            });
+        }
     </script>
 }

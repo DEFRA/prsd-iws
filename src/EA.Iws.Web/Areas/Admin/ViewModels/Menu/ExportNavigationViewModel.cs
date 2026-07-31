@@ -18,5 +18,13 @@
         public bool ShowFinancialGuaranteeDatesOverride { get; set; }
 
         public bool HasComments { get; set; }
+
+        public bool ShowConsentExpiryDateInRed { get; set; }
+
+        public System.DateTime? ConsentExpiryDate { get; set; }
+
+        public System.DateTime? ConsentStartDate { get; set; }
+
+        public System.DateTime? ConsentedDate { get; set; }
     }
 }

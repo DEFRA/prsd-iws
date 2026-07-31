@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text;
     using System.Web.Mvc;
     using Core.FinancialGuarantee;
     using Core.Movement;
@@ -58,7 +59,7 @@
             }
         }
 
-        public MovementSummaryViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data)
+        public MovementSummaryViewModel(Guid notificationId, NotificationMovementsSummaryAndTable data, string preNotificationWarnings, string earlyShipmentWarnings, string consentedDateWarnings)
         {
             NotificationId = notificationId;
             NotificationNumber = data.SummaryData.NotificationNumber;
@@ -79,6 +80,11 @@
             PageSize = data.PageSize;
             PageNumber = data.PageNumber;
             NumberofShipments = data.NumberOfShipments;
+
+            QuantityRemainingValue = data.SummaryData.QuantityRemaining;
+            PreNotificationWarnings = preNotificationWarnings;
+            EarlyShipmentWarnings = earlyShipmentWarnings;
+            ConsentedDateWarnings = consentedDateWarnings;
         }
 
         private string GetMovementStatusText(MovementStatus status)
@@ -96,5 +102,15 @@
         public int PageNumber { get; set; }
 
         public int NumberofShipments { get; set; }
+
+        public List<NotificationAssessmentDecision> Decisions { get; set; }
+
+        public decimal QuantityRemainingValue { get; set; }
+
+        public string PreNotificationWarnings { get; set; }
+
+        public string EarlyShipmentWarnings { get; set; }
+
+        public string ConsentedDateWarnings { get; set; }
     }
 }

@@ -168,8 +168,14 @@
   <data name="Megajoules" xml:space="preserve">
     <value>Megajoules per kilogram</value>
   </data>
+  <data name="MegajoulesUnits" xml:space="preserve">
+    <value>MJ/kg</value>
+  </data>
   <data name="Milligrams" xml:space="preserve">
     <value>Milligrams per kilogram</value>
+  </data>
+  <data name="MilligramsUnits" xml:space="preserve">
+    <value>mg/kg</value>
   </data>
   <data name="Min" xml:space="preserve">
     <value>min</value>

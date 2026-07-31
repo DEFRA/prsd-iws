@@ -68,29 +68,40 @@
                 {
                     @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
                     @Html.Partial("_OperationReadOnly", Model.Recovery)
+
+                    if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                    {
+                        <hr id="hrAfterRecovery" style="display:none" />
+                    }
+                    else
+                    {
+                        <hr id="hrAfterRecovery" style="display:block" />
+                    }
                 }
                 else if (!Model.IsRejected)
                 {
                     @Html.EditorFor(m => m.Recovery)
+
+                    if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                    {
+                        <hr id="hrAfterRecovery" style="display:none" />
+                    }
+                    else
+                    {
+                        <hr id="hrAfterRecovery" style="display:block" />
+                    }
                 }
 
-                if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
-                {
-                    <hr id="hrAfterRecovery" style="display:none" />
-                }
-                else
-                {
-                    <hr id="hrAfterRecovery" style="display:block" />
-                }
-
-                if (Model.HasComments)
+                @* Only show comments section if there are comments or stats marking with values *@
+                if (!string.IsNullOrWhiteSpace(Model.StatsMarking) || !string.IsNullOrWhiteSpace(Model.Comments))
                 {
                     @Html.HiddenFor(m => m.StatsMarking)
                     @Html.HiddenFor(m => m.Comments)
                     @Html.Partial("_CommentsReadOnly")
                 }
-                else
+                else if (!Model.IsReceived && !Model.IsRejected && !Model.IsPartiallyRejected)
                 {
+                    @* Show editable comments only when receipt has not been captured yet *@
                     @Html.Partial("_Comments")
                 }
 
@@ -106,7 +117,7 @@
 @section scripts {
     @Html.Partial("_Scripts")
 
-<script>
+    <script>
     $(function () {
             var isSaved = @(ViewBag.IsSaved == true ? "true" : "false");
             var isReceived = @(Model.IsReceived ? "true" : "false");
@@ -126,5 +137,5 @@
             }
 
         });
-</script>
+    </script>
 }

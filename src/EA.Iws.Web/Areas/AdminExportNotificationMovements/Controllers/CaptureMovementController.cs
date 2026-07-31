@@ -139,7 +139,13 @@
         {
             if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                if (model.Receipt.ActualQuantity != null && model.Receipt.ReceivedDate.Date != null && model.IsReceived == false)
+                // The view-model validation now enforces ReceivedDate / ActualQuantity / Units when
+                // Accepted is picked. Keep the field-level guards as defence in depth so a partial
+                // post can never record a receipt with missing data.
+                if (model.Receipt.ReceivedDate.Date.HasValue
+                    && model.Receipt.ActualQuantity.HasValue
+                    && model.Receipt.ActualUnits.HasValue
+                    && !model.IsReceived)
                 {
                     await mediator.SendAsync(new RecordReceiptInternal(movementId,
                         model.Receipt.ReceivedDate.Date.Value,
@@ -156,7 +162,7 @@
             {
                 var isRejectMovementAvailable = await mediator.SendAsync(new GetRejectionByMovementId(movementId));
 
-                if (isEdit == false || isRejectMovementAvailable == false)
+                if (!isEdit || !isRejectMovementAvailable)
                 {
                     await mediator.SendAsync(new RecordRejectionInternal(movementId,
                         model.Receipt.ReceivedDate.Date.Value,
@@ -170,11 +176,11 @@
                         MovementAuditType.Rejected);
                 }
             }
-            else
+            else if (model.Receipt.ShipmentTypes == ShipmentType.Partially)
             {
                 var isPartialRejectMovementAvailable = await mediator.SendAsync(new GetPartialRejectionByMovementId(movementId));
 
-                if (isEdit == false || isPartialRejectMovementAvailable == false)
+                if (!isEdit || !isPartialRejectMovementAvailable)
                 {
                     var recoveryDate = (DateTime?)null;
                     if (model.Recovery.RecoveryDate.Date.HasValue)
@@ -209,22 +215,22 @@
                                                                  model.NotificationType == NotificationType.Disposal ? MovementAuditType.Disposed : MovementAuditType.Recovered);
                     }
                 }
-                else
+                else if (model.Recovery.RecoveryDate.Date.HasValue)
                 {
-                    var recoveryDate = (DateTime?)null;
-                    if (model.Recovery.RecoveryDate.Date.HasValue)
-                    {
-                        recoveryDate = model.Recovery.RecoveryDate.Date.Value;
-                        await mediator.SendAsync(new RecordParialOperationCompleteInternal(movementId, recoveryDate));
+                    var recoveryDate = (DateTime?)model.Recovery.RecoveryDate.Date.Value;
+                    await mediator.SendAsync(new RecordParialOperationCompleteInternal(movementId, recoveryDate));
 
-                        await this.auditService.AddMovementAudit(this.mediator,
-                                                                 notificationId,
-                                                                 model.ShipmentNumber.Value,
-                                                                 User.GetUserId(),
-                                                                 model.NotificationType == NotificationType.Disposal ? MovementAuditType.Disposed : MovementAuditType.Recovered);
-                    }
+                    await this.auditService.AddMovementAudit(this.mediator,
+                                                             notificationId,
+                                                             model.ShipmentNumber.Value,
+                                                             User.GetUserId(),
+                                                             model.NotificationType == NotificationType.Disposal ? MovementAuditType.Disposed : MovementAuditType.Recovered);
                 }
             }
+            // ShipmentTypes is null when the user hasn't picked an outcome. The view-model validation
+            // only requires an outcome when receipt/rejection fields have been populated, so reaching
+            // this point with a null ShipmentTypes means the user is saving comments / stats marking
+            // only — handled below. The outcome handlers above must NOT run with null fields.
 
             if (model.Recovery.IsComplete() && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {

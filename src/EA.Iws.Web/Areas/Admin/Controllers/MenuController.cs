@@ -1,10 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
+    using EA.Iws.Core.NotificationAssessment;
+    using EA.Iws.Requests.ImportNotificationAssessment;
     using EA.Iws.Requests.Notification;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -85,7 +89,7 @@
         public ActionResult ImportNavigation(Guid id, ImportNavigationSection section)
         {
             var details = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
-            
+
             var showAssessmentDecision = Task.Run(() =>
                 authorizationService.AuthorizeActivity(
                     ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision))
@@ -98,6 +102,24 @@
 
             var hasComments = Task.Run(() => mediator.SendAsync(new CheckImportNotificationHasComments(id))).Result;
 
+            var keyDates = Task.Run(() => mediator.SendAsync(new GetKeyDates(id))).Result;
+
+            var mostRecentConsentedDecision = keyDates.DecisionHistory.Where(d => d.Status == NotificationStatus.Consented)
+                                                                      .OrderByDescending(d => d.Date)
+                                                                      .FirstOrDefault();
+
+            DateTime? consentExpiryDate = null;
+            DateTime? consentStartDate = null;
+            DateTime? consentedDate = null;
+            if (mostRecentConsentedDecision != null)
+            {
+                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo;
+                consentStartDate = mostRecentConsentedDecision.ConsentedFrom;
+                consentedDate = (DateTime?)mostRecentConsentedDecision.Date;
+            }
+
+            var showConsentedDateInRed = ShowConsentExpiryDateInRed(details.AllFacilitiesPreconsented, consentExpiryDate);
+
             var model = new ImportNavigationViewModel
             {
                 Details = details,
@@ -106,7 +128,11 @@
                 AdminLinksModel = CreateAdminLinksViewModel(),
                 ShowAssessmentDecision = showAssessmentDecision,
                 ShowKeyDatesOverride = showKeyDatesOverride,
-                HasComments = hasComments
+                HasComments = hasComments,
+                ShowConsentExpiryDateInRed = showConsentedDateInRed,
+                ConsentExpiryDate = consentExpiryDate,
+                ConsentStartDate = consentStartDate,
+                ConsentedDate = consentedDate
             };
 
             return PartialView("_ImportNavigation", model);
@@ -134,6 +160,24 @@
 
             var hasComments = Task.Run(() => mediator.SendAsync(new CheckNotificationHasComments(id))).Result;
 
+            var keyDates = Task.Run(() => mediator.SendAsync(new GetKeyDatesSummaryInformation(id))).Result;
+
+            var mostRecentConsentedDecision = keyDates.DecisionHistory.Where(d => d.Status == NotificationStatus.Consented)
+                                                                      .OrderByDescending(d => d.Date)
+                                                                      .FirstOrDefault();
+
+            DateTime? consentExpiryDate = null;
+            DateTime? consentStartDate = null;
+            DateTime? consentedDate = null;
+            if (mostRecentConsentedDecision != null)
+            {
+                consentExpiryDate = mostRecentConsentedDecision.ConsentedTo;
+                consentStartDate = mostRecentConsentedDecision.ConsentedFrom;
+                consentedDate = (DateTime?)mostRecentConsentedDecision.Date;
+            }
+
+            var showConsentedDateInRed = ShowConsentExpiryDateInRed(data.AllFacilitiesPreconsented, consentExpiryDate);
+
             var model = new ExportNavigationViewModel
             {
                 Data = data,
@@ -142,10 +186,47 @@
                 ShowAssessmentDecision = showAssessmentDecision,
                 ShowKeyDatesOverride = showKeyDatesOverride,
                 ShowFinancialGuaranteeDatesOverride = showFinancialGuaranteeDatesOverride,
-                HasComments = hasComments
+                HasComments = hasComments,
+                ShowConsentExpiryDateInRed = showConsentedDateInRed,
+                ConsentExpiryDate = consentExpiryDate,
+                ConsentStartDate = consentStartDate,
+                ConsentedDate = consentedDate ?? null
             };
 
             return PartialView("_ExportNavigation", model);
+        }
+
+        private bool ShowConsentExpiryDateInRed(bool? allFacilitiesPreConsented, DateTime? consentExpiryDate)
+        {
+            var oneYearAgo = DateTime.UtcNow.Date.AddYears(-1);
+            var threeYearsAgo = DateTime.UtcNow.Date.AddYears(-3);
+
+            if (consentExpiryDate == null)
+            {
+                return false;
+            }   
+
+            bool moreThanOneYearAgo = (oneYearAgo.Date >= consentExpiryDate.Value.Date);
+            bool moreThanThreeYearAgo = (threeYearsAgo.Date >= consentExpiryDate.Value.Date);
+
+            if (allFacilitiesPreConsented == null)
+            {
+                allFacilitiesPreConsented = false;
+            }
+
+            var allFacilitiesPreConsentedValue = (bool)allFacilitiesPreConsented;
+
+            if (allFacilitiesPreConsentedValue && moreThanThreeYearAgo)
+            {
+                return true;
+            }
+
+            if (!allFacilitiesPreConsentedValue && moreThanOneYearAgo)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

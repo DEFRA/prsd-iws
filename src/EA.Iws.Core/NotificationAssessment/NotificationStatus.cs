@@ -18,7 +18,7 @@
         Transmitted = 6,
         [Display(Name = "Decision required")]
         DecisionRequiredBy = 7,
-        [Display(Name = "Withdrawn")]
+        [Display(Name = "Notification Withdrawn")]
         Withdrawn = 8,
         [Display(Name = "Objected")]
         Objected = 9,
