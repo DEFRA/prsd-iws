@@ -30,7 +30,10 @@ BEGIN
 		[WasteType],
 		[NotificationStatus],
 		[ConsigneeName],
-		[RegistrationNumber]
+		[ExporterRegistrationNumber],
+		[ImporterRegistrationNumber],
+		[FacilityRegistrationNumber],
+		[ProducerRegistrationNumber]
 	FROM
 		[Reports].[ProducerCache]
 	WHERE

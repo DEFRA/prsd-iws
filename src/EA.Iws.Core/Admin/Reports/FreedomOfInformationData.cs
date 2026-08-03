@@ -19,6 +19,9 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Notifier")]
         public string NotifierName { get; set; }
 
+        [DisplayName("Notifier Registration Number")]
+        public string ExporterRegistrationNumber { get; set; }
+
         public string NotifierAddress { get; set; }
 
         public string NotifierPostalCode { get; set; }
@@ -32,6 +35,9 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Producer")]
         public string ProducerName { get; set; }
+
+        [DisplayName("Producer Registration Number")]
+        public string ProducerRegistrationNumber { get; set; }
 
         public string ProducerAddress { get; set; }
 
@@ -65,7 +71,7 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("EWC Code")]
         public string Ewc { get; set; }
-        
+
         public string YCode { get; set; }
 
         public string HCode { get; set; }
@@ -75,6 +81,9 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Consignee")]
         public string ImporterName { get; set; }
+
+        [DisplayName("Consignee Registration Number")]
+        public string ImporterRegistrationNumber { get; set; }
 
         [DisplayName("Consignee Address")]
         public string ImporterAddress { get; set; }
@@ -93,6 +102,9 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Facility")]
         public string FacilityName { get; set; }
+
+        [DisplayName("Facility Registration Number")]
+        public string FacilityRegistrationNumber { get; set; }
 
         public string FacilityAddress { get; set; }
 
@@ -132,9 +144,6 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Officer name")]
         public string Officer { get; set; }
-
-        [DisplayName("Registration Number")]
-        public string RegistrationNumber { get; set; }
 
         [DisplayName("Consent withdrawn date")]
         public DateTime? ConsentWithdrawnDate { get; set; }
