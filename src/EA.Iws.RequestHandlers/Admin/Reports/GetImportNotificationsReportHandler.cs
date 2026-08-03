@@ -31,7 +31,7 @@
         public async Task<DataImportNotificationData[]> HandleAsync(GetImportNotificationsReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var data = await importNotificationsRepository.Get(message.From, message.To, user.CompetentAuthority);
+            var data = await importNotificationsRepository.GetDataImportNotificationData(message.From, message.To, user.CompetentAuthority);
 
             return data.Select(x => mapper.Map(x, user.CompetentAuthority)).ToArray();
         }
