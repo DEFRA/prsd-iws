@@ -67,7 +67,11 @@
                         x.ConsentedDate,
                         x.DecisionRequiredByDate,
                         x.Status,
-                        x.LastCommentDate)).ToArray()
+                        x.LastCommentDate,
+                        x.FinancialGuaranteeStatus,
+                        x.FinancialGuaranteeStatusDescription,
+                        x.LastAction,
+                        x.LastComment)).ToArray()
             };
         }
 
@@ -85,6 +89,10 @@
             public ImportNotificationStatus Status { get; set; }
             public DateTimeOffset? LastCommentDate { get; set; }
             public int TotalCount { get; set; }
+            public int? FinancialGuaranteeStatus { get; set; }
+            public string FinancialGuaranteeStatusDescription { get; set; }
+            public string LastAction { get; set; }
+            public string LastComment { get; set; }
         }
     }
 }

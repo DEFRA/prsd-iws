@@ -43,18 +43,43 @@ BEGIN
             ND.ConsentedDate,
             ND.DecisionRequiredByDate,
             NA.Status,
-            (SELECT TOP 1 DateAdded 
+            FG.Status AS FinancialGuaranteeStatus,
+            FGLS.Description AS FinancialGuaranteeStatusDescription,
+            
+            -- Last action from status change history
+            (SELECT TOP 1 LS.Description
+             FROM [ImportNotification].[NotificationStatusChange] NSC
+             INNER JOIN [Lookup].[ImportNotificationStatus] LS ON NSC.NewStatus = LS.Id
+             WHERE NSC.NotificationAssessmentId = NA.Id
+             ORDER BY NSC.ChangeDate DESC) AS LastAction,
+            
+            -- Latest comment information
+            (SELECT TOP 1 C.Comment 
+             FROM [ImportNotification].[Comments] C 
+             WHERE C.NotificationId = N.Id 
+             ORDER BY C.DateAdded DESC) AS LastComment,
+             
+            (SELECT TOP 1 C.DateAdded 
              FROM [ImportNotification].[Comments] C 
              WHERE C.NotificationId = N.Id 
              ORDER BY C.DateAdded DESC) AS LastCommentDate
+             
         FROM
             [ImportNotification].[Notification] N
             INNER JOIN [ImportNotification].[NotificationAssessment] NA 
                 ON N.Id = NA.NotificationApplicationId
             INNER JOIN [ImportNotification].[NotificationDates] ND 
                 ON NA.Id = ND.NotificationAssessmentId
+                
             LEFT JOIN [ImportNotification].[Exporter] E 
                 ON N.Id = E.ImportNotificationId
+                
+            LEFT JOIN [ImportNotification].[FinancialGuarantee] FG 
+                ON N.Id = FG.ImportNotificationId
+                
+            LEFT JOIN [Lookup].[FinancialGuaranteeStatus] FGLS
+                ON FG.Status = FGLS.Id
+                
         WHERE
             N.CompetentAuthority = @CompetentAuthority
             AND (@NotificationNumber IS NULL OR N.NotificationNumber LIKE '%' + @NotificationNumber + '%')
@@ -72,7 +97,12 @@ BEGIN
         ConsentedDate,
         DecisionRequiredByDate,
         Status,
+        FinancialGuaranteeStatus,
+        FinancialGuaranteeStatusDescription,
+        LastAction,
+        LastComment,
         LastCommentDate,
+        
         (SELECT COUNT(*) FROM WorklistData) AS TotalCount
     FROM WorklistData
     ORDER BY 
@@ -82,4 +112,3 @@ BEGIN
     OFFSET @Offset ROWS
     FETCH NEXT @PageSize ROWS ONLY;
 END
-GO

@@ -17,5 +17,9 @@
         public int? WorkingDaysInAssessment { get; set; }
         public string DaysRemaining { get; set; }
         public DateTimeOffset? LastCommentDate { get; set; }
+        public int? FinancialGuaranteeStatus { get; set; }
+        public string FinancialGuaranteeStatusDescription { get; set; }
+        public string LastAction { get; set; }
+        public string LastComment { get; set; }
     }
 }

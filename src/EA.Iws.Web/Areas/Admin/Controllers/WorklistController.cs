@@ -34,7 +34,7 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             ExportWorklistFilterViewModel exportFilter, 
             ImportWorklistFilterViewModel importFilter, 
             int page = 1, 
-            string tab = "export")
+            string tab = "import") // change to export when needed to get the default to export
         {
             var model = new WorklistViewModel();
 

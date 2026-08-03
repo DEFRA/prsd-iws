@@ -122,7 +122,11 @@
                 Status = summary.Status,
                 WorkingDaysInAssessment = workingDaysInAssessment,
                 DaysRemaining = daysRemaining,
-                LastCommentDate = summary.LastCommentDate
+                LastCommentDate = summary.LastCommentDate,
+                FinancialGuaranteeStatus = summary.FinancialGuaranteeStatus,
+                FinancialGuaranteeStatusDescription = summary.FinancialGuaranteeStatusDescription,
+                LastAction = summary.LastAction,
+                LastComment = summary.LastComment
             };
         }
     }

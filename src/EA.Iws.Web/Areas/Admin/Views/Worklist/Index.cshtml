@@ -7,7 +7,7 @@
 @{
     ViewBag.Title = "Worklist";
     Layout = "~/Areas/Admin/Views/Worklist/_Layout.cshtml";
-    var currentTab = ViewBag.CurrentTab as string ?? "export";
+    var currentTab = ViewBag.CurrentTab as string ?? "import"; //change to export when we finalize
 }
 
 @functions {
@@ -38,168 +38,168 @@
 <div class="govuk-tabs">
     <h2 class="govuk-tabs__title">Contents</h2>
     <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item @(currentTab == "export" ? "govuk-tabs__list-item--selected" : "")">
-            <a class="govuk-tabs__tab" href="@Url.Action("Index", "Worklist", new { area = "Admin", tab = "export" })">Exports</a>
-        </li>
+        @*<li class="govuk-tabs__list-item @(currentTab == "export" ? "govuk-tabs__list-item--selected" : "")">
+                <a class="govuk-tabs__tab" href="@Url.Action("Index", "Worklist", new { area = "Admin", tab = "export" })">Exports</a>
+            </li>*@
         <li class="govuk-tabs__list-item @(currentTab == "import" ? "govuk-tabs__list-item--selected" : "")">
             <a class="govuk-tabs__tab" href="@Url.Action("Index", "Worklist", new { area = "Admin", tab = "import" })">Imports</a>
         </li>
     </ul>
 
     <!-- Export Tab -->
-    @if (currentTab == "export")
-    {
-        <div class="govuk-tabs__panel" id="export">
+    @*@if (currentTab == "export")
+        {
+            <div class="govuk-tabs__panel" id="export">
 
-            @using (Html.BeginForm("Index", "Worklist", new { tab = "export" }, FormMethod.Post, new { id = "exportFilterForm" }))
-            {
-                @Html.AntiForgeryToken()
-                <input type="hidden" name="tab" value="export" />
-                
-                <div class="grid-row">
-                    <div class="column-one-half">
-                        <div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ExportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ExportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
-                        </div>
-                    </div>
-                    <div class="column-one-half">
-                        <div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ExportFilter.Officer, "Officer", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ExportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
-                        </div>
-                    </div>
-                </div>
-                <div class="govuk-form-group">
-                    <fieldset class="govuk-fieldset">
-                        <legend class="govuk-fieldset__legend govuk-label">
-                            Status
-                        </legend>
-                        <div class="grid-row">
-                            <div class="column-one-half">
-                                <div class="govuk-checkboxes">
-                                    @for (int i = 0; i < Model.ExportStatuses.Length / 2; i++)
-                                    {
-                                        var allowedStatus = Model.ExportStatuses[i];
-                                        var statusValue = (int)allowedStatus;
-                                        var statusText = EnumHelper.GetValues(typeof(NotificationStatus))[statusValue];
-                                        var isChecked = Model.ExportFilter.SelectedStatuses != null && Model.ExportFilter.SelectedStatuses.Contains(allowedStatus);
-                                        <div class="govuk-checkboxes__item">
-                                            <input class="govuk-checkboxes__input" 
-                                                   type="checkbox" 
-                                                   name="ExportFilter.SelectedStatuses" 
-                                                   id="export_status_@statusValue" 
-                                                   value="@statusValue" 
-                                                   @(isChecked ? "checked" : "") />
-                                            <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue">
-                                                @statusText
-                                            </label>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                            <div class="column-one-half">
-                                <div class="govuk-checkboxes">
-                                    @for (int i = Model.ExportStatuses.Length / 2; i < Model.ExportStatuses.Length; i++)
-                                    {
-                                        var allowedStatus = Model.ExportStatuses[i];
-                                        var statusValue = (int)allowedStatus;
-                                        var statusText = EnumHelper.GetValues(typeof(NotificationStatus))[statusValue];
-                                        var isChecked = Model.ExportFilter.SelectedStatuses != null && Model.ExportFilter.SelectedStatuses.Contains(allowedStatus);
-                                        <div class="govuk-checkboxes__item">
-                                            <input class="govuk-checkboxes__input" 
-                                                   type="checkbox" 
-                                                   name="ExportFilter.SelectedStatuses" 
-                                                   id="export_status_@statusValue" 
-                                                   value="@statusValue" 
-                                                   @(isChecked ? "checked" : "") />
-                                            <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue">
-                                                @statusText
-                                            </label>
-                                        </div>
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-                <button type="submit" class="govuk-button">Filter</button>
-                <button id="export-reset" type="button" class="govuk-button govuk-button--secondary">Reset</button>
-            }
-
-            @if (Model.ExportResult != null)
-            {
-                if (Model.ExportResult.Results.Count > 0)
+                @using (Html.BeginForm("Index", "Worklist", new { tab = "export" }, FormMethod.Post, new { id = "exportFilterForm" }))
                 {
-                    <table class="govuk-table">
-                        <thead class="govuk-table__head">
-                            <tr class="govuk-table__row">
-                                <th scope="col" class="govuk-table__header">Notification number</th>
-                                <th scope="col" class="govuk-table__header">Notifier</th>
-                                <th scope="col" class="govuk-table__header">Officer</th>
-                                <th scope="col" class="govuk-table__header">Status</th>
-                                <th scope="col" class="govuk-table__header">Date picked up</th>
-                                <th scope="col" class="govuk-table__header">Working days</th>
-                                <th scope="col" class="govuk-table__header">Acknowledged</th>
-                                <th scope="col" class="govuk-table__header">Decision required</th>
-                                <th scope="col" class="govuk-table__header">Days remaining</th>
-                                <th scope="col" class="govuk-table__header">Consented</th>
-                                <th scope="col" class="govuk-table__header">Last comment</th>
-                            </tr>
-                        </thead>
-                        <tbody class="govuk-table__body">
-                            @foreach (var row in Model.ExportResult.Results)
-                            {
-                                <tr class="govuk-table__row">
-                                    <td class="govuk-table__cell">
-                                        @Html.ActionLink(
-                                            linkText: row.NotificationNumber.ToNonBreakingString(),
-                                            actionName: "Index",
-                                            controllerName: "Home",
-                                            routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
-                                            htmlAttributes: null)
-                                    </td>
-                                    <td class="govuk-table__cell">@row.Notifier</td>
-                                    <td class="govuk-table__cell">@row.Officer</td>
-                                    <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(NotificationStatus))[(int)row.Status]</td>
-                                    <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">
-                                        @if (row.WorkingDaysInAssessment.HasValue)
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" name="tab" value="export" />
+
+                    <div class="grid-row">
+                        <div class="column-one-half">
+                            <div class="govuk-form-group">
+                                @Html.LabelFor(m => m.ExportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
+                                @Html.TextBoxFor(m => m.ExportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
+                            </div>
+                        </div>
+                        <div class="column-one-half">
+                            <div class="govuk-form-group">
+                                @Html.LabelFor(m => m.ExportFilter.Officer, "Officer", new { @class = "govuk-label" })
+                                @Html.TextBoxFor(m => m.ExportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="govuk-form-group">
+                        <fieldset class="govuk-fieldset">
+                            <legend class="govuk-fieldset__legend govuk-label">
+                                Status
+                            </legend>
+                            <div class="grid-row">
+                                <div class="column-one-half">
+                                    <div class="govuk-checkboxes">
+                                        @for (int i = 0; i < Model.ExportStatuses.Length / 2; i++)
                                         {
-                                            <strong class="govuk-tag @GetWorkingDaysColorClass(row.WorkingDaysInAssessment)">@row.WorkingDaysInAssessment</strong>
+                                            var allowedStatus = Model.ExportStatuses[i];
+                                            var statusValue = (int)allowedStatus;
+                                            var statusText = EnumHelper.GetValues(typeof(NotificationStatus))[statusValue];
+                                            var isChecked = Model.ExportFilter.SelectedStatuses != null && Model.ExportFilter.SelectedStatuses.Contains(allowedStatus);
+                                            <div class="govuk-checkboxes__item">
+                                                <input class="govuk-checkboxes__input"
+                                                       type="checkbox"
+                                                       name="ExportFilter.SelectedStatuses"
+                                                       id="export_status_@statusValue"
+                                                       value="@statusValue"
+                                                       @(isChecked ? "checked" : "") />
+                                                <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue">
+                                                    @statusText
+                                                </label>
+                                            </div>
                                         }
-                                    </td>
-                                    <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@row.DaysRemaining</td>
-                                    <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
+                                    </div>
+                                </div>
+                                <div class="column-one-half">
+                                    <div class="govuk-checkboxes">
+                                        @for (int i = Model.ExportStatuses.Length / 2; i < Model.ExportStatuses.Length; i++)
+                                        {
+                                            var allowedStatus = Model.ExportStatuses[i];
+                                            var statusValue = (int)allowedStatus;
+                                            var statusText = EnumHelper.GetValues(typeof(NotificationStatus))[statusValue];
+                                            var isChecked = Model.ExportFilter.SelectedStatuses != null && Model.ExportFilter.SelectedStatuses.Contains(allowedStatus);
+                                            <div class="govuk-checkboxes__item">
+                                                <input class="govuk-checkboxes__input"
+                                                       type="checkbox"
+                                                       name="ExportFilter.SelectedStatuses"
+                                                       id="export_status_@statusValue"
+                                                       value="@statusValue"
+                                                       @(isChecked ? "checked" : "") />
+                                                <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue">
+                                                    @statusText
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <button type="submit" class="govuk-button">Filter</button>
+                    <button id="export-reset" type="button" class="govuk-button govuk-button--secondary">Reset</button>
+                }
 
-                    @Html.Pager(Model.ExportResult.PageSize, Model.ExportResult.PageNumber, Model.ExportResult.TotalCount).Options(o =>
-                    {
-                        o.AddRouteValue("tab", "export");
-                        o.AddRouteValue("exportFilter.NotificationNumber", Model.ExportFilter.NotificationNumber);
-                        o.AddRouteValue("exportFilter.Officer", Model.ExportFilter.Officer);
-                        if (Model.ExportFilter.SelectedStatuses != null)
-                        {
-                            for (int i = 0; i < Model.ExportFilter.SelectedStatuses.Length; i++)
-                            {
-                                o.AddRouteValue(string.Format("exportFilter.SelectedStatuses[{0}]", i), (int)Model.ExportFilter.SelectedStatuses[i]);
-                            }
-                        }
-                    })
-                }
-                else
+                @if (Model.ExportResult != null)
                 {
-                    <p class="govuk-body">No export notifications found matching the current filter.</p>
+                    if (Model.ExportResult.Results.Count > 0)
+                    {
+                        <table class="govuk-table">
+                            <thead class="govuk-table__head">
+                                <tr class="govuk-table__row">
+                                    <th scope="col" class="govuk-table__header">Notification number</th>
+                                    <th scope="col" class="govuk-table__header">Notifier</th>
+                                    <th scope="col" class="govuk-table__header">Officer</th>
+                                    <th scope="col" class="govuk-table__header">Status</th>
+                                    <th scope="col" class="govuk-table__header">Date picked up</th>
+                                    <th scope="col" class="govuk-table__header">Working days</th>
+                                    <th scope="col" class="govuk-table__header">Acknowledged</th>
+                                    <th scope="col" class="govuk-table__header">Decision required</th>
+                                    <th scope="col" class="govuk-table__header">Days remaining</th>
+                                    <th scope="col" class="govuk-table__header">Consented</th>
+                                    <th scope="col" class="govuk-table__header">Last comment</th>
+                                </tr>
+                            </thead>
+                            <tbody class="govuk-table__body">
+                                @foreach (var row in Model.ExportResult.Results)
+                                {
+                                    <tr class="govuk-table__row">
+                                        <td class="govuk-table__cell">
+                                            @Html.ActionLink(
+                                                linkText: row.NotificationNumber.ToNonBreakingString(),
+                                                actionName: "Index",
+                                                controllerName: "Home",
+                                                routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
+                                                htmlAttributes: null)
+                                        </td>
+                                        <td class="govuk-table__cell">@row.Notifier</td>
+                                        <td class="govuk-table__cell">@row.Officer</td>
+                                        <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(NotificationStatus))[(int)row.Status]</td>
+                                        <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
+                                        <td class="govuk-table__cell">
+                                            @if (row.WorkingDaysInAssessment.HasValue)
+                                            {
+                                                <strong class="govuk-tag @GetWorkingDaysColorClass(row.WorkingDaysInAssessment)">@row.WorkingDaysInAssessment</strong>
+                                            }
+                                        </td>
+                                        <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
+                                        <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
+                                        <td class="govuk-table__cell">@row.DaysRemaining</td>
+                                        <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
+                                        <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                        @Html.Pager(Model.ExportResult.PageSize, Model.ExportResult.PageNumber, Model.ExportResult.TotalCount).Options(o =>
+                        {
+                            o.AddRouteValue("tab", "export");
+                            o.AddRouteValue("exportFilter.NotificationNumber", Model.ExportFilter.NotificationNumber);
+                            o.AddRouteValue("exportFilter.Officer", Model.ExportFilter.Officer);
+                            if (Model.ExportFilter.SelectedStatuses != null)
+                            {
+                                for (int i = 0; i < Model.ExportFilter.SelectedStatuses.Length; i++)
+                                {
+                                    o.AddRouteValue(string.Format("exportFilter.SelectedStatuses[{0}]", i), (int)Model.ExportFilter.SelectedStatuses[i]);
+                                }
+                            }
+                        })
+                    }
+                    else
+                    {
+                        <p class="govuk-body">No export notifications found matching the current filter.</p>
+                    }
                 }
-            }
-        </div>
-    }
+            </div>
+        }*@
 
     <!-- Import Tab -->
     @if (currentTab == "import")
@@ -210,7 +210,7 @@
             {
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="tab" value="import" />
-                
+
                 <div class="grid-row">
                     <div class="column-one-half">
                         <div class="govuk-form-group">
@@ -224,9 +224,9 @@
                     </div>
                     <div class="column-one-half">
                         @*<div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ImportFilter.Officer, "Officer", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ImportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
-                        </div>*@
+                                @Html.LabelFor(m => m.ImportFilter.Officer, "Officer", new { @class = "govuk-label" })
+                                @Html.TextBoxFor(m => m.ImportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
+                            </div>*@
                     </div>
                 </div>
                 <div class="govuk-form-group">
@@ -278,27 +278,27 @@
                                 </div>
                             </div>
                             @*<div class="column-one-half">
-                                <div class="govuk-checkboxes">
-                                    @for (int i = (Model.ImportStatuses.Length + 1) / 2; i < Model.ImportStatuses.Length; i++)
-                                    {
-                                        var allowedStatus = Model.ImportStatuses[i];
-                                        var statusValue = (int)allowedStatus;
-                                        var statusText = EnumHelper.GetValues(typeof(ImportNotificationStatus))[statusValue];
-                                        var isChecked = Model.ImportFilter.SelectedStatuses != null && Model.ImportFilter.SelectedStatuses.Contains(allowedStatus);
-                                        <div class="govuk-checkboxes__item">
-                                            <input class="govuk-checkboxes__input" 
-                                                   type="checkbox" 
-                                                   name="ImportFilter.SelectedStatuses" 
-                                                   id="import_status_@statusValue" 
-                                                   value="@statusValue" 
-                                                   @(isChecked ? "checked" : "") />
-                                            <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue">
-                                                @statusText
-                                            </label>
-                                        </div>
-                                    }
-                                </div>
-                            </div>*@
+                                    <div class="govuk-checkboxes">
+                                        @for (int i = (Model.ImportStatuses.Length + 1) / 2; i < Model.ImportStatuses.Length; i++)
+                                        {
+                                            var allowedStatus = Model.ImportStatuses[i];
+                                            var statusValue = (int)allowedStatus;
+                                            var statusText = EnumHelper.GetValues(typeof(ImportNotificationStatus))[statusValue];
+                                            var isChecked = Model.ImportFilter.SelectedStatuses != null && Model.ImportFilter.SelectedStatuses.Contains(allowedStatus);
+                                            <div class="govuk-checkboxes__item">
+                                                <input class="govuk-checkboxes__input"
+                                                       type="checkbox"
+                                                       name="ImportFilter.SelectedStatuses"
+                                                       id="import_status_@statusValue"
+                                                       value="@statusValue"
+                                                       @(isChecked ? "checked" : "") />
+                                                <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue">
+                                                    @statusText
+                                                </label>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>*@
                         </div>
                     </fieldset>
                 </div>
@@ -314,15 +314,18 @@
                         <thead class="govuk-table__head">
                             <tr class="govuk-table__row">
                                 <th scope="col" class="govuk-table__header">Notification number</th>
-                                <th scope="col" class="govuk-table__header">Exporter</th>
+                                <th scope="col" class="govuk-table__header">Notifier</th>
                                 <th scope="col" class="govuk-table__header">Officer</th>
                                 <th scope="col" class="govuk-table__header">Notification Status</th>
                                 <th scope="col" class="govuk-table__header">Date picked up</th>
                                 <th scope="col" class="govuk-table__header">Working days</th>
-                                <th scope="col" class="govuk-table__header">Acknowledged</th>
+                                <th scope="col" class="govuk-table__header">Acknowledgement date</th>
                                 <th scope="col" class="govuk-table__header">Decision required</th>
                                 <th scope="col" class="govuk-table__header">Days remaining</th>
-                                <th scope="col" class="govuk-table__header">Consented</th>
+                                <th scope="col" class="govuk-table__header">Consented date</th>
+                                <th scope="col" class="govuk-table__header">Financial Guarantee Status</th>
+                                <th scope="col" class="govuk-table__header">Last Action</th>
+                                <th scope="col" class="govuk-table__header">Last comment date</th>
                                 <th scope="col" class="govuk-table__header">Last comment</th>
                             </tr>
                         </thead>
@@ -341,6 +344,7 @@
                                     <td class="govuk-table__cell">@row.Exporter</td>
                                     <td class="govuk-table__cell">@row.Officer</td>
                                     <td class="govuk-table__cell">@EnumHelper.GetValues(typeof(ImportNotificationStatus))[(int)row.Status]</td>
+
                                     <td class="govuk-table__cell">@(row.DatePickedUpByOfficer.HasValue ? Html.Gds().DisplayShortDate(row.DatePickedUpByOfficer.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">
                                         @if (row.WorkingDaysInAssessment.HasValue)
@@ -352,7 +356,10 @@
                                     <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@row.DaysRemaining</td>
                                     <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : string.Empty)</td>
+                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatusDescription) ? "- -" : row.FinancialGuaranteeStatusDescription)</td>
+                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastAction) ? "- -" : row.LastAction)</td>
+                                    <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : "- -")</td>
+                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastComment) ? "- -" : row.LastComment)</td>
                                 </tr>
                             }
                         </tbody>
