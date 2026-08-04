@@ -81,7 +81,7 @@
 @if (Model.IsNotificationStatusRecordable && (Model.Decision != FinancialGuaranteeDecision.None || Model.IsEmpty))
 {
     <div class="govuk-form-group">
-        @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "govuk-button" })
+        @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "govuk-button", id = "btnRecordFinanicalGuarantee" })
     </div>
 }
 
