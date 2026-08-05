@@ -5,69 +5,91 @@ GO
 ALTER PROCEDURE [Notification].[uspGetExportWorklist]
     @CompetentAuthority INT,
     @NotificationNumber NVARCHAR(50) = NULL,
-    @Officer NVARCHAR(256) = NULL,
+    @Officer NVARCHAR(255) = NULL,
     @Statuses NVARCHAR(MAX) = NULL,
     @PageNumber INT = 1,
-    @PageSize INT = 20
+    @PageSize INT = 25
 AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Parse statuses using XML (compatible with all SQL Server versions)
-    DECLARE @StatusTable TABLE (StatusId INT);
-    
-    IF @Statuses IS NOT NULL AND LEN(@Statuses) > 0
+    -- Parse XML status list
+    DECLARE @StatusIds TABLE (Id INT);
+    IF @Statuses IS NOT NULL
     BEGIN
-        DECLARE @StatusesXml XML;
-        SET @StatusesXml = CAST('<i>' + REPLACE(@Statuses, ',', '</i><i>') + '</i>' AS XML);
-        
-        INSERT INTO @StatusTable (StatusId)
-        SELECT CAST(T.c.value('.', 'INT') AS INT)
-        FROM @StatusesXml.nodes('/i') T(c)
-        WHERE LTRIM(RTRIM(T.c.value('.', 'NVARCHAR(10)'))) <> '';
+        INSERT INTO @StatusIds
+        SELECT CAST(value AS INT)
+        FROM STRING_SPLIT(@Statuses, ',');
     END
-
-    DECLARE @Offset INT;
-    SET @Offset = (@PageNumber - 1) * @PageSize;
 
     ;WITH WorklistData AS
     (
-        SELECT
+        SELECT 
             N.Id AS NotificationId,
             N.NotificationNumber,
+            -- Notifier (Exporter name directly from Exporter table)
             E.Name AS Notifier,
-            ND.NameOfOfficer AS Officer,
-            ND.CommencementDate AS DatePickedUpByOfficer,
-            ND.TransmittedDate,
-            ND.AcknowledgedDate,
-            ND.ConsentedDate,
-            ND.DecisionRequiredByDate,
+            -- Officer from NotificationDates
+            NAD.NameOfOfficer AS Officer,
+            -- Date picked up by officer (using CommencementDate as proxy)
+            NAD.CommencementDate AS DatePickedUpByOfficer,
+            -- Transmitted date
+            NAD.TransmittedDate,
+            -- Acknowledged date
+            NAD.AcknowledgedDate,
+            -- Consented date
+            NAD.ConsentedDate,
+            -- Decision required date
+            NAD.DecisionRequiredByDate AS DecisionRequiredByDate,
+            -- Status
             NA.Status,
-            (SELECT TOP 1 DateAdded 
-             FROM [Notification].[Audit] A 
-             WHERE A.NotificationId = N.Id 
-             ORDER BY A.DateAdded DESC) AS LastActionDate,
-            (SELECT TOP 1 CAST(A.Type AS NVARCHAR(50))
-             FROM [Notification].[Audit] A 
-             WHERE A.NotificationId = N.Id 
-             ORDER BY A.DateAdded DESC) AS LastActionType,
-            (SELECT TOP 1 DateAdded 
-             FROM [Notification].[Comments] C 
-             WHERE C.NotificationId = N.Id 
-             ORDER BY C.DateAdded DESC) AS LastCommentDate
-        FROM
-            [Notification].[Notification] N
-            INNER JOIN [Notification].[NotificationAssessment] NA 
-                ON N.Id = NA.NotificationApplicationId
-            INNER JOIN [Notification].[NotificationDates] ND 
-                ON NA.Id = ND.NotificationAssessmentId
-            LEFT JOIN [Notification].[Exporter] E 
-                ON N.Id = E.NotificationId
-        WHERE
-            N.CompetentAuthority = @CompetentAuthority
+            -- Last action from status changes
+            (
+                SELECT TOP 1 LNS.Description
+                FROM [Notification].[NotificationStatusChange] NSC
+                INNER JOIN [Lookup].[NotificationStatus] LNS ON NSC.Status = LNS.Id
+                WHERE NSC.NotificationAssessmentId = NA.Id
+                ORDER BY NSC.ChangeDate DESC
+            ) AS LastActionType,
+            -- Last action date
+            (
+                SELECT TOP 1 NSC.ChangeDate
+                FROM [Notification].[NotificationStatusChange] NSC
+                WHERE NSC.NotificationAssessmentId = NA.Id
+                ORDER BY NSC.ChangeDate DESC
+            ) AS LastActionDate,
+            -- Last comment date
+            (
+                SELECT TOP 1 C.DateAdded
+                FROM [Notification].[Comments] C
+                WHERE C.NotificationId = N.Id
+                ORDER BY C.DateAdded DESC
+            ) AS LastCommentDate,
+            -- Financial Guarantee Status
+            (
+                SELECT TOP 1 LFGS.Description
+                FROM [Notification].[FinancialGuaranteeCollection] FGC
+                INNER JOIN [Notification].[FinancialGuarantee] FG ON FG.FinancialGuaranteeCollectionId = FGC.Id
+                INNER JOIN [Lookup].[FinancialGuaranteeStatus] LFGS ON FG.Status = LFGS.Id
+                WHERE FGC.NotificationId = N.Id
+                ORDER BY FG.CreatedDate DESC
+            ) AS FinancialGuaranteeStatus,
+            -- Last Comment
+            (
+                SELECT TOP 1 C.Comment
+                FROM [Notification].[Comments] C
+                WHERE C.NotificationId = N.Id
+                ORDER BY C.DateAdded DESC
+            ) AS LastComment
+        FROM [Notification].[Notification] N
+        INNER JOIN [Notification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
+        LEFT JOIN [Notification].[NotificationDates] NAD ON NAD.NotificationAssessmentId = NA.Id
+        LEFT JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
+        WHERE N.CompetentAuthority = @CompetentAuthority
+            AND N.NotificationType = 1 -- Export notifications only
             AND (@NotificationNumber IS NULL OR N.NotificationNumber LIKE '%' + @NotificationNumber + '%')
-            AND (@Officer IS NULL OR ND.NameOfOfficer LIKE '%' + @Officer + '%')
-            AND (NOT EXISTS(SELECT 1 FROM @StatusTable) OR NA.Status IN (SELECT StatusId FROM @StatusTable))
+            AND (@Officer IS NULL OR NAD.NameOfOfficer LIKE '%' + @Officer + '%')
+            AND (NOT EXISTS(SELECT 1 FROM @StatusIds) OR NA.Status IN (SELECT Id FROM @StatusIds))
     )
     SELECT 
         NotificationId,
@@ -83,13 +105,12 @@ BEGIN
         LastActionDate,
         LastActionType,
         LastCommentDate,
-        (SELECT COUNT(*) FROM WorklistData) AS TotalCount
+        FinancialGuaranteeStatus,
+        LastComment,
+        TotalCount = (SELECT COUNT(*) FROM WorklistData)
     FROM WorklistData
-    ORDER BY 
-        CASE WHEN DecisionRequiredByDate IS NULL THEN 1 ELSE 0 END,
-        DecisionRequiredByDate ASC,
-        NotificationNumber ASC
-    OFFSET @Offset ROWS
+    ORDER BY NotificationNumber
+    OFFSET (@PageNumber - 1) * @PageSize ROWS
     FETCH NEXT @PageSize ROWS ONLY;
 END
 GO

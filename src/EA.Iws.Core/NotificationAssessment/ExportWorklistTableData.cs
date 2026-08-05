@@ -34,5 +34,9 @@ namespace EA.Iws.Core.NotificationAssessment
         public DateTimeOffset? LastCommentDate { get; set; }
 
         public NotificationStatus Status { get; set; }
+
+        public string FinancialGuaranteeStatus { get; set; }
+
+        public string LastComment { get; set; }
     }
 }

@@ -69,7 +69,9 @@ namespace EA.Iws.DataAccess.Repositories
                         x.Status,
                         x.LastActionDate,
                         x.LastActionType,
-                        x.LastCommentDate)).ToArray()
+                        x.LastCommentDate,
+                        x.FinancialGuaranteeStatus,
+                        x.LastComment)).ToArray()
             };
         }
 
@@ -88,6 +90,8 @@ namespace EA.Iws.DataAccess.Repositories
             public DateTimeOffset? LastActionDate { get; set; }
             public string LastActionType { get; set; }
             public DateTimeOffset? LastCommentDate { get; set; }
+            public string FinancialGuaranteeStatus { get; set; }
+            public string LastComment { get; set; }
             public int TotalCount { get; set; }
         }
     }

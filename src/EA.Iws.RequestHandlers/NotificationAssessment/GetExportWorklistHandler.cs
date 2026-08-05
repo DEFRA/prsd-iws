@@ -115,7 +115,9 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
                 LastActionDate = summary.LastActionDate,
                 LastActionType = summary.LastActionType,
                 LastCommentDate = summary.LastCommentDate,
-                Status = summary.Status
+                Status = summary.Status,
+                FinancialGuaranteeStatus = summary.FinancialGuaranteeStatus,
+                LastComment = summary.LastComment
             };
         }
     }
