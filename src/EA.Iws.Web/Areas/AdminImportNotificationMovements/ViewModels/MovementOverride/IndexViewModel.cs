@@ -201,9 +201,28 @@
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
+            // Validate ActualQuantity is greater than 0 when provided
+            if (ActualQuantity.HasValue && ActualQuantity.Value <= 0)
+            {
+                yield return new ValidationResult("Quantity received must be greater than 0", new[] { "ActualQuantity" });
+            }
+
             if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && !RejectedQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.RejectedQuantityRequired, new[] { "RejectedQuantity" });
+            }
+
+            // Validate RejectedQuantity is greater than 0 when provided
+            if (RejectedQuantity.HasValue && RejectedQuantity.Value <= 0)
+            {
+                yield return new ValidationResult("Rejected quantity must be greater than 0", new[] { "RejectedQuantity" });
+            }
+
+            // Add validation: RejectedQuantity cannot be >= ActualQuantity for Partially rejected shipments
+            if (ActualQuantity.HasValue && RejectedQuantity.HasValue && ShipmentTypes == ShipmentType.Partially
+                && ActualQuantity <= RejectedQuantity)
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.RejectQuantityMoreThanActualQuantity, new[] { "RejectedQuantity" });
             }
 
             if ((ShipmentTypes == ShipmentType.Partially || ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrEmpty(RejectionReason))
@@ -236,6 +255,39 @@
                     yield return new ValidationResult("Please select the units for the quantity received", new[] { "Units" });
                 }
             }
+
+            // Disposal/Recovery date validation
+            if (Date.HasValue)
+            {
+                // Disposal/Recovery date must be after or equal to received date
+                if (ReceivedDate.HasValue && Date.Value < ReceivedDate.Value)
+                {
+                    yield return new ValidationResult(
+                        string.Format(CaptureViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(NotificationType)), 
+                        new[] { "Date" });
+                }
+
+                // Disposal/Recovery date cannot be in the future
+                if (Date.Value > SystemTime.UtcNow.Date)
+                {
+                    yield return new ValidationResult(
+                        string.Format(CaptureViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(NotificationType)), 
+                        new[] { "Date" });
+                }
+            }
+
+            // Disposal/Recovery date cannot be entered for fully rejected shipments
+            if (ShipmentTypes == ShipmentType.Rejected && Date.HasValue)
+            {
+                yield return new ValidationResult(
+                    string.Format(CaptureViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
+                    new[] { "Date" });
+            }
+        }
+
+        private static string GetNotificationTypeVerb(NotificationType displayedType)
+        {
+            return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
         }
     }
 }
