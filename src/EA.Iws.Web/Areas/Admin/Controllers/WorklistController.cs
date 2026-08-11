@@ -17,6 +17,13 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
     {
         private readonly IMediator mediator;
 
+        // Default export statuses
+        private static readonly NotificationStatus[] DefaultExportStatuses = new[]
+        {
+            NotificationStatus.DecisionRequiredBy,
+            NotificationStatus.InAssessment
+        };
+
         // Default import statuses
         private static readonly ImportNotificationStatus[] DefaultImportStatuses = new[]
         {
@@ -99,6 +106,17 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             {
                 // Initialize export filter
                 model.ExportFilter = exportFilter ?? new ExportWorklistFilterViewModel();
+                
+                // Check if any filter parameters were provided
+                bool hasExportFilters = !string.IsNullOrWhiteSpace(model.ExportFilter.NotificationNumber) ||
+                                       !string.IsNullOrWhiteSpace(model.ExportFilter.Officer) ||
+                                       (model.ExportFilter.SelectedStatuses != null && model.ExportFilter.SelectedStatuses.Length > 0);
+
+                // Apply default statuses if no filters were provided
+                if (!hasExportFilters)
+                {
+                    model.ExportFilter.SelectedStatuses = DefaultExportStatuses;
+                }
                 
                 // Load ONLY export data
                 model.ExportResult = await mediator.SendAsync(new GetExportWorklist
