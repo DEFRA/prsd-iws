@@ -31,6 +31,28 @@
             return "govuk-tag--red";
         }
     }
+
+    string FormatLastComment(DateTimeOffset? commentDate, string commentText)
+    {
+        if (!commentDate.HasValue && string.IsNullOrWhiteSpace(commentText))
+        {
+            return "- -";
+        }
+
+        var parts = new System.Collections.Generic.List<string>();
+
+        if (commentDate.HasValue)
+        {
+            parts.Add(commentDate.Value.ToString("d MMM yyyy"));
+        }
+
+        if (!string.IsNullOrWhiteSpace(commentText))
+        {
+            parts.Add(commentText);
+        }
+
+        return string.Join(" - ", parts);
+    }
 }
 
 <h1 class="govuk-heading-l">Worklist</h1>
@@ -139,14 +161,13 @@
                                     <th scope="col" class="govuk-table__header">Officer</th>
                                     <th scope="col" class="govuk-table__header">Notification Status</th>
                                     <th scope="col" class="govuk-table__header">Date picked up</th>
-                                    <th scope="col" class="govuk-table__header">Working days</th>
-                                    <th scope="col" class="govuk-table__header">Acknowledged</th>
+                                    <th scope="col" class="govuk-table__header">Working days in assessment</th>
+                                    <th scope="col" class="govuk-table__header">Date transmitted</th>
+                                    <th scope="col" class="govuk-table__header">Date Acknowledged</th>
                                     <th scope="col" class="govuk-table__header">Decision required</th>
                                     <th scope="col" class="govuk-table__header">Days remaining</th>
-                                    <th scope="col" class="govuk-table__header">Consented date</th>
+                                    <th scope="col" class="govuk-table__header">Date consented</th>
                                     <th scope="col" class="govuk-table__header">Financial Guarantee Status</th>
-                                    <th scope="col" class="govuk-table__header">Last Action</th>
-                                    <th scope="col" class="govuk-table__header">Last comment date</th>
                                     <th scope="col" class="govuk-table__header">Last comment</th>
                                 </tr>
                             </thead>
@@ -172,14 +193,13 @@
                                                 <strong class="govuk-tag @GetWorkingDaysColorClass(row.WorkingDaysInAssessment)">@row.WorkingDaysInAssessment</strong>
                                             }
                                         </td>
+                                        <td class="govuk-table__cell">@(row.TransmittedDate.HasValue ? Html.Gds().DisplayShortDate(row.TransmittedDate.Value).ToString() : string.Empty)</td>
                                         <td class="govuk-table__cell">@(row.AcknowledgedDate.HasValue ? Html.Gds().DisplayShortDate(row.AcknowledgedDate.Value).ToString() : string.Empty)</td>
                                         <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
                                         <td class="govuk-table__cell">@row.DaysRemaining</td>
                                         <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
                                         <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatus) ? "- -" : row.FinancialGuaranteeStatus)</td>
-                                        <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastActionType) ? "- -" : row.LastActionType)</td>
-                                        <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : "- -")</td>
-                                        <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastComment) ? "- -" : row.LastComment)</td>
+                                        <td class="govuk-table__cell">@FormatLastComment(row.LastCommentDate, row.LastComment)</td>
                                     </tr>
                                 }
                             </tbody>
