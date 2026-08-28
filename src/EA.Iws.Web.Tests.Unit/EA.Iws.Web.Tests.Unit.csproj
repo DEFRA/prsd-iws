@@ -176,6 +176,7 @@
     <Compile Include="Controllers\NotificationApplication\AdditionalChargeControllerTests.cs" />
     <Compile Include="ViewModels\AdminExportNotificationMovements\MovementOverride\IndexViewModelTests.cs" />
     <Compile Include="ViewModels\AdminImportNotificationMovements\MovementOverride\IndexViewModelTests.cs" />
+    <Compile Include="ViewModels\Admin\WorklistControllerTests.cs" />
     <Compile Include="ViewModels\Registration\AdminRegistrationViewModelTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AddressBook\EditControllerTests.cs" />
