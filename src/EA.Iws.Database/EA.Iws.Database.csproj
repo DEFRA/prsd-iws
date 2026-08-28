@@ -53,11 +53,14 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0023-uspGetImportNotifications.sql" />
     <Content Include="scripts\Everytime\01-Functions\0005-ImportNotification.GetDraftPricing.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0018-uspShipmentReportData.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0019-uspFinanceReportData.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0020-uspProducerReportData.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0021-uspFreedomOfInformationReportData.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0022-uspGetExportNotifications.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0024-uspGetNotifications.sql" />
     <Content Include="scripts\TestData\20260311-1739-create-ea-import-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\TestData\20260311-1646-create-ea-export-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260225-Under-Prohibition-new-status.sql" />
@@ -203,6 +206,8 @@
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260304-0900-Alter-Identity-AspNetUsers-add-LastLoginDate.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260319-1550-Alter-lookup-OperationCode-add-IsInterim.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260511-1107-Alter-Report-Tables.sql" />
+    <Content Include="scripts\Update\0007-Support\Sprint2026\20260624-1359-NRW-Price-Matrices-for-2026-27.sql" />
+    <Content Include="scripts\Update\0007-Support\Sprint2026\20260702-1131-ReportTables-scheme-update.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />

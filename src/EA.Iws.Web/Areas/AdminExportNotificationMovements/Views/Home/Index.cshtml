@@ -226,7 +226,7 @@
                                     @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
                                 </td>
                                 <td class="govuk-table__cell">
-                                    @DisplayString(Model.TableData[i].WasShipmentAccepted.Value.ToString(), Model.TableData[i].Status)
+                                    @DisplayString(Model.TableData[i].WasShipmentAccepted.HasValue ? Model.TableData[i].WasShipmentAccepted.Value.ToString() : string.Empty, Model.TableData[i].Status)
                                 </td>
                             </tr>
                         }

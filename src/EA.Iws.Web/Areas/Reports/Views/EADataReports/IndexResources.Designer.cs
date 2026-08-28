@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.EADataReports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EA Data reports.
+        ///   Looks up a localized string similar to EA reports data download.
         /// </summary>
         public static string MainHeading {
             get {
@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.EADataReports {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EA Data reports.
+        ///   Looks up a localized string similar to EA reports data download.
         /// </summary>
         public static string Title {
             get {

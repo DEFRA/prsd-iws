@@ -29,7 +29,7 @@
         {
             if (fromDate != null && toDate != null)
             {
-                ConsentRange = new DateRange(fromDate.Value, fromDate.Value);
+                ConsentRange = new DateRange(fromDate.Value, toDate.Value);
             }
         }
     }

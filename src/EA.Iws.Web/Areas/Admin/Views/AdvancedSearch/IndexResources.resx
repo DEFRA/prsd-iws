@@ -126,4 +126,7 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="SearchHintMessage" xml:space="preserve">
+    <value>Search by name or reference number</value>
+  </data>
 </root>

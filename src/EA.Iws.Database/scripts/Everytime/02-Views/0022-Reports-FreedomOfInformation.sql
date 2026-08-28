@@ -113,8 +113,11 @@ AS
 			ELSE NULL
 		END AS [SiteOfExportName],
 		D.[NameOfOfficer] AS [Officer],
-		ORG.RegistrationNumber AS 'RegistrationNumber',
-		D.ConsentWithdrawnDate
+		D.ConsentWithdrawnDate,
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM [Notification].[Notification] N
 	LEFT JOIN [Identity].[AspNetUsers] U ON U.Id = N.[UserId]
 	LEFT JOIN [Notification].[Organisation] ORG ON ORG.Id = U.OrganisationId
@@ -285,8 +288,11 @@ AS
 		D.WithdrawnDate,
 		NULL as [SiteOfExportName],
 		D.[NameOfOfficer] AS [Officer],
-		NULL AS 'RegistrationNumber',
-		D.ConsentWithdrawnDate
+		D.ConsentWithdrawnDate,
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM [ImportNotification].[Notification] N
 	INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
 	INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]

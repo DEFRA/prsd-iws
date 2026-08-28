@@ -94,25 +94,25 @@
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExporterName)">
                 @Html.Gds().LabelFor(m => m.ExporterName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ExporterName)
-                @Html.Gds().TextBoxFor(m => m.ExporterName, false)
+                @Html.Gds().TextBoxFor(m => m.ExporterName, new { placeholder = Resources.SearchHintMessage, @class = "placeholder-text" }, false)
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ProducerName)">
                 @Html.Gds().LabelFor(m => m.ProducerName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ProducerName)
-                @Html.Gds().TextBoxFor(m => m.ProducerName, false)
+                @Html.Gds().TextBoxFor(m => m.ProducerName, new { placeholder = Resources.SearchHintMessage, @class = "placeholder-text" }, false)
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FacilityName)">
                 @Html.Gds().LabelFor(m => m.FacilityName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.FacilityName)
-                @Html.Gds().TextBoxFor(m => m.FacilityName, false)
+                @Html.Gds().TextBoxFor(m => m.FacilityName, new { placeholder = Resources.SearchHintMessage, @class = "placeholder-text" }, false)
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ImporterName)">
                 @Html.Gds().LabelFor(m => m.ImporterName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ImporterName)
-                @Html.Gds().TextBoxFor(m => m.ImporterName, false)
+                @Html.Gds().TextBoxFor(m => m.ImporterName, new { placeholder = Resources.SearchHintMessage, @class = "placeholder-text" }, false)
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExportCountryName)">

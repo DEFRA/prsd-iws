@@ -56,7 +56,10 @@ BEGIN
 			CASE WHEN HCode IS NULL THEN 'NA' ELSE HCode END AS [HCode],
 			CASE WHEN UNClass IS NULL THEN 'NA' ELSE UNClass END AS [UNClass],
 			[ActionedByExternalUser],
-			[RegistrationNumber]
+			[ExporterRegistrationNumber],
+			[ImporterRegistrationNumber],
+			[FacilityRegistrationNumber],
+			[ProducerRegistrationNumber]
 		FROM
 			[Reports].[ShipmentsCache]
 		WHERE
