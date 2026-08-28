@@ -205,6 +205,7 @@
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260310-Notification-charge-override.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260304-0900-Alter-Identity-AspNetUsers-add-LastLoginDate.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260319-1550-Alter-lookup-OperationCode-add-IsInterim.sql" />
+	<Content Include="scripts\Update\0007-Support\20260814-1059-Add-EWC-Codes-To-WasteCode.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260511-1107-Alter-Report-Tables.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260624-1359-NRW-Price-Matrices-for-2026-27.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260702-1131-ReportTables-scheme-update.sql" />
