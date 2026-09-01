@@ -327,7 +327,6 @@
                                 <th scope="col" class="govuk-table__header">Consented date</th>
                                 <th scope="col" class="govuk-table__header">Financial Guarantee Status</th>
                                 <th scope="col" class="govuk-table__header">Last Action</th>
-                                <th scope="col" class="govuk-table__header">Last comment date</th>
                                 <th scope="col" class="govuk-table__header">Last comment</th>
                             </tr>
                         </thead>
@@ -360,8 +359,22 @@
                                     <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatusDescription) ? "- -" : row.FinancialGuaranteeStatusDescription)</td>
                                     <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastAction) ? "- -" : row.LastAction)</td>
-                                    <td class="govuk-table__cell">@(row.LastCommentDate.HasValue ? row.LastCommentDate.Value.ToString("d MMM yyyy") : "- -")</td>
-                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastComment) ? "- -" : row.LastComment)</td>
+                                    <td class="govuk-table__cell">
+                                        @if (row.LastCommentDate.HasValue && !string.IsNullOrWhiteSpace(row.LastComment))
+                                        {
+                                            <span>@row.LastCommentDate.Value.ToString("d MMM yyyy"): </span>
+                                            @Html.ActionLink(
+                                                linkText: "View comments",
+                                                actionName: "Index",
+                                                controllerName: "Comments",
+                                                routeValues: new { id = row.NotificationId, area = "AdminImportAssessment" },
+                                                htmlAttributes: new { @class = "govuk-link" })
+                                        }
+                                        else
+                                        {
+                                            @:- -
+                                        }
+                                    </td>
                                 </tr>
                             }
                         </tbody>
