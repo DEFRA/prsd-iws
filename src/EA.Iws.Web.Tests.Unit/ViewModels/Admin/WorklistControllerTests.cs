@@ -36,7 +36,7 @@
                 PageSize = 25
             };
 
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
                 .Returns(exportResult);
 
             // Act
@@ -48,9 +48,9 @@
             Assert.NotNull(model.ExportResult);
             Assert.Null(model.ImportResult);
             Assert.Equal("export", controller.ViewBag.CurrentTab);
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
                 .MustHaveHappenedOnceExactly();
-            A.CallTo(() => mediator.SendAsync(A<GetImportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
                 .MustNotHaveHappened();
         }
 
@@ -66,7 +66,7 @@
                 PageSize = 25
             };
 
-            A.CallTo(() => mediator.SendAsync(A<GetImportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
                 .Returns(importResult);
 
             // Act
@@ -78,9 +78,9 @@
             Assert.NotNull(model.ImportResult);
             Assert.Null(model.ExportResult);
             Assert.Equal("import", controller.ViewBag.CurrentTab);
-            A.CallTo(() => mediator.SendAsync(A<GetImportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
                 .MustHaveHappenedOnceExactly();
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
                 .MustNotHaveHappened();
         }
 
@@ -97,8 +97,8 @@
             };
 
             GetExportWorklist capturedRequest = null;
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
-                .Invokes((GetExportWorklist req) => capturedRequest = req)
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
+                .Invokes((IRequest<ExportWorklistResult> req) => capturedRequest = req as GetExportWorklist)
                 .Returns(exportResult);
 
             // Act
@@ -128,8 +128,8 @@
             };
 
             GetImportWorklist capturedRequest = null;
-            A.CallTo(() => mediator.SendAsync(A<GetImportWorklist>._))
-                .Invokes((GetImportWorklist req) => capturedRequest = req)
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
+                .Invokes((IRequest<ImportWorklistResult> req) => capturedRequest = req as GetImportWorklist)
                 .Returns(importResult);
 
             // Act
@@ -164,8 +164,8 @@
             };
 
             GetExportWorklist capturedRequest = null;
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
-                .Invokes((GetExportWorklist req) => capturedRequest = req)
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
+                .Invokes((IRequest<ExportWorklistResult> req) => capturedRequest = req as GetExportWorklist)
                 .Returns(exportResult);
 
             // Act
@@ -197,8 +197,8 @@
             };
 
             GetExportWorklist capturedRequest = null;
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
-                .Invokes((GetExportWorklist req) => capturedRequest = req)
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
+                .Invokes((IRequest<ExportWorklistResult> req) => capturedRequest = req as GetExportWorklist)
                 .Returns(exportResult);
 
             // Act
@@ -233,8 +233,8 @@
             };
 
             GetImportWorklist capturedRequest = null;
-            A.CallTo(() => mediator.SendAsync(A<GetImportWorklist>._))
-                .Invokes((GetImportWorklist req) => capturedRequest = req)
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
+                .Invokes((IRequest<ImportWorklistResult> req) => capturedRequest = req as GetImportWorklist)
                 .Returns(importResult);
 
             // Act
@@ -261,7 +261,7 @@
                 PageSize = 25
             };
 
-            A.CallTo(() => mediator.SendAsync(A<GetExportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
                 .Returns(exportResult);
 
             // Act
@@ -288,7 +288,7 @@
                 PageSize = 25
             };
 
-            A.CallTo(() => mediator.SendAsync(A<GetImportWorklist>._))
+            A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
                 .Returns(importResult);
 
             // Act
