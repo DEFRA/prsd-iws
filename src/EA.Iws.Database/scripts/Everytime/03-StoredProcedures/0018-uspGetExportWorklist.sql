@@ -13,13 +13,20 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Parse XML status list
+    -- Parse comma-separated status list into table variable.
+    -- Avoids use of STRING_SPLIT for environments where it's not available.
     DECLARE @StatusIds TABLE (Id INT);
-    IF @Statuses IS NOT NULL
+    IF @Statuses IS NOT NULL AND LTRIM(RTRIM(@Statuses)) <> ''
     BEGIN
-        INSERT INTO @StatusIds
-        SELECT CAST(value AS INT)
-        FROM STRING_SPLIT(@Statuses, ',');
+        -- Convert comma-separated values into XML, then shred.
+        -- Wrap values in <i> nodes; this handles values like '1,2,3'.
+        DECLARE @xml XML;
+        SET @xml = CAST('<i>' + REPLACE(@Statuses, ',', '</i><i>') + '</i>' AS XML);
+
+        INSERT INTO @StatusIds (Id)
+        SELECT TRY_CAST(x.i.value('.', 'nvarchar(100)') AS INT)
+        FROM @xml.nodes('/i') AS x(i)
+        WHERE LTRIM(RTRIM(x.i.value('.', 'nvarchar(100)'))) <> '';
     END
 
     ;WITH WorklistData AS
