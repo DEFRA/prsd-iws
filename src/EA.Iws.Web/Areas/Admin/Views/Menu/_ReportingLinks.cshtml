@@ -1,13 +1,34 @@
-﻿<ul>
-    <li>@Html.ActionLink("Export stats", "Index", "ExportStats", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Import stats", "Index", "ImportStats", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Shipments report", "Index", "Shipments", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Data Export Notifications", "Index", "ExportNotifications", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Data Import Notifications", "Index", "ImportNotifications", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Finance report", "Index", "Finance", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Producer report", "Index", "Producer", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("FOI report", "Index", "FreedomOfInformation", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Export Movement Documents Input", "Index", "ExportMovements", new { area = "Reports" }, null)</li>
-	<li>@Html.ActionLink("Compliance report", "Index", "Compliance", new { area = "Reports" }, null)</li>
-    <li>@Html.ActionLink("Financial guarantees", "Index", "FinancialGuarantees", new { area = "Reports" }, null)</li>
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.ReportLinkViewModel
+
+@{
+    var reportLinks = new[]
+    {
+        new { Text = "Export stats", Controller = "ExportStats" },
+        new { Text = "Import stats", Controller = "ImportStats" },
+        new { Text = "Shipments report", Controller = "Shipments" },
+        new { Text = "Data export notifications", Controller = "ExportNotifications" },
+        new { Text = "Data import notifications", Controller = "ImportNotifications" },
+        new { Text = "Finance report", Controller = "Finance" },
+        new { Text = "Producer report", Controller = "Producer" },
+        new { Text = "FOI report", Controller = "FreedomOfInformation" },
+        new { Text = "Export movement documents input", Controller = "ExportMovements" },
+        new { Text = "Compliance report", Controller = "Compliance" },
+        new { Text = "Financial guarantees", Controller = "FinancialGuarantees" }
+    };
+}
+
+<ul>
+    @foreach (var link in reportLinks)
+    {
+        <li>
+            @Html.ActionLink(link.Text, "Index", link.Controller, new { area = "Reports" }, null)
+        </li>
+    }
+
+    @if (Model.ShowEAReportLinks)
+    {
+        <li>
+            @Html.ActionLink("EA reports data download", "Index", "EADataReports", new { area = "Reports" }, null)
+        </li>
+    }
 </ul>

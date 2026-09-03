@@ -16,27 +16,29 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<DataImportNotification>> Get(DateTime @from, DateTime to,
-            UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<DataImportNotification>> GetDataImportNotificationData(DateTime @from, DateTime to, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<DataImportNotification>(
-                @"SELECT	[NotificationNumber],
-                            [NotificationType],
-                            [Status],
-                            [Preconsented],
-                            [NotificationReceived],
-                            [PaymentReceived],
-                            [AssessmentStarted],
-                            [ApplicationCompleted],
-                            [Acknowledged],
-                            [DecisionDate],
-                            [Consented],
-                            [Officer],
-                            [ConsentTo]
-                    FROM	[Reports].[DataImportNotifications]
-
-                    WHERE	[CompetentAuthorityId] = @ca
-                    AND     [NotificationReceived] BETWEEN @from AND @to",
+                @"SELECT 
+                    [NotificationNumber],
+                    [NotificationType],
+                    [Status],
+                    [Preconsented],
+                    [NotificationReceived],
+                    [PaymentReceived],
+                    [AssessmentStarted],
+                    [ApplicationCompleted],
+                    [Acknowledged],
+                    [DecisionDate],
+                    [Consented],
+                    [Officer],
+                    [ConsentTo],
+                    [SubmittedDate],
+                    [ConsentWithdrawnDate]
+                FROM 
+                    [Reports].[DataImportNotifications]
+                WHERE 
+                    [CompetentAuthorityId] = @ca AND [NotificationReceived] BETWEEN @from AND @to",
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToArrayAsync();
