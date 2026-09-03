@@ -39,7 +39,8 @@
             int? financialGuaranteeStatus,
             string financialGuaranteeStatusDescription,
             string lastAction,
-            string lastComment)
+            string lastComment,
+            string lastCommentUser)
         {
             return new ImportWorklistSummary
             {
@@ -57,7 +58,8 @@
                 FinancialGuaranteeStatus = financialGuaranteeStatus,
                 FinancialGuaranteeStatusDescription = financialGuaranteeStatusDescription,
                 LastAction = lastAction,
-                LastComment = lastComment
+                LastComment = lastComment,
+                LastCommentUser = lastCommentUser
             };
         }
     }

@@ -46,7 +46,7 @@ BEGIN
             FG.Status AS FinancialGuaranteeStatus,
             FGLS.Description AS FinancialGuaranteeStatusDescription,
             
-            -- Last action from status change history
+             -- Last action from status change history
             (SELECT TOP 1 LS.Description
              FROM [ImportNotification].[NotificationStatusChange] NSC
              INNER JOIN [Lookup].[ImportNotificationStatus] LS ON NSC.NewStatus = LS.Id
@@ -62,7 +62,14 @@ BEGIN
             (SELECT TOP 1 C.DateAdded 
              FROM [ImportNotification].[Comments] C 
              WHERE C.NotificationId = N.Id 
-             ORDER BY C.DateAdded DESC) AS LastCommentDate
+             ORDER BY C.DateAdded DESC) AS LastCommentDate,
+
+            -- Latest comment author
+            (SELECT TOP 1 LTRIM(RTRIM(ISNULL(U.FirstName, '') + ' ' + ISNULL(U.Surname, '')))
+             FROM [ImportNotification].[Comments] C
+             INNER JOIN [Identity].[AspNetUsers] U ON U.Id = C.UserId
+             WHERE C.NotificationId = N.Id
+             ORDER BY C.DateAdded DESC) AS LastCommentUser
              
         FROM
             [ImportNotification].[Notification] N
@@ -102,6 +109,7 @@ BEGIN
         LastAction,
         LastComment,
         LastCommentDate,
+        LastCommentUser,
         
         (SELECT COUNT(*) FROM WorklistData) AS TotalCount
     FROM WorklistData

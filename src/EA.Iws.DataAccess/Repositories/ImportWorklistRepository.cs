@@ -71,7 +71,8 @@
                         x.FinancialGuaranteeStatus,
                         x.FinancialGuaranteeStatusDescription,
                         x.LastAction,
-                        x.LastComment)).ToArray()
+                        x.LastComment,
+                        x.LastCommentUser)).ToArray()
             };
         }
 
@@ -93,6 +94,7 @@
             public string FinancialGuaranteeStatusDescription { get; set; }
             public string LastAction { get; set; }
             public string LastComment { get; set; }
+            public string LastCommentUser { get; set; }
         }
     }
 }

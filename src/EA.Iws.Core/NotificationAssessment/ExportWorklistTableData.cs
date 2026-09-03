@@ -38,5 +38,6 @@ namespace EA.Iws.Core.NotificationAssessment
         public string FinancialGuaranteeStatus { get; set; }
 
         public string LastComment { get; set; }
+        public string LastCommentUser { get; set; }
     }
 }

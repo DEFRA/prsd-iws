@@ -87,7 +87,14 @@ BEGIN
                 FROM [Notification].[Comments] C
                 WHERE C.NotificationId = N.Id
                 ORDER BY C.DateAdded DESC
-            ) AS LastComment
+            ) AS LastComment,
+            -- Latest comment author
+            (SELECT TOP 1 LTRIM(RTRIM(ISNULL(U.FirstName, '') + ' ' + ISNULL(U.Surname, '')))
+             FROM [Notification].[Comments] C
+             INNER JOIN [Identity].[AspNetUsers] U ON U.Id = C.UserId
+             WHERE C.NotificationId = N.Id
+             ORDER BY C.DateAdded DESC) AS LastCommentUser
+
         FROM [Notification].[Notification] N
         INNER JOIN [Notification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
         LEFT JOIN [Notification].[NotificationDates] NAD ON NAD.NotificationAssessmentId = NA.Id
@@ -114,6 +121,7 @@ BEGIN
         LastCommentDate,
         FinancialGuaranteeStatus,
         LastComment,
+        LastCommentUser,
         TotalCount = (SELECT COUNT(*) FROM WorklistData)
     FROM WorklistData
     ORDER BY NotificationNumber

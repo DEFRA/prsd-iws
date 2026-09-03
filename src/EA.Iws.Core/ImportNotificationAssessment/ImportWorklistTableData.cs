@@ -21,5 +21,6 @@
         public string FinancialGuaranteeStatusDescription { get; set; }
         public string LastAction { get; set; }
         public string LastComment { get; set; }
+        public string LastCommentUser { get; set; }
     }
 }
