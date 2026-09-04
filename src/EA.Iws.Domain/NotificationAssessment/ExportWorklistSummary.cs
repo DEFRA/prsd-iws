@@ -20,7 +20,6 @@ namespace EA.Iws.Domain.NotificationAssessment
         public string LastActionType { get; private set; }
         public DateTimeOffset? LastCommentDate { get; private set; }
         public string FinancialGuaranteeStatus { get; private set; }
-        public string LastComment { get; private set; }
         public string LastCommentUser { get; private set; }
 
         public static ExportWorklistSummary Load(
@@ -38,7 +37,6 @@ namespace EA.Iws.Domain.NotificationAssessment
             string lastActionType,
             DateTimeOffset? lastCommentDate,
             string financialGuaranteeStatus,
-            string lastComment,
             string lastCommentUser)
         {
             return new ExportWorklistSummary
@@ -57,7 +55,6 @@ namespace EA.Iws.Domain.NotificationAssessment
                 LastActionType = lastActionType,
                 LastCommentDate = lastCommentDate,
                 FinancialGuaranteeStatus = financialGuaranteeStatus,
-                LastComment = lastComment,
                 LastCommentUser = lastCommentUser
             };
         }

@@ -463,7 +463,7 @@
 
             var lastCommentDate = new DateTimeOffset(2024, 6, 1, 10, 30, 0, TimeSpan.Zero);
             var lastComment = "Test comment content";
-            var worklistSummary = CreateExportWorklistSummary(lastCommentDate: lastCommentDate, lastComment: lastComment);
+            var worklistSummary = CreateExportWorklistSummary(lastCommentDate: lastCommentDate);
             var queryResult = new ExportWorklistQueryResult
             {
                 TotalCount = 1,
@@ -490,14 +490,12 @@
 
             // Assert
             Assert.Equal(lastCommentDate, result.Results.First().LastCommentDate);
-            Assert.Equal(lastComment, result.Results.First().LastComment);
         }
 
         private ExportWorklistSummary CreateExportWorklistSummary(
             DateTime? datePickedUp = null,
             DateTime? transmittedDate = null,
-            DateTimeOffset? lastCommentDate = null,
-            string lastComment = null)
+            DateTimeOffset? lastCommentDate = null)
         {
             return ExportWorklistSummary.Load(
                 notificationId,
@@ -514,7 +512,6 @@
                 null,
                 lastCommentDate ?? new DateTimeOffset(2024, 1, 10, 0, 0, 0, TimeSpan.Zero),
                 "Approved",
-                lastComment ?? "Test comment",
                 null);
         }
 

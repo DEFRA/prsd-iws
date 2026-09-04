@@ -70,7 +70,6 @@ namespace EA.Iws.DataAccess.Repositories
                         x.LastActionType,
                         x.LastCommentDate,
                         x.FinancialGuaranteeStatus,
-                        x.LastComment,
                         x.LastCommentUser)).ToArray()
             };
         }

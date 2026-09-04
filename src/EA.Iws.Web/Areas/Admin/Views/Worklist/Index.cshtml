@@ -197,7 +197,7 @@
                                     <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatus) ? "- -" : row.FinancialGuaranteeStatus)</td>
                                     <td class="govuk-table__cell">
-                                        @if (row.LastCommentDate.HasValue && !string.IsNullOrWhiteSpace(row.LastComment))
+                                        @if (row.LastCommentDate.HasValue)
                                         {
                                             <span>@FormatLastComment(row.LastCommentDate, row.LastCommentUser)</span>
                                             <br />
@@ -373,7 +373,7 @@
                                     <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatusDescription) ? "- -" : row.FinancialGuaranteeStatusDescription)</td>
                                     <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastAction) ? "- -" : row.LastAction)</td>
                                     <td class="govuk-table__cell">
-                                        @if (row.LastCommentDate.HasValue && !string.IsNullOrWhiteSpace(row.LastComment))
+                                        @if (row.LastCommentDate.HasValue)
                                         {
                                             <span>@FormatLastComment(row.LastCommentDate, row.LastCommentUser)</span>
                                             <br />

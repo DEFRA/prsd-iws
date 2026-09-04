@@ -18,7 +18,6 @@ namespace EA.Iws.Core.NotificationAssessment
         public string LastActionType { get; set; }
         public DateTimeOffset? LastCommentDate { get; set; }
         public string FinancialGuaranteeStatus { get; set; }
-        public string LastComment { get; set; }
         public string LastCommentUser { get; set; }
         public int TotalCount { get; set; }
     }
