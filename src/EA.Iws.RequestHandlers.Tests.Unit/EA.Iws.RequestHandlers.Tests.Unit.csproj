@@ -103,6 +103,7 @@
     <Compile Include="Admin\NotificationAssessment\SetOperationCodesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateExportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateImportAccountManagementCommentsHandlerTests.cs" />
+    <Compile Include="Admin\Reports\GetEADataReportHandlerTests.cs" />
     <Compile Include="Admin\Reports\GetProducerReportHandlerTests.cs" />
     <Compile Include="Admin\SearchImportNotificationsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />

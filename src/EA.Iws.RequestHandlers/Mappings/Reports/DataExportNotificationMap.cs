@@ -41,7 +41,8 @@
                 ConsentDate = source.Consented,
                 Officer = source.Officer,
                 SubmittedBy = source.SubmittedBy,
-                ConsentTo = source.ConsentTo
+                ConsentTo = source.ConsentTo,
+                SubmittedDate = source.SubmittedDate,
             };
         }
 
