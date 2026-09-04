@@ -112,7 +112,6 @@
     <Compile Include="ImportNotificationAssessment\IImportNotificationAssessmentDecisionRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationCommentRepository.cs" />
-    <Compile Include="ImportNotificationAssessment\IImportWorklistRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IKeyDatesOverrideRepository.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationComment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
