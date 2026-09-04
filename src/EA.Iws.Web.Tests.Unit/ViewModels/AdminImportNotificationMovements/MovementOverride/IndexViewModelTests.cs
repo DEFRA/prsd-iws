@@ -15,6 +15,7 @@
         private readonly DateTime validActualDate = DateTime.UtcNow.Date.AddDays(-5);
         private readonly DateTime validPrenotificationDate = DateTime.UtcNow.Date.AddDays(-8);
         private readonly DateTime validReceivedDate = DateTime.UtcNow.Date.AddDays(-3);
+        private readonly DateTime validDisposalDate = DateTime.UtcNow.Date.AddDays(-1);
 
         [Fact]
         public void Constructor_WithReceivedData_SetsShipmentTypesToAccepted()
@@ -58,6 +59,39 @@
         }
 
         [Fact]
+        public void Validate_AcceptedShipment_WithoutReceivedDate_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.ReceivedDate = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("ReceivedDate"));
+        }
+
+        [Fact]
+        public void Validate_AcceptedShipment_WithoutUnits_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.Units = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("Units"));
+        }
+
+        [Fact]
+        public void Validate_RejectedShipment_WithoutReceivedDate_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Rejected);
+            model.ReceivedDate = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("ReceivedDate"));
+        }
+
+        [Fact]
         public void Validate_RejectedShipment_WithoutRejectionReason_ReturnsError()
         {
             var model = CreateValidModel(ShipmentType.Rejected);
@@ -91,10 +125,54 @@
         }
 
         [Fact]
+        public void Validate_RejectedShipment_WithZeroRejectedQuantity_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Rejected);
+            model.RejectedQuantity = 0;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("RejectedQuantity"));
+        }
+
+        [Fact]
+        public void Validate_RejectedShipment_WithNegativeRejectedQuantity_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Rejected);
+            model.RejectedQuantity = -5;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("RejectedQuantity"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithoutReceivedDate_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ReceivedDate = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("ReceivedDate"));
+        }
+
+        [Fact]
         public void Validate_PartiallyRejectedShipment_WithoutActualQuantity_ReturnsError()
         {
             var model = CreateValidModel(ShipmentType.Partially);
             model.ActualQuantity = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("ActualQuantity"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithZeroActualQuantity_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ActualQuantity = 0;
 
             var results = ValidateModel(model);
 
@@ -110,6 +188,41 @@
             var results = ValidateModel(model);
 
             Assert.Contains(results, r => r.MemberNames.Contains("RejectedQuantity"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithRejectedQuantityGreaterThanActualQuantity_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ActualQuantity = 10;
+            model.RejectedQuantity = 15;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("RejectedQuantity"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithRejectedQuantityEqualToActualQuantity_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ActualQuantity = 10;
+            model.RejectedQuantity = 10;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("RejectedQuantity"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithoutRejectionReason_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.RejectionReason = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("RejectionReason"));
         }
 
         [Fact]
@@ -135,6 +248,18 @@
         }
 
         [Fact]
+        public void Validate_PrenotificationDateMissing_WhenNotMarkedAsNoPrenotification_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.HasNoPrenotification = false;
+            model.PrenotificationDate = null;
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("PrenotificationDate"));
+        }
+
+        [Fact]
         public void Validate_ActualShipmentDateMissing_ReturnsError()
         {
             var model = CreateValidModel(ShipmentType.Accepted);
@@ -143,6 +268,188 @@
             var results = ValidateModel(model);
 
             Assert.Contains(results, r => r.MemberNames.Contains("ActualShipmentDate"));
+        }
+
+        // NEW TESTS FOR DISPOSAL/RECOVERY DATE VALIDATION
+
+        [Fact]
+        public void Validate_DisposalDateBeforeReceivedDate_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-3);
+            model.Date = DateTime.UtcNow.Date.AddDays(-5); // Disposal date before received date
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("Date"));
+            Assert.Contains(results, r => r.ErrorMessage.Contains("recovered") || r.ErrorMessage.Contains("disposed of"));
+        }
+
+        [Fact]
+        public void Validate_DisposalDateInFuture_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-3);
+            model.Date = DateTime.UtcNow.Date.AddDays(2); // Future disposal date
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("Date"));
+            Assert.Contains(results, r => r.ErrorMessage.Contains("future"));
+        }
+
+        [Fact]
+        public void Validate_DisposalDateEqualToReceivedDate_IsValid()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            var receivedDate = DateTime.UtcNow.Date.AddDays(-3);
+            model.ReceivedDate = receivedDate;
+            model.Date = receivedDate; // Same day
+
+            var results = ValidateModel(model);
+
+            Assert.DoesNotContain(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_DisposalDateAfterReceivedDate_IsValid()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-5);
+            model.Date = DateTime.UtcNow.Date.AddDays(-2); // Disposal after received
+
+            var results = ValidateModel(model);
+
+            Assert.DoesNotContain(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_DisposalDateToday_IsValid()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-5);
+            model.Date = DateTime.UtcNow.Date; // Today
+
+            var results = ValidateModel(model);
+
+            Assert.DoesNotContain(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_RejectedShipment_WithDisposalDate_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Rejected);
+            model.Date = DateTime.UtcNow.Date.AddDays(-1); // Disposal date on rejected shipment
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("Date"));
+            Assert.Contains(results, r => r.ErrorMessage.Contains("rejected"));
+        }
+
+        [Fact]
+        public void Validate_RejectedShipment_WithoutDisposalDate_IsValid()
+        {
+            var model = CreateValidModel(ShipmentType.Rejected);
+            model.Date = null; // No disposal date
+
+            var results = ValidateModel(model);
+
+            // Should not have Date error (other validation errors are expected for rejected shipments)
+            Assert.DoesNotContain(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithValidDisposalDate_IsValid()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-5);
+            model.Date = DateTime.UtcNow.Date.AddDays(-2); // Valid disposal date
+
+            var results = ValidateModel(model);
+
+            Assert.DoesNotContain(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_PartiallyRejectedShipment_WithDisposalDateBeforeReceivedDate_ReturnsError()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-3);
+            model.Date = DateTime.UtcNow.Date.AddDays(-5); // Disposal before received
+
+            var results = ValidateModel(model);
+
+            Assert.Contains(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_DisposalTypeNotification_UsesCorrectVerb()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.NotificationType = NotificationType.Disposal;
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-3);
+            model.Date = DateTime.UtcNow.Date.AddDays(-5); // Before received date
+
+            var results = ValidateModel(model);
+
+            var dateError = results.FirstOrDefault(r => r.MemberNames.Contains("Date"));
+            Assert.NotNull(dateError);
+            Assert.Contains("disposed of", dateError.ErrorMessage);
+        }
+
+        [Fact]
+        public void Validate_RecoveryTypeNotification_UsesCorrectVerb()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.NotificationType = NotificationType.Recovery;
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-3);
+            model.Date = DateTime.UtcNow.Date.AddDays(-5); // Before received date
+
+            var results = ValidateModel(model);
+
+            var dateError = results.FirstOrDefault(r => r.MemberNames.Contains("Date"));
+            Assert.NotNull(dateError);
+            Assert.Contains("recovered", dateError.ErrorMessage);
+        }
+
+        [Fact]
+        public void Validate_NoDisposalDate_DoesNotTriggerDateValidation()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.Date = null;
+
+            var results = ValidateModel(model);
+
+            Assert.DoesNotContain(results, r => r.MemberNames.Contains("Date"));
+        }
+
+        [Fact]
+        public void Validate_CompletelyValidAcceptedShipmentWithDisposalDate_ReturnsNoErrors()
+        {
+            var model = CreateValidModel(ShipmentType.Accepted);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-5);
+            model.Date = DateTime.UtcNow.Date.AddDays(-2);
+            model.ActualQuantity = 10;
+            model.Units = ShipmentQuantityUnits.Tonnes;
+
+            var results = ValidateModel(model);
+
+            Assert.Empty(results);
+        }
+
+        [Fact]
+        public void Validate_CompletelyValidPartiallyRejectedShipmentWithDisposalDate_ReturnsNoErrors()
+        {
+            var model = CreateValidModel(ShipmentType.Partially);
+            model.ReceivedDate = DateTime.UtcNow.Date.AddDays(-5);
+            model.Date = DateTime.UtcNow.Date.AddDays(-2);
+            model.ActualQuantity = 10;
+            model.RejectedQuantity = 3;
+
+            var results = ValidateModel(model);
+
+            Assert.Empty(results);
         }
 
         private ImportMovementSummaryData CreateMovementData(bool isReceived, bool isRejected, bool isPartiallyRejected)
@@ -165,7 +472,9 @@
                     PossibleUnits = new List<ShipmentQuantityUnits> { ShipmentQuantityUnits.Tonnes }
                 },
                 RecoveryData = new ImportMovementRecoveryData(),
-                IsPartiallyRejected = isPartiallyRejected
+                IsPartiallyRejected = isPartiallyRejected,
+                IsReceived = isReceived,
+                IsRejected = isRejected
             };
         }
 

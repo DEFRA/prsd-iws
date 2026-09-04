@@ -88,20 +88,23 @@
                 ? new SelectList(countries, "Id", "Name", model.SelectedCountry.Value)
                 : new SelectList(countries, "Id", "Name");
 
-            var matches = countries.Where(c => c.Name.Equals(route.StateOfImportData.Country.Name));
+            var matches = countries.Where(c => c.Name.Equals(route?.StateOfImportData?.Country?.Name));
             if (matches.Any() && model.SelectedCountry == null)
             {
                 ModelState.AddModelError("SelectedCountry", EntryCustomsOfficeResources.EUEntryImport);
             }
 
-            foreach (var transitState in route.TransitStatesData)
+            if (route.TransitStatesData != null)
             {
-                var matches2 = countries.Where(c => c.Name.Equals(transitState.Country.Name));
-                if (matches2.Any() && model.SelectedCountry == null)
+                foreach (var transitState in route.TransitStatesData)
                 {
-                    ModelState.AddModelError("SelectedCountry", EntryCustomsOfficeResources.EUEntryTransit);
-                    break;
-                }   
+                    var matches2 = countries.Where(c => c.Name.Equals(transitState.Country.Name));
+                    if (matches2.Any() && model.SelectedCountry == null)
+                    {
+                        ModelState.AddModelError("SelectedCountry", EntryCustomsOfficeResources.EUEntryTransit);
+                        break;
+                    }
+                }
             }
 
             if (!ModelState.IsValid)
@@ -144,7 +147,7 @@
                 }
 
                 return RedirectToAction("Index", "Shipment", new { id });
-            }            
+            }
 
             return RedirectToAction("Index", "ExitCustomsOffice", new { id, backToOverview = backToOverview });
         }

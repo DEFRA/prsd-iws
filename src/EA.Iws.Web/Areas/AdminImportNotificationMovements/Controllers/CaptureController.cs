@@ -132,6 +132,9 @@
         {
             if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
+                // The view-model validation now enforces ReceivedDate / ActualQuantity / Units when
+                // Accepted is picked. Keep the field-level guards as defence in depth so a partial
+                // post can never record a receipt with missing data.
                 if (model.Receipt.ActualQuantity != null && model.Receipt.ReceivedDate.Date != null && model.IsReceived == false)
                 {
                     await mediator.SendAsync(new RecordReceipt(movementId,
@@ -162,7 +165,7 @@
                         MovementAuditType.Rejected);
                 }
             }
-            else
+            else if (model.Receipt.ShipmentTypes == ShipmentType.Partially)
             {
                 var isPartailRejectMovementAvailable = await mediator.SendAsync(new GetImportPartialRejectionByMovementId(movementId));
 
@@ -221,6 +224,10 @@
                     }
                 }
             }
+            // ShipmentTypes is null when the user hasn't picked an outcome. The view-model validation
+            // only requires an outcome when receipt/rejection fields have been populated, so reaching
+            // this point with a null ShipmentTypes means the user is saving comments / stats marking
+            // only — handled below. The outcome handlers above must NOT run with null fields.
 
             if (model.Recovery.IsComplete() && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
