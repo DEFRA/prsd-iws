@@ -31,6 +31,12 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             ImportNotificationStatus.InAssessment
         };
 
+        public enum WorklistTab
+        {
+            Export,
+            Import
+        }
+
         public WorklistController(IMediator mediator)
         {
             this.mediator = mediator;
@@ -40,8 +46,8 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
         public async Task<ActionResult> Index(
             ExportWorklistFilterViewModel exportFilter, 
             ImportWorklistFilterViewModel importFilter, 
-            int page = 1, 
-            string tab = "export")
+            int page = 1,
+            WorklistTab tab = WorklistTab.Export)
         {
             var model = new WorklistViewModel();
 
@@ -73,7 +79,7 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             };
 
             // ONLY load data for the active tab
-            if (tab == "import")
+            if (tab == WorklistTab.Import)
             {
                 // Initialize import filter
                 model.ImportFilter = importFilter ?? new ImportWorklistFilterViewModel();
@@ -139,7 +145,7 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(WorklistViewModel model, string tab = "export")
+        public ActionResult Index(WorklistViewModel model, WorklistTab tab = WorklistTab.Export)
         {
             var routeValues = new RouteValueDictionary
             {
@@ -147,7 +153,7 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
                 { "page", 1 }
             };
 
-            if (tab == "import")
+            if (tab == WorklistTab.Import)
             {
                 if (!string.IsNullOrWhiteSpace(model.ImportFilter.NotificationNumber))
                 {

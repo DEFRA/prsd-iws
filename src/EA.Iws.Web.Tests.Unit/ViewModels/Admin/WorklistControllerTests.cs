@@ -40,14 +40,14 @@
                 .Returns(exportResult);
 
             // Act
-            var result = await controller.Index(null, null, 1, "export") as ViewResult;
+            var result = await controller.Index(null, null, 1, WorklistController.WorklistTab.Export) as ViewResult;
             var model = result.Model as WorklistViewModel;
 
             // Assert
             Assert.NotNull(model);
             Assert.NotNull(model.ExportResult);
             Assert.Null(model.ImportResult);
-            Assert.Equal("export", controller.ViewBag.CurrentTab);
+            Assert.Equal(WorklistController.WorklistTab.Export, controller.ViewBag.CurrentTab);
             A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
                 .MustHaveHappenedOnceExactly();
             A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
@@ -70,14 +70,14 @@
                 .Returns(importResult);
 
             // Act
-            var result = await controller.Index(null, null, 1, "import") as ViewResult;
+            var result = await controller.Index(null, null, 1, WorklistController.WorklistTab.Import) as ViewResult;
             var model = result.Model as WorklistViewModel;
 
             // Assert
             Assert.NotNull(model);
             Assert.NotNull(model.ImportResult);
             Assert.Null(model.ExportResult);
-            Assert.Equal("import", controller.ViewBag.CurrentTab);
+            Assert.Equal(WorklistController.WorklistTab.Import, controller.ViewBag.CurrentTab);
             A.CallTo(() => mediator.SendAsync(A<IRequest<ImportWorklistResult>>._))
                 .MustHaveHappenedOnceExactly();
             A.CallTo(() => mediator.SendAsync(A<IRequest<ExportWorklistResult>>._))
@@ -102,7 +102,7 @@
                 .Returns(exportResult);
 
             // Act
-            var result = await controller.Index(null, null, 1, "export") as ViewResult;
+            var result = await controller.Index(null, null, 1, WorklistController.WorklistTab.Export) as ViewResult;
             var model = result.Model as WorklistViewModel;
 
             // Assert
@@ -133,7 +133,7 @@
                 .Returns(importResult);
 
             // Act
-            var result = await controller.Index(null, null, 1, "import") as ViewResult;
+            var result = await controller.Index(null, null, 1, WorklistController.WorklistTab.Import) as ViewResult;
             var model = result.Model as WorklistViewModel;
 
             // Assert
@@ -169,7 +169,7 @@
                 .Returns(exportResult);
 
             // Act
-            var result = await controller.Index(filter, null, 1, "export") as ViewResult;
+            var result = await controller.Index(filter, null, 1, WorklistController.WorklistTab.Export) as ViewResult;
 
             // Assert
             Assert.NotNull(capturedRequest);
@@ -202,7 +202,7 @@
                 .Returns(exportResult);
 
             // Act
-            await controller.Index(filter, null, 2, "export");
+            await controller.Index(filter, null, 2, WorklistController.WorklistTab.Export);
 
             // Assert
             Assert.NotNull(capturedRequest);
@@ -238,7 +238,7 @@
                 .Returns(importResult);
 
             // Act
-            await controller.Index(null, filter, 3, "import");
+            await controller.Index(null, filter, 3, WorklistController.WorklistTab.Import);
 
             // Assert
             Assert.NotNull(capturedRequest);
@@ -265,7 +265,7 @@
                 .Returns(exportResult);
 
             // Act
-            var result = await controller.Index(null, null, 1, "export") as ViewResult;
+            var result = await controller.Index(null, null, 1, WorklistController.WorklistTab.Export) as ViewResult;
             var model = result.Model as WorklistViewModel;
 
             // Assert
@@ -292,7 +292,7 @@
                 .Returns(importResult);
 
             // Act
-            var result = await controller.Index(null, null, 1, "import") as ViewResult;
+            var result = await controller.Index(null, null, 1, WorklistController.WorklistTab.Import) as ViewResult;
             var model = result.Model as WorklistViewModel;
 
             // Assert
@@ -318,12 +318,12 @@
             };
 
             // Act
-            var result = controller.Index(model, "export") as RedirectToRouteResult;
+            var result = controller.Index(model, WorklistController.WorklistTab.Export) as RedirectToRouteResult;
 
             // Assert
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("export", result.RouteValues["tab"]);
+            Assert.Equal(WorklistController.WorklistTab.Export, result.RouteValues["tab"]);
             Assert.Equal(1, result.RouteValues["page"]);
             Assert.Equal("GB 0001 000001", result.RouteValues["exportFilter.NotificationNumber"]);
             Assert.Equal("John Doe", result.RouteValues["exportFilter.Officer"]);
@@ -345,7 +345,7 @@
             };
 
             // Act
-            var result = controller.Index(model, "import") as RedirectToRouteResult;
+            var result = controller.Index(model, WorklistController.WorklistTab.Import) as RedirectToRouteResult;
 
             // Assert
             Assert.NotNull(result);
@@ -375,7 +375,7 @@
             };
 
             // Act
-            var result = controller.Index(model, "export") as RedirectToRouteResult;
+            var result = controller.Index(model, WorklistController.WorklistTab.Export) as RedirectToRouteResult;
 
             // Assert
             Assert.NotNull(result);
@@ -394,7 +394,7 @@
             };
 
             // Act
-            var result = controller.Index(model, "import") as RedirectToRouteResult;
+            var result = controller.Index(model, WorklistController.WorklistTab.Import) as RedirectToRouteResult;
 
             // Assert
             Assert.NotNull(result);
