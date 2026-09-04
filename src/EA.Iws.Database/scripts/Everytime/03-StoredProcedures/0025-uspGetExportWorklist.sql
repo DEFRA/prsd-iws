@@ -34,6 +34,8 @@ BEGIN
 
     IF @Statuses IS NOT NULL
     BEGIN
+        -- Convert comma-separated values into XML, then shred.
+        -- Wrap values in <i> nodes; this handles values like '1,2,3'.
         DECLARE @xml XML;
 
         SET @xml = CAST(
