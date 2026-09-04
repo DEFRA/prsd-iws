@@ -53,7 +53,11 @@
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public bool WasAccepted { get; set; }
 
-        public ShipmentType ShipmentTypes { get; set; }
+        // Nullable so the radio can render unchecked when the shipment has no recorded outcome yet.
+        // Previously this was defaulted to ShipmentType.Accepted (with @checked = true on the "Accepted" radio)
+        // which meant a user could open a freshly prenotified shipment and hit Save without entering a received date,
+        // silently posting IsReceived = true and triggering the data corruption pattern.
+        public ShipmentType? ShipmentTypes { get; set; }
 
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }
 
@@ -69,7 +73,6 @@
         {
             ReceivedDate = new MaskedDateInputViewModel();
             PossibleUnits = new List<ShipmentQuantityUnits>();
-            WasAccepted = true;
         }
 
         public ReceiptViewModel(ImportMovementReceiptData importMovementReceiptData)

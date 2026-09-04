@@ -174,7 +174,7 @@
                 <span></span>
                 @Resources.ReportingHeading
             </h3>
-            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
+            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
         </li>
 
         @if (Model.AdminLinksModel.ShowNotificationLinks)
