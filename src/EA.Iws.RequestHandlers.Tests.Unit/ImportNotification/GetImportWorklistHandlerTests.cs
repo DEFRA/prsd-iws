@@ -392,7 +392,8 @@
                 1,
                 "Approved",
                 "Test action",
-                lastComment ?? "Test comment");
+                lastComment ?? "Test comment",
+                null);
         }
 
         private void SetupMocks(ImportWorklistSummary summary)
