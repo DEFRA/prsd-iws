@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace EA.Iws.Core.NotificationAssessment
+﻿namespace EA.Iws.Core.NotificationAssessment
 {
+    using System;
+
     public class ExportWorklistRow
     {
         public Guid NotificationId { get; set; }

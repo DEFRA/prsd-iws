@@ -462,7 +462,6 @@
             A.CallTo(() => internalUserRepository.GetByUserId(userId)).Returns(internalUser);
 
             var lastCommentDate = new DateTimeOffset(2024, 6, 1, 10, 30, 0, TimeSpan.Zero);
-            var lastComment = "Test comment content";
             var worklistSummary = CreateExportWorklistSummary(lastCommentDate: lastCommentDate);
             var queryResult = new ExportWorklistQueryResult
             {

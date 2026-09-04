@@ -21,7 +21,6 @@
         public int? FinancialGuaranteeStatus { get; private set; }
         public string FinancialGuaranteeStatusDescription { get; private set; }
         public string LastAction { get; private set; }
-        public string LastComment { get; private set; }
         public string LastCommentUser { get; private set; }
 
         public static ImportWorklistSummary Load(
@@ -39,7 +38,6 @@
             int? financialGuaranteeStatus,
             string financialGuaranteeStatusDescription,
             string lastAction,
-            string lastComment,
             string lastCommentUser)
         {
             return new ImportWorklistSummary
@@ -58,7 +56,6 @@
                 FinancialGuaranteeStatus = financialGuaranteeStatus,
                 FinancialGuaranteeStatusDescription = financialGuaranteeStatusDescription,
                 LastAction = lastAction,
-                LastComment = lastComment,
                 LastCommentUser = lastCommentUser
             };
         }

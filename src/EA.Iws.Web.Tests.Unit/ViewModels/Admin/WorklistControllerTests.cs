@@ -350,7 +350,7 @@
             // Assert
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("import", result.RouteValues["tab"]);
+            Assert.Equal(WorklistController.WorklistTab.Import, result.RouteValues["tab"]);
             Assert.Equal(1, result.RouteValues["page"]);
             Assert.Equal("GB 0001 000002", result.RouteValues["importFilter.NotificationNumber"]);
             Assert.Equal("Jane Smith", result.RouteValues["importFilter.Officer"]);
@@ -399,7 +399,7 @@
             // Assert
             Assert.NotNull(result);
             Assert.Equal("Index", result.RouteValues["action"]);
-            Assert.Equal("import", result.RouteValues["tab"]);
+            Assert.Equal(WorklistController.WorklistTab.Import, result.RouteValues["tab"]);
             Assert.Equal(1, result.RouteValues["page"]);
             // Should only have tab and page in route values
             Assert.Equal(3, result.RouteValues.Count);

@@ -1,7 +1,6 @@
-﻿using System;
-
-namespace EA.Iws.Core.ImportNotificationAssessment
+﻿namespace EA.Iws.Core.ImportNotificationAssessment
 {
+    using System;
     public class ImportWorklistRow
     {
         public Guid NotificationId { get; set; }
@@ -19,7 +18,6 @@ namespace EA.Iws.Core.ImportNotificationAssessment
         public int? FinancialGuaranteeStatus { get; set; }
         public string FinancialGuaranteeStatusDescription { get; set; }
         public string LastAction { get; set; }
-        public string LastComment { get; set; }
         public string LastCommentUser { get; set; }
     }
 }

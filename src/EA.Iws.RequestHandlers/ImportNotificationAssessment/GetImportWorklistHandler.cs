@@ -126,7 +126,6 @@
                 FinancialGuaranteeStatus = summary.FinancialGuaranteeStatus,
                 FinancialGuaranteeStatusDescription = summary.FinancialGuaranteeStatusDescription,
                 LastAction = summary.LastAction,
-                LastComment = summary.LastComment,
                 LastCommentUser = summary.LastCommentUser
             };
         }

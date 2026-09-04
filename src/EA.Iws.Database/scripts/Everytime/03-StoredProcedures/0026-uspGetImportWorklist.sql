@@ -13,110 +13,158 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    -- Parse statuses using XML (compatible with all SQL Server versions)
-    DECLARE @StatusTable TABLE (StatusId INT);
+    -- Normalise parameters
+    SET @NotificationNumber = NULLIF(LTRIM(RTRIM(@NotificationNumber)), '');
+    SET @Officer = NULLIF(LTRIM(RTRIM(@Officer)), '');
+    SET @Statuses = NULLIF(LTRIM(RTRIM(@Statuses)), '');
 
-    IF @Statuses IS NOT NULL AND LEN(@Statuses) > 0
+    IF @PageNumber < 1
+        SET @PageNumber = 1;
+
+    IF @PageSize < 1
+        SET @PageSize = 20;
+
+    -- Parse status IDs
+    DECLARE @StatusTable TABLE
+    (
+        StatusId INT PRIMARY KEY
+    );
+
+    DECLARE @HasStatusFilter BIT = 0;
+
+    IF @Statuses IS NOT NULL
     BEGIN
+        -- Convert comma-separated values into XML, then shred.
+        -- Wrap values in <i> nodes; this handles values like '1,2,3'.
         DECLARE @StatusesXml XML;
-        SET @StatusesXml = CAST('<i>' + REPLACE(@Statuses, ',', '</i><i>') + '</i>' AS XML);
+
+        SET @StatusesXml = CAST(
+            '<i>' +
+            REPLACE(@Statuses, ',', '</i><i>') +
+            '</i>'
+            AS XML
+        );
 
         INSERT INTO @StatusTable (StatusId)
-        SELECT CAST(T.c.value('.', 'INT') AS INT)
+        SELECT DISTINCT TRY_CAST(T.c.value('.', 'NVARCHAR(10)') AS INT)
         FROM @StatusesXml.nodes('/i') T(c)
-        WHERE LTRIM(RTRIM(T.c.value('.', 'NVARCHAR(10)'))) <> '';
-    END
+        WHERE TRY_CAST(T.c.value('.', 'NVARCHAR(10)') AS INT) IS NOT NULL;
 
-    DECLARE @Offset INT;
-    SET @Offset = (@PageNumber - 1) * @PageSize;
+        IF EXISTS (SELECT 1 FROM @StatusTable)
+            SET @HasStatusFilter = 1;
+    END;
 
-    ;WITH WorklistData AS
+    -- Main query
+    SELECT
+        N.Id AS NotificationId,
+        N.NotificationNumber,
+        E.Name AS Exporter,
+        ND.NameOfOfficer AS Officer,
+        ND.AssessmentStartedDate AS DatePickedUpByOfficer,
+        ND.NotificationReceivedDate,
+        ND.AcknowledgedDate,
+        ND.ConsentedDate,
+        ND.DecisionRequiredByDate,
+        NA.Status,
+
+        FG.Status AS FinancialGuaranteeStatus,
+        FGLS.Description AS FinancialGuaranteeStatusDescription,
+
+        LastStatus.Description AS LastAction,
+
+        LastComment.DateAdded AS LastCommentDate,
+        LastComment.UserName AS LastCommentUser,
+
+        COUNT(*) OVER() AS TotalCount
+
+    FROM [ImportNotification].[Notification] N
+
+    INNER JOIN [ImportNotification].[NotificationAssessment] NA
+        ON NA.NotificationApplicationId = N.Id
+
+    INNER JOIN [ImportNotification].[NotificationDates] ND
+        ON ND.NotificationAssessmentId = NA.Id
+
+    LEFT JOIN [ImportNotification].[Exporter] E
+        ON E.ImportNotificationId = N.Id
+
+    LEFT JOIN [ImportNotification].[FinancialGuarantee] FG
+        ON FG.ImportNotificationId = N.Id
+
+    LEFT JOIN [Lookup].[FinancialGuaranteeStatus] FGLS
+        ON FGLS.Id = FG.Status
+
+    -- Latest notification status change
+    OUTER APPLY
     (
-        SELECT
-            N.Id AS NotificationId,
-            N.NotificationNumber,
-            E.Name AS Exporter,
-            ND.NameOfOfficer AS Officer,
-            ND.AssessmentStartedDate AS DatePickedUpByOfficer,
-            ND.NotificationReceivedDate,
-            ND.AcknowledgedDate,
-            ND.ConsentedDate,
-            ND.DecisionRequiredByDate,
-            NA.Status,
-            FG.Status AS FinancialGuaranteeStatus,
-            FGLS.Description AS FinancialGuaranteeStatusDescription,
+        SELECT TOP (1)
+            LS.Description
+        FROM [ImportNotification].[NotificationStatusChange] NSC
 
-             -- Last action from status change history
-            (SELECT TOP 1 LS.Description
-             FROM [ImportNotification].[NotificationStatusChange] NSC
-             INNER JOIN [Lookup].[ImportNotificationStatus] LS ON NSC.NewStatus = LS.Id
-             WHERE NSC.NotificationAssessmentId = NA.Id
-             ORDER BY NSC.ChangeDate DESC) AS LastAction,
+        INNER JOIN [Lookup].[ImportNotificationStatus] LS
+            ON LS.Id = NSC.NewStatus
 
-            -- Latest comment information
-            (SELECT TOP 1 C.Comment 
-             FROM [ImportNotification].[Comments] C 
-             WHERE C.NotificationId = N.Id 
-             ORDER BY C.DateAdded DESC) AS LastComment,
+        WHERE NSC.NotificationAssessmentId = NA.Id
 
-            (SELECT TOP 1 C.DateAdded 
-             FROM [ImportNotification].[Comments] C 
-             WHERE C.NotificationId = N.Id 
-             ORDER BY C.DateAdded DESC) AS LastCommentDate,
+        ORDER BY NSC.ChangeDate DESC
+    ) LastStatus
 
-            -- Latest comment author
-            (SELECT TOP 1 LTRIM(RTRIM(ISNULL(U.FirstName, '') + ' ' + ISNULL(U.Surname, '')))
-             FROM [ImportNotification].[Comments] C
-             INNER JOIN [Identity].[AspNetUsers] U ON U.Id = C.UserId
-             WHERE C.NotificationId = N.Id
-             ORDER BY C.DateAdded DESC) AS LastCommentUser
+    -- Latest comment and author
+    OUTER APPLY
+    (
+        SELECT TOP (1)
+            C.DateAdded,
+            LTRIM(RTRIM(
+                ISNULL(U.FirstName, '') + ' ' + ISNULL(U.Surname, '')
+            )) AS UserName
 
-        FROM
-            [ImportNotification].[Notification] N
-            INNER JOIN [ImportNotification].[NotificationAssessment] NA 
-                ON N.Id = NA.NotificationApplicationId
-            INNER JOIN [ImportNotification].[NotificationDates] ND 
-                ON NA.Id = ND.NotificationAssessmentId
+        FROM [ImportNotification].[Comments] C
 
-            LEFT JOIN [ImportNotification].[Exporter] E 
-                ON N.Id = E.ImportNotificationId
+        LEFT JOIN [Identity].[AspNetUsers] U
+            ON U.Id = C.UserId
 
-            LEFT JOIN [ImportNotification].[FinancialGuarantee] FG 
-                ON N.Id = FG.ImportNotificationId
+        WHERE C.NotificationId = N.Id
 
-            LEFT JOIN [Lookup].[FinancialGuaranteeStatus] FGLS
-                ON FG.Status = FGLS.Id
+        ORDER BY C.DateAdded DESC
+    ) LastComment
 
-        WHERE
-            N.CompetentAuthority = @CompetentAuthority
-            AND (@NotificationNumber IS NULL OR N.NotificationNumber LIKE '%' + @NotificationNumber + '%')
-            AND (@Officer IS NULL OR ND.NameOfOfficer LIKE '%' + @Officer + '%')
-            AND (NOT EXISTS(SELECT 1 FROM @StatusTable) OR NA.Status IN (SELECT StatusId FROM @StatusTable))
-    )
-    SELECT 
-        NotificationId,
-        NotificationNumber,
-        Exporter,
-        Officer,
-        DatePickedUpByOfficer,
-        NotificationReceivedDate,
-        AcknowledgedDate,
-        ConsentedDate,
-        DecisionRequiredByDate,
-        Status,
-        FinancialGuaranteeStatus,
-        FinancialGuaranteeStatusDescription,
-        LastAction,
-        LastComment,
-        LastCommentDate,
-        LastCommentUser,
+    -- Filters
+    WHERE
+        N.CompetentAuthority = @CompetentAuthority
 
-        (SELECT COUNT(*) FROM WorklistData) AS TotalCount
-    FROM WorklistData
-    ORDER BY 
-        CASE WHEN DecisionRequiredByDate IS NULL THEN 1 ELSE 0 END,
-        DecisionRequiredByDate ASC,
-        NotificationNumber ASC
-    OFFSET @Offset ROWS
-    FETCH NEXT @PageSize ROWS ONLY;
+        AND
+        (
+            @NotificationNumber IS NULL
+            OR N.NotificationNumber LIKE '%' + @NotificationNumber + '%'
+        )
+
+        AND
+        (
+            @Officer IS NULL
+            OR ND.NameOfOfficer LIKE '%' + @Officer + '%'
+        )
+
+        AND
+        (
+            @HasStatusFilter = 0
+            OR EXISTS
+            (
+                SELECT 1
+                FROM @StatusTable S
+                WHERE S.StatusId = NA.Status
+            )
+        )
+
+    -- Pagination
+    ORDER BY
+        CASE WHEN ND.DecisionRequiredByDate IS NULL THEN 1 ELSE 0 END,
+        ND.DecisionRequiredByDate ASC,
+        N.NotificationNumber ASC,
+        N.Id ASC
+
+    OFFSET (@PageNumber - 1) * @PageSize ROWS
+    FETCH NEXT @PageSize ROWS ONLY
+
+    OPTION (RECOMPILE);
 END
+GO

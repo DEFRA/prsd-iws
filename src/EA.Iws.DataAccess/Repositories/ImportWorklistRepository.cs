@@ -71,7 +71,6 @@
                         x.FinancialGuaranteeStatus,
                         x.FinancialGuaranteeStatusDescription,
                         x.LastAction,
-                        x.LastComment,
                         x.LastCommentUser)).ToArray()
             };
         }

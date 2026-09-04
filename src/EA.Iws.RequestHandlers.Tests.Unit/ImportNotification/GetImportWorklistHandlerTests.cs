@@ -339,8 +339,7 @@
             A.CallTo(() => internalUserRepository.GetByUserId(userId)).Returns(internalUser);
 
             var lastCommentDate = new DateTimeOffset(2024, 6, 1, 10, 30, 0, TimeSpan.Zero);
-            var lastComment = "Import test comment";
-            var worklistSummary = CreateImportWorklistSummary(lastCommentDate: lastCommentDate, lastComment: lastComment);
+            var worklistSummary = CreateImportWorklistSummary(lastCommentDate: lastCommentDate);
             var queryResult = new ImportWorklistQueryResult
             {
                 TotalCount = 1,
@@ -367,15 +366,13 @@
 
             // Assert
             Assert.Equal(lastCommentDate, result.Results.First().LastCommentDate);
-            Assert.Equal(lastComment, result.Results.First().LastComment);
         }
 
         private ImportWorklistSummary CreateImportWorklistSummary(
             DateTime? datePickedUp = null,
             DateTime? acknowledgedDate = null,
             DateTime? decisionRequiredDate = null,
-            DateTimeOffset? lastCommentDate = null,
-            string lastComment = null)
+            DateTimeOffset? lastCommentDate = null)
         {
             return ImportWorklistSummary.Load(
                 notificationId,
@@ -392,7 +389,6 @@
                 1,
                 "Approved",
                 "Test action",
-                lastComment ?? "Test comment",
                 null);
         }
 
