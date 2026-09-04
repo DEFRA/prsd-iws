@@ -1,13 +1,12 @@
 namespace EA.Iws.DataAccess.Repositories
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.SqlClient;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Core.Notification;
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
+    using System;
+    using System.Data.SqlClient;
+    using System.Linq;
+    using System.Threading.Tasks;
 
     internal class ExportWorklistRepository : IExportWorklistRepository
     {
@@ -74,27 +73,6 @@ namespace EA.Iws.DataAccess.Repositories
                         x.LastComment,
                         x.LastCommentUser)).ToArray()
             };
-        }
-
-        private class ExportWorklistRow
-        {
-            public Guid NotificationId { get; set; }
-            public string NotificationNumber { get; set; }
-            public string Notifier { get; set; }
-            public string Officer { get; set; }
-            public DateTime? DatePickedUpByOfficer { get; set; }
-            public DateTime? TransmittedDate { get; set; }
-            public DateTime? AcknowledgedDate { get; set; }
-            public DateTime? ConsentedDate { get; set; }
-            public DateTime? DecisionRequiredByDate { get; set; }
-            public NotificationStatus Status { get; set; }
-            public DateTimeOffset? LastActionDate { get; set; }
-            public string LastActionType { get; set; }
-            public DateTimeOffset? LastCommentDate { get; set; }
-            public string FinancialGuaranteeStatus { get; set; }
-            public string LastComment { get; set; }
-            public string LastCommentUser { get; set; }
-            public int TotalCount { get; set; }
         }
     }
 }
