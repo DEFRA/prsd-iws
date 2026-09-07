@@ -839,9 +839,13 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Controllers\ArchiveNotificationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\WorklistController.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationReviewViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Worklist\ExportWorklistFilterViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Worklist\ImportWorklistFilterViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Worklist\WorklistViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Menu\ReportLinkViewModel.cs" />
     <Compile Include="Areas\Admin\Views\ArchiveNotification\ArchiveNotificationResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -945,6 +949,8 @@
     <Content Include="Content\iws\_session-timeout.scss" />
     <Content Include="Areas\Reports\Views\EADataReports\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\_Uploads.cshtml" />
+    <Content Include="Areas\Admin\Views\Worklist\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Worklist\_Layout.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4775,6 +4781,7 @@
     <EmbeddedResource Include="Areas\Admin\Views\AdvancedSearch\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\AdvancedSearch\ResultsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
