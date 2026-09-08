@@ -57,8 +57,16 @@
 <style type="text/css">
     .govuk-table__header,
     .govuk-table__cell {
-        font-size: 18px !important;
+        font-size: 15px !important;
         width: 7.6% !important;
+    }
+
+    .worklist-fontsize {
+        font-size: 16px !important;
+    }
+
+    .govuk-checkboxes--small .govuk-checkboxes__item{
+        padding-top: 6px;
     }
 </style>
 
@@ -68,10 +76,10 @@
 <div class="govuk-tabs">
     <h2 class="govuk-tabs__title">Contents</h2>
     <ul class="govuk-tabs__list">
-        <li class="govuk-tabs__list-item @(currentTab == WorklistController.WorklistTab.Export ? "govuk-tabs__list-item--selected" : "")">
+        <li class="govuk-tabs__list-item worklist-fontsize @(currentTab == WorklistController.WorklistTab.Export ? "govuk-tabs__list-item--selected" : "")">
             <a class="govuk-tabs__tab" href="@Url.Action("Index", "Worklist", new { area = "Admin", tab = "export" })">Exports</a>
         </li>
-        <li class="govuk-tabs__list-item @(currentTab == WorklistController.WorklistTab.Import ? "govuk-tabs__list-item--selected" : "")">
+        <li class="govuk-tabs__list-item worklist-fontsize @(currentTab == WorklistController.WorklistTab.Import ? "govuk-tabs__list-item--selected" : "")">
             <a class="govuk-tabs__tab" href="@Url.Action("Index", "Worklist", new { area = "Admin", tab = "import" })">Imports</a>
         </li>
     </ul>
@@ -79,7 +87,7 @@
     <!-- Export Tab -->
     @if (currentTab == WorklistController.WorklistTab.Export)
     {
-        <div class="govuk-tabs__panel" id="export">
+        <div class="govuk-tabs__panel worklist-fontsize" id="export">
 
             @using (Html.BeginForm("Index", "Worklist", new { tab = "export" }, FormMethod.Post, new { id = "exportFilterForm" }))
             {
@@ -87,42 +95,42 @@
                 <input type="hidden" name="tab" value="export" />
 
                 <div class="grid-row">
-                    <div class="column-one-third">
+                    <div class="govuk-grid-column-one-quarter">
                         <div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ExportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ExportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
+                            @Html.LabelFor(m => m.ExportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label worklist-fontsize" })
+                            @Html.TextBoxFor(m => m.ExportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20 worklist-fontsize" })
                         </div>
                         <div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ExportFilter.Officer, "Officer", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ExportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
+                            @Html.LabelFor(m => m.ExportFilter.Officer, "Officer", new { @class = "govuk-label worklist-fontsize" })
+                            @Html.TextBoxFor(m => m.ExportFilter.Officer, new { @class = "govuk-input govuk-input--width-20 worklist-fontsize" })
                         </div>
                         <div class="govuk-form-group">
-                            <button type="submit" class="govuk-button">@Resource.Filter</button>
-                            <button id="export-reset" type="button" class="govuk-button govuk-button--secondary">@Resource.Reset</button>
+                            <button type="submit" class="govuk-button worklist-fontsize">@Resource.Filter</button>
+                            <button id="export-reset" type="button" class="govuk-button govuk-button--secondary worklist-fontsize">@Resource.Reset</button>
                         </div>
                     </div>
-                    <div class="column-one-third">
+                    <div class="govuk-grid-column-one-quarter">
                         <fieldset class="govuk-fieldset">
-                            <legend class="govuk-fieldset__legend govuk-label">
+                            <legend class="govuk-fieldset__legend govuk-label worklist-fontsize">
                                 @Resource.NotificationStatus
                             </legend>
                         </fieldset>
                         <div class="govuk-form-group">
-                            <div class="govuk-checkboxes">
+                            <div class="govuk-checkboxes govuk-checkboxes--small">
                                 @for (int i = 0; i < Model.ExportStatuses.Length / 2; i++)
                                 {
                                     var allowedStatus = Model.ExportStatuses[i];
                                     var statusValue = (int)allowedStatus;
                                     var statusText = EnumHelper.GetValues(typeof(NotificationStatus))[statusValue];
                                     var isChecked = Model.ExportFilter.SelectedStatuses != null && Model.ExportFilter.SelectedStatuses.Contains(allowedStatus);
-                                    <div class="govuk-checkboxes__item">
+                                    <div class="govuk-checkboxes__item worklist-fontsize">
                                         <input class="govuk-checkboxes__input"
                                                type="checkbox"
                                                name="ExportFilter.SelectedStatuses"
                                                id="export_status_@statusValue"
                                                value="@statusValue"
                                                @(isChecked ? "checked" : "") />
-                                        <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue">
+                                        <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue" style="display:contents">
                                             @statusText
                                         </label>
                                     </div>
@@ -130,8 +138,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="column-one-third">
-                        <div class="govuk-checkboxes">
+                    <div class="govuk-grid-column-one-quarter">
+                        <div class="govuk-checkboxes govuk-checkboxes--small">
                             @for (int i = Model.ExportStatuses.Length / 2; i < Model.ExportStatuses.Length; i++)
                             {
                                 var allowedStatus = Model.ExportStatuses[i];
@@ -145,7 +153,7 @@
                                            id="export_status_@statusValue"
                                            value="@statusValue"
                                            @(isChecked ? "checked" : "") />
-                                    <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue">
+                                    <label class="govuk-label govuk-checkboxes__label" for="export_status_@statusValue" style="display:contents">
                                         @statusText
                                     </label>
                                 </div>
@@ -260,27 +268,27 @@
                 <input type="hidden" name="tab" value="import" />
 
                 <div class="grid-row">
-                    <div class="column-one-third">
+                    <div class="govuk-grid-column-one-quarter">
                         <div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ImportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ImportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20" })
+                            @Html.LabelFor(m => m.ImportFilter.NotificationNumber, "Notification number", new { @class = "govuk-label worklist-fontsize" })
+                            @Html.TextBoxFor(m => m.ImportFilter.NotificationNumber, new { @class = "govuk-input govuk-input--width-20 worklist-fontsize" })
                         </div>
                         <div class="govuk-form-group">
-                            @Html.LabelFor(m => m.ImportFilter.Officer, "Officer", new { @class = "govuk-label" })
-                            @Html.TextBoxFor(m => m.ImportFilter.Officer, new { @class = "govuk-input govuk-input--width-20" })
+                            @Html.LabelFor(m => m.ImportFilter.Officer, "Officer", new { @class = "govuk-label worklist-fontsize" })
+                            @Html.TextBoxFor(m => m.ImportFilter.Officer, new { @class = "govuk-input govuk-input--width-20 worklist-fontsize" })
                         </div>
                         <div class="govuk-form-group">
-                            <button type="submit" class="govuk-button">@Resource.Filter</button>
-                            <button id="import-reset" type="button" class="govuk-button govuk-button--secondary">@Resource.Reset</button>
+                            <button type="submit" class="govuk-button worklist-fontsize">@Resource.Filter</button>
+                            <button id="import-reset" type="button" class="govuk-button govuk-button--secondary worklist-fontsize">@Resource.Reset</button>
                         </div>
                     </div>
-                    <div class="column-one-third">
+                    <div class="govuk-grid-column-one-quarter">
                         <fieldset class="govuk-fieldset">
-                            <legend class="govuk-fieldset__legend govuk-label">
+                            <legend class="govuk-fieldset__legend govuk-label worklist-fontsize">
                                 @Resource.NotificationStatus
                             </legend>
                         </fieldset>
-                        <div class="govuk-checkboxes">
+                        <div class="govuk-checkboxes govuk-checkboxes--small">
                             @for (int i = 0; i < (Model.ImportStatuses.Length + 1) / 2; i++)
                             {
                                 var allowedStatus = Model.ImportStatuses[i];
@@ -294,15 +302,15 @@
                                            id="import_status_@statusValue"
                                            value="@statusValue"
                                            @(isChecked ? "checked" : "") />
-                                    <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue">
+                                    <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue" style="display:contents">
                                         @statusText
                                     </label>
                                 </div>
                             }
                         </div>
                     </div>
-                    <div class="column-one-third">
-                        <div class="govuk-checkboxes">
+                    <div class="govuk-grid-column-one-quarter">
+                        <div class="govuk-checkboxes govuk-checkboxes--small">
                             @for (int i = (Model.ImportStatuses.Length + 1) / 2; i < Model.ImportStatuses.Length; i++)
                             {
                                 var allowedStatus = Model.ImportStatuses[i];
@@ -316,7 +324,7 @@
                                            id="import_status_@statusValue"
                                            value="@statusValue"
                                            @(isChecked ? "checked" : "") />
-                                    <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue">
+                                    <label class="govuk-label govuk-checkboxes__label" for="import_status_@statusValue" style="display:contents">
                                         @statusText
                                     </label>
                                 </div>
