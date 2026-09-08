@@ -852,6 +852,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArchiveNotificationResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Views\Worklist\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Common\ITrimTextService.cs" />
     <Compile Include="Areas\Common\TrimTextService.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteCategoriesController.cs" />
@@ -910,7 +915,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Home\Uploads.Designer.cs">
       <DependentUpon>Uploads.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -4893,6 +4898,10 @@
     <EmbeddedResource Include="Areas\Admin\Views\UserAdministration\UserAdministrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UserAdministrationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Worklist\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
