@@ -74,6 +74,8 @@
         [Fact]
         public async Task Add_RejectedAudit()
         {
+            var createdMovementId = Guid.NewGuid();
+            
             var model = new CaptureViewModel
             {
                 NotificationId = notificationId,
@@ -91,6 +93,7 @@
             };
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementIdIfExists>.Ignored)).Returns(movementId);
+            A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(createdMovementId);
 
             var result = await controller.Create(notificationId, model);
 
@@ -100,6 +103,8 @@
         [Fact]
         public async Task Add_PartialRejectedAudit()
         {
+            var createdMovementId = Guid.NewGuid();
+            
             var model = new CaptureViewModel
             {
                 NotificationId = notificationId,
@@ -125,6 +130,7 @@
             };
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementIdIfExists>.Ignored)).Returns(movementId);
+            A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(createdMovementId);
 
             var result = await controller.Create(notificationId, model);
 
@@ -134,6 +140,8 @@
         [Fact]
         public async Task Add_ReceivedAudit()
         {
+            var createdMovementId = Guid.NewGuid();
+            
             var model = new CaptureViewModel
             {
                 NotificationId = notificationId,
@@ -144,11 +152,13 @@
                 {
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    ActualUnits = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms,
+                    ShipmentTypes = ShipmentType.Accepted
                 }
             };
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementIdIfExists>.Ignored)).Returns(movementId);
+            A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(createdMovementId);
 
             var result = await controller.Create(notificationId, model);
 
@@ -158,6 +168,8 @@
         [Fact]
         public async Task Add_RecoveredAudit()
         {
+            var createdMovementId = Guid.NewGuid();
+            
             var model = new CaptureViewModel
             {
                 NotificationId = notificationId,
@@ -168,7 +180,8 @@
                 {
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    ActualUnits = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms,
+                    ShipmentTypes = ShipmentType.Accepted
                 },
                 Recovery = new RecoveryViewModel
                 {
@@ -178,6 +191,7 @@
             };
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementIdIfExists>.Ignored)).Returns(movementId);
+            A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(createdMovementId);
 
             var result = await controller.Create(notificationId, model);
 
@@ -187,17 +201,20 @@
         [Fact]
         public async Task Add_DisposedAudit()
         {
+            var createdMovementId = Guid.NewGuid();
+            
             var model = new CaptureViewModel
             {
                 NotificationId = notificationId,
                 ShipmentNumber = 1,
-                HasNoPrenotification = true,
+                HasNoPrenotification = false,
                 ActualShipmentDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(actualDate),
                 Receipt = new ReceiptViewModel
                 {
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    ActualUnits = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms,
+                    ShipmentTypes = ShipmentType.Accepted
                 },
                 Recovery = new RecoveryViewModel
                 {
@@ -207,6 +224,7 @@
             };
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementIdIfExists>.Ignored)).Returns(movementId);
+            A.CallTo(() => mediator.SendAsync(A<CreateMovementInternal>.Ignored)).Returns(createdMovementId);
 
             var result = await controller.Create(notificationId, model);
 
