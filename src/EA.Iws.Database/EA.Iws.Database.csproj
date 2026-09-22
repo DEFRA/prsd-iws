@@ -211,6 +211,7 @@
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260511-1107-Alter-Report-Tables.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260624-1359-NRW-Price-Matrices-for-2026-27.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260702-1131-ReportTables-scheme-update.sql" />
+    <Content Include="scripts\Update\0007-Support\Sprint2026\20260915-1000-Alter-Lookup-BankHoliday.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
