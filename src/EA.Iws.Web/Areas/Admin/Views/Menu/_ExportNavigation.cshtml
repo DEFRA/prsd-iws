@@ -98,6 +98,11 @@
             </h3>
             <ul>
                 <li>
+                    <a href="@Url.Action("Add", "Comments", new { area = "AdminExportAssessment",  id = Model.Data.Id })">
+                        @Resources.CommentsAddLinkText
+                    </a>
+                </li>
+                <li>
                     <a href="@Url.Action("Index", "Comments", new { area = "AdminExportAssessment",  id = Model.Data.Id })">
                         @Resources.CommentsLinkText
                         &nbsp; &nbsp; &nbsp;

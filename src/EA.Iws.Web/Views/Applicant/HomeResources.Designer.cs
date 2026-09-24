@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can delete unsubmitted notifications in Account Services.
+        /// </summary>
+        public static string DeleteUnsubmittedNotifications {
+            get {
+                return ResourceManager.GetString("DeleteUnsubmittedNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Error retrieving notifications, please try again..
         /// </summary>
         public static string ErrorMessage {

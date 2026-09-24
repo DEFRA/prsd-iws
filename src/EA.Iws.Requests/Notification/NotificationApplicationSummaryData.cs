@@ -20,5 +20,39 @@
         public string Importer { get; set; }
 
         public string AccessLevel { get; set; }
+
+        public DateTime? ConsentedFrom { get; set; }
+
+        public string ConsentedFromText 
+        { 
+            get 
+            {
+                if (ConsentedFrom == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "From: " + ConsentedFrom?.ToString("dd/MM/yyyy");
+                }
+            } 
+        }
+
+        public DateTime? ConsentedTo { get; set; }
+
+        public string ConsentedToText
+        {
+            get
+            {
+                if (ConsentedTo == null)
+                {
+                    return null;
+                }
+                else
+                {
+                    return "To: " + ConsentedTo?.ToString("dd/MM/yyyy");
+                }
+            }
+        }
     }
 }

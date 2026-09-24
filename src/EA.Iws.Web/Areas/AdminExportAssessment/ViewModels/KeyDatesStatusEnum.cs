@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels
 {
     using System.ComponentModel.DataAnnotations;
+    using DocumentFormat.OpenXml.Wordprocessing;
 
     public enum KeyDatesStatusEnum
     {
@@ -29,6 +30,9 @@
         FileClosed = 8,
 
         [Display(Name = "Archive reference")]
-        ArchiveReference = 9
+        ArchiveReference = 9,
+
+        [Display(Name = "Change officer")]
+        ChangeOfficer = 10
     }
 }

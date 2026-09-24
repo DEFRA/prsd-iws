@@ -254,6 +254,7 @@
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetExitPointHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportKeyDatesOfficerHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDateHandler.cs" />
@@ -537,6 +538,7 @@
     <Compile Include="NotificationAssessment\SetFacilityDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
+    <Compile Include="NotificationAssessment\SetImportKeyDatesOfficerHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetProducerDetailsHandler.cs" />

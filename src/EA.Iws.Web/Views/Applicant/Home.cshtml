@@ -70,6 +70,13 @@ else
                 <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
                     <h6 class="govuk-label">@HomeResources.SearchForNotification</h6>
                     <br />
+                    <div class="govuk-warning-text">
+                        <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                        <strong class="govuk-warning-text__text">
+                            <span class="govuk-visually-hidden">Warning</span>
+                            @HomeResources.DeleteUnsubmittedNotifications
+                        </strong>
+                    </div>
                     @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
                     <h6 class="govuk-label">@HomeResources.SearchForNotificationNumber</h6>
                     @Html.Gds().HintSpan(HomeResources.SearchHint)
@@ -118,9 +125,6 @@ else
                     <th class="govuk-table__header">
                         Notification access level
                     </th>
-                    <th class="govuk-table__header">
-                        @HomeResources.ThAction
-                    </th>
                 </tr>
             </thead>
 
@@ -129,12 +133,16 @@ else
                 {
                     <tr class="govuk-table__row">
                         <td class="govuk-table__cell">
-                            @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
+                            <a href="@Url.Action("Index", "Options", new { id = Model.Notifications[i].Id, area = "NotificationApplication" })" title="@Model.Notifications[i].NotificationNumber">
+                                @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
+                            </a>
                         </td>
                         <td class="govuk-table__cell">
                             <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">
                                 @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;"))
                             </span>
+                            @(Model.Notifications[i].ConsentedFromText)
+                            @(Model.Notifications[i].ConsentedToText)
                         </td>
                         <td class="govuk-table__cell">
                             @Model.Notifications[i].Exporter
@@ -147,14 +155,6 @@ else
                         </td>
                         <td class="govuk-table__cell">
                             @Model.Notifications[i].AccessLevel
-                        </td>
-                        <td class="govuk-table__cell">
-                            <a href="@Url.Action("Index", "Options", new { id = Model.Notifications[i].Id, area = "NotificationApplication" })" title="@Model.Notifications[i].NotificationNumber">
-                                @HomeResources.LinkChoose
-                                <span class="screen-reader-text">
-                                    notification  @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", ""))
-                                </span>
-                            </a>
                         </td>
                     </tr>
                 }
