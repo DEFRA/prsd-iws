@@ -41,7 +41,7 @@
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Comments)">
-    @Html.Gds().LabelFor(m => m.Comments)
+    @Html.Gds().LabelFor(m => m.Comments, false)
     @Html.TextAreaFor(m => m.Comments, new { @class = "govuk-textarea", rows = 5 })
 </div>
 
