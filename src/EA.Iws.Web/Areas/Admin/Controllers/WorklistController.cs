@@ -83,14 +83,11 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             {
                 // Initialize import filter
                 model.ImportFilter = importFilter ?? new ImportWorklistFilterViewModel();
-                
-                // Check if any filter parameters were provided
-                bool hasImportFilters = !string.IsNullOrWhiteSpace(model.ImportFilter.NotificationNumber) ||
-                                       !string.IsNullOrWhiteSpace(model.ImportFilter.Officer) ||
-                                       (model.ImportFilter.SelectedStatuses != null && model.ImportFilter.SelectedStatuses.Length > 0);
 
-                // Apply default statuses if no filters were provided
-                if (!hasImportFilters)
+                // Only apply default statuses on a genuine first page load (no prior submission).
+                // Once the filter form has been submitted, respect the user's selection even if
+                // they've unticked every status checkbox (which posts back as null/empty).
+                if (!model.ImportFilter.HasSubmitted)
                 {
                     model.ImportFilter.SelectedStatuses = DefaultImportStatuses;
                 }
@@ -112,14 +109,11 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             {
                 // Initialize export filter
                 model.ExportFilter = exportFilter ?? new ExportWorklistFilterViewModel();
-                
-                // Check if any filter parameters were provided
-                bool hasExportFilters = !string.IsNullOrWhiteSpace(model.ExportFilter.NotificationNumber) ||
-                                       !string.IsNullOrWhiteSpace(model.ExportFilter.Officer) ||
-                                       (model.ExportFilter.SelectedStatuses != null && model.ExportFilter.SelectedStatuses.Length > 0);
 
-                // Apply default statuses if no filters were provided
-                if (!hasExportFilters)
+                // Only apply default statuses on a genuine first page load (no prior submission).
+                // Once the filter form has been submitted, respect the user's selection even if
+                // they've unticked every status checkbox (which posts back as null/empty).
+                if (!model.ExportFilter.HasSubmitted)
                 {
                     model.ExportFilter.SelectedStatuses = DefaultExportStatuses;
                 }
@@ -155,6 +149,10 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
 
             if (tab == WorklistTab.Import)
             {
+                // Mark that the filter form has been submitted so the GET action
+                // doesn't reapply the default status filters.
+                routeValues.Add("importFilter.HasSubmitted", true);
+
                 if (!string.IsNullOrWhiteSpace(model.ImportFilter.NotificationNumber))
                 {
                     routeValues.Add("importFilter.NotificationNumber", model.ImportFilter.NotificationNumber);
@@ -175,6 +173,10 @@ namespace EA.Iws.Web.Areas.Admin.Controllers
             }
             else
             {
+                // Mark that the filter form has been submitted so the GET action
+                // doesn't reapply the default status filters.
+                routeValues.Add("exportFilter.HasSubmitted", true);
+
                 if (!string.IsNullOrWhiteSpace(model.ExportFilter.NotificationNumber))
                 {
                     routeValues.Add("exportFilter.NotificationNumber", model.ExportFilter.NotificationNumber);

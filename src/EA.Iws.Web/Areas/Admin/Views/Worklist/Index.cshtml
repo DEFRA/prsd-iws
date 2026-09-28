@@ -93,6 +93,7 @@
             {
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="tab" value="export" />
+                <input type="hidden" name="ExportFilter.HasSubmitted" value="true" />
 
                 <div class="grid-row">
                     <div class="govuk-grid-column-one-quarter">
@@ -212,7 +213,7 @@
                                     <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@row.DaysRemaining</td>
                                     <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatus) ? "- -" : row.FinancialGuaranteeStatus)</td>
+                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatus) ? "Awaiting application" : row.FinancialGuaranteeStatus)</td>
                                     <td class="govuk-table__cell">
                                         @if (row.LastCommentDate.HasValue)
                                         {
@@ -238,6 +239,7 @@
                     @Html.Pager(Model.ExportResult.PageSize, Model.ExportResult.PageNumber, Model.ExportResult.TotalCount).Options(o =>
                     {
                         o.AddRouteValue("tab", "export");
+                        o.AddRouteValue("exportFilter.HasSubmitted", Model.ExportFilter.HasSubmitted);
                         o.AddRouteValue("exportFilter.NotificationNumber", Model.ExportFilter.NotificationNumber);
                         o.AddRouteValue("exportFilter.Officer", Model.ExportFilter.Officer);
                         if (Model.ExportFilter.SelectedStatuses != null)
@@ -266,6 +268,7 @@
             {
                 @Html.AntiForgeryToken()
                 <input type="hidden" name="tab" value="import" />
+                <input type="hidden" name="ImportFilter.HasSubmitted" value="true" />
 
                 <div class="grid-row">
                     <div class="govuk-grid-column-one-quarter">
@@ -352,7 +355,6 @@
                                 <th scope="col" class="govuk-table__header">@Resource.DaysRemaining</th>
                                 <th scope="col" class="govuk-table__header">@Resource.ConsentedDate</th>
                                 <th scope="col" class="govuk-table__header">@Resource.FinancialGuaranteeStatus</th>
-                                <th scope="col" class="govuk-table__header">@Resource.LastAction</th>
                                 <th scope="col" class="govuk-table__header">@Resource.LastComment</th>
                             </tr>
                         </thead>
@@ -383,8 +385,7 @@
                                     <td class="govuk-table__cell">@(row.DecisionRequiredDate.HasValue ? Html.Gds().DisplayShortDate(row.DecisionRequiredDate.Value).ToString() : string.Empty)</td>
                                     <td class="govuk-table__cell">@row.DaysRemaining</td>
                                     <td class="govuk-table__cell">@(row.ConsentedDate.HasValue ? Html.Gds().DisplayShortDate(row.ConsentedDate.Value).ToString() : string.Empty)</td>
-                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatusDescription) ? "- -" : row.FinancialGuaranteeStatusDescription)</td>
-                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.LastAction) ? "- -" : row.LastAction)</td>
+                                    <td class="govuk-table__cell">@(string.IsNullOrWhiteSpace(row.FinancialGuaranteeStatusDescription) ? "Awaiting application" : row.FinancialGuaranteeStatusDescription)</td>
                                     <td class="govuk-table__cell">
                                         @if (row.LastCommentDate.HasValue)
                                         {
@@ -410,6 +411,7 @@
                     @Html.Pager(Model.ImportResult.PageSize, Model.ImportResult.PageNumber, Model.ImportResult.TotalCount).Options(o =>
                     {
                         o.AddRouteValue("tab", "import");
+                        o.AddRouteValue("importFilter.HasSubmitted", Model.ImportFilter.HasSubmitted);
                         o.AddRouteValue("importFilter.NotificationNumber", Model.ImportFilter.NotificationNumber);
                         o.AddRouteValue("importFilter.Officer", Model.ImportFilter.Officer);
                         if (Model.ImportFilter.SelectedStatuses != null)

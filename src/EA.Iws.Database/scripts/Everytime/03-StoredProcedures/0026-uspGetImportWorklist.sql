@@ -70,8 +70,6 @@ BEGIN
         FG.Status AS FinancialGuaranteeStatus,
         FGLS.Description AS FinancialGuaranteeStatusDescription,
 
-        LastStatus.Description AS LastAction,
-
         LastComment.DateAdded AS LastCommentDate,
         LastComment.UserName AS LastCommentUser,
 
@@ -93,21 +91,6 @@ BEGIN
 
     LEFT JOIN [Lookup].[FinancialGuaranteeStatus] FGLS
         ON FGLS.Id = FG.Status
-
-    -- Latest notification status change
-    OUTER APPLY
-    (
-        SELECT TOP (1)
-            LS.Description
-        FROM [ImportNotification].[NotificationStatusChange] NSC
-
-        INNER JOIN [Lookup].[ImportNotificationStatus] LS
-            ON LS.Id = NSC.NewStatus
-
-        WHERE NSC.NotificationAssessmentId = NA.Id
-
-        ORDER BY NSC.ChangeDate DESC
-    ) LastStatus
 
     -- Latest comment and author
     OUTER APPLY

@@ -70,7 +70,6 @@
                         x.LastCommentDate,
                         x.FinancialGuaranteeStatus,
                         x.FinancialGuaranteeStatusDescription,
-                        x.LastAction,
                         x.LastCommentUser)).ToArray()
             };
         }
