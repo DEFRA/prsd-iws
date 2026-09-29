@@ -108,6 +108,7 @@
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsWithAmountsHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistoryHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
@@ -435,6 +436,7 @@
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
+    <Compile Include="Mappings\FinancialGuaranteeWithAmountsMap.cs" />
     <Compile Include="Mappings\ImportMovement\CancellableMovementMap.cs" />
     <Compile Include="Mappings\ImportMovement\ImportMovementAuditMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementAuditMap.cs" />

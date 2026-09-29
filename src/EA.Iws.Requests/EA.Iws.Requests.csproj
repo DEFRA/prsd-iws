@@ -61,6 +61,7 @@
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
     <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuarantee.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeWithAmountsDetails.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetails.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistory.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetCurrentFinancialGuaranteeDates.cs" />
