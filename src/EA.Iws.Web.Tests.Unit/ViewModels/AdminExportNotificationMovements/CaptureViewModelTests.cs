@@ -86,6 +86,7 @@
         public void WasteReceivedDateCanBeInThePast()
         {
             var model = CreateViewModelForReceivedDate(30, 4, 2016, true);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -93,6 +94,7 @@
         public void WasteReceivedDateCanBeToday()
         {
             var model = CreateViewModelForReceivedDate(1, 6, 2016, false);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -100,6 +102,7 @@
         public void WasteReceivedDateCanBeBeforeActualShipmentDate()
         {
             var model = CreateViewModelForReceivedDate(30, 4, 2016, true);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -107,6 +110,7 @@
         public void WasteReceivedDateSameasActualShipmentDate()
         {
             var model = CreateViewModelForReceivedDate(1, 6, 2016, false);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -121,6 +125,7 @@
         public void WasteRecoveredDateCanBeInThePast()
         {
             var model = CreateViewModelForRecoveredDate(30, 5, 2016, true);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -128,6 +133,7 @@
         public void WasteRecoveredDateCanBeToday()
         {
             var model = CreateViewModelForRecoveredDate(1, 6, 2016, false);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -135,6 +141,7 @@
         public void WasteRecoveredDateNotBeforeWasteReceivedDate()
         {
             var model = CreateViewModelForRecoveredDate(31, 5, 2016, false);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -142,6 +149,7 @@
         public void WasteRecoveredDateSameasWasteReceivedDate()
         {
             var model = CreateViewModelForRecoveredDate(1, 6, 2016, false);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -149,6 +157,7 @@
         public void WasteRecoveredDateCannotBeInTheFuture()
         {
             var model = CreateViewModelForRecoveredDate(30, 7, 2016, false);
+            model.Receipt.ShipmentTypes = ShipmentType.Accepted;
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
