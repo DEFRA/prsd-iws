@@ -388,7 +388,6 @@
                 lastCommentDate ?? new DateTimeOffset(2024, 1, 12, 0, 0, 0, TimeSpan.Zero),
                 1,
                 "Approved",
-                "Test action",
                 null);
         }
 

@@ -20,7 +20,6 @@
         // New properties for financial guarantee and last action/comment
         public int? FinancialGuaranteeStatus { get; private set; }
         public string FinancialGuaranteeStatusDescription { get; private set; }
-        public string LastAction { get; private set; }
         public string LastCommentUser { get; private set; }
 
         public static ImportWorklistSummary Load(
@@ -37,7 +36,6 @@
             DateTimeOffset? lastCommentDate,
             int? financialGuaranteeStatus,
             string financialGuaranteeStatusDescription,
-            string lastAction,
             string lastCommentUser)
         {
             return new ImportWorklistSummary
@@ -55,7 +53,6 @@
                 LastCommentDate = lastCommentDate,
                 FinancialGuaranteeStatus = financialGuaranteeStatus,
                 FinancialGuaranteeStatusDescription = financialGuaranteeStatusDescription,
-                LastAction = lastAction,
                 LastCommentUser = lastCommentUser
             };
         }
