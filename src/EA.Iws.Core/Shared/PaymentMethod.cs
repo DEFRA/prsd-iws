@@ -14,6 +14,9 @@
         Card = 2,
 
         [Display(Name = "Postal order")]
-        PostalOrder = 3
+        PostalOrder = 3,
+
+        [Display(Name = "Gov.Pay")]
+        GovPay = 4
     }
 }

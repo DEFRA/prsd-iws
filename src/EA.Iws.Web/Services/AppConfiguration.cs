@@ -79,5 +79,15 @@
 
         [DefaultValue(5)]
         public int SessionTimeoutWarningInMinutes { get; set; }
+
+        public string GovUkPayBaseUrl { get; set; }
+
+        public string GovUkPayApiKey { get; set; }
+
+        [DefaultValue("{0}")]
+        public string GovUkPayReturnUrlFormat { get; set; }
+
+        [DefaultValue("Payment for notification {0}")]
+        public string GovUkPayDescription { get; set; }
     }
 }

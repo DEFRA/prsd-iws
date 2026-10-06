@@ -65,11 +65,25 @@
         {
             <p>@Resources.ListAvailablePaymentMethods</p>
         }
-
+        <hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
+        @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
+        
+        @if (due > 0)
+        {
+            using (Html.BeginForm("PayOnline", "WhatToDoNext", new { id = Model.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                <div class="govuk-form-group">
+                    <button type="submit" class="govuk-button">Pay online</button>
+                </div>
+            }
+        }
         <h2>@Resources.BankTransfer</h2>
         <p>@Resources.BankTransferReferenceDisclaimer</p>
     </div>
 </div>
+
+<hr class="govuk-section-break govuk-section-break--m govuk-section-break--visible">
 
 <dl class="govuk-body govuk-summary-list">
     <div class="govuk-summary-list__row">
@@ -151,6 +165,7 @@
 </dl>
 
 <div class="grid-row column-two-thirds">
+    
     @if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
     {
         @Html.Partial("_NrwRemittanceEmail")
@@ -164,8 +179,6 @@
 
     <h2>@Resources.Post</h2>
     @Html.Partial("_GeneralPost")
-
-    @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
 
     <br /><br />
 
