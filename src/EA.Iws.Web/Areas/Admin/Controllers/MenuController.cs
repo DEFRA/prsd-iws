@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Admin;
     using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
     using EA.Iws.Requests.Notification;
@@ -32,6 +34,9 @@
         public ActionResult HomeNavigation(AdminHomeNavigationSection section)
         {
             var model = CreateAdminLinksViewModel(section);
+
+            var users = Task.Run(() => mediator.SendAsync(new GetNewInternalUsers())).Result;
+            model.UsersAwaitingApproval = users.Count;
 
             return PartialView("_HomeNavigation", model);
         }

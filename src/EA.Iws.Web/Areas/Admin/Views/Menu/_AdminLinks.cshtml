@@ -2,7 +2,7 @@
 
     @if (Model.ShowApproveNewInternalUserLink)
     {
-        <li>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
+        <li>@Html.ActionLink(Model.ManageNewUsersText, "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
     }
     @if (Model.ShowManageExistingInternalUserLink)
     {
