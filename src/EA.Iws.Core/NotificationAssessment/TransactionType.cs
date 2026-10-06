@@ -8,6 +8,9 @@
         Payment = 1,
 
         [Display(Name = "Refund")]
-        Refund = 2
+        Refund = 2,
+
+        [Display(Name = "Failed payment")]
+        Failed = 3
     }
 }

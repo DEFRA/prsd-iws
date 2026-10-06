@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Notification;
@@ -10,6 +11,8 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using Requests.NotificationAssessment.Payment;
+    using ViewModels.WhatToDoNext;
 
     [Authorize]
     [NotificationReadOnlyFilter]
@@ -107,6 +110,95 @@
                 }
                 return HttpNotFound();
             }
+        }
+
+        private static readonly string[] AllowedGovUkPayDomains = { "publicapi.payments.service.gov.uk", "card.payments.service.gov.uk" };
+
+        private static bool IsValidGovUkPayUrl(string url)
+        {
+            if (string.IsNullOrWhiteSpace(url))
+            {
+                return false;
+            }
+
+            Uri uri;
+            if (!Uri.TryCreate(url, UriKind.Absolute, out uri))
+            {
+                return false;
+            }
+
+            return uri.Scheme == Uri.UriSchemeHttps &&
+                   AllowedGovUkPayDomains.Any(domain => uri.Host.Equals(domain, StringComparison.OrdinalIgnoreCase));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> PayOnline(Guid id)
+        {
+            try
+            {
+                var response = await mediator.SendAsync(new CreateGovUkPayment(id));
+
+                if (response.AlreadyPaid || response.PaymentInProgress)
+                {
+                    return RedirectToAction("Payment", new { id });
+                }
+
+                if (!IsValidGovUkPayUrl(response.NextUrl))
+                {
+                    throw new InvalidOperationException("GOV.UK Pay returned an unexpected redirect URL.");
+                }
+
+                return Redirect(response.NextUrl);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+                return RedirectToAction("Payment", new { id });
+            }
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> PaymentReturn(string secureToken)
+        {
+            var response = await mediator.SendAsync(new ProcessGovUkPaymentReturn(secureToken));
+
+            if (response.Success)
+            {
+                return RedirectToAction("PaymentSuccess", new { id = response.NotificationId, reference = response.PaymentReference });
+            }
+
+            return RedirectToAction("PaymentFailure", new { id = response.NotificationId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> PaymentSuccess(Guid id, string reference)
+        {
+            var paymentData = await mediator.SendAsync(new GetWhatToDoNextPaymentDataForNotification(id));
+
+            var model = new PaymentResultViewModel
+            {
+                NotificationId = id,
+                PaymentReference = reference,
+                AmountPaid = paymentData.AmountPaid
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult PaymentFailure(Guid id)
+        {
+            var model = new PaymentResultViewModel
+            {
+                NotificationId = id
+            };
+
+            return View(model);
         }
     }
 }
