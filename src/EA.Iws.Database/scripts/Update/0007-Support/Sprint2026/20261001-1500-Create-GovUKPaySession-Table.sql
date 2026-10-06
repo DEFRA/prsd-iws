@@ -8,6 +8,7 @@ CREATE TABLE [Notification].[GovUkPaySession] (
 	[Amount] DECIMAL (12, 2) NOT NULL,
 	[Status] NVARCHAR (50) NOT NULL,
 	[InFinalState] BIT NOT NULL,
+	[UserId] UNIQUEIDENTIFIER NOT NULL,
 	[CreatedDate] DATETIME NOT NULL,
 	[UpdatedDate] DATETIME NULL,
 	[RowVersion] ROWVERSION NOT NULL,
