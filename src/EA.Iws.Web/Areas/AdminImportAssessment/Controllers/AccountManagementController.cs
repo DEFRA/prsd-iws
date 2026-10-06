@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.NotificationAssessment;
+    using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
@@ -62,6 +63,11 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPayment(Guid id, PaymentDetailsViewModel model)
         {
+            if (model.PaymentMethod == PaymentMethod.GovPay)
+            {
+                ModelState.AddModelError("PaymentMethod", "Gov.Pay is not a valid payment method for manually recorded payments.");
+            }
+
             if (!ModelState.IsValid)
             {
                 var data = await mediator.SendAsync(new GetImportNotificationAccountOverview(id));

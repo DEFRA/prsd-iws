@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
     using Infrastructure.Validation;
@@ -32,7 +33,10 @@
         {
             get
             {
-                return new SelectList(EnumHelper.GetValues(typeof(PaymentMethod)), "Key", "Value");
+                return new SelectList(
+                    EnumHelper.GetValues(typeof(PaymentMethod))
+                        .Where(p => (PaymentMethod)p.Key != PaymentMethod.GovPay),
+                    "Key", "Value");
             }
         }
 
