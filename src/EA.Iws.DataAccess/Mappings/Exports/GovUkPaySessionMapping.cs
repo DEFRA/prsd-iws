@@ -14,6 +14,7 @@
             Property(x => x.SecureToken).IsRequired().HasMaxLength(100);
             Property(x => x.Status).IsRequired().HasMaxLength(50);
             Property(x => x.Amount).HasPrecision(12, 2);
+            Property(x => x.UserId).IsRequired();
         }
     }
 }

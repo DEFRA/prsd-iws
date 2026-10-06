@@ -7,6 +7,7 @@
     using Domain.NotificationAssessment;
     using Domain.Security;
     using EA.Iws.Api.Client.GovUkPay;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment.Payment;
 
@@ -19,6 +20,7 @@
         private readonly IGovUkPayConfiguration configuration;
         private readonly IPayClient payClient;
         private readonly IwsContext context;
+        private readonly IUserContext userContext;
 
         public CreateGovUkPaymentHandler(INotificationApplicationAuthorization authorization,
             INotificationApplicationRepository notificationApplicationRepository,
@@ -26,7 +28,8 @@
             IGovUkPaySessionRepository paySessionRepository,
             IGovUkPayConfiguration configuration,
             IPayClient payClient,
-            IwsContext context)
+            IwsContext context,
+            IUserContext userContext)
         {
             this.authorization = authorization;
             this.notificationApplicationRepository = notificationApplicationRepository;
@@ -35,6 +38,7 @@
             this.configuration = configuration;
             this.payClient = payClient;
             this.context = context;
+            this.userContext = userContext;
         }
 
         public async Task<CreateGovUkPaymentResult> HandleAsync(CreateGovUkPayment message)
@@ -85,6 +89,7 @@
                 notificationNumber,
                 secureToken,
                 balance,
+                userContext.UserId,
                 DateTime.UtcNow);
 
             paySessionRepository.Add(session);

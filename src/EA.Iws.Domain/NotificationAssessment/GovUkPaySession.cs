@@ -20,6 +20,8 @@
 
         public bool InFinalState { get; private set; }
 
+        public Guid UserId { get; private set; }
+
         public DateTime CreatedDate { get; private set; }
 
         public DateTime? UpdatedDate { get; private set; }
@@ -33,6 +35,7 @@
             string paymentReference,
             string secureToken,
             decimal amount,
+            Guid userId,
             DateTime createdDate)
         {
             Guard.ArgumentNotDefaultValue(() => notificationId, notificationId);
@@ -40,12 +43,14 @@
             Guard.ArgumentNotNullOrEmpty(() => paymentReference, paymentReference);
             Guard.ArgumentNotNullOrEmpty(() => secureToken, secureToken);
             Guard.ArgumentNotZeroOrNegative(() => amount, amount);
+            Guard.ArgumentNotDefaultValue(() => userId, userId);
 
             NotificationId = notificationId;
             PaymentId = paymentId;
             PaymentReference = paymentReference;
             SecureToken = secureToken;
             Amount = amount;
+            UserId = userId;
             Status = "created";
             InFinalState = false;
             CreatedDate = createdDate;
