@@ -141,8 +141,9 @@ else
                             <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">
                                 @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;"))
                             </span>
-                            @(Model.Notifications[i].ConsentedFromText)
-                            @(Model.Notifications[i].ConsentedToText)
+                            <span class="govuk-body-s">@(Model.Notifications[i].ConsentedFromText)</span>
+                            <br/>
+                            <span class="govuk-body-s">@(Model.Notifications[i].ConsentedToText)</span>
                         </td>
                         <td class="govuk-table__cell">
                             @Model.Notifications[i].Exporter
