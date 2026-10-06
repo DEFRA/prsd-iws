@@ -19,3 +19,10 @@ a {
     border-radius: 50%;
     display: inline-block;
 }
+
+.disabled-link {
+    color: #cecece;
+    text-decoration: none;
+    pointer-events: none; /* prevents clicking */
+    cursor: default;
+}

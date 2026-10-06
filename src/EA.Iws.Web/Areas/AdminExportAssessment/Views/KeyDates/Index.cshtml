@@ -129,7 +129,7 @@
                     {
                         @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
                     }*@
-                @if (Model.PaymentIsComplete)
+                @if (Model.PaymentIsComplete && !Model.NotificationFileClosedDate.IsCompleted && Model.CanSetDates)
                 {
                     if (Model.CommencementDate.IsCompleted)
                     {

@@ -103,11 +103,13 @@
 
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
                     {
-                        @*@Html.ActionLink(Resource.PrintNotification, "DownloadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)*@
-                        @*@Html.ActionLink(Resource.PrintLabel, "PostageLabelUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)*@
-                        @*@Html.ActionLink(Resource.CompleteFG, "FinancialGuaranteeUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)*@
+                        @Html.ActionLink(Resource.PrintNotification, "DownloadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "disabled-link" })
+                        @Html.ActionLink(Resource.PrintLabel, "PostageLabelUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "disabled-link" })
+                        @Html.ActionLink(Resource.CompleteFG, "FinancialGuaranteeUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "disabled-link" })
                         @Html.ActionLink(Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @*@Html.ActionLink(Resource.UploadAnnexes, "AnnexUploadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)*@
+                        @Html.ActionLink(Resource.UploadAnnexes, "AnnexUploadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "disabled-link" })
+
+                        @Html.ActionLink(Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "disabled-link" })
                     }
                     else
                     {
@@ -119,8 +121,6 @@
 
                         @Html.ActionLink(Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
-
-                    @*@Html.ActionLink(Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)*@
                 </nav>
             </div>
         </div>
