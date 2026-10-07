@@ -27,7 +27,14 @@
         {
             get
             {
-                return "Manage new users (" + UsersAwaitingApproval.ToString() + ")";
+                if (UsersAwaitingApproval == 0)
+                {
+                    return "Manage new users";
+                }
+                else
+                {
+                    return "Manage new users (" + UsersAwaitingApproval.ToString() + ")";
+                }
             }
         }
     }
