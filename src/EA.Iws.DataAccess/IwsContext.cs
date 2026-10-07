@@ -93,6 +93,8 @@
 
         public virtual DbSet<NotificationTransaction> NotificationTransactions { get; set; }
 
+        public virtual DbSet<GovUkPaySession> GovUkPaySessions { get; set; }
+
         public virtual DbSet<MovementDetails> MovementDetails { get; set; }
 
         public virtual DbSet<MovementDateHistory> MovementDateHistories { get; set; }

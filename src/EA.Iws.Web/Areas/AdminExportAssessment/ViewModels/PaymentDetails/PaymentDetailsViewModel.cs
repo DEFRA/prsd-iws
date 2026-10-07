@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
     using Infrastructure;
@@ -13,8 +14,11 @@
     public class PaymentDetailsViewModel : IValidatableObject
     {
         public PaymentDetailsViewModel() 
-        {
-            PaymentMethodsSelectList = new SelectList(EnumHelper.GetValues(typeof(PaymentMethod)), "Key", "Value");
+        {   // Prevent GovPay option in the payment method list.
+            PaymentMethodsSelectList = new SelectList(
+                EnumHelper.GetValues(typeof(PaymentMethod))
+                    .Where(p => (PaymentMethod)p.Key != PaymentMethod.GovPay),
+                "Key", "Value");
             PaymentDate = new OptionalDateInputViewModel(true);
         }
 

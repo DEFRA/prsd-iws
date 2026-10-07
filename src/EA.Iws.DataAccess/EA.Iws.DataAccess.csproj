@@ -127,6 +127,7 @@
     <Compile Include="Mappings\Exports\EntryExitCustomsSelectionsMapping.cs" />
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\GovUkPaySessionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\MovementAuditMapping.cs" />
     <Compile Include="Mappings\Common\IntraCountryExportAllowedMapping.cs" />
@@ -244,6 +245,7 @@
     <Compile Include="Repositories\ArchiveNotificationRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
     <Compile Include="Repositories\ExportWorklistRepository.cs" />
+    <Compile Include="Repositories\GovUkPaySessionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementPartailRejectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationAdditionalChargeRepository.cs" />
     <Compile Include="Repositories\Imports\WasteComponentRepository.cs" />
