@@ -103,6 +103,7 @@
     <Compile Include="Admin\NotificationAssessment\SetOperationCodesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateExportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateImportAccountManagementCommentsHandlerTests.cs" />
+    <Compile Include="Admin\Reports\GetEADataReportHandlerTests.cs" />
     <Compile Include="Admin\Reports\GetProducerReportHandlerTests.cs" />
     <Compile Include="Admin\SearchImportNotificationsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />
     <Compile Include="ImportNotification\GetImportNotificationCommentsHandlerTests.cs" />
     <Compile Include="ImportNotification\GetImportNotificationCommentsUsersHandlerTests.cs" />
+    <Compile Include="ImportNotification\GetImportWorklistHandlerTests.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
@@ -176,6 +178,7 @@
     <Compile Include="Movement\Reject\SetMovementRejectedHandlerTests.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandlerTests.cs" />
     <Compile Include="NotificationAssessment\AddCarrierHandlerTests.cs" />
+    <Compile Include="NotificationAssessment\GetExportWorklistHandlerTests.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitDataHandlerTests.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecoveredRuleTests.cs" />

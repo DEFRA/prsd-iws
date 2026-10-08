@@ -7,6 +7,8 @@
     {
         Task<decimal> TotalPaid(Guid importNotificationId);
 
+        Task<decimal> TotalBillable(Guid importNotificationId);
+
         Task<bool> PaymentIsNowFullyReceived(Guid importNotificationId, decimal credit);
 
         Task<decimal> Balance(Guid importNotificationId);

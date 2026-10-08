@@ -61,6 +61,24 @@ namespace EA.Iws.Web.Areas.Admin.Views.UserAdministration {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active Users.
+        /// </summary>
+        public static string ActiveUsersButton {
+            get {
+                return ResourceManager.GetString("ActiveUsersButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Users.
+        /// </summary>
+        public static string AllUsersButton {
+            get {
+                return ResourceManager.GetString("AllUsersButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The changes you have made have been confirmed.
         /// </summary>
         public static string ChangedConfirmed {
@@ -93,6 +111,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.UserAdministration {
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Inactive Users.
+        /// </summary>
+        public static string InactiveUsersButton {
+            get {
+                return ResourceManager.GetString("InactiveUsersButton", resourceCulture);
             }
         }
         

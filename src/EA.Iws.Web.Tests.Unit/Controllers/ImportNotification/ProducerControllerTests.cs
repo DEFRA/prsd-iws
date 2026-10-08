@@ -28,6 +28,7 @@
             this.additionalChargeService = A.Fake<IAdditionalChargeService>();
             companiesHouseClient = A.Fake<ICompaniesHouseClient>();
             configurationService = A.Fake<ConfigurationService>();
+            auditService = A.Fake<IAuditService>();
 
             producerController = new ProducerController(mediator, auditService, additionalChargeService, () => companiesHouseClient, configurationService);
         }

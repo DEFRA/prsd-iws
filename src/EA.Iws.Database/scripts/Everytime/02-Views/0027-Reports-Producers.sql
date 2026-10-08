@@ -22,10 +22,10 @@ AS
 		NS.[Description] AS [NotificationStatus],
 		I.[Name] AS [ConsigneeName],
 		C.[From] AS [ConsentFrom],
-        C.[To] AS [ConsentTo],
+		C.[To] AS [ConsentTo],
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
-        MOR.[Date] AS [MovementCompletedDate],
+		MOR.[Date] AS [MovementCompletedDate],
 		CASE
 			WHEN WCI_EWC.IsNotApplicable = 1 THEN 'Not applicable'
 			ELSE STUFF(( SELECT ', ' + WC.Code AS [text()]
@@ -47,9 +47,9 @@ AS
 					), 1, 1, '' ) 
 		END AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
-        SI_EEP.[Name] AS [PointOfEntry],
+		SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
-        SI_C.[Name] AS [ImportCountryName],
+		SI_C.[Name] AS [ImportCountryName],
 		CASE
 			WHEN SiteOfExport.[Id] IS NOT NULL THEN SiteOfExport.[Name]
 			ELSE ''
@@ -60,34 +60,42 @@ AS
 					WHERE FC.NotificationId = N.Id
 					order by 1
 					FOR XML PATH('')
-					), 1, 1, '' ) AS [FacilityName]
+					), 1, 1, '' ) AS [FacilityName],
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM
 		[Notification].[Notification] N
+		LEFT JOIN [Identity].[AspNetUsers] U ON U.Id = N.[UserId]
+		LEFT JOIN [Notification].[Organisation] ORG ON ORG.Id = U.OrganisationId
 		INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
 		INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
 		INNER JOIN [Notification].[ProducerCollection] PC ON PC.NotificationId = N.Id
 		INNER JOIN [Notification].[Producer] P ON P.ProducerCollectionId = PC.Id
 		LEFT JOIN [Notification].[Producer] SiteOfExport
-        ON SiteOfExport.Id = 
-        (
-            SELECT TOP 1 P1.Id
-
-            FROM		[Notification].[ProducerCollection] AS PC
-
-            INNER JOIN [Notification].[Producer] AS P1
-            ON		   PC.Id = P1.ProducerCollectionId
-
-            WHERE		PC.NotificationId = N.Id 
-						AND [IsSiteOfExport] = 1
-            ORDER BY	P1.[IsSiteOfExport] DESC
-        )
-		LEFT JOIN [Notification].[Consultation] CON 
-			INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id 
-		ON CON.NotificationId = N.Id
+		ON SiteOfExport.Id = 
+		(
+			SELECT TOP 1 P1.Id
+			FROM [Notification].[ProducerCollection] AS PC
+			INNER JOIN [Notification].[Producer] AS P1 ON PC.Id = P1.ProducerCollectionId
+			WHERE PC.NotificationId = N.Id AND [IsSiteOfExport] = 1
+			ORDER BY P1.[IsSiteOfExport] DESC
+		)
+		INNER JOIN [Notification].[Facility] AS F ON F.Id = 
+		(
+			SELECT TOP 1 F1.Id
+			FROM [Notification].[FacilityCollection] AS FC
+			INNER JOIN	[Notification].[Facility] AS F1 ON FC.Id = F1.FacilityCollectionId
+			WHERE FC.NotificationId = N.Id
+			ORDER BY F1.IsActualSiteOfTreatment DESC
+		)
+		LEFT JOIN [Notification].[Consultation] CON
+		INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id ON CON.NotificationId = N.Id
 		INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
 		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
 		INNER JOIN [Notification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
-		INNER JOIN	[Lookup].[NotificationStatus] AS NS ON [NS].[Id] = [NA].[Status]
+		INNER JOIN [Lookup].[NotificationStatus] AS NS ON [NS].[Id] = [NA].[Status]
 		LEFT JOIN [Notification].[Consent] C ON C.NotificationApplicationId = N.Id
 		LEFT JOIN [Notification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
 		LEFT JOIN [Notification].[Movement] M ON M.[NotificationId] = N.Id
@@ -120,18 +128,18 @@ AS
 		NS.[Description] AS [NotificationStatus],
 		I.[Name] AS [ConsigneeName],
 		C.[From] AS [ConsentFrom],
-        C.[To] AS [ConsentTo],
+		C.[To] AS [ConsentTo],
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
-        MOR.[Date] AS [MovementCompletedDate],
+		MOR.[Date] AS [MovementCompletedDate],
 		STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 3
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [EwcCode],
+				FROM [ImportNotification].[WasteType] WT
+				INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+				INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+				WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 3
+				ORDER BY 1
+			FOR XML PATH('')
+			), 1, 1, '' ) AS [EwcCode],
 		CASE
 			WHEN WT.YCodeNotApplicable = 1 THEN 'Not applicable'
 			ELSE STUFF(( SELECT ', ' + WC.Code AS [text()]
@@ -144,9 +152,9 @@ AS
 					), 1, 1, '' )
 		END AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
-        SI_EEP.[Name] AS [PointOfEntry],
+		SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
-        SI_C.[Name] AS [ImportCountryName],
+		SI_C.[Name] AS [ImportCountryName],
 		P.[Name] [SiteOfExportName],
 		STUFF(( SELECT ', ' + F.[Name] AS [text()]
 			FROM [ImportNotification].[Facility] F
@@ -154,15 +162,18 @@ AS
 			WHERE FC.ImportNotificationId = N.Id
 			order by 1
 			FOR XML PATH('')
-			), 1, 1, '' ) AS [FacilityName]
+			), 1, 1, '' ) AS [FacilityName],
+		E.RegistrationNumber AS 'ExporterRegistrationNumber',
+		I.RegistrationNumber AS 'ImporterRegistrationNumber',
+		F.RegistrationNumber AS 'FacilityRegistrationNumber',
+		P.RegistrationNumber AS 'ProducerRegistrationNumber'
 	FROM
 		[ImportNotification].[Notification] N
 		INNER JOIN [ImportNotification].[Exporter] E ON E.ImportNotificationId = N.Id
 		INNER JOIN [ImportNotification].[Importer] I ON I.ImportNotificationId = N.Id
 		INNER JOIN [ImportNotification].[Producer] P ON P.ImportNotificationId = N.Id
-		LEFT JOIN [ImportNotification].[Consultation] CON 
-			INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id
-		ON CON.NotificationId = N.Id
+		LEFT JOIN [ImportNotification].[Consultation] CON ON CON.NotificationId = N.Id
+		INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id
 		INNER JOIN [ImportNotification].[WasteType] WT ON WT.ImportNotificationId = N.Id
 		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
 		INNER JOIN [ImportNotification].[NotificationAssessment] AS NA ON NA.[NotificationApplicationId] = N.Id
@@ -183,5 +194,12 @@ AS
 			WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
 		INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-
+		INNER JOIN [ImportNotification].[Facility] AS F ON F.Id = 
+		(
+			SELECT TOP 1 F1.Id
+			FROM [ImportNotification].[FacilityCollection] AS FC
+			INNER JOIN [ImportNotification].[Facility] AS F1 ON FC.Id = F1.FacilityCollectionId
+			WHERE FC.ImportNotificationId = N.Id
+			ORDER BY F1.IsActualSiteOfTreatment DESC
+		)
 GO

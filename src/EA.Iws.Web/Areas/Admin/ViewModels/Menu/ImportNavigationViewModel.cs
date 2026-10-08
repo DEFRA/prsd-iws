@@ -3,7 +3,7 @@
     using Core.ImportNotification;
     using Infrastructure;
 
-    public class ImportNavigationViewModel
+    public class ImportNavigationViewModel : ReportLinkViewModel
     {
         public ImportNavigationSection ActiveSection { get; set; }
 
@@ -18,5 +18,13 @@
         public bool ShowKeyDatesOverride { get; set; }
 
         public bool HasComments { get; set; }
+
+        public bool ShowConsentExpiryDateInRed { get; set; }
+
+        public System.DateTime? ConsentExpiryDate { get; set; }
+
+        public System.DateTime? ConsentStartDate { get; set; }
+
+        public System.DateTime? ConsentedDate { get; set; }
     }
 }

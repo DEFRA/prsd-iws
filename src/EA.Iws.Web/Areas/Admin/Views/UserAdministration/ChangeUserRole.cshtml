@@ -1,10 +1,15 @@
-﻿@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
+﻿@using EA.Iws.Core.Admin
+@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
 @using Resources = EA.Iws.Web.Areas.Admin.Views.UserAdministration.UserAdministrationResources
 @{
     ViewBag.Title = Resources.ChangeUserRoleTitle;
 }
 
 <h1 class="govuk-heading-l">@Resources.ChangeUserRoleTitle</h1>
+
+@Html.ActionLink(Resources.ActiveUsersButton, "ChangeUserRole", "UserAdministration", new { userStatus = InternalUserStatus.Approved }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.InactiveUsersButton, "ChangeUserRole", "UserAdministration", new { userStatus = InternalUserStatus.Inactive }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(Resources.AllUsersButton, "ChangeUserRole", "UserAdministration", new { @class = "govuk-button--secondary" })
 
 <table class="govuk-table" title="@Resources.ChangeUserRoleTitle">
     <thead class="govuk-table__head">

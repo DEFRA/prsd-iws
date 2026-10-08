@@ -27,6 +27,11 @@
             return TotalCredits(transactions) - TotalDebits(transactions);
         }
 
+        public Task<decimal> TotalBillable(Guid importNotificationId)
+        {
+            return chargeCalculator.GetValue(importNotificationId);
+        }
+
         private static decimal TotalCredits(IEnumerable<ImportNotificationTransaction> transactions)
         {
             Guard.ArgumentNotNull(() => transactions, transactions);
@@ -83,6 +88,7 @@
                     }
                 }
             }
+
             return null;
         }
     }

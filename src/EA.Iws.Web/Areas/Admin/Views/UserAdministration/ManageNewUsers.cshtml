@@ -1,12 +1,17 @@
 ﻿@using EA.Iws.Core.Admin
 @using EA.Iws.Core.Authorization
 @model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.NewUsersListViewModel
+@using Resources = EA.Iws.Web.Areas.Admin.Views.UserAdministration.UserAdministrationResources
 @{
     ViewBag.Title = "Manage users";
     var usersNoun = Model.Users.Count != 1 ? "users" : "user";
 }
 
 <h1 class="govuk-heading-l">Manage new users</h1>
+
+@Html.ActionLink(@Resources.ActiveUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = InternalUserStatus.Approved }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(@Resources.InactiveUsersButton, "ManageNewUsers", "UserAdministration", new { userStatus = InternalUserStatus.Inactive }, new { @class = "govuk-button--secondary" })
+@Html.ActionLink(@Resources.AllUsersButton, "ManageNewUsers", "UserAdministration", new { @class = "govuk-button--secondary" })
 
 <p>Displaying @Model.Users.Count @usersNoun</p>
 

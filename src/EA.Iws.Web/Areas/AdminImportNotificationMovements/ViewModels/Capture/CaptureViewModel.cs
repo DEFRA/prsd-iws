@@ -127,9 +127,21 @@
             IsRejected = data.IsRejected;
             IsPartiallyRejected = data.IsPartiallyRejected;
 
-            if (!data.IsReceived && !data.IsRejected && !data.IsPartiallyRejected)
+            // Reflect the persisted outcome only. If the shipment has no recorded outcome yet,
+            // leave ShipmentTypes null so the radio renders with nothing pre-selected and the
+            // user has to make a choice (the receipt fields will then validate).
+            ShipmentType? shipmentTypes = null;
+            if (data.IsReceived)
             {
-                data.IsReceived = true;
+                shipmentTypes = ShipmentType.Accepted;
+            }
+            else if (data.IsRejected)
+            {
+                shipmentTypes = ShipmentType.Rejected;
+            }
+            else if (data.IsPartiallyRejected)
+            {
+                shipmentTypes = ShipmentType.Partially;
             }
 
             Receipt = new ReceiptViewModel
@@ -137,7 +149,7 @@
                 ActualQuantity = data.ReceiptData.ActualQuantity,
                 ReceivedDate = data.ReceiptData.ReceiptDate.HasValue ? new MaskedDateInputViewModel(data.ReceiptData.ReceiptDate.Value.DateTime) : new MaskedDateInputViewModel(),
                 ActualUnits = data.ReceiptData.ReceiptUnits ?? data.ReceiptData.NotificationUnit,
-                ShipmentTypes = data.IsReceived ? ShipmentType.Accepted : (data.IsRejected ? ShipmentType.Rejected : ShipmentType.Partially),
+                ShipmentTypes = shipmentTypes,
                 RejectionReason = data.ReceiptData.RejectionReason,
                 PossibleUnits = data.ReceiptData.PossibleUnits,
                 RejectedQuantity = data.RejectedQuantity,
@@ -180,6 +192,20 @@
                 if (ActualShipmentDate.Date > preNotificateDate.AddDays(60))
                 {
                     yield return new ValidationResult(CaptureViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
+                }
+            }
+
+            // Was the shipment accepted? is now a required choice. Previously the radio was
+            // pre-selected to Accepted, which let users save a freshly prenotified shipment
+            // without ever picking an outcome (and without entering receipt details).
+            if (!Receipt.ShipmentTypes.HasValue)
+            {
+                if (Receipt.ReceivedDate.IsCompleted
+                    || Receipt.ActualQuantity.HasValue
+                    || !string.IsNullOrWhiteSpace(Receipt.RejectionReason)
+                    || Receipt.RejectedQuantity.HasValue)
+                {
+                    yield return new ValidationResult(CaptureViewModelResources.ShipmentTypeRequired, new[] { "Receipt.ShipmentTypes" });
                 }
             }
 

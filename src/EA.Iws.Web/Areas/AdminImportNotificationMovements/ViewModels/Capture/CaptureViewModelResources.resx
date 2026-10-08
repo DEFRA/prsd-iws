@@ -168,6 +168,9 @@
   <data name="ShipmentNumber" xml:space="preserve">
     <value>Shipment number</value>
   </data>
+  <data name="ShipmentTypeRequired" xml:space="preserve">
+    <value>Please select whether the shipment was accepted</value>
+  </data>
   <data name="StatsMarking" xml:space="preserve">
     <value>WSR/Basel annual stats marking (when required)</value>
   </data>

@@ -8,7 +8,7 @@
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
-    
+
     public class ReceiptViewModel
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
@@ -51,11 +51,15 @@
 
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }
 
-        public ShipmentType ShipmentTypes { get; set; }
+        // Nullable so the radio can render unchecked when the shipment has no recorded outcome yet.
+        // Previously this was defaulted to ShipmentType.Accepted
+        // @checked = true on the "Accepted" radio in ReceiptViewModel.cshtml meant a user could
+        // open a freshly prenotified shipment and hit Save without entering a received date,
+        // silently posting IsReceived = true and triggering the data corruption pattern.
+        public ShipmentType? ShipmentTypes { get; set; }
 
         public ReceiptViewModel()
         {
-            ShipmentTypes = ShipmentType.Accepted;
             ReceivedDate = new MaskedDateInputViewModel();
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }

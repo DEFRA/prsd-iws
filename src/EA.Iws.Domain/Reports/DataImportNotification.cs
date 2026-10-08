@@ -31,5 +31,7 @@
         public bool? Preconsented { get; protected set; }
 
         public DateTime? ConsentTo { get; set; }
+
+        public DateTime? SubmittedDate { get; protected set; }
     }
 }

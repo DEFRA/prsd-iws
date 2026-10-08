@@ -16,7 +16,7 @@
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
         private readonly IImportNotificationAssessmentRepository assessmentRepository;
 
-        public ImportPaymentTransaction(IImportNotificationTransactionRepository transactionRepository, 
+        public ImportPaymentTransaction(IImportNotificationTransactionRepository transactionRepository,
             IImportNotificationTransactionCalculator transactionCalculator,
             IImportNotificationAssessmentRepository assessmentRepository)
         {
@@ -31,12 +31,12 @@
             var transaction = ImportNotificationTransaction.PaymentRecord(notificationId, date, amount,
                 paymentMethod, receiptNumber, comments);
 
-            var balance = await transactionCalculator.Balance(transaction.NotificationId)
-                - transaction.Credit.GetValueOrDefault()
-                + transaction.Debit.GetValueOrDefault();
-
-            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            // Build the complete transaction list including the new (unsaved) transaction
+            // so that balance and CalculatePaymentReceivedDate use the same consistent data.
+            var transactions = (await transactionRepository.GetTransactions(notificationId)).ToList();
             transactions.Add(transaction);
+
+            var balance = await CalculateBalance(notificationId, transactions);
 
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
@@ -48,19 +48,27 @@
         public async Task Delete(Guid notificationId, Guid transactionId)
         {
             var transaction = await transactionRepository.GetById(transactionId);
-            
-            var balance = await transactionCalculator.Balance(transaction.NotificationId)
-                + transaction.Credit.GetValueOrDefault()
-                - transaction.Debit.GetValueOrDefault();
 
-            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            // Build the transaction list with the target transaction removed
+            // so that balance and CalculatePaymentReceivedDate use the same consistent data.
+            var transactions = (await transactionRepository.GetTransactions(notificationId)).ToList();
             transactions.RemoveAll(t => t.Id == transactionId);
+
+            var balance = await CalculateBalance(notificationId, transactions);
 
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
-            await UpdatePaymentReceivedDate(paymentDate, transaction.NotificationId);
+            await UpdatePaymentReceivedDate(paymentDate, notificationId);
 
             await transactionRepository.DeleteById(transactionId);
+        }
+
+        private async Task<decimal> CalculateBalance(Guid notificationId, IEnumerable<ImportNotificationTransaction> transactions)
+        {
+            var totalBillable = await transactionCalculator.TotalBillable(notificationId);
+            var netPaid = transactions.Sum(t => t.Credit.GetValueOrDefault() - t.Debit.GetValueOrDefault());
+
+            return totalBillable - netPaid;
         }
 
         private static DateTime? CalculatePaymentReceivedDate(IEnumerable<ImportNotificationTransaction> transactions, decimal balance)

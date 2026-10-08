@@ -46,13 +46,13 @@
         }
 
         [Fact]
-        public void Constructor_WithNoStatus_DefaultsToAccepted()
+        public void Constructor_WithNoStatus_LeavesShipmentTypesNull()
         {
             var data = CreateMovementData(isReceived: false, isRejected: false, isPartiallyRejected: false);
 
             var model = new IndexViewModel(data);
 
-            Assert.Equal(ShipmentType.Accepted, model.ShipmentTypes);
+            Assert.Null(model.ShipmentTypes);
         }
 
         [Fact]

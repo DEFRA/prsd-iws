@@ -18,11 +18,15 @@
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
                 <p>@Resources.ConfirmResponsibility</p>
+                <p>@Resources.EmailRequirement</p>
                 <p>@Resources.EnterEmail</p>
-                <div class="column bold-small">
-                    @Resources.EmailHint
-                </div>
-                @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
+                <div class="govuk-warning-text">
+                    <span class="govuk-warning-text__icon" aria-hidden="true">!</span>
+                    <strong class="govuk-warning-text__text">
+                        <span class="govuk-visually-hidden">Warning</span>
+                        @Resources.EmailWarning
+                    </strong>
+                </div>                @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
                 @Html.Gds().TextBoxFor(m => m.EmailAddress)
                 <button type="submit" name="command" value="addshareduser" tabindex="2" class="govuk-button">@Resources.AddSharedUser</button>
             </div>

@@ -12,7 +12,7 @@
         private readonly IMovementRepository movementRepository;
         private readonly IMovementRejectionRepository movementRejectionRepository;
 
-        public RejectMovement(IMovementRepository movementRepository, 
+        public RejectMovement(IMovementRepository movementRepository,
             IMovementRejectionRepository movementRejectionRepository)
         {
             this.movementRepository = movementRepository;
@@ -27,10 +27,6 @@
         {
             var movement = await movementRepository.GetById(movementId);
 
-            if (rejectionDate < movement.Date)
-            {
-                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
-            }
             if (rejectionDate > SystemTime.UtcNow.Date)
             {
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");

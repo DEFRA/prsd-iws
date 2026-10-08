@@ -215,11 +215,29 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to MJ/kg.
+        /// </summary>
+        public static string MegajoulesUnits {
+            get {
+                return ResourceManager.GetString("MegajoulesUnits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Milligrams per kilogram.
         /// </summary>
         public static string Milligrams {
             get {
                 return ResourceManager.GetString("Milligrams", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mg/kg.
+        /// </summary>
+        public static string MilligramsUnits {
+            get {
+                return ResourceManager.GetString("MilligramsUnits", resourceCulture);
             }
         }
         

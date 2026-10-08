@@ -30,10 +30,6 @@
         {
             var movement = await movementRepository.GetById(movementId);
 
-            if (date < movement.Date)
-            {
-                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
-            }
             if (date > SystemTime.UtcNow.Date)
             {
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");

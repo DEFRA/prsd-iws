@@ -14,7 +14,7 @@
 
     public class IndexViewModel : IValidatableObject
     {
-        private const int StatusIdOffset = 500;
+        public const int StatusIdOffset = 500;
 
         public IndexViewModel()
         {
