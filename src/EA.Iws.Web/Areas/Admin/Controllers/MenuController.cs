@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Admin;
     using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
     using EA.Iws.Core.NotificationAssessment;
@@ -37,6 +38,8 @@
         {
             var model = CreateAdminLinksViewModel(section);
 
+            var users = Task.Run(() => mediator.SendAsync(new GetNewInternalUsers())).Result;
+            model.UsersAwaitingApproval = users.Count;
             var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
             if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
             {
