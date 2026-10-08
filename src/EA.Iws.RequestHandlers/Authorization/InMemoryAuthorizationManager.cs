@@ -35,6 +35,7 @@
             { ReportingPermissions.CanViewExportMovementsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewBlanketBondsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewProducerReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
+            { ReportingPermissions.CanViewEADataReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ExportNotificationPermissions.CanCreateExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanReadExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },

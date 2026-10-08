@@ -215,6 +215,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select whether the shipment was accepted.
+        /// </summary>
+        public static string ShipmentTypeRequired {
+            get {
+                return ResourceManager.GetString("ShipmentTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to WSR/Basel annual stats marking (when required).
         /// </summary>
         public static string StatsMarking {

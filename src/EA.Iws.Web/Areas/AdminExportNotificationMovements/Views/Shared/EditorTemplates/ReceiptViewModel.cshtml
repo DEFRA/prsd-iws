@@ -12,9 +12,10 @@
 
     <div class="govuk-form-group">
         @Html.Label(@Resource.ShipmentAcceptedLable, new { @class = "form-label-bold" })
+        @Html.Gds().ValidationMessageFor(m => m.ShipmentTypes)
         <div class="govuk-radios" data-module="govuk-radios">
             <div class="govuk-radios__item">
-                @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "Accepted", @checked = true, @class = "govuk-radios__input" })
+                @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "Accepted", @class = "govuk-radios__input" })
                 <label class="govuk-label govuk-radios__label" for="Accepted">
                     Yes
                 </label>

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActiveUsersButton" xml:space="preserve">
+    <value>Active Users</value>
+  </data>
+  <data name="AllUsersButton" xml:space="preserve">
+    <value>All Users</value>
+  </data>
   <data name="ChangedConfirmed" xml:space="preserve">
     <value>The changes you have made have been confirmed</value>
   </data>
@@ -128,6 +134,9 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="InactiveUsersButton" xml:space="preserve">
+    <value>Inactive Users</value>
   </data>
   <data name="LastLogin" xml:space="preserve">
     <value>Last login date</value>

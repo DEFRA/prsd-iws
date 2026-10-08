@@ -72,8 +72,33 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddPayment(PaymentDetailsViewModel model)
+        public async Task<ActionResult> AddPayment(PaymentDetailsViewModel model, string submitButton)
         {
+            bool paymentDateIsInTheFuture = model.PaymentDate.AsDateTime().HasValue && model.PaymentDate.AsDateTime().Value > DateTime.UtcNow;
+            bool submitButtonYes = false;
+            bool submitButtonNo = false;
+            
+            if (submitButton != null)
+            {
+                submitButtonYes = (submitButton.ToLower() == "futuredateyes");
+                submitButtonNo = (submitButton.ToLower() == "futuredateno");
+            }
+            
+            if (paymentDateIsInTheFuture && !submitButtonYes && !submitButtonNo)
+            {
+                model.FutureDateYesNoButtonsVisible = true;
+                ModelState.AddModelError("PaymentDate", AccountManagementControllerResources.FutureDateQuery);
+            }
+            else if (paymentDateIsInTheFuture && submitButtonYes)
+            {
+                model.FutureDateYesNoButtonsVisible = false;
+            }
+            else if (paymentDateIsInTheFuture && submitButtonNo)
+            {
+                model.FutureDateYesNoButtonsVisible = false;
+                ModelState.AddModelError("PaymentDate", AccountManagementControllerResources.FutureDateChange);
+            }   
+
             if (!ModelState.IsValid)
             {
                 var data = await mediator.SendAsync(new GetAccountManagementData(model.NotificationId));

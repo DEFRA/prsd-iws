@@ -3,7 +3,7 @@
     using Google.Apis.TagManager.v2.Data;
     using Infrastructure;
 
-    public class AdminLinksViewModel
+    public class AdminLinksViewModel : ReportLinkViewModel
     {
         public bool ShowApproveNewInternalUserLink { get; set; }
 

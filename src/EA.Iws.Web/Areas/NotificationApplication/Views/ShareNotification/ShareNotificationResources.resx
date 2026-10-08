@@ -127,13 +127,13 @@
     <value>Your chosen shared users</value>
   </data>
   <data name="ConfirmResponsibility" xml:space="preserve">
-    <value>It is your responsibility as the owner to advise the user you want to share this notification with; what they can, and can't do on this notification once shared.</value>
+    <value>You are currently owner of this notification. You can share it with other IWS Online registered users.</value>
   </data>
   <data name="EmailHint" xml:space="preserve">
     <value>This is the email address that was used to register their account and they enter when logging into the service. If they are not registered to use IWS Online, they will need to do this first.</value>
   </data>
   <data name="EnterEmail" xml:space="preserve">
-    <value>Enter the e-mail addresses of other users you want to share this notification with.</value>
+    <value>To share this notification, enter their email address into the box below and click ‘Add’. Once shared, you can remove access via the ‘Remove’ option below.</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
@@ -161,5 +161,11 @@
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="EmailWarning" xml:space="preserve">
+    <value>This email address must match the other user's IWS Online login email.</value>
+  </data>
+  <data name="EmailRequirement" xml:space="preserve">
+    <value>Make sure the other user has an active IWS Online account and knows why you’re sharing the notification with them.</value>
   </data>
 </root>

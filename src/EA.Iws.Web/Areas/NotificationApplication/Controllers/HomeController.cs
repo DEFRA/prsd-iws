@@ -1,11 +1,17 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Http.Results;
+    using System.Web.Mvc;
     using Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
     using EA.Iws.Core.NotificationAssessment;
     using EA.Iws.Core.Shared;
     using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
+    using EA.Iws.Requests.Annexes;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure;
@@ -15,10 +21,6 @@
     using Requests.Notification;
     using Requests.SharedUsers;
     using Requests.Users;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels.Home;
     using ViewModels.NotificationApplication;
 
@@ -134,6 +136,16 @@
                     NotificationId = id
                 };
             }
+
+            var annexes = await mediator.SendAsync(new GetAnnexes(id));
+            var annex = new AnnexViewModel
+            {
+                NotificationId = id,
+                WasteCompositionStatus = annexes.WasteComposition,
+                TechnologyEmployedStatus = annexes.TechnologyEmployed,
+                ProcessOfGenerationStatus = annexes.ProcessOfGeneration
+            };
+            model.AnnexPlusViewModel = new AnnexPlusViewModel(annex, model.SubmitSideBarViewModel.Status);
 
             ViewBag.Charge = response.NotificationCharge;
 

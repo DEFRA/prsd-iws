@@ -16,16 +16,25 @@
         [DisplayName("Notifier Company Type")]
         public string NotifierCompanyType { get; set; }
 
+        [DisplayName("Notifier Registration Number")]
+        public string ExporterRegistrationNumber { get; set; }
+
         [DisplayName("Consignee")]
         public string Importer { get; set; }
 
         [DisplayName("Consignee Company Type")]
         public string ConsigneeCompanyType { get; set; }
 
+        [DisplayName("Consignee Registration Number")]
+        public string ImporterRegistrationNumber { get; set; }
+
         public string Facility { get; set; }
 
         [DisplayName("Facility Company Type")]
         public string FacilityCompanyType { get; set; }
+
+        [DisplayName("Facility Registration Number")]
+        public string FacilityRegistrationNumber { get; set; }
 
         [DisplayName("Basel/OECD Code and Description")]
         public string BaselOecdCode { get; set; }
@@ -94,6 +103,9 @@
 
         [DisplayName("UN Class")]
         public string UNClass { get; set; }
+
+        [DisplayName("Customs Code")]
+        public string CustomsCode { get; set; }
 
         [DisplayName("Shipment Status")]
         public string ShipmentStatus { get; set; }

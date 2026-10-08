@@ -67,5 +67,7 @@
 
             return results;
         }
+
+        public bool FutureDateYesNoButtonsVisible { get; set; }
     }
 }

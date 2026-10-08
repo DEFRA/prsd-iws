@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is your responsibility as the owner to advise the user you want to share this notification with; what they can, and can&apos;t do on this notification once shared..
+        ///   Looks up a localized string similar to You are currently owner of this notification. You can share it with other IWS Online registered users..
         /// </summary>
         public static string ConfirmResponsibility {
             get {
@@ -125,7 +125,25 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the e-mail addresses of other users you want to share this notification with..
+        ///   Looks up a localized string similar to Make sure the other user has an active IWS Online account and knows why you’re sharing the notification with them..
+        /// </summary>
+        public static string EmailRequirement {
+            get {
+                return ResourceManager.GetString("EmailRequirement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This email address must match the other user&apos;s IWS Online login email..
+        /// </summary>
+        public static string EmailWarning {
+            get {
+                return ResourceManager.GetString("EmailWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To share this notification, enter their email address into the box below and click ‘Add’. Once shared, you can remove access via the ‘Remove’ option below..
         /// </summary>
         public static string EnterEmail {
             get {

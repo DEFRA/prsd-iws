@@ -27,7 +27,7 @@
 
         public ShipmentType? WasShipmentAccepted { get; set; }
 
-    public MovementSummaryTableViewModel(MovementTableDataRow data)
+        public MovementSummaryTableViewModel(MovementTableDataRow data)
         {
             Id = data.Id;
             Number = data.Number;
@@ -38,8 +38,8 @@
             Quantity = data.Quantity;
             Unit = data.QuantityUnits;
             RecoveredOrDisposedOf = data.CompletedDate;
-            WasShipmentAccepted = data.IsReceived ? ShipmentType.Accepted : (data.IsPartialRejection ? ShipmentType.Partially : ShipmentType.Rejected);
-    }
+            WasShipmentAccepted = GetShipmentOutcome(data);
+        }
 
         public bool IsShipped()
         {
@@ -49,6 +49,31 @@
         public bool IsShipmentActive()
         {
             return (Status == MovementStatus.New || Status == MovementStatus.Captured) && ShipmentDate <= SystemTime.UtcNow;
+        }
+
+        // Determine the shipment outcome strictly from what is recorded on the row.
+        // Previously this used a ternary that fell through to ShipmentType.Rejected whenever
+        // IsReceived and IsPartialRejection were both false, which caused newly captured /
+        // prenotified shipments (no outcome yet) to incorrectly display as "Rejected".
+        // Returning null lets the view render "- -" for the no-outcome case.
+        private static ShipmentType? GetShipmentOutcome(MovementTableDataRow data)
+        {
+            if (data.IsReceived)
+            {
+                return ShipmentType.Accepted;
+            }
+
+            if (data.IsPartialRejection)
+            {
+                return ShipmentType.Partially;
+            }
+
+            if (data.Status == MovementStatus.Rejected)
+            {
+                return ShipmentType.Rejected;
+            }
+
+            return null;
         }
     }
 }

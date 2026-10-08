@@ -86,5 +86,14 @@ namespace EA.Iws.Web.Areas.Admin.Views.AdvancedSearch {
                 return ResourceManager.GetString("Search", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search by name or reference number.
+        /// </summary>
+        public static string SearchHintMessage {
+            get {
+                return ResourceManager.GetString("SearchHintMessage", resourceCulture);
+            }
+        }
     }
 }

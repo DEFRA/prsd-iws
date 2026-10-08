@@ -47,6 +47,7 @@
 
             var isRejected = model.ShipmentTypes == ShipmentType.Rejected;
             var isPartiallyRejected = model.ShipmentTypes == ShipmentType.Partially;
+            var isAccepted = model.ShipmentTypes == ShipmentType.Accepted;
 
             var data = new ImportMovementSummaryData
             {
@@ -58,20 +59,21 @@
                 },
                 ReceiptData = new ImportMovementReceiptData
                 {
-                    ReceiptDate = (!isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                    ReceiptDate = isAccepted && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : ((isRejected || isPartiallyRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null),
                     ActualQuantity = model.ActualQuantity,
                     ReceiptUnits = model.Units,
                     RejectionReason = model.RejectionReason,
                 },
                 HasNoPrenotification = model.PrenotificationDate.HasValue ? false : true,
-                RejectionDate = (isRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
+                RejectionDate = (isRejected || isPartiallyRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 RecoveryData = new ImportMovementRecoveryData
                 {
-                    OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null
+                    OperationCompleteDate = isRejected ? null : (model.Date.HasValue ? model.Date.Value : (DateTime?)null)
                 },
-                Comments = model.Comments,
-                StatsMarking = model.StatsMarking,
-                IsReceived = model.ShipmentTypes == ShipmentType.Accepted,
+                Comments = model.HasComments ? model.Comments : null,
+                // StatsMarking is only set for Rejected/Partially outcomes; always NULL for Accepted
+                StatsMarking = (isRejected || isPartiallyRejected) ? model.StatsMarking : null,
+                IsReceived = isAccepted,
                 IsRejected = isRejected,
                 IsPartiallyRejected = isPartiallyRejected,
                 MovementId = movementId,
@@ -113,7 +115,7 @@
                     var movementId = await mediator.SendAsync(new GetImportMovementIdIfExists(id, shipmentNumber.Value));
                     if (movementId.HasValue)
                     {
-                        return RedirectToAction("Index", new { movementId = movementId.Value });
+                        return RedirectToAction("Index", new { id, movementId = movementId.Value });
                     }
                 }
 

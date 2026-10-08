@@ -74,6 +74,13 @@
                 <div id="dvAccessLevelBody">
                     <label>@Model.AccessLevelText</label>
                 </div>
+                @if (Model.IsOwner)
+                {
+                    <div>
+                        @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
+                        @Html.ActionLink(Resource.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -296,7 +303,7 @@
                                         @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
                                     </td>
                                     <td>
-                                        @DisplayString(Model.TableData[i].WasShipmentAccepted.Value.ToString(), Model.TableData[i].Status)
+                                        @DisplayString(Model.TableData[i].WasShipmentAccepted.HasValue ? Model.TableData[i].WasShipmentAccepted.Value.ToString() : string.Empty, Model.TableData[i].Status)
                                     </td>
                                 </tr>
                             }
