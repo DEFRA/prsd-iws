@@ -204,4 +204,7 @@
   <data name="AdditionalChargesLinkText" xml:space="preserve">
     <value>Additional charges</value>
   </data>
+  <data name="CommentsAddLinkText" xml:space="preserve">
+    <value>Add comment</value>
+  </data>
 </root>

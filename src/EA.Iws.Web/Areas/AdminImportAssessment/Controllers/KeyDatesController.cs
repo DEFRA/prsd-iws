@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
-    using EA.Iws.Core.Authorization.Permissions;
-    using Infrastructure.Authorization;
-    using Prsd.Core.Mediator;
-    using Requests.ImportNotificationAssessment;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using EA.Iws.Core.Authorization.Permissions;
+    using EA.Iws.Requests.Admin.KeyDates;
+    using Infrastructure.Authorization;
+    using Prsd.Core.Mediator;
+    using Requests.ImportNotificationAssessment;
     using ViewModels.KeyDates;
 
     [AuthorizeActivity(typeof(GetKeyDates))]
@@ -55,9 +56,10 @@
             switch (model.Command)
             {
                 case KeyDatesCommand.BeginAssessment:
-                    await
-                        mediator.SendAsync(new SetAssessmentStartedDate(id, model.NewDate.AsDateTime().Value,
-                            model.NameOfOfficer));
+                    await mediator.SendAsync(new SetAssessmentStartedDate(id, model.NewDate.AsDateTime().Value, model.NameOfOfficer));
+                    break;
+                case KeyDatesCommand.ChangeOfficer:
+                    await mediator.SendAsync(new SetImportKeyDatesOfficer(id, model.NameOfOfficer));
                     break;
                 case KeyDatesCommand.NotificationComplete:
                     await mediator.SendAsync(new SetNotificationCompletedDate(id, model.NewDate.AsDateTime().Value));
@@ -67,8 +69,6 @@
                     break;
                 case KeyDatesCommand.FileClosed:
                     await mediator.SendAsync(new SetNotificationFileClosedDate(id, model.NewDate.AsDateTime().Value));
-                    break;
-                case KeyDatesCommand.ArchiveReference:
                     await mediator.SendAsync(new SetArchiveReference(id, model.ArchiveReference));
                     break;
                 default:

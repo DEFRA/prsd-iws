@@ -20,6 +20,12 @@ a {
     display: inline-block;
 }
 
+.disabled-link {
+    color: #858686 !important;
+    text-decoration: none;
+    pointer-events: none; /* prevents clicking */
+    cursor: default;
+}
 .consented-dates-expired {
     color: red;
     white-space: nowrap;

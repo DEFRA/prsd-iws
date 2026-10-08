@@ -115,6 +115,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add comment.
+        /// </summary>
+        public static string CommentsAddLinkText {
+            get {
+                return ResourceManager.GetString("CommentsAddLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comments.
         /// </summary>
         public static string CommentsHeading {
