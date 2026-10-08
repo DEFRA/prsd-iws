@@ -956,6 +956,7 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_Uploads.cshtml" />
     <Content Include="Areas\Admin\Views\Worklist\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Worklist\_Layout.cshtml" />
+    <Content Include="Web.config" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -1605,9 +1606,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\AutofacBootstrapper.cs" />
