@@ -205,3 +205,7 @@ tools/xunit.runner.console/
 
 # License files
 *.lic
+/src/EA.Iws.Api/Web.config
+/src/EA.Iws.Database/App.config
+/src/EA.Iws.Web/Web.config
+/src/.github/copilot-instructions.md
