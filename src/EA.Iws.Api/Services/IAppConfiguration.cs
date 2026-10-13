@@ -25,5 +25,13 @@
         string ApiClientCredentialId { get; set; }
 
         bool MaintenanceMode { get; set; }
+
+        string GovUkPayBaseUrl { get; set; }
+
+        string GovUkPayApiKey { get; set; }
+
+        string GovUkPayReturnUrlFormat { get; set; }
+
+        string GovUkPayDescription { get; set; }
     }
 }
