@@ -36,8 +36,8 @@
 
             //We need to exclude 'other' as this will be handled separately
             physicalCharacteristics.PossibleValues = physicalCharacteristics.PossibleValues
-                .Where(p => p.Value != PhysicalCharacteristicType.Other.ToString())
-                .ToList();
+                                                                            .Where(p => (PhysicalCharacteristicType)Convert.ToInt32(p.Value) != PhysicalCharacteristicType.Other)
+                                                                            .ToList();
 
             var model = new PhysicalCharacteristicsViewModel
             {
@@ -77,9 +77,9 @@
             try
             {
                 var selectedPackagingTypes = model.PhysicalCharacteristics.PossibleValues
-                    .Where(p => p.Selected)
-                    .Select(p => (PhysicalCharacteristicType)Enum.Parse(typeof(PhysicalCharacteristicType), p.Value))
-                    .ToList();
+                                                                          .Where(p => p.Selected)
+                                                                          .Select(p => (PhysicalCharacteristicType)(Convert.ToInt32(p.Value)))
+                                                                          .ToList();
 
                 if (model.OtherSelected)
                 {

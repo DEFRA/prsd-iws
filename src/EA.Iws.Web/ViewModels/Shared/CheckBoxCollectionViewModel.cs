@@ -7,7 +7,7 @@
     using System.Reflection;
     using System.Web.Mvc;
 
-    public class CheckBoxCollectionViewModel 
+    public class CheckBoxCollectionViewModel
     {
         public IList<SelectListItem> PossibleValues { get; set; }
 
@@ -18,7 +18,7 @@
             var enumerable = selectedValues as TEnum[] ?? selectedValues.ToArray();
             foreach (var item in PossibleValues)
             {
-                item.Selected = enumerable.Any(p => p.ToString() == item.Value);
+                item.Selected = enumerable.Any(p => (Convert.ToInt32(p)).ToString() == item.Value);
             }
         }
 
@@ -56,7 +56,7 @@
                 // Set field name to either the enum name or the display name.
                 var name = (displayAttribute == null) ? field.Name : displayAttribute.Name;
 
-                fieldNames.Add(new SelectListItem { Text = name, Value = field.Name });
+                fieldNames.Add(new SelectListItem { Text = name, Value = ((int)field.GetValue(null)).ToString() });
             }
 
             return new CheckBoxCollectionViewModel()
