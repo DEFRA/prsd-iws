@@ -1,16 +1,17 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Core.Notification.Audit;
     using Core.WasteType;
+    using EA.Iws.Core.PackagingType;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels.PhysicalCharacteristics;
     using Web.ViewModels.Shared;
 
@@ -34,10 +35,9 @@
             physicalCharacteristics.ShowEnumValue = true;
 
             //We need to exclude 'other' as this will be handled separately
-            physicalCharacteristics.PossibleValues =
-                physicalCharacteristics.PossibleValues.Where(
-                    p => (PhysicalCharacteristicType)Convert.ToInt32(p.Value) != PhysicalCharacteristicType.Other)
-                    .ToList();
+            physicalCharacteristics.PossibleValues = physicalCharacteristics.PossibleValues
+                .Where(p => p.Value != PhysicalCharacteristicType.Other.ToString())
+                .ToList();
 
             var model = new PhysicalCharacteristicsViewModel
             {
@@ -76,10 +76,10 @@
 
             try
             {
-                var selectedPackagingTypes =
-                    model.PhysicalCharacteristics.PossibleValues.Where(p => p.Selected)
-                        .Select(p => (PhysicalCharacteristicType)(Convert.ToInt32(p.Value)))
-                        .ToList();
+                var selectedPackagingTypes = model.PhysicalCharacteristics.PossibleValues
+                    .Where(p => p.Selected)
+                    .Select(p => (PhysicalCharacteristicType)Enum.Parse(typeof(PhysicalCharacteristicType), p.Value))
+                    .ToList();
 
                 if (model.OtherSelected)
                 {
