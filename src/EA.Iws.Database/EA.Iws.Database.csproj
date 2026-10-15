@@ -61,6 +61,8 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0021-uspFreedomOfInformationReportData.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0022-uspGetExportNotifications.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0024-uspGetNotifications.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0025-uspGetExportWorklist.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0026-uspGetImportWorklist.sql" />
     <Content Include="scripts\TestData\20260311-1739-create-ea-import-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\TestData\20260311-1646-create-ea-export-notifications-test-data-for-26-27.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260225-Under-Prohibition-new-status.sql" />
@@ -209,6 +211,7 @@
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260511-1107-Alter-Report-Tables.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260624-1359-NRW-Price-Matrices-for-2026-27.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260702-1131-ReportTables-scheme-update.sql" />
+    <Content Include="scripts\Update\0007-Support\Sprint2026\20260928-1000-Alter-lookup-FinancialGuaranteeStatus-lookup-ImportFinancialGuaranteeStatus.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />

@@ -3,17 +3,23 @@
     using System.ComponentModel.DataAnnotations;
     public enum FOIOutputColumns
     {
+        [Display(Name = "Notification Number")]
+        NotificationNumber = 1,
+
         [Display(Name = "Import / Export")]
-        ImportOrExport = 2,
+        ImportOrExport,
 
         [Display(Name = "Interim / non-interim")]
-        Interim = 3,
+        Interim,
 
         [Display(Name = "Basel/OECD Code and Description")]
         BaselOecdCode,
 
         [Display(Name = "Notifier")]
         NotifierName,
+
+        [Display(Name = "Notifier Registration Number")]
+        ExporterRegistrationNumber,
 
         [Display(Name = "Notifier Address")]
         NotifierAddress,
@@ -32,6 +38,9 @@
 
         [Display(Name = "Producer")]
         ProducerName,
+
+        [Display(Name = "Producer Registration Number")]
+        ProducerRegistrationNumber,
 
         [Display(Name = "Producer Address")]
         ProducerAddress,
@@ -79,6 +88,9 @@
         [Display(Name = "Consignee")]
         ImporterName,
 
+        [Display(Name = "Consignee Registration Number")]
+        ImporterRegistrationNumber,
+
         [Display(Name = "Consignee Address")]
         ImporterAddress,
 
@@ -96,6 +108,9 @@
 
         [Display(Name = "Facility")]
         FacilityName,
+
+        [Display(Name = "Facility Registration Number")]
+        FacilityRegistrationNumber,
 
         [Display(Name = "Facility Address")]
         FacilityAddress,
@@ -124,6 +139,9 @@
         [Display(Name = "Consent Valid To")]
         ConsentTo,
 
+        [Display(Name = "Consent withdrawn date")]
+        ConsentWithdrawnDate,
+
         [Display(Name = "Notification status")]
         NotificationStatus,
 
@@ -144,5 +162,8 @@
 
         [Display(Name = "Officer name")]
         Officer,
+
+        [Display(Name = "Customs Code")]
+        CustomsCode,
     }
 }
