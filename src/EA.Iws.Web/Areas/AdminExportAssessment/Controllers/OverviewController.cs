@@ -69,6 +69,8 @@
             model.WasteCodeOverviewViewModel.CanEditHCodes = canEditHCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.TransportationViewModel.CanAddCarrier = canAddCarrier && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.TransportationViewModel.DisplayAllCarriers = IsEditableStatus(result.SubmitSummaryData.Status);
+            model.AmountsAndDatesViewModel.IntendedShipmentData.ShouldDisplayShipmentSelfEnterDataQuestion = 
+                                                                        !(model.AmountsAndDatesViewModel.IntendedShipmentData.WillSelfEnterShipmentData ?? false);
 
             return View(model);
         }
