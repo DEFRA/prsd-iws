@@ -120,6 +120,12 @@
   <data name="ActiveLoadsPermitted" xml:space="preserve">
     <value>Active loads permitted</value>
   </data>
+  <data name="CalculationContinued" xml:space="preserve">
+    <value>Calculation continued</value>
+  </data>
+  <data name="CoverAmount" xml:space="preserve">
+    <value>Amount of cover provided</value>
+  </data>
   <data name="CurrentTitle" xml:space="preserve">
     <value>Current financial guarantee</value>
   </data>

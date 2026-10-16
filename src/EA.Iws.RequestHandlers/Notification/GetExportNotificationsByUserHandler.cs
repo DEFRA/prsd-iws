@@ -32,7 +32,9 @@
                     E.Name AS Exporter,
                     I.Name AS Importer,
                     P.Name AS Producer,
-                    AccessLevel = CASE WHEN N.UserId = @Id THEN 'Owner' Else 'Administrator' END
+                    AccessLevel = CASE WHEN N.UserId = @Id THEN 'Owner' Else 'Administrator' END,
+                    C.[From] AS ConsentedFrom,
+                    C.[To] AS ConsentedTo
                 FROM 
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
@@ -47,6 +49,7 @@
                     LEFT JOIN [Notification].[ProducerCollection] PC ON N.Id = PC.NotificationId
                     LEFT JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId AND P.IsSiteOfExport = 1
                     LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id AND SU.UserId =  @Id
+                    LEFT JOIN [Notification].[Consent] C ON C.NotificationApplicationId = N.Id
                 WHERE 
                     (N.UserId = @Id OR SU.UserId = @Id)
                     AND (@Status IS NULL OR NA.Status = @Status)
