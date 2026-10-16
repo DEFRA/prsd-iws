@@ -1,5 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using EA.Iws.Core.Notification;
     using EA.Iws.Core.Notification.AdditionalCharge;
@@ -7,15 +10,12 @@
     using EA.Iws.Core.Shared;
     using EA.Iws.Core.SystemSettings;
     using EA.Iws.Requests.AdditionalCharge;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.SystemSettings;
     using EA.Iws.Web.Infrastructure.AdditionalCharge;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
-    using Requests.NotificationAssessment;
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels;
 
     [AuthorizeActivity(typeof(GetKeyDatesSummaryInformation))]
@@ -90,6 +90,10 @@
             {
                 await SetNotificationReceived(model);
             }
+            else if (model.Command == KeyDatesStatusEnum.ChangeOfficer)
+            {
+                await SetNameOfOfficer(model);
+            }
             else if (model.Command == KeyDatesStatusEnum.AssessmentCommenced)
             {
                 await SetAssessmentCommenced(model);
@@ -109,9 +113,6 @@
             else if (model.Command == KeyDatesStatusEnum.FileClosed)
             {
                 await FileClosed(model);
-            }
-            else if (model.Command == KeyDatesStatusEnum.ArchiveReference)
-            {
                 await SetArchiveReference(model);
             }
             else
@@ -255,6 +256,11 @@
                 model.NewDate.AsDateTime().GetValueOrDefault(), model.NameOfOfficer);
 
             await mediator.SendAsync(setAssessmentCommenced);
+        }
+
+        private async Task SetNameOfOfficer(DateInputViewModel model)
+        {
+            await mediator.SendAsync(new SetKeyDatesOfficer(model.NotificationId, model.NameOfOfficer));
         }
 
         private async Task SetAcknowledged(DateInputViewModel model)
