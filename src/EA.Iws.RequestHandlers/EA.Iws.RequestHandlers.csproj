@@ -543,7 +543,7 @@
     <Compile Include="NotificationAssessment\SetFacilityDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
-    <Compile Include="NotificationAssessment\SetImportKeyDatesOfficerHandler.cs" />
+    <Compile Include="NotificationAssessment\SetKeyDatesOfficerHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetProducerDetailsHandler.cs" />

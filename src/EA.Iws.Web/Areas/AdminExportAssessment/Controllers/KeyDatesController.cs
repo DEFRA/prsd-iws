@@ -260,7 +260,7 @@
 
         private async Task SetNameOfOfficer(DateInputViewModel model)
         {
-            await mediator.SendAsync(new SetImportKeyDatesOfficer(model.NotificationId, model.NameOfOfficer));
+            await mediator.SendAsync(new SetKeyDatesOfficer(model.NotificationId, model.NameOfOfficer));
         }
 
         private async Task SetAcknowledged(DateInputViewModel model)

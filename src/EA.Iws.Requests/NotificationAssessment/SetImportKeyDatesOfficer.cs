@@ -1,16 +1,14 @@
 ﻿namespace EA.Iws.Requests.NotificationAssessment
 {
     using System;
-    using Core.Admin.KeyDates;
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using EA.Iws.Core.ImportNotificationAssessment;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(UserAdministrationPermissions.CanOverrideKeyDates)]
-    public class SetImportKeyDatesOfficer : IRequest<Unit>
+    public class SetKeyDatesOfficer : IRequest<Unit>
     {
-        public SetImportKeyDatesOfficer(Guid notificationId, string nameOfOfficer)
+        public SetKeyDatesOfficer(Guid notificationId, string nameOfOfficer)
         {
             this.NotificationId = notificationId;
             this.NameOfOfficer = nameOfOfficer;

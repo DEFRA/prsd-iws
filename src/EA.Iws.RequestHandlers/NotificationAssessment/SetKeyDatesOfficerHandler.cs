@@ -2,16 +2,16 @@
 {
     using System.Threading.Tasks;
     using Domain.NotificationAssessment;
-    using EA.Iws.Requests.ImportNotificationAssessment;
+    using EA.Iws.Requests.NotificationAssessment;
     using Prsd.Core.Mediator;
 
-    internal class SetImportKeyDatesOfficerHandler : IRequestHandler<SetImportKeyDatesOfficer, Unit>
+    internal class SetKeyDatesOfficerHandler : IRequestHandler<SetKeyDatesOfficer, Unit>
     {
         private readonly IKeyDatesRepository repository;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly DecisionRequiredBy decisionRequiredBy;
 
-        public SetImportKeyDatesOfficerHandler(IKeyDatesRepository repository,
+        public SetKeyDatesOfficerHandler(IKeyDatesRepository repository,
             INotificationAssessmentRepository assessmentRepository,
             DecisionRequiredBy decisionRequiredBy)
         {
@@ -20,7 +20,7 @@
             this.decisionRequiredBy = decisionRequiredBy;
         }
 
-        public async Task<Unit> HandleAsync(SetImportKeyDatesOfficer message)
+        public async Task<Unit> HandleAsync(SetKeyDatesOfficer message)
         {
             var assessment = await assessmentRepository.GetByNotificationId(message.NotificationId);
 
