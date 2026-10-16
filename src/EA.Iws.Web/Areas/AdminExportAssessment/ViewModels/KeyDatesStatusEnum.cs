@@ -29,6 +29,9 @@
         FileClosed = 8,
 
         [Display(Name = "Archive reference")]
-        ArchiveReference = 9
+        ArchiveReference = 9,
+
+        [Display(Name = "Change officer")]
+        ChangeOfficer = 10
     }
 }

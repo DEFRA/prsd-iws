@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
 {
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public enum KeyDatesCommand
@@ -17,6 +18,9 @@
         FileClosed = 4,
 
         [Display(Name = "Archive reference")]
-        ArchiveReference = 5
+        ArchiveReference = 5,
+
+        [Display(Name = "Change officer")]
+        ChangeOfficer = 6
     }
 }
