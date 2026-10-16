@@ -1,5 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using System;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Core.Notification.Audit;
     using Core.PackagingType;
     using Infrastructure;
@@ -7,10 +12,6 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.PackagingType;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels.PackagingTypes;
     using Views.PackagingTypes;
     using Web.ViewModels.Shared;
@@ -35,9 +36,9 @@
             packagingTypes.ShowEnumValue = true;
 
             //We need to exclude 'other' as this will be handled separately
-            packagingTypes.PossibleValues =
-                packagingTypes.PossibleValues.Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other)
-                    .ToList();
+            packagingTypes.PossibleValues = packagingTypes.PossibleValues
+                                                          .Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other)
+                                                          .ToList();
 
             var model = new PackagingTypesViewModel
             {
@@ -72,10 +73,10 @@
 
             try
             {
-                var selectedPackagingTypes =
-                    model.PackagingTypes.PossibleValues.Where(p => p.Selected)
-                        .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
-                        .ToList();
+                var selectedPackagingTypes = model.PackagingTypes.PossibleValues
+                                                                 .Where(p => p.Selected)
+                                                                 .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
+                                                                 .ToList();
 
                 if (model.OtherSelected)
                 {
@@ -117,6 +118,7 @@
                     throw;
                 }
             }
+
             return View(model);
         }
     }
