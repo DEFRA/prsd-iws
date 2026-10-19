@@ -19,7 +19,8 @@
                     LastDate = source.ShipmentPeriod.LastDate,
                     NumberOfShipments = source.NumberOfShipments,
                     Quantity = source.Quantity,
-                    Units = source.Units
+                    Units = source.Units,
+                    WillSelfEnterShipmentData = source.WillSelfEnterShipmentData
                 };
             }
             else
