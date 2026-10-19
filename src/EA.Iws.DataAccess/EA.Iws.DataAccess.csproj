@@ -246,6 +246,7 @@
     <Compile Include="Repositories\ExportWorklistRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementPartailRejectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationAdditionalChargeRepository.cs" />
+    <Compile Include="Repositories\Imports\KeyDatesRepository.cs" />
     <Compile Include="Repositories\Imports\WasteComponentRepository.cs" />
     <Compile Include="Repositories\ImportWorklistRepository.cs" />
     <Compile Include="Repositories\IntraCountryExportAllowedRepository.cs" />
@@ -294,6 +295,7 @@
     <Compile Include="Repositories\Imports\WasteTypeRepository.cs" />
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\KeyDatesOverrideRepository.cs" />
+    <Compile Include="Repositories\KeyDatesRepository.cs" />
     <Compile Include="Repositories\MeansOfTransportRepository.cs" />
     <Compile Include="Repositories\MovementAuditRepository.cs" />
     <Compile Include="Repositories\MovementCarrierRepository.cs" />
