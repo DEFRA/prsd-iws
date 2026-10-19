@@ -74,6 +74,11 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddPayment(PaymentDetailsViewModel model, string submitButton)
         {
+            if (model.PaymentMethod == PaymentMethod.GovPay)
+            {
+                ModelState.AddModelError("PaymentMethod", "Gov.Pay is not a valid payment method for manually recorded payments.");
+            }
+
             bool paymentDateIsInTheFuture = model.PaymentDate.AsDateTime().HasValue && model.PaymentDate.AsDateTime().Value > DateTime.UtcNow;
             bool submitButtonYes = false;
             bool submitButtonNo = false;

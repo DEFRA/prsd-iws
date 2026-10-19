@@ -139,6 +139,14 @@
     <Compile Include="Entities\PasswordResetData.cs" />
     <Compile Include="Entities\PasswordResetRequest.cs" />
     <Compile Include="Entities\VerifiedEmailData.cs" />
+    <Compile Include="GovUkPay\CreateCardPaymentRequest.cs" />
+    <Compile Include="GovUkPay\CreatePaymentResult.cs" />
+    <Compile Include="GovUkPay\IPayClient.cs" />
+    <Compile Include="GovUkPay\Link.cs" />
+    <Compile Include="GovUkPay\PayClient.cs" />
+    <Compile Include="GovUkPay\PaymentLinks.cs" />
+    <Compile Include="GovUkPay\PaymentState.cs" />
+    <Compile Include="GovUkPay\PaymentWithAllLinks.cs" />
     <Compile Include="HttpClients\HttpClientHandlerConfig.cs" />
     <Compile Include="HttpClients\HttpClientHandlerFactory.cs" />
     <Compile Include="HttpClients\HttpClientWrapper.cs" />
