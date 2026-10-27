@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using Core.NotificationAssessment;
+    using EA.Iws.Core.Notification;
     using Infrastructure.Authorization;
     using NotificationApplication.ViewModels.NotificationApplication;
     using Prsd.Core.Mediator;
@@ -69,8 +70,7 @@
             model.WasteCodeOverviewViewModel.CanEditHCodes = canEditHCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.TransportationViewModel.CanAddCarrier = canAddCarrier && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.TransportationViewModel.DisplayAllCarriers = IsEditableStatus(result.SubmitSummaryData.Status);
-            model.AmountsAndDatesViewModel.IntendedShipmentData.ShouldDisplayShipmentSelfEnterDataQuestion = 
-                                                                        !(model.AmountsAndDatesViewModel.IntendedShipmentData.WillSelfEnterShipmentData ?? false);
+            model.AmountsAndDatesViewModel.IntendedShipmentData.ShouldDisplayShipmentSelfEnterDataQuestion = (result.CompetentAuthority == UKCompetentAuthority.Scotland);
 
             return View(model);
         }
