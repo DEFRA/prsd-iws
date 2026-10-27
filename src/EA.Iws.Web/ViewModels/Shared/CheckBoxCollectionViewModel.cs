@@ -18,7 +18,7 @@
             var enumerable = selectedValues as TEnum[] ?? selectedValues.ToArray();
             foreach (var item in PossibleValues)
             {
-                item.Selected = enumerable.Any(p => (Convert.ToInt32(p)).ToString() == item.Value);
+                item.Selected = enumerable.Any(p => p.ToString() == item.Value);
             }
         }
 
@@ -56,7 +56,7 @@
                 // Set field name to either the enum name or the display name.
                 var name = (displayAttribute == null) ? field.Name : displayAttribute.Name;
 
-                fieldNames.Add(new SelectListItem { Text = name, Value = ((int)field.GetValue(null)).ToString() });
+                fieldNames.Add(new SelectListItem { Text = name, Value = field.Name });
             }
 
             return new CheckBoxCollectionViewModel()
