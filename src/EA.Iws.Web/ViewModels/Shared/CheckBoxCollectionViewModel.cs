@@ -13,6 +13,14 @@
 
         public bool ShowEnumValue { get; set; }
 
+        /// <summary>
+        /// The enum type this collection was created from. Used to resolve a checkbox's
+        /// Value (the enum member's name) back to its underlying numeric value for display
+        /// purposes only (e.g. when ShowEnumValue is true), without changing the Value used
+        /// for form submission/model binding.
+        /// </summary>
+        public Type EnumType { get; set; }
+
         public void SetSelectedValues<TEnum>(IEnumerable<TEnum> selectedValues)
         {
             var enumerable = selectedValues as TEnum[] ?? selectedValues.ToArray();
@@ -29,6 +37,15 @@
             {
                 item.Selected = enumerable.Any(p => p.ToString() == item.Value);
             }
+        }
+
+        /// <summary>
+        /// Returns the underlying numeric value for the given checkbox's Value (enum member name),
+        /// for display purposes only.
+        /// </summary>
+        public int GetEnumValue(string value)
+        {
+            return Convert.ToInt32(Enum.Parse(EnumType, value));
         }
 
         /// <summary>
@@ -61,7 +78,8 @@
 
             return new CheckBoxCollectionViewModel()
             {
-                PossibleValues = fieldNames
+                PossibleValues = fieldNames,
+                EnumType = typeof(T)
             };
         }
     }
