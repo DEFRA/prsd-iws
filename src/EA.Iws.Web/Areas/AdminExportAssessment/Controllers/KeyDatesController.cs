@@ -115,6 +115,10 @@
                 await FileClosed(model);
                 await SetArchiveReference(model);
             }
+            else if (model.Command == KeyDatesStatusEnum.ArchiveReference)
+            {
+                await SetArchiveReference(model);
+            }
             else
             {
                 throw new InvalidOperationException();

@@ -375,7 +375,7 @@
         <br />
         <br />
 
-        if (Model.Command != KeyDatesStatusEnum.ChangeOfficer)
+        if (Model.Command != KeyDatesStatusEnum.ChangeOfficer && Model.Command != KeyDatesStatusEnum.ArchiveReference)
         {
             <fieldset>
                 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
@@ -388,6 +388,17 @@
         }
 
         if (Model.Command == KeyDatesStatusEnum.FileClosed)
+        {
+            <fieldset>
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
+                    @Html.Gds().LabelFor(m => m.ArchiveReference, false)
+                    @Html.Gds().ValidationMessageFor(m => m.ArchiveReference)
+                    @Html.Gds().TextBoxFor(m => m.ArchiveReference, new { @Maxlength = 100 })
+                </div>
+            </fieldset>
+        }
+
+        if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
         {
             <fieldset>
                 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
