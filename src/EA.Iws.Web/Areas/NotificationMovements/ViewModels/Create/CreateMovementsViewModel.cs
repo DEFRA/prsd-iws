@@ -31,7 +31,7 @@
                 .Select(x => new SelectListItem
                 {
                     Text = EnumHelper.GetDisplayName(x),
-                    Value = ((int)x).ToString()
+                    Value = x.ToString()
                 })
                 .ToList();
 
@@ -41,12 +41,13 @@
                 {
                     Text = string.Format("{0} - {1}", EnumHelper.GetShortName(PackagingType.Other),
                         shipmentInfo.PackagingData.OtherDescription),
-                    Value = ((int)PackagingType.Other).ToString()
+                    Value = PackagingType.Other.ToString()
                 });
             }
 
             PackagingTypes = new CheckBoxCollectionViewModel();
             PackagingTypes.ShowEnumValue = true;
+            PackagingTypes.EnumType = typeof(PackagingType);
             PackagingTypes.PossibleValues = items;
         }
 
@@ -116,7 +117,7 @@
                 return PackagingTypes
                     .PossibleValues
                     .Where(x => x.Selected)
-                    .Select(x => (PackagingType)Convert.ToInt32(x.Value))
+                    .Select(x => (PackagingType)Enum.Parse(typeof(PackagingType), x.Value))
                     .ToList();
             }
         }
