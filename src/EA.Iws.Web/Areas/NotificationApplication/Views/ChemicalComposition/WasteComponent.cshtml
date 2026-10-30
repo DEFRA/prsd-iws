@@ -28,7 +28,7 @@
                         <label class="govuk-label govuk-checkboxes__label" for="@idForThisCheckBox">
                             @if (Model.WasteComponentTypes.ShowEnumValue)
                             {
-                                @Html.DisplayFor(m => m.WasteComponentTypes.PossibleValues[i].Value)
+                                @Model.WasteComponentTypes.GetEnumValue(Model.WasteComponentTypes.PossibleValues[i].Value)
                                 @Html.Raw(" - ")
                             }
                             @Html.DisplayFor(m => m.WasteComponentTypes.PossibleValues[i].Text)
