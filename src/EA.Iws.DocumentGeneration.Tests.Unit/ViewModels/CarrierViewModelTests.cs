@@ -62,7 +62,7 @@
 
             var result = CarrierViewModel.CreateCarrierViewModelsForNotification(meansOfTransport, carrierCollection, formatter);
 
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
         }
 
         [Fact]

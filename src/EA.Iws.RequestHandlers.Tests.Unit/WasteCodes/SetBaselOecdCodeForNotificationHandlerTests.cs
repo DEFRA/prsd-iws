@@ -100,7 +100,7 @@
             await handler.HandleAsync(new SetBaselOecdCodeForNotification(NotificationId, CodeType.Oecd, false,
                 FirstOecdCode.Id));
 
-            Assert.Empty(getTestNotification(context).WasteCodes.Where(wc => wc.CodeType == CodeType.Basel));
+            Assert.DoesNotContain(getTestNotification(context).WasteCodes, wc => wc.CodeType == CodeType.Basel);
             Assert.Equal(FirstOecdCode.Id, getTestNotification(context).BaselOecdCode.WasteCode.Id);
         }
 
