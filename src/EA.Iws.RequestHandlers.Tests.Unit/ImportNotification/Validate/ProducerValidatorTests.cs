@@ -90,7 +90,7 @@
 
             var result = await validator.ValidateAsync(producer);
 
-            Assert.Empty(result.Errors.Where(e => e.PropertyName == "Address.AddressLine1"));
+            Assert.DoesNotContain(result.Errors, e => e.PropertyName == "Address.AddressLine1");
         }
 
         [Fact]
@@ -130,7 +130,7 @@
 
             var result = await validator.ValidateAsync(producer);
 
-            Assert.Empty(result.Errors.Where(e => e.PropertyName == "Contact.ContactName"));
+            Assert.DoesNotContain(result.Errors, e => e.PropertyName == "Contact.ContactName");
         }
 
         [Theory]

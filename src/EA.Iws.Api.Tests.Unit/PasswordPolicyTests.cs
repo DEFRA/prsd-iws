@@ -2,6 +2,7 @@
 {
     using FluentAssertions;
     using Identity;
+    using System.Threading.Tasks;
     using Xunit;
 
     public class PasswordPolicyTests
@@ -15,7 +16,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenNullItem_ArgumentNullExceptionExpected()
+        public async Task ValidateAsync_GivenNullItem_ArgumentNullExceptionExpected()
         {
             var result = await Xunit.Record.ExceptionAsync(() => passwordPolicy.ValidateAsync(null));
 
@@ -23,7 +24,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenPasswordLengthIsLessThanRequired_ResultShouldContainError()
+        public async Task ValidateAsync_GivenPasswordLengthIsLessThanRequired_ResultShouldContainError()
         {
             var result = await passwordPolicy.ValidateAsync("PaswoS1");
 
@@ -31,7 +32,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenPasswordDoesNotContainLower_ResultShouldContainError()
+        public async Task ValidateAsync_GivenPasswordDoesNotContainLower_ResultShouldContainError()
         {
             var result = await passwordPolicy.ValidateAsync("PA5SW&RD");
 
@@ -39,7 +40,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenPasswordDoesNotContainUpper_ResultShouldContainError()
+        public async Task ValidateAsync_GivenPasswordDoesNotContainUpper_ResultShouldContainError()
         {
             var result = await passwordPolicy.ValidateAsync("pa5sw&rd");
 
@@ -47,7 +48,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenPasswordDoesNotContainDigit_ResultShouldContainError()
+        public async Task ValidateAsync_GivenPasswordDoesNotContainDigit_ResultShouldContainError()
         {
             var result = await passwordPolicy.ValidateAsync("pa5sw&rd");
 
@@ -55,7 +56,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenPasswordDoesNotContainSpecial_ResultShouldContainError()
+        public async Task ValidateAsync_GivenPasswordDoesNotContainSpecial_ResultShouldContainError()
         {
             var result = await passwordPolicy.ValidateAsync("pa5sword");
 
@@ -63,7 +64,7 @@
         }
 
         [Fact]
-        public async void ValidateAsync_GivenPasswordContainsUpperLowerDigitAndSpecial_ResultShouldBeSucceeded()
+        public async Task ValidateAsync_GivenPasswordContainsUpperLowerDigitAndSpecial_ResultShouldBeSucceeded()
         {
             var result = await passwordPolicy.ValidateAsync("Passw0r&");
 

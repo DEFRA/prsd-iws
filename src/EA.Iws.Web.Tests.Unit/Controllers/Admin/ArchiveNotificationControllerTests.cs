@@ -131,7 +131,7 @@
         }
 
         [Fact]
-        public async void Post_Archive()
+        public async Task Post_Archive()
         {
             controller.SelectAllNotifications(sampleNotifications, true);
             var result = await controller.Archive() as RedirectToRouteResult;
