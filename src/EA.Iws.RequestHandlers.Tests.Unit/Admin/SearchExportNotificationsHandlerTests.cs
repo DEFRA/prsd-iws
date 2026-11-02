@@ -159,7 +159,7 @@
             nonExistantSearchTerm = "GB 0001 005001";
             var results = await ResultsWhenSearchingFor(nonExistantSearchTerm);
 
-            Assert.Equal(0, results.Count);
+            Assert.Empty(results);
             Assert.True(!results.Any(r => r.NotificationNumber.Contains(nonExistantSearchTerm)));
         }
 
@@ -184,7 +184,7 @@
         {
             var results = await ResultsWhenSearchingFor("SRF");
 
-            Assert.Equal(0, results.Count);
+            Assert.Empty(results);
         }
 
         [Fact]
@@ -192,7 +192,7 @@
         {
             var results = await ResultsWhenSearchingFor("Exporter three");
 
-            Assert.Equal(0, results.Count);
+            Assert.Empty(results);
         }
 
         [Fact]

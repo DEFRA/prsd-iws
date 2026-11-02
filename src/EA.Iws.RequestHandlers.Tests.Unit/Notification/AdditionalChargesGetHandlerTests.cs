@@ -51,7 +51,7 @@
             var request = new Requests.Notification.GetNotificationAdditionalCharges(notificationId);
 
             var result = await handler.HandleAsync(request);
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
         }
     }
 }

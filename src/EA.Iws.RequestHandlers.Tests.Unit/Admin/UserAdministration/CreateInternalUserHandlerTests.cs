@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Notification;
     using RequestHandlers.Admin.UserAdministration;
     using Requests.Admin.UserAdministration;
@@ -21,7 +22,7 @@
         }
 
         [Fact]
-        public async void AddsNewIntneralUser()
+        public async Task AddsNewIntneralUser()
         {
             var message = new CreateInternalUser(userId, "job title",
                 localAreaId, UKCompetentAuthority.England);
@@ -32,7 +33,7 @@
         }
 
         [Fact]
-        public async void SaveChangesIsCalled()
+        public async Task SaveChangesIsCalled()
         {
             var message = new CreateInternalUser(userId, "job title",
                 localAreaId, UKCompetentAuthority.England);

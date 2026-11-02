@@ -2,6 +2,7 @@
 {
     using System;
     using System.IO;
+    using System.Threading.Tasks;
     using FakeItEasy;
     using Xunit;
 
@@ -24,7 +25,7 @@
         }
 
         [Fact]
-        public async void ScanFileAsync_GivenWriteFileThrowsException_IoExceptionShouldBeThrown()
+        public async Task ScanFileAsync_GivenWriteFileThrowsException_IoExceptionShouldBeThrown()
         {
             var file = A.Dummy<byte[]>();
 
@@ -37,7 +38,7 @@
         }
 
         [Fact]
-        public async void ScanFileAsync_GivenFileHasBeenRemoved_ScanResultShouldBeVirus()
+        public async Task ScanFileAsync_GivenFileHasBeenRemoved_ScanResultShouldBeVirus()
         {
             A.CallTo(() => fileAccess.FileExists(FileName)).Returns(false);
 
@@ -47,7 +48,7 @@
         }
 
         [Fact]
-        public async void ScanFileAsync_GivenFileHasNotBeenRemoved_ScanResultShouldBeClean()
+        public async Task ScanFileAsync_GivenFileHasNotBeenRemoved_ScanResultShouldBeClean()
         {
             A.CallTo(() => fileAccess.FileExists(FileName)).Returns(true);
 
@@ -57,7 +58,7 @@
         }
 
         [Fact]
-        public async void ScanFileAsync_GivenFileHasNotBeenRemoved_FileShouldBeDeleted()
+        public async Task ScanFileAsync_GivenFileHasNotBeenRemoved_FileShouldBeDeleted()
         {
             A.CallTo(() => fileAccess.FileExists(FileName)).Returns(true);
 
@@ -67,7 +68,7 @@
         }
 
         [Fact]
-        public async void ScanFileAsync_GivenTemporaryFileCouldNotBeDeleted_ScanResultShouldBeClean()
+        public async Task ScanFileAsync_GivenTemporaryFileCouldNotBeDeleted_ScanResultShouldBeClean()
         {
             A.CallTo(() => fileAccess.FileExists(FileName)).Returns(true);
             A.CallTo(() => fileAccess.DeleteFile(FileName)).Throws<IOException>();

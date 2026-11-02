@@ -69,7 +69,7 @@
 
             var result = await handler.HandleAsync(new GetExitCustomsOfficeAddDataByNotificationId(NotificationId));
 
-            Assert.Equal(1, result.Countries.Count);
+            Assert.Single(result.Countries);
             Assert.Equal(exitCustomsOffice.Name, result.CustomsOfficeData.Name);
         }
     }

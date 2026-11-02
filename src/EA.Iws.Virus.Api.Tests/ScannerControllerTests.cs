@@ -8,6 +8,7 @@
     using FakeItEasy;
     using Scanning;
     using Xunit;
+    using System.Threading.Tasks;
 
     public class ScannerControllerTests
     {
@@ -48,7 +49,7 @@
         }
 
         [Fact]
-        public async void PostScan_GivenFile_ScannerShouldBeCalled()
+        public async Task PostScan_GivenFile_ScannerShouldBeCalled()
         {
             var file = A.Dummy<byte[]>();
 
@@ -58,7 +59,7 @@
         }
 
         [Fact]
-        public async void PostScan_GivenFile_ScannerResultShouldBeReturned()
+        public async Task PostScan_GivenFile_ScannerResultShouldBeReturned()
         {
             var file = A.Dummy<byte[]>();
             var scanResult = A.Dummy<ScanResult>();

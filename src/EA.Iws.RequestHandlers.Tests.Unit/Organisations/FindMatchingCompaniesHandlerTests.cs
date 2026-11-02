@@ -79,7 +79,7 @@
 
             var strings = await handler.HandleAsync(new FindMatchingOrganisations("sfw"));
 
-            Assert.Equal(1, strings.Count);
+            Assert.Single(strings);
         }
 
         [Fact]

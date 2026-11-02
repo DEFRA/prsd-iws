@@ -144,7 +144,7 @@
             string searchNotificationNumber = "GB 0001 11111";
             var results = await ResultsWhenSearchingFor(searchNotificationNumber);
 
-            Assert.Equal(1, results.Count);
+            Assert.Single(results);
             Assert.Contains(results, r => r.NotificationNumber.Contains(searchNotificationNumber));
         }
 
@@ -154,7 +154,7 @@
             string nonExistantSearchTerm = "GB 0001 005001";
             var results = await ResultsWhenSearchingFor(nonExistantSearchTerm);
 
-            Assert.Equal(0, results.Count);
+            Assert.Empty(results);
             Assert.True(!results.Any(r => r.NotificationNumber.Contains(nonExistantSearchTerm)));
         }
 
@@ -162,7 +162,7 @@
         public async Task SearchBy_NotificationNumber_NotificationNumberWithoutSpace()
         {
             var results = await ResultsWhenSearchingFor("GB000144444");
-            Assert.Equal(1, results.Count);
+            Assert.Single(results);
         }
 
         [Fact]
@@ -176,14 +176,14 @@
         public async Task Find_NotAvailable_ImporterName()
         {
             var results = await ResultsWhenSearchingFor("Importer Six");
-            Assert.Equal(0, results.Count);
+            Assert.Empty(results);
         }
 
         [Fact]
         public async Task Find_Available_ImporterName()
         {
             var results = await ResultsWhenSearchingFor("Importer 2");
-            Assert.Equal(1, results.Count);
+            Assert.Single(results);
         }
 
         [Fact]
@@ -211,14 +211,14 @@
         public async Task Find_Available_ImporterName_With_UpperCase()
         {
             var results = await ResultsWhenSearchingFor("IMPORTER 2");
-            Assert.Equal(1, results.Count);
+            Assert.Empty(results);
         }
 
         [Fact]
         public async Task Find_Available_NotificationNumber_With_LowerCase()
         {
             var results = await ResultsWhenSearchingFor("gb 0001 11111");
-            Assert.Equal(1, results.Count);
+            Assert.Empty(results);
         }
     }
 }
