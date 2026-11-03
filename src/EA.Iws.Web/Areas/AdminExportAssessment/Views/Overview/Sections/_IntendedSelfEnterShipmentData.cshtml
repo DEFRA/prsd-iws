@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.AmountsAndDatesViewModel
 
 <div class="overview-block">
-    @if (Model.IntendedShipmentData.WillSelfEnterShipmentData.HasValue.Equals(true))
+    @if (Model.IntendedShipmentData.WillSelfEnterShipmentData.Value.Equals(true))
     {
         <div class="overview-block-element">
             Notifier
