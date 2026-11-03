@@ -88,7 +88,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comments/Rationale.
+        ///   Looks up a localized string similar to Reason for the charge.
         /// </summary>
         public static string Comments {
             get {

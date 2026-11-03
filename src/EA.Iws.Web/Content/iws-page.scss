@@ -25,6 +25,13 @@ a {
     white-space: nowrap;
 }
 
+.disabled-link {
+    color: #858686 !important;
+    text-decoration: none;
+    pointer-events: none; /* prevents clicking */
+    cursor: default;
+}
+
 .placeholder-text{
     font-size : 18px !important;
 }

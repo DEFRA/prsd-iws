@@ -71,6 +71,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisio
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calculation continued.
+        /// </summary>
+        public static string CalculationContinued {
+            get {
+                return ResourceManager.GetString("CalculationContinued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount of cover provided.
+        /// </summary>
+        public static string CoverAmount {
+            get {
+                return ResourceManager.GetString("CoverAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current financial guarantee.
         /// </summary>
         public static string CurrentTitle {

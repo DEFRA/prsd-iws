@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
+    using EA.Iws.Requests.Admin;
+    using EA.Iws.Requests.Admin.FinancialGuarantee;
+    using EA.Prsd.Core.Mediator;
+    using Infrastructure.Authorization;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure.Authorization;
-    using Prsd.Core.Mediator;
-    using Requests.Admin.FinancialGuarantee;
     using ViewModels.FinancialGuaranteeDecisionHistory;
 
     [AuthorizeActivity(typeof(GetFinancialGuaranteeHistory))]
@@ -21,13 +22,15 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var currentFinancialGuarantee = await mediator.SendAsync(new GetCurrentFinancialGuaranteeDetails(id));
+            var currentFinancialGuarantee = await mediator.SendAsync(new GetCurrentFinancialGuaranteeWithAmountsDetails(id));
             var history = await mediator.SendAsync(new GetFinancialGuaranteeHistory(id));
+            var competantAuthority = await mediator.SendAsync(new GetUserCompetentAuthority());
 
             var model = new FinancialGuaranteeDecisionHistoryViewModel
             {
                 CurrentFinancialGuarantee = currentFinancialGuarantee,
-                FinancialGuaranteeHistory = history
+                FinancialGuaranteeHistory = history,
+                CompetentAuthority = competantAuthority
             };
 
             return View(model);

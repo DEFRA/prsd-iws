@@ -31,7 +31,7 @@
         private PackagingTypesViewModel CreateValidPackagingTypesViewModel()
         {
             var packagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>();
-            var selectedValues = new[] { 1, 2 };
+            var selectedValues = new[] { PackagingType.Drum, PackagingType.WoodenBarrel };
             packagingTypes.SetSelectedValues(selectedValues);
             return new PackagingTypesViewModel()
             {

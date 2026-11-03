@@ -31,7 +31,7 @@
                         <label class="govuk-label govuk-checkboxes__label" for="@idForThisCheckBox">
                             @if (Model.PackagingTypes.ShowEnumValue)
                             {
-                                @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                                @Model.PackagingTypes.GetEnumValue(Model.PackagingTypes.PossibleValues[i].Value)
                                 @Html.Raw(" - ")
                             }
                             @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
@@ -45,7 +45,12 @@
                 <div class="multiple-choice govuk-checkboxes__item" data-target="other-option">
                     @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check", @class = "govuk-checkboxes__input" })
                     <label class="govuk-label govuk-checkboxes__label" for="other-option-check">
-                        @((int)PackagingType.Other) - @PackagingTypesResources.Other
+                        @if (Model.PackagingTypes.ShowEnumValue)
+                        {
+                            @((int)PackagingType.Other)
+                            @Html.Raw(" - ")
+                        }
+                        @PackagingTypesResources.Other
                     </label>
                 </div>
 

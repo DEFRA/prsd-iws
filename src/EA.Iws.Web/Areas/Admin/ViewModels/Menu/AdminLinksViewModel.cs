@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.Menu
 {
+    using Google.Apis.TagManager.v2.Data;
     using Infrastructure;
 
     public class AdminLinksViewModel : ReportLinkViewModel
@@ -19,5 +20,22 @@
         public bool ShowArchiveNotificationsLink { get; set; }
 
         public bool ShowNotificationLinks { get; set; }
+
+        public int UsersAwaitingApproval { get; set; }
+
+        public string ManageNewUsersText
+        {
+            get
+            {
+                if (UsersAwaitingApproval == 0)
+                {
+                    return "Manage new users";
+                }
+                else
+                {
+                    return "Manage new users (" + UsersAwaitingApproval.ToString() + ")";
+                }
+            }
+        }
     }
 }

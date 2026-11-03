@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.FinancialGuarantee
+@using EA.Iws.Core.Notification
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecisionHistory.FinancialGuaranteeDecisionHistoryViewModel
 @using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisionHistory.FinancialGuaranteeDecisionHistoryResources
 @{
@@ -19,63 +20,91 @@
     {
         <table class="govuk-table">
             <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">@Resources.Status</th>
-                <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CurrentFinancialGuarantee.Status)</td>
-            </tr>
-
-            <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">@Resources.DecisionDate</th>
-                <td class="govuk-table__cell">
-                    @if (Model.CurrentFinancialGuarantee.DecisionDate.HasValue)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.CurrentFinancialGuarantee.DecisionDate.Value)
-                    }
-                    else
-                    {
-                        @:- -
-                    }
-                </td>
-            </tr>
-            <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">@Resources.IsBlanketBond</th>
-                <td class="govuk-table__cell">
-                    @if (Model.CurrentFinancialGuarantee.IsBlanketBond.HasValue)
-                    {
-                        @(Model.CurrentFinancialGuarantee.IsBlanketBond.Value ? Resources.Yes : Resources.No)
-                    }
-                    else
-                    {
-                        @:- -
-                    }
-                </td>
-            </tr>
-            <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">@Resources.ReferenceNumber</th>
-                <td class="govuk-table__cell">
-                    @if (!string.IsNullOrWhiteSpace(Model.CurrentFinancialGuarantee.ReferenceNumber))
-                    {
-                        @Model.CurrentFinancialGuarantee.ReferenceNumber
-                    }
-                    else
-                    {
-                        @:- -
-                    }
-                </td>
-            </tr>
-            <tr class="govuk-table__row">
-                <th scope="row" class="govuk-table__header">@Resources.ActiveLoadsPermitted</th>
-                <td class="govuk-table__cell">
-                    @if (Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.HasValue)
-                    {
-                        @Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.Value
-                    }
-                    else
-                    {
-                        @:- -
-                    }
-                </td>
-            </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.Status</th>
+                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CurrentFinancialGuarantee.Status)</td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.DecisionDate</th>
+                    <td class="govuk-table__cell">
+                        @if (Model.CurrentFinancialGuarantee.DecisionDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.CurrentFinancialGuarantee.DecisionDate.Value)
+                        }
+                        else
+                        {
+                            @:- -
+                        }
+                    </td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.IsBlanketBond</th>
+                    <td class="govuk-table__cell">
+                        @if (Model.CurrentFinancialGuarantee.IsBlanketBond.HasValue)
+                        {
+                            @(Model.CurrentFinancialGuarantee.IsBlanketBond.Value ? Resources.Yes : Resources.No)
+                        }
+                        else
+                        {
+                            @:- -
+                        }
+                    </td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.ReferenceNumber</th>
+                    <td class="govuk-table__cell">
+                        @if (!string.IsNullOrWhiteSpace(Model.CurrentFinancialGuarantee.ReferenceNumber))
+                        {
+                            @Model.CurrentFinancialGuarantee.ReferenceNumber
+                        }
+                        else
+                        {
+                            @:- -
+                        }
+                    </td>
+                </tr>
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.ActiveLoadsPermitted</th>
+                    <td class="govuk-table__cell">
+                        @if (Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.HasValue)
+                        {
+                            @Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.Value
+                        }
+                        else
+                        {
+                            @:- -
+                        }
+                    </td>
+                </tr>
+                @if (Model.CompetentAuthority != UKCompetentAuthority.Scotland)
+                {
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">@Resources.CoverAmount</th>
+                        <td class="govuk-table__cell">
+                            @if (Model.CurrentFinancialGuarantee.CoverAmount.HasValue)
+                            {
+                                @Model.CurrentFinancialGuarantee.CoverAmount.Value
+                            }
+                            else
+                            {
+                                @:- -
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">@Resources.CalculationContinued</th>
+                        <td class="govuk-table__cell">
+                            @if (Model.CurrentFinancialGuarantee.CalculationContinued.HasValue)
+                            {
+                                @Model.CurrentFinancialGuarantee.CalculationContinued.Value
+                            }
+                            else
+                            {
+                                @:- -
+                            }
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     }
@@ -95,38 +124,38 @@
     {
         <table class="govuk-table">
             <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-                <th scope="col" class="govuk-table__header">@Resources.Status</th>
-                <th scope="col" class="govuk-table__header">@Resources.Date</th>
-                <th scope="col" class="govuk-table__header"></th>
-            </tr>
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@Resources.Status</th>
+                    <th scope="col" class="govuk-table__header">@Resources.Date</th>
+                    <th scope="col" class="govuk-table__header"></th>
+                </tr>
             </thead>
             <tbody>
-            @foreach (var financialGuarantee in Model.FinancialGuaranteeHistory)
-            {
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(financialGuarantee.Status)</td>
-                    <td class="govuk-table__cell">
-                        @if (financialGuarantee.DecisionDate.HasValue)
-                        {
-                            @Html.Gds().DisplayDate(financialGuarantee.DecisionDate.Value)
-                        }
-                        else
-                        {
-                            @:- -
-                        }
-                    </td>
-                    <td class="govuk-table__cell">
-                        @Html.ActionLink(Resources.DetailsLink, "Index", "FinancialGuaranteeDetails",
-                            routeValues: new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, htmlAttributes: null)
-                        @if (financialGuarantee.Status == FinancialGuaranteeStatus.Approved)
-                        {
-                            @:&nbsp;
-                            @Html.ActionLink(Resources.Release, "Release", "FinancialGuaranteeDecision", new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, null)
-                        }
-                    </td>
-                </tr>
-            }
+                @foreach (var financialGuarantee in Model.FinancialGuaranteeHistory)
+                {
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(financialGuarantee.Status)</td>
+                        <td class="govuk-table__cell">
+                            @if (financialGuarantee.DecisionDate.HasValue)
+                            {
+                                @Html.Gds().DisplayDate(financialGuarantee.DecisionDate.Value)
+                            }
+                            else
+                            {
+                                @:- -
+                            }
+                        </td>
+                        <td class="govuk-table__cell">
+                            @Html.ActionLink(Resources.DetailsLink, "Index", "FinancialGuaranteeDetails",
+                                routeValues: new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, htmlAttributes: null)
+                            @if (financialGuarantee.Status == FinancialGuaranteeStatus.Approved)
+                            {
+                                @:&nbsp;
+                                @Html.ActionLink(Resources.Release, "Release", "FinancialGuaranteeDecision", new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, null)
+                            }
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
     }
