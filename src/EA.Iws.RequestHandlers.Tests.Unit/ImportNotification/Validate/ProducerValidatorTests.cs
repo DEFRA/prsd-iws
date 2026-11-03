@@ -37,7 +37,7 @@
             var producer = GetValidProducer();
             producer.Address.AddressLine1 = null;
 
-            var result = await validator.ValidateAsync(producer);
+            var result = await validator.ValidateAsync(producer, TestContext.Current.CancellationToken);
 
             Assert.Equal("Address.AddressLine1", result.Errors.Single().PropertyName);
         }
@@ -48,7 +48,7 @@
             var producer = GetValidProducer();
             producer.Contact.ContactName = null;
 
-            var result = await validator.ValidateAsync(producer);
+            var result = await validator.ValidateAsync(producer, TestContext.Current.CancellationToken);
 
             Assert.Equal("Contact.ContactName", result.Errors.Single().PropertyName);
         }
@@ -68,7 +68,7 @@
             var producer = GetValidProducer();
             producer.Address = null;
 
-            var result = await validator.ValidateAsync(producer);
+            var result = await validator.ValidateAsync(producer, TestContext.Current.CancellationToken);
 
             Assert.Equal(1, result.Errors.Count(e => e.PropertyName == "Address"));
         }
@@ -88,7 +88,7 @@
             var producer = GetValidProducer();
             producer.Address = new Address();
 
-            var result = await validator.ValidateAsync(producer);
+            var result = await validator.ValidateAsync(producer, TestContext.Current.CancellationToken);
 
             Assert.DoesNotContain(result.Errors, e => e.PropertyName == "Address.AddressLine1");
         }
@@ -108,7 +108,7 @@
             var producer = GetValidProducer();
             producer.Contact = null;
 
-            var result = await validator.ValidateAsync(producer);
+            var result = await validator.ValidateAsync(producer, TestContext.Current.CancellationToken);
 
             Assert.Equal(1, result.Errors.Count(e => e.PropertyName == "Contact"));
         }
@@ -128,7 +128,7 @@
             var producer = GetValidProducer();
             producer.Contact = new Contact();
 
-            var result = await validator.ValidateAsync(producer);
+            var result = await validator.ValidateAsync(producer, TestContext.Current.CancellationToken);
 
             Assert.DoesNotContain(result.Errors, e => e.PropertyName == "Contact.ContactName");
         }

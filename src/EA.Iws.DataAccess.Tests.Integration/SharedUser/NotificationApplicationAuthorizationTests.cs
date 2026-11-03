@@ -45,13 +45,13 @@
             context.NotificationApplications.Add(notification);
             context.Users.Add(aspnetInternalUser);
             context.LocalAreas.Add(localArea);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
                 localArea.Id);
 
             context.InternalUsers.Add(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             A.CallTo(() => userContext.UserId).Returns(Guid.Parse(internalUser.UserId));
 
@@ -63,14 +63,14 @@
 
             // Clear data.
             context.DeleteOnCommit(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.Entry(aspnetInternalUser).State = EntityState.Deleted;
             context.Entry(localArea).State = EntityState.Deleted;
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -86,14 +86,14 @@
             context.NotificationApplications.Add(notification);
             context.Users.Add(aspnetInternalUser);
             context.LocalAreas.Add(localArea);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             // Internal user is different UKCA from the notification - should cause the exception.
             var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.Wales,
                 localArea.Id);
 
             context.InternalUsers.Add(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             A.CallTo(() => userContext.UserId).Returns(Guid.Parse(internalUser.UserId));
 
@@ -104,14 +104,14 @@
 
             // Clear data.
             context.DeleteOnCommit(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.Entry(aspnetInternalUser).State = EntityState.Deleted;
             context.Entry(localArea).State = EntityState.Deleted;
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -130,7 +130,7 @@
             context.Users.Add(aspnetInternalUser);
             context.Users.Add(aspnetSharedUser);
             context.LocalAreas.Add(localArea);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
                 localArea.Id);
@@ -138,10 +138,10 @@
             var sharedUser = new SharedUser(notification.Id, aspnetSharedUser.Id, DateTimeOffset.Now);
 
             context.SharedUser.Add(sharedUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.InternalUsers.Add(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var authorization = new NotificationApplicationAuthorization(context, userContext);
 
@@ -151,15 +151,15 @@
             // Clear data.
             context.DeleteOnCommit(internalUser);
             context.DeleteOnCommit(sharedUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.Entry(aspnetInternalUser).State = EntityState.Deleted;
             context.Entry(aspnetSharedUser).State = EntityState.Deleted;
             context.Entry(localArea).State = EntityState.Deleted;
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -178,7 +178,7 @@
             context.Users.Add(aspnetInternalUser);
             context.Users.Add(aspnetSharedUser);
             context.LocalAreas.Add(localArea);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
                 localArea.Id);
@@ -186,7 +186,7 @@
 
             context.InternalUsers.Add(internalUser);
             context.SharedUser.Add(sharedUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             // Set the shared user to be the user context.
             A.CallTo(() => userContext.UserId).Returns(Guid.Parse(sharedUser.UserId));
@@ -200,15 +200,15 @@
             // Clear data.
             context.DeleteOnCommit(internalUser);
             context.DeleteOnCommit(sharedUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.Entry(aspnetInternalUser).State = EntityState.Deleted;
             context.Entry(aspnetSharedUser).State = EntityState.Deleted;
             context.Entry(localArea).State = EntityState.Deleted;
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -224,13 +224,13 @@
             context.NotificationApplications.Add(notification);
             context.Users.Add(aspnetInternalUser);
             context.LocalAreas.Add(localArea);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
                 localArea.Id);
 
             context.InternalUsers.Add(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var authorization = new NotificationApplicationAuthorization(context, userContext);
 
@@ -239,14 +239,14 @@
 
             // Clear data.
             context.DeleteOnCommit(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.Entry(aspnetInternalUser).State = EntityState.Deleted;
             context.Entry(localArea).State = EntityState.Deleted;
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -262,13 +262,13 @@
             context.NotificationApplications.Add(notification);
             context.Users.Add(aspnetInternalUser);
             context.LocalAreas.Add(localArea);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
                 localArea.Id);
 
             context.InternalUsers.Add(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             // Set the shared user to be the user context.
             A.CallTo(() => userContext.UserId).Returns(notification.UserId);
@@ -281,14 +281,14 @@
 
             // Clear data.
             context.DeleteOnCommit(internalUser);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.Entry(aspnetInternalUser).State = EntityState.Deleted;
             context.Entry(localArea).State = EntityState.Deleted;
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
     }
 }

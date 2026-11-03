@@ -49,14 +49,14 @@
             try
             {
                 context.Users.Add(newUser);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 context.Organisations.Add(org);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Assign org to user
                 newUser.LinkToOrganisation(org);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Hold OrgID of newly created entity
                 var oldOrgId = org.Id;
@@ -64,12 +64,12 @@
                 //Update org with change in Business Type
                 org = new Organisation("Name Changed", BusinessType.SoleTrader);
                 context.Organisations.Add(org);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Update user with newly created org2
                 var user = await context.Users.SingleAsync(u => u.Id == newUser.Id);
                 user.UpdateOrganisationOfUser(org);
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
                 Assert.True(user.Organisation.Id == org.Id);
 
                 //Both Orgs should have different OrgIds
@@ -103,7 +103,7 @@
             {
                 context.NotificationApplications.Add(notification);
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 notificationId = notification.Id;
 
@@ -112,12 +112,12 @@
                     packagingInfo1
                 });
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 var count =
                     await context.Database.SqlQuery<int>(
                         "select count(id) from notification.PackagingInfo where NotificationId = @id",
-                        new SqlParameter("id", notificationId)).SingleAsync();
+                        new SqlParameter("id", notificationId)).SingleAsync(TestContext.Current.CancellationToken);
 
                 Assert.Equal(1, count);
 
@@ -127,12 +127,12 @@
                     packagingInfo3
                 });
 
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 count =
                     await context.Database.SqlQuery<int>(
                         "select count(id) from notification.PackagingInfo where NotificationId = @id",
-                        new SqlParameter("id", notificationId)).SingleAsync();
+                        new SqlParameter("id", notificationId)).SingleAsync(TestContext.Current.CancellationToken);
 
                 Assert.Equal(2, count);
             }

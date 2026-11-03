@@ -45,7 +45,7 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var producerCollection = new ProducerCollection(notification.Id);
 
@@ -55,7 +55,7 @@
             }
 
             context.Producers.Add(producerCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var dbProducerCollection = context.Producers.Single(p => p.NotificationId == notification.Id);
 
@@ -73,25 +73,25 @@
             var contact = new Contact(string.Empty, String.Empty, String.Empty, String.Empty);
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var producerCollection = new ProducerCollection(notification.Id);
 
             var producer = producerCollection.AddProducer(business, address, contact);
 
             context.Producers.Add(producerCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var updateProducer = producerCollection.GetProducer(producer.Id);
             var newAddress = new Address("address1", string.Empty, "town", string.Empty, string.Empty, "country");
 
             updateProducer.Address = newAddress;
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var newAddress1 =
                 await context.Database.SqlQuery<string>("SELECT [Address1] FROM [Notification].[Producer] WHERE Id = @id",
-                    new SqlParameter("id", producer.Id)).SingleAsync();
+                    new SqlParameter("id", producer.Id)).SingleAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal("address1", newAddress1);
         }
@@ -106,7 +106,7 @@
 
             notification.SetPackagingInfo(new[] { PackagingInfo.CreatePackagingInfo(PackagingType.Bag) });
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.Single(notification.PackagingInfos);
         }
@@ -130,15 +130,15 @@
             };
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             notification.SetOperationCodes(codes);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             notification.SetOperationCodes(newCodes);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.Collection(notification.OperationInfos,
                 item => Assert.Equal(OperationCode.R3, notification.OperationInfos.ElementAt(0).OperationCode),
@@ -152,7 +152,7 @@
                 UKCompetentAuthority.England, 0);
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             List<WasteAdditionalInformation> wasteCompositions = new List<WasteAdditionalInformation>
             {
@@ -161,7 +161,7 @@
             };
             notification.SetWasteType(WasteType.CreateWoodWasteType("This waste type is of wood type. I am writing some description here.", wasteCompositions));
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(notification.HasWasteType);
         }
@@ -175,13 +175,13 @@
             notification.SetSpecialHandlingRequirements("keep upright");
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(notification.HasSpecialHandlingRequirements);
             Assert.Equal("keep upright", notification.SpecialHandlingDetails);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
         
         [Fact]
@@ -195,7 +195,7 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var producerCollection = new ProducerCollection(notification.Id);
 
@@ -204,7 +204,7 @@
             Assert.True(producerCollection.Producers.Any());
 
             producerCollection.RemoveProducer(producer.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.False(producerCollection.Producers.Any());
         }
@@ -220,7 +220,7 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var producerCollection = new ProducerCollection(notification.Id);
 
@@ -230,7 +230,7 @@
             Assert.True(producerCollection.Producers.Count() == 2);
 
             producerCollection.SetProducerAsSiteOfExport(anotherProducer.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Action removeProducer = () => producerCollection.RemoveProducer(anotherProducer.Id);
             Assert.Throws<InvalidOperationException>(removeProducer);
@@ -247,7 +247,7 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var producerCollection = new ProducerCollection(notification.Id);
 
@@ -255,15 +255,15 @@
             var anotherProducer = producerCollection.AddProducer(business, address, contact);
             context.NotificationApplications.Add(notification);
             context.Producers.Add(producerCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(producerCollection.Producers.Count() == 2);
 
             producerCollection.SetProducerAsSiteOfExport(producer.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             producerCollection.RemoveProducer(anotherProducer.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(producerCollection.Producers.Count() == 1);
         }
@@ -279,18 +279,18 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var facilityCollection = new FacilityCollection(notification.Id);
             context.Facilities.Add(facilityCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             for (int i = 0; i < 5; i++)
             {
                 facilityCollection.AddFacility(business, address, contact);
             }
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(facilityCollection.Facilities.Count() == 5);
         }
@@ -305,19 +305,19 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var facilityCollection = new FacilityCollection(notification.Id);
             context.Facilities.Add(facilityCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var facility = facilityCollection.AddFacility(business, address, contact);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(facilityCollection.Facilities.Any());
 
             facilityCollection.RemoveFacility(facility.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.False(facilityCollection.Facilities.Any());
         }
@@ -332,21 +332,21 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var facilityCollection = new FacilityCollection(notification.Id);
             context.Facilities.Add(facilityCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             facilityCollection.AddFacility(business, address, contact);
             var anotherFacility = facilityCollection.AddFacility(business, address, contact);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(facilityCollection.Facilities.Count() == 2);
 
             facilityCollection.SetFacilityAsSiteOfTreatment(anotherFacility.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Action removeFacility = () => facilityCollection.RemoveFacility(anotherFacility.Id);
             Assert.Throws<InvalidOperationException>(removeFacility);
@@ -362,24 +362,24 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var facilityCollection = new FacilityCollection(notification.Id);
             context.Facilities.Add(facilityCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var facility = facilityCollection.AddFacility(business, address, contact);
             var anotherFacility = facilityCollection.AddFacility(business, address, contact);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(facilityCollection.Facilities.Count() == 2);
 
             facilityCollection.SetFacilityAsSiteOfTreatment(facility.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             facilityCollection.RemoveFacility(anotherFacility.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(facilityCollection.Facilities.Count() == 1);
         }
@@ -394,18 +394,18 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var carrierCollection = new CarrierCollection(notification.Id);
             context.Carriers.Add(carrierCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             for (int i = 0; i < 5; i++)
             {
                 carrierCollection.AddCarrier(business, address, contact);
             }
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(5, carrierCollection.Carriers.Count());
         }
@@ -420,20 +420,20 @@
             var contact = ObjectFactory.CreateEmptyContact();
 
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var carrierCollection = new CarrierCollection(notification.Id);
             context.Carriers.Add(carrierCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var carrier = carrierCollection.AddCarrier(business, address, contact);
             context.NotificationApplications.Add(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.True(carrierCollection.Carriers.Any());
 
             carrierCollection.RemoveCarrier(carrier.Id);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.False(carrierCollection.Carriers.Any());
         }

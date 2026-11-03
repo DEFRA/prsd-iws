@@ -90,9 +90,9 @@ namespace EA.Prsd.Core.Tests
 
             Action action2 = () => value2 = singleton.Value;
 
-            var tasks = new[] { Task.Factory.StartNew(action1), Task.Factory.StartNew(action2) };
+            var tasks = new[] { Task.Factory.StartNew(action1, TestContext.Current.CancellationToken), Task.Factory.StartNew(action2, TestContext.Current.CancellationToken) };
 
-            Task.WaitAll(tasks);
+            Task.WaitAll(tasks, TestContext.Current.CancellationToken);
 
             Assert.Equal("bar", value1);
             Assert.Equal("foo", value2);

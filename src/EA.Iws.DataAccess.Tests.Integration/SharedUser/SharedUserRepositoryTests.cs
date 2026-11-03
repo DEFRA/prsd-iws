@@ -62,7 +62,7 @@
 
             A.CallTo(() => authorization.EnsureAccessIsOwnerAsync(shared.NotificationId)).MustHaveHappened();
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -71,13 +71,13 @@
             var shared = new SharedUser(notification.Id, sharedUser.Id, DateTimeOffset.Now);
 
             context.SharedUser.Add(shared);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             await repository.RemoveSharedUser(notification.Id, shared.Id);
 
             A.CallTo(() => authorization.EnsureAccessIsOwnerAsync(shared.NotificationId)).MustHaveHappened();
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -86,7 +86,7 @@
             var shared = new SharedUser(notification.Id, sharedUser.Id, DateTimeOffset.Now);
 
             context.SharedUser.Add(shared);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             await repository.GetAllSharedUsers(notification.Id);
 
@@ -99,7 +99,7 @@
             var shared = new SharedUser(notification.Id, sharedUser.Id, DateTimeOffset.Now);
 
             context.SharedUser.Add(shared);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             await repository.GetSharedUserById(notification.Id, shared.Id);
 

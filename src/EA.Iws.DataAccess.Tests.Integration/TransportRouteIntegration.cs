@@ -37,13 +37,13 @@
 
             context.NotificationApplications.Add(notification);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var transport = new TransportRoute(notification.Id);
 
             context.TransportRoutes.Add(transport);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var exitPoint = await context.EntryOrExitPoints.FirstAsync();
 
@@ -59,7 +59,7 @@
 
             transport.SetStateOfExportForNotification(stateOfExport, this.validator);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(country.Id, transport.StateOfExport.Country.Id);
             Assert.Equal(competentAuthority.Id, transport.StateOfExport.CompetentAuthority.Id);
@@ -75,13 +75,13 @@
 
             context.NotificationApplications.Add(notification);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var transport = new TransportRoute(notification.Id);
 
             context.TransportRoutes.Add(transport);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var exitPoint = context.EntryOrExitPoints.First();
 
@@ -96,7 +96,7 @@
 
             transport.SetStateOfExportForNotification(stateOfExport, this.validator);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             var nextExitPoint = context.EntryOrExitPoints.First(ep => ep.Id != exitPoint.Id);
 
@@ -111,7 +111,7 @@
 
             transport.SetStateOfExportForNotification(newStateOfExport, this.validator);
 
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             Assert.Equal(nextExitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 

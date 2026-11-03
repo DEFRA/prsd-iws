@@ -216,7 +216,7 @@
                 database.TestContext.SimpleEntities.Add(se);
                 database.TestContext.SetEntityId();
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 EntityWithForeignId ewf = new EntityWithForeignId(se);
                 database.TestContext.ForeignIdEntities.Add(ewf);
@@ -224,7 +224,7 @@
 
                 //Act
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Assert
                 //Audit Log stores correct json, with foreign key
@@ -253,7 +253,7 @@
 
                 //Act
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Assert
                 //Audit Log stores correct json, with foreign keys
@@ -281,7 +281,7 @@
                 database.TestContext.ParentEntities.Add(ewc);
                 database.TestContext.SetEntityId();
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 // Update exisiting EntityWithChildren with new child entity
                 SimpleEntity sBv2 = new SimpleEntity("Simple B Version 2");
@@ -291,7 +291,7 @@
 
                 //Act
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Assert
                 //Audit Log stores correct new json, with foreign keys
@@ -319,7 +319,7 @@
                 database.TestContext.ParentEntities.Add(ewc);
                 database.TestContext.SetEntityId();
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 // Update exisiting EntityWithChildren with new child entity
                 SimpleEntity sBv2 = new SimpleEntity("Simple B Version 2");
@@ -329,7 +329,7 @@
 
                 //Act
                 database.TestContext.AuditChanges(userId);
-                await database.TestContext.SaveChangesAsync();
+                await database.TestContext.SaveChangesAsync(TestContext.Current.CancellationToken);
 
                 //Assert
                 //Audit Log stores correct original json, with foreign keys

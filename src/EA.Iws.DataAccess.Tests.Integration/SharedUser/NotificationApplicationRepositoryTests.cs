@@ -56,7 +56,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -80,7 +80,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -131,7 +131,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -162,10 +162,10 @@
 
             context.DeleteOnCommit(assessment);
             context.DeleteOnCommit(consent);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -193,10 +193,10 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(assessment);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -223,10 +223,10 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(consent);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -248,7 +248,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -283,10 +283,10 @@
 
             context.DeleteOnCommit(shipmentsHistory);
             context.DeleteOnCommit(shipmentsInfo);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -315,10 +315,10 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(producerCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -356,10 +356,10 @@
             context.DeleteOnCommit(shipmentsInfo);
             context.DeleteOnCommit(assessment);
             context.DeleteOnCommit(facilityCollection);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -381,7 +381,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -403,7 +403,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
 
         [Fact]
@@ -425,7 +425,7 @@
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened();
 
             context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
+            await context.SaveChangesAsync(TestContext.Current.CancellationToken);
         }
     }
 }
