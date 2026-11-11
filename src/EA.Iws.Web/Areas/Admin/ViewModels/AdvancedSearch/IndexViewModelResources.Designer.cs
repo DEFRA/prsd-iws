@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EWC code.
+        ///   Looks up a localized string similar to LoW code.
         /// </summary>
         public static string EwcCode {
             get {

@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EWC Codes.
+        ///   Looks up a localized string similar to LoW Codes.
         /// </summary>
         public static string EWCTitle {
             get {

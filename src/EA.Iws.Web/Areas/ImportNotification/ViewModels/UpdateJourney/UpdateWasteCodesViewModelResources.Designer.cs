@@ -89,7 +89,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EWC code(s).
+        ///   Looks up a localized string similar to LoW code(s).
         /// </summary>
         public static string EwcCode {
             get {
@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select an EWC code.
+        ///   Looks up a localized string similar to Please select an LoW code.
         /// </summary>
         public static string EwcCodeRequired {
             get {

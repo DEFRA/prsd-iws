@@ -136,7 +136,7 @@
     <value>Description</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>What are your European Waste Catalogues (EWC) codes?</value>
+    <value>What are your List of Wastes (LoW) codes?</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>Type your code and select from the options that will appear in the list.</value>
@@ -145,6 +145,6 @@
     <value>Remove</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>EWC codes</value>
+    <value>LoW codes</value>
   </data>
 </root>
