@@ -168,7 +168,7 @@
                 return View(model);
             }
 
-            var selectedWasteComponentTypes = model.WasteComponentTypes.PossibleValues.Where(p => p.Selected).Select(p => (WasteComponentType)(Convert.ToInt32(p.Value))).ToList();
+            var selectedWasteComponentTypes = model.WasteComponentTypes.PossibleValues.Where(p => p.Selected).Select(p => (WasteComponentType)Enum.Parse(typeof(WasteComponentType), p.Value)).ToList();
             var existingWasteComponentData = await mediator.SendAsync(new GetWasteComponentInfoForNotification(model.NotificationId));
             await mediator.SendAsync(new SetWasteComponentInfoForNotification(selectedWasteComponentTypes, model.NotificationId));
 
