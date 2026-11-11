@@ -129,6 +129,9 @@
   <data name="DeleteNotification" xml:space="preserve">
     <value>Delete a notification</value>
   </data>
+  <data name="DeleteUnsubmittedNotifications" xml:space="preserve">
+    <value>You can delete unsubmitted notifications in Account Services</value>
+  </data>
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error retrieving notifications, please try again.</value>
   </data>

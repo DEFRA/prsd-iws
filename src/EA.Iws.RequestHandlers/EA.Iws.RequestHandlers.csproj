@@ -202,6 +202,7 @@
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
     <Compile Include="Feedback\FeedbackInformation.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsWithAmountsHandler.cs" />
     <Compile Include="ImportMovement\AuditImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovementsHandler.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChangesHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportWorklistHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportDataHandler.cs" />
@@ -255,6 +257,7 @@
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetExitPointHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportKeyDatesOfficerHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDateHandler.cs" />
@@ -435,6 +438,7 @@
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
+    <Compile Include="Mappings\FinancialGuaranteeWithAmountsMap.cs" />
     <Compile Include="Mappings\ImportMovement\CancellableMovementMap.cs" />
     <Compile Include="Mappings\ImportMovement\ImportMovementAuditMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementAuditMap.cs" />
@@ -522,6 +526,7 @@
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetExportNotificationTransactionsHandler.cs" />
+    <Compile Include="NotificationAssessment\GetExportWorklistHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsersHandler.cs" />
@@ -538,6 +543,7 @@
     <Compile Include="NotificationAssessment\SetFacilityDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
+    <Compile Include="NotificationAssessment\SetKeyDatesOfficerHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetProducerDetailsHandler.cs" />

@@ -146,7 +146,8 @@
                     WasAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    ActualUnits = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms,
+                    ShipmentTypes = ShipmentType.Accepted
                 }
             };
 
@@ -171,7 +172,8 @@
                     WasAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    ActualUnits = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms,
+                    ShipmentTypes = ShipmentType.Accepted
                 },
                 Recovery = new RecoveryViewModel
                 {
@@ -201,7 +203,8 @@
                     WasAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    ActualUnits = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms,
+                    ShipmentTypes = ShipmentType.Accepted
                 },
                 Recovery = new RecoveryViewModel
                 {

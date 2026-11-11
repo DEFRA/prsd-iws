@@ -38,6 +38,17 @@ BEGIN
 	LEFT JOIN ImportNotification.WasteType WT ON N.Id = WT.ImportNotificationId
 	LEFT JOIN ImportNotification.WasteCode W ON WT.Id = W.WasteTypeId
 	INNER JOIN Lookup.WasteCode WC ON W.WasteCodeId = WC.Id AND WC.CodeType IN (1, 2)
-	WHERE N.Id IN (@NotificationIds);
+	WHERE N.Id IN
+	(
+		SELECT CAST(x.i.value('.', 'nvarchar(50)') AS UNIQUEIDENTIFIER)
+		FROM
+		(
+			SELECT CAST(
+				'<i>' + REPLACE(@NotificationIds, ',', '</i><i>') + '</i>'
+				AS XML
+			) AS XmlData
+		) d
+		CROSS APPLY XmlData.nodes('/i') x(i)
+	)
 END
 GO

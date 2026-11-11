@@ -1,0 +1,69 @@
+@{
+    ViewBag.HeaderClass = "with-proposition";
+    Layout = "~/Views/Shared/_Layout.GovUK.cshtml";
+}
+
+@section head {
+    @Html.Partial("_IwsHead")
+    @RenderSection("head", required: false)
+}
+
+@section inside_header {
+    @Html.Partial("_IwsHeader")
+}
+
+@section after_header {
+}
+
+@section footer_top {
+    @Html.Partial("_IwsHelpline")
+    <hr class="govuk-footer__section-break">
+}
+
+@section footer_support_links {
+    <ul class="govuk-footer__inline-list">
+        <li class="govuk-footer__inline-list-item">
+            <a href="https://www.gov.uk/help" class="govuk-footer__link">Help</a>
+        </li>
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, new { @class = "govuk-footer__link" })
+        </li>
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Terms and conditions", "TermsAndConditions", "NewUser", new { area = string.Empty }, new { @class = "govuk-footer__link" })
+        </li>
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Privacy notice", "Index", "PrivacyPolicy", new { area = string.Empty }, new { @class = "govuk-footer__link" })
+        </li>
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Accessibility", "Accessibility", "NewUser", new { area = string.Empty }, new { @class = "govuk-footer__link" })
+        </li>
+    </ul>
+}
+
+@section body_end {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/govuk-frontend")
+    @Scripts.Render("~/bundles/govuk_iws")
+    @Scripts.Render("~/bundles/helpers")
+    @RenderSection("scripts", required: false)
+}
+
+<div style="padding: 0 30px;">
+    @Html.Partial("_FeedbackBanner")
+    @Html.Partial("_IwsMessageBanner")
+    <main id="content" style="max-width: none; margin: 0;">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="top-content-box font-xsmall">
+                <div id="top-content-box-container">
+                    @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+                </div>
+            </div>
+        }
+        <div id="renderedContent">
+            @RenderBody()
+        </div>
+    </main>
+</div>

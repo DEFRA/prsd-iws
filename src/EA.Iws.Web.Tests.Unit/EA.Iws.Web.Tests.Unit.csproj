@@ -175,8 +175,11 @@
     <Compile Include="Controllers\ImportNotification\WasteCategoriesControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\WasteComponentControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\AdditionalChargeControllerTests.cs" />
+    <Compile Include="Reports\FOIOutputColumnsTests.cs" />
+    <Compile Include="Reports\ShipmentReportOutputColumnsTests.cs" />
     <Compile Include="ViewModels\AdminExportNotificationMovements\MovementOverride\IndexViewModelTests.cs" />
     <Compile Include="ViewModels\AdminImportNotificationMovements\MovementOverride\IndexViewModelTests.cs" />
+    <Compile Include="ViewModels\Admin\WorklistControllerTests.cs" />
     <Compile Include="ViewModels\Registration\AdminRegistrationViewModelTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AddressBook\EditControllerTests.cs" />
@@ -255,6 +258,7 @@
     <Compile Include="ViewModels\NotificationApplication\WasteCodeOverviewViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationMovements\CancelSuccessViewModelTests.cs" />
     <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModelTests.cs" />
+    <Compile Include="ViewModels\Shared\CheckBoxCollectionViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />

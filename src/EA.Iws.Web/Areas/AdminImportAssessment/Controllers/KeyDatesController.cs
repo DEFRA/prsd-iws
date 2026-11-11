@@ -37,7 +37,7 @@
             }
 
             model.ShowAssessmentDecisionLink = await authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision);
-            
+
             return View(model);
         }
 
@@ -56,21 +56,30 @@
             {
                 case KeyDatesCommand.BeginAssessment:
                     await
-                        mediator.SendAsync(new SetAssessmentStartedDate(id, model.NewDate.AsDateTime().Value,
-                            model.NameOfOfficer));
+                        mediator.SendAsync(new SetAssessmentStartedDate(id, model.NewDate.AsDateTime().Value, model.NameOfOfficer));
                     break;
+
+                case KeyDatesCommand.ChangeOfficer:
+                    await mediator.SendAsync(new SetImportKeyDatesOfficer(id, model.NameOfOfficer));
+                    break;
+
                 case KeyDatesCommand.NotificationComplete:
                     await mediator.SendAsync(new SetNotificationCompletedDate(id, model.NewDate.AsDateTime().Value));
                     break;
+
                 case KeyDatesCommand.NotificationAcknowledged:
                     await mediator.SendAsync(new SetAcknowlegedDate(id, model.NewDate.AsDateTime().Value));
                     break;
+
                 case KeyDatesCommand.FileClosed:
                     await mediator.SendAsync(new SetNotificationFileClosedDate(id, model.NewDate.AsDateTime().Value));
+                    await mediator.SendAsync(new SetArchiveReference(id, model.ArchiveReference));
                     break;
+
                 case KeyDatesCommand.ArchiveReference:
                     await mediator.SendAsync(new SetArchiveReference(id, model.ArchiveReference));
                     break;
+
                 default:
                     break;
             }

@@ -3,8 +3,11 @@
     using System.ComponentModel.DataAnnotations;
     public enum ShipmentReportOutputColumns
     {
+        [Display(Name = "Notification Number")]
+        NotificationNumber = 1,
+
         [Display(Name = "Import/Export")]
-        ImportOrExport = 2,
+        ImportOrExport,
 
         [Display(Name = "Notifier")]
         Exporter,
@@ -12,16 +15,25 @@
         [Display(Name = "Notifier Company Type")]
         NotifierCompanyType,
 
+        [Display(Name = "Notifier Registration Number")]
+        ExporterRegistrationNumber,
+
         [Display(Name = "Consignee")]
         Importer,
 
         [Display(Name = "Consignee Company Type")]
         ConsigneeCompanyType,
 
+        [Display(Name = "Consignee Registration Number")]
+        ImporterRegistrationNumber,
+
         Facility,
 
         [Display(Name = "Facility Company Type")]
         FacilityCompanyType,
+
+        [Display(Name = "Facility Registration Number")]
+        FacilityRegistrationNumber,
 
         [Display(Name = "Basel/OECD Code and Description")]
         BaselOecdCode,
@@ -97,6 +109,9 @@
 
         [Display(Name = "UN Class")]
         UNClass,
+
+        [Display(Name = "Customs Code")]
+        CustomsCode,
 
         [Display(Name = "Shipment Status")]
         ShipmentStatus,

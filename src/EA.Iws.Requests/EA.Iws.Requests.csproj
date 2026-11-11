@@ -62,6 +62,7 @@
     <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetails.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeWithAmountsDetails.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistory.cs" />
     <Compile Include="Admin\FinancialGuarantee\SetCurrentFinancialGuaranteeDates.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplays.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportInterimStatus.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationProhibitionStatusChanges.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportWorklist.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
@@ -189,6 +191,7 @@
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
     <Compile Include="ImportNotificationAssessment\SetEntryPoint.cs" />
     <Compile Include="ImportNotificationAssessment\SetExitPoint.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportKeyDatesOfficer.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
@@ -274,12 +277,14 @@
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />
     <Compile Include="NotificationAssessment\CreateNotificationStatusChange.cs" />
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
+    <Compile Include="NotificationAssessment\GetExportWorklist.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
     <Compile Include="NotificationAssessment\GetProhibitionStatusChanges.cs" />
     <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitData.cs" />
     <Compile Include="NotificationAssessment\RemoveUnderProhibitionStatus.cs" />
     <Compile Include="NotificationAssessment\SetFacilityDetails.cs" />
+    <Compile Include="NotificationAssessment\SetImportKeyDatesOfficer.cs" />
     <Compile Include="NotificationAssessment\SetProducerDetails.cs" />
     <Compile Include="NotificationAssessment\SetUnderProhibitionStatus.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExit.cs" />

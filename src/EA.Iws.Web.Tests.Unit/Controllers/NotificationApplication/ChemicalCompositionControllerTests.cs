@@ -13,6 +13,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.WasteComponentType;
     using Requests.WasteType;
     using Web.Infrastructure;
     using Web.ViewModels.Shared;
@@ -159,7 +160,7 @@
         public async Task OtherWaste_WasteComponent_RedirectedTo_OtherWaste()
         {
             var wasteComponentType = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>();
-            var selectedValues = new[] { 1, 2 };
+            var selectedValues = new[] { WasteComponentType.Mercury, WasteComponentType.FGas };
             wasteComponentType.SetSelectedValues(selectedValues);
 
             var wasteComponentViewModel = new WasteComponentViewModel()
@@ -304,6 +305,30 @@
             };
             var result = await chemicalCompositionController.Constituents(model, false) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "WasteGenerationProcess");
+        }
+
+        [Fact]
+        public async Task WasteComponent_Post_MapsSelectedCheckboxValuesToEnum()
+        {
+            var wasteComponentType = CheckBoxCollectionViewModel.CreateFromEnum<WasteComponentType>();
+            wasteComponentType.SetSelectedValues(new[] { WasteComponentType.Mercury, WasteComponentType.NORM });
+
+            var model = new WasteComponentViewModel
+            {
+                NotificationId = notificationId,
+                WasteComponentTypes = wasteComponentType
+            };
+
+            A.CallTo(() => mediator.SendAsync(A<GetWasteComponentInfoForNotification>.That.Matches(p => p.NotificationId == notificationId)))
+                .Returns(new WasteComponentData());
+
+            await chemicalCompositionController.WasteComponent(model, true);
+
+            A.CallTo(() => mediator.SendAsync(A<SetWasteComponentInfoForNotification>.That.Matches(p =>
+                p.WasteComponentTypes.Contains(WasteComponentType.Mercury) &&
+                p.WasteComponentTypes.Contains(WasteComponentType.NORM) &&
+                p.WasteComponentTypes.Count == 2)))
+                .MustHaveHappenedOnceExactly();
         }
     }
 }

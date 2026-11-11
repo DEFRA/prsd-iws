@@ -63,9 +63,9 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates {
         /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
-        public static string ArchieveReferenceButtonText {
+        public static string ArchiveReferenceButtonText {
             get {
-                return ResourceManager.GetString("ArchieveReferenceButtonText", resourceCulture);
+                return ResourceManager.GetString("ArchiveReferenceButtonText", resourceCulture);
             }
         }
         
