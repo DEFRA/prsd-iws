@@ -127,10 +127,10 @@
     <value>Please select a Basel or OECD code or mark as not listed</value>
   </data>
   <data name="EwcCode" xml:space="preserve">
-    <value>EWC code(s)</value>
+    <value>LoW code(s)</value>
   </data>
   <data name="EwcCodeRequired" xml:space="preserve">
-    <value>Please select an EWC code</value>
+    <value>Please select an LoW code</value>
   </data>
   <data name="HCode" xml:space="preserve">
     <value>H or HP code(s)</value>

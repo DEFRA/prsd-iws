@@ -18,7 +18,7 @@
     var unClass = Model.AreUnClassesCompleted ? "over-no-alert" : "over-alert";
     var unNumberClass = Model.AreUnNumbersCompleted ? "over-no-alert" : "over-alert";
     var OtherClass = Model.AreOtherCodesCompleted ? "over-no-alert" : "over-alert";
-    var ewcLabel = Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "EWC codes" : "EWC code") : "EWC code(s)";
+    var ewcLabel = Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "LoW codes" : "LoW code") : "LoW code(s)";
     var yCodeLabel = Model.AreYCodesCompleted ? (Model.YCodes.Length > 1 ? "Y codes" : "Y code") : "Y code(s)";
     var hCodeLabel = Model.AreHCodesCompleted ? (Model.HCodes.Length > 1 ? "H or HP codes" : "H or HP code") : "H or HP code(s)";
     var unClassLabel = Model.AreUnClassesCompleted ? (Model.UnClass.Length > 1 ? "UN classes" : "UN class") : "UN class(es)";
@@ -65,7 +65,7 @@
                 <td class="change govuk-link">
                     <a href="@Url.Action("Index", "EwcCode", new { id, backToOverview = true })">
                         Change
-                        <span class="screen-reader-text">EWC Codes</span>
+                        <span class="screen-reader-text">LoW Codes</span>
                     </a>
                 </td>
             }

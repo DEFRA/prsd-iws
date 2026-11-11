@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteCodes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Added EWC codes.
+        ///   Looks up a localized string similar to Added LoW codes.
         /// </summary>
         public static string EwcCodesTableHeading {
             get {
