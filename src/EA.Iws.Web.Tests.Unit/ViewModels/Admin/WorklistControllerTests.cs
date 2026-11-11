@@ -160,7 +160,8 @@
 
             var filter = new ExportWorklistFilterViewModel
             {
-                NotificationNumber = "GB 0001 000001"
+                NotificationNumber = "GB 0001 000001",
+                HasSubmitted = true
             };
 
             GetExportWorklist capturedRequest = null;
@@ -193,7 +194,8 @@
             {
                 NotificationNumber = "GB 0001 000001",
                 Officer = "John Doe",
-                SelectedStatuses = new[] { NotificationStatus.Consented }
+                SelectedStatuses = new[] { NotificationStatus.Consented },
+                HasSubmitted = true
             };
 
             GetExportWorklist capturedRequest = null;
@@ -229,7 +231,8 @@
             {
                 NotificationNumber = "GB 0001 000002",
                 Officer = "Jane Smith",
-                SelectedStatuses = new[] { ImportNotificationStatus.Consented }
+                SelectedStatuses = new[] { ImportNotificationStatus.Consented },
+                HasSubmitted = true
             };
 
             GetImportWorklist capturedRequest = null;
@@ -401,8 +404,9 @@
             Assert.Equal("Index", result.RouteValues["action"]);
             Assert.Equal(WorklistController.WorklistTab.Import, result.RouteValues["tab"]);
             Assert.Equal(1, result.RouteValues["page"]);
-            // Should only have tab and page in route values
-            Assert.Equal(3, result.RouteValues.Count);
+            Assert.Equal(true, result.RouteValues["importFilter.HasSubmitted"]);
+            // Should only have action, tab, page and HasSubmitted in route values
+            Assert.Equal(4, result.RouteValues.Count);
         }
     }
 }

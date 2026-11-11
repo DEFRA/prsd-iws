@@ -72,6 +72,7 @@
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="Extensions\OrderingExtension.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeDataWithAmounts.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />
     <Compile Include="Admin\InternalUserStatus.cs" />

@@ -37,7 +37,7 @@
 
             //We need to exclude 'other' as this will be handled separately
             packagingTypes.PossibleValues = packagingTypes.PossibleValues
-                                                          .Where(p => (PackagingType)Convert.ToInt32(p.Value) != PackagingType.Other)
+                                                          .Where(p => (PackagingType)Enum.Parse(typeof(PackagingType), p.Value) != PackagingType.Other)
                                                           .ToList();
 
             var model = new PackagingTypesViewModel
@@ -75,7 +75,7 @@
             {
                 var selectedPackagingTypes = model.PackagingTypes.PossibleValues
                                                                  .Where(p => p.Selected)
-                                                                 .Select(p => (PackagingType)(Convert.ToInt32(p.Value)))
+                                                                 .Select(p => (PackagingType)Enum.Parse(typeof(PackagingType), p.Value))
                                                                  .ToList();
 
                 if (model.OtherSelected)

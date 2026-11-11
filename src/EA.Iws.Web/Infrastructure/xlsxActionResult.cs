@@ -52,7 +52,7 @@
             CreateWorkBook();
 
             Worksheet.Cell(2, 1).Value = Data.AsEnumerable();
-           
+
             FormatWorkSheet();
         }
 

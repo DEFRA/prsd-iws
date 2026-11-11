@@ -74,7 +74,7 @@
                 PackagingTypes = packagingTypes
             };
 
-            model.PackagingTypes.PossibleValues.First(y => y.Value == "1").Selected = true;
+            model.PackagingTypes.PossibleValues.First(y => y.Value == PackagingType.Drum.ToString()).Selected = true;
             model.Units = ShipmentQuantityUnits.Kilograms;
 
             A.CallTo(
@@ -116,7 +116,7 @@
                 PackagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>()
             };
 
-            model.PackagingTypes.PossibleValues.First(y => y.Value == "1").Selected = true;
+            model.PackagingTypes.PossibleValues.First(y => y.Value == PackagingType.Drum.ToString()).Selected = true;
             model.Units = ShipmentQuantityUnits.Kilograms;
 
             A.CallTo(
@@ -152,7 +152,7 @@
                 PackagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>()
             };
 
-            model.PackagingTypes.PossibleValues.First(y => y.Value == "1").Selected = true;
+            model.PackagingTypes.PossibleValues.First(y => y.Value == PackagingType.Drum.ToString()).Selected = true;
             model.Units = ShipmentQuantityUnits.Kilograms;
 
             A.CallTo(
@@ -188,7 +188,7 @@
                 PackagingTypes = CheckBoxCollectionViewModel.CreateFromEnum<PackagingType>()
             };
 
-            model.PackagingTypes.PossibleValues.First(y => y.Value == "1").Selected = true;
+            model.PackagingTypes.PossibleValues.First(y => y.Value == PackagingType.Drum.ToString()).Selected = true;
             model.Units = ShipmentQuantityUnits.Kilograms;
 
             A.CallTo(

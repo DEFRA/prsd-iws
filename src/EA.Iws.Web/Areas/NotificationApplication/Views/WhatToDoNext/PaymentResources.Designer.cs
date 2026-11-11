@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Charges are not shown as notification is still in progress.
+        ///   Looks up a localized string similar to Charges cannot be displayed as notification is incomplete.
         /// </summary>
         public static string ChargesNotShownAlert {
             get {
