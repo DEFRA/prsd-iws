@@ -63,5 +63,13 @@
         int SessionTimeoutInMinutes { get; set; }
 
         int SessionTimeoutWarningInMinutes { get; set; }
+
+        string GovUkPayBaseUrl { get; set; }
+
+        string GovUkPayApiKey { get; set; }
+
+        string GovUkPayReturnUrlFormat { get; set; }
+
+        string GovUkPayDescription { get; set; }
     }
 }

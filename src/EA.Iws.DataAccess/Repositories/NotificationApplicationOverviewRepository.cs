@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
+    using Domain.NotificationAssessment;
     using Domain.Security;
 
     internal class NotificationApplicationOverviewRepository : INotificationApplicationOverviewRepository
@@ -12,16 +13,19 @@
         private readonly INotificationProgressService progressService;
         private readonly INotificationApplicationAuthorization authorization;
         private readonly INotificationChargeCalculator chargeCalculator;
+        private readonly INotificationTransactionCalculator transactionCalculator;
         private readonly IwsContext db;
 
         public NotificationApplicationOverviewRepository(
             IwsContext db,
             INotificationChargeCalculator chargeCalculator,
+            INotificationTransactionCalculator transactionCalculator,
             INotificationProgressService progressService,
             INotificationApplicationAuthorization authorization)
         {
             this.db = db;
             this.chargeCalculator = chargeCalculator;
+            this.transactionCalculator = transactionCalculator;
             this.progressService = progressService;
             this.authorization = authorization;
         }
@@ -85,7 +89,8 @@
                 data.WasteDisposal,
                 data.Exporter,
                 data.Importer,
-                await chargeCalculator.GetValue(notificationId), 
+                await chargeCalculator.GetValue(notificationId),
+                await transactionCalculator.TotalPaid(notificationId),
                 progressService.GetNotificationProgressInfo(notificationId));
         }
     }

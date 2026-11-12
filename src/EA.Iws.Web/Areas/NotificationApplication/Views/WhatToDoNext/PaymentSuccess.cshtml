@@ -1,0 +1,50 @@
+﻿@using System.Globalization
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WhatToDoNext.PaymentResultViewModel
+
+@{
+    ViewBag.Title = "Payment successful";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    NumberFormatInfo nfi = new CultureInfo("en-GB").NumberFormat;
+    nfi.CurrencyGroupSeparator = string.Empty;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        <div class="govuk-panel govuk-panel--confirmation">
+            <h1 class="govuk-panel__title">Payment successful</h1>
+            <div class="govuk-panel__body">
+                Payment reference<br /><strong>@Model.PaymentReference</strong>
+            </div>
+        </div>
+
+        <p class="govuk-body">You have been emailed a confirmation of payment to the email address provided during the payment.</p>
+
+        <div class="govuk-!-width-two-thirds">
+            <h2 class="govuk-heading-m govuk-!-margin-bottom-0">Payment summary</h2>
+            <table id="payment-summary-table" class="govuk-table prsd-table-small-collapse">
+                <thead class="govuk-table__head prsd-table-small-collapse prsd-table-small-collapse-header">
+                    <tr class="govuk-table__row govuk-table__cell--thick prsd-table-small-collapse prsd-table-small-collapse-header">
+                        <th scope="col" class="govuk-table__header prsd-table-small-collapse" style="width: 30%;"><span class="govuk-visually-hidden">Detail</span></th>
+                        <th scope="col" class="govuk-table__header prsd-table-small-collapse"><span class="govuk-visually-hidden">Value</span></th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row task-list-row govuk-table__cell--thick prsd-table-small-collapse">
+                        <th class="govuk-table__header" style="width: 30%;" scope="row">Payment reference</th>
+                        <td class="govuk-table__cell">@Model.PaymentReference</td>
+                    </tr>
+                    <tr class="govuk-table__row task-list-row govuk-table__cell--thick prsd-table-small-collapse">
+                        <th class="govuk-table__header" style="width: 30%;" scope="row">Amount paid</th>
+                        <td class="govuk-table__cell">@Html.Raw(Model.AmountPaid.ToString("C2", nfi))</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <p class="govuk-body govuk-!-margin-top-6">
+            @Html.ActionLink("Return to notification option", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "govuk-link" })
+        </p>
+
+    </div>
+</div>

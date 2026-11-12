@@ -889,6 +889,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MarkInterimStatusViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\AnnexPlusViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\NotificationApplication\AnnexViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\WhatToDoNext\PaymentResultViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Views\ChemicalComposition\WasteCategoryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -956,6 +957,8 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_Uploads.cshtml" />
     <Content Include="Areas\Admin\Views\Worklist\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Worklist\_Layout.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentSuccess.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentFailure.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

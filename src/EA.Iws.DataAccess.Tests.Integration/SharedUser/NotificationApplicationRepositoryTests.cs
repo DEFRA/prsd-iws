@@ -72,6 +72,7 @@
 
             var repository = new NotificationApplicationOverviewRepository(context,
                 A.Fake<INotificationChargeCalculator>(),
+                A.Fake<INotificationTransactionCalculator>(),
                 A.Fake<INotificationProgressService>(),
                 notificationApplicationAuthorization);
 

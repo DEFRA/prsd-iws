@@ -20,7 +20,7 @@
                 IsAllComplete = isComplete
             };
 
-            var submitSideBarViewModel = new SubmitSideBarViewModel(submitSummaryData, 500, progress);
+            var submitSideBarViewModel = new SubmitSideBarViewModel(submitSummaryData, 500, 0, progress);
             if (isInternalUser)
             {
                 submitSideBarViewModel.ShowResubmitButton = ((status.Equals(NotificationStatus.Unlocked) || (status.Equals(NotificationStatus.ConsentedUnlock))) ? true : false);
