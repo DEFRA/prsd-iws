@@ -75,7 +75,7 @@
         [Display(Name = "Waste Contains")]
         WasteComponentTypes,
 
-        [Display(Name = "EWC Code")]
+        [Display(Name = "LoW Code")]
         Ewc,
 
         YCode,

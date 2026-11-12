@@ -95,7 +95,7 @@
         [Display(Name = "Prenotified on Time")]
         WasPrenotifiedBeforeThreeWorkingDays,
 
-        [Display(Name = "EWC Codes")]
+        [Display(Name = "LoW Codes")]
         EwcCodes,
 
         [Display(Name = "R/D Code(s)")]
