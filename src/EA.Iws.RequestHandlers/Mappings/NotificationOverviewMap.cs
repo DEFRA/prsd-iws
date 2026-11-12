@@ -42,7 +42,8 @@
                 SubmitSummaryData = mapper.Map<SubmitSummaryData>(source.Notification),
                 WasteCodesOverview = mapper.Map<WasteCodesOverviewInfo>(source.Notification),
                 CanEditNotification = source.NotificationAssessment.CanEditNotification,
-                NotificationCharge = source.Charge
+                NotificationCharge = source.Charge,
+                AmountPaid = source.AmountPaid
             };
 
             returnData.ShipmentOverview.IntendedShipmentData.Status = source.NotificationAssessment.Status;
