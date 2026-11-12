@@ -24,6 +24,8 @@
 
         public decimal Charge { get; private set; }
 
+        public decimal AmountPaid { get; private set; }
+
         public NotificationApplicationCompletionProgress Progress { get; private set; }
 
         public static NotificationApplicationOverview Load(NotificationApplication notification,
@@ -34,6 +36,7 @@
             Exporter.Exporter exporter,
             Importer.Importer importer,
             decimal charge,
+            decimal amountPaid,
             NotificationApplicationCompletionProgress progress)
         {
             return new NotificationApplicationOverview
@@ -46,6 +49,7 @@
                 WasteRecovery = wasteRecovery,
                 WasteDisposal = wasteDisposal,
                 Charge = charge,
+                AmountPaid = amountPaid,
                 Progress = progress
             };
         }

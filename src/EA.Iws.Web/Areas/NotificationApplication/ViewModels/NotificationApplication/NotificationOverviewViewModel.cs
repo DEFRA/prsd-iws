@@ -34,6 +34,8 @@
 
         public decimal NotificationCharge { get; set; }
 
+        public decimal AmountPaid { get; set; }
+
         public bool CanEditNotification { get; set; }
 
         public AdditionalChargeData AdditionalCharge { get; set; }
@@ -54,9 +56,10 @@
             ClassifyYourWasteViewModel = new ClassifyYourWasteViewModel(overviewData.WasteClassificationOverview, overviewData.Progress);
             WasteRecoveryViewModel = new WasteRecoveryViewModel(overviewData.NotificationId, overviewData.WasteRecovery, overviewData.WasteDisposal, overviewData.Progress);
             AmountsAndDatesViewModel = new AmountsAndDatesViewModel(overviewData.ShipmentOverview, overviewData.Progress);
-            SubmitSideBarViewModel = new SubmitSideBarViewModel(overviewData.SubmitSummaryData, overviewData.NotificationCharge, overviewData.Progress);
+            SubmitSideBarViewModel = new SubmitSideBarViewModel(overviewData.SubmitSummaryData, overviewData.NotificationCharge, overviewData.AmountPaid, overviewData.Progress);
             WasteCodeOverviewViewModel = new WasteCodeOverviewViewModel(overviewData.WasteCodesOverview, overviewData.Progress);
             NotificationCharge = overviewData.NotificationCharge;
+            AmountPaid = overviewData.AmountPaid;
             CanEditNotification = overviewData.CanEditNotification;
             AdditionalCharge = new AdditionalChargeData() { NotificationId = overviewData.NotificationId };
         }
