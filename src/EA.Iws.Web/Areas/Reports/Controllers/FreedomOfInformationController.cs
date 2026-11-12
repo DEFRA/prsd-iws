@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
@@ -77,7 +79,8 @@
                 return View(model);
             }
 
-            var columnsToHide = model.FOIReportColumns.GetColumnsToHide();
+            //var columnsToHide = model.FOIReportColumns.GetColumnsToHide();
+            var columnsToHide = GetColumnsToHide<FOIOutputColumns>(model.FOIReportColumns);
             var dateType = ReportEnumParser.TryParse<FOIReportDates>(model.FOIReportColumns.DateType);
             var textFieldType = ReportEnumParser.TryParse<FOIReportTextFields>(model.FOIReportColumns.TextFieldType);
             var operatorType = ReportEnumParser.TryParse<TextFieldOperator>(model.FOIReportColumns.OperatorType);
@@ -107,6 +110,22 @@
             var fileName = string.Format("foi-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
             return new XlsxActionResult<FreedomOfInformationData>(report, fileName, true, columnsToHide);
-        }       
+        }
+
+        private string GetColumnsToHide<TEnum>(ReportOutputParametersViewModel model) where TEnum : Enum
+        {
+            string columnsToHideIndexes = model.GetColumnsToHide();
+            List<string> items = columnsToHideIndexes.Split(',').ToList();
+            List<string> columnNames = Enum.GetNames(typeof(TEnum)).ToList();
+            string result = string.Empty;
+
+            foreach (var item in items)
+            {
+                int.TryParse(item, out int index);
+                result += "," + columnNames[index - 1];
+            }
+
+            return result.Substring(1);
+        }
     }
 }

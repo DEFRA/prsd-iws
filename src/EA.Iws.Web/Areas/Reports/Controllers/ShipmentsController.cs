@@ -1,12 +1,18 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.IdentityModel.Protocols.WSTrust;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
     using Core.Reports;
+    using DocumentFormat.OpenXml.Office2010.ExcelAc;
+    using EA.Iws.Web.Infrastructure.Validation;
     using Infrastructure;
     using Infrastructure.Authorization;
+    using Microsoft.Ajax.Utilities;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
     using ViewModels.Shipments;
@@ -79,7 +85,8 @@
                 return View(model);
             }
 
-            var columnsToHide = model.ShipmentReportColumns.GetColumnsToHide();
+            //var columnsToHide = model.ShipmentReportColumns.GetColumnsToHide();
+            var columnsToHide = GetColumnsToHide<ShipmentReportOutputColumns>(model.ShipmentReportColumns);
             var dateType = ReportEnumParser.TryParse<ShipmentsReportDates>(model.ShipmentReportColumns.DateType);
             var textFieldType = ReportEnumParser.TryParse<ShipmentReportTextFields>(model.ShipmentReportColumns.TextFieldType);
             var operatorType = ReportEnumParser.TryParse<TextFieldOperator>(model.ShipmentReportColumns.OperatorType);
@@ -112,6 +119,22 @@
             var fileName = string.Format("shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
             return new XlsxActionResult<ShipmentData>(report, fileName, true, columnsToHide);
+        }
+
+        private string GetColumnsToHide<TEnum>(ReportOutputParametersViewModel model) where TEnum : Enum
+        {
+            string columnsToHideIndexes = model.GetColumnsToHide();
+            List<string> items = columnsToHideIndexes.Split(',').ToList();
+            List<string> columnNames = Enum.GetNames(typeof(TEnum)).ToList();
+            string result = string.Empty;
+
+            foreach (var item in items)
+            {
+                int.TryParse(item, out int index);
+                result += "," + columnNames[index - 1];
+            }
+
+            return result.Substring(1);
         }
     }
 }
