@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Repositories.Reports
+namespace EA.Iws.DataAccess.Repositories.Reports
 {
     using Core.Admin.Reports;
     using Core.Notification;
@@ -29,28 +29,28 @@
             var textFilter = TextFilterHelper.GetTextFilter(textFieldType, operatorType, textSearch);
             textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
-			var query = @"SELECT DISTINCT
-					[NotificationNumber]
-					,[NotifierName]
-					,[ProducerName]
-					,[ProducerAddress1]
-					,[ProducerAddress2]
-					,[ProducerTownOrCity]
-					,[ProducerPostCode]
-					,[SiteOfExport]
-					,[LocalArea]
-					,[WasteType]
-					,[NotificationStatus]
-					,[ConsigneeName]
-					,[ExporterRegistrationNumber]
-					,[ImporterRegistrationNumber]
-					,[FacilityRegistrationNumber]
-					,[ProducerRegistrationNumber]
-				FROM 
-					[Reports].[ProducerCache]
+            var query = @"SELECT DISTINCT
+                    [NotificationNumber]
+                    ,[NotifierName]
+                    ,[ProducerName]
+                    ,[ProducerAddress1]
+                    ,[ProducerAddress2]
+                    ,[ProducerTownOrCity]
+                    ,[ProducerPostCode]
+                    ,[SiteOfExport]
+                    ,[LocalArea]
+                    ,[WasteType]
+                    ,[NotificationStatus]
+                    ,[ConsigneeName]
+                    ,[ExporterRegistrationNumber]
+                    ,[ImporterRegistrationNumber]
+                    ,[FacilityRegistrationNumber]
+                    ,[ProducerRegistrationNumber]
+                FROM 
+                    [Reports].[ProducerCache]
                 WHERE
-	                [CompetentAuthorityId] = @competentAuthority
-	                AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to
+                    [CompetentAuthorityId] = @competentAuthority
+                    AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to
                                          OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
                                          OR @dateType = 'ConsentTo' AND  [ConsentTo] BETWEEN @from AND @to
                                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
