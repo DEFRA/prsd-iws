@@ -138,17 +138,13 @@
                     }
                 </td>
                 <td>
-                    @*@if (Model.PaymentIsComplete && !Model.AssessmentStartedDate.IsCompleted)
-                        {
-                            @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null)
-                        }*@
                     @if (Model.PaymentIsComplete)
                     {
                         if (Model.AssessmentStartedDate.IsCompleted)
                         {
                             @Html.ActionLink("Change Officer", "Index", "KeyDates", new { command = KeyDatesCommand.ChangeOfficer }, null)
                         }
-                        else
+                        else if (Model.Status != ImportNotificationStatus.NotificationReceived)
                         {
                             @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null)
                         }
