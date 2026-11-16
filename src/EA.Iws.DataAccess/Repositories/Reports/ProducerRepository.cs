@@ -29,21 +29,25 @@
             var textFilter = TextFilterHelper.GetTextFilter(textFieldType, operatorType, textSearch);
             textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
-            var query = @"SELECT DISTINCT
-	                [NotificationNumber]
-	                ,[NotifierName]
-	                ,[ProducerName]
-	                ,[ProducerAddress1]
-	                ,[ProducerAddress2]
-	                ,[ProducerTownOrCity]
-	                ,[ProducerPostCode]
-	                ,[SiteOfExport]
-	                ,[LocalArea]
-	                ,[WasteType]
-	                ,[NotificationStatus]
-	                ,[ConsigneeName]
-                FROM 
-	                [Reports].[ProducerCache]
+			var query = @"SELECT DISTINCT
+					[NotificationNumber]
+					,[NotifierName]
+					,[ProducerName]
+					,[ProducerAddress1]
+					,[ProducerAddress2]
+					,[ProducerTownOrCity]
+					,[ProducerPostCode]
+					,[SiteOfExport]
+					,[LocalArea]
+					,[WasteType]
+					,[NotificationStatus]
+					,[ConsigneeName]
+					,[ExporterRegistrationNumber]
+					,[ImporterRegistrationNumber]
+					,[FacilityRegistrationNumber]
+					,[ProducerRegistrationNumber]
+				FROM 
+					[Reports].[ProducerCache]
                 WHERE
 	                [CompetentAuthorityId] = @competentAuthority
 	                AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to

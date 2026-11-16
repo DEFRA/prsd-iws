@@ -29,10 +29,13 @@
                     [ImportOrExport],
                     [Exporter],
                     [NotifierCompanyType],
+                    [ExporterRegistrationNumber],
                     [Importer],
                     [ConsigneeCompanyType],
+                    [ImporterRegistrationNumber],
                     [Facility],
                     [FacilityCompanyType],
+                    [FacilityRegistrationNumber],
                     [BaselOecdCode],
                     [ShipmentNumber],
                     [ActualDateOfShipment],
@@ -61,6 +64,7 @@
                     CASE WHEN YCode IS NULL THEN 'NA' ELSE YCode END AS [YCode],
                     CASE WHEN HCode IS NULL THEN 'NA' ELSE HCode END AS [HCode],
                     CASE WHEN UNClass IS NULL THEN 'NA' ELSE UNClass END AS [UNClass],
+                    [CustomsCode],
                     [ActionedByExternalUser]
                 FROM [Reports].[ShipmentsCache]
                 WHERE [CompetentAuthorityId] = @ca
