@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.EwcCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What are your European Waste Catalogues (EWC) codes?.
+        ///   Looks up a localized string similar to What are your List of Wastes (LoW) codes?.
         /// </summary>
         public static string Header {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.EwcCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EWC codes.
+        ///   Looks up a localized string similar to LoW codes.
         /// </summary>
         public static string Title {
             get {
