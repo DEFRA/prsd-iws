@@ -12,6 +12,8 @@
         public DateTime? TransmittedDate { get; set; }
         public DateTime? AcknowledgedDate { get; set; }
         public DateTime? ConsentedDate { get; set; }
+        public DateTime? ObjectedDate { get; set; }
+        public DateTime? WithdrawnDate { get; set; }
         public DateTime? DecisionRequiredByDate { get; set; }
         public NotificationStatus Status { get; set; }
         public DateTimeOffset? LastActionDate { get; set; }

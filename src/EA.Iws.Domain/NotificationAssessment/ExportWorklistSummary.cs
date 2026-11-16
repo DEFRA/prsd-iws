@@ -21,6 +21,8 @@ namespace EA.Iws.Domain.NotificationAssessment
         public DateTimeOffset? LastCommentDate { get; private set; }
         public string FinancialGuaranteeStatus { get; private set; }
         public string LastCommentUser { get; private set; }
+        public DateTime? ObjectedDate { get; private set; }
+        public DateTime? WithdrawnDate { get; private set; }
 
         public static ExportWorklistSummary Load(
             Guid notificationId,
@@ -37,7 +39,9 @@ namespace EA.Iws.Domain.NotificationAssessment
             string lastActionType,
             DateTimeOffset? lastCommentDate,
             string financialGuaranteeStatus,
-            string lastCommentUser)
+            string lastCommentUser,
+            DateTime? objectedDate,
+            DateTime? withdrawnDate)
         {
             return new ExportWorklistSummary
             {
@@ -55,7 +59,9 @@ namespace EA.Iws.Domain.NotificationAssessment
                 LastActionType = lastActionType,
                 LastCommentDate = lastCommentDate,
                 FinancialGuaranteeStatus = financialGuaranteeStatus,
-                LastCommentUser = lastCommentUser
+                LastCommentUser = lastCommentUser,
+                ObjectedDate = objectedDate,
+                WithdrawnDate = withdrawnDate
             };
         }
     }
