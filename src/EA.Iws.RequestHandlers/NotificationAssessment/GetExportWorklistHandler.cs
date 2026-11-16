@@ -1,6 +1,8 @@
 namespace EA.Iws.RequestHandlers.NotificationAssessment
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Domain;
@@ -88,13 +90,19 @@ namespace EA.Iws.RequestHandlers.NotificationAssessment
                 daysRemaining = daysRemainingCalculator.Calculate(decisionRequiredBy.Value);
             }
 
+            // Calculate the end of the In Assessment period which is whenever the 
+            // status changes to Consented, Objected or Withdrawn - whichever comes first
+            // This may not be the date represented - e.g. If a Withdrawn notification is shown the earliest 
+            // date may be Consented as this was the status which brought the notification out of "In Assessment"
+            DateTime? outOfAssessment = new[] { summary.ConsentedDate, summary.ObjectedDate, summary.WithdrawnDate, SystemTime.UtcNow }.Min();
+
             // Calculate working days in assessment from date picked up by officer to today
             int? workingDaysInAssessment = null;
             if (summary.DatePickedUpByOfficer.HasValue)
             {
                 workingDaysInAssessment = workingDayCalculator.GetWorkingDays(
                     summary.DatePickedUpByOfficer.Value,
-                    SystemTime.UtcNow,
+                    outOfAssessment.Value,
                     false,
                     notification.CompetentAuthority);
             }
