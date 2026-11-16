@@ -33,7 +33,7 @@
         [Display(Name = "Waste type")]
         NameOfWaste,
 
-        [Display(Name = "EWC code")]
+        [Display(Name = "LoW code")]
         Ewc,
 
         [Display(Name = "Y code")]

@@ -31,7 +31,7 @@
         [Display(Name = "Waste type")]
         ChemicalComposition,
 
-        [Display(Name = "EWC code")]
+        [Display(Name = "LoW code")]
         EwcCodes,
 
         [Display(Name = "Y code")]
