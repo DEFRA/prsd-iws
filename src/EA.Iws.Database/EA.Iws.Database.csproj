@@ -214,6 +214,7 @@
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260915-1000-Alter-Lookup-BankHoliday.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260917-Lookup-WasteCode-DataInsert.sql" />
     <Content Include="scripts\Update\0007-Support\Sprint2026\20260928-1000-Alter-lookup-FinancialGuaranteeStatus-lookup-ImportFinancialGuaranteeStatus.sql" />
+    <Content Include="scripts\Update\0007-Support\Sprint2026\20261116-1600-R882765-alter-uspGetExportWorklist.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0004-Notification-GetPricingInfo.sql" />
