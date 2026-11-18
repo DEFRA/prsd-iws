@@ -159,5 +159,23 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute {
                 return ResourceManager.GetString("ThPortExit", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to check the rules for all the countries your waste will pass through on its intended journey.
+        /// </summary>
+        public static string WarningLinkText {
+            get {
+                return ResourceManager.GetString("WarningLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your application must include details of all the transit countries your waste will pass through on its journey. Some countries define this very widely to include journeys that pass through territorial waters or stop at port, even if the waste is not unloaded..
+        /// </summary>
+        public static string WarningText {
+            get {
+                return ResourceManager.GetString("WarningText", resourceCulture);
+            }
+        }
     }
 }

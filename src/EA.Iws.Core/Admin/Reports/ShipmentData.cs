@@ -89,7 +89,7 @@
         [DisplayName("Prenotified on Time")]
         public bool WasPrenotifiedBeforeThreeWorkingDays { get; set; }
 
-        [DisplayName("EWC Codes")]
+        [DisplayName("LoW Codes")]
         public string EwcCodes { get; set; }
 
         [DisplayName("R/D Code(s)")]

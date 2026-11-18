@@ -64,6 +64,8 @@ BEGIN
         NAD.TransmittedDate,
         NAD.AcknowledgedDate,
         NAD.ConsentedDate,
+        NAD.ObjectedDate,
+        NAD.WithdrawnDate,
         NAD.DecisionRequiredByDate,
         NA.Status,
 
@@ -165,4 +167,3 @@ BEGIN
 
     OPTION (RECOMPILE);
 END
-GO
