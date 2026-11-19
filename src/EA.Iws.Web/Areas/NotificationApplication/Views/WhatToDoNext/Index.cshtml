@@ -16,8 +16,8 @@
 <h2 class="heading-medium">@IndexResources.WhatToDoNextHeading</h2>
 
 <ul class="list list-number govuk-list">
-  <li>@IndexResources.WhatToDoNextListItem1</li>
   <li>@IndexResources.WhatToDoNextListItem2</li>
+  <li>@IndexResources.WhatToDoNextListItem1</li>
   <li>@IndexResources.WhatToDoNextListItem3</li>
   <li>@IndexResources.WhatToDoNextListItem4</li>
 </ul>
@@ -34,14 +34,8 @@
   <li>@IndexResources.SendUsListItem4</li>
 </ul>
 
-
 <div class="govuk-form-group">
-  @Html.Raw(string.Format(IndexResources.NotificationOptionsLinkMessage,
-      Html.ActionLink("notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)))
-</div>
-
-<div class="govuk-form-group">
-  @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
+  @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Payment", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
 </div>
 
 @Html.FeedbackLink()
