@@ -62,7 +62,7 @@
 }
 
 .noti-price{
-    background: $light-blue;
+    background: #1d70b8;
         color: $white;
         padding: 10px 10px 5px 10px;
         font-weight: bold;
@@ -82,71 +82,71 @@
         }
 }
 
-.noti-overview{
+.noti-overview {
     margin-bottom: 30px;
 
-    .heading-medium{
+    .heading-medium {
         font-weight: normal;
         color: $secondary-text-colour;
         margin-top: 30px;
     }
 
-    .heading-large{
+    .heading-large {
         margin-top: 0;
     }
 
-    span{
+    span {
         display: inline-block;
     }
 
-    .status{
+    .status {
         float: right;
         clear: right;
         margin-top: 30px;
         margin-bottom: 10px;
     }
-    
-    .noti-charge{
-        background: $light-blue;
+
+    .noti-charge {
+        background: #1d70b8;
         color: $white;
         padding: 10px 10px 5px 10px;
         font-weight: bold;
         float: right;
         clear: right;
-        
-        .price{
-           font-size: 40px;
+
+        .price {
+            font-size: 40px;
             font-weight: bold;
-            
         }
 
-        .vat-message{
+        .vat-message {
             font-weight: normal;
             font-size: 0.75em;
         }
     }
 
-    .noti-links{
+    .noti-links {
         float: right;
         clear: right;
         padding: 15px 0px 15px 0px;
 
-        a{
+        a {
             display: block;
             float: right;
         }
     }
 
-    .status, .noti-charge, .noti-links{
-      &:after {
-        visibility: hidden;
-        display: block;
-        font-size: 0;
-        content: " ";
-        clear: both;
-        height: 0;
-     }  
+    .status, .noti-charge, .noti-links {
+        &:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
     }
+
     &:after {
         border-bottom: 1px solid $grey-2;
         display: block;
@@ -155,7 +155,7 @@
         clear: both;
         height: 0;
         margin: 30px 15px 10px 15px;
-     }
+    }
 }
 
 .noti-alert{ 
@@ -338,4 +338,61 @@
    overflow: hidden; 
    position: absolute !important;
    word-wrap:normal !important;
+}
+
+.noti-charge {
+    background: #1d70b8;
+    color: $white;
+    padding: 10px 10px 5px 10px;
+    font-weight: bold;
+    float: right;
+    clear: right;
+
+    .price {
+        font-size: 40px;
+        font-weight: bold;
+    }
+
+    .vat-message {
+        font-weight: normal;
+        font-size: 0.75em;
+    }
+}
+
+.noti-amount-paid {
+    background: $white;
+    color: #1d70b8;
+    border: 2px solid #1d70b8;
+    padding: 10px 10px 5px 10px;
+    font-weight: bold;
+    float: right;
+    clear: right;
+    margin-top: 10px;
+
+    .price {
+        font-size: 40px;
+        font-weight: bold;
+    }
+}
+
+.noti-links {
+    float: right;
+    clear: right;
+    padding: 15px 0px 15px 0px;
+
+    a {
+        display: block;
+        float: right;
+    }
+}
+
+.status, .noti-charge, .noti-amount-paid, .noti-links {
+    &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+    }
 }

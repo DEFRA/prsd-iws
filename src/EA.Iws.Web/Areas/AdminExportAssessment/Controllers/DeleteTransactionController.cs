@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
@@ -32,6 +33,12 @@
         public async Task<ActionResult> Confirm(Guid id, Guid transactionId)
         {
             var transaction = await mediator.SendAsync(new GetTransactionById(transactionId));
+
+            // Additional layer redirects back to the account management page
+            if (transaction.Type == PaymentMethod.GovPay)
+            {
+                return RedirectToAction("Index", "AccountManagement", new { id });
+            }
 
             var model = new ConfirmViewModel(id, transaction);
 

@@ -44,7 +44,7 @@
                     <td class="govuk-table__cell">@Model.Transactions[i].Amount.ToString("C")</td>
                     <td class="govuk-table__cell">@EnumHelper.GetDescription(type)</td>
                     <td class="govuk-table__cell">
-                        @if (trans == TransactionType.Payment)
+                        @if (trans == TransactionType.Payment && Model.Transactions[i].Type != PaymentMethod.GovPay)
                         {
                             @Html.ActionLink(Resource.DeleteLink, "Confirm", "DeleteTransaction", new { id = Model.NotificationId, transactionId = Model.Transactions[i].TransactionId }, null)
                         }

@@ -20,6 +20,8 @@
 
         public decimal Charge { get; set; }
 
+        public decimal AmountPaid { get; set; }
+
         public NotificationStatus Status { get; set; }
 
         public bool IsNotificationComplete { get; set; }
@@ -94,13 +96,14 @@
         {
         }
 
-        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, decimal notificationCharge, NotificationApplicationCompletionProgress progress)
+        public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, decimal notificationCharge, decimal amountPaid, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = submitSummaryData.NotificationId;
             CompetentAuthorityName = EnumHelper.GetDisplayName(submitSummaryData.CompetentAuthority);
             CreatedDate = submitSummaryData.CreatedDate;
             NotificationNumber = submitSummaryData.NotificationNumber;
             Charge = notificationCharge;
+            AmountPaid = amountPaid;
             Status = submitSummaryData.Status;
             IsNotificationComplete = progress.IsAllComplete;
             CompetentAuthority = submitSummaryData.CompetentAuthority;

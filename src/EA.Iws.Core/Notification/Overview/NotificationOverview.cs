@@ -41,6 +41,8 @@
 
         public decimal NotificationCharge { get; set; }
 
+        public decimal AmountPaid { get; set; }
+
         public bool CanEditNotification { get; set; }
     }
 }
