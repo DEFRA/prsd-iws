@@ -28,7 +28,6 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var model = new WhatToDoNextData { Id = id };
             var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
 
             return View(response);
