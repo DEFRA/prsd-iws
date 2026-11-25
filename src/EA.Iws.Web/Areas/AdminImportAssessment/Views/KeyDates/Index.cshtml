@@ -15,33 +15,31 @@
 <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 <div>
-    @if (Model.Status == ImportNotificationStatus.Consented ||
-         Model.Status == ImportNotificationStatus.ConsentWithdrawn ||
-         Model.Status == ImportNotificationStatus.FileClosed)
-    {
-        <div class="govuk-form-group">
+    <div class="govuk-form-group">
 
-            @if (Model.Status == ImportNotificationStatus.UnderProhibition)
+        @if (Model.Status == ImportNotificationStatus.UnderProhibition)
+        {
+            using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
             {
-                using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
-                    <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
-                }
+                <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
             }
-            else
+        }
+
+        @if (Model.Status == ImportNotificationStatus.Consented ||
+                Model.Status == ImportNotificationStatus.ConsentWithdrawn ||
+                Model.Status == ImportNotificationStatus.FileClosed)
+        {
+            using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
             {
-                using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
-                {
-                    @Html.AntiForgeryToken()
+                @Html.AntiForgeryToken()
 
-                    <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
-                }
+                <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
             }
+        }
 
-        </div>
-    }
+    </div>
 
         @Resource.FirstParagraph
 

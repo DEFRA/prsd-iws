@@ -14,33 +14,31 @@
     var byText = " by ";
 }
 
-@if (Model.CurrentStatus == NotificationStatus.Consented ||
-     Model.CurrentStatus == NotificationStatus.ConsentWithdrawn ||
-     Model.CurrentStatus == NotificationStatus.FileClosed)
-{
-    <div class="govuk-form-group">
+<div class="govuk-form-group">
 
-        @if (Model.CurrentStatus == NotificationStatus.UnderProhibition)
+    @if (Model.CurrentStatus == NotificationStatus.UnderProhibition)
+    {
+        using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
         {
-            using (Html.BeginForm("LiftProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
-            }
+            <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
         }
-        else
+    }
+
+    @if (Model.CurrentStatus == NotificationStatus.Consented ||
+            Model.CurrentStatus == NotificationStatus.ConsentWithdrawn ||
+            Model.CurrentStatus == NotificationStatus.FileClosed)
+    {
+        using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
         {
-            using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
+            @Html.AntiForgeryToken()
 
-                <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
-            }
+            <button type="submit" class="govuk-button">Set status to 'Under Prohibition'</button>
         }
+    }
 
-    </div>
-}
+</div>
 
 <div>
     These are the dates so far:
