@@ -2,6 +2,18 @@
 @model IList<EA.Iws.Core.TransitState.TransitStateData>
 
 <h2 class="govuk-heading-m">@TransitStatesSummaryResources.Header</h2>
+
+<div class="govuk-warning-text" style="display: flex; align-items: center;">
+    <span class="govuk-warning-text__icon" aria-hidden="true" style="position: static; margin-top: 0; flex-shrink: 0;">!</span>
+    <span class="govuk-warning-text__text" style="margin-left: 10px;">
+        <span class="govuk-visually-hidden">Warning</span>
+        @TransitStatesSummaryResources.WarningText
+        <a class="govuk-link" href="https://www.basel.int/Implementation/LegalMatters/Compliance/GeneralIssuesActivities/Activities201617/ControlsystemTransitissues/tabid/4781/Default.aspx" target="_blank" rel="noopener noreferrer">
+            @TransitStatesSummaryResources.WarningLinkText<span class="govuk-visually-hidden"> (opens in new tab)</span>
+        </a>
+    </span>
+</div>
+
 @if (Model == null || Model.Count == 0)
 {
     <p>@TransitStatesSummaryResources.NoTransitState</p>

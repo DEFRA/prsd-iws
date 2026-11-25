@@ -38,8 +38,12 @@
         {
             var model = CreateAdminLinksViewModel(section);
 
-            var users = Task.Run(() => mediator.SendAsync(new GetNewInternalUsers())).Result;
-            model.UsersAwaitingApproval = users.Count;
+            if (model.ShowApproveNewInternalUserLink)
+            {
+                var users = Task.Run(() => mediator.SendAsync(new GetNewInternalUsers())).Result;
+                model.UsersAwaitingApproval = users.Count;
+            }
+
             var competentAuthority = mediator.SendAsync(new GetUserCompetentAuthority()).Result;
             if (competentAuthority == Core.Notification.UKCompetentAuthority.England)
             {

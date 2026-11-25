@@ -107,6 +107,6 @@
             var fileName = string.Format("foi-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
             return new XlsxActionResult<FreedomOfInformationData>(report, fileName, true, columnsToHide);
-        }       
+        }
     }
 }

@@ -194,7 +194,8 @@ BEGIN
 		[ExporterRegistrationNumber],
 		[ImporterRegistrationNumber],
 		[FacilityRegistrationNumber],
-		[ProducerRegistrationNumber])
+		[ProducerRegistrationNumber],
+		[CustomsCode])
 	SELECT
 		[NotificationId],
 		[NotificationNumber],
@@ -242,7 +243,8 @@ BEGIN
 		[ExporterRegistrationNumber],
 		[ImporterRegistrationNumber],
 		[FacilityRegistrationNumber],
-		[ProducerRegistrationNumber]
+		[ProducerRegistrationNumber],
+		[CustomsCode]
 	FROM [Reports].[Shipments];
 
 	--Update the ActionedByExternalUser, this is Y if any MovementAudit action has been carried out by an external user.

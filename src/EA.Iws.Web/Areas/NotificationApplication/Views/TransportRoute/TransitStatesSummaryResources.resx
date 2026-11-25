@@ -150,4 +150,10 @@
   <data name="ThPortExit" xml:space="preserve">
     <value>Exit port or border crossing</value>
   </data>
+  <data name="WarningLinkText" xml:space="preserve">
+    <value>You need to check the rules for all the countries your waste will pass through on its intended journey</value>
+  </data>
+  <data name="WarningText" xml:space="preserve">
+    <value>Your application must include details of all the transit countries your waste will pass through on its journey. Some countries define this very widely to include journeys that pass through territorial waters or stop at port, even if the waste is not unloaded.</value>
+  </data>
 </root>

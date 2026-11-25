@@ -88,7 +88,12 @@
                     [IsFinancialGuaranteeApproved],
                     [FileClosedDate],
                     [LocalArea],
-                    [Officer]
+                    [Officer],
+                    [CustomsCode],
+                    [ExporterRegistrationNumber],
+                    [ImporterRegistrationNumber],
+                    [FacilityRegistrationNumber],
+                    [ProducerRegistrationNumber]
                 FROM 
                     [Reports].[FreedomOfInformationCache]
                 WHERE 
@@ -154,7 +159,12 @@
                     [IsFinancialGuaranteeApproved],
                     [FileClosedDate],
                     [LocalArea],
-                    [Officer]";
+                    [Officer],
+                    [CustomsCode],
+                    [ExporterRegistrationNumber],
+                    [ImporterRegistrationNumber],
+                    [FacilityRegistrationNumber],
+                    [ProducerRegistrationNumber]";
 
             return await context.Database.SqlQuery<FreedomOfInformationData>(string.Format(query, textFilter),
               new SqlParameter("@from", from),

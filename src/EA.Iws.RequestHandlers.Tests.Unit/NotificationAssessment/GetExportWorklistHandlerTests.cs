@@ -511,6 +511,8 @@
                 null,
                 lastCommentDate ?? new DateTimeOffset(2024, 1, 10, 0, 0, 0, TimeSpan.Zero),
                 "Approved",
+                null,
+                null,
                 null);
         }
 

@@ -133,7 +133,7 @@
     <value>Entry port / point</value>
   </data>
   <data name="EwcCode" xml:space="preserve">
-    <value>EWC code</value>
+    <value>LoW code</value>
   </data>
   <data name="ExitPointName" xml:space="preserve">
     <value>Exit port / point</value>

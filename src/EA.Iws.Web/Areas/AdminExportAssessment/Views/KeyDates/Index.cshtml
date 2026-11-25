@@ -25,7 +25,10 @@
             <button type="submit" class="govuk-button">Remove 'Under Prohibition' status</button>
         }
     }
-    else
+
+    @if (Model.CurrentStatus == NotificationStatus.Consented ||
+            Model.CurrentStatus == NotificationStatus.ConsentWithdrawn ||
+            Model.CurrentStatus == NotificationStatus.FileClosed)
     {
         using (Html.BeginForm("UnderProhibition", "KeyDates", new { id = Model.NotificationId }, FormMethod.Post))
         {
